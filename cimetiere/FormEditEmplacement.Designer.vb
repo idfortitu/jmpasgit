@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormEditEmplacement
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,10 @@ Partial Class FormEditEmplacement
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TbRef = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -32,30 +34,26 @@ Partial Class FormEditEmplacement
         Me.BtAjouterOccupant = New System.Windows.Forms.Button()
         Me.BtRetirerOccupant = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.BtEnregistrer = New System.Windows.Forms.Button()
+        Me.BtAnnuler = New System.Windows.Forms.Button()
         Me.DgvOccSrc = New cimetiere.DataGridViewCustom()
-        Me.DgvOccDest = New cimetiere.DataGridViewCustom()
-        Me.TbintNbPlaces = New cimetiere.TextBoxInt()
-        Me.CbTypeEmpl = New cimetiere.ComboBoxTypeEmpl()
-        Me.ColOccDestNumLh = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestNumAnnée = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestNom = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestEmplacement = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestDateDécès = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestLieuDécès = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestAdresse = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestEtatCivil = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestDateNaiss = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccDestLieuNaiss = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DgvSrcColId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColOccSrcNumLh = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColOccSrcNumAnnée = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColOccSrcNom = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColOccSrcEmplacement = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColOccSrcDateDécès = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColOccSrcLieuDécès = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccSrcAdresse = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccSrcEtatCivil = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccSrcDateNaiss = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColOccSrcLieuNaiss = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DgvOccDest = New cimetiere.DataGridViewCustom()
+        Me.DgvDestColId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColOccDestNumLh = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColOccDestNumAnnée = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColOccDestNom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColOccDestEmplacement = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColOccDestDateDécès = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColOccDestLieuDécès = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TbintNbPlaces = New cimetiere.TextBoxInt()
+        Me.CbTypeEmpl = New cimetiere.ComboBoxTypeEmpl()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DgvOccSrc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvOccDest, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,6 +149,25 @@ Partial Class FormEditEmplacement
         Me.Button2.Text = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'BtEnregistrer
+        '
+        Me.BtEnregistrer.Location = New System.Drawing.Point(642, 475)
+        Me.BtEnregistrer.Name = "BtEnregistrer"
+        Me.BtEnregistrer.Size = New System.Drawing.Size(100, 35)
+        Me.BtEnregistrer.TabIndex = 13
+        Me.BtEnregistrer.Text = "Enregistrer"
+        Me.BtEnregistrer.UseVisualStyleBackColor = True
+        '
+        'BtAnnuler
+        '
+        Me.BtAnnuler.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.BtAnnuler.Location = New System.Drawing.Point(758, 476)
+        Me.BtAnnuler.Name = "BtAnnuler"
+        Me.BtAnnuler.Size = New System.Drawing.Size(100, 34)
+        Me.BtAnnuler.TabIndex = 14
+        Me.BtAnnuler.Text = "Annuler"
+        Me.BtAnnuler.UseVisualStyleBackColor = True
+        '
         'DgvOccSrc
         '
         Me.DgvOccSrc.AllowUserToAddRows = False
@@ -159,7 +176,15 @@ Partial Class FormEditEmplacement
         Me.DgvOccSrc.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvOccSrc.BackgroundColor = System.Drawing.Color.White
         Me.DgvOccSrc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvOccSrc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColOccSrcNumLh, Me.ColOccSrcNumAnnée, Me.ColOccSrcNom, Me.ColOccSrcEmplacement, Me.ColOccSrcDateDécès, Me.ColOccSrcLieuDécès, Me.ColOccSrcAdresse, Me.ColOccSrcEtatCivil, Me.ColOccSrcDateNaiss, Me.ColOccSrcLieuNaiss})
+        Me.DgvOccSrc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvSrcColId, Me.ColOccSrcNumLh, Me.ColOccSrcNumAnnée, Me.ColOccSrcNom, Me.ColOccSrcEmplacement, Me.ColOccSrcDateDécès, Me.ColOccSrcLieuDécès})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvOccSrc.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvOccSrc.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvOccSrc.Location = New System.Drawing.Point(327, 242)
         Me.DgvOccSrc.MultiSelect = False
@@ -167,9 +192,63 @@ Partial Class FormEditEmplacement
         Me.DgvOccSrc.ReadOnly = True
         Me.DgvOccSrc.RowHeadersVisible = False
         Me.DgvOccSrc.RowTemplate.Height = 24
+        Me.DgvOccSrc.SelectedRow = Nothing
+        Me.DgvOccSrc.SelectedRowIndex = -1
+        Me.DgvOccSrc.SelectedValue = -1
         Me.DgvOccSrc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvOccSrc.Size = New System.Drawing.Size(543, 220)
         Me.DgvOccSrc.TabIndex = 11
+        '
+        'DgvSrcColId
+        '
+        Me.DgvSrcColId.DataPropertyName = "def_id"
+        Me.DgvSrcColId.HeaderText = "Id"
+        Me.DgvSrcColId.Name = "DgvSrcColId"
+        Me.DgvSrcColId.ReadOnly = True
+        Me.DgvSrcColId.Visible = False
+        '
+        'ColOccSrcNumLh
+        '
+        Me.ColOccSrcNumLh.DataPropertyName = "def_numero_lh"
+        Me.ColOccSrcNumLh.HeaderText = "Code"
+        Me.ColOccSrcNumLh.Name = "ColOccSrcNumLh"
+        Me.ColOccSrcNumLh.ReadOnly = True
+        Me.ColOccSrcNumLh.Width = 50
+        '
+        'ColOccSrcNumAnnée
+        '
+        Me.ColOccSrcNumAnnée.DataPropertyName = "def_numero_annee"
+        Me.ColOccSrcNumAnnée.HeaderText = "Num. année"
+        Me.ColOccSrcNumAnnée.Name = "ColOccSrcNumAnnée"
+        Me.ColOccSrcNumAnnée.ReadOnly = True
+        '
+        'ColOccSrcNom
+        '
+        Me.ColOccSrcNom.DataPropertyName = "def_nom"
+        Me.ColOccSrcNom.HeaderText = "Nom"
+        Me.ColOccSrcNom.Name = "ColOccSrcNom"
+        Me.ColOccSrcNom.ReadOnly = True
+        '
+        'ColOccSrcEmplacement
+        '
+        Me.ColOccSrcEmplacement.DataPropertyName = "empl_reference"
+        Me.ColOccSrcEmplacement.HeaderText = "Empl."
+        Me.ColOccSrcEmplacement.Name = "ColOccSrcEmplacement"
+        Me.ColOccSrcEmplacement.ReadOnly = True
+        '
+        'ColOccSrcDateDécès
+        '
+        Me.ColOccSrcDateDécès.DataPropertyName = "def_date_deces"
+        Me.ColOccSrcDateDécès.HeaderText = "Décédé le"
+        Me.ColOccSrcDateDécès.Name = "ColOccSrcDateDécès"
+        Me.ColOccSrcDateDécès.ReadOnly = True
+        '
+        'ColOccSrcLieuDécès
+        '
+        Me.ColOccSrcLieuDécès.DataPropertyName = "def_lieu_deces"
+        Me.ColOccSrcLieuDécès.HeaderText = "Décédé à"
+        Me.ColOccSrcLieuDécès.Name = "ColOccSrcLieuDécès"
+        Me.ColOccSrcLieuDécès.ReadOnly = True
         '
         'DgvOccDest
         '
@@ -179,7 +258,15 @@ Partial Class FormEditEmplacement
         Me.DgvOccDest.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvOccDest.BackgroundColor = System.Drawing.Color.White
         Me.DgvOccDest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvOccDest.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColOccDestNumLh, Me.ColOccDestNumAnnée, Me.ColOccDestNom, Me.ColOccDestEmplacement, Me.ColOccDestDateDécès, Me.ColOccDestLieuDécès, Me.ColOccDestAdresse, Me.ColOccDestEtatCivil, Me.ColOccDestDateNaiss, Me.ColOccDestLieuNaiss})
+        Me.DgvOccDest.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvDestColId, Me.ColOccDestNumLh, Me.ColOccDestNumAnnée, Me.ColOccDestNom, Me.ColOccDestEmplacement, Me.ColOccDestDateDécès, Me.ColOccDestLieuDécès})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvOccDest.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvOccDest.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvOccDest.Location = New System.Drawing.Point(327, 12)
         Me.DgvOccDest.MultiSelect = False
@@ -187,9 +274,63 @@ Partial Class FormEditEmplacement
         Me.DgvOccDest.ReadOnly = True
         Me.DgvOccDest.RowHeadersVisible = False
         Me.DgvOccDest.RowTemplate.Height = 24
+        Me.DgvOccDest.SelectedRow = Nothing
+        Me.DgvOccDest.SelectedRowIndex = -1
+        Me.DgvOccDest.SelectedValue = -1
         Me.DgvOccDest.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvOccDest.Size = New System.Drawing.Size(543, 162)
         Me.DgvOccDest.TabIndex = 10
+        '
+        'DgvDestColId
+        '
+        Me.DgvDestColId.DataPropertyName = "def_id"
+        Me.DgvDestColId.HeaderText = "Id"
+        Me.DgvDestColId.Name = "DgvDestColId"
+        Me.DgvDestColId.ReadOnly = True
+        Me.DgvDestColId.Visible = False
+        '
+        'ColOccDestNumLh
+        '
+        Me.ColOccDestNumLh.DataPropertyName = "def_numero_lh"
+        Me.ColOccDestNumLh.HeaderText = "Code"
+        Me.ColOccDestNumLh.Name = "ColOccDestNumLh"
+        Me.ColOccDestNumLh.ReadOnly = True
+        Me.ColOccDestNumLh.Width = 50
+        '
+        'ColOccDestNumAnnée
+        '
+        Me.ColOccDestNumAnnée.DataPropertyName = "def_numero_annee"
+        Me.ColOccDestNumAnnée.HeaderText = "Num. année"
+        Me.ColOccDestNumAnnée.Name = "ColOccDestNumAnnée"
+        Me.ColOccDestNumAnnée.ReadOnly = True
+        '
+        'ColOccDestNom
+        '
+        Me.ColOccDestNom.DataPropertyName = "def_nom"
+        Me.ColOccDestNom.HeaderText = "Nom"
+        Me.ColOccDestNom.Name = "ColOccDestNom"
+        Me.ColOccDestNom.ReadOnly = True
+        '
+        'ColOccDestEmplacement
+        '
+        Me.ColOccDestEmplacement.DataPropertyName = "empl_reference"
+        Me.ColOccDestEmplacement.HeaderText = "Empl."
+        Me.ColOccDestEmplacement.Name = "ColOccDestEmplacement"
+        Me.ColOccDestEmplacement.ReadOnly = True
+        '
+        'ColOccDestDateDécès
+        '
+        Me.ColOccDestDateDécès.DataPropertyName = "def_date_deces"
+        Me.ColOccDestDateDécès.HeaderText = "Décédé le"
+        Me.ColOccDestDateDécès.Name = "ColOccDestDateDécès"
+        Me.ColOccDestDateDécès.ReadOnly = True
+        '
+        'ColOccDestLieuDécès
+        '
+        Me.ColOccDestLieuDécès.DataPropertyName = "def_lieu_deces"
+        Me.ColOccDestLieuDécès.HeaderText = "Décédé à"
+        Me.ColOccDestLieuDécès.Name = "ColOccDestLieuDécès"
+        Me.ColOccDestLieuDécès.ReadOnly = True
         '
         'TbintNbPlaces
         '
@@ -208,154 +349,14 @@ Partial Class FormEditEmplacement
         Me.CbTypeEmpl.Size = New System.Drawing.Size(121, 24)
         Me.CbTypeEmpl.TabIndex = 2
         '
-        'ColOccDestNumLh
-        '
-        Me.ColOccDestNumLh.DataPropertyName = "NuméroLh"
-        Me.ColOccDestNumLh.HeaderText = "Code"
-        Me.ColOccDestNumLh.Name = "ColOccDestNumLh"
-        Me.ColOccDestNumLh.ReadOnly = True
-        Me.ColOccDestNumLh.Width = 50
-        '
-        'ColOccDestNumAnnée
-        '
-        Me.ColOccDestNumAnnée.DataPropertyName = "NuméroAnnée"
-        Me.ColOccDestNumAnnée.HeaderText = "Num. année"
-        Me.ColOccDestNumAnnée.Name = "ColOccDestNumAnnée"
-        Me.ColOccDestNumAnnée.ReadOnly = True
-        '
-        'ColOccDestNom
-        '
-        Me.ColOccDestNom.DataPropertyName = "NomComplet"
-        Me.ColOccDestNom.HeaderText = "Nom"
-        Me.ColOccDestNom.Name = "ColOccDestNom"
-        Me.ColOccDestNom.ReadOnly = True
-        '
-        'ColOccDestEmplacement
-        '
-        Me.ColOccDestEmplacement.DataPropertyName = "EmplComplet"
-        Me.ColOccDestEmplacement.HeaderText = "Empl."
-        Me.ColOccDestEmplacement.Name = "ColOccDestEmplacement"
-        Me.ColOccDestEmplacement.ReadOnly = True
-        '
-        'ColOccDestDateDécès
-        '
-        Me.ColOccDestDateDécès.DataPropertyName = "DateDécès"
-        Me.ColOccDestDateDécès.HeaderText = "Décédé le"
-        Me.ColOccDestDateDécès.Name = "ColOccDestDateDécès"
-        Me.ColOccDestDateDécès.ReadOnly = True
-        '
-        'ColOccDestLieuDécès
-        '
-        Me.ColOccDestLieuDécès.DataPropertyName = "LieuDécès"
-        Me.ColOccDestLieuDécès.HeaderText = "Décédé à"
-        Me.ColOccDestLieuDécès.Name = "ColOccDestLieuDécès"
-        Me.ColOccDestLieuDécès.ReadOnly = True
-        '
-        'ColOccDestAdresse
-        '
-        Me.ColOccDestAdresse.DataPropertyName = "AdresseComplète"
-        Me.ColOccDestAdresse.HeaderText = "Adresse"
-        Me.ColOccDestAdresse.Name = "ColOccDestAdresse"
-        Me.ColOccDestAdresse.ReadOnly = True
-        '
-        'ColOccDestEtatCivil
-        '
-        Me.ColOccDestEtatCivil.DataPropertyName = "EtatCivilComplet"
-        Me.ColOccDestEtatCivil.HeaderText = "État civil"
-        Me.ColOccDestEtatCivil.Name = "ColOccDestEtatCivil"
-        Me.ColOccDestEtatCivil.ReadOnly = True
-        '
-        'ColOccDestDateNaiss
-        '
-        Me.ColOccDestDateNaiss.DataPropertyName = "DateNaiss"
-        Me.ColOccDestDateNaiss.HeaderText = "Né le"
-        Me.ColOccDestDateNaiss.Name = "ColOccDestDateNaiss"
-        Me.ColOccDestDateNaiss.ReadOnly = True
-        '
-        'ColOccDestLieuNaiss
-        '
-        Me.ColOccDestLieuNaiss.DataPropertyName = "LieuNaiss"
-        Me.ColOccDestLieuNaiss.HeaderText = "Né à"
-        Me.ColOccDestLieuNaiss.Name = "ColOccDestLieuNaiss"
-        Me.ColOccDestLieuNaiss.ReadOnly = True
-        '
-        'ColOccSrcNumLh
-        '
-        Me.ColOccSrcNumLh.DataPropertyName = "NuméroLh"
-        Me.ColOccSrcNumLh.HeaderText = "Code"
-        Me.ColOccSrcNumLh.Name = "ColOccSrcNumLh"
-        Me.ColOccSrcNumLh.ReadOnly = True
-        Me.ColOccSrcNumLh.Width = 50
-        '
-        'ColOccSrcNumAnnée
-        '
-        Me.ColOccSrcNumAnnée.DataPropertyName = "NuméroAnnée"
-        Me.ColOccSrcNumAnnée.HeaderText = "Num. année"
-        Me.ColOccSrcNumAnnée.Name = "ColOccSrcNumAnnée"
-        Me.ColOccSrcNumAnnée.ReadOnly = True
-        '
-        'ColOccSrcNom
-        '
-        Me.ColOccSrcNom.DataPropertyName = "NomComplet"
-        Me.ColOccSrcNom.HeaderText = "Nom"
-        Me.ColOccSrcNom.Name = "ColOccSrcNom"
-        Me.ColOccSrcNom.ReadOnly = True
-        '
-        'ColOccSrcEmplacement
-        '
-        Me.ColOccSrcEmplacement.DataPropertyName = "EmplComplet"
-        Me.ColOccSrcEmplacement.HeaderText = "Empl."
-        Me.ColOccSrcEmplacement.Name = "ColOccSrcEmplacement"
-        Me.ColOccSrcEmplacement.ReadOnly = True
-        '
-        'ColOccSrcDateDécès
-        '
-        Me.ColOccSrcDateDécès.DataPropertyName = "DateDécès"
-        Me.ColOccSrcDateDécès.HeaderText = "Décédé le"
-        Me.ColOccSrcDateDécès.Name = "ColOccSrcDateDécès"
-        Me.ColOccSrcDateDécès.ReadOnly = True
-        '
-        'ColOccSrcLieuDécès
-        '
-        Me.ColOccSrcLieuDécès.DataPropertyName = "LieuDécès"
-        Me.ColOccSrcLieuDécès.HeaderText = "Décédé à"
-        Me.ColOccSrcLieuDécès.Name = "ColOccSrcLieuDécès"
-        Me.ColOccSrcLieuDécès.ReadOnly = True
-        '
-        'ColOccSrcAdresse
-        '
-        Me.ColOccSrcAdresse.DataPropertyName = "AdresseComplète"
-        Me.ColOccSrcAdresse.HeaderText = "Adresse"
-        Me.ColOccSrcAdresse.Name = "ColOccSrcAdresse"
-        Me.ColOccSrcAdresse.ReadOnly = True
-        '
-        'ColOccSrcEtatCivil
-        '
-        Me.ColOccSrcEtatCivil.DataPropertyName = "EtatCivilComplet"
-        Me.ColOccSrcEtatCivil.HeaderText = "État civil"
-        Me.ColOccSrcEtatCivil.Name = "ColOccSrcEtatCivil"
-        Me.ColOccSrcEtatCivil.ReadOnly = True
-        '
-        'ColOccSrcDateNaiss
-        '
-        Me.ColOccSrcDateNaiss.DataPropertyName = "DateNaiss"
-        Me.ColOccSrcDateNaiss.HeaderText = "Né le"
-        Me.ColOccSrcDateNaiss.Name = "ColOccSrcDateNaiss"
-        Me.ColOccSrcDateNaiss.ReadOnly = True
-        '
-        'ColOccSrcLieuNaiss
-        '
-        Me.ColOccSrcLieuNaiss.DataPropertyName = "LieuNaiss"
-        Me.ColOccSrcLieuNaiss.HeaderText = "Né à"
-        Me.ColOccSrcLieuNaiss.Name = "ColOccSrcLieuNaiss"
-        Me.ColOccSrcLieuNaiss.ReadOnly = True
-        '
         'FormEditEmplacement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(927, 528)
+        Me.Controls.Add(Me.BtAnnuler)
+        Me.Controls.Add(Me.BtEnregistrer)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.DgvOccSrc)
         Me.Controls.Add(Me.DgvOccDest)
@@ -395,24 +396,20 @@ Partial Class FormEditEmplacement
     Friend WithEvents DgvOccDest As DataGridViewCustom
     Friend WithEvents DgvOccSrc As DataGridViewCustom
     Friend WithEvents Button2 As Button
-    Friend WithEvents ColOccDestNumLh As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestNumAnnée As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestNom As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestEmplacement As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestDateDécès As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestLieuDécès As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestAdresse As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestEtatCivil As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestDateNaiss As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccDestLieuNaiss As DataGridViewTextBoxColumn
+    Friend WithEvents DgvSrcColId As DataGridViewTextBoxColumn
     Friend WithEvents ColOccSrcNumLh As DataGridViewTextBoxColumn
     Friend WithEvents ColOccSrcNumAnnée As DataGridViewTextBoxColumn
     Friend WithEvents ColOccSrcNom As DataGridViewTextBoxColumn
     Friend WithEvents ColOccSrcEmplacement As DataGridViewTextBoxColumn
     Friend WithEvents ColOccSrcDateDécès As DataGridViewTextBoxColumn
     Friend WithEvents ColOccSrcLieuDécès As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccSrcAdresse As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccSrcEtatCivil As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccSrcDateNaiss As DataGridViewTextBoxColumn
-    Friend WithEvents ColOccSrcLieuNaiss As DataGridViewTextBoxColumn
+    Friend WithEvents DgvDestColId As DataGridViewTextBoxColumn
+    Friend WithEvents ColOccDestNumLh As DataGridViewTextBoxColumn
+    Friend WithEvents ColOccDestNumAnnée As DataGridViewTextBoxColumn
+    Friend WithEvents ColOccDestNom As DataGridViewTextBoxColumn
+    Friend WithEvents ColOccDestEmplacement As DataGridViewTextBoxColumn
+    Friend WithEvents ColOccDestDateDécès As DataGridViewTextBoxColumn
+    Friend WithEvents ColOccDestLieuDécès As DataGridViewTextBoxColumn
+    Friend WithEvents BtEnregistrer As Button
+    Friend WithEvents BtAnnuler As Button
 End Class

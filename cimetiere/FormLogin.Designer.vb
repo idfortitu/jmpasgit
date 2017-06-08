@@ -31,7 +31,6 @@ Partial Class FormLogin
         Me.LabNomUtilisateur = New System.Windows.Forms.Label()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.CtrlLocVillePays1 = New cimetiere.CtrlLocVillePays()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -118,14 +117,6 @@ Partial Class FormLogin
         Me.Button1.Text = "debug"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'CtrlLocVillePays1
-        '
-        Me.CtrlLocVillePays1.Location = New System.Drawing.Point(74, 174)
-        Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
-        Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 25)
-        Me.CtrlLocVillePays1.TabIndex = 23
-        '
         'FormLogin
         '
         Me.AcceptButton = Me.BtOk
@@ -134,7 +125,6 @@ Partial Class FormLogin
         Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(676, 213)
-        Me.Controls.Add(Me.CtrlLocVillePays1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.BtQuitter)
         Me.Controls.Add(Me.BtOk)
@@ -162,5 +152,4 @@ Partial Class FormLogin
     Friend WithEvents LabNomUtilisateur As Label
     Friend WithEvents LogoPictureBox As PictureBox
     Friend WithEvents Button1 As Button
-    Friend WithEvents CtrlLocVillePays1 As CtrlLocVillePays
 End Class

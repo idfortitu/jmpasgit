@@ -1,134 +1,39 @@
 ﻿Public Class FormEditDefunt
 
-    Public Property IdDef As Integer?
+    Public Property IdDef As Integer
 
-    Private Property LeDefunt As Defunt
+    Private Property LeDefunt As DataRow
 
     Sub New(Optional id As Integer = -1)
         InitializeComponent() ' This call is required by the designer.
-        If id <> -1 Then
-            IdDef = id
-        End If
+        IdDef = id
     End Sub
 
     Private Sub FormEditDéfunt_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ChargerDefunt(IdDef)
+    End Sub
 
-        Using ctx As New CimEntities
-            If IdDef <> -1 Then
-                ' SI ID PRECISE
-                LeDefunt = ctx.Defunts.Include("LocVille.Pays").Single(Function(def) def.Id = IdDef)
-                TbNom.Text = LeDefunt.Nom
-                TbPrénom.Text = LeDefunt.Prenom
-                TbIntNumLh.Value = LeDefunt.NumeroLh
-                TbintNumAnnée.Value = LeDefunt.NumeroAnnee
-                TbAdresse.Text = LeDefunt.Adresse
-                TbdateDateDécès.DateValue = LeDefunt.DateDeces
-                TbLieuDécès.Text = LeDefunt.LieuDeces
-                TbdateDateNaiss.DateValue = LeDefunt.DateNaiss
-                TbLieuNaiss.Text = LeDefunt.LieuNaiss
-                CtrlEtatCivil.EtatCivil = LeDefunt.EtatCivil
-                CtrlEtatCivil.EtatCivilDe = LeDefunt.EtatCivilDe
-            Else LeDefunt = New Defunt
+    Private Sub ChargerDefunt(id As Integer)
+        If IdDef <> -1 Then
+            LeDefunt = Bdd.GetRow("defunts", "def_id", IdDef)
+            TbNom.Text = LeDefunt("def_nom")
+            TbPrénom.Text = LeDefunt("def_prenom")
+            TbintNumLh.Value = LeDefunt("def_numero_lh")
+            TbintNumAnnée.Value = LeDefunt("def_numero_annee")
+            TbAdresse.Text = LeDefunt("def_adresse")
+            TbdDateDécès.DateValue = LeDefunt("def_date_deces")
+            TbLieuDécès.Text = LeDefunt("def_lieu_deces")
+            TbdDateNaiss.DateValue = LeDefunt("def_date_naiss")
+            TbLieuNaiss.Text = LeDefunt("def_lieu_naiss")
+            CtrlEtatCivil.EtatCivil = LeDefunt("def_etat_civil")
+            CtrlEtatCivil.EtatCivilDe = LeDefunt("def_etat_civil_de")
+            If Not IsDBNull(LeDefunt("empl_id")) Then CbEmplacement.SelectedValue = LeDefunt("empl_id")
+            If Not IsDBNull(LeDefunt("locville_id")) Then
+                CtrlLocVillePays1.CbLocVille.SelectedValue = LeDefunt("locville_id")
             End If
-
-            ChargerListboxLocVille(ctx, LeDefunt.LocVille)
-            ChargerListboxPays(ctx, LeDefunt.Pays)
-            ChargerComboboxEmpl(ctx, LeDefunt.Emplacement)
-
-        End Using
-
-
-    End Sub
-
-
-
-    Private Sub ChargerListboxLocVille(contexte As CimEntities, Optional EtSélectionnerId As Integer = -1)
-        Dim ctx = If(contexte, New CimEntities)
-        Try
-            Dim ListeVilles As New List(Of LocVille)({New LocVille With {.Id = -1, .Ville = ""}})
-            ListeVilles = ListeVilles.Concat(From v In ctx.LocVilles.Include("Pays") Order By v.Ville).ToList     ' on charge aussi les pays pour pouvoir faire correspondre les éléments de la listbox des villes (Uneville.Pays) à ceux de la listbox des pays au changement de sélection de la ville
-
-            LbVille.DisplayMember = "NomEtCp"
-            LbVille.ValueMember = "Id"
-            LbVille.DataSource = ListeVilles
-            If EtSélectionnerId <> -1 Then LbVille.SelectedValue = EtSélectionnerId
-        Finally
-            If contexte Is Nothing Then ctx.Dispose()
-        End Try
-    End Sub
-
-    Private Sub ChargerListboxLocVille(contexte As CimEntities, EtSélectionner As LocVille)
-        ChargerListboxLocVille(contexte, If(EtSélectionner IsNot Nothing, EtSélectionner.Id, -1))
-    End Sub
-
-
-    Private Sub ChargerListboxPays(contexte As CimEntities, Optional EtSélectionnerId As Integer = -1)
-        Dim ctx = If(contexte, New CimEntities)
-        Try
-            Dim ListePays As New List(Of Pays)({New Pays With {.Id = -1, .Nom = ""}})
-            ListePays = ListePays.Concat(From p In ctx.Pays.Include("LocVilles") Order By p.Nom).ToList
-
-            LbPays.DisplayMember = "Nom"
-            LbPays.ValueMember = "Id"
-            LbPays.DataSource = ListePays
-            If EtSélectionnerId <> -1 Then LbPays.SelectedValue = EtSélectionnerId
-        Finally
-            If contexte Is Nothing Then ctx.Dispose()
-        End Try
-    End Sub
-
-    Private Sub ChargerListboxPays(contexte As CimEntities, EtSélectionner As Pays)
-        ChargerListboxPays(contexte, If(EtSélectionner IsNot Nothing, EtSélectionner.Id, -1))
-
-        Dim ListePays As New List(Of Pays)({New Pays With {.Id = -1, .Nom = ""}})
-    End Sub
-
-    Private Sub ChargerComboboxEmpl(contexte As CimEntities, Optional EtSélectionnerId As Integer = -1)
-        Dim ctx = If(contexte, New CimEntities)
-        Try
-            Dim ListeEmpls As New List(Of Emplacement)({New Emplacement With {.Id = -1, .Reference = ""}})      ' élément vide
-            ListeEmpls = ListeEmpls.Concat(From e In ctx.Emplacements Order By e.Reference).ToList
-
-            CbEmplacement.DisplayMember = "Reference"
-            CbEmplacement.ValueMember = "Id"
-            CbEmplacement.DataSource = ListeEmpls
-            CbEmplacement.SelectedValue = EtSélectionnerId
-        Finally
-            If contexte Is Nothing Then ctx.Dispose()
-        End Try
-    End Sub
-
-
-    Private Sub ChargerComboboxEmpl(contexte As CimEntities, EtSélectionnerItem As Emplacement)
-        ChargerComboboxEmpl(contexte, If(EtSélectionnerItem IsNot Nothing, EtSélectionnerItem.Id, -1))
-    End Sub
-
-
-    Private Sub BtAjouterVille_Click(sender As Object, e As EventArgs) Handles BtAjouterVille.Click
-        ' en cas d'ajout de ville, il faut aussi recharger la liste des pays, la dlgbox d'ajout de ville permettant de créer des pays
-        Dim f As New FormNouvelleVille
-        If f.ShowDialog = DialogResult.OK Then
-            Using ctx As New CimEntities
-                'Dim IdVilleSelect As Integer = If(LbVille.SelectedItem IsNot Nothing, LbVille.SelectedItem.Id, -1)
-                '                Dim IdPaysSelect As Integer = If(LbPays.SelectedItem IsNot Nothing, LbPays.SelectedItem.Id, -1)
-                ChargerListboxLocVille(ctx, f.VilleFaite.Id)
-                ChargerListboxPays(ctx)
-                LbVille_SelectedIndexChanged(Nothing, Nothing)
-            End Using
-        End If
-    End Sub
-
-    Private Sub BtAjouterPays_Click(sender As Object, e As EventArgs) Handles BtAjouterPays.Click
-        Dim f As New FormNouveauPays
-        If f.ShowDialog = DialogResult.OK Then
-            Using ctx As New CimEntities
-                Dim IdVilleSelect As Integer = If(LbVille.SelectedItem IsNot Nothing, LbVille.SelectedItem.Id, -1)
-                'Dim IdNouveauPays As Integer = f.PaysFait.Id      ' le contexte qui a chargé ces objets était différent, donc on ne peut pas compter sur les références d'objet pour reconnaître les entités
-                ChargerListboxLocVille(ctx)
-                ChargerListboxPays(ctx)
-                LbVille.SelectedValue = IdVilleSelect
-                'LbPays.SelectedValue = IdNouveauPays
-            End Using
+        Else
+            LeDefunt = Bdd.GetRowVide("defunts")
+            LeDefunt("def_id") = -1
         End If
     End Sub
 
@@ -136,38 +41,82 @@
 
     End Sub
 
-
     Private Sub BtEnregistrer_Click() Handles BtEnregistrer.Click
-        Using ctx As New CimEntities
-            'If le Then
-            'nom
-            'prénom
-            'numlh
-            'numannée
-            'datedécès
-            'datenaiss
-            'lieudécès
-            'lieunaiss
-            'adresse
-            'emplacement
-            'étatcivil & de
-            'ville
-            'si la ville n'a pas de pays et qu'un pays est indiqué, on l'ajoute par la même occasion
-        End Using
-        DialogResult = DialogResult.OK
+        If ToutEstCorrect() Then
+            LeDefunt("def_nom") = TbNom.Text
+            LeDefunt("def_prenom") = TbPrénom.Text
+            LeDefunt("def_numero_lh") = TbintNumLh.Value
+            LeDefunt("def_numero_annee") = TbintNumAnnée.Value
+            LeDefunt("def_date_deces") = TbdDateDécès.DateValue
+            LeDefunt("def_date_naiss") = TbdDateNaiss.DateValue
+            LeDefunt("def_lieu_deces") = TbLieuDécès.Text
+            LeDefunt("def_lieu_naiss") = TbLieuNaiss.Text
+            LeDefunt("def_adresse") = TbAdresse.Text
+            LeDefunt("empl_id") = If(CbEmplacement.SelectedValue <> -1, CbEmplacement.SelectedValue, DBNull.Value)
+            LeDefunt("def_etat_civil") = CtrlEtatCivil.EtatCivil
+            LeDefunt("def_etat_civil_de") = CtrlEtatCivil.EtatCivilDe
+            LeDefunt("locville_id") = If(CtrlLocVillePays1.LocVilleId <> -1, CtrlLocVillePays1.LocVilleId, DBNull.Value)
+
+            If LeDefunt("def_id") <> -1 Then
+                Bdd.Update("defunts", LeDefunt)
+            Else
+                Bdd.Insert("defunts", LeDefunt)
+            End If
+
+            DialogResult = DialogResult.OK
+        Else
+            ToolTip1.Show("Le formulaire contient des champs incorrects.", BtEnregistrer)
+        End If
+
+
     End Sub
 
+    Private Function ToutEstCorrect() As Boolean
+        FaireValidation()
+        Return _
+            ErrorProvider1.GetError(TbNom) = "" _
+    AndAlso ErrorProvider1.GetError(TbPrénom) = "" _
+    AndAlso ErrorProvider1.GetError(TbdDateNaiss) = "" _
+    AndAlso ErrorProvider1.GetError(TbdDateDécès) = ""
+    End Function
 
-    Private Sub LbVille_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LbVille.SelectedIndexChanged
-        ' si on change de ville, le pays doit être changé pour correspondre, et il ne peut être changé par l'utilisateur que si aucune ville n'est sélectionnée
-        If LbVille.SelectedItem IsNot Nothing AndAlso CType(LbVille.SelectedItem, LocVille).Pays IsNot Nothing AndAlso CType(LbVille.SelectedItem, LocVille).Id <> -1 Then
-            LbPays.SelectedItem = (CType(LbVille.SelectedItem, LocVille).Pays)
-            LbPays.Enabled = False
+    Private Sub FaireValidation()
+        TbNom_Validating(Nothing, Nothing)
+        TbPrénom_Validating(Nothing, Nothing)
+        TbdDateDécès_Validating(Nothing, Nothing)
+        TbdDateNaiss_Validating(Nothing, Nothing)
+    End Sub
+
+    Private Sub TbNom_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbNom.Validating
+        If TbNom.Text.Trim = "" Then
+            ErrorProvider1.SetError(TbNom, "Veuillez entrer le nom du défunt")
         Else
-            LbPays.SelectedItem = Nothing
-            LbPays.Enabled = True
+            ErrorProvider1.SetError(TbNom, "")
         End If
     End Sub
 
+    Private Sub TbPrénom_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbPrénom.Validating
+        If TbPrénom.Text.Trim = "" Then
+            ErrorProvider1.SetError(TbPrénom, "Veuillez entrer le prénom du défunt")
+        Else
+            ErrorProvider1.SetError(TbPrénom, "")
+        End If
+    End Sub
+
+    Private Sub TbdDateDécès_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbdDateDécès.Validating
+        If Not TbdDateDécès.DateEstValide Then
+            ErrorProvider1.SetError(TbdDateDécès, "La date est incorrecte")
+        Else
+            ErrorProvider1.SetError(TbdDateDécès, "")
+        End If
+    End Sub
+
+    Private Sub TbdDateNaiss_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbdDateNaiss.Validating
+        If Not TbdDateNaiss.DateEstValide Then
+            ErrorProvider1.SetError(TbdDateNaiss, "La date est incorrecte")
+        Else
+            ErrorProvider1.SetError(TbdDateNaiss, "")
+        End If
+    End Sub
 
 End Class

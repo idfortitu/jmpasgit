@@ -103,6 +103,9 @@
       <DependentUpon>dmCimetiere.tt</DependentUpon>
     </Compile>
     <Compile Include="CimEntities.partial.vb" />
+    <Compile Include="ComboBoxEmplacements.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ComboBoxEnum.vb">
       <SubType>Component</SubType>
     </Compile>

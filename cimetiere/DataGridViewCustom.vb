@@ -7,44 +7,28 @@ Public Class DataGridViewCustom
         InitializeComponent()
     End Sub
 
-
-    Private Property _customFilterFunc As Func(Of Object, String, Boolean)
-    Public Property CustomFilterFunc As Func(Of Object, String, Boolean)
-        Set(value As Func(Of Object, String, Boolean))
-            _customFilterFunc = value
-            If Me.DataSource IsNot Nothing Then Me.DataSource.FilterFunc = value
-        End Set
+    ' si changement de datasource, remet l'ancienne sélection (en se basant sur la première colonne, qu'on suppose être un id)
+    Public Overloads Property DataSource As DataTable
         Get
-            Return _customFilterFunc
+            Return CType(MyBase.DataSource, DataTable)
         End Get
-    End Property
-
-    Public Sub UpdateFilter()
-        If DataSource IsNot Nothing Then DataSource.UpdateFilter()
-    End Sub
-
-
-    ' si changement de datasource, remet l'ancienne sélection
-    ' expose une propriété de type objet pour éviter les erreurs de compilation "cannot convert list of acteur to list of ientityinterface"
-    ' mais doit être de type SortableBindingList(Of IEntityInterface)
-    Public Overloads Property DataSource As Object 'SortableBindingList(Of IEntityInterface)
-        Get
-            Return MyBase.DataSource
-        End Get
-        Set(value As Object) 'SortableBindingList(Of IEntityInterface))
-            Dim IdSelect As Integer
-            If SelectedRowIndex = -1 Then
-                IdSelect = -1
+        Set(value As DataTable)
+            Dim Filtre As String
+            Dim ValeurSelect
+            If DataSource IsNot Nothing Then
+                ValeurSelect = SelectedValue
+                Filtre = DataSource.DefaultView.RowFilter
             Else
-                IdSelect = CType(SelectedRow.DataBoundItem, IEntity).Id
+                ValeurSelect = Nothing
+                Filtre = ""
             End If
-            ' re-filtre
-            If CustomFilterFunc IsNot Nothing Then value.FilterFunc = _customFilterFunc
+
+            value.DefaultView.RowFilter = Filtre
             MyBase.DataSource = value
-            value.UpdateFilter()
+
             ' remet l'ancienne sélection
-            Dim row As DataGridViewRow = (From r As DataGridViewRow In Me.Rows Where CType(r.DataBoundItem, IEntity).Id = IdSelect).SingleOrDefault
-            If row IsNot Nothing Then row.Selected = True
+            SelectedValue = ValeurSelect
+
             ' et scrolle dessus si nécessaire
             ScrollSelectedIntoView()
 
@@ -52,9 +36,8 @@ Public Class DataGridViewCustom
     End Property
 
 
-    ' la dgv de base ne propose que la collection de lignes sélectionnées SelectedRows
-
-    Public ReadOnly Property SelectedRow As DataGridViewRow
+    ' la dgv de base ne propose que la collection SelectedRows
+    Public Property SelectedRow As DataGridViewRow
         Get
             If SelectedRows.Count > 0 Then
                 Return SelectedRows(0)
@@ -62,9 +45,41 @@ Public Class DataGridViewCustom
                 Return Nothing
             End If
         End Get
+        Set(value As DataGridViewRow)
+            If value IsNot Nothing Then
+                value.Selected = True
+            Else
+                ClearSelection()
+            End If
+        End Set
     End Property
 
-
+    Public Property SelectedValue
+        Get
+            If Rows.Count > 0 AndAlso Columns.Count > 0 Then
+                Dim sl = SelectedRow
+                If sl Is Nothing Then
+                    Return -1
+                Else
+                    Return sl.Cells(0).Value
+                End If
+            Else
+                Return -1
+            End If
+        End Get
+        Set(value)
+            If value = -1 Or Columns.Count <= 0 Then
+                ClearSelection()
+            Else
+                Dim Row As DataGridViewRow = (From r In Rows Where r.cells(0).value = value).SingleOrDefault
+                If Row Is Nothing Then
+                    ClearSelection()
+                Else
+                    Row.Selected = True
+                End If
+            End If
+        End Set
+    End Property
 
     Public Property SelectedRowIndex As Integer
         Get
@@ -83,26 +98,6 @@ Public Class DataGridViewCustom
         End Set
     End Property
 
-
-    Public Property SelectedItem As Object
-        Get
-            Return If(SelectedRows.Count > 0, SelectedRows(0).DataBoundItem, Nothing)
-        End Get
-        Set(value As Object)
-            If value Is Nothing Then
-                ClearSelection()
-            Else
-                Dim laligne = (From l As DataGridViewRow In Rows Where l.DataBoundItem Is value).FirstOrDefault
-                If laligne IsNot Nothing Then
-                    laligne.Selected = True
-                Else
-                    ClearSelection()
-                End If
-            End If
-        End Set
-    End Property
-
-
     Public Sub ScrollSelectedIntoView()
         If SelectedRows.Count > 0 Then
             Dim ligne = SelectedRows(0)
@@ -112,9 +107,6 @@ Public Class DataGridViewCustom
             End If
         End If
     End Sub
-
-
-
 
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -144,6 +136,5 @@ Public Class DataGridViewCustom
         Me.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-
     End Sub
 End Class

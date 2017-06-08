@@ -19,7 +19,7 @@ Public Class FormGestion
 
 
     Sub DataTableDefunt()
-        dtPersonnes = GetDataTable("select * FROM defunts INNER JOIN t_loc_ville ON defunts.locville_id = t_loc_ville.locville_id INNER JOIN t_pays on t_loc_ville.locville_id = t_pays.Pays_id INNER JOIN emplacements on defunts.empl_id = emplacements.empl_id")
+        dtPersonnes = Bdd.Query("select * FROM defunts INNER JOIN t_loc_ville ON defunts.locville_id = t_loc_ville.locville_id INNER JOIN t_pays on t_loc_ville.locville_id = t_pays.Pays_id INNER JOIN emplacements on defunts.empl_id = emplacements.empl_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "def_nom"
@@ -38,7 +38,7 @@ Public Class FormGestion
     End Sub
 
     Sub DataTableConsBeneficiaire()
-        dtbenef = GetDataTable("SELECT * FROM beneficiaires INNER JOIN beneficier ON beneficiaires.ben_id = beneficier.ben_id where beneficier.con_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("con_id") & "")
+        dtbenef = Query("SELECT * FROM beneficiaires INNER JOIN beneficier ON beneficiaires.ben_id = beneficier.ben_id where beneficier.con_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("con_id") & "")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "ben_nom"
@@ -56,7 +56,7 @@ Public Class FormGestion
     End Sub
 
     Sub DataTableConcess()
-        dtPersonnes = GetDataTable("select * FROM concessionnaires INNER JOIN t_loc_ville ON concessionnaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+        dtPersonnes = Bdd.Query("select * FROM concessionnaires INNER JOIN t_loc_ville ON concessionnaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "csnr_nom"
@@ -76,7 +76,7 @@ Public Class FormGestion
 
 
     Sub DataTableConcession()
-        dtcons = GetDataTable("SELECT * FROM concessions INNER JOIN emplacements ON concessions.empl_id = emplacements.empl_id INNER JOIN t_histoire ON concessions.h_id = t_histoire.h_id INNER JOIN t_commentaire ON concessions.com_id = t_commentaire.com_id")
+        dtcons = Bdd.Query("SELECT * FROM concessions INNER JOIN emplacements ON concessions.empl_id = emplacements.empl_id INNER JOIN t_histoire ON concessions.h_id = t_histoire.h_id INNER JOIN t_commentaire ON concessions.com_id = t_commentaire.com_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "con_numero"
@@ -97,7 +97,7 @@ Public Class FormGestion
     Sub DataTableDefuntCons()
         FCDGDefunt.DataBindings.Clear()
         FCDGDefunt.Columns.Clear()
-        dtdefunt = GetDataTable("SELECT * FROM defunts WHERE empl_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") & "")
+        dtdefunt = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") & "")
         Dim DTGV_Id_Colonne_def = New DataGridViewTextBoxColumn()
         Dim Colonne = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne_def.DataPropertyName = "def_nom"
@@ -114,7 +114,7 @@ Public Class FormGestion
         FCDGDefunt.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
     Sub DataTableBeneficiaire()
-        dtPersonnes = GetDataTable("select * FROM beneficiaires INNER JOIN t_loc_ville ON beneficiaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+        dtPersonnes = Bdd.Query("select * FROM beneficiaires INNER JOIN t_loc_ville ON beneficiaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "ben_nom"
@@ -132,7 +132,7 @@ Public Class FormGestion
     End Sub
 
     Sub DataTablePersContact()
-        dtPersonnes = GetDataTable("select * FROM personnes_contact INNER JOIN t_loc_ville ON personnes_contact.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+        dtPersonnes = Bdd.Query("select * FROM personnes_contact INNER JOIN t_loc_ville ON personnes_contact.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "pc_nom"

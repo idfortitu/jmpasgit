@@ -7,8 +7,6 @@
 *.userosscache
 *.sln.docstates
 
-cimetiere/ConfigLocale.vb
-
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
