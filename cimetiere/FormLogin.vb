@@ -3,9 +3,6 @@
 
 Public Class FormLogin
     Private Sub OK_Click(sender As Object, e As EventArgs) Handles BtOk.Click
-        ' identification via bdd à faire
-        'If TbNomUtilisateur.Text = "a" And TbMdp.Text = "a" Then
-
         Dim mMD5 As New MD5CryptoServiceProvider
         Dim UniEnc As New System.Text.UnicodeEncoding
         Dim bitPass() As Byte = UniEnc.GetBytes(TbMdp.Text)

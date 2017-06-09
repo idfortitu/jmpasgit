@@ -22,6 +22,7 @@ Partial Class FormEditEmplacement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TbRef = New System.Windows.Forms.TextBox()
@@ -30,12 +31,13 @@ Partial Class FormEditEmplacement
         Me.CbMonumClassé = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TbHistoire = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BtNvDef = New System.Windows.Forms.Button()
         Me.BtAjouterOccupant = New System.Windows.Forms.Button()
         Me.BtRetirerOccupant = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.BtEnregistrer = New System.Windows.Forms.Button()
         Me.BtAnnuler = New System.Windows.Forms.Button()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.DgvOccSrc = New cimetiere.DataGridViewCustom()
         Me.DgvSrcColId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColOccSrcNumLh = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,6 +57,7 @@ Partial Class FormEditEmplacement
         Me.TbintNbPlaces = New cimetiere.TextBoxInt()
         Me.CbTypeEmpl = New cimetiere.ComboBoxTypeEmpl()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvOccSrc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvOccDest, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -63,7 +66,6 @@ Partial Class FormEditEmplacement
         '
         Me.TbRef.Location = New System.Drawing.Point(12, 12)
         Me.TbRef.Name = "TbRef"
-        Me.TbRef.ReadOnly = True
         Me.TbRef.Size = New System.Drawing.Size(100, 22)
         Me.TbRef.TabIndex = 0
         '
@@ -113,14 +115,14 @@ Partial Class FormEditEmplacement
         Me.TbHistoire.Size = New System.Drawing.Size(270, 218)
         Me.TbHistoire.TabIndex = 0
         '
-        'Button1
+        'BtNvDef
         '
-        Me.Button1.Location = New System.Drawing.Point(70, 420)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(244, 42)
-        Me.Button1.TabIndex = 7
-        Me.Button1.Text = "Enregistrer un nouveau défunt"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.BtNvDef.Location = New System.Drawing.Point(44, 420)
+        Me.BtNvDef.Name = "BtNvDef"
+        Me.BtNvDef.Size = New System.Drawing.Size(244, 42)
+        Me.BtNvDef.TabIndex = 7
+        Me.BtNvDef.Text = "Enregistrer un nouveau défunt"
+        Me.BtNvDef.UseVisualStyleBackColor = True
         '
         'BtAjouterOccupant
         '
@@ -140,15 +142,6 @@ Partial Class FormEditEmplacement
         Me.BtRetirerOccupant.TabIndex = 9
         Me.BtRetirerOccupant.UseVisualStyleBackColor = True
         '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(96, 482)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 12
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'BtEnregistrer
         '
         Me.BtEnregistrer.Location = New System.Drawing.Point(642, 475)
@@ -167,6 +160,10 @@ Partial Class FormEditEmplacement
         Me.BtAnnuler.TabIndex = 14
         Me.BtAnnuler.Text = "Annuler"
         Me.BtAnnuler.UseVisualStyleBackColor = True
+        '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
         '
         'DgvOccSrc
         '
@@ -351,18 +348,19 @@ Partial Class FormEditEmplacement
         '
         'FormEditEmplacement
         '
+        Me.AcceptButton = Me.BtEnregistrer
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.CancelButton = Me.BtAnnuler
         Me.ClientSize = New System.Drawing.Size(927, 528)
         Me.Controls.Add(Me.BtAnnuler)
         Me.Controls.Add(Me.BtEnregistrer)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.DgvOccSrc)
         Me.Controls.Add(Me.DgvOccDest)
         Me.Controls.Add(Me.BtRetirerOccupant)
         Me.Controls.Add(Me.BtAjouterOccupant)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.BtNvDef)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.CbMonumClassé)
         Me.Controls.Add(Me.Label2)
@@ -375,6 +373,7 @@ Partial Class FormEditEmplacement
         Me.Text = "FormEditEmplacement"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvOccSrc, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvOccDest, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -390,12 +389,11 @@ Partial Class FormEditEmplacement
     Friend WithEvents CbMonumClassé As CheckBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents TbHistoire As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents BtNvDef As Button
     Friend WithEvents BtAjouterOccupant As Button
     Friend WithEvents BtRetirerOccupant As Button
     Friend WithEvents DgvOccDest As DataGridViewCustom
     Friend WithEvents DgvOccSrc As DataGridViewCustom
-    Friend WithEvents Button2 As Button
     Friend WithEvents DgvSrcColId As DataGridViewTextBoxColumn
     Friend WithEvents ColOccSrcNumLh As DataGridViewTextBoxColumn
     Friend WithEvents ColOccSrcNumAnnée As DataGridViewTextBoxColumn
@@ -412,4 +410,6 @@ Partial Class FormEditEmplacement
     Friend WithEvents ColOccDestLieuDécès As DataGridViewTextBoxColumn
     Friend WithEvents BtEnregistrer As Button
     Friend WithEvents BtAnnuler As Button
+    Friend WithEvents ErrorProvider1 As ErrorProvider
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

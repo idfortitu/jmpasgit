@@ -2,7 +2,7 @@
 
 Public Class debug
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim kroutonu As New FormEditEmplacement(1)
+        Dim kroutonu As New FormEditEmplacement(41)
         kroutonu.ShowDialog()
     End Sub
 

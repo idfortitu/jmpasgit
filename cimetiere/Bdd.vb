@@ -149,7 +149,7 @@ Module Bdd
     End Function
 
     Function Login(user As String, pass As String) As Boolean
-        Dim resultat = Query("SELECT * FROM t_login WHERE username = """ & MySqlHelper.EscapeString(user) & """ AND password = " & MySqlHelper.EscapeString(pass))
+        Dim resultat = Query("SELECT * FROM t_login WHERE username = """ & MySqlHelper.EscapeString(user) & """ AND password = """ & MySqlHelper.EscapeString(pass) & """")
         Return resultat.Rows.Count > 0
     End Function
 

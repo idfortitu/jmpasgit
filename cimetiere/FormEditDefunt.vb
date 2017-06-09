@@ -1,8 +1,7 @@
 ﻿Public Class FormEditDefunt
 
-    Public Property IdDef As Integer
-
-    Private Property LeDefunt As DataRow
+    Private Property IdDef As Integer
+    Public Property LeDefunt As DataRow
 
     Sub New(Optional id As Integer = -1)
         InitializeComponent() ' This call is required by the designer.
@@ -60,7 +59,7 @@
             If LeDefunt("def_id") <> -1 Then
                 Bdd.Update("defunts", LeDefunt)
             Else
-                Bdd.Insert("defunts", LeDefunt)
+                LeDefunt("def_id") = Bdd.Insert("defunts", LeDefunt)
             End If
 
             DialogResult = DialogResult.OK
