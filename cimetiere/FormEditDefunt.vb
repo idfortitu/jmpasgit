@@ -46,8 +46,8 @@
             LeDefunt("def_prenom") = TbPrénom.Text
             LeDefunt("def_numero_lh") = TbintNumLh.Value
             LeDefunt("def_numero_annee") = TbintNumAnnée.Value
-            LeDefunt("def_date_deces") = TbdDateDécès.DateValue
-            LeDefunt("def_date_naiss") = TbdDateNaiss.DateValue
+            LeDefunt("def_date_deces") = If(TbdDateDécès.DateValue IsNot Nothing, TbdDateDécès.DateValue, DBNull.Value)
+            LeDefunt("def_date_naiss") = If(TbdDateNaiss.DateValue IsNot Nothing, TbdDateNaiss.DateValue, DBNull.Value)
             LeDefunt("def_lieu_deces") = TbLieuDécès.Text
             LeDefunt("def_lieu_naiss") = TbLieuNaiss.Text
             LeDefunt("def_adresse") = TbAdresse.Text
@@ -66,7 +66,6 @@
         Else
             ToolTip1.Show("Le formulaire contient des champs incorrects.", BtEnregistrer)
         End If
-
 
     End Sub
 

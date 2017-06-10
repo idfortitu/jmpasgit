@@ -10,7 +10,7 @@ Public Class DataGridViewCustom
     ' si changement de datasource, remet l'ancienne sélection (en se basant sur la première colonne, qu'on suppose être un id)
     Public Overloads Property DataSource As DataTable
         Get
-            Return CType(MyBase.DataSource, DataTable)
+            Return MyBase.DataSource
         End Get
         Set(value As DataTable)
             Dim Filtre As String

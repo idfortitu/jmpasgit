@@ -121,7 +121,7 @@ Module Bdd
         Return Query("SELECT * FROM " & nomtable & " WHERE FALSE")
     End Function
 
-    Function GetRowVide(nomtable As String)
+    Function GetRowVide(nomtable As String) As DataRow
         Return GetTableVide(nomtable).NewRow
     End Function
 

@@ -49,7 +49,4 @@
         End If
     End Sub
 
-    Private Sub MajTbEtatCivilDe(sender As Object, e As EventArgs) Handles CbEtatCivil.SelectedIndexChanged
-
-    End Sub
 End Class

@@ -122,10 +122,28 @@
       <DependentUpon>dmCimetiere.tt</DependentUpon>
     </Compile>
     <Compile Include="ConfigLocale.vb" />
+    <Compile Include="corbeille.Designer.vb">
+      <DependentUpon>corbeille.vb</DependentUpon>
+    </Compile>
+    <Compile Include="corbeille.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CtrlBenefPourListe.Designer.vb">
+      <DependentUpon>CtrlBenefPourListe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CtrlBenefPourListe.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CtrlEtatCivil.Designer.vb">
       <DependentUpon>CtrlEtatCivil.vb</DependentUpon>
     </Compile>
     <Compile Include="CtrlEtatCivil.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlListeBenefs.Designer.vb">
+      <DependentUpon>CtrlListeBenefs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CtrlListeBenefs.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CtrlLocVillePays.Designer.vb">
@@ -175,6 +193,12 @@
     <Compile Include="FDetails.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormDemandeInhumation.Designer.vb">
+      <DependentUpon>FormDemandeInhumation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDemandeInhumation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEditEmplacement.Designer.vb">
       <DependentUpon>FormEditEmplacement.vb</DependentUpon>
     </Compile>
@@ -206,10 +230,10 @@
     <Compile Include="FormNouveauPays.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormNouvelleConcession.Designer.vb">
-      <DependentUpon>FormNouvelleConcession.vb</DependentUpon>
+    <Compile Include="FormReservation.Designer.vb">
+      <DependentUpon>FormReservation.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormNouvelleConcession.vb">
+    <Compile Include="FormReservation.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormNouvelleVille.Designer.vb">
@@ -222,12 +246,6 @@
       <DependentUpon>FormProlong.vb</DependentUpon>
     </Compile>
     <Compile Include="FormProlong.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormReservation.Designer.vb">
-      <DependentUpon>FormReservation.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormReservation.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Histoire.partial.vb" />
@@ -325,9 +343,6 @@
     <Compile Include="TextBoxInt64.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TTypeEmpl.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
     <Compile Include="UCBenef.Designer.vb">
       <DependentUpon>UCBenef.vb</DependentUpon>
     </Compile>
@@ -341,8 +356,17 @@
     <EmbeddedResource Include="ComboBoxEnum.resx">
       <DependentUpon>ComboBoxEnum.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="corbeille.resx">
+      <DependentUpon>corbeille.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtrlBenefPourListe.resx">
+      <DependentUpon>CtrlBenefPourListe.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CtrlEtatCivil.resx">
       <DependentUpon>CtrlEtatCivil.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtrlListeBenefs.resx">
+      <DependentUpon>CtrlListeBenefs.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CtrlLocVillePays.resx">
       <DependentUpon>CtrlLocVillePays.vb</DependentUpon>
@@ -355,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FDetails.resx">
       <DependentUpon>FDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDemandeInhumation.resx">
+      <DependentUpon>FormDemandeInhumation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEditEmplacement.resx">
       <DependentUpon>FormEditEmplacement.vb</DependentUpon>
@@ -371,17 +398,14 @@
     <EmbeddedResource Include="FormNouveauPays.resx">
       <DependentUpon>FormNouveauPays.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormNouvelleConcession.resx">
-      <DependentUpon>FormNouvelleConcession.vb</DependentUpon>
+    <EmbeddedResource Include="FormReservation.resx">
+      <DependentUpon>FormReservation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormNouvelleVille.resx">
       <DependentUpon>FormNouvelleVille.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProlong.resx">
       <DependentUpon>FormProlong.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormReservation.resx">
-      <DependentUpon>FormReservation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListBenefNewCons.resx">
       <DependentUpon>ListBenefNewCons.vb</DependentUpon>

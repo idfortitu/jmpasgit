@@ -438,7 +438,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Reference" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Type" Type="bddcimeModel.TTypeEmpl" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="NbPlaces" Type="Int32" Nullable="true" />
           <Property Name="MonumClasse" Type="Boolean" Nullable="false" />
           <Property Name="Coordonnees" Type="Binary" />
@@ -682,12 +682,6 @@
             <End Role="Emplacement" EntitySet="Emplacements" />
           </AssociationSet>
         </EntityContainer>
-        <EnumType Name="TTypeEmpl">
-          <Member Name="NonPrecise" Value="0" />
-          <Member Name="Caveau" Value="1" />
-          <Member Name="Concession" Value="2" />
-          <Member Name="FosseOrdinaire" Value="3" />
-        </EnumType>
         <EnumType Name="TEtatCivil">
           <Member Name="NonPrecise" Value="0" />
           <Member Name="Celibataire" Value="1" />

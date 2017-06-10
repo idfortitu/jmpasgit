@@ -43,7 +43,7 @@ Public Class debug
     End Sub
 
     Private Sub nvcon_Click(sender As Object, e As EventArgs) Handles nvcon.Click
-        Dim aer As New FormNouvelleConcession
+        Dim aer As New FormReservation
         aer.ShowDialog()
     End Sub
 

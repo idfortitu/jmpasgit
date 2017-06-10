@@ -21,7 +21,7 @@
     End Sub
 
     Private Sub BtDéclarationDécès_Click(sender As Object, e As EventArgs) Handles BtDéclarationDécès.Click
-        Dim aer As New FormNouvelleConcession
+        Dim aer As New FormReservation
         aer.ShowDialog()
     End Sub
 

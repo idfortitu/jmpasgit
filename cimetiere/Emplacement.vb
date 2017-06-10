@@ -13,7 +13,7 @@ Imports System.Collections.Generic
 Partial Public Class Emplacement
     Public Property Id As Integer
     Public Property Reference As String
-    Public Property Type As TTypeEmpl
+    Public Property Type As Integer
     Public Property NbPlaces As Nullable(Of Integer)
     Public Property MonumClasse As Boolean
     Public Property Coordonnees As Byte()

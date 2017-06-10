@@ -9,6 +9,12 @@
         Me.TextAlign = HorizontalAlignment.Right    ' plus facile pour se mettre au début du texte en cliquant à gauche
     End Sub
 
+    Public ReadOnly Property DateEstVide As Boolean
+        Get
+            Return Replace(Replace(Me.Text, " ", ""), "/", "") = ""
+        End Get
+    End Property
+
 
     ' en entrée, attend Me.Text au format j/m/a
     ' si un "champ" est 0 (mois, jour, année), le met à 1

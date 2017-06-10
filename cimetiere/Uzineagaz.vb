@@ -1,5 +1,13 @@
 ﻿Imports System.Globalization
-Imports System.Runtime.Serialization
+
+' le mettre dans le module uzineagaz provoque des problèmes d'accès
+Public Enum TTypeEmpl
+    NonPrecise = 0
+    Caveau = 1
+    Fosse = 2
+    Urne = 3
+End Enum
+
 
 Module Uzineagaz
 
@@ -34,13 +42,13 @@ Module Uzineagaz
     Public Function TTypeEmplToString(TypeEmpl As TTypeEmpl) As String
         Select Case TypeEmpl
             Case TTypeEmpl.NonPrecise
-                Return "(non précisé)"
+                Return ""
             Case TTypeEmpl.Caveau
                 Return "Caveau"
-            Case TTypeEmpl.Concession
-                Return "Concession"
-            Case TTypeEmpl.FosseOrdinaire
-                Return "Fosse ordinaire"
+            Case TTypeEmpl.Fosse
+                Return "Fosse"
+            Case TTypeEmpl.Urne
+                Return "Urne en colombarium"
             Case Else
                 Throw New ArgumentException("Valeur inconnue.")
         End Select
@@ -138,7 +146,6 @@ Module Uzineagaz
     Public Function ListeDeType(Of T)(ElemTemplate As T) As List(Of T)
         Return New List(Of T)           ' astuce pour avoir une liste de type anonyme
     End Function
-
 
 
     ' sert à initialiser les combobox, un DisplayMember et un ValueMember
