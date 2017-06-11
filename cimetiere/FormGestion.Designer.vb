@@ -26,6 +26,9 @@ Partial Class FormGestion
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.DgvListeDefunts = New System.Windows.Forms.DataGridView()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.BtDefAnnulerRecherche = New System.Windows.Forms.Button()
@@ -183,11 +186,11 @@ Partial Class FormGestion
         Me.DgvListeConcessionnaire = New System.Windows.Forms.DataGridView()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TbDateDeces = New cimetiere.TextBoxDate()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.DgvListeDefunts = New System.Windows.Forms.DataGridView()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel10.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -221,9 +224,6 @@ Partial Class FormGestion
         Me.GroupBox12.SuspendLayout()
         CType(Me.DgvListeConcessionnaire, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel3.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -260,6 +260,49 @@ Partial Class FormGestion
         Me.TabPage1.Size = New System.Drawing.Size(1262, 665)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Défunt"
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.SeaGreen
+        Me.Panel3.Controls.Add(Me.GroupBox3)
+        Me.Panel3.Location = New System.Drawing.Point(274, 6)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(403, 513)
+        Me.Panel3.TabIndex = 97
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.BackColor = System.Drawing.Color.GhostWhite
+        Me.GroupBox3.Controls.Add(Me.DgvListeDefunts)
+        Me.GroupBox3.Location = New System.Drawing.Point(11, 8)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(381, 496)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
+        '
+        'DgvListeDefunts
+        '
+        Me.DgvListeDefunts.AllowUserToAddRows = False
+        Me.DgvListeDefunts.AllowUserToDeleteRows = False
+        Me.DgvListeDefunts.AllowUserToOrderColumns = True
+        Me.DgvListeDefunts.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DgvListeDefunts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DgvListeDefunts.BackgroundColor = System.Drawing.SystemColors.ButtonFace
+        Me.DgvListeDefunts.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DgvListeDefunts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvListeDefunts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.DgvListeDefunts.EnableHeadersVisualStyles = False
+        Me.DgvListeDefunts.GridColor = System.Drawing.Color.DarkGray
+        Me.DgvListeDefunts.Location = New System.Drawing.Point(8, 15)
+        Me.DgvListeDefunts.MultiSelect = False
+        Me.DgvListeDefunts.Name = "DgvListeDefunts"
+        Me.DgvListeDefunts.ReadOnly = True
+        Me.DgvListeDefunts.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.DgvListeDefunts.RowHeadersVisible = False
+        Me.DgvListeDefunts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvListeDefunts.Size = New System.Drawing.Size(367, 476)
+        Me.DgvListeDefunts.TabIndex = 48
         '
         'Panel10
         '
@@ -1841,49 +1884,6 @@ Partial Class FormGestion
         Me.TbDateDeces.TabIndex = 113
         Me.TbDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.SeaGreen
-        Me.Panel3.Controls.Add(Me.GroupBox3)
-        Me.Panel3.Location = New System.Drawing.Point(274, 6)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(403, 513)
-        Me.Panel3.TabIndex = 97
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.BackColor = System.Drawing.Color.GhostWhite
-        Me.GroupBox3.Controls.Add(Me.DgvListeDefunts)
-        Me.GroupBox3.Location = New System.Drawing.Point(11, 8)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(381, 496)
-        Me.GroupBox3.TabIndex = 0
-        Me.GroupBox3.TabStop = False
-        '
-        'DgvListeDefunts
-        '
-        Me.DgvListeDefunts.AllowUserToAddRows = False
-        Me.DgvListeDefunts.AllowUserToDeleteRows = False
-        Me.DgvListeDefunts.AllowUserToOrderColumns = True
-        Me.DgvListeDefunts.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvListeDefunts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DgvListeDefunts.BackgroundColor = System.Drawing.SystemColors.ButtonFace
-        Me.DgvListeDefunts.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DgvListeDefunts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvListeDefunts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DgvListeDefunts.EnableHeadersVisualStyles = False
-        Me.DgvListeDefunts.GridColor = System.Drawing.Color.DarkGray
-        Me.DgvListeDefunts.Location = New System.Drawing.Point(8, 15)
-        Me.DgvListeDefunts.MultiSelect = False
-        Me.DgvListeDefunts.Name = "DgvListeDefunts"
-        Me.DgvListeDefunts.ReadOnly = True
-        Me.DgvListeDefunts.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.DgvListeDefunts.RowHeadersVisible = False
-        Me.DgvListeDefunts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeDefunts.Size = New System.Drawing.Size(367, 476)
-        Me.DgvListeDefunts.TabIndex = 48
-        '
         'FormGestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1900,6 +1900,9 @@ Partial Class FormGestion
         Me.Text = "FormGestion"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel10.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
@@ -1942,9 +1945,6 @@ Partial Class FormGestion
         Me.GroupBox12.ResumeLayout(False)
         CType(Me.DgvListeConcessionnaire, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel3.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
