@@ -475,7 +475,10 @@ Public Class FormGestion
             TBconsBenefpays.Text = GetValeurSql("Select * From t_loc_ville INNER Join t_pays On t_loc_ville.locville_id = t_pays.Pays_id Where locville_id = " & dtbenef.Rows(FCDGBeneficiaire.CurrentRow.Index())("locville_id") & "", "Pays_nom")
 
         Catch ex As Exception
-            MessageBox.Show("merde")
+            TBconsBenefnom.Text = ""
+            TBconsBenefprenom.Text = ""
+            TBconsBenefadress.Text = ""
+            TBconsBenefdatenaiss.Text = ""
         End Try
 
     End Sub
@@ -509,7 +512,10 @@ Public Class FormGestion
 
     Private Sub FPBLienCons_Click(sender As Object, e As EventArgs) Handles FPBLienCons.Click
         TabControl1.SelectedIndex = 1
-        Dim defuntid = dtPersonnes.Rows(DgvListeDefunts.CurrentRow.Index())("def_id").ToString
+        'Dim defuntid = dtPersonnes.Rows(DgvListeDefunts.CurrentRow.Index())("def_id").ToString
+        Dim defuntid = Me.DgvListeDefunts(0, 0).Value.ToString
+
+
         MsgBox(defuntid)
         Dim id = Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "con_id")
         Dim Source As New BindingSource()

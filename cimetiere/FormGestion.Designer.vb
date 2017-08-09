@@ -821,7 +821,7 @@ Partial Class FormGestion
         Me.GroupBox9.Size = New System.Drawing.Size(312, 166)
         Me.GroupBox9.TabIndex = 0
         Me.GroupBox9.TabStop = False
-        Me.GroupBox9.Text = "Défunt :"
+        Me.GroupBox9.Text = "Défunt séjournant dans l'emplacement:"
         '
         'FCDGDefunt
         '
@@ -854,7 +854,7 @@ Partial Class FormGestion
         Me.GroupBox8.Size = New System.Drawing.Size(312, 166)
         Me.GroupBox8.TabIndex = 0
         Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Bénéficiaire :"
+        Me.GroupBox8.Text = "Bénéficiaire de la concession :"
         '
         'FCDGBeneficiaire
         '
@@ -1039,7 +1039,7 @@ Partial Class FormGestion
         Me.GroupBox5.Size = New System.Drawing.Size(312, 166)
         Me.GroupBox5.TabIndex = 0
         Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Concession :"
+        Me.GroupBox5.Text = "Concession / Emplacement :"
         '
         'FCDGConss
         '
