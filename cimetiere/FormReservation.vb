@@ -7,92 +7,78 @@
     Private Sub InitListeEmplacements()
         ' emplacements, avec nombre de places disponibles (places totales - défunts étant dans cet emplacement)
         ' et fin de la location actuelle, si l'emplacement est loué
+        'DgvEmplacements.DataSource = _
+        'Bdd.Query("SELECT DISTINCT emplacements.empl_id,empl_reference,empl_type,empl_nb_places,empl_nb_places-count(defunts.def_id) as places_libres,con_date_fin,empl_monum_classe" &
+        '    " FROM emplacements LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id " &
+        '    " LEFT OUTER JOIN concessions ON concessions.empl_id= emplacements.empl_id" &
+        '    " GROUP BY emplacements.empl_id,concessions.con_id")
         DgvEmplacements.DataSource =
-            Bdd.Query("SELECT DISTINCT emplacements.empl_id,empl_reference,empl_type,empl_nb_places,empl_nb_places-count(defunts.def_id) as places_libres,con_date_fin,empl_monum_classe" &
+        Bdd.Query("SELECT DISTINCT emplacements.empl_id,empl_reference,empl_type,empl_nb_places,empl_nb_places-count(defunts.def_id) as places_libres,con_date_fin,empl_monum_classe" &
                 " FROM emplacements LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id " &
-                " LEFT OUTER JOIN concessions ON concessions.empl_id= emplacements.empl_id" &
-                " GROUP BY emplacements.empl_id,concessions.con_id")
+                " LEFT OUTER JOIN (SELECT empl_id,MAX(con_date_fin) as con_date_fin FROM concessions WHERE con_date_debut <= NOW() AND con_date_fin >= NOW() GROUP BY empl_id) AS dates_fin ON dates_fin.empl_id= emplacements.empl_id" &
+                " GROUP BY emplacements.empl_id")
+
+
     End Sub
 
-    Private Sub BtEnregistrer_Click(sender As Object, e As EventArgs)
-        If ErrorProvider1.GetError(TbCsnrNom) = "" _
-            AndAlso ErrorProvider1.GetError(TbCsnrPrenom) = "" _
-            AndAlso ErrorProvider1.GetError(TbdateCsnrDateNaiss) = "" _
-            AndAlso ErrorProvider1.GetError(TbfloatMontantPaye) = "" _
-            AndAlso ErrorProvider1.GetError(TbCsnrNoRegistre) = "" Then
+    Private Sub BtEnregistrer_Click(sender As Object, e As EventArgs) Handles BtEnregistrer.Click
+
+        If ToutEstOk() Then
 
 
-
-            MessageBox.Show("trankil sa passe")
+            'MessageBox.Show("trankil sa passe")
 
             ' enregistrer
 
-            ' concessionnaire
-            ' on en cherche un du même nom qui existerait déjà
-            Dim LeConcessionnaire As Concessionnaire
-            Using ctx As New CimEntities
-                Dim NomsCsnrs = (From c In ctx.Concessionnaires Select New With {c.Id, c.Nom, c.Prenom}).ToList
-                Dim IdCsnrDeja = (From c In NomsCsnrs Where ReduireString(c.Nom) = ReduireString(TbCsnrNom.Text) _
-                                 AndAlso ReduireString(c.Prenom) = ReduireString(TbCsnrPrenom.Text)
-                                  Select c.Id) _
-                                .FirstOrDefault
-                If IdCsnrDeja <> 0 Then
-                    LeConcessionnaire = ctx.Concessionnaires.Find(IdCsnrDeja)
-                Else
-                    LeConcessionnaire = New Concessionnaire
-                    ctx.Concessionnaires.Add(LeConcessionnaire)
-                End If
+            ' nouveau concessionnaire
+            Dim RowCsnr = Bdd.GetRowVide("concessionnaires")
 
-                LeConcessionnaire.Nom = TbCsnrNom.Text.Trim
-                LeConcessionnaire.Prenom = TbCsnrPrenom.Text.Trim
-                Dim dnaiss As Date? = TbdateCsnrDateNaiss.DateValue
-                If dnaiss.HasValue Then LeConcessionnaire.DateNaiss = dnaiss.Value      ' si une valeur n'est pas précisée, on n'enregistre pas le "Nothing" pour ne pas supprimer une valeur qui serait déjà présente (dans le cas d'un concessionnaire qui existe déjà)
-                If TbCsnrNoRegistre.Text <> "" Then LeConcessionnaire.NoRegistre = TbCsnrNoRegistre.Text
-                If TbCsnrTel.Text.Trim <> "" Then LeConcessionnaire.Tel = TbCsnrTel.Text.Trim
-                If TbCsnrAdresse.Text.Trim <> "" Then LeConcessionnaire.Adresse = TbCsnrAdresse.Text.Trim
+            RowCsnr("csnr_nom") = TbCsnrNom.Text.Trim
+            RowCsnr("csnr_prenom") = TbCsnrPrenom.Text.Trim
+            RowCsnr("csnr_date_naiss") = If(TbdateCsnrDateNaiss.DateValue IsNot Nothing, TbdateCsnrDateNaiss.DateValue, DBNull.Value)
+            RowCsnr("csnr_adresse") = TbCsnrAdresse.Text.Trim
+            RowCsnr("csnr_no_registre") = If(TbCsnrNoRegistre.Text.Trim = "", DBNull.Value,TbCsnrNoRegistre.Text)
+            RowCsnr("csnr_tel") = TbCsnrTel.Text.Trim
+            RowCsnr("locville_id") = If(CtrlLocVillePays1.LocVilleId > 0, CtrlLocVillePays1.LocVilleId, DBNull.Value)
+            ' ICI ajouter csnr
+            Dim IdCsnr = Bdd.Insert("concessionnaires", RowCsnr)
 
-                If CtrlLocVillePays1.LocVilleId <> -1 Then               ' si la locville est précisée, on la met
-                    LeConcessionnaire.LocVilleId = CtrlLocVillePays1.LocVilleId
-                Else
-                    If CtrlLocVillePays1.PaysId <> -1 Then          ' si la ville n'est pas précisée mais que le pays l'est
-                        ' on met une LocVille avec le nom de la ville vide et ce pays
-                        ' (si cette LocVille n'existe pas déjà, on la crée)
-                        Dim LocVilleVide = (From l In ctx.LocVilles Where l.Ville = "" AndAlso l.PaysId = CtrlLocVillePays1.PaysId).FirstOrDefault
-                        If LocVilleVide IsNot Nothing Then
-                            LeConcessionnaire.LocVille = LocVilleVide
-                        Else
-                            LeConcessionnaire.LocVille = New LocVille With {.PaysId = CtrlLocVillePays1.PaysId}
-                        End If
-                    Else    ' si ni la ville ni le pays ne sont précisés
-                        ' et si le concessionnaire n'a pas déjà une locville
-                        If LeConcessionnaire.LocVilleId Is Nothing Then
-                            ' on lui met une locville spéciale sans nom de ville et sans pays (plutôt que pas de locville)
-                            ' (si elle n'existe pas, on la crée)
-                            Dim LocVilleVide = (From l In ctx.LocVilles Where l.Ville = "" AndAlso l.PaysId Is Nothing).FirstOrDefault
-                            If LocVilleVide IsNot Nothing Then
-                                LeConcessionnaire.LocVille = LocVilleVide
-                            Else
-                                LeConcessionnaire.LocVille = New LocVille
-                            End If
-                        End If
-                    End If
-                End If
+            ' commentaire
+            Dim RowCom = Bdd.GetRowVide("t_commentaire")
+            RowCom("com_commentaire") = TbCommentaire.Text.Trim
+            Dim IdCom = Bdd.Insert("t_commentaire", RowCom)
 
-                ' concession
-                Dim LaConcession As New Concession
-
-                LaConcession.MontantPaye = Convert.ToDecimal(TbfloatMontantPaye.Text)
+            ' histoire, même si en fait on s'en fout
+            Dim RowHist = Bdd.GetRowVide("t_histoire")
+            RowHist("h_histoire") = ""
+            Dim IdHist = Bdd.Insert("t_histoire", RowHist)
 
 
-                If TbCommentaire.Text.Trim <> "" Then LaConcession.Commentaire = New Commentaire(TbCommentaire.Text.Trim)
+            ' concession
+            Dim RowCsn = Bdd.GetRowVide("concessions")
 
-                ctx.Concessions.Add(LaConcession)
-                LaConcession.Concessionnaire = LeConcessionnaire
+            RowCsn("con_date_debut") = TbdDateDebut.DateValue
+            RowCsn("con_date_fin") = DateAdd(DateInterval.Year, If(Rb15Ans.Checked, 15, 30), RowCsn("con_date_debut"))
+            RowCsn("con_nbre_renovations") = 0
+            RowCsn("con_montant_paye") = TbfloatMontantPaye.Value
+            RowCsn("empl_id") = CType(DgvEmplacements.SelectedRow.DataBoundItem, DataRowView).Row("empl_id")
+            RowCsn("csnr_id") = IdCsnr
+            RowCsn("com_id") = IdCom
+            RowCsn("h_id") = IdHist
+            ' histoire : osef
+            Dim IdCsn = Bdd.Insert("concessions", RowCsn)
 
-                ctx.SaveChanges()
+            Dim bens = CtrlListeBenefs1.GetBenefs
+            Dim PremIdBen = Bdd.Insert("beneficiaires", bens)
 
-                DialogResult = DialogResult.OK
-            End Using
+            Dim LiensBensCsn = Bdd.GetTableVide("beneficier")
+            For idben = PremIdBen To PremIdBen + bens.Rows.Count - 1
+                LiensBensCsn.Rows.Add(IdCsn, idben)     ' ordre con_id,ben_id
+            Next
+            Bdd.Insert("beneficier", LiensBensCsn, True)
+
+
+            DialogResult = DialogResult.OK
 
         Else
             ToolTip1.Show("Le formulaire contient des champs incorrects.", BtEnregistrer)
@@ -100,7 +86,7 @@
 
     End Sub
 
-    Private Sub TbCsnrPrenom_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbCsnrPrenom.Validating
+    Private Sub TbCsnrPrenom_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) 'Handles TbCsnrPrenom.Validating
         If TbCsnrPrenom.Text.Trim = "" Then
             ErrorProvider1.SetError(TbCsnrPrenom, "Veuillez entrer le prénom du concessionnaire")
         Else
@@ -109,7 +95,7 @@
 
     End Sub
 
-    Private Sub TbCsnrNom_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbCsnrNom.Validating
+    Private Sub TbCsnrNom_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) ' Handles TbCsnrNom.Validating
         If TbCsnrNom.Text.Trim = "" Then
             ErrorProvider1.SetError(TbCsnrNom, "Veuillez entrer le nom du concessionnaire")
         Else
@@ -117,7 +103,7 @@
         End If
     End Sub
 
-    Private Sub TbdateCsnrDateNaiss_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbdateCsnrDateNaiss.Validating
+    Private Sub TbdateCsnrDateNaiss_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) ' Handles TbdateCsnrDateNaiss.Validating
         If Not TbdateCsnrDateNaiss.DateEstValide Then
             ErrorProvider1.SetError(TbdateCsnrDateNaiss, "La date est incorrecte")
         Else
@@ -125,7 +111,7 @@
         End If
     End Sub
 
-    Private Sub TbCsnrNoRegistre_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbCsnrNoRegistre.Validating
+    Private Sub TbCsnrNoRegistre_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) 'Handles TbCsnrNoRegistre.Validating
         If Not (TbCsnrNoRegistre.Text.Count = 0 OrElse (TbCsnrNoRegistre.Text.Count = 11 AndAlso IsNumeric(TbCsnrNoRegistre.Text))) Then
             ErrorProvider1.SetError(TbCsnrNoRegistre, "Le numéro n'est pas valide")
         Else
@@ -143,7 +129,7 @@
         End If
     End Sub
 
-    Private Sub TbfloatMontantPaye_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TbfloatMontantPaye.Validating
+    Private Sub TbfloatMontantPaye_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) ' Handles TbfloatMontantPaye.Validating
         If TbfloatMontantPaye.Text = "" Then
             ErrorProvider1.SetError(TbfloatMontantPaye, "Veuillez indiquer le montant")
         Else
@@ -152,19 +138,52 @@
     End Sub
 
     Private Sub CbEmplacement_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs)
-
+        If DgvEmplacements.SelectedRow Is Nothing Then
+            ErrorProvider1.SetError(DgvEmplacements, "Veuillez indiquer un emplacement")
+        Else
+            ErrorProvider1.SetError(DgvEmplacements, "")
+        End If
     End Sub
 
-    Private Sub ToutEstOk()
+    Private Sub RbPers_Validating()
+        If Rb1Pers.Checked OrElse Rb2Pers.Checked Then
+            ErrorProvider1.SetError(Rb2Pers, "")
+        Else
+            ErrorProvider1.SetError(Rb2Pers, "Veuillez indiquer un choix")
+        End If
+    End Sub
+
+    Private Sub RbDuree_Validating()
+        If Rb15Ans.Checked OrElse Rb30Ans.Checked Then
+            ErrorProvider1.SetError(Rb30Ans, "")
+        Else
+            ErrorProvider1.SetError(Rb30Ans, "Veuillez indiquer un choix.")
+        End If
+    End Sub
+
+    Private Function ToutEstOk() As Boolean
         ' validation
         TbCsnrPrenom_Validating(Nothing, Nothing)
         TbCsnrNom_Validating(Nothing, Nothing)
         TbdateCsnrDateNaiss_Validating(Nothing, Nothing)
         TbCsnrNoRegistre_Validating(Nothing, Nothing)
-        TbdateDateDebut_Validating(Nothing, Nothing)
         TbfloatMontantPaye_Validating(Nothing, Nothing)
+        TbdateDateDebut_Validating(Nothing, Nothing)
         CbEmplacement_Validating(Nothing, Nothing)
-    End Sub
+        RbPers_Validating()
+        RbDuree_Validating()
+
+        Return CtrlListeBenefs1.ToutEstOk _
+            AndAlso ErrorProvider1.GetError(TbCsnrNom) = "" _
+            AndAlso ErrorProvider1.GetError(TbCsnrPrenom) = "" _
+            AndAlso ErrorProvider1.GetError(TbdateCsnrDateNaiss) = "" _
+            AndAlso ErrorProvider1.GetError(TbfloatMontantPaye) = "" _
+            AndAlso ErrorProvider1.GetError(TbCsnrNoRegistre) = "" _
+            AndAlso ErrorProvider1.GetError(TbdDateDebut) = "" _
+            AndAlso ErrorProvider1.GetError(DgvEmplacements) = "" _
+            AndAlso ErrorProvider1.GetError(Rb2Pers) = "" _
+            AndAlso ErrorProvider1.GetError(Rb30Ans) = ""
+    End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If CtrlListeBenefs1.ToutEstOk Then
@@ -175,9 +194,6 @@
     ' enregistrement : si empl loué, demander confirm pour remplacer (effacer) location actuelle
 
 
-    Private Function GetTypeEmplacement() As TTypeEmpl
-
-    End Function
 
     Private Sub DgvEmplacements_CellFormatting(sender As DataGridView, e As DataGridViewCellFormattingEventArgs) Handles DgvEmplacements.CellFormatting
         Select Case sender.Columns(e.ColumnIndex).DataPropertyName

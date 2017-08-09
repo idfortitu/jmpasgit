@@ -5,6 +5,7 @@ Imports System
 Imports System.Net
 Imports System.IO
 Imports System.Text
+Imports System.Runtime.CompilerServices
 
 Module Bdd
     Private Const ConnStr As String = "Server=" & ConfigLocale.BddHost & ";User Id=" & ConfigLocale.BddUser & "; Password=" & ConfigLocale.BddPass & "; Database=" & ConfigLocale.BddNom & "; Pooling=false"
@@ -73,6 +74,14 @@ Module Bdd
     End Function
 
 
+
+    ''' <summary>
+    ''' Renvoie l'id de la ligne insérée. Ignore la première colonne (qui est supposée être la PK), sauf si PasAutoId est true
+    ''' </summary>
+    ''' <param name="nomtable"></param>
+    ''' <param name="row"></param>
+    ''' <param name="PasAutoId"></param>
+    ''' <returns></returns>
     Public Function Insert(nomtable As String, row As DataRow, Optional PasAutoId As Boolean = False) As Integer
 
         Dim sqlchamps = "("
@@ -112,13 +121,81 @@ Module Bdd
             Return reader.GetInt32(0)
         Finally
             If reader IsNot Nothing AndAlso Not reader.IsClosed Then reader.Close()
+            cmd.Dispose()
             Connexion.Close()
         End Try
     End Function
 
+    ' renvoie l'id de la première ligne insérée (last_insert_id de sql)
+    ' en toute logique, les ids des lignes insérées ensuite se suivent (autoincrement de 1)
+    ' ce n'est peut-être pas 100% fiable mais ça devrait suffire
+    Public Function Insert(nomtable As String, table As DataTable, Optional PasAutoId As Boolean = False) As Integer
+        Dim tvide = GetTableVide(nomtable)
+        Dim Skip = If(PasAutoId, 0, 1)
+
+        ' donne quelque chose comme "(col1, col2, col3)"
+        Dim champs = "(" & String.Join(", ", (From c As DataColumn In tvide.Columns Skip Skip Select c.Caption)) & ")"
+
+
+        Dim valeursparams As New List(Of Object)
+        For Each r As DataRow In table.Rows
+            For Each c In (From osef In r.ItemArray Skip Skip)
+                valeursparams.Add(c)
+            Next
+        Next
+
+        Dim cptrparams = 0
+        ' truc du genre (param0, param1, param2), (param3, param4, param5)
+        Dim params = String.Join(", ", From r As DataRow In table.Rows Select "(" & String.Join(", ", From c In r.ItemArray Skip Skip Select "@param" & Inc(cptrparams)) & ")")
+
+
+        Dim requete = "INSERT INTO " & nomtable & champs & " VALUES " & params
+
+        Dim cmd = New MySqlCommand With {.Connection = Connexion, .CommandType = CommandType.Text}
+
+        For cptrparams = 0 To valeursparams.Count - 1
+            cmd.Parameters.AddWithValue("@param" & cptrparams, valeursparams(cptrparams))
+        Next
+
+        cmd.CommandText = requete
+
+        Connexion.Open()
+        Dim reader As MySqlDataReader = Nothing
+        Try
+            cmd.ExecuteNonQuery()
+            cmd = New MySqlCommand With {.Connection = Connexion, .CommandText = "SELECT LAST_INSERT_ID() FROM " & nomtable}
+            reader = cmd.ExecuteReader
+            reader.Read()
+            Return reader.GetInt32(0)
+        Finally
+            If reader IsNot Nothing AndAlso Not reader.IsClosed Then reader.Close()
+            cmd.Dispose()
+            Connexion.Close()
+
+        End Try
+
+        'MessageBox.Show(requete)
+
+    End Function
+
+    Private Function Inc(ByRef i As Integer)
+        i += 1
+        Return i - 1
+    End Function
+
     ' récupère une table vide, juste pour avoir la structure
+    ' garde une version des tables en cache, pour ne pas refaire la requête
     Function GetTableVide(nomtable As String) As DataTable
-        Return Query("SELECT * FROM " & nomtable & " WHERE FALSE")
+        Static Cache As Dictionary(Of String, DataTable)
+        If Cache Is Nothing Then Cache = New Dictionary(Of String, DataTable)
+        Dim Dt As DataTable
+        If Not Cache.ContainsKey(nomtable) Then
+            Dt = Query("SELECT * FROM " & nomtable & " WHERE FALSE")
+            Cache.Add(nomtable, Dt)
+        Else
+            Dt = Cache(nomtable)
+        End If
+        Return Dt.Clone
     End Function
 
     Function GetRowVide(nomtable As String) As DataRow

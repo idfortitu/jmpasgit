@@ -11,7 +11,7 @@
         Benef("ben_date_naiss") = If(TbDateNaiss.DateValue IsNot Nothing, TbDateNaiss.DateValue, DBNull.Value)
         Benef("ben_lien_parente") = TbLienParente.Text
         Benef("ben_adresse") = TbAdresse.Text
-        Benef("locville_id") = CtrlVille.LocVilleId
+        Benef("locville_id") = If(CtrlVille.LocVilleId > 0, CtrlVille.LocVilleId, DBNull.Value)
         Return Benef
     End Function
 

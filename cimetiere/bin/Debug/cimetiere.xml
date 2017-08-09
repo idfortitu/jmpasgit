@@ -52,6 +52,15 @@ cimetiere
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="M:cimetiere.Bdd.Insert(System.String,System.Data.DataRow,System.Boolean)">
+ <summary>
+ Renvoie l'id de la ligne insérée. Ignore la première colonne (qui est supposée être la PK), sauf si PasAutoId est true
+ </summary>
+ <param name="nomtable"></param>
+ <param name="row"></param>
+ <param name="PasAutoId"></param>
+ <returns></returns>
+</member>
 <member name="T:cimetiere.SortableBindingList`1">
  <summary>
  SortableBindingList is a list that supports sorting its items and filtering them.
