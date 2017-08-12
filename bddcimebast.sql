@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 08 Juin 2017 à 17:57
+-- Généré le :  Sam 12 Août 2017 à 19:18
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -63,7 +63,9 @@ INSERT INTO `beneficiaires` (`ben_id`, `ben_nom`, `ben_prenom`, `ben_date_naiss`
 (20, 'bennom20', 'benprenom20', '2017-05-03', 'oncle', 'rue du ben20', 2),
 (21, 'bennom21', 'benprenom21', '2017-05-03', 'oncle', 'rue du ben21', 2),
 (22, 'bennom22', 'benprenom22', '2017-05-03', 'oncle', 'rue du ben22', 2),
-(23, 'bennom23', 'benprenom23', '2017-05-03', 'oncle', 'rue du ben23', 2);
+(23, 'bennom23', 'benprenom23', '2017-05-03', 'oncle', 'rue du ben23', 2),
+(30, 'krouton', 'jean', '1314-12-12', 'chien', 'là', 6),
+(32, 'bidule', 'machin', '1314-12-12', 'chien', 'rue du coin', 1);
 
 -- --------------------------------------------------------
 
@@ -99,7 +101,8 @@ INSERT INTO `beneficier` (`con_id`, `ben_id`) VALUES
 (7, 20),
 (8, 21),
 (9, 22),
-(10, 23);
+(10, 23),
+(24, 32);
 
 -- --------------------------------------------------------
 
@@ -132,7 +135,24 @@ INSERT INTO `concessionnaires` (`csnr_id`, `csnr_nom`, `csnr_prenom`, `csnr_date
 (7, 'consnom7', 'consprenom1', '2017-05-11', 'rue du cons7', 15478552, '2551400055', 2),
 (8, 'consnom8', 'consprenom2', '2017-05-08', 'rue du cons8', 58288848, '14785212369', NULL),
 (9, 'consnom9', 'consprenom1', '2017-05-11', 'rue du cons9', 15478552, '200005', 2),
-(10, 'consnom10', 'consprenom2', '2017-05-08', 'rue du cons10', 58288848, '0000069', NULL);
+(10, 'consnom10', 'consprenom2', '2017-05-08', 'rue du cons10', 58288848, '0000069', NULL),
+(14, 'Durand', 'Jean', '1212-12-12', '4 rue des glands', 23223323456, '23454345', 1),
+(15, 'Durand', 'Julie', '1215-12-11', 'rue du ciment', 12142131243, '12354', 1),
+(17, 'crapaud', 'jean', NULL, '', NULL, '', NULL),
+(18, 'azeaze', 'azeaze', NULL, '', NULL, '', NULL),
+(19, 'aze', 'aze', NULL, '', NULL, '', NULL),
+(20, 'aze', 'aze', NULL, '', NULL, '', NULL),
+(21, 'cession', 'ducon', NULL, '', NULL, '', NULL),
+(22, 'az', 'az', NULL, '', NULL, '', NULL),
+(23, 'aze', 'oiu', NULL, '', NULL, '', NULL),
+(24, 'zer', 'er', NULL, '', NULL, '', NULL),
+(25, 'Leconcessionnaire', 'Auyefz4', '1970-12-12', '3 rue des concessions', 98765098765, '123456789', 1),
+(26, 'Cessionnaire', 'Con', '1970-12-12', '3 rue de la concession', 12087736478, '098767890', 12),
+(27, 'Ducon-Cession', 'Mireille', '2001-12-12', 'rue des concessionnaires, 112', 12746287461, '666', 4),
+(28, 'McCain', 'Descartes', '1050-12-12', 'Rue des flèches', 9876545678, '098765', 2),
+(29, 'dgaj', 'odsef', NULL, '', NULL, '', NULL),
+(30, 'jeann', 'jean', NULL, '', NULL, '', NULL),
+(31, 'feiug', 'hein', NULL, '', NULL, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -158,8 +178,8 @@ CREATE TABLE `concessions` (
 --
 
 INSERT INTO `concessions` (`con_id`, `con_numero`, `con_date_debut`, `con_date_fin`, `con_nbre_renovations`, `con_montant_paye`, `empl_id`, `csnr_id`, `com_id`, `h_id`) VALUES
-(1, 20161, '2012-05-01', '2017-05-25', 0, '100', 2, 1, 1, 1),
-(2, 20162, '2012-05-08', '2017-05-10', 0, '150', 4, 2, 1, 1),
+(1, 20161, '2012-05-01', '2018-05-25', 0, '100', 2, 1, 1, 1),
+(2, 20162, '2012-05-08', '2017-12-10', 0, '150', 2, 2, 1, 1),
 (3, 20163, '2012-05-01', '2017-05-02', 1, '200', 3, 3, 1, 1),
 (4, 20164, '2012-05-01', '2017-05-25', 0, '100', 5, 4, 1, 1),
 (5, 20165, '2012-05-08', '2017-05-10', 0, '150', 4, 2, 1, 1),
@@ -172,7 +192,20 @@ INSERT INTO `concessions` (`con_id`, `con_numero`, `con_date_debut`, `con_date_f
 (12, 201612, '2012-05-01', '2017-05-02', 1, '200', 16, 8, 1, 1),
 (13, 201613, '2017-05-01', '2017-05-25', 0, '100', 17, 8, 1, 1),
 (14, 201614, '2017-05-08', '2017-05-10', 0, '150', 15, 2, 1, 1),
-(15, 201615, '2017-05-01', '2017-05-02', 1, '200', 15, 1, 1, 1);
+(15, 201615, '2017-05-01', '2017-05-02', 1, '200', 15, 1, 1, 1),
+(19, NULL, '1212-12-12', '1227-12-12', 0, '13', 4, 18, 5, 2),
+(20, NULL, '1212-12-12', '1227-12-12', 0, '12', 4, 19, 6, 3),
+(21, NULL, '1111-11-11', '1126-11-11', 0, '23', 3, 20, 7, 4),
+(22, NULL, '1311-12-12', '1326-12-12', 0, '23', 3, 22, 9, 6),
+(23, NULL, '1212-12-12', '1227-12-12', 0, '42', 3, 23, 10, 7),
+(24, NULL, '1212-12-12', '1227-12-12', 0, '23', 1, 24, 11, 8),
+(25, NULL, '2007-12-12', '2037-12-12', 0, '900', 13, 25, 12, 9),
+(26, NULL, '2009-12-12', '2039-12-12', 0, '250', 4, 26, 13, 10),
+(27, NULL, '2007-12-12', '2037-12-12', 0, '250', 6, 27, 14, 11),
+(28, NULL, '1111-12-12', '1141-12-12', 0, '900', 7, 28, 15, 12),
+(29, NULL, '1212-12-12', '1227-12-12', 0, '250', 3, 29, 16, 13),
+(30, NULL, '1212-12-12', '1227-12-12', 0, '250', 3, 30, 17, 14),
+(31, NULL, '1212-12-12', '1227-12-12', 0, '250', 3, 31, 18, 15);
 
 -- --------------------------------------------------------
 
@@ -205,14 +238,6 @@ CREATE TABLE `defunts` (
 --
 
 INSERT INTO `defunts` (`def_id`, `def_numero_lh`, `def_numero_annee`, `def_prenom`, `def_nom`, `def_adresse`, `def_etat_civil`, `def_etat_civil_de`, `def_date_naiss`, `def_lieu_naiss`, `def_date_deces`, `def_lieu_deces`, `pc_id`, `Date_debut`, `Date_fin`, `empl_id`, `locville_id`) VALUES
-(1, 10001, 201610001, 'defuntprenom1', 'defuntnom1', 'rue du defadresse 1', 1, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '1', 1, '2017-05-02', '2017-05-31', 2, 1),
-(2, 10002, 201610002, 'defuntprenom2', 'defuntnom2', 'rue du defadresse 2', 2, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '2', 2, '2017-05-02', '2017-05-31', 2, 1),
-(3, 10003, 201610003, 'defuntprenom3', 'defuntnom3', 'rue du defadresse 3', 2, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '2', 2, '2017-05-02', '2017-05-31', 2, 1),
-(4, 10004, 201610004, 'defuntprenom4', 'defuntnom4', 'rue du defadresse 4', 1, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '1', 1, '2017-05-02', '2017-05-31', 14, 1),
-(5, 10005, 201610005, 'defuntprenom5', 'defuntnom5', 'rue du defadresse 5', 2, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '2', 2, '2017-05-02', '2017-05-31', 15, 1),
-(6, 10006, 201610006, 'defuntprenom6', 'defuntnom36', 'rue du defadresse 6', 2, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '2', 2, '2017-05-02', '2017-05-31', 2, 1),
-(7, 10007, 201610007, 'defuntprenom7', 'defuntnom7', 'rue du defadresse 7', 1, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '1', 1, '2017-05-02', '2017-05-31', 14, 1),
-(8, 10008, 201610008, 'defuntprenom8', 'defuntnom8', 'rue du defadresse 8', 2, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '2', 2, '2017-05-02', '2017-05-31', 14, 1),
 (9, 10009, 201610009, 'defuntprenom9', 'defuntnom9', 'rue du defadresse 9', 2, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '2', 2, '2017-05-02', '2017-05-31', 2, 1),
 (10, 10010, 201610010, 'defuntprenom10', 'defuntnom10', 'rue du defadresse 10', 1, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '1', 1, '2017-05-02', '2017-05-31', 12, 1),
 (11, 10011, 201610011, 'defuntprenom11', 'defuntnom11', 'rue du defadresse 11', 2, 'Marie', '2017-05-04', 'La bas', '2017-05-25', '2', 2, '2017-05-02', '2017-05-31', 8, 1),
@@ -256,10 +281,10 @@ CREATE TABLE `emplacements` (
 --
 
 INSERT INTO `emplacements` (`empl_id`, `empl_reference`, `empl_type`, `empl_nb_places`, `empl_monum_classe`, `hist_id`, `empl_coords`) VALUES
-(1, 'A100', 0, 10, 0, NULL, 0xcf0015045b0110045601d903cf00d703cf001504),
+(1, 'A100', 0, 0, 0, NULL, 0xcf0015045b0110045601d903cf00d703cf001504),
 (2, 'A200', 0, 10, 0, NULL, NULL),
 (3, 'A300', 0, 10, 0, NULL, NULL),
-(4, 'A400', 0, 5, 0, NULL, NULL),
+(4, 'A400', 0, NULL, 0, NULL, NULL),
 (5, 'A500', 0, 1, 0, NULL, NULL),
 (6, 'A600', 0, 10, 0, NULL, NULL),
 (7, 'A700', 0, 10, 0, NULL, NULL),
@@ -348,7 +373,24 @@ CREATE TABLE `t_commentaire` (
 --
 
 INSERT INTO `t_commentaire` (`com_id`, `com_commentaire`) VALUES
-(1, 'com com');
+(1, 'com com'),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, ''),
+(8, ''),
+(9, ''),
+(10, ''),
+(11, ''),
+(12, 'dépêchez-vous, il n\'est plus très frais'),
+(13, ''),
+(14, ''),
+(15, ''),
+(16, ''),
+(17, ''),
+(18, '');
 
 -- --------------------------------------------------------
 
@@ -366,7 +408,21 @@ CREATE TABLE `t_histoire` (
 --
 
 INSERT INTO `t_histoire` (`h_id`, `h_histoire`) VALUES
-(1, 'pas d\'histoire');
+(1, 'pas d\'histoire'),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, ''),
+(8, ''),
+(9, ''),
+(10, ''),
+(11, ''),
+(12, ''),
+(13, ''),
+(14, ''),
+(15, '');
 
 -- --------------------------------------------------------
 
@@ -391,9 +447,7 @@ INSERT INTO `t_loc_ville` (`locville_id`, `locville_cp`, `locville_ville`, `Pays
 (4, 666, 'Hell', 5),
 (6, 9876, 'Vancouver', 5),
 (12, 243, 'Trouperdu-Les-Bains-De-Pieds-À-La-Lavande', 3),
-(13, NULL, '', 4),
-(14, NULL, '', 6),
-(15, NULL, '', NULL);
+(16, 458, 'Outabobo', 7);
 
 -- --------------------------------------------------------
 
@@ -435,7 +489,8 @@ INSERT INTO `t_pays` (`Pays_id`, `Pays_nom`) VALUES
 (3, 'France'),
 (4, 'Allemagne'),
 (5, 'Canada'),
-(6, 'Talboukistan');
+(6, 'Talboukistan'),
+(7, 'Gabon');
 
 --
 -- Index pour les tables exportées
@@ -535,17 +590,17 @@ ALTER TABLE `t_pays`
 -- AUTO_INCREMENT pour la table `beneficiaires`
 --
 ALTER TABLE `beneficiaires`
-  MODIFY `ben_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ben_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT pour la table `concessionnaires`
 --
 ALTER TABLE `concessionnaires`
-  MODIFY `csnr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `csnr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT pour la table `concessions`
 --
 ALTER TABLE `concessions`
-  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT pour la table `defunts`
 --
@@ -565,22 +620,27 @@ ALTER TABLE `personnes_contact`
 -- AUTO_INCREMENT pour la table `t_commentaire`
 --
 ALTER TABLE `t_commentaire`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT pour la table `t_histoire`
 --
 ALTER TABLE `t_histoire`
-  MODIFY `h_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `h_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT pour la table `t_loc_ville`
 --
 ALTER TABLE `t_loc_ville`
-  MODIFY `locville_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `locville_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT pour la table `t_login`
 --
 ALTER TABLE `t_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `t_pays`
+--
+ALTER TABLE `t_pays`
+  MODIFY `Pays_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Contraintes pour les tables exportées
 --
@@ -636,7 +696,7 @@ ALTER TABLE `personnes_contact`
 -- Contraintes pour la table `t_loc_ville`
 --
 ALTER TABLE `t_loc_ville`
-  ADD CONSTRAINT `FK_T_Loc_ville_Pays_id` FOREIGN KEY (`Pays_id`) REFERENCES `t_pays` (`Pays_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_T_Loc_ville_Pays_id` FOREIGN KEY (`Pays_id`) REFERENCES `t_pays` (`Pays_id`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

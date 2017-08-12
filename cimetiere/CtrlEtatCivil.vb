@@ -10,7 +10,7 @@
 
     Public Property EtatCivil As TEtatCivil
         Get
-            Return CbEtatCivil.SelectedValue
+            Return If([Enum].IsDefined(GetType(TEtatCivil), CbEtatCivil.SelectedValue), CbEtatCivil.SelectedValue, TEtatCivil.NonPrecise)
         End Get
         Set(value As TEtatCivil)
             CbEtatCivil.SelectedValue = value

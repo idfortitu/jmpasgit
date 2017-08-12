@@ -54,6 +54,8 @@ Public Class DataGridViewCustom
         End Set
     End Property
 
+
+    ' se base sur la valeur de la première colonne (supposée l'id), à employer avec précaution
     Public Property SelectedValue
         Get
             If Rows.Count > 0 AndAlso Columns.Count > 0 Then
@@ -71,7 +73,7 @@ Public Class DataGridViewCustom
             If value = -1 Or Columns.Count <= 0 Then
                 ClearSelection()
             Else
-                Dim Row As DataGridViewRow = (From r In Rows Where r.cells(0).value = value).SingleOrDefault
+                Dim Row As DataGridViewRow = (From r In Rows Where r.cells(0).value = value).FirstOrDefault
                 If Row Is Nothing Then
                     ClearSelection()
                 Else
