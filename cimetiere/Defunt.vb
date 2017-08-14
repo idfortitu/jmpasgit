@@ -17,7 +17,7 @@ Partial Public Class Defunt
     Public Property Prenom As String
     Public Property Nom As String
     Public Property Adresse As String
-    Public Property EtatCivil As TEtatCivil
+    Public Property EtatCivil As Integer
     Public Property EtatCivilDe As String
     Public Property DateNaiss As Nullable(Of Date)
     Public Property LieuNaiss As String

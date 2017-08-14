@@ -333,9 +333,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SortableBindingList.vb" />
-    <Compile Include="TEtatCivil.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
     <Compile Include="TextBoxDate.vb">
       <SubType>Component</SubType>
     </Compile>

@@ -29,12 +29,14 @@ Partial Class debug
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
         Me.nvcon = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
+        Me.Button12 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -99,18 +101,6 @@ Partial Class debug
         Me.Button6.Text = "img 2"
         Me.Button6.UseVisualStyleBackColor = True
         '
-        'PlanCimetiere1
-        '
-        Me.PlanCimetiere1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PlanCimetiere1.EmplSelect = Nothing
-        Me.PlanCimetiere1.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.8!)
-        Me.PlanCimetiere1.IdEmplSelect = -1
-        Me.PlanCimetiere1.Location = New System.Drawing.Point(24, 23)
-        Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
-        Me.PlanCimetiere1.Name = "PlanCimetiere1"
-        Me.PlanCimetiere1.Size = New System.Drawing.Size(764, 605)
-        Me.PlanCimetiere1.TabIndex = 61
-        '
         'nvcon
         '
         Me.nvcon.Location = New System.Drawing.Point(910, 349)
@@ -156,11 +146,43 @@ Partial Class debug
         Me.Button10.Text = "datables"
         Me.Button10.UseVisualStyleBackColor = True
         '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(281, 363)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(122, 32)
+        Me.Button11.TabIndex = 69
+        Me.Button11.Text = "pdfcsn"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
+        'PlanCimetiere1
+        '
+        Me.PlanCimetiere1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PlanCimetiere1.EmplSelect = Nothing
+        Me.PlanCimetiere1.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.8!)
+        Me.PlanCimetiere1.IdEmplSelect = -1
+        Me.PlanCimetiere1.Location = New System.Drawing.Point(24, 23)
+        Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
+        Me.PlanCimetiere1.Name = "PlanCimetiere1"
+        Me.PlanCimetiere1.Size = New System.Drawing.Size(764, 605)
+        Me.PlanCimetiere1.TabIndex = 61
+        '
+        'Button12
+        '
+        Me.Button12.Location = New System.Drawing.Point(260, 432)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(130, 55)
+        Me.Button12.TabIndex = 70
+        Me.Button12.Text = "pdfinh"
+        Me.Button12.UseVisualStyleBackColor = True
+        '
         'debug
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1698, 878)
+        Me.Controls.Add(Me.Button12)
+        Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
@@ -194,4 +216,6 @@ Partial Class debug
     Friend WithEvents Button8 As Button
     Friend WithEvents Button9 As Button
     Friend WithEvents Button10 As Button
+    Friend WithEvents Button11 As Button
+    Friend WithEvents Button12 As Button
 End Class

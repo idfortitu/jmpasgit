@@ -102,7 +102,7 @@ Module Uzineagaz
 
 
     ' Renvoie une seule string du style "13 avenue de la rue, 1415 Trouperdu (France)"
-    Public Function AdresseComplète(Adresse As String, Cp As Integer?, Ville As String, Pays As String, Optional ForcerPays As Boolean = False) As String
+    Public Function AdresseComplete(Adresse As String, Cp As Integer?, Ville As String, Pays As String, Optional ForcerPays As Boolean = False) As String
         Dim Texte As String = ""
         If Adresse <> "" Then
             Texte = Adresse
@@ -155,3 +155,36 @@ Module Uzineagaz
     End Class
 
 End Module
+
+Public Enum TTypeCsnInh
+    NonPrecise
+    OrdinaireCercueil
+    OrdinaireUrne
+    Cercueil1Pers15Ans
+    Urne1Pers15Ans
+    Cercueil2Pers15Ans
+    Urne2Pers15Ans
+    Caveau30AnsCercueil
+    Caveau30AnsCercueilCavCom
+    Caveau30AnsUrne
+    Caveau30AnsUrneCavCom
+    UrneColombOrdinaire
+    UrneColomb15Ans
+    UrneColomb30Ans
+    Urne30Ans
+    CavurneCommunal
+    OuvertureCaveau
+    DispersionCendres
+    CsnExistante
+    Prolong
+End Enum
+
+
+Public Enum TEtatCivil As Integer
+    NonPrecise = 0
+    Celibataire = 1
+    Epoux = 2
+    Veuf = 3
+    Divorce = 4
+    Enfant = 5
+End Enum

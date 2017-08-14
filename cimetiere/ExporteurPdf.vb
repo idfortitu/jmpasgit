@@ -8,7 +8,6 @@ Public Class ExporteurPdf
     Private ReadOnly Property pdf As Document
         Get
             If _pdf Is Nothing Then
-                '_pdf = New Document()
                 _pdf = New Document(PageSize.A4, 50, 40, 30, 40)
                 _pdfwrite = PdfWriter.GetInstance(_pdf, New FileStream(NomFic, FileMode.Create))
                 _pdf.Open()
@@ -43,7 +42,7 @@ Public Class ExporteurPdf
         End Set
     End Property
 
-    Dim fNormal, fNormalL, fNormalXL, fNormalS, fSouligne, fSouligneS, fSouligneL, fGras, fGrasL, fGrasS, fGrasItalique, fGrasSouligne, fItalique, fItaliqueXS, fItaliqueS, fItaliqueL, fItaliqueSouligne, fItaliqueSouligneS, fBarre, fSpecial1, fSpecial1Gras, fSpecial1S, fSpecial1L As Font
+    Dim fNormal, fNormalL, fNormalXL, fNormalS, fSouligne, fSouligneS, fSouligneL, fGras, fGrasL, fGrasS, fGrasItalique, fGrasSouligne, fItalique, fItaliqueXS, fItaliqueS, fItaliqueL, fItaliqueSouligne, fItaliqueSouligneXS, fItaliqueSouligneS, fBarre, fSpecial1, fSpecial1Gras, fSpecial1S, fSpecial1L As Font
     Dim Logo As itextsharp.text.Image
 
     Const CASE_COCHEE = ChrW(&H2612), CASE_VIDE = ChrW(9744), EURO = ChrW(8364)
@@ -82,436 +81,452 @@ Public Class ExporteurPdf
 
 
 
-    ' à adapter pour datatables
+    'à adapter pour datatables
+
+    Public Sub CreePdfInhum(Defunt As DataRow, VilleDefunt As DataRow, PaysDefunt As DataRow, Demandeur As DataRow, TypeCsnInhSollic As TTypeCsnInh, Optional datesign As Date? = Nothing, Optional RefEmplCsnExistante As String = "", Optional DefuntsDeja As DataTable = Nothing, Optional Concessionnaire As DataRow = Nothing, Optional VilleCsnr As DataRow = Nothing, Optional PaysCsnr As DataRow = Nothing, Optional Beneficiaires As DataTable = Nothing)         '(Optional LeForm As DemandeInhumation = Nothing)
+
+        ' valeurs par défaut pour les paramètres optionnels, pour ne pas devoir se demander si tel paramètre est présent ou pas
+        If DefuntsDeja Is Nothing Then DefuntsDeja = Bdd.GetTableVide("defunts")
+        If Concessionnaire Is Nothing Then
+            Concessionnaire = Bdd.GetRowVide("concessionnaires")
+            ' les strings ne peuvent pas être dbnull
+            Concessionnaire("csnr_prenom") = ""
+            Concessionnaire("csnr_nom") = ""
+            Concessionnaire("csnr_tel") = ""
+            Concessionnaire("csnr_adresse") = ""
+        End If
+        If Beneficiaires Is Nothing Then Beneficiaires = Bdd.GetTableVide("beneficiaires")
+        If VilleCsnr Is Nothing Then
+            VilleCsnr = Bdd.GetRowVide("t_loc_ville")
+            VilleCsnr("locville_ville") = ""
+        End If
+        If PaysCsnr Is Nothing Then
+            PaysCsnr = Bdd.GetRowVide("t_pays")
+            PaysCsnr("Pays_nom") = ""
+        End If
+
+        Dim p As Paragraph
+        Dim pdf = Me.pdf        ' économise l'accès à la propriété à chaque utilisation
 
-    'Public Sub CreePdfInhum(Optional LeForm As DemandeInhumation = Nothing)
-    '    ' juste pour pouvoir faire les tests If LeDefunt.Nom is Nothing...
-    '    If LeForm Is Nothing Then LeForm = New DemandeInhumation
-    '    Dim fnvc As DemandeNvConcession
-    '    ' idem, form vide si aucun n'est précisé, évite de tester fnvc is nothing sans arrêt
-    '    fnvc = If(LeForm.DemandeNvCon, New DemandeNvConcession)
 
-    '    Dim p As Paragraph
 
-    '    Dim pdf = Me.pdf        ' économise l'accès à la propriété à chaque utilisation
+        ' encadré en haut à droite
+        Colonne("Cimetière communal de la hulpe", 440, 150, 700, 809, fGras)
+        RectangleGras(445, 744, 115, 45)
+
+        Logo.ScaleToFit(50, 50)
+        Logo.SetAbsolutePosition(455, 750)
+        pdf.Add(Logo)
 
-    '    With LeForm
+        Colonne(If(Not IsDBNull(Defunt("def_numero_lh")), Defunt("def_numero_lh"), ".............."), 512, 150, 700, 790, fGrasS)           ' si dbnull, est nothing ?
+        Colonne(If(Not IsDBNull(Defunt("def_numero_annee")), Defunt("def_numero_annee"), "........"), 507, 150, 700, 770, fGrasS)     ' idem
+        Colonne(Today.Year, 535, 150, 700, 770)
 
-    '        ' encadré en haut à droite
-    '        Colonne("Cimetière communal de la hulpe", 440, 150, 700, 809, fGras)
-    '        RectangleGras(445, 744, 115, 45)
+        p = New Paragraph("À compléter en MAJUSCULES", fGras)
+        p.Alignment = Element.ALIGN_CENTER
+        pdf.Add(p)
 
-    '        Logo.ScaleToFit(50, 50)
-    '        Logo.SetAbsolutePosition(455, 750)
-    '        pdf.Add(Logo)
+        Dim t As New PdfPTable(1) With {.WidthPercentage = 18, .HorizontalAlignment = Rectangle.ALIGN_LEFT}
+        t.AddCell(New PdfPCell(New Phrase("Personne défunte :", fGras)))
+        pdf.Add(t)
 
-    '        Colonne(If(.NumDefLh IsNot Nothing, .NumDefLh, ".............."), 512, 150, 700, 790, fGrasS)
-    '        Colonne(If(.NumDefAnnee IsNot Nothing, .NumDefAnnee, "........"), 507, 150, 700, 770, fGrasS)
-    '        Colonne(Today.Year, 535, 150, 700, 770)
+        pdf.Add(New Paragraph(Champ("Nom : ", Defunt("def_nom"), ".........................................................................................................................................................")))
+        pdf.Add(New Paragraph(Champ("Prénom(s) : ", Defunt("def_prenom"), "................................................................................................................................................")))
 
-    '        p = New Paragraph("À compléter en MAJUSCULES", fGras)
-    '        p.Alignment = Element.ALIGN_CENTER
-    '        pdf.Add(p)
+        pdf.Add(New Paragraph(ChampAdresse(Defunt("def_adresse"), VilleDefunt("locville_ville"), If(Not IsDBNull(VilleDefunt("locville_cp")), VilleDefunt("locville_cp"), Nothing), PaysDefunt("Pays_nom"))))
 
-    '        Dim t As New PdfPTable(1) With {.WidthPercentage = 18, .HorizontalAlignment = Rectangle.ALIGN_LEFT}
-    '        t.AddCell(New PdfPCell(New Phrase("Personne défunte :", fGras)))
-    '        pdf.Add(t)
+        p = New Paragraph
+        p.Add(Champ("Né(e) à ", Defunt("def_lieu_naiss"), "........................................................................................."))
+        p.Add(Champ(" le ", If(Not IsDBNull(Defunt("def_date_naiss")), CType(Defunt("def_date_naiss"), Date).ToString("dd/MM/yyyy"), Nothing), "......................................................................."))
+        pdf.Add(p)
 
-    '        pdf.Add(New Paragraph(Champ("Nom : ", .DefNom, ".........................................................................................................................................................")))
-    '        pdf.Add(New Paragraph(Champ("Prénom(s) : ", .DefPrenom, "................................................................................................................................................")))
+        p = New Paragraph
+        p.Add(Champ("Décédé(e) à ", Defunt("def_lieu_deces"), ".................................................................................."))
+        p.Add(Champ(" le ", If(Not IsDBNull(Defunt("def_date_deces")), CType(Defunt("def_date_deces"), Date).ToString("dd/MM/yyyy"), Nothing), "......................................................................."))
+        pdf.Add(p)
 
-    '        pdf.Add(New Paragraph(ChampAdresse(.DefAdresse, .DefVille, .DefCp, .DefPays)))
+        pdf.Add(New Paragraph(Champ("État civil : ", If(Not IsDBNull(Defunt("def_etat_civil")), Uzineagaz.TEtatCivilToString(Defunt("def_etat_civil")), Nothing), "......................")))
+        If Not IsDBNull(Defunt("def_etat_civil")) AndAlso Uzineagaz.EtatCivilAttendNom(Defunt("def_etat_civil")) Then
+            pdf.Add(New Paragraph(Champ("      De ", Defunt("def_etat_civil_de"), "...............................")))
+        End If
 
-    '        p = New Paragraph
-    '        p.Add(Champ("Né(e) à ", .DefLieuNaiss, "........................................................................................."))
-    '        p.Add(Champ(" le ", If(.DefDateNaiss IsNot Nothing, .DefDateNaiss.Value.ToString("dd/MM/yyyy"), Nothing), "......................................................................."))
-    '        pdf.Add(p)
+        pdf.Add(New Paragraph(vbCrLf))
+        LigneHoriz()
 
-    '        p = New Paragraph
-    '        p.Add(Champ("Décédé(e) à ", .DefLieuDeces, ".................................................................................."))
-    '        p.Add(Champ(" le ", If(.DefDateDeces IsNot Nothing, .DefDateDeces.Value.ToString("dd/MM/yyyy"), Nothing), "......................................................................."))
-    '        pdf.Add(p)
 
-    '        pdf.Add(New Paragraph(Champ("État civil : ", Defunt.StaticEtatCivilComplet(.DefEtatCivil), "......................")))
-    '        If .DefEtatCivil <> TEtatCivil.Celibataire Then
-    '            pdf.Add(New Paragraph(Champ("      De ", .DefEtatCivilDe, "...............................")))
-    '        End If
+        t = New PdfPTable(1) With {.WidthPercentage = 18, .HorizontalAlignment = Rectangle.ALIGN_LEFT}
+        t.AddCell(New PdfPCell(New Phrase("Personne mandatée :", fGras)))
+        pdf.Add(t)
 
-    '        pdf.Add(New Paragraph(vbCrLf))
-    '        LigneHoriz()
+        ' Partie demandeur
 
+        p = New Paragraph
+        p.Add(Champ("Je soussigné(e), ", Demandeur("dmdr_nomcomplet"), "............................................................"))
+        p.Add(Champ(" –  Tél. : ", Demandeur("dmdr_tel"), "....................................................................................................."))
+        pdf.Add(p)
 
-    '        t = New PdfPTable(1) With {.WidthPercentage = 18, .HorizontalAlignment = Rectangle.ALIGN_LEFT}
-    '        t.AddCell(New PdfPCell(New Phrase("Personne mandatée :", fGras)))
-    '        pdf.Add(t)
+        pdf.Add(New Paragraph(ChampAdresse(Demandeur("dmdr_adresse"), Demandeur("dmdr_nomville"), If(Not IsDBNull(Demandeur("dmdr_cp")), Convert.ToInt32(Demandeur("dmdr_cp")), Nothing), Demandeur("dmdr_nompays"))))
 
-    '        ' Partie demandeur
-    '        p = New Paragraph
-    '        p.Add(Champ("Je soussigné(e), ", .DmdrNom, "............................................................"))
-    '        p.Add(Champ(" –  Tél. : ", .DmdrTel, "....................................................................................................."))
-    '        pdf.Add(p)
+        pdf.Add(New Paragraph("Sollicite au nom de la famille :", fNormal))
+        pdf.Add(New Paragraph(Cse(TypeCsnInhSollic <> TTypeCsnInh.NonPrecise AndAlso TypeCsnInhSollic <> TTypeCsnInh.CsnExistante AndAlso TypeCsnInhSollic <> TTypeCsnInh.Prolong) & " a) l'obtention d'un emplacement suivant :", fGrasS))
+        'pdf.Add(New Paragraph(CASE_VIDE & " b) la prolongation d'un emplacement existant de type :", fNormal))
 
-    '        pdf.Add(New Paragraph(ChampAdresse(.DmdrAdresse, .DmdrVille, .DmdrCp, .DmdrPays)))
+        InsererTableauTypeEmplacement(TypeCsnInhSollic)
 
-    '        pdf.Add(New Paragraph("Sollicite au nom de la famille :", fNormal))
+        ' À FAIRE :  voir si les cases existantes - "urne" etc sont encore pertinentes
+        p = New Paragraph
+        p.Add(New Phrase(Cse(TypeCsnInhSollic = TTypeCsnInh.CsnExistante) & " b) l'inhumation en concession existante : ", fGrasS))
+        p.Add(New Phrase(CASE_VIDE & " urne - " & CASE_VIDE & " cercueil / " & CASE_VIDE & " pleine terre - " & CASE_VIDE & " caveau - " & CASE_VIDE & " cellule de columbarium - " & CASE_VIDE & " cavurne", fNormal))
+        pdf.Add(p)
+        'pdf.Add(New Paragraph(Cse(.ConcSollic = "existante") & " b) l'inhumation en concession existante : " & CASE_VIDE & " urne - " & CASE_VIDE & " cercueil / " & CASE_VIDE & " pleine terre - " & CASE_VIDE & " caveau - " & CASE_VIDE & " cellule de columbarium - " & CASE_VIDE & " cavurne", fGrasS))
+        pdf.Add(New Paragraph(Champ("                          Référence de l'emplacement : ", RefEmplCsnExistante, ".............................................")))
+        pdf.Add(New Paragraph(Champ("                          Références des éventuels autres défunts dans la sépulture  : ",
+                                    String.Join(", ", From def As DataRow In DefuntsDeja.Rows Select def("def_prenom") & " " & def("def_nom")),
+                                    ".............................................")))
 
-    '        pdf.Add(New Paragraph(If(.ConcSollic = TConcSollic.Nouvelle, CASE_COCHEE, CASE_VIDE) & " a) l'obtention d'un emplacement suivant :", fGrasS))
-    '        'pdf.Add(New Paragraph(CASE_VIDE & " b) la prolongation d'un emplacement existant de type :", fNormal))
+        pdf.Add(New Phrase("Le paiement de la redevance doit être exécuté par la personne qui demande l'emplacement et est payable au comptant ", fItaliqueXS))
+        pdf.Add(New Phrase("au moment", fItaliqueSouligneXS))
+        pdf.Add(New Phrase(" de la demande.", fItaliqueXS))
+        pdf.Add(New Paragraph(vbCrLf & "             En cas de choix d'une concession, merci de compléter le verso du présent document.", fGrasS))
+        pdf.Add(New Phrase("Je déclare avoir pris connaissance du réglement du cimetière (et redevances y afférentes).", fNormalS))
+        pdf.Add(New Phrase("" & vbCrLf & "Je m'engage à respecter les dispositions de ce règlement.", fNormalS))
+
+        pdf.Add(New Phrase(vbCrLf))
+        pdf.Add(New Phrase(Champ("Date : ", If(datesign IsNot Nothing, datesign.Value.ToString("dd/MM/yyyy"), Nothing))))
+
+        pdf.Add(New Phrase("                                                                Signature de la personne mandatée", fNormal))
+
+        ' À FAIRE : ajout cadre "avis du fossoyeur"
+
+        pdf.Add(New Phrase("" & vbCrLf & "" & vbCrLf & "" & vbCrLf & "  Réservé à l'Administration :", fGras))
+
+        Dim admin As New PdfPTable(3)
+        admin.WidthPercentage = 100
+        'admin.WidthPercentage = 88
+        admin.SetWidths({35, 35, 30})
+        admin.HorizontalAlignment = 3
+
+
+        Dim cellule As New PdfPCell(New Paragraph("Cimetière : Date : .................................... Heure : ..................................." & vbCrLf & "" & vbCrLf & "Eglise : Date - heure : ................................................. — Incinération : Lieu - heure : ......................................" & vbCrLf & "   ", fNormal))
+        cellule.Colspan = 3
+        admin.AddCell(cellule)
+        admin.AddCell(New Paragraph("Reçu le montant de : " & EURO & " ........................." & vbCrLf & "" & vbCrLf & "" & ChrW(9744) & " Liquide - " & ChrW(9744) & " Virement - " & ChrW(9744) & " Bancontact" & vbCrLf & "     ", fNormal))
+        p = New Paragraph("Taxe sur les inhumations, dispersions des cendres et mises en colombarium :" & vbCrLf & CASE_VIDE & " " & EURO & " 100" & vbCrLf & CASE_VIDE & " Dispense : motif ...................................." & vbCrLf & vbCrLf & ".....................................................................", fNormal)
+        admin.AddCell(p)
+
+
+
+        admin.AddCell(New Paragraph("Directeur financier : vérification faite " & CASE_VIDE & " oui - " & CASE_VIDE & " non" & vbCrLf & "" & vbCrLf & "Date : ................................" & vbCrLf & vbCrLf & "Signature," & vbCrLf & vbCrLf & vbCrLf, fNormal))
+
+        pdf.Add(admin)
+
+        Dim bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, False)
+        pdf.Add(New Phrase(vbCrLf, New Font(BaseFont.CreateFont(BaseFont.COURIER, BaseFont.CP1252, False), 3)))
+        Dim Permis As New PdfPTable(1)
+        Dim encadre As New PdfPCell(New Paragraph("Permis " & CASE_VIDE & " d'INHUMER / " & CASE_VIDE & " de TRANSPORT / " & CASE_VIDE & " de DISPERSION DES CENDRES " & vbCrLf & "" & vbCrLf & " délivré à La Hulpe, le ........................         Signature de l'Officier de l'État civil ou de son représentant," & vbCrLf & "         " & vbCrLf & "     " & vbCrLf & "     ", fNormal))
+        encadre.HorizontalAlignment = 3
+        Permis.WidthPercentage = 100
+
+        Permis.HorizontalAlignment = 3
+        Permis.AddCell(encadre)
+
+        pdf.Add(Permis)
+
+
+        '  PARTIE NOUVELLE CONCESSION
+
+        pdf.NewPage()
+
+
+
+        'logo.Alignment = Image.ALIGN_CENTER
+        Logo.SetAbsolutePosition(50, 775)
+        '           Logo.SetAbsolutePosition(455, 750)
+        '
+        pdf.Add(Logo)
+
+        Dim titre As String = "DOCUMENT A COMPLETER EN CAS DE NOUVELLE CONCESSION"
+        Dim para As New Paragraph(titre)
+        para.Alignment = Element.ALIGN_CENTER
+        pdf.Add(para)
+
+        pdf.Add(New Paragraph(" "))
+        pdf.Add(New Paragraph("Pour toute demande d'une concession relative au défunt mentionné au recto de la présente page. les bénéficiaires de la concession doivent être mentionnés ci-dessous (à défaut d'indiquer les bénéficiaires, veuillez lire le point b) en bas de page.)", fNormal))
+        pdf.Add(New Paragraph("La personne qui sollicite la concession est le concessionnaire.", fNormal))
+        pdf.Add(New Paragraph(" "))
+        pdf.Add(New Paragraph(Champ("Nom et prénom du concessionnaire : ", If(Concessionnaire("csnr_nom") <> "" Or Concessionnaire("csnr_prenom") <> "", Concessionnaire("csnr_nom") & ", " & Concessionnaire("csnr_prenom"), Nothing), ".....................................................")))
+        p = New Paragraph
+        p.Add(Champ("Date de naissance : ", If(Not IsDBNull(Concessionnaire("csnr_date_naiss")), CType(Concessionnaire("csnr_date_naiss"), Date).ToString("dd/MM/yyyy"), Nothing), "........................................................ "))
+        p.Add(Champ(" – n° de registre national : ", If(Concessionnaire("csnr_no_registre") IsNot Nothing, Concessionnaire("csnr_no_registre").ToString, ""), "........................................................."))
+        pdf.Add(p)
+
+        pdf.Add(New Paragraph(ChampAdresse(Concessionnaire("csnr_adresse"), VilleCsnr("locville_ville"), If(Not IsDBNull(VilleCsnr("locville_cp")), VilleCsnr("locville_cp"), Nothing), PaysCsnr("Pays_nom"))))
+        pdf.Add(New Paragraph(Champ("Téléphone : ", Concessionnaire("csnr_tel"), ".......................................................................................................................................")))
+        pdf.Add(New Paragraph(" "))
 
-    '        InsererTableauTypeEmplacement(If(LeForm.DemandeNvCon IsNot Nothing, LeForm.DemandeNvCon.TypeCon, ""))
-
-    '        ' À FAIRE :  voir si les cases existante - "urne" etc sont encore pertinentes
-    '        p = New Paragraph
-    '        p.Add(New Phrase(Cse(.ConcSollic = TConcSollic.Existante) & " b) l'inhumation en concession existante : ", fGrasS))
-    '        p.Add(New Phrase(CASE_VIDE & " urne - " & CASE_VIDE & " cercueil / " & CASE_VIDE & " pleine terre - " & CASE_VIDE & " caveau - " & CASE_VIDE & " cellule de columbarium - " & CASE_VIDE & " cavurne", fNormal))
-    '        pdf.Add(p)
-    '        'pdf.Add(New Paragraph(Cse(.ConcSollic = "existante") & " b) l'inhumation en concession existante : " & CASE_VIDE & " urne - " & CASE_VIDE & " cercueil / " & CASE_VIDE & " pleine terre - " & CASE_VIDE & " caveau - " & CASE_VIDE & " cellule de columbarium - " & CASE_VIDE & " cavurne", fGrasS))
-    '        pdf.Add(New Paragraph(Champ("                          Référence de l'emplacement : ", .RefEmpl, ".............................................")))
-    '        pdf.Add(New Paragraph(Champ("                          Références des éventuels autres défunts dans la sépulture  : ", .RefAutresDef, ".............................................")))
-
-    '        pdf.Add(New Phrase("Le paiement de la redevance doit être exécuté par la personne qui demande l'emplacement et est payable au comptant ", fItaliqueXS))
-    '        pdf.Add(New Phrase("au moment", fItaliqueSouligneXS))
-    '        pdf.Add(New Phrase(" de la demande.", fItaliqueXS))
-    '        pdf.Add(New Paragraph(vbCrLf & "             En cas de choix d'une concession, merci de compléter le verso du présent document.", fGrasS))
-    '        pdf.Add(New Phrase("Je déclare avoir pris connaissance du réglement du cimetière (et redevances y afférentes).", fNormalS))
-    '        pdf.Add(New Phrase("" & vbCrLf & "Je m'engage à respecter les dispositions de ce règlement.", fNormalS))
-
-    '        pdf.Add(New Phrase(vbCrLf))
-    '        pdf.Add(New Phrase(Champ("Date : ", If(.DateSign IsNot Nothing, .DateSign.Value.ToString("dd/MM/yyyy"), Nothing))))
-
-    '        pdf.Add(New Phrase("                                                                Signature de la personne mandatée", fNormal))
-
-    '        ' À FAIRE : ajout cadre "avis du fossoyeur"
-
-    '        pdf.Add(New Phrase("" & vbCrLf & "" & vbCrLf & "" & vbCrLf & "  Réservé à l'Administration :", fGras))
-
-    '        Dim admin As New PdfPTable(3)
-    '        admin.WidthPercentage = 100
-    '        'admin.WidthPercentage = 88
-    '        admin.SetWidths({35, 35, 30})
-    '        admin.HorizontalAlignment = 3
-
-
-    '        Dim cellule As New PdfPCell(New Paragraph("Cimetière : Date : .................................... Heure : ..................................." & vbCrLf & "" & vbCrLf & "Eglise : Date - heure : ................................................. — Incinération : Lieu - heure : ......................................" & vbCrLf & "   ", fNormal))
-    '        cellule.Colspan = 3
-    '        admin.AddCell(cellule)
-    '        admin.AddCell(New Paragraph("Reçu le montant de : " & EURO & " ........................." & vbCrLf & "" & vbCrLf & "" & ChrW(9744) & " Liquide - " & ChrW(9744) & " Virement - " & ChrW(9744) & " Bancontact" & vbCrLf & "     ", fNormal))
-    '        p = New Paragraph("Taxe sur les inhumations, dispersions des cendres et mises en colombarium :" & vbCrLf & CASE_VIDE & " " & EURO & " 100" & vbCrLf & CASE_VIDE & " Dispense : motif ...................................." & vbCrLf & vbCrLf & ".....................................................................", fNormal)
-    '        admin.AddCell(p)
-
-
-
-    '        admin.AddCell(New Paragraph("Directeur financier : vérification faite " & CASE_VIDE & " oui - " & CASE_VIDE & " non" & vbCrLf & "" & vbCrLf & "Date : ................................" & vbCrLf & vbCrLf & "Signature," & vbCrLf & vbCrLf & vbCrLf, fNormal))
-
-    '        pdf.Add(admin)
-
-    '        bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, False)
-    '        pdf.Add(New Phrase(vbCrLf, New Font(BaseFont.CreateFont(BaseFont.COURIER, BaseFont.CP1252, False), 3)))
-    '        Dim Permis As New PdfPTable(1)
-    '        Dim encadre As New PdfPCell(New Paragraph("Permis " & CASE_VIDE & " d'INHUMER / " & CASE_VIDE & " de TRANSPORT / " & CASE_VIDE & " de DISPERSION DES CENDRES " & vbCrLf & "" & vbCrLf & " délivré à La Hulpe, le ........................         Signature de l'Officier de l'État civil ou de son représentant," & vbCrLf & "         " & vbCrLf & "     " & vbCrLf & "     ", fNormal))
-    '        encadre.HorizontalAlignment = 3
-    '        Permis.WidthPercentage = 100
-
-    '        Permis.HorizontalAlignment = 3
-    '        Permis.AddCell(encadre)
-
-    '        pdf.Add(Permis)
-
-    '    End With
-
-    '    pdf.NewPage()
-
-    '    ' À CONTINUER
-
-    '    With fnvc
-
-    '        'logo.Alignment = Image.ALIGN_CENTER
-    '        Logo.SetAbsolutePosition(50, 775)
-    '        '           Logo.SetAbsolutePosition(455, 750)
-    '        '
-    '        pdf.Add(Logo)
-
-    '        Dim titre As String = "DOCUMENT A COMPLETER EN CAS DE NOUVELLE CONCESSION"
-    '        Dim para As New Paragraph(titre)
-    '        para.Alignment = Element.ALIGN_CENTER
-    '        pdf.Add(para)
-
-    '        pdf.Add(New Paragraph(" "))
-    '        pdf.Add(New Paragraph("Pour toute demande d'une concession relative au défunt mentionné au recto de la présente page. les bénéficiaires de la concession doivent être mentionnés ci-dessous (à défaut d'indiquer les bénéficiaires, veuillez lire le point b) en bas de page.)", fNormal))
-    '        pdf.Add(New Paragraph("La personne qui sollicite la concession est le concessionnaire.", fNormal))
-    '        pdf.Add(New Paragraph(" "))
-    '        pdf.Add(New Paragraph(Champ("Nom et prénom du concessionnaire : ", If(.CsnrNom <> "" Or .CsnrPrenom <> "", .CsnrNom & ", " & .CsnrPrenom, Nothing), ".....................................................")))
-    '        p = New Paragraph
-    '        p.Add(Champ("Date de naissance : ", If(.CsnrDateNaiss IsNot Nothing, .CsnrDateNaiss.Value.ToString("dd/MM/yyyy"), Nothing), "........................................................ "))
-    '        p.Add(Champ(" – n° de registre national : ", If(.CsnrNoNational.HasValue, .CsnrNoNational.Value.ToString, ""), "........................................................."))
-    '        pdf.Add(p)
-
-    '        pdf.Add(New Paragraph(ChampAdresse(.CsnrAdresse, .CsnrVille, .CsnrCp, .CsnrPays)))
-    '        pdf.Add(New Paragraph(Champ("Téléphone : ", .CsnrTel, ".......................................................................................................................................")))
-    '        pdf.Add(New Paragraph(" "))
-
-    '        Dim table As New PdfPTable(4)
-    '        table.WidthPercentage = 100
-    '        table.AddCell(New Paragraph("Nom(s) du/des) bénéficiaires(s):", fNormalL))
-    '        table.AddCell(New Paragraph("Prénom(s)", fNormalL))
-    '        table.AddCell(New Paragraph("Date(s) de naissance", fNormalL))
-    '        table.AddCell(New Paragraph("Lien(s) de parenté", fNormalL))
-    '        Dim i As Integer = 0
-    '        Dim nbrben As Integer = .Beneficiaires.Count
-    '        While i < nbrben Or i < 4
-    '            table.AddCell(New Phrase(If(i < nbrben, .Beneficiaires(i).Nom, " "), fNormal))
-    '            table.AddCell(New Phrase(If(i < nbrben, .Beneficiaires(i).Prenom, " "), fNormal))
-    '            table.AddCell(New Phrase(If(i < nbrben AndAlso .Beneficiaires(i).DateNaiss IsNot Nothing, .Beneficiaires(i).DateNaiss.Value.ToString("dd/MM/yyyy"), " "), fNormal))
-    '            table.AddCell(New Phrase(If(i < nbrben, .Beneficiaires(i).LienParente, " "), fNormal))
-    '            i += 1
-    '        End While
-
-    '        pdf.Add(table)
-
-    '        pdf.Add(New Paragraph("Date et signature du concessionnaire :", If(Not .SigneParPmand, fNormal, fBarre)))
-    '        pdf.Add(New Paragraph("Date, signature et identité de la personne mandatée :", If(.SigneParPmand, fNormal, fBarre)))
-    '        pdf.Add(New Phrase("BIFFEZ LA MENTION INUTILE, S.V.P.", fItaliqueL))
-    '        pdf.Add(New Paragraph(" "))
-    '        pdf.Add(New Paragraph(" "))
-    '        pdf.Add(New Paragraph(" "))
-    '        pdf.Add(New Phrase("Personne mandatée :", fSouligne))
-    '        pdf.Add(New Paragraph("La personne qui effectue la présente déclaration doit obligatoirement signer ce document. S'il s'agit d'une personne", fNormal))
-    '        pdf.Add(New Paragraph("mandatée par la famille qui se trouve dans l'incapacité de signer, il lui incombe alors de faire remplir un formulaire de", fNormal))
-    '        pdf.Add(New Paragraph("demande de concession par la famille (le concessionnaire) et de retourner ce document à l'administration communale de La Hulpe le plus rapidement possible.", fNormal))
-
-    '        pdf.Add(New Phrase("IMPORTANT:    ", fGrasL))
-    '        pdf.Add(New Phrase("À défaut, la présente déclaration n'est pas valable", fSouligne))
-    '        pdf.Add(New Phrase(" car incomplète.", fNormalL))
-    '        pdf.Add(New Paragraph(" "))
-    '        pdf.Add(New Paragraph(" "))
-
-    '        Dim paragr As New Paragraph("Règlement du 20/12/04 de police et d'administration du cimetière", fSouligne)
-    '        paragr.Alignment = Element.ALIGN_CENTER
-    '        pdf.Add(paragr)
-    '        pdf.Add(New Paragraph(""))
-
-    '        Dim cinquantehuit As New Paragraph("Article 58 traitant des concessions :", fSouligne)
-    '        cinquantehuit.Alignment = Element.ALIGN_CENTER
-    '        pdf.Add(cinquantehuit)
-    '        pdf.Add(New Paragraph(""))
-
-    '        Dim Article58 As New List(False, True, 20.0F)
-    '        Article58.IsLowercase = True
-    '        Article58.Add(New ListItem(New Phrase("Les demandes de concessions indiquent l'identité des bénéficiaires.", fNormal)))
-    '        Article58.Add(New ListItem(New Phrase("À défaut d'indiquer l'identité du ou des bénéficiaire(s), tous les membres de la famille du concessionnaire sont " _
-    '                                & "bénéficiaires, à concurrence du nombre de places, sans que, entre eux, il existe des priorités ; seule la chronologie des " _
-    '                                & "décès détermine le rang.", fNormal)))
-    '        Article58.Add(New ListItem(New Phrase("Le concessionnaire peut, à tout moment, modifier ou compléter la liste des bénéficiaires soit par lettre portant sa " _
-    '                                              & "signature légalisée, adressée à l'Officier de l'État civil et spécifiant les modifications apportées, soit par un acte " _
-    '                                              & "satisfaisant aux conditions de capacité et de forme des actes testamentaires.", fNormal)))
-    '        Dim ItemListe As New ListItem("Après le décès du concessionnaire, ", fNormal)
-    '        ItemListe.Add(New Chunk("aucune modification ", fSouligne))
-    '        ItemListe.Add(New Chunk("de l'état de la concession (transformation d'une concession pleine terre en caveau, agrandissement " _
-    '                                & "ou approfondissement de la concession ou du caveau, transfert de l'urne) "))
-    '        ItemListe.Add(New Chunk("n'est autorisée", fSouligne))
-    '        ItemListe.Add(New Chunk(".", fNormal))
-    '        Article58.Add(ItemListe)
-
-    '        Article58.Add(New ListItem(New Phrase("Dans le cas où les bénéficiaires sont les membres d'une ou de plusieurs communautés religieuses, " _
-    '                                              & "l'identité de ceux-ci sera reprise au moment de l'inhumation. Aucune déclaration de volonté " _
-    '                                              & "de la part des membres de la communauté ne sera requise.", fNormal)))
-
-    '        pdf.Add(Article58)
-
-    '    End With
-
-
-    '    'pdf.Close()
-    '    pdf.Close()
-    '    pdfwrite.Close()
-    '    'pdfwrite.Dispose()
-
-    'End Sub
-
-
-    ' à adapter pour datatables
-
-    'Sub CreePdfReservation(LeForm As DemandeNvConcession)
-
-    '    Dim pdf = Me.pdf
-
-    '    Dim p As Paragraph
-
-    '    ' mettre "Version du document : 2014" ?
-
-    '    FaireGrosEnTete("Formulaire de demande de réservation d'une concession")
-
-    '    pdf.Add(New Paragraph("Ce formulaire vaut pour une demande d'obtention pour un emplacement concédé au cimetière de La Hulpe. Cette demande " &
-    '                "sera examinée par le Collège communal qui donnera une réponse écrite. Si cette réponse est favorable, le paiement de " &
-    '                "l'éventuelle redevance applicable devra être exécuté (à ce stade, le demandeur peut encore renoncer). Après réponse " &
-    '                "favorable et paiement, une confirmation écrite concernant la réservation de la concession sera délivrée.", fNormal))
-    '    'pdf.Add(p)
-
-    '    ' "Identité du demandeur" : ici, on utilise les infos du concessionnaire, ça pourrait changer par la suite
-    '    FaireTableauIdentiteDuDemandeur(UzineAGaz.NomComplet(LeForm.CsnrPrenom, LeForm.CsnrNom), LeForm.CsnrDateNaiss, UzineAGaz.AdresseComplète(LeForm.CsnrAdresse, LeForm.CsnrCp, LeForm.CsnrVille, LeForm.CsnrPays), LeForm.CsnrTel, "Identité du demandeur : (sauf mention contraire, le demander sera le concessionnaire)")
-
-    '    InsererTableauTypeEmplacement(LeForm.TypeCon)
-
-    '    pdf.Add(New Paragraph("Cet emplacement est destiné aux personnes suivantes :", fNormal))
-    '    pdf.Add(New Paragraph(" ", fNormal))
-
-    '    Dim table As New PdfPTable(4)
-    '    table.WidthPercentage = 100
-    '    table.AddCell(New Paragraph("Nom(s)", fNormal))
-    '    table.AddCell(New Paragraph("Prénom(s)", fNormal))
-    '    table.AddCell(New Paragraph("Date(s) de naissance", fNormal))
-    '    table.AddCell(New Paragraph("Domicile (si différent du demandeur)", fNormal))
-    '    Dim i As Integer = 0
-    '    Dim nbrben As Integer = LeForm.Beneficiaires.Count
-    '    While i < nbrben Or i < 4
-    '        With LeForm.Beneficiaires(i)
-    '            table.AddCell(New Phrase(If(i < nbrben, .Nom, vbCrLf & vbCrLf), fNormal))
-    '            table.AddCell(New Phrase(If(i < nbrben, .Prenom, vbCrLf & vbCrLf), fNormal))
-    '            table.AddCell(New Phrase(If(i < nbrben AndAlso .DateNaiss IsNot Nothing, .DateNaiss.Value.ToString("dd/MM/yyyy"), vbCrLf & vbCrLf), fNormal))
-    '            table.AddCell(New Phrase(If(i < nbrben, UzineAGaz.AdresseComplète(.Adresse, .Cp, .Ville, .Pays), vbCrLf & vbCrLf), fNormal))
-    '            i += 1
-    '        End With
-    '    End While
-    '    pdf.Add(table)
-
-    '    p = New Paragraph("Remarque éventuelle :", fNormal)
-    '    p.SetLeading(0, 1.8)
-    '    pdf.Add(p)
-    '    Dim com As String = LeForm.Commentaire
-    '    p = New Paragraph(If(com <> "", com,
-    '                      "............................................................................................................." & vbCrLf &
-    '                      "............................................................................................................." & vbCrLf), fItaliqueL)
-    '    p.SetLeading(0, If(com <> "", 1.4, 1.8))
-    '    pdf.Add(p)
-
-    '    p = New Paragraph("Fait à .................................................................................. , " &
-    '                      "le " & If(LeForm.DateSign.HasValue, LeForm.DateSign.Value.ToString("dd/MM/yyyy"), "................................."), fNormalL)
-    '    p.SetLeading(0, 1.8)
-    '    pdf.Add(p)
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-    '    pdf.Add(New Paragraph("Signature : ", fNormalL))
-
-
-    '    pdf.NewPage()
-    '    Logo.SetAbsolutePosition(50, 775)
-    '    pdf.Add(Logo)
-
-    '    'Dim col As New ColumnText(pdfwrite.DirectContent)
-    '    p = New Paragraph
-    '    p.Add(New Phrase("Extrait du règlement du 20/12/2004 du cimetière de La Hulpe (relatif aux concessions)", fGrasS))
-    '    'col.SetSimpleColumn(140, 0, 800, 815) 'Droite / ? / espacement / hauteur
-    '    'col.AddText(p)
-    '    'col.Go()
-    '    p.Alignment = Element.ALIGN_CENTER
-    '    pdf.Add(p)
-
-    '    pdf.Add(New Paragraph(vbCrLf & vbCrLf, fNormalS))
-
-    '    pdf.Add(New Paragraph("Article 56", fSouligne))
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-
-    '    pdf.Add(New Paragraph("      Les concessions", fGrasS))
-
-    '    Dim liste As New List(False, True, 20.0F)
-    '    liste.IsLowercase = True
-    '    liste.Add(New ListItem(New Phrase("en pleine terre ou avec caveaux", fGrasS)))
-    '    liste.Add(New ListItem(New Phrase("pour l'inhumation  des cercueils ou des urnes cinéraires", fGrasS)))
-    '    liste.Add(New ListItem(New Phrase("pour le placement des urnes cinéraires", fGrasS)))
-    '    pdf.Add(liste)
-
-    '    pdf.Add(New Paragraph("sont accordées aussi longtemps que les possibilités en terrains et/ou en installations le permettent par le Collège des Bourgmestre et Echevins.", fGrasS))
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-    '    pdf.Add(New Paragraph("Pour ce faire, la personne qui sollicite la concession de sépulture devra, au moment de la demande :", fGrasS))
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-
-    '    liste = New List(True, False, 20.0F)
-    '    liste.Add(New ListItem(New Phrase("être âgée de 65 ans accomplis", fGrasS)))
-    '    liste.Add(New ListItem(New Phrase("être désignée comme bénéficiaire ou parmi les bénéficiaires de la concession, sans préjudice des dispositions de l'article 6 de la loi du 20 juillet 1971", fGrasS)))
-    '    liste.Add(New ListItem(New Phrase("être domiciliée depuis plus de 6 mois sur le territoire de la commune : la date d'inscription dans les registres de la population et/ou des étrangers et/ou d'attente faisant foi", fGrasS)))
-    '    pdf.Add(liste)
-
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-
-    '    Dim ph As New Phrase("ATTENTION : les trois conditions précitées sont cumulatives et doivent obligatoirement être réunies au moment de la" &
-    '                          " demande. A défaut d'être réunies toutes les trois, la concession ne pourra être accordée qu'après le décès d'une personne, et" &
-    '                          " au bénéfice de celle-ci ainsi que, si le demandeur le souhaite, au bénéfice d'autres personnes désignées par ce dernier" &
-    '                          " conformément à la loi. Toutefois, pour une cellule de columbarium, la possibilité est laissée au survivant de solliciter ", fGrasS)
-    '    Dim chunque As New Chunk("pour lui-même", fGrasS)
-    '    chunque.SetUnderline(1, -2)
-    '    ph.Add(chunque)
-    '    ph.Add(New Chunk(" la concession d'une cellule voisine de celle de son conjoint, parent ou compagnon, ", fNormalS))
-
-    '    chunque = New Chunk("et cela dès le décès de ce dernier", fGrasS)
-    '    chunque.SetUnderline(1, -2)
-    '    ph.Add(chunque)
-    '    ph.Add(New Chunk(". L'octroi d'une concession ne confère aucun droit de propriété sur le terrain concédé mais uniquement un droit de jouissance et d'usage avec" &
-    '           " affectation spéciale et nominative. En accordant une concession de sépulture, l'autorité communale ne procède ni à un louage ni à une vente. Les concessions" &
-    '           " et sépultures sont incessibles et inaliénables.", fGrasS))
-    '    pdf.Add(ph)
-
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-
-    '    pdf.Add(New Paragraph("Article 57", fSouligne))
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-
-    '    pdf.Add(New Paragraph("Il ne peut être conclu de contrat de concession pour plusieurs personnes même unies par des liens de parenté ou d'alliance : " &
-    '                          "l'Administration ne connaît qu'un seul concessionnaire par contrat.", fNormalS))
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-    '    pdf.Add(New Paragraph("Une même sépulture concédée peut recevoir :", fNormalS))
-
-    '    liste = New List(False, True, 20.0F)
-    '    liste.Add(New ListItem(New Phrase("soit les restes mortels du demandeur, de son conjoint, de ses parents et de ses alliés", fNormalS)))
-    '    liste.Add(New ListItem(New Phrase("soit les restes mortels des membres d'une ou plusieurs communautés religieuses", fNormalS)))
-    '    liste.Add(New ListItem(New Phrase("soit les restes de personnes ayant chacune exprimé auprès de l'administration communale leur volonté de bénéficier d'une sépulture commune", fNormalS)))
-    '    liste.Add(New ListItem(New Phrase("soit les restes mortels de personnes qui ont été désignées par le titulaire de la concession", fNormalS)))
-    '    liste.Add(New ListItem(New Phrase("à défaut d'avoir exprimé chacun leur volonté de leur vivant, en cas de constitution d'un ménage de fait, le survivant d'un tel ménage peut" &
-    '                                      " demander l'octroi d'une concession pour lui-même et le décédé. Il appartient à l'autorité communale de vérifier la réalité de l'existence" &
-    '                                      "d'un tel ménage de fait.", fNormalS)))
-    '    pdf.Add(New Paragraph("", fNormalS))
-    '    pdf.Add(New Paragraph("Si un différend surgit entre le demandeur de la concession et les ayants droit de la personne décédée, il appartiendra à la partie la plus diligente" &
-    '                          " de le soumettre à l'appréciation des juridictions compétentes.", fNormalS))
-    '    pdf.Add(New Paragraph("", fNormalS))
-    '    pdf.Add(New Paragraph("Une demande de concession peut être introduite au bénéfice d'un tiers et de sa famille. Dans ce cas, le demandeur est le seul" &
-    '                          " concessionnaire, le tiers et sa famille ayant seulement la qualité de bénéficiaires.", fGrasS))
-
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-    '    pdf.Add(New Paragraph("Article 58", fSouligne))
-    '    pdf.Add(New Paragraph(" ", fNormalS))
-
-    '    liste = New List(True, False, 20.0F)
-    '    liste.Add(New ListItem(New Phrase("les demandes de concession indiquent l'identité des bénéficiaires", fNormalS)))
-    '    liste.Add(New ListItem(New Phrase("à défaut d'indiquer l'identité du ou des bénéficiaire(s), tous les membres de la famille du concessionnaire sont bénéficiaires," &
-    '                                      " à concurrence du nombre de places, sans que, entre eux, il existe des priorités ; seule la chronologie des décès détermine le rang.", fNormalS)))
-    '    liste.Add(New ListItem(New Phrase("le concessionnaire peut, à tout moment, modifier ou compléter la liste des bénéficiaires soit par lettre portant sa signature légalisée, adressée à" &
-    '                                      " l'Officier de l'État civil et spécifiant les modifications apportées, soit par un acte satisfaisant aux conditions de capacité et de forme" &
-    '                                      " des actes testamentaires.", fNormalS)))
-    '    ph = New Phrase("après le décès du concessionnaire, ", fNormalS)
-    '    chunque = New Chunk("aucune modification", fSouligneS)
-    '    ph.Add(chunque)
-    '    ph.Add(New Chunk(" de l'état de la concession (transformation d'une concession pleine terre en caveau, agrandissement ou appronfondissement de la concession" &
-    '           "ou du caveau, transfert de l'urne) ", fNormalS))
-    '    chunque = New Chunk("n 'est autorisée", fSouligneS)
-    '    ph.Add(chunque)
-    '    ph.Add(".")
-    '    liste.Add(New ListItem(ph))
-    '    liste.Add(New ListItem(New Phrase("dans le cas où les bénéficiaires sont les membres d'un ou de plusieurs communautés religieuses, l'identité" &
-    '                                      " de ceux-ci sera reprise au moment de l'inhumation. Aucune déclaration de volonté de la part des membres de la" &
-    '                                      " communauté ne sera requise.", fNormalS)))
-
-    '    Dim litem As New ListItem(New Phrase("dans une concession caveau ou pleine terre complète, le placement d'un maximum de 3 urnes supplémentaires ne pourra" &
-    '                                          "être admis que moyennant le respect de l'ensemble des clauses ci-après:", fNormalS))
-    '    Dim liste2 As New List(True, False, 20.0F)
-    '    liste2.Add(New ListItem(New Phrase("l'espace intérieur du caveau ou de la tombe concernée permettra un placement aisé des urnes", fNormalS)))
-    '    liste2.Add(New ListItem(New Phrase("le paiement préalable au moment de la déclaration du décès de la redevance prévue dans le réglement-taxe d'application", fNormalS)))
-    '    liste2.Add(New ListItem(New Phrase("par assimilation aux dispositions de l'article 58 c, pour chaque cas, une demande écrite du bénéficiaire ou" &
-    '                                       " de ses ayants droit ainsi qu'un accord écrit du concessionnaire (écrits datés, signés, légalisés).", fNormalS)))
-    '    litem.Add(liste2)
-    '    liste.Add(litem)
-    '    pdf.Add(liste)
-
-    '    pdf.Close()
-
-    'End Sub
+        Dim table As New PdfPTable(4)
+        table.WidthPercentage = 100
+        table.AddCell(New Paragraph("Nom(s) du/des) bénéficiaires(s):", fNormalL))
+        table.AddCell(New Paragraph("Prénom(s)", fNormalL))
+        table.AddCell(New Paragraph("Date(s) de naissance", fNormalL))
+        table.AddCell(New Paragraph("Lien(s) de parenté", fNormalL))
+        Dim i As Integer = 0
+        Dim nbrben As Integer = Beneficiaires.Rows.Count
+        While i < nbrben Or i < 4
+            Dim ben As DataRow
+            If i < nbrben Then ben = Beneficiaires.Rows(i)
+            table.AddCell(New Phrase(If(i < nbrben, ben("ben_nom"), " "), fNormal))
+            table.AddCell(New Phrase(If(i < nbrben, ben("ben_prenom"), " "), fNormal))
+            table.AddCell(New Phrase(If(i < nbrben AndAlso ben("ben_date_naiss") IsNot Nothing, CType(ben("ben_date_naiss"), Date).ToString("dd/MM/yyyy"), " "), fNormal))
+            table.AddCell(New Phrase(If(i < nbrben, ben("ben_lien_parente"), " "), fNormal))
+            i += 1
+        End While
+        pdf.Add(table)
+
+        pdf.Add(New Paragraph("Date et signature du concessionnaire :", fNormal))        'If(Not .SigneParPmand, fNormal, fBarre)))
+        pdf.Add(New Paragraph("Date, signature et identité de la personne mandatée :", fNormal))      'If(.SigneParPmand, fNormal, fBarre)))
+        pdf.Add(New Phrase("BIFFEZ LA MENTION INUTILE, S.V.P.", fItaliqueL))
+        pdf.Add(New Paragraph(" "))
+        pdf.Add(New Paragraph(" "))
+        pdf.Add(New Paragraph(" "))
+        pdf.Add(New Phrase("Personne mandatée :", fSouligne))
+        pdf.Add(New Paragraph("La personne qui effectue la présente déclaration doit obligatoirement signer ce document. S'il s'agit d'une personne", fNormal))
+        pdf.Add(New Paragraph("mandatée par la famille qui se trouve dans l'incapacité de signer, il lui incombe alors de faire remplir un formulaire de", fNormal))
+        pdf.Add(New Paragraph("demande de concession par la famille (le concessionnaire) et de retourner ce document à l'administration communale de La Hulpe le plus rapidement possible.", fNormal))
+
+        pdf.Add(New Phrase("IMPORTANT:    ", fGrasL))
+        pdf.Add(New Phrase("À défaut, la présente déclaration n'est pas valable", fSouligne))
+        pdf.Add(New Phrase(" car incomplète.", fNormalL))
+        pdf.Add(New Paragraph(" "))
+        pdf.Add(New Paragraph(" "))
+
+        Dim paragr As New Paragraph("Règlement du 20/12/04 de police et d'administration du cimetière", fSouligne)
+        paragr.Alignment = Element.ALIGN_CENTER
+        pdf.Add(paragr)
+        pdf.Add(New Paragraph(""))
+
+        Dim cinquantehuit As New Paragraph("Article 58 traitant des concessions :", fSouligne)
+        cinquantehuit.Alignment = Element.ALIGN_CENTER
+        pdf.Add(cinquantehuit)
+        pdf.Add(New Paragraph(""))
+
+        Dim Article58 As New List(False, True, 20.0F)
+        Article58.IsLowercase = True
+        Article58.Add(New ListItem(New Phrase("Les demandes de concessions indiquent l'identité des bénéficiaires.", fNormal)))
+        Article58.Add(New ListItem(New Phrase("À défaut d'indiquer l'identité du ou des bénéficiaire(s), tous les membres de la famille du concessionnaire sont " _
+                                    & "bénéficiaires, à concurrence du nombre de places, sans que, entre eux, il existe des priorités ; seule la chronologie des " _
+                                    & "décès détermine le rang.", fNormal)))
+        Article58.Add(New ListItem(New Phrase("Le concessionnaire peut, à tout moment, modifier ou compléter la liste des bénéficiaires soit par lettre portant sa " _
+                                                  & "signature légalisée, adressée à l'Officier de l'État civil et spécifiant les modifications apportées, soit par un acte " _
+                                                  & "satisfaisant aux conditions de capacité et de forme des actes testamentaires.", fNormal)))
+        Dim ItemListe As New ListItem("Après le décès du concessionnaire, ", fNormal)
+        ItemListe.Add(New Chunk("aucune modification ", fSouligne))
+        ItemListe.Add(New Chunk("de l'état de la concession (transformation d'une concession pleine terre en caveau, agrandissement " _
+                                    & "ou approfondissement de la concession ou du caveau, transfert de l'urne) "))
+        ItemListe.Add(New Chunk("n'est autorisée", fSouligne))
+        ItemListe.Add(New Chunk(".", fNormal))
+        Article58.Add(ItemListe)
+
+        Article58.Add(New ListItem(New Phrase("Dans le cas où les bénéficiaires sont les membres d'une ou de plusieurs communautés religieuses, " _
+                                                  & "l'identité de ceux-ci sera reprise au moment de l'inhumation. Aucune déclaration de volonté " _
+                                                  & "de la part des membres de la communauté ne sera requise.", fNormal)))
+
+        pdf.Add(Article58)
+
+
+
+        'pdf.Close()
+        pdf.Close()
+        pdfwrite.Close()
+        'pdfwrite.Dispose()
+
+    End Sub
+
+
+    Sub CreePdfReservation(Csnr As DataRow, VilleCsnr As DataRow, PaysCsnr As DataRow, ChoixTypeReservation As TTypeCsnInh, Beneficiaires As DataTable, Commentaire As String, datesign As Date?)
+
+        Dim pdf = Me.pdf
+
+        Dim p As Paragraph
+
+        ' mettre "Version du document : 2014" ?
+
+        FaireGrosEnTete("Formulaire de demande de réservation d'une concession")
+
+        pdf.Add(New Paragraph("Ce formulaire vaut pour une demande d'obtention pour un emplacement concédé au cimetière de La Hulpe. Cette demande " &
+                    "sera examinée par le Collège communal qui donnera une réponse écrite. Si cette réponse est favorable, le paiement de " &
+                    "l'éventuelle redevance applicable devra être exécuté (à ce stade, le demandeur peut encore renoncer). Après réponse " &
+                    "favorable et paiement, une confirmation écrite concernant la réservation de la concession sera délivrée.", fNormal))
+
+        ' "Identité du demandeur" : ici, on utilise les infos du concessionnaire, ça pourrait changer par la suite
+        FaireTableauIdentiteDuDemandeur(Uzineagaz.NomComplet(Csnr("csnr_prenom"), Csnr("csnr_nom")), Csnr("csnr_date_naiss"), Uzineagaz.AdresseComplete(Csnr("csnr_adresse"), VilleCsnr("locville_cp"), VilleCsnr("locville_ville"), PaysCsnr("Pays_nom")), Csnr("csnr_tel"), "Identité du demandeur :      (sauf mention contraire, le demandeur sera le concessionnaire)")
+
+        InsererTableauTypeEmplacement(ChoixTypeReservation)
+
+        pdf.Add(New Paragraph("Cet emplacement est destiné aux personnes suivantes :", fNormal))
+        pdf.Add(New Paragraph(" ", fNormal))
+
+        Dim table As New PdfPTable(4)
+        table.WidthPercentage = 100
+        table.AddCell(New Paragraph("Nom(s)", fNormal))
+        table.AddCell(New Paragraph("Prénom(s)", fNormal))
+        table.AddCell(New Paragraph("Date(s) de naissance", fNormal))
+        table.AddCell(New Paragraph("Domicile (si différent du demandeur)", fNormal))
+        Dim i As Integer = 0
+        Dim nbrben As Integer = Beneficiaires.Rows.Count
+        While i < nbrben Or i < 4
+            Dim ben As DataRow
+            If i < nbrben Then ben = Beneficiaires.Rows(i)
+            table.AddCell(New Phrase(If(i < nbrben, ben("ben_nom"), vbCrLf & vbCrLf), fNormal))
+            table.AddCell(New Phrase(If(i < nbrben, ben("ben_prenom"), vbCrLf & vbCrLf), fNormal))
+            table.AddCell(New Phrase(If(i < nbrben AndAlso ben("ben_date_naiss") IsNot Nothing, CType(ben("ben_date_naiss"), Date).ToString("dd/MM/yyyy"), vbCrLf & vbCrLf), fNormal))
+            Dim RowBenVille As DataRow
+            If i < nbrben Then
+                Dim TbBenVille = Bdd.Query("SELECT t_loc_ville.locville_ville,locville_cp,Pays_nom FROM t_loc_ville LEFT OUTER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id WHERE locville_id = " & ben("locville_id"))
+                RowBenVille = If(TbBenVille.Rows.Count > 0, TbBenVille.Rows(0), TbBenVille.NewRow)
+            End If
+            table.AddCell(New Phrase(If(i < nbrben, Uzineagaz.AdresseComplete(ben("ben_adresse"), RowBenVille("locville_cp"), RowBenVille("locville_ville"), RowBenVille("Pays_nom")), vbCrLf & vbCrLf), fNormal))
+            i += 1
+        End While
+        pdf.Add(table)
+
+        p = New Paragraph("Remarque éventuelle :   ", fNormal)
+        p.SetLeading(0, 1.8)
+        pdf.Add(p)
+        p = New Paragraph(If(Commentaire <> "", Commentaire,
+                          "............................................................................................................." & vbCrLf &
+                          "............................................................................................................." & vbCrLf), fItaliqueL)
+        p.SetLeading(0, If(Commentaire <> "", 1.4, 1.8))
+        pdf.Add(p)
+
+        p = New Paragraph("Fait à .................................................................................. , " &
+                          "le " & If(datesign.HasValue, datesign.Value.ToString("dd/MM/yyyy"), "................................."), fNormalL)
+        p.SetLeading(0, 1.8)
+        pdf.Add(p)
+        pdf.Add(New Paragraph(" ", fNormalS))
+        pdf.Add(New Paragraph("Signature : ", fNormalL))
+
+
+        pdf.NewPage()
+        Logo.SetAbsolutePosition(50, 775)
+        pdf.Add(Logo)
+
+        'Dim col As New ColumnText(pdfwrite.DirectContent)
+        p = New Paragraph
+        p.Add(New Phrase("Extrait du règlement du 20/12/2004 du cimetière de La Hulpe (relatif aux concessions)", fGrasS))
+        'col.SetSimpleColumn(140, 0, 800, 815) 'Droite / ? / espacement / hauteur
+        'col.AddText(p)
+        'col.Go()
+        p.Alignment = Element.ALIGN_CENTER
+        pdf.Add(p)
+
+        pdf.Add(New Paragraph(vbCrLf & vbCrLf, fNormalS))
+
+        pdf.Add(New Paragraph("Article 56", fSouligne))
+        pdf.Add(New Paragraph(" ", fNormalS))
+
+        pdf.Add(New Paragraph("      Les concessions", fGrasS))
+
+        Dim liste As New List(False, True, 20.0F)
+        liste.IsLowercase = True
+        liste.Add(New ListItem(New Phrase("en pleine terre ou avec caveaux", fGrasS)))
+        liste.Add(New ListItem(New Phrase("pour l'inhumation  des cercueils ou des urnes cinéraires", fGrasS)))
+        liste.Add(New ListItem(New Phrase("pour le placement des urnes cinéraires", fGrasS)))
+        pdf.Add(liste)
+
+        pdf.Add(New Paragraph("sont accordées aussi longtemps que les possibilités en terrains et/ou en installations le permettent par le Collège des Bourgmestre et Echevins.", fGrasS))
+        pdf.Add(New Paragraph(" ", fNormalS))
+        pdf.Add(New Paragraph("Pour ce faire, la personne qui sollicite la concession de sépulture devra, au moment de la demande :", fGrasS))
+        pdf.Add(New Paragraph(" ", fNormalS))
+
+        liste = New List(True, False, 20.0F)
+        liste.Add(New ListItem(New Phrase("être âgée de 65 ans accomplis", fGrasS)))
+        liste.Add(New ListItem(New Phrase("être désignée comme bénéficiaire ou parmi les bénéficiaires de la concession, sans préjudice des dispositions de l'article 6 de la loi du 20 juillet 1971", fGrasS)))
+        liste.Add(New ListItem(New Phrase("être domiciliée depuis plus de 6 mois sur le territoire de la commune : la date d'inscription dans les registres de la population et/ou des étrangers et/ou d'attente faisant foi", fGrasS)))
+        pdf.Add(liste)
+
+        pdf.Add(New Paragraph(" ", fNormalS))
+
+        Dim ph As New Phrase("ATTENTION : les trois conditions précitées sont cumulatives et doivent obligatoirement être réunies au moment de la" &
+                              " demande. A défaut d'être réunies toutes les trois, la concession ne pourra être accordée qu'après le décès d'une personne, et" &
+                              " au bénéfice de celle-ci ainsi que, si le demandeur le souhaite, au bénéfice d'autres personnes désignées par ce dernier" &
+                              " conformément à la loi. Toutefois, pour une cellule de columbarium, la possibilité est laissée au survivant de solliciter ", fGrasS)
+        Dim chunque As New Chunk("pour lui-même", fGrasS)
+        chunque.SetUnderline(1, -2)
+        ph.Add(chunque)
+        ph.Add(New Chunk(" la concession d'une cellule voisine de celle de son conjoint, parent ou compagnon, ", fNormalS))
+
+        chunque = New Chunk("et cela dès le décès de ce dernier", fGrasS)
+        chunque.SetUnderline(1, -2)
+        ph.Add(chunque)
+        ph.Add(New Chunk(". L'octroi d'une concession ne confère aucun droit de propriété sur le terrain concédé mais uniquement un droit de jouissance et d'usage avec" &
+               " affectation spéciale et nominative. En accordant une concession de sépulture, l'autorité communale ne procède ni à un louage ni à une vente. Les concessions" &
+               " et sépultures sont incessibles et inaliénables.", fGrasS))
+        pdf.Add(ph)
+
+        pdf.Add(New Paragraph(" ", fNormalS))
+
+        pdf.Add(New Paragraph("Article 57", fSouligne))
+        pdf.Add(New Paragraph(" ", fNormalS))
+
+        pdf.Add(New Paragraph("Il ne peut être conclu de contrat de concession pour plusieurs personnes même unies par des liens de parenté ou d'alliance : " &
+                              "l'Administration ne connaît qu'un seul concessionnaire par contrat.", fNormalS))
+        pdf.Add(New Paragraph(" ", fNormalS))
+        pdf.Add(New Paragraph("Une même sépulture concédée peut recevoir :", fNormalS))
+
+        liste = New List(False, True, 20.0F)
+        liste.Add(New ListItem(New Phrase("soit les restes mortels du demandeur, de son conjoint, de ses parents et de ses alliés", fNormalS)))
+        liste.Add(New ListItem(New Phrase("soit les restes mortels des membres d'une ou plusieurs communautés religieuses", fNormalS)))
+        liste.Add(New ListItem(New Phrase("soit les restes de personnes ayant chacune exprimé auprès de l'administration communale leur volonté de bénéficier d'une sépulture commune", fNormalS)))
+        liste.Add(New ListItem(New Phrase("soit les restes mortels de personnes qui ont été désignées par le titulaire de la concession", fNormalS)))
+        liste.Add(New ListItem(New Phrase("à défaut d'avoir exprimé chacun leur volonté de leur vivant, en cas de constitution d'un ménage de fait, le survivant d'un tel ménage peut" &
+                                          " demander l'octroi d'une concession pour lui-même et le décédé. Il appartient à l'autorité communale de vérifier la réalité de l'existence" &
+                                          "d'un tel ménage de fait.", fNormalS)))
+        pdf.Add(New Paragraph("", fNormalS))
+        pdf.Add(New Paragraph("Si un différend surgit entre le demandeur de la concession et les ayants droit de la personne décédée, il appartiendra à la partie la plus diligente" &
+                              " de le soumettre à l'appréciation des juridictions compétentes.", fNormalS))
+        pdf.Add(New Paragraph("", fNormalS))
+        pdf.Add(New Paragraph("Une demande de concession peut être introduite au bénéfice d'un tiers et de sa famille. Dans ce cas, le demandeur est le seul" &
+                              " concessionnaire, le tiers et sa famille ayant seulement la qualité de bénéficiaires.", fGrasS))
+
+        pdf.Add(New Paragraph(" ", fNormalS))
+        pdf.Add(New Paragraph("Article 58", fSouligne))
+        pdf.Add(New Paragraph(" ", fNormalS))
+
+        liste = New List(True, False, 20.0F)
+        liste.Add(New ListItem(New Phrase("les demandes de concession indiquent l'identité des bénéficiaires", fNormalS)))
+        liste.Add(New ListItem(New Phrase("à défaut d'indiquer l'identité du ou des bénéficiaire(s), tous les membres de la famille du concessionnaire sont bénéficiaires," &
+                                          " à concurrence du nombre de places, sans que, entre eux, il existe des priorités ; seule la chronologie des décès détermine le rang.", fNormalS)))
+        liste.Add(New ListItem(New Phrase("le concessionnaire peut, à tout moment, modifier ou compléter la liste des bénéficiaires soit par lettre portant sa signature légalisée, adressée à" &
+                                          " l'Officier de l'État civil et spécifiant les modifications apportées, soit par un acte satisfaisant aux conditions de capacité et de forme" &
+                                          " des actes testamentaires.", fNormalS)))
+        ph = New Phrase("après le décès du concessionnaire, ", fNormalS)
+        chunque = New Chunk("aucune modification", fSouligneS)
+        ph.Add(chunque)
+        ph.Add(New Chunk(" de l'état de la concession (transformation d'une concession pleine terre en caveau, agrandissement ou appronfondissement de la concession" &
+               "ou du caveau, transfert de l'urne) ", fNormalS))
+        chunque = New Chunk("n 'est autorisée", fSouligneS)
+        ph.Add(chunque)
+        ph.Add(".")
+        liste.Add(New ListItem(ph))
+        liste.Add(New ListItem(New Phrase("dans le cas où les bénéficiaires sont les membres d'un ou de plusieurs communautés religieuses, l'identité" &
+                                          " de ceux-ci sera reprise au moment de l'inhumation. Aucune déclaration de volonté de la part des membres de la" &
+                                          " communauté ne sera requise.", fNormalS)))
+
+        Dim litem As New ListItem(New Phrase("dans une concession caveau ou pleine terre complète, le placement d'un maximum de 3 urnes supplémentaires ne pourra" &
+                                              "être admis que moyennant le respect de l'ensemble des clauses ci-après:", fNormalS))
+        Dim liste2 As New List(True, False, 20.0F)
+        liste2.Add(New ListItem(New Phrase("l'espace intérieur du caveau ou de la tombe concernée permettra un placement aisé des urnes", fNormalS)))
+        liste2.Add(New ListItem(New Phrase("le paiement préalable au moment de la déclaration du décès de la redevance prévue dans le réglement-taxe d'application", fNormalS)))
+        liste2.Add(New ListItem(New Phrase("par assimilation aux dispositions de l'article 58 c, pour chaque cas, une demande écrite du bénéficiaire ou" &
+                                           " de ses ayants droit ainsi qu'un accord écrit du concessionnaire (écrits datés, signés, légalisés).", fNormalS)))
+        litem.Add(liste2)
+        liste.Add(litem)
+        pdf.Add(liste)
+
+        pdf.Close()
+
+    End Sub
 
     Sub CreePdfProlongation()
 
@@ -726,92 +741,95 @@ Public Class ExporteurPdf
 
 
     ' à adaptery pour datatables
-    'Sub InsererTableauTypeEmplacement(Optional typecon As TTypeInh? = Nothing)
-    '    Dim prix As New PdfPTable(2)
-    '    'Dim cell As New PdfPCell(New Paragraph("Montants des redevances", fNormal))
-    '    'cell.Colspan = 2
-    '    'cell.HorizontalAlignment = 1
-    '    prix.WidthPercentage = 25
+    Sub InsererTableauTypeEmplacement(Optional typecon As TTypeCsnInh = TTypeCsnInh.NonPrecise)
 
-    '    prix.HorizontalAlignment = 2
-    '    'prix.AddCell(cell)
-    '    prix.AddCell(New Paragraph("La Hulpois : ", fGrasS))
-    '    prix.AddCell(New Paragraph("Autres :", fGrasS))
+        Dim p As Paragraph
 
-    '    pdf.Add(prix)
+        Dim prix As New PdfPTable(2)
+        'Dim cell As New PdfPCell(New Paragraph("Montants des redevances", fNormal))
+        'cell.Colspan = 2
+        'cell.HorizontalAlignment = 1
+        prix.WidthPercentage = 25
 
-    '    'P.Add(New Phrase("Indiquez le type d'emplacement souhaité", fGrasL))
-    '    'Col.SetSimpleColumn(200, 150, 800, 590)          ' deplacehorizon , ? , largeur , hauteur
-    '    'Add the paragraph to the ColumnText
-    '    'Col.AddText(P)
-    '    'Call to stupid Go() method which actually writes the content to the stream.
-    '    'Col.Go()
-    '    'P.Clear()
+        prix.HorizontalAlignment = 2
+        'prix.AddCell(cell)
+        prix.AddCell(New Paragraph("La Hulpois : ", fGrasS))
+        prix.AddCell(New Paragraph("Autres :", fGrasS))
 
-    '    Dim tableau As New PdfPTable(4)
-    '    Dim intTblWidth() As Integer = {1, 33.5, 6.25, 6.25}
+        pdf.Add(prix)
 
-    '    tableau.WidthPercentage = 97
-    '    tableau.SetWidths(intTblWidth)
-    '    tableau.HorizontalAlignment = 2
-    '    tableau.AddCell(New Paragraph(Cse(typecon = TTypeInh.OrdinaireCercueil OrElse typecon = TTypeInh.OrdinaireUrne, "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Inhumation ordinaire en pleine terre ( " & Cse(typecon = TTypeInh.OrdinaireCercueil) & " cercueil ou " & Cse(typecon = TTypeInh.OrdinaireUrne) & " urne)", fNormal))
-    '    tableau.AddCell(New Paragraph("Gratuit", fNormal))
-    '    tableau.AddCell(New Paragraph("750 " & EURO & "", fNormal))
+        'P.Add(New Phrase("Indiquez le type d'emplacement souhaité", fGrasL))
+        'Col.SetSimpleColumn(200, 150, 800, 590)          ' deplacehorizon , ? , largeur , hauteur
+        'Add the paragraph to the ColumnText
+        'Col.AddText(P)
+        'Call to stupid Go() method which actually writes the content to the stream.
+        'Col.Go()
+        'P.Clear()
 
-    '    'tableau.AddCell(New Paragraph(" ", fNormal))
-    '    tableau.AddCell(New Paragraph(Cse(typecon = TTypeInh.Cercueil1Pers15Ans OrElse typecon = TTypeInh.Urne1Pers15Ans, "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Inhumation en pleine terre (1 personne) - concession de 15 ans - " & Cse(typecon = TTypeInh.Cercueil1Pers15Ans) & " cercueil - " & Cse(typecon = TTypeInh.Urne1Pers15Ans) & " urne", fNormal))
-    '    tableau.AddCell(New Paragraph("250 " & EURO & "", fNormal))
-    '    tableau.AddCell(New Paragraph("1.800 " & EURO & "", fNormal))
+        Dim tableau As New PdfPTable(4)
+        Dim intTblWidth() As Integer = {1, 33.5, 6.25, 6.25}
 
-    '    tableau.AddCell(New Paragraph(Cse(typecon = TTypeInh.Cercueil2Pers15Ans OrElse typecon = TTypeInh.Urne2Pers15Ans, "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Inhumation en pleine terre (2 personnes) - concession de 15 ans - " & Cse(typecon = TTypeInh.Cercueil2Pers15Ans) & " cercueil - " & Cse(typecon = TTypeInh.Urne2Pers15Ans) & " urne", fNormal))
-    '    tableau.AddCell(New Paragraph("500 " & EURO & "", fNormal))
-    '    tableau.AddCell(New Paragraph("3.600 " & EURO & "", fNormal))
+        tableau.WidthPercentage = 97
+        tableau.SetWidths(intTblWidth)
+        tableau.HorizontalAlignment = 2
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.OrdinaireCercueil OrElse typecon = TTypeCsnInh.OrdinaireUrne, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Inhumation ordinaire en pleine terre ( " & Cse(typecon = TTypeCsnInh.OrdinaireCercueil) & " cercueil ou " & Cse(typecon = TTypeCsnInh.OrdinaireUrne) & " urne)", fNormal))
+        tableau.AddCell(New Paragraph("Gratuit", fNormal))
+        tableau.AddCell(New Paragraph("750 " & EURO & "", fNormal))
 
+        'tableau.AddCell(New Paragraph(" ", fNormal))
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.Cercueil1Pers15Ans OrElse typecon = TTypeCsnInh.Urne1Pers15Ans, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Inhumation en pleine terre (1 personne) - concession de 15 ans - " & Cse(typecon = TTypeCsnInh.Cercueil1Pers15Ans) & " cercueil - " & Cse(typecon = TTypeCsnInh.Urne1Pers15Ans) & " urne", fNormal))
+        tableau.AddCell(New Paragraph("250 " & EURO & "", fNormal))
+        tableau.AddCell(New Paragraph("1.800 " & EURO & "", fNormal))
 
-    '    tableau.AddCell(New Paragraph(Cse({TTypeInh.Caveau30AnsCercueil, TTypeInh.Caveau30AnsCercueilCavCom, TTypeInh.Caveau30AnsUrne, TTypeInh.Caveau30AnsUrneCavCom}.Contains(typecon), "X", " "), fNormal))
-    '    p = New Paragraph
-    '    p.Add(New Phrase("Placement d'un caveau - concession de 30 ans - " & Cse(typecon = TTypeInh.Caveau30AnsCercueil OrElse typecon = TTypeInh.Caveau30AnsCercueilCavCom) & " cercueil - " & Cse(typecon = TTypeInh.Caveau30AnsUrne OrElse typecon = TTypeInh.Caveau30AnsUrneCavCom) & " urne  " & vbCrLf, fNormal))
-    '    p.Add(New Phrase("les cercueils sont placés horizontalement dans un alignement vertical, en profondeur (maximum 3 places)", fItaliqueXS))
-    '    p.Add(New Phrase(vbCrLf & Cse(typecon = TTypeInh.Caveau30AnsCercueilCavCom OrElse typecon = TTypeInh.Caveau30AnsUrneCavCom) & " Emplacement pourvu d'un caveau communal", fGrasS))
-    '    tableau.AddCell(p)
-    '    tableau.AddCell(New Paragraph("400 " & EURO & " " & vbCrLf & "par pers." & vbCrLf & "+ " & EURO & " 500", fNormal))
-    '    tableau.AddCell(New Paragraph("1.800 " & EURO & " " & vbCrLf & "par caveau." & vbCrLf & "+ " & EURO & " 500", fNormal))
-
-    '    tableau.AddCell(New Paragraph(Cse(typecon = TTypeInh.OuvertureCaveau, "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Ouverture de caveau uniquement si travail du Fossoyeur (ouverture par chemin)", fNormal))
-    '    tableau.AddCell(New Paragraph("100 " & EURO, fNormal))
-    '    tableau.AddCell(New Paragraph("100 " & EURO, fNormal))
-
-    '    tableau.AddCell(New Paragraph(Cse(typecon = "urne_colomb_ordinaire", "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Une urne mise en columbarium - place ordinaire (cell. 1 place prioritairement)", fNormal))
-    '    tableau.AddCell(New Paragraph("gratuit", fNormal))
-    '    tableau.AddCell(New Paragraph("750 " & EURO & "", fNormal))
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.Cercueil2Pers15Ans OrElse typecon = TTypeCsnInh.Urne2Pers15Ans, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Inhumation en pleine terre (2 personnes) - concession de 15 ans - " & Cse(typecon = TTypeCsnInh.Cercueil2Pers15Ans) & " cercueil - " & Cse(typecon = TTypeCsnInh.Urne2Pers15Ans) & " urne", fNormal))
+        tableau.AddCell(New Paragraph("500 " & EURO & "", fNormal))
+        tableau.AddCell(New Paragraph("3.600 " & EURO & "", fNormal))
 
 
-    '    tableau.AddCell(New Paragraph(Cse(typecon = TTypeInh.UrneColomb15Ans, "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Une urne mise en columbarium - concession de 15 ans", fNormal))
-    '    tableau.AddCell(New Paragraph("250 " & EURO & "", fNormal))
-    '    tableau.AddCell(New Paragraph("1800 " & EURO & "", fNormal))
+        tableau.AddCell(New Paragraph(Cse({TTypeCsnInh.Caveau30AnsCercueil, TTypeCsnInh.Caveau30AnsCercueilCavCom, TTypeCsnInh.Caveau30AnsUrne, TTypeCsnInh.Caveau30AnsUrneCavCom}.Contains(typecon), "X", " "), fNormal))
+        p = New Paragraph
+        p.Add(New Phrase("Placement d'un caveau - concession de 30 ans - " & Cse(typecon = TTypeCsnInh.Caveau30AnsCercueil OrElse typecon = TTypeCsnInh.Caveau30AnsCercueilCavCom) & " cercueil - " & Cse(typecon = TTypeCsnInh.Caveau30AnsUrne OrElse typecon = TTypeCsnInh.Caveau30AnsUrneCavCom) & " urne  " & vbCrLf, fNormal))
+        p.Add(New Phrase("les cercueils sont placés horizontalement dans un alignement vertical, en profondeur (maximum 3 places)", fItaliqueXS))
+        p.Add(New Phrase(vbCrLf & Cse(typecon = TTypeCsnInh.Caveau30AnsCercueilCavCom OrElse typecon = TTypeCsnInh.Caveau30AnsUrneCavCom) & " Emplacement pourvu d'un caveau communal", fGrasS))
+        tableau.AddCell(p)
+        tableau.AddCell(New Paragraph("400 " & EURO & " " & vbCrLf & "par pers." & vbCrLf & "+ " & EURO & " 500", fNormal))
+        tableau.AddCell(New Paragraph("1.800 " & EURO & " " & vbCrLf & "par caveau." & vbCrLf & "+ " & EURO & " 500", fNormal))
 
-    '    tableau.AddCell(New Paragraph(Cse(typecon = TTypeInh.UrneColomb30Ans, "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Une urne mise en columbarium - concession de 30 ans", fNormal))
-    '    tableau.AddCell(New Paragraph("400 " & EURO & "", fNormal))
-    '    tableau.AddCell(New Paragraph("2500 " & EURO & "", fNormal))
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.OuvertureCaveau, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Ouverture de caveau uniquement si travail du Fossoyeur (ouverture par chemin)", fNormal))
+        tableau.AddCell(New Paragraph("100 " & EURO, fNormal))
+        tableau.AddCell(New Paragraph("100 " & EURO, fNormal))
 
-    '    tableau.AddCell(New Paragraph(Cse(typecon = TTypeInh.CavurneCommunal, "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Placement d'un cavurne communal - concession de 30 ans (max. 5 urnes)", fNormal))
-    '    tableau.AddCell(New Paragraph("250 " & EURO & vbCrLf & "par urne", fNormal))
-    '    tableau.AddCell(New Paragraph("500 " & EURO & vbCrLf & "par urne", fNormal))
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.UrneColombOrdinaire, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Une urne mise en columbarium - place ordinaire (cell. 1 place prioritairement)", fNormal))
+        tableau.AddCell(New Paragraph("gratuit", fNormal))
+        tableau.AddCell(New Paragraph("750 " & EURO & "", fNormal))
 
-    '    tableau.AddCell(New Paragraph(Cse(typecon = TTypeInh.DispersionCendres, "X", " "), fNormal))
-    '    tableau.AddCell(New Paragraph("Dispersion des cendres", fNormal))
-    '    tableau.AddCell(New Paragraph("gratuit", fNormal))
-    '    tableau.AddCell(New Paragraph("gratuit", fNormal))
-    '    pdf.Add(tableau)
-    'End Sub
+
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.UrneColomb15Ans, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Une urne mise en columbarium - concession de 15 ans", fNormal))
+        tableau.AddCell(New Paragraph("250 " & EURO & "", fNormal))
+        tableau.AddCell(New Paragraph("1800 " & EURO & "", fNormal))
+
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.UrneColomb30Ans, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Une urne mise en columbarium - concession de 30 ans", fNormal))
+        tableau.AddCell(New Paragraph("400 " & EURO & "", fNormal))
+        tableau.AddCell(New Paragraph("2500 " & EURO & "", fNormal))
+
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.CavurneCommunal, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Placement d'un cavurne communal - concession de 30 ans (max. 5 urnes)", fNormal))
+        tableau.AddCell(New Paragraph("250 " & EURO & vbCrLf & "par urne", fNormal))
+        tableau.AddCell(New Paragraph("500 " & EURO & vbCrLf & "par urne", fNormal))
+
+        tableau.AddCell(New Paragraph(Cse(typecon = TTypeCsnInh.DispersionCendres, "X", " "), fNormal))
+        tableau.AddCell(New Paragraph("Dispersion des cendres", fNormal))
+        tableau.AddCell(New Paragraph("gratuit", fNormal))
+        tableau.AddCell(New Paragraph("gratuit", fNormal))
+        pdf.Add(tableau)
+    End Sub
 
     Sub FaireGrosEnTete(texte As String)
         Dim t As New PdfPTable(2)

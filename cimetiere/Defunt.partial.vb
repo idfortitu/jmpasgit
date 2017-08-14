@@ -21,7 +21,7 @@
 
 #Region "Interfaces IPersonne et IEntity"
 
-    Public Property IdInterface As Integer Implements IPersonne.id, IEntity.Id
+    Public Property IdInterface As Integer Implements IPersonne.Id, IEntity.Id
         Get
             Return Id
         End Get
@@ -109,7 +109,7 @@
 
     Public ReadOnly Property AdresseComplete As String Implements IPersonne.AdresseComplete
         Get
-            Return Uzineagaz.AdresseComplète(Adresse, Cp, NomVille, NomPays)
+            Return Uzineagaz.AdresseComplete(Adresse, Cp, NomVille, NomPays)
         End Get
     End Property
 

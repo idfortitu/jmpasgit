@@ -417,7 +417,7 @@
           <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EtatCivil" Type="bddcimeModel.TEtatCivil" Nullable="false" />
+          <Property Name="EtatCivil" Type="Int32" Nullable="false" />
           <Property Name="EtatCivilDe" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateNaiss" Type="DateTime" Nullable="true" />
           <Property Name="LieuNaiss" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
@@ -682,14 +682,6 @@
             <End Role="Emplacement" EntitySet="Emplacements" />
           </AssociationSet>
         </EntityContainer>
-        <EnumType Name="TEtatCivil">
-          <Member Name="NonPrecise" Value="0" />
-          <Member Name="Celibataire" Value="1" />
-          <Member Name="Epoux" Value="2" />
-          <Member Name="Veuf" Value="3" />
-          <Member Name="Divorce" Value="4" />
-          <Member Name="Enfant" Value="5" />
-        </EnumType>
         <Association Name="emplacements_ibfk_11">
           <End Type="bddcimeModel.Histoire" Role="Histoire" Multiplicity="0..1" />
           <End Type="bddcimeModel.Emplacement" Role="Emplacement" Multiplicity="*" />

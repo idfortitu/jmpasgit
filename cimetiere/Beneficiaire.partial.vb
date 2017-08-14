@@ -93,7 +93,7 @@
 
     Public ReadOnly Property AdresseComplete As String Implements IPersonne.AdresseComplete
         Get
-            Return Uzineagaz.AdresseComplète(Adresse, Cp, NomVille, NomPays)
+            Return Uzineagaz.AdresseComplete(Adresse, Cp, NomVille, NomPays)
         End Get
     End Property
 
