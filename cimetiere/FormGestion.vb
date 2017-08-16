@@ -4,22 +4,63 @@ Public Class FormGestion
     Public dtcons As DataTable
     Public dtbenef As DataTable
     Public dtdefunt As DataTable
-    Public flagdefunt As Integer
-    Public flagconssession As Integer
-    Public flagacteur As Integer
+    Public dtCsnr As DataTable
+    Public dtPersContact As DataTable
+    Public dtBeneficiaireForm As DataTable
+    Dim screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
+    Dim screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
+
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        flagacteur = 0
-        flagconssession = 0
+        Panel10.Hide()
+        Panel3.Hide()
+        Panel1.Hide()
+        TabControl1.Hide()
+        Me.Size = New Size(820, 150)
+        Me.Left = (screenWidth - Me.Width) / 2
+        Me.Top = (screenHeight - Me.Height) / 2
+        Lchargementdonnee.Text = "Chargement des données"
+    End Sub
 
-
-        DataTableDefunt()
+    Private Sub Form1_Shown(sender As System.Object, e As System.EventArgs) Handles MyBase.Shown
+        ProgressBar.Increment(10)
+        DataTableDefunt() '1
         DataBindDefunt()
-        flagdefunt = 1
+        ProgressBar.Increment(25)
+        Lchargementdonnee.Text = "Chargement des données ."
+        Threading.Thread.Sleep(500)
+        DataTableConcess() '2
+        ProgressBar.Increment(40)
+        Lchargementdonnee.Text = "Chargement des données . ."
+        Threading.Thread.Sleep(500)
+        DataTableConcession() '2
+        ProgressBar.Increment(55)
+        Lchargementdonnee.Text = "Chargement des données . . ."
+        Threading.Thread.Sleep(500)
+        DataTablePersContact()
+        ProgressBar.Increment(70)
+        Threading.Thread.Sleep(500)
+        DataTableBeneficiaire()
+        ProgressBar.Increment(85)
+        Threading.Thread.Sleep(500)
+        DgvListeConcessionnaireBenef.Show()
+        DgvListeConcessionnairePersonneContact.Hide()
+        DgvListeConcessionnaireConcess.Hide()
+        ProgressBar.Increment(100)
+        Threading.Thread.Sleep(500)
+        ProgressBar.Hide()
+        Me.Size = New Size(1270, 705)
+        Me.Left = (screenWidth - Me.Width) / 2
+        Me.Top = (screenHeight - Me.Height) / 2
+        Panel10.Show()
+        Panel3.Show()
+        Panel1.Show()
+        Lchargementdonnee.Hide()
+        TabControl1.Show()
     End Sub
 
 
-    Sub DataTableDefunt()
-        dtPersonnes = Bdd.Query("select * FROM defunts INNER JOIN t_loc_ville ON defunts.locville_id = t_loc_ville.locville_id INNER JOIN t_pays on t_loc_ville.locville_id = t_pays.Pays_id INNER JOIN emplacements on defunts.empl_id = emplacements.empl_id")
+    Sub DataTableDefunt() '1
+        dtdefunt = Bdd.Query("select * FROM defunts INNER JOIN t_loc_ville ON defunts.locville_id = t_loc_ville.locville_id INNER JOIN t_pays on t_loc_ville.locville_id = t_pays.Pays_id INNER JOIN emplacements on defunts.empl_id = emplacements.empl_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
@@ -35,23 +76,18 @@ Public Class FormGestion
         colonneid.HeaderText = "id"
         colonneid.Name = "def_id"
         DgvListeDefunts.AutoGenerateColumns = False
-        DgvListeDefunts.DataSource = dtPersonnes
+        DgvListeDefunts.DataSource = dtdefunt
         DgvListeDefunts.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DgvListeDefunts.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-
     End Sub
 
     Sub DataTableConsBeneficiaire(ByRef Optional empl As Integer = 0)
-
-
         If empl = 0 Then
             dtbenef = Query("SELECT * FROM beneficiaires INNER JOIN beneficier ON beneficiaires.ben_id = beneficier.ben_id where beneficier.con_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("con_id") & "")
         Else
             dtbenef = Query("SELECT * FROM beneficiaires INNER JOIN beneficier ON beneficiaires.ben_id = beneficier.ben_id where beneficier.con_id = " & empl & "")
 
         End If
-
-
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "ben_nom"
@@ -68,27 +104,27 @@ Public Class FormGestion
         FCDGBeneficiaire.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
-    Sub DataTableConcess()
-        dtPersonnes = Bdd.Query("select * FROM concessionnaires INNER JOIN t_loc_ville ON concessionnaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+    Sub DataTableConcess() '2
+        dtCsnr = Bdd.Query("select * FROM concessionnaires INNER JOIN t_loc_ville ON concessionnaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "csnr_nom"
         DTGV_Id_Colonne.HeaderText = "nom"
         DTGV_Id_Colonne.Name = "csnr_nom"
-        DgvListeConcessionnaire.Columns.Add(DTGV_Id_Colonne)
+        DgvListeConcessionnaireConcess.Columns.Add(DTGV_Id_Colonne)
         ColonnePrenom.DataPropertyName = "csnr_prenom"
         ColonnePrenom.HeaderText = "prenom"
         ColonnePrenom.Name = "csnr_prenom"
-        DgvListeConcessionnaire.Columns.Add(ColonnePrenom)
-        DgvListeConcessionnaire.AutoGenerateColumns = False
-        DgvListeConcessionnaire.DataSource = dtPersonnes
-        DgvListeConcessionnaire.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DgvListeConcessionnaire.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DgvListeConcessionnaireConcess.Columns.Add(ColonnePrenom)
+        DgvListeConcessionnaireConcess.AutoGenerateColumns = False
+        DgvListeConcessionnaireConcess.DataSource = dtCsnr
+        DgvListeConcessionnaireConcess.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DgvListeConcessionnaireConcess.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
 
 
-    Sub DataTableConcession()
+    Sub DataTableConcession() '2
         dtcons = Bdd.Query("SELECT * FROM concessions INNER JOIN emplacements ON concessions.empl_id = emplacements.empl_id INNER JOIN t_histoire ON concessions.h_id = t_histoire.h_id INNER JOIN t_commentaire ON concessions.com_id = t_commentaire.com_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
@@ -117,8 +153,7 @@ Public Class FormGestion
         Else
             dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") = empl
         End If
-        FCDGDefunt.DataBindings.Clear()
-        FCDGDefunt.Columns.Clear()
+
         dtdefunt = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") & "")
         Dim DTGV_Id_Colonne_def = New DataGridViewTextBoxColumn()
         Dim Colonne = New DataGridViewTextBoxColumn()
@@ -140,39 +175,39 @@ Public Class FormGestion
         FCDGDefunt.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
     Sub DataTableBeneficiaire()
-        dtPersonnes = Bdd.Query("select * FROM beneficiaires INNER JOIN t_loc_ville ON beneficiaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+        dtBeneficiaireForm = Bdd.Query("select * FROM beneficiaires INNER JOIN t_loc_ville ON beneficiaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "ben_nom"
         DTGV_Id_Colonne.HeaderText = "nom"
         DTGV_Id_Colonne.Name = "ben_nom"
-        DgvListeConcessionnaire.Columns.Add(DTGV_Id_Colonne)
+        DgvListeConcessionnaireBenef.Columns.Add(DTGV_Id_Colonne)
         ColonnePrenom.DataPropertyName = "ben_prenom"
         ColonnePrenom.HeaderText = "prenom"
         ColonnePrenom.Name = "ben_prenom"
-        DgvListeConcessionnaire.Columns.Add(ColonnePrenom)
-        DgvListeConcessionnaire.AutoGenerateColumns = False
-        DgvListeConcessionnaire.DataSource = dtPersonnes
-        DgvListeConcessionnaire.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DgvListeConcessionnaire.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DgvListeConcessionnaireBenef.Columns.Add(ColonnePrenom)
+        DgvListeConcessionnaireBenef.AutoGenerateColumns = False
+        DgvListeConcessionnaireBenef.DataSource = dtBeneficiaireForm
+        DgvListeConcessionnaireBenef.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DgvListeConcessionnaireBenef.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
     Sub DataTablePersContact()
-        dtPersonnes = Bdd.Query("select * FROM personnes_contact INNER JOIN t_loc_ville ON personnes_contact.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+        dtPersContact = Bdd.Query("select * FROM personnes_contact INNER JOIN t_loc_ville ON personnes_contact.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "pc_nom"
         DTGV_Id_Colonne.HeaderText = "nom"
         DTGV_Id_Colonne.Name = "pc_nom"
-        DgvListeConcessionnaire.Columns.Add(DTGV_Id_Colonne)
+        DgvListeConcessionnairePersonneContact.Columns.Add(DTGV_Id_Colonne)
         ColonnePrenom.DataPropertyName = "pc_prenom"
         ColonnePrenom.HeaderText = "prenom"
         ColonnePrenom.Name = "pc_prenom"
-        DgvListeConcessionnaire.Columns.Add(ColonnePrenom)
-        DgvListeConcessionnaire.AutoGenerateColumns = False
-        DgvListeConcessionnaire.DataSource = dtPersonnes
-        DgvListeConcessionnaire.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DgvListeConcessionnaire.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DgvListeConcessionnairePersonneContact.Columns.Add(ColonnePrenom)
+        DgvListeConcessionnairePersonneContact.AutoGenerateColumns = False
+        DgvListeConcessionnairePersonneContact.DataSource = dtPersContact
+        DgvListeConcessionnairePersonneContact.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DgvListeConcessionnairePersonneContact.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
 
@@ -187,71 +222,61 @@ Public Class FormGestion
         FCTBDateFin.DataBindings.Add("Text", dtcons, "con_date_fin")
     End Sub
     Private Sub DataBindConsbenef()
-
-
         TBconsBenefnom.DataBindings.Add("Text", dtbenef, "ben_nom")
         TBconsBenefprenom.DataBindings.Add("Text", dtbenef, "ben_prenom")
         TBconsBenefadress.DataBindings.Add("Text", dtbenef, "ben_adresse")
         TBconsBenefdatenaiss.DataBindings.Add("Text", dtbenef, "ben_date_naiss")
-
-
     End Sub
     Private Sub DataBindDefunt()
-        FPTBNom.DataBindings.Add("Text", dtPersonnes, "def_nom")
-        FPTBPrenom.DataBindings.Add("Text", dtPersonnes, "def_prenom")
-        FPTBDateNaiss.DataBindings.Add("Text", dtPersonnes, "def_date_naiss")
-        FPTBDateE.DataBindings.Add("Text", dtPersonnes, "Date_debut")
-        FPTBSepulture.DataBindings.Add("Text", dtPersonnes, "empl_id")
-        FPTBEtatCivil.DataBindings.Add("Text", dtPersonnes, "def_etat_civil")
-        FPTBAdresse.DataBindings.Add("Text", dtPersonnes, "def_adresse")
-        FPTBDateM.DataBindings.Add("Text", dtPersonnes, "def_date_deces")
-        FPTBLieuNaiss.DataBindings.Add("Text", dtPersonnes, "def_lieu_naiss")
-        FPTBCodeLieu.DataBindings.Add("Text", dtPersonnes, "def_etat_civil_de")
-        FPTBCodePostal.DataBindings.Add("Text", dtPersonnes, "locville_cp")
-        FPTBPays.DataBindings.Add("Text", dtPersonnes, "Pays_nom")
-        FPTBVille.DataBindings.Add("Text", dtPersonnes, "locville_ville")
-        FPTBEmplacement.DataBindings.Add("Text", dtPersonnes, "empl_reference")
+        FPTBNom.DataBindings.Add("Text", dtdefunt, "def_nom")
+        FPTBPrenom.DataBindings.Add("Text", dtdefunt, "def_prenom")
+        FPTBDateNaiss.DataBindings.Add("Text", dtdefunt, "def_date_naiss")
+        FPTBDateE.DataBindings.Add("Text", dtdefunt, "Date_debut")
+        FPTBSepulture.DataBindings.Add("Text", dtdefunt, "empl_id")
+        FPTBEtatCivil.DataBindings.Add("Text", dtdefunt, "def_etat_civil")
+        FPTBAdresse.DataBindings.Add("Text", dtdefunt, "def_adresse")
+        FPTBDateM.DataBindings.Add("Text", dtdefunt, "def_date_deces")
+        FPTBLieuNaiss.DataBindings.Add("Text", dtdefunt, "def_lieu_naiss")
+        FPTBCodeLieu.DataBindings.Add("Text", dtdefunt, "def_etat_civil_de")
+        FPTBCodePostal.DataBindings.Add("Text", dtdefunt, "locville_cp")
+        FPTBPays.DataBindings.Add("Text", dtdefunt, "Pays_nom")
+        FPTBVille.DataBindings.Add("Text", dtdefunt, "locville_ville")
+        FPTBEmplacement.DataBindings.Add("Text", dtdefunt, "empl_reference")
     End Sub
 
 
 
     Private Sub DataBindConss()
-        TBPersNom.DataBindings.Add("Text", dtPersonnes, "csnr_nom")
-        TBPersPrenom.DataBindings.Add("Text", dtPersonnes, "csnr_prenom")
-        TBPersTel.DataBindings.Add("Text", dtPersonnes, "csnr_tel")
-        TBPersDN.DataBindings.Add("Text", dtPersonnes, "csnr_date_naiss")
-        TBPersAdress.DataBindings.Add("Text", dtPersonnes, "csnr_adresse")
-        TBPersCodePostal.DataBindings.Add("Text", dtPersonnes, "locville_cp")
-        TBPersVille.DataBindings.Add("Text", dtPersonnes, "locville_ville")
-        TBPersPays.DataBindings.Add("Text", dtPersonnes, "Pays_nom")
-        TBPersNumNational.DataBindings.Add("Text", dtPersonnes, "csnr_no_registre")
-
-
+        TBPersNom.DataBindings.Add("Text", dtCsnr, "csnr_nom")
+        TBPersPrenom.DataBindings.Add("Text", dtCsnr, "csnr_prenom")
+        TBPersTel.DataBindings.Add("Text", dtCsnr, "csnr_tel")
+        TBPersDN.DataBindings.Add("Text", dtCsnr, "csnr_date_naiss")
+        TBPersAdress.DataBindings.Add("Text", dtCsnr, "csnr_adresse")
+        TBPersCodePostal.DataBindings.Add("Text", dtCsnr, "locville_cp")
+        TBPersVille.DataBindings.Add("Text", dtCsnr, "locville_ville")
+        TBPersPays.DataBindings.Add("Text", dtCsnr, "Pays_nom")
+        TBPersNumNational.DataBindings.Add("Text", dtCsnr, "csnr_no_registre")
     End Sub
 
     Private Sub DataBindBenef()
-        TBPersNom.DataBindings.Add("Text", dtPersonnes, "ben_nom")
-        TBPersPrenom.DataBindings.Add("Text", dtPersonnes, "ben_prenom")
-        TBPersDN.DataBindings.Add("Text", dtPersonnes, "ben_date_naiss")
-        TBPersAdress.DataBindings.Add("Text", dtPersonnes, "ben_adresse")
-        TBPersNumNational.DataBindings.Add("Text", dtPersonnes, "ben_lien_parente")
-        TBPersCodePostal.DataBindings.Add("Text", dtPersonnes, "locville_cp")
-        TBPersVille.DataBindings.Add("Text", dtPersonnes, "locville_ville")
-        TBPersPays.DataBindings.Add("Text", dtPersonnes, "Pays_nom")
-
-
-
+        TBPersNom.DataBindings.Add("Text", dtBeneficiaireForm, "ben_nom")
+        TBPersPrenom.DataBindings.Add("Text", dtBeneficiaireForm, "ben_prenom")
+        TBPersDN.DataBindings.Add("Text", dtBeneficiaireForm, "ben_date_naiss")
+        TBPersAdress.DataBindings.Add("Text", dtBeneficiaireForm, "ben_adresse")
+        TBPersNumNational.DataBindings.Add("Text", dtBeneficiaireForm, "ben_lien_parente")
+        TBPersCodePostal.DataBindings.Add("Text", dtBeneficiaireForm, "locville_cp")
+        TBPersVille.DataBindings.Add("Text", dtBeneficiaireForm, "locville_ville")
+        TBPersPays.DataBindings.Add("Text", dtBeneficiaireForm, "Pays_nom")
     End Sub
 
     Private Sub DataBindPersContact()
-        TBPersNom.DataBindings.Add("Text", dtPersonnes, "pc_nom")
-        TBPersPrenom.DataBindings.Add("Text", dtPersonnes, "pc_prenom")
-        TBPersTel.DataBindings.Add("Text", dtPersonnes, "pc_tel")
-        TBPersAdress.DataBindings.Add("Text", dtPersonnes, "pc_adresse")
-        TBPersCodePostal.DataBindings.Add("Text", dtPersonnes, "locville_cp")
-        TBPersVille.DataBindings.Add("Text", dtPersonnes, "locville_ville")
-        TBPersPays.DataBindings.Add("Text", dtPersonnes, "Pays_nom")
-
+        TBPersNom.DataBindings.Add("Text", dtPersContact, "pc_nom")
+        TBPersPrenom.DataBindings.Add("Text", dtPersContact, "pc_prenom")
+        TBPersTel.DataBindings.Add("Text", dtPersContact, "pc_tel")
+        TBPersAdress.DataBindings.Add("Text", dtPersContact, "pc_adresse")
+        TBPersCodePostal.DataBindings.Add("Text", dtPersContact, "locville_cp")
+        TBPersVille.DataBindings.Add("Text", dtPersContact, "locville_ville")
+        TBPersPays.DataBindings.Add("Text", dtPersContact, "Pays_nom")
     End Sub
 
     Private Sub DataBindClear()
@@ -271,12 +296,10 @@ Public Class FormGestion
         FCTBEmplacement.DataBindings.Clear()
         FCTBMonumentClasse.DataBindings.Clear()
         FCTBType.DataBindings.Clear()
-
         FCTBCommentaire.DataBindings.Clear()
         FCTBHistoire.DataBindings.Clear()
         FCTBDateDeb.DataBindings.Clear()
         FCTBDateFin.DataBindings.Clear()
-
     End Sub
 
     Private Sub DataBindClearConcessionsBeneficiaire()
@@ -294,53 +317,14 @@ Public Class FormGestion
         FPTBEtatCivil.DataBindings.Clear()
         FPTBSepulture.DataBindings.Clear()
         FPTBDateM.DataBindings.Clear()
-
         FPTBEtatCivil.DataBindings.Clear()
-
         FPTBAdresse.DataBindings.Clear()
-
         FPTBEmplacement.DataBindings.Clear()
-
         FPTBLieuNaiss.DataBindings.Clear()
         FPTBCodePostal.DataBindings.Clear()
         FPTBPays.DataBindings.Clear()
         FPTBVille.DataBindings.Clear()
-
     End Sub
-
-
-
-    '  Private Sub Deplacement_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    ' Inutile de tenter un déplacement si la DataTable ne contient aucune ligne.
-    '   If dtPersonnes IsNot Nothing AndAlso dtPersonnes.Rows.Count > 0 Then
-    ' Le BindingContext appartient à un conteneur, le formulaire dans ce cas.
-    '     With Me.BindingContext(dtPersonnes)
-    ' Modification de sa propriété Position en fonction du bouton.
-    '       If sender.Equals(FPBPremier) Then
-    '           .Position = 0
-    '       ElseIf sender.Equals(FPBPrec) Then
-    '           If .Position = 0 Then
-    '               .Position = .Count - 1            ' Balayage circulaire
-    '           Else
-    '               .Position -= 1
-    '           End If
-    '       ElseIf sender.Equals(FPBSuivant) Then
-    '          If .Position = .Count - 1 Then
-    '             .Position = 0                 ' Balayage circulaire
-    '         Else
-    '           .Position += 1
-    '       End If
-    '   ElseIf sender.Equals(FPBDernier) Then
-    '       .Position = .Count - 1
-    '    End If
-    '  End With
-    '     End If
-    ' End Sub
-
-
-
-
-
 
     Private Sub FPBDetails_Click(sender As Object, e As EventArgs) Handles FPBDetails.Click
         Dim FDetails As New FDetails
@@ -380,85 +364,44 @@ Public Class FormGestion
 
 
     Private Sub BtDefChercher_Click(sender As Object, e As EventArgs) Handles BtDefChercher.Click
-
         Dim Source As New BindingSource()
         Source.DataSource = Me.DgvListeDefunts.DataSource
         Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%'"
-
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtDefAnnulerRecherche.Click
         Dim Source As New BindingSource()
         Source.DataSource = Me.DgvListeDefunts.DataSource
-
         Source.Filter = "def_nom like '%'"
     End Sub
 
-
-
     Private Sub PRBConcessionnaire_CheckedChanged(sender As Object, e As EventArgs) Handles PRBConcessionnaire.CheckedChanged
+        DgvListeConcessionnaireBenef.Hide()
+        DgvListeConcessionnairePersonneContact.Hide()
+        DgvListeConcessionnaireConcess.Show()
         DataBindClear()
-        DgvListeConcessionnaire.DataBindings.Clear()
-        DgvListeConcessionnaire.Columns.Clear()
-        DataTableConcess()
         DataBindConss()
     End Sub
 
     Private Sub PRBPersCon_CheckedChanged(sender As Object, e As EventArgs) Handles PRBPersCon.CheckedChanged
+        DgvListeConcessionnaireBenef.Hide()
+        DgvListeConcessionnairePersonneContact.Show()
+        DgvListeConcessionnaireConcess.Hide()
         DataBindClear()
-        DgvListeConcessionnaire.DataBindings.Clear()
-        DgvListeConcessionnaire.Columns.Clear()
-        DataTablePersContact()
         DataBindPersContact()
     End Sub
 
     Private Sub PRBBenef_CheckedChanged(sender As Object, e As EventArgs) Handles PRBBenef.CheckedChanged
+        DgvListeConcessionnaireBenef.Show()
+        DgvListeConcessionnairePersonneContact.Hide()
+        DgvListeConcessionnaireConcess.Hide()
         DataBindClear()
-        DgvListeConcessionnaire.DataBindings.Clear()
-        DgvListeConcessionnaire.Columns.Clear()
-        DataTableBeneficiaire()
         DataBindBenef()
     End Sub
 
-    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
 
-        If TabControl1.SelectedIndex.ToString = 0 Then
-            If flagdefunt = 0 Then
-                DataBindClearBeneficiaire()
-                DgvListeDefunts.DataBindings.Clear()
-                DgvListeDefunts.Columns.Clear()
-                DataTableDefunt()
-                DataBindDefunt()
-                flagdefunt = 1
-            End If
-
-        ElseIf TabControl1.SelectedIndex.ToString = 1 Then
-            If flagconssession = 0 Then
-                FCDGConss.DataBindings.Clear()
-                FCDGConss.Columns.Clear()
-                FCDGDefunt.Columns.Clear()
-                FCDGDefunt.DataBindings.Clear()
-                FCDGBeneficiaire.DataBindings.Clear()
-                FCDGBeneficiaire.Columns.Clear()
-                DataTableConcession()
-                flagconssession = 1
-            End If
-
-        ElseIf TabControl1.SelectedIndex.ToString = 2 Then
-            If flagacteur = 0 Then
-                DataBindClear()
-                DgvListeConcessionnaire.DataBindings.Clear()
-                DgvListeConcessionnaire.Columns.Clear()
-                DataTableBeneficiaire()
-                DataBindBenef()
-                flagacteur = 1
-            End If
-        End If
-    End Sub
 
     Private Sub FCDGConss_SelectionChanged(sender As Object, e As EventArgs) Handles FCDGConss.SelectionChanged
-
         DataBindClearConcessions()
         FCDGBeneficiaire.DataBindings.Clear()
         FCDGBeneficiaire.Columns.Clear()
@@ -514,8 +457,6 @@ Public Class FormGestion
         TabControl1.SelectedIndex = 1
         'Dim defuntid = dtPersonnes.Rows(DgvListeDefunts.CurrentRow.Index())("def_id").ToString
         Dim defuntid = Me.DgvListeDefunts(0, 0).Value.ToString
-
-
         MsgBox(defuntid)
         Dim id = Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "con_id")
         Dim Source As New BindingSource()
@@ -550,12 +491,4 @@ Public Class FormGestion
     End Sub
 
 
-
-
-
-
-
-
-    ' Affiche les infos d'un défunt quand celui-ci est sélectionné dans la liste
-    ' '   MsgBox("Num site : " & dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id"))
 End Class

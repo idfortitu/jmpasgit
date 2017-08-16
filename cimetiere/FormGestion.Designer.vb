@@ -26,6 +26,7 @@ Partial Class FormGestion
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.DgvListeDefunts = New System.Windows.Forms.DataGridView()
@@ -183,8 +184,12 @@ Partial Class FormGestion
         Me.PRBBenef = New System.Windows.Forms.RadioButton()
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
-        Me.DgvListeConcessionnaire = New System.Windows.Forms.DataGridView()
+        Me.DgvListeConcessionnairePersonneContact = New System.Windows.Forms.DataGridView()
+        Me.DgvListeConcessionnaireConcess = New System.Windows.Forms.DataGridView()
+        Me.DgvListeConcessionnaireBenef = New System.Windows.Forms.DataGridView()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Lchargementdonnee = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TbDateDeces = New cimetiere.TextBoxDate()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -222,8 +227,11 @@ Partial Class FormGestion
         Me.GroupBox15.SuspendLayout()
         Me.Panel12.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
-        CType(Me.DgvListeConcessionnaire, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvListeConcessionnairePersonneContact, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvListeConcessionnaireConcess, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvListeConcessionnaireBenef, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -234,7 +242,7 @@ Partial Class FormGestion
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(64, 32)
-        Me.TabControl1.Location = New System.Drawing.Point(-4, 0)
+        Me.TabControl1.Location = New System.Drawing.Point(-5, 1)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1270, 705)
@@ -260,6 +268,13 @@ Partial Class FormGestion
         Me.TabPage1.Size = New System.Drawing.Size(1262, 665)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Défunt"
+        '
+        'ProgressBar
+        '
+        Me.ProgressBar.Location = New System.Drawing.Point(123, 42)
+        Me.ProgressBar.Name = "ProgressBar"
+        Me.ProgressBar.Size = New System.Drawing.Size(657, 23)
+        Me.ProgressBar.TabIndex = 98
         '
         'Panel3
         '
@@ -446,7 +461,7 @@ Partial Class FormGestion
         '
         Me.FPBAjouter.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBAjouter.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBAjouter.Location = New System.Drawing.Point(749, 296)
+        Me.FPBAjouter.Location = New System.Drawing.Point(738, 296)
         Me.FPBAjouter.Name = "FPBAjouter"
         Me.FPBAjouter.Size = New System.Drawing.Size(64, 23)
         Me.FPBAjouter.TabIndex = 88
@@ -457,7 +472,7 @@ Partial Class FormGestion
         '
         Me.Panel1.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(710, 6)
+        Me.Panel1.Location = New System.Drawing.Point(699, 6)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(543, 266)
         Me.Panel1.TabIndex = 92
@@ -729,7 +744,7 @@ Partial Class FormGestion
         '
         Me.FPBSupprimer.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBSupprimer.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBSupprimer.Location = New System.Drawing.Point(917, 296)
+        Me.FPBSupprimer.Location = New System.Drawing.Point(906, 296)
         Me.FPBSupprimer.Name = "FPBSupprimer"
         Me.FPBSupprimer.Size = New System.Drawing.Size(74, 23)
         Me.FPBSupprimer.TabIndex = 90
@@ -740,7 +755,7 @@ Partial Class FormGestion
         '
         Me.FPBModifier.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBModifier.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBModifier.Location = New System.Drawing.Point(835, 296)
+        Me.FPBModifier.Location = New System.Drawing.Point(824, 296)
         Me.FPBModifier.Name = "FPBModifier"
         Me.FPBModifier.Size = New System.Drawing.Size(64, 23)
         Me.FPBModifier.TabIndex = 89
@@ -751,7 +766,7 @@ Partial Class FormGestion
         '
         Me.FPBDetails.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBDetails.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBDetails.Location = New System.Drawing.Point(1149, 329)
+        Me.FPBDetails.Location = New System.Drawing.Point(1138, 329)
         Me.FPBDetails.Name = "FPBDetails"
         Me.FPBDetails.Size = New System.Drawing.Size(99, 48)
         Me.FPBDetails.TabIndex = 87
@@ -762,7 +777,7 @@ Partial Class FormGestion
         '
         Me.FPBLienCons.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBLienCons.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBLienCons.Location = New System.Drawing.Point(1099, 279)
+        Me.FPBLienCons.Location = New System.Drawing.Point(1088, 279)
         Me.FPBLienCons.Name = "FPBLienCons"
         Me.FPBLienCons.Size = New System.Drawing.Size(152, 48)
         Me.FPBLienCons.TabIndex = 86
@@ -1819,12 +1834,10 @@ Partial Class FormGestion
         '
         Me.PRBBenef.AutoSize = True
         Me.PRBBenef.BackColor = System.Drawing.Color.Transparent
-        Me.PRBBenef.Checked = True
         Me.PRBBenef.Location = New System.Drawing.Point(309, 8)
         Me.PRBBenef.Name = "PRBBenef"
         Me.PRBBenef.Size = New System.Drawing.Size(85, 18)
         Me.PRBBenef.TabIndex = 140
-        Me.PRBBenef.TabStop = True
         Me.PRBBenef.Text = "Bénéficiaire"
         Me.PRBBenef.UseVisualStyleBackColor = False
         '
@@ -1840,7 +1853,9 @@ Partial Class FormGestion
         'GroupBox12
         '
         Me.GroupBox12.BackColor = System.Drawing.Color.White
-        Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnaire)
+        Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnairePersonneContact)
+        Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnaireConcess)
+        Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnaireBenef)
         Me.GroupBox12.Location = New System.Drawing.Point(17, 14)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.Size = New System.Drawing.Size(312, 483)
@@ -1848,19 +1863,47 @@ Partial Class FormGestion
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "Acteurs"
         '
-        'DgvListeConcessionnaire
+        'DgvListeConcessionnairePersonneContact
         '
-        Me.DgvListeConcessionnaire.BackgroundColor = System.Drawing.Color.White
-        Me.DgvListeConcessionnaire.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DgvListeConcessionnaire.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvListeConcessionnaire.EnableHeadersVisualStyles = False
-        Me.DgvListeConcessionnaire.Location = New System.Drawing.Point(0, 15)
-        Me.DgvListeConcessionnaire.Name = "DgvListeConcessionnaire"
-        Me.DgvListeConcessionnaire.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.DgvListeConcessionnaire.RowHeadersVisible = False
-        Me.DgvListeConcessionnaire.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeConcessionnaire.Size = New System.Drawing.Size(312, 470)
-        Me.DgvListeConcessionnaire.TabIndex = 43
+        Me.DgvListeConcessionnairePersonneContact.BackgroundColor = System.Drawing.Color.White
+        Me.DgvListeConcessionnairePersonneContact.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DgvListeConcessionnairePersonneContact.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvListeConcessionnairePersonneContact.EnableHeadersVisualStyles = False
+        Me.DgvListeConcessionnairePersonneContact.Location = New System.Drawing.Point(0, 13)
+        Me.DgvListeConcessionnairePersonneContact.Name = "DgvListeConcessionnairePersonneContact"
+        Me.DgvListeConcessionnairePersonneContact.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.DgvListeConcessionnairePersonneContact.RowHeadersVisible = False
+        Me.DgvListeConcessionnairePersonneContact.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvListeConcessionnairePersonneContact.Size = New System.Drawing.Size(312, 470)
+        Me.DgvListeConcessionnairePersonneContact.TabIndex = 148
+        '
+        'DgvListeConcessionnaireConcess
+        '
+        Me.DgvListeConcessionnaireConcess.BackgroundColor = System.Drawing.Color.White
+        Me.DgvListeConcessionnaireConcess.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DgvListeConcessionnaireConcess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvListeConcessionnaireConcess.EnableHeadersVisualStyles = False
+        Me.DgvListeConcessionnaireConcess.Location = New System.Drawing.Point(0, 15)
+        Me.DgvListeConcessionnaireConcess.Name = "DgvListeConcessionnaireConcess"
+        Me.DgvListeConcessionnaireConcess.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.DgvListeConcessionnaireConcess.RowHeadersVisible = False
+        Me.DgvListeConcessionnaireConcess.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvListeConcessionnaireConcess.Size = New System.Drawing.Size(312, 470)
+        Me.DgvListeConcessionnaireConcess.TabIndex = 147
+        '
+        'DgvListeConcessionnaireBenef
+        '
+        Me.DgvListeConcessionnaireBenef.BackgroundColor = System.Drawing.Color.White
+        Me.DgvListeConcessionnaireBenef.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DgvListeConcessionnaireBenef.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvListeConcessionnaireBenef.EnableHeadersVisualStyles = False
+        Me.DgvListeConcessionnaireBenef.Location = New System.Drawing.Point(0, 15)
+        Me.DgvListeConcessionnaireBenef.Name = "DgvListeConcessionnaireBenef"
+        Me.DgvListeConcessionnaireBenef.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.DgvListeConcessionnaireBenef.RowHeadersVisible = False
+        Me.DgvListeConcessionnaireBenef.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvListeConcessionnaireBenef.Size = New System.Drawing.Size(312, 470)
+        Me.DgvListeConcessionnaireBenef.TabIndex = 43
         '
         'PictureBox1
         '
@@ -1872,6 +1915,28 @@ Partial Class FormGestion
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 132
         Me.PictureBox1.TabStop = False
+        '
+        'Lchargementdonnee
+        '
+        Me.Lchargementdonnee.AutoSize = True
+        Me.Lchargementdonnee.BackColor = System.Drawing.Color.Transparent
+        Me.Lchargementdonnee.Font = New System.Drawing.Font("Arial Narrow", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lchargementdonnee.Location = New System.Drawing.Point(328, 14)
+        Me.Lchargementdonnee.Name = "Lchargementdonnee"
+        Me.Lchargementdonnee.Size = New System.Drawing.Size(247, 25)
+        Me.Lchargementdonnee.TabIndex = 99
+        Me.Lchargementdonnee.Text = "Chargement des données . . ."
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(1, 1)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(111, 77)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 51
+        Me.PictureBox2.TabStop = False
         '
         'TbDateDeces
         '
@@ -1888,13 +1953,17 @@ Partial Class FormGestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.ClientSize = New System.Drawing.Size(1254, 666)
+        Me.Controls.Add(Me.ProgressBar)
+        Me.Controls.Add(Me.Lchargementdonnee)
         Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.PictureBox2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximumSize = New System.Drawing.Size(1270, 705)
-        Me.MinimumSize = New System.Drawing.Size(1270, 705)
+        Me.MinimumSize = New System.Drawing.Size(400, 100)
         Me.Name = "FormGestion"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "FormGestion"
@@ -1943,9 +2012,13 @@ Partial Class FormGestion
         Me.GroupBox15.PerformLayout()
         Me.Panel12.ResumeLayout(False)
         Me.GroupBox12.ResumeLayout(False)
-        CType(Me.DgvListeConcessionnaire, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvListeConcessionnairePersonneContact, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvListeConcessionnaireConcess, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvListeConcessionnaireBenef, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -2040,7 +2113,7 @@ Partial Class FormGestion
     Friend WithEvents Button8 As Button
     Friend WithEvents Panel12 As Panel
     Friend WithEvents GroupBox12 As GroupBox
-    Friend WithEvents DgvListeConcessionnaire As DataGridView
+    Friend WithEvents DgvListeConcessionnaireBenef As DataGridView
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Panel10 As Panel
     Friend WithEvents GroupBox10 As GroupBox
@@ -2111,4 +2184,9 @@ Partial Class FormGestion
     Friend WithEvents Panel3 As Panel
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents DgvListeDefunts As DataGridView
+    Friend WithEvents DgvListeConcessionnairePersonneContact As DataGridView
+    Friend WithEvents DgvListeConcessionnaireConcess As DataGridView
+    Friend WithEvents ProgressBar As ProgressBar
+    Friend WithEvents Lchargementdonnee As Label
+    Friend WithEvents PictureBox2 As PictureBox
 End Class
