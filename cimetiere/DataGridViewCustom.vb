@@ -54,6 +54,18 @@ Public Class DataGridViewCustom
         End Set
     End Property
 
+    ' renvoie une DataRow, qui permet un index, par exemple ladgv.SelectedDataRow("empl_id")
+    ' -- Pas encore testé
+    Public ReadOnly Property SelectedDataRow As DataRow
+        Get
+            If Me.SelectedRows.Count > 0 Then
+                Return CType(Me.SelectedRow.DataBoundItem, DataRowView).Row
+            Else Return Nothing
+            End If
+            ' alternative :
+            ' Return Me.DataSource.Rows(Me.CurrentRow.Index)
+        End Get
+    End Property
 
     ' se base sur la valeur de la première colonne (supposée l'id), à employer avec précaution
     Public Property SelectedValue
@@ -107,6 +119,8 @@ Public Class DataGridViewCustom
              Or GetCellDisplayRectangle(0, ligne.Index, True).Height < GetCellDisplayRectangle(0, ligne.Index, False).Height Then
                 FirstDisplayedScrollingRowIndex = ligne.Index
             End If
+            ' alternative simple à tester :
+            ' Me.FirstDisplayedCell = Me.CurrentCell
         End If
     End Sub
 
