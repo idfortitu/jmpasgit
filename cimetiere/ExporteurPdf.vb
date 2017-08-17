@@ -3,12 +3,11 @@ Imports itextsharp.text
 Imports System.IO
 Public Class ExporteurPdf
 
-    'Dim DejaUt As Boolean = False
     Private _pdf As Document
     Private ReadOnly Property pdf As Document
         Get
             If _pdf Is Nothing Then
-                _pdf = New Document(PageSize.A4, 50, 40, 30, 40)
+                _pdf = New Document(PageSize.A4, 50, 40, 30, 20)
                 _pdfwrite = PdfWriter.GetInstance(_pdf, New FileStream(NomFic, FileMode.Create))
                 _pdf.Open()
             End If
@@ -80,12 +79,37 @@ Public Class ExporteurPdf
     End Function
 
 
-
     'à adapter pour datatables
 
-    Public Sub CreePdfInhum(Defunt As DataRow, VilleDefunt As DataRow, PaysDefunt As DataRow, Demandeur As DataRow, TypeCsnInhSollic As TTypeCsnInh, Optional datesign As Date? = Nothing, Optional RefEmplCsnExistante As String = "", Optional DefuntsDeja As DataTable = Nothing, Optional Concessionnaire As DataRow = Nothing, Optional VilleCsnr As DataRow = Nothing, Optional PaysCsnr As DataRow = Nothing, Optional Beneficiaires As DataTable = Nothing)         '(Optional LeForm As DemandeInhumation = Nothing)
-
+    Public Sub CreerPdfInhum(Optional Defunt As DataRow = Nothing, Optional Demandeur As DataRow = Nothing, Optional TypeCsnInhSollic As TTypeCsnInh = TTypeCsnInh.NonPrecise, Optional TypeInhCsnExis As TTypeInhCsnExistante = TTypeInhCsnExistante.NonPrecise, Optional DateSign As Date? = Nothing, Optional RefEmplCsnExistante As String = "", Optional DefuntsDeja As DataTable = Nothing, Optional Concessionnaire As DataRow = Nothing, Optional Beneficiaires As DataTable = Nothing)         '(Optional LeForm As DemandeInhumation = Nothing)
         ' valeurs par défaut pour les paramètres optionnels, pour ne pas devoir se demander si tel paramètre est présent ou pas
+        If Defunt Is Nothing Then
+            Defunt = Bdd.GetRowVide("defunts)")
+            Defunt("def_prenom") = ""
+            Defunt("def_nom") = ""
+            Defunt("def_adresse") = ""
+            Defunt("def_etat_civil") = TEtatCivil.NonPrecise
+            Defunt("def_lieu_naiss") = ""
+            Defunt("def_lieu_deces") = ""
+        End If
+        Dim VilleDefunt As DataRow
+        If Not IsDBNull(Defunt("locville_id")) AndAlso Defunt("locville_id") > 0 Then
+            VilleDefunt = Bdd.GetRow("t_loc_ville", Defunt("locville_id"))
+        Else
+            VilleDefunt = Bdd.GetRowVide("t_loc_ville")
+            VilleDefunt("locville_ville") = ""
+        End If
+        Dim PaysDefunt As DataRow
+        If Not IsDBNull(VilleDefunt("Pays_id")) Then
+            PaysDefunt = Bdd.GetRow("t_pays", VilleDefunt("Pays_id"))
+        Else
+            PaysDefunt = Bdd.GetRowVide("t_pays")
+            PaysDefunt("Pays_nom") = ""
+        End If
+        If Demandeur Is Nothing Then
+            Demandeur = Bdd.GetRowDmdrVide
+        End If
+
         If DefuntsDeja Is Nothing Then DefuntsDeja = Bdd.GetTableVide("defunts")
         If Concessionnaire Is Nothing Then
             Concessionnaire = Bdd.GetRowVide("concessionnaires")
@@ -95,15 +119,23 @@ Public Class ExporteurPdf
             Concessionnaire("csnr_tel") = ""
             Concessionnaire("csnr_adresse") = ""
         End If
-        If Beneficiaires Is Nothing Then Beneficiaires = Bdd.GetTableVide("beneficiaires")
-        If VilleCsnr Is Nothing Then
+        Dim VilleCsnr As DataRow
+        If Not IsDBNull(Concessionnaire("locville_id")) AndAlso Concessionnaire("locville_id") > 0 Then
+            VilleCsnr = Bdd.GetRow("t_loc_ville", Concessionnaire("locville_id"))
+        Else
             VilleCsnr = Bdd.GetRowVide("t_loc_ville")
             VilleCsnr("locville_ville") = ""
         End If
-        If PaysCsnr Is Nothing Then
+        Dim PaysCsnr As DataRow
+        If Not IsDBNull(VilleCsnr("Pays_id")) Then
+            PaysCsnr = Bdd.GetRow("t_pays", VilleCsnr("Pays_id"))
+        Else
             PaysCsnr = Bdd.GetRowVide("t_pays")
             PaysCsnr("Pays_nom") = ""
         End If
+
+        If Beneficiaires Is Nothing Then Beneficiaires = Bdd.GetTableVide("beneficiaires")
+
 
         Dim p As Paragraph
         Dim pdf = Me.pdf        ' économise l'accès à la propriété à chaque utilisation
@@ -127,7 +159,7 @@ Public Class ExporteurPdf
         pdf.Add(p)
 
         Dim t As New PdfPTable(1) With {.WidthPercentage = 18, .HorizontalAlignment = Rectangle.ALIGN_LEFT}
-        t.AddCell(New PdfPCell(New Phrase("Personne défunte :", fGras)))
+        t.AddCell(New PdfPCell(New Phrase("Personne défunte : ", fGras)))
         pdf.Add(t)
 
         pdf.Add(New Paragraph(Champ("Nom : ", Defunt("def_nom"), ".........................................................................................................................................................")))
@@ -164,8 +196,10 @@ Public Class ExporteurPdf
         p.Add(Champ("Je soussigné(e), ", Demandeur("dmdr_nomcomplet"), "............................................................"))
         p.Add(Champ(" –  Tél. : ", Demandeur("dmdr_tel"), "....................................................................................................."))
         pdf.Add(p)
+        ' la conversion explicite du CP en integer nullable est là pour que le If renvoie une valeur type Integer?, ce qui évite que le Nothing soit transformé en 0
+        pdf.Add(New Paragraph(ChampAdresse(Demandeur("dmdr_adresse"), Demandeur("dmdr_nomville"), If(IsDBNull(Demandeur("dmdr_cp")), Nothing, New Integer?(Convert.ToInt32(Demandeur("dmdr_cp")))), Demandeur("dmdr_nompays"))))
 
-        pdf.Add(New Paragraph(ChampAdresse(Demandeur("dmdr_adresse"), Demandeur("dmdr_nomville"), If(Not IsDBNull(Demandeur("dmdr_cp")), Convert.ToInt32(Demandeur("dmdr_cp")), Nothing), Demandeur("dmdr_nompays"))))
+
 
         pdf.Add(New Paragraph("Sollicite au nom de la famille :", fNormal))
         pdf.Add(New Paragraph(Cse(TypeCsnInhSollic <> TTypeCsnInh.NonPrecise AndAlso TypeCsnInhSollic <> TTypeCsnInh.CsnExistante AndAlso TypeCsnInhSollic <> TTypeCsnInh.Prolong) & " a) l'obtention d'un emplacement suivant :", fGrasS))
@@ -176,7 +210,7 @@ Public Class ExporteurPdf
         ' À FAIRE :  voir si les cases existantes - "urne" etc sont encore pertinentes
         p = New Paragraph
         p.Add(New Phrase(Cse(TypeCsnInhSollic = TTypeCsnInh.CsnExistante) & " b) l'inhumation en concession existante : ", fGrasS))
-        p.Add(New Phrase(CASE_VIDE & " urne - " & CASE_VIDE & " cercueil / " & CASE_VIDE & " pleine terre - " & CASE_VIDE & " caveau - " & CASE_VIDE & " cellule de columbarium - " & CASE_VIDE & " cavurne", fNormal))
+        p.Add(New Phrase(Cse(TypeInhCsnExis = TTypeInhCsnExistante.Urne) & " urne - " & Cse(TypeInhCsnExis = TTypeInhCsnExistante.Cercueil) & " cercueil / " & Cse(TypeInhCsnExis = TTypeInhCsnExistante.PleineTerre) & " pleine terre - " & Cse(TypeInhCsnExis = TTypeInhCsnExistante.Caveau) & " caveau - " & Cse(TypeInhCsnExis = TTypeInhCsnExistante.CelluleColombarium) & " cellule de columbarium - " & Cse(TypeInhCsnExis = TTypeInhCsnExistante.Cavurne) & " cavurne", fNormal))
         pdf.Add(p)
         'pdf.Add(New Paragraph(Cse(.ConcSollic = "existante") & " b) l'inhumation en concession existante : " & CASE_VIDE & " urne - " & CASE_VIDE & " cercueil / " & CASE_VIDE & " pleine terre - " & CASE_VIDE & " caveau - " & CASE_VIDE & " cellule de columbarium - " & CASE_VIDE & " cavurne", fGrasS))
         pdf.Add(New Paragraph(Champ("                          Référence de l'emplacement : ", RefEmplCsnExistante, ".............................................")))
@@ -192,7 +226,7 @@ Public Class ExporteurPdf
         pdf.Add(New Phrase("" & vbCrLf & "Je m'engage à respecter les dispositions de ce règlement.", fNormalS))
 
         pdf.Add(New Phrase(vbCrLf))
-        pdf.Add(New Phrase(Champ("Date : ", If(datesign IsNot Nothing, datesign.Value.ToString("dd/MM/yyyy"), Nothing))))
+        pdf.Add(New Phrase(Champ("Date : ", If(DateSign IsNot Nothing, DateSign.Value.ToString("dd/MM/yyyy"), Nothing))))
 
         pdf.Add(New Phrase("                                                                Signature de la personne mandatée", fNormal))
 
@@ -277,7 +311,7 @@ Public Class ExporteurPdf
             If i < nbrben Then ben = Beneficiaires.Rows(i)
             table.AddCell(New Phrase(If(i < nbrben, ben("ben_nom"), " "), fNormal))
             table.AddCell(New Phrase(If(i < nbrben, ben("ben_prenom"), " "), fNormal))
-            table.AddCell(New Phrase(If(i < nbrben AndAlso ben("ben_date_naiss") IsNot Nothing, CType(ben("ben_date_naiss"), Date).ToString("dd/MM/yyyy"), " "), fNormal))
+            table.AddCell(New Phrase(If(i < nbrben AndAlso Not IsDBNull(ben("ben_date_naiss")), CType(ben("ben_date_naiss"), Date).ToString("dd/MM/yyyy"), " "), fNormal))
             table.AddCell(New Phrase(If(i < nbrben, ben("ben_lien_parente"), " "), fNormal))
             i += 1
         End While
@@ -343,7 +377,32 @@ Public Class ExporteurPdf
     End Sub
 
 
-    Sub CreePdfReservation(Csnr As DataRow, VilleCsnr As DataRow, PaysCsnr As DataRow, ChoixTypeReservation As TTypeCsnInh, Beneficiaires As DataTable, Commentaire As String, datesign As Date?)
+    Sub CreePdfReservation(Optional Csnr As DataRow = Nothing, Optional ChoixTypeReservation As TTypeCsnInh = TTypeCsnInh.NonPrecise, Optional Beneficiaires As DataTable = Nothing, Optional Commentaire As String = "", Optional datesign As Date? = Nothing)
+        If Csnr Is Nothing Then
+            Csnr = Bdd.GetRowVide("concessionnaires")
+            ' champs not null
+            Csnr("csnr_nom") = ""
+            Csnr("csnr_prenom") = ""
+            Csnr("csnr_adresse") = ""
+            Csnr("csnr_tel") = ""
+        End If
+        Dim VilleCsnr As DataRow
+        If Not IsDBNull(Csnr("locville_id")) AndAlso Csnr("locville_id") > 0 Then
+            VilleCsnr = Bdd.GetRow("t_loc_ville", "locville_id", Csnr("locville_id"))
+        Else
+            VilleCsnr = Bdd.GetRowVide("t_loc_ville")
+            VilleCsnr("locville_ville") = ""
+        End If
+        Dim PaysCsnr As DataRow
+        If Not IsDBNull(VilleCsnr("Pays_id")) AndAlso VilleCsnr("Pays_id") > 0 Then
+            PaysCsnr = Bdd.GetRow("t_pays", "Pays_id", VilleCsnr("Pays_id"))
+        Else
+            PaysCsnr = Bdd.GetRowVide("t_pays")
+            PaysCsnr("Pays_nom") = ""
+        End If
+
+        If Beneficiaires Is Nothing Then Beneficiaires = Bdd.GetTableVide("beneficiaires")
+
 
         Dim pdf = Me.pdf
 
@@ -359,7 +418,7 @@ Public Class ExporteurPdf
                     "favorable et paiement, une confirmation écrite concernant la réservation de la concession sera délivrée.", fNormal))
 
         ' "Identité du demandeur" : ici, on utilise les infos du concessionnaire, ça pourrait changer par la suite
-        FaireTableauIdentiteDuDemandeur(Uzineagaz.NomComplet(Csnr("csnr_prenom"), Csnr("csnr_nom")), Csnr("csnr_date_naiss"), Uzineagaz.AdresseComplete(Csnr("csnr_adresse"), VilleCsnr("locville_cp"), VilleCsnr("locville_ville"), PaysCsnr("Pays_nom")), Csnr("csnr_tel"), "Identité du demandeur :      (sauf mention contraire, le demandeur sera le concessionnaire)")
+        FaireTableauIdentiteDuDemandeur(Uzineagaz.NomComplet(Csnr("csnr_prenom"), Csnr("csnr_nom")), If(Not IsDBNull(Csnr("csnr_date_naiss")), Csnr("csnr_date_naiss"), Nothing), Uzineagaz.AdresseComplete(Csnr("csnr_adresse"), if(not IsDBNull(VilleCsnr("locville_cp")),VilleCsnr("locville_cp"),nothing), VilleCsnr("locville_ville"), PaysCsnr("Pays_nom")), Csnr("csnr_tel"), "Identité du demandeur :      (sauf mention contraire, le demandeur sera le concessionnaire)")
 
         InsererTableauTypeEmplacement(ChoixTypeReservation)
 

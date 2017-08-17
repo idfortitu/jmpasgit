@@ -5,13 +5,13 @@
     ' -1 si aucune ville n'est choisie, auquel cas le locville existe peut-être en tant que ville vide + pays sélectionné, ou pas et dans ce cas il faut le créer
     Public ReadOnly Property LocVilleId As Integer
         Get
-            Return CbLocVille.SelectedValue
+            Return If(CbLocVille.SelectedValue Is Nothing, -1, CbLocVille.SelectedValue)
         End Get
     End Property
 
     Public ReadOnly Property PaysId As Integer
         Get
-            Return CbPays.SelectedValue
+            Return If(CbPays.SelectedValue Is Nothing, -1, CbPays.SelectedValue)
         End Get
     End Property
 

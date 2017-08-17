@@ -188,3 +188,13 @@ Public Enum TEtatCivil As Integer
     Divorce = 4
     Enfant = 5
 End Enum
+
+Public Enum TTypeInhCsnExistante
+    NonPrecise
+    Urne
+    Cercueil
+    PleineTerre
+    Caveau
+    CelluleColombarium
+    Cavurne
+End Enum

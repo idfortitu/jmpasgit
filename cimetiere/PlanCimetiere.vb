@@ -1,55 +1,147 @@
-﻿Public Class PlanCimetiere
-
-    Public Event EmplClicked(sender As PlanCimetiere, e As PlanCimEventArgs)
-    Public Event SelectionChanged(sender As Object, e As PlanCimEventArgs)
-    Public Event EmplDoubleClicked(sender As PlanCimetiere, e As PlanCimEventArgs)
-    ' Public Font As New Font("Courier New", 16)        ' existe déjà dans la classe Control
+﻿Imports System.Runtime.InteropServices
 
 
-    ' à changer pour la vraie classe emplacement utilisée par le prog
-    Public Class emplacementtresclasse
-        Public Id As Integer
-        Public Coords As Byte()
-        Public reference As String
-        Public nbplaces As Integer?
-        Public nboccupants As Integer
-        Public estloué As Boolean
+Public Class PlanCimetiere
+
+    ' charger les emplacements :
+    '  Dim TblEmpls = Bdd.GetTable("emplacements")
+    '  PlanCimetiere1.SetEmplacements(TblEmpls)
+    ' (se base sur la référence de l'emplacement pour déterminer à quelle parcelle il appartient, par exemple "A20100" = parcelle A2)
+
+    ' changer la parcelle affichée :
+    '  PlanCimetiere1.NomParcelleAffichee="A2"
+
+    ' récupérer la row de l'emplacement sélectionné :
+    '  Dim EmplacementSelectionne As DataRow = PlanCimetiere1.EmplSelect
+
+    ' id de l'empl sélectionné : PlanCimetiere1.IdEmplSelect (pas testé à fond)
+
+    ' évènements :
+    ' un emplacement a été cliqué :
+    ' Sub PlanCimetiere1_EmplClicked(sender as PlanCimetiere, e As PlanCimEventArgs) Handles PlanCimetiere1.EmplClicked
+    '   e.Emplacement donne la datarow de l'emplacement concerné
+    ' End Sub
+    ' double clic sur emplacement :
+    '  Sub PlanCimetiere1_EmplDoubleClicked(sender as PlanCimetiere, e As PlanCimEventArgs) Handles PlanCimetiere1.EmplDoubleClicked
+    ' sélection d'un emplacement :
+    '  Sub PlanCimetiere1_SelectionChanged(sender as PlanCimetiere, e As PlanCimEventArgs) Handles PlanCimetiere1.SelectionChanged
+
+
+
+    Private Class InfosParcelle
+        Public NomFicImg As String
+        Public IdsEmpls As New List(Of Integer)
+        Public CoordsX As New List(Of List(Of Integer))
+        Public CoordsY As New List(Of List(Of Integer))
+        Public RefsEmpls As New List(Of String)
+        Public Emplacements As New List(Of DataRow)     ' on tient aussi une liste des datarows représentant les emplacements, pour les transmettre à l'appelant si il en a besoin
+        Private CacheBgImg As Image = Nothing
+        Public ReadOnly Property BgImage As Image
+            Get
+                If CacheBgImg Is Nothing Then
+                    CacheBgImg = Image.FromFile(Me.NomFicImg)
+                End If
+                Return CacheBgImg
+            End Get
+        End Property
+
+
     End Class
 
-    Public CouleurVide As Color = Color.FromArgb(60, Color.White)
-    Public CouleurPartiellementPlein As Color = Color.FromArgb(100, Color.MediumPurple)
-    Public CouleurPlein As Color = Color.FromArgb(100, Color.Purple)
-    Public CouleurBordureLoué As Color = Color.FromArgb(255, Color.Yellow)
-    Public CouleurBordurePasLoué As Color = Color.Transparent
+    ' - chargement : datatable emplacements
+    ' - si coords absentes, ne pas montrer, peut-être griser dans la dgv associée ??
+    ' - images des parcelles prédéfinies, peut-être propriétés publique (mais valeur par défaut)
+    ' - fonctions publiques pour changer de parcelle (ce qui entraîne changement d'image et repositionnement des emplacements)
+    ' - évènements publics pour sélectionchangée, clic & double clic sur emplacement
+    ' - fonction publique pour recharger les données (pas les coords qui ne devraient pas changer), à défaut de faire un contrôle databound
 
 
+    Const COORDS_ECHELLE_BASE = 2000       ' les coordonnées des emplacements sont interprétées comme si l'image faisait 2000x2000, puis sont mises à l'échelle de la taille du contrôle
 
-    'Public :
-    ' Sub SetListeEmplacements(empls as List(Of emplacementtresclasse))
-    ' ce n'est pas un data binding, les changements faits sur la liste ne changeront pas l'état du plan (ceux sur les emplacements oui puisque les objets restent les mêmes, mais sans garantie du résultat)
+    Private InfosParcelles As Dictionary(Of String, InfosParcelle) = New Dictionary(Of String, InfosParcelle) From {
+        {"A1", New InfosParcelle With {.NomFicImg = "planA1.JPG"}},
+        {"A2", New InfosParcelle With {.NomFicImg = "planA2.JPG"}},
+        {"A3", New InfosParcelle With {.NomFicImg = "planA3.JPG"}}
+     }
 
-    ' Ne gère pas spécialement les emplacements sans id, ne prévoit pas qu'un emplacement puisse changer d'id (ni de n'importe quoi en fait)
 
-    Private Const COORDS_ECHELLE_BASE = 2000       ' les coordonnées des emplacements sont interprétées comme si l'image faisait 2000x2000, puis sont mises à l'échelle
+    Private _nomParcelleAffichee As String = "A1"
+    Public Property NomParcelleAffichee As String
+        Get
+            Return _nomParcelleAffichee
+        End Get
+        Set(value As String)
+            If _nomParcelleAffichee = value Then Exit Property
+            If Not InfosParcelles.ContainsKey(value) Then Throw New ArgumentException("Nom de parcelle non reconnu")
+            Me._nomParcelleAffichee = value
+            Me.ParcelleAffichee = InfosParcelles(value)
+            Me.EmplSelect = Nothing
+            ChangerImage(ParcelleAffichee.BgImage)
+            Me.Invalidate()
+        End Set
+    End Property
 
-    ' le plan peut changer de taille pour garder les proportions de l'image, mais il doit retenir la taille originale comme taille maximum
-    Private LargeurOrig As Integer
-    Private HauteurOrig As Integer
-    ' indique si la taille originale a déjà été enregistrée, déjà pour ne pas le faire plusieurs fois, ensuite pour ne pas changer le bg si ce n'est pas encore fait
-    Private TailleAEtéDéfinie As Boolean = False
+    Private ParcelleAffichee As InfosParcelle = InfosParcelles(_nomParcelleAffichee)
 
-    Private TailleTexteEmplacement As Size    ' utilisé pour centrer le texte sur le polygone de l'emplacement
-    Private FontVoulue As Font  ' la police réellement affichée sera mise à l'échelle et se base (comme pour les coordonnées des emplacements) sur des dimensions de 2000x2000
+    Private Property _emplSelect As DataRow
+    Public Property EmplSelect As DataRow
+        Get
+            Return _emplSelect
+        End Get
+        Set(value As DataRow)
+            If value IsNot _emplSelect Then
+                _emplSelect = value
+                Me.Invalidate()
+            End If
+        End Set
+    End Property
 
-    Public Sub New()
-        InitializeComponent() ' This call is required by the designer.
-        CalculerLargeurTexteEmplacement()
+    Public Property IdEmplSelect As Integer
+        Get
+            Return If(_emplSelect IsNot Nothing, EmplSelect("empl_id"), -1)
+        End Get
+        Set(value As Integer)
+            ' trouve l'index du ctrl demandé dans la liste
+            Dim RowEmplASelect = (From e In ParcelleAffichee.Emplacements Where e("empl_id") = value).FirstOrDefault
+            If RowEmplASelect IsNot Nothing Then
+                EmplSelect = RowEmplASelect
+            Else
+                EmplSelect = Nothing
+            End If
+        End Set
+    End Property
+
+    Public Class PlanCimEventArgs
+        Inherits EventArgs
+        Public Emplacement As DataRow
+        Sub New(empl As DataRow)
+            Me.Emplacement = empl
+        End Sub
+    End Class
+
+
+    Public Event EmplClicked(sender As PlanCimetiere, e As PlanCimEventArgs)
+
+    Sub Me_Clicked(sender As Object, e As MouseEventArgs) Handles Me.Click
+        Dim EmplClique As DataRow = EmplacementA(e.Location)
+        If EmplClique IsNot Nothing Then RaiseEvent EmplClicked(Me, New PlanCimEventArgs(EmplClique))
+        If EmplClique IsNot EmplSelect Then
+            Me.EmplSelect = EmplClique
+            RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(EmplClique))
+        End If
     End Sub
 
-    Private Sub CalculerLargeurTexteEmplacement()
-        TailleTexteEmplacement = TextRenderer.MeasureText("A3000", Me.Font)
+    Public Event EmplDoubleClicked(sender As PlanCimetiere, e As PlanCimEventArgs)
+
+    Private Sub Me_DoubleClicked(sender As PlanCimetiere, e As MouseEventArgs) Handles Me.DoubleClick
+        Dim EmplClique As DataRow = EmplacementA(e.Location)
+        If EmplClique IsNot Nothing Then RaiseEvent EmplDoubleClicked(Me, New PlanCimEventArgs(EmplClique))     ' le SelectionChanged est déjà appelé par l'evt click qui se déclenche aussi
     End Sub
 
+    Public Event SelectionChanged(sender As Object, e As PlanCimEventArgs)
+
+    ' mettre la font dans le designer ne marche pas, un code extérieur la remet à 5.8
+    ' on peut la changer après ou pendant le Load
     Public Overrides Property Font As Font
         Get
             Return MyBase.Font
@@ -60,8 +152,86 @@
         End Set
     End Property
 
-    Private Sub _changerImage(NouvelleImage As Image)
-        If TailleAEtéDéfinie AndAlso NouvelleImage IsNot MyBase.BackgroundImage Then
+    Public CouleurVide As Color = Color.FromArgb(60, Color.White)
+    Public CouleurPartiellementPlein As Color = Color.FromArgb(100, Color.MediumPurple)
+    Public CouleurPlein As Color = Color.FromArgb(100, Color.Purple)
+    Public CouleurBordureLoué As Color = Color.FromArgb(255, Color.Yellow)
+    Public CouleurBordurePasLoué As Color = Color.Transparent
+    Public CouleurTexteReference As Color = Color.White
+
+    Private LargeurOrig As Integer
+    Private HauteurOrig As Integer
+
+
+    Private TailleTexteEmplacement As Size    ' utilisé en interne pour centrer le texte sur le polygone de l'emplacement, calculé selon la font
+    Private TailleAEteDefinie As Boolean = False     ' interne, indique si la taille originale a déjà été enregistrée, déjà pour ne pas le faire plusieurs fois, ensuite pour ne pas changer le bg si ce n'est pas encore fait
+
+    ' lit les infos des emplacements, les divise en parcelles, sépare leurs données en listes parallèles pour accélérer les opérations en série
+    Public Sub SetEmplacements(empls As DataTable)
+        If Not DesignMode Then      ' DesignMode ne foncionne sans doute pas avec les contrôles de toute façon
+            For Each p In InfosParcelles.Values
+                p.IdsEmpls.Clear()
+                p.CoordsX.Clear()
+                p.CoordsY.Clear()
+                p.RefsEmpls.Clear()
+                p.Emplacements.Clear()
+            Next
+
+            Dim rapport_l As Single = COORDS_ECHELLE_BASE / Me.Size.Width
+            Dim rapport_h As Single = COORDS_ECHELLE_BASE / Me.Size.Height
+
+            For Each empl As DataRow In empls.Rows
+                Dim RefEmpl As String = empl("empl_reference")
+                'If empl("empl_reference") = "A200" Then
+                'End If
+
+                If RefEmpl.Count < 2 Then Continue For      ' ignorera les emplacements dont la parcelle n'est pas reconnue (d'après les deux premiers caractères de la référence)
+                Dim NomParcelle = RefEmpl.Substring(0, 2)
+                If Not InfosParcelles.ContainsKey(NomParcelle) Then Continue For
+
+                Dim crds = empl("empl_coords")
+                If IsDBNull(crds) Then Continue For      ' ignorera aussi les emplacements qui n'ont pas de coordonnées
+                Dim CoordsBinaire As Byte() = empl("empl_coords")
+
+                Dim CetteParcelle = InfosParcelles(NomParcelle)
+
+
+                ' traduit les coordonnées binaires en deux listes d'entiers (coords x et y)
+                Dim NbrPtsCetEmpl As Integer = CoordsBinaire.Count \ 4
+                Dim i_coords As Integer = 0
+                Dim CoordsXCePoint As New List(Of Integer)
+                Dim CoordsYCePoint As New List(Of Integer)
+                While i_coords < CType(empl("empl_coords"), Byte()).Count
+                    Dim tmpx As Integer = CoordsBinaire(i_coords)
+                    i_coords += 1
+                    tmpx += CoordsBinaire(i_coords) * &H100              ' cast ? memorystream ?
+                    i_coords += 1
+                    tmpx /= rapport_l
+
+                    Dim tmpy As Integer = CoordsBinaire(i_coords)
+                    i_coords += 1
+                    tmpy += CoordsBinaire(i_coords) * &H100
+                    i_coords += 1
+                    tmpy /= rapport_h
+
+                    CoordsXCePoint.Add(tmpx)
+                    CoordsYCePoint.Add(tmpy)
+                End While
+
+                CetteParcelle.CoordsX.Add(CoordsXCePoint)
+                CetteParcelle.CoordsY.Add(CoordsYCePoint)
+
+                CetteParcelle.IdsEmpls.Add(empl("empl_id"))
+                CetteParcelle.RefsEmpls.Add(RefEmpl)
+                CetteParcelle.Emplacements.Add(empl)
+            Next
+        End If
+        Me.Invalidate()
+    End Sub
+
+
+    Private Sub ChangerImage(NouvelleImage As Image)
+        If TailleAEteDefinie AndAlso NouvelleImage IsNot MyBase.BackgroundImage Then
             If NouvelleImage IsNot Nothing Then
                 ' ajuste les dimensions du contrôle pour respecter le ratio de la nouvelle image
                 Dim nvl = NouvelleImage.Width
@@ -69,7 +239,8 @@
                 Dim ratiol = nvl / LargeurOrig
                 Dim ratioh = nvh / HauteurOrig
                 'If ratiol > ratioh Then ratioh = ratiol Else ratiol = ratioh
-                Dim ratio = If(ratiol > ratioh, ratiol, ratioh)
+                'Dim ratio = If(ratiol > ratioh, ratiol, ratioh)
+                Dim ratio = Math.Max(ratiol, ratioh)
                 nvl = nvl / ratio 'l
                 nvh = nvh / ratio 'h
                 Me.Height = nvh
@@ -79,176 +250,87 @@
         End If
     End Sub
 
-    ' Change l'image, mais garde les emplacements en les adaptant juste aux nouvelles dimensions (ce qui ne devrait généralement pas servir, les anciens emplacements ne collant probablement pas avec la nouvelle image)
-    Public Sub ChangerImage(NvImg As Image)
-        _changerImage(NvImg)
-        MajListeCoordonnées()
-    End Sub
-    ' Accepte une nouvelle liste d'emplacements (cas le plus logique)
-    Public Sub ChangerImage(NvImg As Image, NvListeEmpls As IEnumerable(Of emplacementtresclasse))
-        _changerImage(NvImg)
-        SetEmplacements(NvListeEmpls)
-    End Sub
-    ' retire les empls
-    Public Sub ChangerImage(NvImage As Image, Optional ViderEmpls As Boolean = True)
-        _changerImage(NvImage)
-        If ViderEmpls Then ViderEmplacements()      ' ça devrait toujours être le cas, sinon autant ne pas mettre le paramètre
-    End Sub
-
-    ' Overloads pour accepter un nom de fichier plutôt qu'une Image
-    Public Sub ChangerImage(NvImg As String)
-        ChangerImage(Image.FromFile(NvImg))
-    End Sub
-    Public Sub ChangerImage(NvImg As String, NvListeEmpls As IEnumerable(Of emplacementtresclasse))
-        ChangerImage(Image.FromFile(NvImg), NvListeEmpls)
-    End Sub
-    Public Sub ChangerImage(NvImg As String, Optional ViderEmpls As Boolean = True)
-        ChangerImage(Image.FromFile(NvImg), ViderEmpls)
-    End Sub
-
-
-
-
-    Private PolygonesEmplacements As New List(Of Point())
-    Private ListeEmplacements As New List(Of emplacementtresclasse)
 
     Private ttip As New TooltipL With {.AutoPopDelay = 1000000, .InitialDelay = 0, .ReshowDelay = 500, .ShowAlways = True}
 
-    Private Property _emplSelect As emplacementtresclasse
 
-    Public Property EmplSelect As emplacementtresclasse
-        Get
-            Return _emplSelect
-        End Get
-        Set(value As emplacementtresclasse)
-            If value IsNot _emplSelect Then
-                _emplSelect = value
-                Me.Invalidate()
-            End If
-        End Set
-    End Property
 
-    Public Property IdEmplSelect As Integer
-        Get
-            Return If(_emplSelect IsNot Nothing, EmplSelect.Id, -1)
-        End Get
-        Set(value As Integer)
-            ' cherche l'index du ctrl demandé dans la liste
-            Dim i As Integer = 0
-            While i < ListeEmplacements.Count AndAlso ListeEmplacements(i).Id <> value
-                i += 1
-            End While
-            If i < ListeEmplacements.Count Then     ' trouvé ?
-                EmplSelect = ListeEmplacements(i)
-            Else
-                ' si l'id demandé n'est pas présent, on ne sélectionne rien
-                EmplSelect = Nothing
-            End If
-            'End If
-        End Set
-    End Property
+    Sub Me_Load() Handles Me.Load
+        Me.BackgroundImage = ParcelleAffichee.BgImage
+        CalculerLargeurTexteEmplacement()
+    End Sub
+
+
+    Private Sub CalculerLargeurTexteEmplacement()
+        TailleTexteEmplacement = TextRenderer.MeasureText("A3000", Me.Font)
+    End Sub
+
+
 
     ' il faut un évènement qui arrive une fois que les dimensions sont définies et qui ne se déclenchera plus après, ce qui n'est pas si évident ;
-    ' ne conviennent pas : Load, New (dimensions pas encore définies), ParentChanged (se fait avant redimensionnement de Windows), Layout, SizeChanged (se redéclenchent quand le plan change sa taille pour garder les proportions de l'image)
+    ' ne conviennent pas : Load, New (dimensions zéro), ParentChanged (se fait avant redimensionnement de Windows), Layout, SizeChanged (se redéclenchent quand le plan change sa taille pour garder les proportions de l'image)
+    ' même comme ça, il reste qu'un changement de Location va redéfinir les dimensions "originales" sur celles réduites pour afficher l'image ; tant pis
     Private Sub NoterDimensionsOriginales() Handles Me.LocationChanged
         Me.LargeurOrig = Me.Width
         Me.HauteurOrig = Me.Height
-        TailleAEtéDéfinie = True
+        TailleAEteDefinie = True
     End Sub
 
-    Public Class PlanCimEventArgs
-        Inherits EventArgs
-        Public Emplacement As emplacementtresclasse
-        Sub New(empl As emplacementtresclasse)
-            Me.Emplacement = empl
-        End Sub
-    End Class
 
-    Sub Me_Click(sender As Object, e As MouseEventArgs) Handles Me.Click
-        Dim EmplCliqué As emplacementtresclasse = EmplacementA(e.Location)
-        If EmplCliqué IsNot Nothing Then RaiseEvent EmplClicked(Me, New PlanCimEventArgs(EmplCliqué))
-        If EmplCliqué IsNot EmplSelect Then
-            EmplSelect = EmplCliqué
-            RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(EmplCliqué))
-        End If
-    End Sub
-
-    Private Sub Me_DoubleClick(sender As PlanCimetiere, e As MouseEventArgs) Handles Me.DoubleClick
-        Dim EmplCliqué As emplacementtresclasse = EmplacementA(e.Location)
-        If EmplCliqué IsNot Nothing Then RaiseEvent EmplDoubleClicked(Me, New PlanCimEventArgs(EmplCliqué))
-    End Sub
-
-    ' Renvoie l'emplacement qui est situé au point indiqué (celui d'un clic de souris par exemple)
-    Private Function EmplacementA(p As Point) As emplacementtresclasse
-        Dim LEmpl As emplacementtresclasse = Nothing
-        For i = 0 To PolygonesEmplacements.Count - 1
-            Dim Path = New Drawing2D.GraphicsPath
-            Path.AddPolygon(PolygonesEmplacements(i))
-            If Path.IsVisible(p) Then
-                LEmpl = ListeEmplacements(i)
-                Exit For
-            End If
-        Next
-        'End If
-        Return LEmpl
+    Private Function EmplacementA(p As Point) As DataRow
+        Dim lempl As DataRow = Nothing
+        With ParcelleAffichee
+            For i = 0 To .CoordsX.Count - 1
+                Dim NbCoordsCetEmpl As Integer = .CoordsX(i).Count
+                Dim poly(NbCoordsCetEmpl) As PointF
+                For j = 0 To NbCoordsCetEmpl - 1
+                    poly(j) = New Point(.CoordsX(i)(j), .CoordsY(i)(j))
+                Next
+                Dim path = New System.Drawing.Drawing2D.GraphicsPath
+                path.AddPolygon(poly)
+                If path.IsVisible(p) Then
+                    lempl = .Emplacements(i)
+                    Exit For
+                End If
+            Next
+        End With
+        Return lempl
     End Function
 
-    Public Sub ViderEmplacements()
-        ListeEmplacements.Clear()
-        PolygonesEmplacements.Clear()
-        EmplSelect = Nothing
-        'Me.Invalidate()    ' déjà déclenché par EmplSelect
-    End Sub
 
-    Public Sub SetEmplacements(empls As IEnumerable(Of emplacementtresclasse))
-        ListeEmplacements.Clear()
-        For Each empl In empls  ' tri : le plan ne prend que les emplacements qui ont des coordonnés
-            If empl.Coords IsNot Nothing Then ListeEmplacements.Add(empl)
-        Next
-        MajListeCoordonnées()
-        EmplSelect = Nothing
-        'Me.Invalidate()    ' déjà déclenché par EmplSelect
-    End Sub
 
-    ' à faire éventuellement : mettre les coordonnées à jour au resize
 
-    ' Met à jour la liste PolygonesEmplacements d'après le contenu de ListeEmplacements
-    ' décortique les coordonnées, qui sont enregistrées sous la forme d'une suite d'octets, chaque groupe de 4 octets représentant un point : les 2 premiers octets pour la coordonnée X et les 2 autres pour Y (en little endian)
-    ' ça pourrait être fait au moment de l'appel de OnPaint ; l'avantage serait que les changements sur les coordonnées des emplacements
-    ' seraient visibles au lieu de rester une liste figée (mais ces changements ne devraient pas arriver), l'inconvénient serait un dessin
-    ' sans doute un peu plus long à faire
-    Private Sub MajListeCoordonnées()
-        Dim rapport_l As Single = COORDS_ECHELLE_BASE / Me.Size.Width
-        Dim rapport_h As Single = COORDS_ECHELLE_BASE / Me.Size.Height
-        PolygonesEmplacements.Clear()
 
-        For Each empl In ListeEmplacements
-            Dim CoordsBinaireCetEmpl As Byte() = empl.Coords
+    Protected Overrides Sub OnPaint(pe As PaintEventArgs)
+        MyBase.OnPaint(pe)
+        Dim InfosParcelle = InfosParcelles(NomParcelleAffichee)
 
-            Dim i_coords As Integer = 0
-            Dim NombrePointsCetEmpl As Integer = CoordsBinaireCetEmpl.Count \ 4
-            Dim PolygoneCetEmpl(NombrePointsCetEmpl - 1) As Point
-            Dim i_poly As Integer = 0
-                While i_coords < empl.Coords.Count
-                Dim tmpx As Single = empl.Coords(i_coords)  ' integer ?
-                i_coords += 1
-                tmpx += empl.Coords(i_coords) * &H100              ' cast ? memorystream ? 
-                i_coords += 1
-                tmpx /= rapport_l
+        Using brosse As New System.Drawing.SolidBrush(Color.FromArgb(100, Color.Purple)),
+              brosseselect As New System.Drawing.SolidBrush(Color.FromArgb(180, Color.Purple)),
+              Stylo As New SolidBrush(CouleurTexteReference)
 
-                Dim tmpy As Single = empl.Coords(i_coords)
-                i_coords += 1
-                tmpy += empl.Coords(i_coords) * &H100
-                i_coords += 1
-                tmpy /= rapport_h
-
-                PolygoneCetEmpl(i_poly) = New Point(tmpx, tmpy)
-                i_poly += 1
-                End While
-                PolygonesEmplacements.Add(PolygoneCetEmpl)
-        Next
-        'End If
-        Me.Invalidate()
+            Dim graph = pe.Graphics
+            For i = 0 To InfosParcelle.CoordsX.Count - 1
+                With InfosParcelle
+                    Dim CoordsXCetEmpl = .CoordsX(i)
+                    Dim CoordsYCetEmpl = .CoordsY(i)
+                    Dim poly(CoordsXCetEmpl.Count - 1) As Point
+                    For j = 0 To CoordsXCetEmpl.Count - 1
+                        poly(j) = New Point(CoordsXCetEmpl(j), CoordsYCetEmpl(j))
+                    Next
+                    If .Emplacements(i) Is _emplSelect Then
+                        graph.FillPolygon(brosseselect, poly)
+                    Else
+                        graph.FillPolygon(brosse, poly)
+                    End If
+                    ' écrit la référence
+                    Dim MilieuZoneEmpl = Milieu(poly)
+                    Dim CoinHGTxt = New Point(MilieuZoneEmpl.X - TailleTexteEmplacement.Width / 2, MilieuZoneEmpl.Y - TailleTexteEmplacement.Height / 2)
+                    graph.DrawString(.Emplacements(i)("empl_reference"), Me.Font, Stylo, CoinHGTxt)
+                End With
+            Next
+            'End Using
+        End Using
     End Sub
 
     Private Function Milieu(poly As Point()) As Point    ' ou plutôt, centre du rectangle orthogonal englobant le polygone
@@ -260,69 +342,23 @@
             If p.X < minX Then minX = p.X
             If p.X > maxX Then maxX = p.X
             If p.Y < minY Then minY = p.Y
-            If p.Y > maxX Then maxY = p.Y
+            If p.Y > maxY Then maxY = p.Y
         Next
         Return New Point((maxX + minX) \ 2, (maxY + minY) \ 2)
     End Function
 
-    Protected Overrides Sub OnPaint(pe As PaintEventArgs)
-        MyBase.OnPaint(pe)
-        ' Ici, varier le dessin des emplacements en fonction de leur type, location...
-        Using BrosseEmplVide = New SolidBrush(CouleurVide),
-              BrosseEmplVideSélect = New SolidBrush(Color.FromArgb(If(CouleurVide.A * 2 > 255, 255, CouleurVide.A * 2), CouleurVide)),        ' tester avec couleurvide.a*2 > 255
-              BrosseEmplPartiellementPlein = New SolidBrush(CouleurPartiellementPlein),
-              BrosseEmplPartiellementPleinSélect = New SolidBrush(Color.FromArgb(If(CouleurPartiellementPlein.A * 2 > 255, 255, CouleurPartiellementPlein.A * 2), CouleurPartiellementPlein)),
-              BrosseEmplPlein = New SolidBrush(CouleurPlein),
-              BrosseEmplPleinSélect = New SolidBrush(Color.FromArgb(If(CouleurPlein.A * 2 > 255, 255, CouleurPlein.A * 2), CouleurPlein)),
-              PenContourLoué = New Pen(New SolidBrush(CouleurBordureLoué)) With {.Width = 1},
-              PenContourLouéSélect As New Pen(New SolidBrush(Color.FromArgb(If(CouleurBordureLoué.A * 2 > 255, 255, CouleurBordureLoué.A * 2), CouleurBordureLoué))),
-              PenContourPasLoué = New Pen(New SolidBrush(CouleurBordurePasLoué)) With {.Width = 1},
-              PenContourPasLouéSélect = PenContourPasLoué,
-              Stylo As New SolidBrush(Color.White)
 
-            Dim Graph = pe.Graphics
-            Dim BrosseRemplissage As SolidBrush
-            Dim PenContour As Pen
 
-            Dim brosses = {BrosseEmplVide, BrosseEmplVideSélect, BrosseEmplPartiellementPlein, BrosseEmplPartiellementPleinSélect, BrosseEmplPlein, BrosseEmplPleinSélect}
-            Dim pens = {PenContourLoué, PenContourLouéSélect, PenContourPasLoué, PenContourPasLouéSélect}
-            ' contour
-            For i = 0 To ListeEmplacements.Count - 1
-                Dim empl = ListeEmplacements(i)
+    '''''  test
+    ' à faire éventuellement : mettre à jour la position et forme des contrôles emplacements au resize
 
-                Dim n As Integer
-
-                If empl.estloué Then n = Array.IndexOf(pens, PenContourLoué) Else n = Array.IndexOf(pens, PenContourPasLoué)
-                If empl Is _emplSelect Then n += 1
-                PenContour = pens(n)
-
-                If empl.nboccupants = 0 Then
-                    n = Array.IndexOf(brosses, BrosseEmplVide)
-                ElseIf Not empl.nbplaces.HasValue OrElse empl.nbplaces > empl.nboccupants Then
-                    n = Array.IndexOf(brosses, BrosseEmplPartiellementPlein)
-                Else
-                    n = Array.IndexOf(brosses, BrosseEmplPlein)
-                End If
-                If empl Is _emplSelect Then n += 1
-                BrosseRemplissage = brosses(n)
-
-                Graph.FillPolygon(BrosseRemplissage, PolygonesEmplacements(i))
-                Graph.DrawPolygon(PenContour, PolygonesEmplacements(i))
-
-                ' écrit la référence
-                Dim MilieuZoneEmpl = Milieu(PolygonesEmplacements(i))
-                Dim CoinHGTxt = New Point(MilieuZoneEmpl.X - TailleTexteEmplacement.Width / 2, MilieuZoneEmpl.Y - TailleTexteEmplacement.Height / 2)
-                Graph.DrawString(ListeEmplacements(i).reference, Me.Font, Stylo, CoinHGTxt)
-            Next
-        End Using
-    End Sub
 
     ' Tooltip personnalisé d'une taille de police plus grande
     Private Class TooltipL
+
         Inherits ToolTip
 
         Public myfont = New Font(SystemFonts.DefaultFont.FontFamily, 12)
-
         Sub New()
             MyBase.New()
             Me.OwnerDraw = True
@@ -336,14 +372,16 @@
             s.Height += 4
             e.ToolTipSize = s
         End Sub
-
         Private Sub OnDraw(ByVal sender As Object, ByVal e As DrawToolTipEventArgs) Handles Me.Draw
-            Dim newe = New DrawToolTipEventArgs(e.Graphics, e.AssociatedWindow, e.AssociatedControl, e.Bounds, e.ToolTipText, Me.BackColor, Me.ForeColor, myfont)
+            Dim newe = New DrawToolTipEventArgs(e.Graphics, e.AssociatedWindow, e.AssociatedControl, e.Bounds, e.ToolTipText, Me.BackColor, Me.ForeColor,
+                                            myfont)
             newe.DrawBackground()
             newe.DrawBorder()
             newe.DrawText(TextFormatFlags.LeftAndRightPadding)
         End Sub
 
     End Class
+
+
 
 End Class

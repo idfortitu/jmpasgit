@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormDemandeInhumation
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,18 +20,25 @@ Partial Class FormDemandeInhumation
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TbNumAnnee = New cimetiere.TextBoxInt()
+        Me.TbDefNumLh = New cimetiere.TextBoxInt()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TbDefLieuDeces = New System.Windows.Forms.TextBox()
+        Me.TbDefDateDeces = New cimetiere.TextBoxDate()
+        Me.TbDefDateNaiss = New cimetiere.TextBoxDate()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.CtrlDefEtatCiv = New cimetiere.CtrlEtatCivil()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.CtrlDefLocvillepays = New cimetiere.CtrlLocVillePays()
         Me.TbDefLieuNaiss = New System.Windows.Forms.TextBox()
         Me.FPLLieuNaiss = New System.Windows.Forms.Label()
         Me.TbDefAdresse = New System.Windows.Forms.TextBox()
@@ -44,30 +51,37 @@ Partial Class FormDemandeInhumation
         Me.FPLNom = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.LbTypeInhOrd = New System.Windows.Forms.ListBox()
         Me.RbInhOrd = New System.Windows.Forms.RadioButton()
         Me.RbNouvelleCon = New System.Windows.Forms.RadioButton()
         Me.RbConcExis = New System.Windows.Forms.RadioButton()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.TbDmdrTel = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.CtrlVilleDmdr = New cimetiere.CtrlLocVillePays()
+        Me.TbDmdrNom = New System.Windows.Forms.TextBox()
+        Me.TbDmdrAdresse = New System.Windows.Forms.TextBox()
+        Me.TbDmdrPrenom = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.CbEnregPdfP1 = New System.Windows.Forms.CheckBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.DtpDateSign = New System.Windows.Forms.DateTimePicker()
         Me.BtSuivant = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabP2InhSimple = New System.Windows.Forms.TabPage()
-        Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.CbOuvrirPdf = New System.Windows.Forms.CheckBox()
-        Me.CbEnregPdf = New System.Windows.Forms.CheckBox()
-        Me.BtEnregistrerInhSimple = New System.Windows.Forms.Button()
-        Me.PanTypeInhSimple = New System.Windows.Forms.Panel()
-        Me.panelzaer = New System.Windows.Forms.Panel()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.LbChoixInhSimple = New System.Windows.Forms.ListBox()
         Me.TabP2ConExis = New System.Windows.Forms.TabPage()
+        Me.BtPrécédentDeConExis = New System.Windows.Forms.Button()
+        Me.LbTypeInhCsnExis = New System.Windows.Forms.ListBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CbEnregPdfCsnExis = New System.Windows.Forms.CheckBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.LvCsnExisBenefs = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -82,40 +96,57 @@ Partial Class FormDemandeInhumation
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtTerminerConExis = New System.Windows.Forms.Button()
-        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.TbNumAnnee = New cimetiere.TextBoxInt()
-        Me.TbDefNumLh = New cimetiere.TextBoxInt()
-        Me.TbDefDateDeces = New cimetiere.TextBoxDate()
-        Me.TbDefDateNaiss = New cimetiere.TextBoxDate()
-        Me.CtrlDefEtatCiv = New cimetiere.CtrlEtatCivil()
-        Me.CtrlDefLocvillepays = New cimetiere.CtrlLocVillePays()
         Me.DgvCsnsExist = New cimetiere.DataGridViewConcessions()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCsnsExistColOccupants = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabP2InhOrd = New System.Windows.Forms.TabPage()
+        Me.BtPrecedentDeInhOrd = New System.Windows.Forms.Button()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.CbEnregPdfInhOrd = New System.Windows.Forms.CheckBox()
+        Me.BtTerminerInhOrd = New System.Windows.Forms.Button()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.LvOccupantsInhOrdEmpl = New System.Windows.Forms.ListView()
+        Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader11 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader12 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader13 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.DgvEmplacementsPourInhOrd = New cimetiere.DataGridViewCustom()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DgvEmplsInhOrdOccupants = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DgvEmplsInhOrdClasse = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.CtrlLocVillePays1 = New cimetiere.CtrlLocVillePays()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BtPrécédentDeConExit = New System.Windows.Forms.Button()
         Me.Panel4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
+        Me.Panel10.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabP2InhSimple.SuspendLayout()
-        Me.Panel8.SuspendLayout()
-        Me.Panel9.SuspendLayout()
-        Me.PanTypeInhSimple.SuspendLayout()
-        Me.panelzaer.SuspendLayout()
         Me.TabP2ConExis.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCsnsExist, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabP2InhOrd.SuspendLayout()
+        Me.Panel8.SuspendLayout()
+        Me.Panel9.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        CType(Me.DgvEmplacementsPourInhOrd, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel4
@@ -162,6 +193,22 @@ Partial Class FormDemandeInhumation
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Informations du défunt"
         '
+        'TbNumAnnee
+        '
+        Me.TbNumAnnee.Location = New System.Drawing.Point(460, 22)
+        Me.TbNumAnnee.Name = "TbNumAnnee"
+        Me.TbNumAnnee.Size = New System.Drawing.Size(129, 22)
+        Me.TbNumAnnee.TabIndex = 151
+        Me.TbNumAnnee.Value = Nothing
+        '
+        'TbDefNumLh
+        '
+        Me.TbDefNumLh.Location = New System.Drawing.Point(158, 22)
+        Me.TbDefNumLh.Name = "TbDefNumLh"
+        Me.TbDefNumLh.Size = New System.Drawing.Size(133, 22)
+        Me.TbDefNumLh.TabIndex = 150
+        Me.TbDefNumLh.Value = Nothing
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -188,6 +235,26 @@ Partial Class FormDemandeInhumation
         Me.TbDefLieuDeces.Size = New System.Drawing.Size(189, 22)
         Me.TbDefLieuDeces.TabIndex = 147
         '
+        'TbDefDateDeces
+        '
+        Me.TbDefDateDeces.DateValue = Nothing
+        Me.TbDefDateDeces.Location = New System.Drawing.Point(158, 229)
+        Me.TbDefDateDeces.Mask = "00/00/0000"
+        Me.TbDefDateDeces.Name = "TbDefDateDeces"
+        Me.TbDefDateDeces.Size = New System.Drawing.Size(100, 22)
+        Me.TbDefDateDeces.TabIndex = 146
+        Me.TbDefDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'TbDefDateNaiss
+        '
+        Me.TbDefDateNaiss.DateValue = Nothing
+        Me.TbDefDateNaiss.Location = New System.Drawing.Point(158, 188)
+        Me.TbDefDateNaiss.Mask = "00/00/0000"
+        Me.TbDefDateNaiss.Name = "TbDefDateNaiss"
+        Me.TbDefDateNaiss.Size = New System.Drawing.Size(100, 22)
+        Me.TbDefDateNaiss.TabIndex = 145
+        Me.TbDefDateNaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -208,6 +275,14 @@ Partial Class FormDemandeInhumation
         Me.Label2.TabIndex = 143
         Me.Label2.Text = "Etat civil :"
         '
+        'CtrlDefEtatCiv
+        '
+        Me.CtrlDefEtatCiv.EtatCivilDe = ""
+        Me.CtrlDefEtatCiv.Location = New System.Drawing.Point(158, 270)
+        Me.CtrlDefEtatCiv.Name = "CtrlDefEtatCiv"
+        Me.CtrlDefEtatCiv.Size = New System.Drawing.Size(369, 24)
+        Me.CtrlDefEtatCiv.TabIndex = 142
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -217,6 +292,14 @@ Partial Class FormDemandeInhumation
         Me.Label1.Size = New System.Drawing.Size(42, 17)
         Me.Label1.TabIndex = 141
         Me.Label1.Text = "Ville :"
+        '
+        'CtrlDefLocvillepays
+        '
+        Me.CtrlDefLocvillepays.Location = New System.Drawing.Point(158, 146)
+        Me.CtrlDefLocvillepays.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlDefLocvillepays.Name = "CtrlDefLocvillepays"
+        Me.CtrlDefLocvillepays.Size = New System.Drawing.Size(316, 25)
+        Me.CtrlDefLocvillepays.TabIndex = 140
         '
         'TbDefLieuNaiss
         '
@@ -312,23 +395,36 @@ Partial Class FormDemandeInhumation
         '
         'Panel1
         '
+        Me.Panel1.AutoSize = True
         Me.Panel1.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Location = New System.Drawing.Point(3, 352)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(850, 132)
+        Me.Panel1.Size = New System.Drawing.Size(620, 140)
         Me.Panel1.TabIndex = 145
         '
         'Panel2
         '
+        Me.Panel2.AutoSize = True
         Me.Panel2.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel2.Controls.Add(Me.LbTypeInhOrd)
         Me.Panel2.Controls.Add(Me.RbInhOrd)
         Me.Panel2.Controls.Add(Me.RbNouvelleCon)
         Me.Panel2.Controls.Add(Me.RbConcExis)
-        Me.Panel2.Location = New System.Drawing.Point(5, 5)
+        Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(745, 111)
+        Me.Panel2.Size = New System.Drawing.Size(614, 134)
         Me.Panel2.TabIndex = 0
+        '
+        'LbTypeInhOrd
+        '
+        Me.LbTypeInhOrd.FormattingEnabled = True
+        Me.LbTypeInhOrd.ItemHeight = 16
+        Me.LbTypeInhOrd.Items.AddRange(New Object() {"Inhumation en pleine terre - cercueil", "Inhumation en pleine terre - urne", "Ouverture de caveau", "Urne en colombarium", "Dispersion des cendres"})
+        Me.LbTypeInhOrd.Location = New System.Drawing.Point(9, 40)
+        Me.LbTypeInhOrd.Name = "LbTypeInhOrd"
+        Me.LbTypeInhOrd.Size = New System.Drawing.Size(285, 84)
+        Me.LbTypeInhOrd.TabIndex = 3
         '
         'RbInhOrd
         '
@@ -366,6 +462,7 @@ Partial Class FormDemandeInhumation
         '
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel4)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel1)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Panel10)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel5)
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
@@ -374,11 +471,119 @@ Partial Class FormDemandeInhumation
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1046, 821)
         Me.FlowLayoutPanel1.TabIndex = 146
         '
+        'Panel10
+        '
+        Me.Panel10.BackColor = System.Drawing.Color.SeaGreen
+        Me.Panel10.Controls.Add(Me.Panel11)
+        Me.Panel10.Location = New System.Drawing.Point(3, 498)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(789, 165)
+        Me.Panel10.TabIndex = 148
+        '
+        'Panel11
+        '
+        Me.Panel11.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel11.Controls.Add(Me.GroupBox4)
+        Me.Panel11.Location = New System.Drawing.Point(3, 3)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(783, 159)
+        Me.Panel11.TabIndex = 0
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.TbDmdrTel)
+        Me.GroupBox4.Controls.Add(Me.Label7)
+        Me.GroupBox4.Controls.Add(Me.CtrlVilleDmdr)
+        Me.GroupBox4.Controls.Add(Me.TbDmdrNom)
+        Me.GroupBox4.Controls.Add(Me.TbDmdrAdresse)
+        Me.GroupBox4.Controls.Add(Me.TbDmdrPrenom)
+        Me.GroupBox4.Controls.Add(Me.Label10)
+        Me.GroupBox4.Controls.Add(Me.Label8)
+        Me.GroupBox4.Controls.Add(Me.Label9)
+        Me.GroupBox4.Location = New System.Drawing.Point(7, 4)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(737, 152)
+        Me.GroupBox4.TabIndex = 8
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Personne introduisant la demande"
+        '
+        'TbDmdrTel
+        '
+        Me.TbDmdrTel.Location = New System.Drawing.Point(93, 94)
+        Me.TbDmdrTel.Name = "TbDmdrTel"
+        Me.TbDmdrTel.Size = New System.Drawing.Size(142, 22)
+        Me.TbDmdrTel.TabIndex = 8
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(23, 29)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(37, 17)
+        Me.Label7.TabIndex = 1
+        Me.Label7.Text = "Nom"
+        '
+        'CtrlVilleDmdr
+        '
+        Me.CtrlVilleDmdr.Location = New System.Drawing.Point(307, 60)
+        Me.CtrlVilleDmdr.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlVilleDmdr.Name = "CtrlVilleDmdr"
+        Me.CtrlVilleDmdr.Size = New System.Drawing.Size(316, 25)
+        Me.CtrlVilleDmdr.TabIndex = 7
+        '
+        'TbDmdrNom
+        '
+        Me.TbDmdrNom.Location = New System.Drawing.Point(93, 29)
+        Me.TbDmdrNom.Name = "TbDmdrNom"
+        Me.TbDmdrNom.Size = New System.Drawing.Size(142, 22)
+        Me.TbDmdrNom.TabIndex = 0
+        '
+        'TbDmdrAdresse
+        '
+        Me.TbDmdrAdresse.Location = New System.Drawing.Point(93, 61)
+        Me.TbDmdrAdresse.Name = "TbDmdrAdresse"
+        Me.TbDmdrAdresse.Size = New System.Drawing.Size(171, 22)
+        Me.TbDmdrAdresse.TabIndex = 6
+        '
+        'TbDmdrPrenom
+        '
+        Me.TbDmdrPrenom.Location = New System.Drawing.Point(371, 29)
+        Me.TbDmdrPrenom.Name = "TbDmdrPrenom"
+        Me.TbDmdrPrenom.Size = New System.Drawing.Size(142, 22)
+        Me.TbDmdrPrenom.TabIndex = 2
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(21, 61)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(60, 17)
+        Me.Label10.TabIndex = 5
+        Me.Label10.Text = "Adresse"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(299, 29)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(57, 17)
+        Me.Label8.TabIndex = 3
+        Me.Label8.Text = "Prénom"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(8, 94)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(76, 17)
+        Me.Label9.TabIndex = 4
+        Me.Label9.Text = "Téléphone"
+        '
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel5.Controls.Add(Me.Panel6)
-        Me.Panel5.Location = New System.Drawing.Point(3, 490)
+        Me.Panel5.Location = New System.Drawing.Point(3, 669)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(633, 100)
         Me.Panel5.TabIndex = 147
@@ -386,17 +591,50 @@ Partial Class FormDemandeInhumation
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel6.Controls.Add(Me.CbEnregPdfP1)
+        Me.Panel6.Controls.Add(Me.Label11)
+        Me.Panel6.Controls.Add(Me.DtpDateSign)
         Me.Panel6.Controls.Add(Me.BtSuivant)
-        Me.Panel6.Location = New System.Drawing.Point(89, 11)
+        Me.Panel6.Location = New System.Drawing.Point(3, 12)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(493, 64)
+        Me.Panel6.Size = New System.Drawing.Size(611, 64)
         Me.Panel6.TabIndex = 0
+        '
+        'CbEnregPdfP1
+        '
+        Me.CbEnregPdfP1.AutoSize = True
+        Me.CbEnregPdfP1.Checked = True
+        Me.CbEnregPdfP1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CbEnregPdfP1.Location = New System.Drawing.Point(15, 37)
+        Me.CbEnregPdfP1.Margin = New System.Windows.Forms.Padding(4)
+        Me.CbEnregPdfP1.Name = "CbEnregPdfP1"
+        Me.CbEnregPdfP1.Size = New System.Drawing.Size(188, 21)
+        Me.CbEnregPdfP1.TabIndex = 9
+        Me.CbEnregPdfP1.Text = "Enregistrer le fichier PDF"
+        Me.CbEnregPdfP1.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(12, 6)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(46, 17)
+        Me.Label11.TabIndex = 2
+        Me.Label11.Text = "Fait le"
+        '
+        'DtpDateSign
+        '
+        Me.DtpDateSign.Location = New System.Drawing.Point(86, 5)
+        Me.DtpDateSign.Name = "DtpDateSign"
+        Me.DtpDateSign.ShowCheckBox = True
+        Me.DtpDateSign.Size = New System.Drawing.Size(270, 22)
+        Me.DtpDateSign.TabIndex = 1
         '
         'BtSuivant
         '
         Me.BtSuivant.BackColor = System.Drawing.Color.SeaGreen
         Me.BtSuivant.ForeColor = System.Drawing.Color.White
-        Me.BtSuivant.Location = New System.Drawing.Point(370, 6)
+        Me.BtSuivant.Location = New System.Drawing.Point(479, 6)
         Me.BtSuivant.Name = "BtSuivant"
         Me.BtSuivant.Size = New System.Drawing.Size(113, 51)
         Me.BtSuivant.TabIndex = 0
@@ -406,8 +644,8 @@ Partial Class FormDemandeInhumation
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabP2InhSimple)
         Me.TabControl1.Controls.Add(Me.TabP2ConExis)
+        Me.TabControl1.Controls.Add(Me.TabP2InhOrd)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -426,116 +664,10 @@ Partial Class FormDemandeInhumation
         Me.TabPage1.Text = "Début"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabP2InhSimple
-        '
-        Me.TabP2InhSimple.Controls.Add(Me.Panel8)
-        Me.TabP2InhSimple.Controls.Add(Me.BtEnregistrerInhSimple)
-        Me.TabP2InhSimple.Controls.Add(Me.PanTypeInhSimple)
-        Me.TabP2InhSimple.Location = New System.Drawing.Point(4, 25)
-        Me.TabP2InhSimple.Name = "TabP2InhSimple"
-        Me.TabP2InhSimple.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabP2InhSimple.Size = New System.Drawing.Size(1052, 827)
-        Me.TabP2InhSimple.TabIndex = 1
-        Me.TabP2InhSimple.Text = "Fin inh simple"
-        Me.TabP2InhSimple.UseVisualStyleBackColor = True
-        '
-        'Panel8
-        '
-        Me.Panel8.BackColor = System.Drawing.Color.SeaGreen
-        Me.Panel8.Controls.Add(Me.Panel9)
-        Me.Panel8.Location = New System.Drawing.Point(22, 225)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(402, 76)
-        Me.Panel8.TabIndex = 171
-        '
-        'Panel9
-        '
-        Me.Panel9.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel9.Controls.Add(Me.CbOuvrirPdf)
-        Me.Panel9.Controls.Add(Me.CbEnregPdf)
-        Me.Panel9.Location = New System.Drawing.Point(8, 7)
-        Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(387, 62)
-        Me.Panel9.TabIndex = 0
-        '
-        'CbOuvrirPdf
-        '
-        Me.CbOuvrirPdf.AutoSize = True
-        Me.CbOuvrirPdf.Checked = True
-        Me.CbOuvrirPdf.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbOuvrirPdf.Location = New System.Drawing.Point(6, 35)
-        Me.CbOuvrirPdf.Margin = New System.Windows.Forms.Padding(4)
-        Me.CbOuvrirPdf.Name = "CbOuvrirPdf"
-        Me.CbOuvrirPdf.Size = New System.Drawing.Size(157, 21)
-        Me.CbOuvrirPdf.TabIndex = 9
-        Me.CbOuvrirPdf.Text = "Ouvrir le fichier PDF"
-        Me.CbOuvrirPdf.UseVisualStyleBackColor = True
-        '
-        'CbEnregPdf
-        '
-        Me.CbEnregPdf.AutoSize = True
-        Me.CbEnregPdf.Checked = True
-        Me.CbEnregPdf.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbEnregPdf.Location = New System.Drawing.Point(6, 6)
-        Me.CbEnregPdf.Margin = New System.Windows.Forms.Padding(4)
-        Me.CbEnregPdf.Name = "CbEnregPdf"
-        Me.CbEnregPdf.Size = New System.Drawing.Size(188, 21)
-        Me.CbEnregPdf.TabIndex = 8
-        Me.CbEnregPdf.Text = "Enregistrer le fichier PDF"
-        Me.CbEnregPdf.UseVisualStyleBackColor = True
-        '
-        'BtEnregistrerInhSimple
-        '
-        Me.BtEnregistrerInhSimple.BackColor = System.Drawing.Color.SeaGreen
-        Me.BtEnregistrerInhSimple.ForeColor = System.Drawing.Color.Transparent
-        Me.BtEnregistrerInhSimple.Location = New System.Drawing.Point(588, 235)
-        Me.BtEnregistrerInhSimple.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtEnregistrerInhSimple.Name = "BtEnregistrerInhSimple"
-        Me.BtEnregistrerInhSimple.Size = New System.Drawing.Size(132, 59)
-        Me.BtEnregistrerInhSimple.TabIndex = 170
-        Me.BtEnregistrerInhSimple.Text = "Terminer"
-        Me.BtEnregistrerInhSimple.UseVisualStyleBackColor = False
-        '
-        'PanTypeInhSimple
-        '
-        Me.PanTypeInhSimple.BackColor = System.Drawing.Color.SeaGreen
-        Me.PanTypeInhSimple.Controls.Add(Me.panelzaer)
-        Me.PanTypeInhSimple.Location = New System.Drawing.Point(22, 20)
-        Me.PanTypeInhSimple.Name = "PanTypeInhSimple"
-        Me.PanTypeInhSimple.Size = New System.Drawing.Size(735, 168)
-        Me.PanTypeInhSimple.TabIndex = 147
-        '
-        'panelzaer
-        '
-        Me.panelzaer.BackColor = System.Drawing.SystemColors.Window
-        Me.panelzaer.Controls.Add(Me.Label6)
-        Me.panelzaer.Controls.Add(Me.LbChoixInhSimple)
-        Me.panelzaer.Location = New System.Drawing.Point(3, 3)
-        Me.panelzaer.Name = "panelzaer"
-        Me.panelzaer.Size = New System.Drawing.Size(726, 162)
-        Me.panelzaer.TabIndex = 0
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(10, 10)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(195, 17)
-        Me.Label6.TabIndex = 1
-        Me.Label6.Text = "Type d'inhumation demandé :"
-        '
-        'LbChoixInhSimple
-        '
-        Me.LbChoixInhSimple.FormattingEnabled = True
-        Me.LbChoixInhSimple.ItemHeight = 16
-        Me.LbChoixInhSimple.Items.AddRange(New Object() {"Inhumation en pleine terre (cercueil)", "Inhumation en pleine terre (urne)", "Urne en colombarium", "Dispersion des cendres"})
-        Me.LbChoixInhSimple.Location = New System.Drawing.Point(30, 39)
-        Me.LbChoixInhSimple.Name = "LbChoixInhSimple"
-        Me.LbChoixInhSimple.Size = New System.Drawing.Size(326, 68)
-        Me.LbChoixInhSimple.TabIndex = 0
-        '
         'TabP2ConExis
         '
+        Me.TabP2ConExis.Controls.Add(Me.BtPrécédentDeConExis)
+        Me.TabP2ConExis.Controls.Add(Me.LbTypeInhCsnExis)
         Me.TabP2ConExis.Controls.Add(Me.Panel3)
         Me.TabP2ConExis.Controls.Add(Me.GroupBox3)
         Me.TabP2ConExis.Controls.Add(Me.GroupBox1)
@@ -548,11 +680,33 @@ Partial Class FormDemandeInhumation
         Me.TabP2ConExis.Text = "fin concexis"
         Me.TabP2ConExis.UseVisualStyleBackColor = True
         '
+        'BtPrécédentDeConExis
+        '
+        Me.BtPrécédentDeConExis.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtPrécédentDeConExis.ForeColor = System.Drawing.Color.Transparent
+        Me.BtPrécédentDeConExis.Location = New System.Drawing.Point(543, 693)
+        Me.BtPrécédentDeConExis.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtPrécédentDeConExis.Name = "BtPrécédentDeConExis"
+        Me.BtPrécédentDeConExis.Size = New System.Drawing.Size(132, 59)
+        Me.BtPrécédentDeConExis.TabIndex = 182
+        Me.BtPrécédentDeConExis.Text = "Précédent"
+        Me.BtPrécédentDeConExis.UseVisualStyleBackColor = False
+        '
+        'LbTypeInhCsnExis
+        '
+        Me.LbTypeInhCsnExis.FormattingEnabled = True
+        Me.LbTypeInhCsnExis.ItemHeight = 16
+        Me.LbTypeInhCsnExis.Items.AddRange(New Object() {"Urne", "Cercueil", "Pleine terre", "Caveau", "Cellule de colombarium", "Cavurne"})
+        Me.LbTypeInhCsnExis.Location = New System.Drawing.Point(857, 19)
+        Me.LbTypeInhCsnExis.Name = "LbTypeInhCsnExis"
+        Me.LbTypeInhCsnExis.Size = New System.Drawing.Size(156, 212)
+        Me.LbTypeInhCsnExis.TabIndex = 181
+        '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel3.Controls.Add(Me.Panel7)
-        Me.Panel3.Location = New System.Drawing.Point(31, 686)
+        Me.Panel3.Location = New System.Drawing.Point(28, 686)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(402, 76)
         Me.Panel3.TabIndex = 180
@@ -560,38 +714,24 @@ Partial Class FormDemandeInhumation
         'Panel7
         '
         Me.Panel7.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel7.Controls.Add(Me.CheckBox1)
-        Me.Panel7.Controls.Add(Me.CheckBox2)
+        Me.Panel7.Controls.Add(Me.CbEnregPdfCsnExis)
         Me.Panel7.Location = New System.Drawing.Point(8, 7)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(387, 62)
         Me.Panel7.TabIndex = 0
         '
-        'CheckBox1
+        'CbEnregPdfCsnExis
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(6, 35)
-        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(157, 21)
-        Me.CheckBox1.TabIndex = 9
-        Me.CheckBox1.Text = "Ouvrir le fichier PDF"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox2.Location = New System.Drawing.Point(6, 6)
-        Me.CheckBox2.Margin = New System.Windows.Forms.Padding(4)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(188, 21)
-        Me.CheckBox2.TabIndex = 8
-        Me.CheckBox2.Text = "Enregistrer le fichier PDF"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.CbEnregPdfCsnExis.AutoSize = True
+        Me.CbEnregPdfCsnExis.Checked = True
+        Me.CbEnregPdfCsnExis.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CbEnregPdfCsnExis.Location = New System.Drawing.Point(6, 6)
+        Me.CbEnregPdfCsnExis.Margin = New System.Windows.Forms.Padding(4)
+        Me.CbEnregPdfCsnExis.Name = "CbEnregPdfCsnExis"
+        Me.CbEnregPdfCsnExis.Size = New System.Drawing.Size(188, 21)
+        Me.CbEnregPdfCsnExis.TabIndex = 8
+        Me.CbEnregPdfCsnExis.Text = "Enregistrer le fichier PDF"
+        Me.CbEnregPdfCsnExis.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
@@ -664,90 +804,34 @@ Partial Class FormDemandeInhumation
         'ColumnHeader6
         '
         Me.ColumnHeader6.Text = "Nom"
-        Me.ColumnHeader6.Width = 126
+        Me.ColumnHeader6.Width = 180
         '
         'ColumnHeader7
         '
         Me.ColumnHeader7.Text = "Prénom"
-        Me.ColumnHeader7.Width = 130
+        Me.ColumnHeader7.Width = 188
         '
         'ColumnHeader8
         '
         Me.ColumnHeader8.Text = "Date naiss."
-        Me.ColumnHeader8.Width = 94
+        Me.ColumnHeader8.Width = 132
         '
         'ColumnHeader9
         '
         Me.ColumnHeader9.Text = "Date décès"
-        Me.ColumnHeader9.Width = 100
+        Me.ColumnHeader9.Width = 128
         '
         'BtTerminerConExis
         '
         Me.BtTerminerConExis.BackColor = System.Drawing.Color.SeaGreen
         Me.BtTerminerConExis.ForeColor = System.Drawing.Color.Transparent
-        Me.BtTerminerConExis.Location = New System.Drawing.Point(713, 698)
+        Me.BtTerminerConExis.Location = New System.Drawing.Point(713, 693)
         Me.BtTerminerConExis.Margin = New System.Windows.Forms.Padding(4)
         Me.BtTerminerConExis.Name = "BtTerminerConExis"
         Me.BtTerminerConExis.Size = New System.Drawing.Size(132, 59)
         Me.BtTerminerConExis.TabIndex = 172
         Me.BtTerminerConExis.Text = "Terminer"
         Me.BtTerminerConExis.UseVisualStyleBackColor = False
-        '
-        'ErrorProvider1
-        '
-        Me.ErrorProvider1.ContainerControl = Me
-        '
-        'TbNumAnnee
-        '
-        Me.TbNumAnnee.Location = New System.Drawing.Point(460, 22)
-        Me.TbNumAnnee.Name = "TbNumAnnee"
-        Me.TbNumAnnee.Size = New System.Drawing.Size(129, 22)
-        Me.TbNumAnnee.TabIndex = 151
-        Me.TbNumAnnee.Value = Nothing
-        '
-        'TbDefNumLh
-        '
-        Me.TbDefNumLh.Location = New System.Drawing.Point(158, 22)
-        Me.TbDefNumLh.Name = "TbDefNumLh"
-        Me.TbDefNumLh.Size = New System.Drawing.Size(133, 22)
-        Me.TbDefNumLh.TabIndex = 150
-        Me.TbDefNumLh.Value = Nothing
-        '
-        'TbDefDateDeces
-        '
-        Me.TbDefDateDeces.DateValue = Nothing
-        Me.TbDefDateDeces.Location = New System.Drawing.Point(158, 229)
-        Me.TbDefDateDeces.Mask = "00/00/0000"
-        Me.TbDefDateDeces.Name = "TbDefDateDeces"
-        Me.TbDefDateDeces.Size = New System.Drawing.Size(100, 22)
-        Me.TbDefDateDeces.TabIndex = 146
-        Me.TbDefDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'TbDefDateNaiss
-        '
-        Me.TbDefDateNaiss.DateValue = Nothing
-        Me.TbDefDateNaiss.Location = New System.Drawing.Point(158, 188)
-        Me.TbDefDateNaiss.Mask = "00/00/0000"
-        Me.TbDefDateNaiss.Name = "TbDefDateNaiss"
-        Me.TbDefDateNaiss.Size = New System.Drawing.Size(100, 22)
-        Me.TbDefDateNaiss.TabIndex = 145
-        Me.TbDefDateNaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'CtrlDefEtatCiv
-        '
-        Me.CtrlDefEtatCiv.EtatCivilDe = ""
-        Me.CtrlDefEtatCiv.Location = New System.Drawing.Point(158, 270)
-        Me.CtrlDefEtatCiv.Name = "CtrlDefEtatCiv"
-        Me.CtrlDefEtatCiv.Size = New System.Drawing.Size(369, 24)
-        Me.CtrlDefEtatCiv.TabIndex = 142
-        '
-        'CtrlDefLocvillepays
-        '
-        Me.CtrlDefLocvillepays.Location = New System.Drawing.Point(158, 146)
-        Me.CtrlDefLocvillepays.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtrlDefLocvillepays.Name = "CtrlDefLocvillepays"
-        Me.CtrlDefLocvillepays.Size = New System.Drawing.Size(316, 25)
-        Me.CtrlDefLocvillepays.TabIndex = 140
         '
         'DgvCsnsExist
         '
@@ -758,14 +842,14 @@ Partial Class FormDemandeInhumation
         Me.DgvCsnsExist.BackgroundColor = System.Drawing.Color.White
         Me.DgvCsnsExist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCsnsExist.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column4, Me.Column2, Me.Column3, Me.DgvCsnsExistColOccupants})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvCsnsExist.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvCsnsExist.DefaultCellStyle = DataGridViewCellStyle6
         Me.DgvCsnsExist.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvCsnsExist.Location = New System.Drawing.Point(8, 19)
         Me.DgvCsnsExist.MultiSelect = False
@@ -814,6 +898,210 @@ Partial Class FormDemandeInhumation
         Me.DgvCsnsExistColOccupants.Name = "DgvCsnsExistColOccupants"
         Me.DgvCsnsExistColOccupants.ReadOnly = True
         '
+        'TabP2InhOrd
+        '
+        Me.TabP2InhOrd.Controls.Add(Me.BtPrecedentDeInhOrd)
+        Me.TabP2InhOrd.Controls.Add(Me.Panel8)
+        Me.TabP2InhOrd.Controls.Add(Me.BtTerminerInhOrd)
+        Me.TabP2InhOrd.Controls.Add(Me.GroupBox5)
+        Me.TabP2InhOrd.Controls.Add(Me.DgvEmplacementsPourInhOrd)
+        Me.TabP2InhOrd.Location = New System.Drawing.Point(4, 25)
+        Me.TabP2InhOrd.Name = "TabP2InhOrd"
+        Me.TabP2InhOrd.Size = New System.Drawing.Size(1052, 827)
+        Me.TabP2InhOrd.TabIndex = 4
+        Me.TabP2InhOrd.Text = "TabP2InhOrd"
+        Me.TabP2InhOrd.UseVisualStyleBackColor = True
+        '
+        'BtPrecedentDeInhOrd
+        '
+        Me.BtPrecedentDeInhOrd.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtPrecedentDeInhOrd.ForeColor = System.Drawing.Color.Transparent
+        Me.BtPrecedentDeInhOrd.Location = New System.Drawing.Point(523, 517)
+        Me.BtPrecedentDeInhOrd.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtPrecedentDeInhOrd.Name = "BtPrecedentDeInhOrd"
+        Me.BtPrecedentDeInhOrd.Size = New System.Drawing.Size(132, 59)
+        Me.BtPrecedentDeInhOrd.TabIndex = 186
+        Me.BtPrecedentDeInhOrd.Text = "Précédent"
+        Me.BtPrecedentDeInhOrd.UseVisualStyleBackColor = False
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.SeaGreen
+        Me.Panel8.Controls.Add(Me.Panel9)
+        Me.Panel8.Location = New System.Drawing.Point(39, 504)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(402, 76)
+        Me.Panel8.TabIndex = 185
+        '
+        'Panel9
+        '
+        Me.Panel9.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel9.Controls.Add(Me.CbEnregPdfInhOrd)
+        Me.Panel9.Location = New System.Drawing.Point(8, 7)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(387, 62)
+        Me.Panel9.TabIndex = 0
+        '
+        'CbEnregPdfInhOrd
+        '
+        Me.CbEnregPdfInhOrd.AutoSize = True
+        Me.CbEnregPdfInhOrd.Checked = True
+        Me.CbEnregPdfInhOrd.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CbEnregPdfInhOrd.Location = New System.Drawing.Point(6, 6)
+        Me.CbEnregPdfInhOrd.Margin = New System.Windows.Forms.Padding(4)
+        Me.CbEnregPdfInhOrd.Name = "CbEnregPdfInhOrd"
+        Me.CbEnregPdfInhOrd.Size = New System.Drawing.Size(188, 21)
+        Me.CbEnregPdfInhOrd.TabIndex = 8
+        Me.CbEnregPdfInhOrd.Text = "Enregistrer le fichier PDF"
+        Me.CbEnregPdfInhOrd.UseVisualStyleBackColor = True
+        '
+        'BtTerminerInhOrd
+        '
+        Me.BtTerminerInhOrd.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtTerminerInhOrd.ForeColor = System.Drawing.Color.Transparent
+        Me.BtTerminerInhOrd.Location = New System.Drawing.Point(721, 516)
+        Me.BtTerminerInhOrd.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtTerminerInhOrd.Name = "BtTerminerInhOrd"
+        Me.BtTerminerInhOrd.Size = New System.Drawing.Size(132, 59)
+        Me.BtTerminerInhOrd.TabIndex = 184
+        Me.BtTerminerInhOrd.Text = "Terminer"
+        Me.BtTerminerInhOrd.UseVisualStyleBackColor = False
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.LvOccupantsInhOrdEmpl)
+        Me.GroupBox5.Location = New System.Drawing.Point(33, 291)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(843, 190)
+        Me.GroupBox5.TabIndex = 183
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Occupants actuels"
+        '
+        'LvOccupantsInhOrdEmpl
+        '
+        Me.LvOccupantsInhOrdEmpl.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader10, Me.ColumnHeader11, Me.ColumnHeader12, Me.ColumnHeader13})
+        Me.LvOccupantsInhOrdEmpl.FullRowSelect = True
+        Me.LvOccupantsInhOrdEmpl.Location = New System.Drawing.Point(6, 21)
+        Me.LvOccupantsInhOrdEmpl.Name = "LvOccupantsInhOrdEmpl"
+        Me.LvOccupantsInhOrdEmpl.Size = New System.Drawing.Size(831, 163)
+        Me.LvOccupantsInhOrdEmpl.TabIndex = 178
+        Me.LvOccupantsInhOrdEmpl.UseCompatibleStateImageBehavior = False
+        Me.LvOccupantsInhOrdEmpl.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader10
+        '
+        Me.ColumnHeader10.Text = "Nom"
+        Me.ColumnHeader10.Width = 179
+        '
+        'ColumnHeader11
+        '
+        Me.ColumnHeader11.Text = "Prénom"
+        Me.ColumnHeader11.Width = 240
+        '
+        'ColumnHeader12
+        '
+        Me.ColumnHeader12.Text = "Date naiss."
+        Me.ColumnHeader12.Width = 134
+        '
+        'ColumnHeader13
+        '
+        Me.ColumnHeader13.Text = "Date décès"
+        Me.ColumnHeader13.Width = 124
+        '
+        'DgvEmplacementsPourInhOrd
+        '
+        Me.DgvEmplacementsPourInhOrd.AllowUserToAddRows = False
+        Me.DgvEmplacementsPourInhOrd.AllowUserToDeleteRows = False
+        Me.DgvEmplacementsPourInhOrd.AllowUserToOrderColumns = True
+        Me.DgvEmplacementsPourInhOrd.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DgvEmplacementsPourInhOrd.BackgroundColor = System.Drawing.Color.White
+        Me.DgvEmplacementsPourInhOrd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvEmplacementsPourInhOrd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column5, Me.DgvEmplsInhOrdOccupants, Me.DgvEmplsInhOrdClasse})
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvEmplacementsPourInhOrd.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DgvEmplacementsPourInhOrd.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.DgvEmplacementsPourInhOrd.Location = New System.Drawing.Point(33, 29)
+        Me.DgvEmplacementsPourInhOrd.MultiSelect = False
+        Me.DgvEmplacementsPourInhOrd.Name = "DgvEmplacementsPourInhOrd"
+        Me.DgvEmplacementsPourInhOrd.ReadOnly = True
+        Me.DgvEmplacementsPourInhOrd.RowHeadersVisible = False
+        Me.DgvEmplacementsPourInhOrd.RowTemplate.Height = 24
+        Me.DgvEmplacementsPourInhOrd.SelectedRow = Nothing
+        Me.DgvEmplacementsPourInhOrd.SelectedRowIndex = -1
+        Me.DgvEmplacementsPourInhOrd.SelectedValue = -1
+        Me.DgvEmplacementsPourInhOrd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvEmplacementsPourInhOrd.Size = New System.Drawing.Size(681, 256)
+        Me.DgvEmplacementsPourInhOrd.TabIndex = 0
+        '
+        'Column5
+        '
+        Me.Column5.DataPropertyName = "empl_reference"
+        Me.Column5.HeaderText = "Référence"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        '
+        'DgvEmplsInhOrdOccupants
+        '
+        Me.DgvEmplsInhOrdOccupants.HeaderText = "Occupants"
+        Me.DgvEmplsInhOrdOccupants.Name = "DgvEmplsInhOrdOccupants"
+        Me.DgvEmplsInhOrdOccupants.ReadOnly = True
+        '
+        'DgvEmplsInhOrdClasse
+        '
+        Me.DgvEmplsInhOrdClasse.DataPropertyName = "empl_monum_classe"
+        Me.DgvEmplsInhOrdClasse.HeaderText = "Classé"
+        Me.DgvEmplsInhOrdClasse.Name = "DgvEmplsInhOrdClasse"
+        Me.DgvEmplsInhOrdClasse.ReadOnly = True
+        '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(337, 32)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(171, 22)
+        Me.TextBox1.TabIndex = 6
+        '
+        'CtrlLocVillePays1
+        '
+        Me.CtrlLocVillePays1.Location = New System.Drawing.Point(337, 59)
+        Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
+        Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 25)
+        Me.CtrlLocVillePays1.TabIndex = 7
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.SeaGreen
+        Me.Button1.ForeColor = System.Drawing.Color.Transparent
+        Me.Button1.Location = New System.Drawing.Point(543, 693)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(132, 59)
+        Me.Button1.TabIndex = 182
+        Me.Button1.Text = "Précédent"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'BtPrécédentDeConExit
+        '
+        Me.BtPrécédentDeConExit.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtPrécédentDeConExit.ForeColor = System.Drawing.Color.Transparent
+        Me.BtPrécédentDeConExit.Location = New System.Drawing.Point(543, 693)
+        Me.BtPrécédentDeConExit.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtPrécédentDeConExit.Name = "BtPrécédentDeConExit"
+        Me.BtPrécédentDeConExit.Size = New System.Drawing.Size(132, 59)
+        Me.BtPrécédentDeConExit.TabIndex = 182
+        Me.BtPrécédentDeConExit.Text = "Précédent"
+        Me.BtPrécédentDeConExit.UseVisualStyleBackColor = False
+        '
         'FormDemandeInhumation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -826,28 +1114,34 @@ Partial Class FormDemandeInhumation
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.FlowLayoutPanel1.PerformLayout()
+        Me.Panel10.ResumeLayout(False)
+        Me.Panel11.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
+        Me.Panel6.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.TabP2InhSimple.ResumeLayout(False)
-        Me.Panel8.ResumeLayout(False)
-        Me.Panel9.ResumeLayout(False)
-        Me.Panel9.PerformLayout()
-        Me.PanTypeInhSimple.ResumeLayout(False)
-        Me.panelzaer.ResumeLayout(False)
-        Me.panelzaer.PerformLayout()
         Me.TabP2ConExis.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
-        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvCsnsExist, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabP2InhOrd.ResumeLayout(False)
+        Me.Panel8.ResumeLayout(False)
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel9.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        CType(Me.DgvEmplacementsPourInhOrd, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -884,20 +1178,10 @@ Partial Class FormDemandeInhumation
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabP2InhSimple As TabPage
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel6 As Panel
     Friend WithEvents BtSuivant As Button
-    Friend WithEvents PanTypeInhSimple As Panel
-    Friend WithEvents panelzaer As Panel
-    Friend WithEvents Label6 As Label
-    Friend WithEvents LbChoixInhSimple As ListBox
     Friend WithEvents TabP2ConExis As TabPage
-    Friend WithEvents Panel8 As Panel
-    Friend WithEvents Panel9 As Panel
-    Friend WithEvents CbOuvrirPdf As CheckBox
-    Friend WithEvents CbEnregPdf As CheckBox
-    Friend WithEvents BtEnregistrerInhSimple As Button
     Friend WithEvents BtTerminerConExis As Button
     Friend WithEvents DgvCsnsExist As DataGridViewConcessions
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
@@ -920,7 +1204,44 @@ Partial Class FormDemandeInhumation
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel7 As Panel
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents CbEnregPdfCsnExis As CheckBox
     Friend WithEvents ErrorProvider1 As ErrorProvider
+    Friend WithEvents LbTypeInhOrd As ListBox
+    Friend WithEvents Panel10 As Panel
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents TbDmdrPrenom As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents TbDmdrNom As TextBox
+    Friend WithEvents TbDmdrAdresse As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents TbDmdrTel As TextBox
+    Friend WithEvents CtrlVilleDmdr As CtrlLocVillePays
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents CtrlLocVillePays1 As CtrlLocVillePays
+    Friend WithEvents Label11 As Label
+    Friend WithEvents DtpDateSign As DateTimePicker
+    Friend WithEvents LbTypeInhCsnExis As ListBox
+    Friend WithEvents TabP2InhOrd As TabPage
+    Friend WithEvents DgvEmplacementsPourInhOrd As DataGridViewCustom
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents DgvEmplsInhOrdOccupants As DataGridViewTextBoxColumn
+    Friend WithEvents DgvEmplsInhOrdClasse As DataGridViewTextBoxColumn
+    Friend WithEvents LvOccupantsInhOrdEmpl As ListView
+    Friend WithEvents ColumnHeader10 As ColumnHeader
+    Friend WithEvents ColumnHeader11 As ColumnHeader
+    Friend WithEvents ColumnHeader12 As ColumnHeader
+    Friend WithEvents ColumnHeader13 As ColumnHeader
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents CbEnregPdfInhOrd As CheckBox
+    Friend WithEvents BtTerminerInhOrd As Button
+    Friend WithEvents CbEnregPdfP1 As CheckBox
+    Friend WithEvents BtPrécédentDeConExis As Button
+    Friend WithEvents BtPrecedentDeInhOrd As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents BtPrécédentDeConExit As Button
 End Class

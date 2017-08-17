@@ -46,7 +46,7 @@ Partial Class FormReservation
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GBListBenef = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.FPBLienCons = New System.Windows.Forms.Button()
+        Me.BtAnnuler = New System.Windows.Forms.Button()
         Me.BtEnregistrer = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -55,14 +55,17 @@ Partial Class FormReservation
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.DtpDateDebut = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.CbTarifLh = New System.Windows.Forms.CheckBox()
         Me.LbTypeConcession = New System.Windows.Forms.ListBox()
         Me.PanCbsPdf = New System.Windows.Forms.Panel()
         Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.CbOuvrirPdf = New System.Windows.Forms.CheckBox()
         Me.CbEnregPdf = New System.Windows.Forms.CheckBox()
-        Me.DtpDateDebut = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.DtpDateSign = New System.Windows.Forms.DateTimePicker()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.TbDateFin = New System.Windows.Forms.TextBox()
         Me.TbNbPlaces = New cimetiere.TextBoxInt()
         Me.TbMontant = New cimetiere.TextBoxFloat()
         Me.DgvEmplacements = New cimetiere.DataGridViewCustom()
@@ -293,17 +296,18 @@ Partial Class FormReservation
         Me.Button1.Text = "TESTINH"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'FPBLienCons
+        'BtAnnuler
         '
-        Me.FPBLienCons.BackColor = System.Drawing.Color.SeaGreen
-        Me.FPBLienCons.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBLienCons.Location = New System.Drawing.Point(438, 697)
-        Me.FPBLienCons.Margin = New System.Windows.Forms.Padding(4)
-        Me.FPBLienCons.Name = "FPBLienCons"
-        Me.FPBLienCons.Size = New System.Drawing.Size(132, 59)
-        Me.FPBLienCons.TabIndex = 139
-        Me.FPBLienCons.Text = "Annuler"
-        Me.FPBLienCons.UseVisualStyleBackColor = False
+        Me.BtAnnuler.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtAnnuler.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.BtAnnuler.ForeColor = System.Drawing.Color.Transparent
+        Me.BtAnnuler.Location = New System.Drawing.Point(438, 697)
+        Me.BtAnnuler.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtAnnuler.Name = "BtAnnuler"
+        Me.BtAnnuler.Size = New System.Drawing.Size(132, 59)
+        Me.BtAnnuler.TabIndex = 139
+        Me.BtAnnuler.Text = "Annuler"
+        Me.BtAnnuler.UseVisualStyleBackColor = False
         '
         'BtEnregistrer
         '
@@ -376,6 +380,8 @@ Partial Class FormReservation
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.SystemColors.Window
+        Me.GroupBox3.Controls.Add(Me.TbDateFin)
+        Me.GroupBox3.Controls.Add(Me.Label12)
         Me.GroupBox3.Controls.Add(Me.DtpDateDebut)
         Me.GroupBox3.Controls.Add(Me.Label2)
         Me.GroupBox3.Controls.Add(Me.TbNbPlaces)
@@ -391,6 +397,13 @@ Partial Class FormReservation
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Autres informations"
+        '
+        'DtpDateDebut
+        '
+        Me.DtpDateDebut.Location = New System.Drawing.Point(111, 23)
+        Me.DtpDateDebut.Name = "DtpDateDebut"
+        Me.DtpDateDebut.Size = New System.Drawing.Size(251, 22)
+        Me.DtpDateDebut.TabIndex = 174
         '
         'Label2
         '
@@ -435,32 +448,20 @@ Partial Class FormReservation
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel9.Controls.Add(Me.CbOuvrirPdf)
+        Me.Panel9.Controls.Add(Me.DtpDateSign)
+        Me.Panel9.Controls.Add(Me.Label4)
         Me.Panel9.Controls.Add(Me.CbEnregPdf)
         Me.Panel9.Location = New System.Drawing.Point(8, 7)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Size = New System.Drawing.Size(387, 62)
         Me.Panel9.TabIndex = 0
         '
-        'CbOuvrirPdf
-        '
-        Me.CbOuvrirPdf.AutoSize = True
-        Me.CbOuvrirPdf.Checked = True
-        Me.CbOuvrirPdf.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbOuvrirPdf.Location = New System.Drawing.Point(6, 35)
-        Me.CbOuvrirPdf.Margin = New System.Windows.Forms.Padding(4)
-        Me.CbOuvrirPdf.Name = "CbOuvrirPdf"
-        Me.CbOuvrirPdf.Size = New System.Drawing.Size(157, 21)
-        Me.CbOuvrirPdf.TabIndex = 9
-        Me.CbOuvrirPdf.Text = "Ouvrir le fichier PDF"
-        Me.CbOuvrirPdf.UseVisualStyleBackColor = True
-        '
         'CbEnregPdf
         '
         Me.CbEnregPdf.AutoSize = True
         Me.CbEnregPdf.Checked = True
         Me.CbEnregPdf.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbEnregPdf.Location = New System.Drawing.Point(6, 6)
+        Me.CbEnregPdf.Location = New System.Drawing.Point(9, 37)
         Me.CbEnregPdf.Margin = New System.Windows.Forms.Padding(4)
         Me.CbEnregPdf.Name = "CbEnregPdf"
         Me.CbEnregPdf.Size = New System.Drawing.Size(188, 21)
@@ -468,12 +469,39 @@ Partial Class FormReservation
         Me.CbEnregPdf.Text = "Enregistrer le fichier PDF"
         Me.CbEnregPdf.UseVisualStyleBackColor = True
         '
-        'DtpDateDebut
+        'Label4
         '
-        Me.DtpDateDebut.Location = New System.Drawing.Point(111, 23)
-        Me.DtpDateDebut.Name = "DtpDateDebut"
-        Me.DtpDateDebut.Size = New System.Drawing.Size(200, 22)
-        Me.DtpDateDebut.TabIndex = 174
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(9, 9)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(46, 17)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Fait le"
+        '
+        'DtpDateSign
+        '
+        Me.DtpDateSign.Location = New System.Drawing.Point(61, 7)
+        Me.DtpDateSign.Name = "DtpDateSign"
+        Me.DtpDateSign.ShowCheckBox = True
+        Me.DtpDateSign.Size = New System.Drawing.Size(250, 22)
+        Me.DtpDateSign.TabIndex = 10
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(377, 26)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(77, 17)
+        Me.Label12.TabIndex = 175
+        Me.Label12.Text = "Date de fin"
+        '
+        'TbDateFin
+        '
+        Me.TbDateFin.Location = New System.Drawing.Point(461, 23)
+        Me.TbDateFin.Name = "TbDateFin"
+        Me.TbDateFin.ReadOnly = True
+        Me.TbDateFin.Size = New System.Drawing.Size(159, 22)
+        Me.TbDateFin.TabIndex = 176
         '
         'TbNbPlaces
         '
@@ -607,12 +635,13 @@ Partial Class FormReservation
         Me.AutoScroll = True
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.CancelButton = Me.BtAnnuler
         Me.ClientSize = New System.Drawing.Size(1491, 807)
         Me.Controls.Add(Me.PanCbsPdf)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.BtEnregistrer)
-        Me.Controls.Add(Me.FPBLienCons)
+        Me.Controls.Add(Me.BtAnnuler)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -665,7 +694,7 @@ Partial Class FormReservation
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents GBListBenef As GroupBox
-    Friend WithEvents FPBLienCons As Button
+    Friend WithEvents BtAnnuler As Button
     Friend WithEvents BtEnregistrer As Button
     Friend WithEvents CtrlListeBenefs1 As CtrlListeBenefs
     Friend WithEvents Panel5 As Panel
@@ -679,7 +708,6 @@ Partial Class FormReservation
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents PanCbsPdf As Panel
     Friend WithEvents Panel9 As Panel
-    Friend WithEvents CbOuvrirPdf As CheckBox
     Friend WithEvents CbEnregPdf As CheckBox
     Friend WithEvents LbTypeConcession As ListBox
     Friend WithEvents Label2 As Label
@@ -693,4 +721,8 @@ Partial Class FormReservation
     Friend WithEvents ColEmplPlTotal As DataGridViewTextBoxColumn
     Friend WithEvents ColEmplClasse As DataGridViewTextBoxColumn
     Friend WithEvents DtpDateDebut As DateTimePicker
+    Friend WithEvents DtpDateSign As DateTimePicker
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents TbDateFin As TextBox
 End Class

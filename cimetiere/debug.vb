@@ -11,37 +11,6 @@ Public Class debug
         raoijer.ShowDialog()
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Using ctx As New CimEntities
-            Dim listeemplsàremplacerparunedatatable = (From em In ctx.Emplacements Take 350 Select New PlanCimetiere.emplacementtresclasse With {.Id = em.Id, .reference = em.Reference, .Coords = em.Coordonnees, .estloué = True, .nboccupants = 5, .nbplaces = 5}).ToList
-            PlanCimetiere1.ChangerImage("09pfuz.jpg", listeemplsàremplacerparunedatatable)
-        End Using
-    End Sub
-
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        Using ctx As New CimEntities
-            PlanCimetiere1.ChangerImage("107.jpg", True)
-            'Dim cul = From em In ctx.Emplacements Skip 350 Take 350
-        End Using
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        PlanCimetiere1.ChangerImage(CType(Nothing, Image), True)
-    End Sub
-
-
-    Private Sub planemplclic(sender As PlanCimetiere, e As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.EmplClicked
-        MessageBox.Show("clic, sél = " & e.Emplacement.Id)
-    End Sub
-
-    Private Sub planempldbclic(sender As PlanCimetiere, e As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.EmplDoubleClicked
-        MessageBox.Show("dbl clic, sél = " & e.Emplacement.Id)
-    End Sub
-
-    Private Sub planemplselchg(sender As PlanCimetiere, e As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.SelectionChanged
-        MessageBox.Show("sel chg, sél = " & If(e.Emplacement IsNot Nothing, e.Emplacement.Id & " " & e.Emplacement.reference, "rien"))
-    End Sub
-
     Private Sub nvcon_Click(sender As Object, e As EventArgs) Handles nvcon.Click
         Dim aer As New FormReservation
         aer.ShowDialog()
@@ -63,7 +32,8 @@ Public Class debug
 
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
         Dim pdf As New ExporteurPdf
-        pdf.CreePdfReservation(Bdd.GetRow("concessionnaires", "csnr_id", 27), Bdd.GetRow("t_loc_ville", "locville_id", "4"), Bdd.GetRow("t_pays", "Pays_id", 5), TTypeCsnInh.UrneColomb30Ans, Bdd.Query("SELECT * FROM beneficiaires WHERE ben_id > 15 LIMIT 3"), "Orienté sud si possible", Today)
+        'pdf.CreePdfReservation(Bdd.GetRow("concessionnaires", "csnr_id", 27), TTypeCsnInh.UrneColomb30Ans, Bdd.Query("SELECT * FROM beneficiaires WHERE ben_id > 15 LIMIT 3"), "Orienté sud si possible", Today)
+        pdf.CreePdfReservation()
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
@@ -120,7 +90,31 @@ Public Class debug
         Dim benefs = Nothing
 
 
-        p.CreePdfInhum(def, villedef, paysdef, dmdr, typecsnsollic, datesign, refemplcsnexis, defsdeja, csnr, villecsnr, payscsnr, benefs)
+        p.CreerPdfInhum(def, dmdr, typecsnsollic, datesign, refemplcsnexis, defsdeja, csnr, benefs)
+    End Sub
+
+    Private Sub debug_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        PlanCimetiere1.NomParcelleAffichee = "A1"
+    End Sub
+
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        PlanCimetiere1.NomParcelleAffichee = "A2"
+    End Sub
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        PlanCimetiere1.NomParcelleAffichee = "A3"
+    End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        PlanCimetiere1.SetEmplacements(Bdd.GetTable("emplacements"))
+
+    End Sub
+
+    Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
+        PlanCimetiere1.Font = New Font("Calibri", 18)
     End Sub
 End Class
 

@@ -8,6 +8,21 @@ Imports System.Text
 Imports System.Runtime.CompilerServices
 
 Module Bdd
+
+    Private Pks As Dictionary(Of String, String) = New Dictionary(Of String, String) From {
+        {"beneficiaires", "ben_id"},
+        {"concessionnaires", "csnr_id"},
+        {"concessions", "con_id"},
+        {"defunts", "def_id"},
+        {"emplacements", "empl_id"},
+        {"personnes_contact", "pc_id"},
+        {"t_commentaire", "com_id"},
+        {"t_histoire", "h_id"},
+        {"t_loc_ville", "locville_id"},
+        {"t_login", "id"},
+        {"t_pays", "Pays_id"}
+    }
+
     Private Const ConnStr As String = "Server=" & ConfigLocale.BddHost & ";User Id=" & ConfigLocale.BddUser & "; Password=" & ConfigLocale.BddPass & "; Database=" & ConfigLocale.BddNom & "; Pooling=false"
     Private Connexion As New MySqlConnection With {.ConnectionString = ConnStr}
 
@@ -68,9 +83,19 @@ Module Bdd
         Return Query("SELECT * FROM " & nomtable)
     End Function
 
-    Public Function GetRow(nomtable As String, nompk As String, id As Integer) As DataRow
-        Dim res = Query("SELECT * FROM " & nomtable & " WHERE " & nompk & "  = " & id)
+    Public Function GetRow(nomtable As String, colcritere As String, valeurcherchee As Object) As DataRow
+        Dim res = Query("SELECT * FROM " & nomtable & " WHERE " & colcritere & "  = """ & Convert.ToString(valeurcherchee) & """")
         If res.Rows.Count > 0 Then Return res.Rows(0) Else Return Nothing
+    End Function
+
+    ' variante de GetRow, récupère la pk dans Me.Pks pour qu'on ne doive pas la préciser
+    Public Function GetRow(nomtable As String, id As Integer) As DataRow
+        If Not Bdd.Pks.ContainsKey(nomtable) Then
+            Throw New ArgumentException
+        Else
+            Dim nompk = Bdd.Pks(nomtable)
+            Return GetRow(nomtable, nompk, id)
+        End If
     End Function
 
 
@@ -174,8 +199,6 @@ Module Bdd
 
         End Try
 
-        'MessageBox.Show(requete)
-
     End Function
 
     Private Function Inc(ByRef i As Integer)
@@ -200,6 +223,26 @@ Module Bdd
 
     Function GetRowVide(nomtable As String) As DataRow
         Return GetTableVide(nomtable).NewRow
+    End Function
+
+    ' il n'y a pas de table demandeur en bdd, mais un "type" de row dmdr peut quand même être utilisé pour transmettre des données à des fonctions
+    ' où demandeur a
+    'dmdr_nom_complet
+    'dmdr_tel
+    'dmdr_adresse
+    'dmdr_nomville
+    'dmdr_cp(Int?)
+    'dmdr_nompays
+    Function GetRowDmdrVide() As DataRow
+        Dim tdm = New DataTable()
+        tdm.Columns.AddRange({New DataColumn("dmdr_nomcomplet"), New DataColumn("dmdr_tel"), New DataColumn("dmdr_adresse"), New DataColumn("dmdr_nomville"), New DataColumn("dmdr_cp"), New DataColumn("dmdr_nompays")})
+        Dim Demandeur = tdm.NewRow
+        Demandeur("dmdr_nomcomplet") = ""
+        Demandeur("dmdr_tel") = ""
+        Demandeur("dmdr_adresse") = ""
+        Demandeur("dmdr_nomville") = ""
+        Demandeur("dmdr_nompays") = ""
+        Return Demandeur
     End Function
 
     ' met à jour une même colonne dans plusieurs enregistrements, avec la même valeur pour toutes

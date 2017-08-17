@@ -30,7 +30,7 @@ Partial Class PlanCimetiere
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.DoubleBuffered = True
-        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.8!)
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "PlanCimetiere"
         Me.Size = New System.Drawing.Size(584, 515)
