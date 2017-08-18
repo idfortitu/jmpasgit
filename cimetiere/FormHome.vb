@@ -1,4 +1,5 @@
-﻿Public Class FormHome
+﻿
+Public Class FormHome
     Private Sub FormHome_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Using FormLogin As New FormLogin
             Dim ResultatLogin = FormLogin.ShowDialog()
@@ -6,6 +7,7 @@
                 Close()
             End If
         End Using
+        LabWelkom.Text = "Bonjour " & user
     End Sub
 
     Private Sub BtNotifsMasquer_Click(sender As Object, e As EventArgs) Handles BtNotifsMasquer.Click

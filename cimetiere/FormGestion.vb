@@ -9,8 +9,29 @@ Public Class FormGestion
     Public dtBeneficiaireForm As DataTable
     Dim screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
     Dim screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
+    Dim boutongestion = 0
+
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+        If user = "User" Then
+                FPBAjouter.Hide()
+                FPBModifier.Hide()
+                FPBSupprimer.Hide()
+                BModifGestionPers.Hide()
+                BmodifConsBenef.Hide()
+                BmodifCons.Hide()
+                BSupGestionPers.Hide()
+                BSupGestionPersBenef.Hide()
+                BSuppConsBenef.Hide()
+                BSuppCons.Hide()
+                BAddConsBenef.Hide()
+                BModifGestionPersBenef.Hide()
+            End If
+
+        TextBoxDefuntRO()
+        TextBoxConsRO()
+        TextBoxPersRO()
         Panel10.Hide()
         Panel3.Hide()
         Panel1.Hide()
@@ -56,6 +77,7 @@ Public Class FormGestion
         Panel1.Show()
         Lchargementdonnee.Hide()
         TabControl1.Show()
+
     End Sub
 
 
@@ -490,5 +512,324 @@ Public Class FormGestion
         Source.Filter = "convert([def_id],'System.String') LIKE '" & id & "'"
     End Sub
 
+    Private Sub TextBoxConsRO()
+        FCTBnumero.ReadOnly = True
+        FCTBnumero.Cursor = Cursors.No
+        If FCTBnumero.BackColor <> SystemColors.Window Then FCTBnumero.BackColor = SystemColors.Window
+        FCTBPlaceLibre.ReadOnly = True
+        FCTBPlaceLibre.Cursor = Cursors.No
+        If FCTBPlaceLibre.BackColor <> SystemColors.Window Then FCTBPlaceLibre.BackColor = SystemColors.Window
+        FCTBPlaceOccupe.ReadOnly = True
+        FCTBPlaceOccupe.Cursor = Cursors.No
+        If FCTBPlaceOccupe.BackColor <> SystemColors.Window Then FCTBPlaceOccupe.BackColor = SystemColors.Window
+        FCTBType.ReadOnly = True
+        FCTBType.Cursor = Cursors.No
+        If FCTBType.BackColor <> SystemColors.Window Then FCTBType.BackColor = SystemColors.Window
+        FCTBMonumentClasse.ReadOnly = True
+        FCTBMonumentClasse.Cursor = Cursors.No
+        If FCTBMonumentClasse.BackColor <> SystemColors.Window Then FCTBMonumentClasse.BackColor = SystemColors.Window
+        FCTBHistoire.ReadOnly = True
+        FCTBHistoire.Cursor = Cursors.No
+        If FCTBHistoire.BackColor <> SystemColors.Window Then FCTBHistoire.BackColor = SystemColors.Window
+        FCTBEmplacement.ReadOnly = True
+        FCTBEmplacement.Cursor = Cursors.No
+        If FCTBEmplacement.BackColor <> SystemColors.Window Then FCTBEmplacement.BackColor = SystemColors.Window
+        FCTBDateFin.ReadOnly = True
+        FCTBDateFin.Cursor = Cursors.No
+        If FCTBDateFin.BackColor <> SystemColors.Window Then FCTBDateFin.BackColor = SystemColors.Window
+        FCTBDateDeb.ReadOnly = True
+        FCTBDateDeb.Cursor = Cursors.No
+        If FCTBDateDeb.BackColor <> SystemColors.Window Then FCTBDateDeb.BackColor = SystemColors.Window
+        FCTBCommentaire.ReadOnly = True
+        FCTBCommentaire.Cursor = Cursors.No
+        If FCTBCommentaire.BackColor <> SystemColors.Window Then FCTBCommentaire.BackColor = SystemColors.Window
+        TBconsBenefadress.ReadOnly = True
+        TBconsBenefadress.Cursor = Cursors.No
+        If TBconsBenefadress.BackColor <> SystemColors.Window Then TBconsBenefadress.BackColor = SystemColors.Window
+        TBconsBenefcodepostal.ReadOnly = True
+        TBconsBenefcodepostal.Cursor = Cursors.No
+        If TBconsBenefcodepostal.BackColor <> SystemColors.Window Then TBconsBenefcodepostal.BackColor = SystemColors.Window
+        TBconsBenefdatenaiss.ReadOnly = True
+        TBconsBenefdatenaiss.Cursor = Cursors.No
+        If TBconsBenefdatenaiss.BackColor <> SystemColors.Window Then TBconsBenefdatenaiss.BackColor = SystemColors.Window
+        TBconsBenefnom.ReadOnly = True
+        TBconsBenefnom.Cursor = Cursors.No
+        If TBconsBenefnom.BackColor <> SystemColors.Window Then TBconsBenefnom.BackColor = SystemColors.Window
+        TBconsBenefpays.ReadOnly = True
+        TBconsBenefpays.Cursor = Cursors.No
+        If TBconsBenefpays.BackColor <> SystemColors.Window Then TBconsBenefpays.BackColor = SystemColors.Window
+        TBconsBenefprenom.ReadOnly = True
+        TBconsBenefprenom.Cursor = Cursors.No
+        If TBconsBenefprenom.BackColor <> SystemColors.Window Then TBconsBenefprenom.BackColor = SystemColors.Window
+        TBconsBenefville.ReadOnly = True
+        TBconsBenefville.Cursor = Cursors.No
+        If TBconsBenefville.BackColor <> SystemColors.Window Then TBconsBenefville.BackColor = SystemColors.Window
+    End Sub
+    Private Sub TextBoxDefuntRO()
+        FPTBNom.ReadOnly = True
+        FPTBNom.Cursor = Cursors.No
+        If FPTBNom.BackColor <> SystemColors.Window Then FPTBNom.BackColor = SystemColors.Window
+        FPTBPays.ReadOnly = True
+        FPTBPays.Cursor = Cursors.No
+        If FPTBPays.BackColor <> SystemColors.Window Then FPTBPays.BackColor = SystemColors.Window
+        FPTBPrenom.ReadOnly = True
+        FPTBPrenom.Cursor = Cursors.No
+        If FPTBPrenom.BackColor <> SystemColors.Window Then FPTBPrenom.BackColor = SystemColors.Window
+        FPTBSepulture.ReadOnly = True
+        FPTBSepulture.Cursor = Cursors.No
+        If FPTBSepulture.BackColor <> SystemColors.Window Then FPTBSepulture.BackColor = SystemColors.Window
+        FPTBVille.ReadOnly = True
+        FPTBVille.Cursor = Cursors.No
+        If FPTBVille.BackColor <> SystemColors.Window Then FPTBVille.BackColor = SystemColors.Window
+        FPTBLieuNaiss.ReadOnly = True
+        FPTBLieuNaiss.Cursor = Cursors.No
+        If FPTBLieuNaiss.BackColor <> SystemColors.Window Then FPTBLieuNaiss.BackColor = SystemColors.Window
+        FPTBEtatCivil.ReadOnly = True
+        FPTBEtatCivil.Cursor = Cursors.No
+        If FPTBEtatCivil.BackColor <> SystemColors.Window Then FPTBEtatCivil.BackColor = SystemColors.Window
+        FPTBEmplacement.ReadOnly = True
+        FPTBEmplacement.Cursor = Cursors.No
+        If FPTBEmplacement.BackColor <> SystemColors.Window Then FPTBEmplacement.BackColor = SystemColors.Window
+        FPTBDateNaiss.ReadOnly = True
+        FPTBDateNaiss.Cursor = Cursors.No
+        If FPTBDateNaiss.BackColor <> SystemColors.Window Then FPTBDateNaiss.BackColor = SystemColors.Window
+        FPTBDateM.ReadOnly = True
+        FPTBDateM.Cursor = Cursors.No
+        If FPTBDateM.BackColor <> SystemColors.Window Then FPTBDateM.BackColor = SystemColors.Window
+        FPTBDateE.ReadOnly = True
+        FPTBDateE.Cursor = Cursors.No
+        If FPTBDateE.BackColor <> SystemColors.Window Then FPTBDateE.BackColor = SystemColors.Window
+        FPTBCodePostal.ReadOnly = True
+        FPTBCodePostal.Cursor = Cursors.No
+        If FPTBCodePostal.BackColor <> SystemColors.Window Then FPTBCodePostal.BackColor = SystemColors.Window
+        FPTBCodeLieu.ReadOnly = True
+        FPTBCodeLieu.Cursor = Cursors.No
+        If FPTBCodeLieu.BackColor <> SystemColors.Window Then FPTBCodeLieu.BackColor = SystemColors.Window
+        FPTBAdresse.ReadOnly = True
+        FPTBAdresse.Cursor = Cursors.No
+        If FPTBAdresse.BackColor <> SystemColors.Window Then FPTBAdresse.BackColor = SystemColors.Window
+    End Sub
 
+    Private Sub TextBoxPersRO()
+        TBPersNom.ReadOnly = True
+        TBPersNom.Cursor = Cursors.No
+        If TBPersNom.BackColor <> SystemColors.Window Then TBPersNom.BackColor = SystemColors.Window
+        TBPersNumNational.ReadOnly = True
+        TBPersNumNational.Cursor = Cursors.No
+        If TBPersNumNational.BackColor <> SystemColors.Window Then TBPersNumNational.BackColor = SystemColors.Window
+        TBPersPays.ReadOnly = True
+        TBPersPays.Cursor = Cursors.No
+        If TBPersPays.BackColor <> SystemColors.Window Then TBPersPays.BackColor = SystemColors.Window
+        TBPersPrenom.ReadOnly = True
+        TBPersPrenom.Cursor = Cursors.No
+        If TBPersPrenom.BackColor <> SystemColors.Window Then TBPersPrenom.BackColor = SystemColors.Window
+        TBPersTel.ReadOnly = True
+        TBPersTel.Cursor = Cursors.No
+        If TBPersTel.BackColor <> SystemColors.Window Then TBPersTel.BackColor = SystemColors.Window
+        TBPersVille.ReadOnly = True
+        TBPersVille.Cursor = Cursors.No
+        If TBPersVille.BackColor <> SystemColors.Window Then TBPersVille.BackColor = SystemColors.Window
+        TBPersDN.ReadOnly = True
+        TBPersDN.Cursor = Cursors.No
+        If TBPersDN.BackColor <> SystemColors.Window Then TBPersDN.BackColor = SystemColors.Window
+        TBPersCodePostal.ReadOnly = True
+        TBPersCodePostal.Cursor = Cursors.No
+        If TBPersCodePostal.BackColor <> SystemColors.Window Then TBPersCodePostal.BackColor = SystemColors.Window
+        TBPersAdress.ReadOnly = True
+        TBPersAdress.Cursor = Cursors.No
+        If TBPersAdress.BackColor <> SystemColors.Window Then TBPersAdress.BackColor = SystemColors.Window
+
+    End Sub
+
+    Private Sub TextBoxPersUpd()
+        TBPersNom.ReadOnly = False
+        TBPersNom.Cursor = Cursors.IBeam
+        TBPersNumNational.ReadOnly = False
+        TBPersNumNational.Cursor = Cursors.IBeam
+        TBPersPays.ReadOnly = False
+        TBPersPays.Cursor = Cursors.IBeam
+        TBPersPrenom.ReadOnly = False
+        TBPersPrenom.Cursor = Cursors.IBeam
+        TBPersTel.ReadOnly = False
+        TBPersTel.Cursor = Cursors.IBeam
+        TBPersVille.ReadOnly = False
+        TBPersVille.Cursor = Cursors.IBeam
+        TBPersDN.ReadOnly = False
+        TBPersDN.Cursor = Cursors.IBeam
+        TBPersCodePostal.ReadOnly = False
+        TBPersCodePostal.Cursor = Cursors.IBeam
+        TBPersAdress.ReadOnly = False
+        TBPersAdress.Cursor = Cursors.IBeam
+    End Sub
+
+    Private Sub TextBoxDefuntUpd()
+        FPTBNom.ReadOnly = False
+        FPTBNom.Cursor = Cursors.IBeam
+        FPTBPays.ReadOnly = False
+        FPTBPays.Cursor = Cursors.IBeam
+        FPTBPrenom.ReadOnly = False
+        FPTBPrenom.Cursor = Cursors.IBeam
+        FPTBSepulture.ReadOnly = False
+        FPTBSepulture.Cursor = Cursors.IBeam
+        FPTBVille.ReadOnly = False
+        FPTBVille.Cursor = Cursors.IBeam
+        FPTBLieuNaiss.ReadOnly = False
+        FPTBLieuNaiss.Cursor = Cursors.IBeam
+        FPTBEtatCivil.ReadOnly = False
+        FPTBEtatCivil.Cursor = Cursors.IBeam
+        FPTBEmplacement.ReadOnly = False
+        FPTBEmplacement.Cursor = Cursors.IBeam
+        FPTBDateNaiss.ReadOnly = False
+        FPTBDateNaiss.Cursor = Cursors.IBeam
+        FPTBDateM.ReadOnly = False
+        FPTBDateM.Cursor = Cursors.IBeam
+        FPTBDateE.ReadOnly = False
+        FPTBDateE.Cursor = Cursors.IBeam
+        FPTBCodePostal.ReadOnly = False
+        FPTBCodePostal.Cursor = Cursors.IBeam
+        FPTBCodeLieu.ReadOnly = False
+        FPTBCodeLieu.Cursor = Cursors.IBeam
+        FPTBAdresse.ReadOnly = False
+        FPTBAdresse.Cursor = Cursors.IBeam
+    End Sub
+
+    Private Sub TextBoxConsUpd()
+        FCTBnumero.ReadOnly = False
+        FCTBnumero.Cursor = Cursors.IBeam
+        FCTBPlaceLibre.ReadOnly = False
+        FCTBPlaceLibre.Cursor = Cursors.IBeam
+        FCTBPlaceOccupe.ReadOnly = False
+        FCTBPlaceOccupe.Cursor = Cursors.IBeam
+        FCTBType.ReadOnly = False
+        FCTBType.Cursor = Cursors.IBeam
+        FCTBMonumentClasse.ReadOnly = False
+        FCTBMonumentClasse.Cursor = Cursors.IBeam
+        FCTBHistoire.ReadOnly = False
+        FCTBHistoire.Cursor = Cursors.IBeam
+        FCTBEmplacement.ReadOnly = False
+        FCTBEmplacement.Cursor = Cursors.IBeam
+        FCTBDateFin.ReadOnly = False
+        FCTBDateFin.Cursor = Cursors.IBeam
+        FCTBDateDeb.ReadOnly = False
+        FCTBDateDeb.Cursor = Cursors.IBeam
+        FCTBCommentaire.ReadOnly = False
+        FCTBCommentaire.Cursor = Cursors.IBeam
+    End Sub
+
+    Private Sub TextBoxConsBenefUpd()
+        TBconsBenefadress.ReadOnly = False
+        TBconsBenefadress.Cursor = Cursors.IBeam
+        TBconsBenefcodepostal.ReadOnly = False
+        TBconsBenefcodepostal.Cursor = Cursors.IBeam
+        TBconsBenefdatenaiss.ReadOnly = False
+        TBconsBenefdatenaiss.Cursor = Cursors.IBeam
+        TBconsBenefnom.ReadOnly = False
+        TBconsBenefnom.Cursor = Cursors.IBeam
+        TBconsBenefpays.ReadOnly = False
+        TBconsBenefpays.Cursor = Cursors.IBeam
+        TBconsBenefprenom.ReadOnly = False
+        TBconsBenefprenom.Cursor = Cursors.IBeam
+        TBconsBenefville.ReadOnly = False
+        TBconsBenefville.Cursor = Cursors.IBeam
+    End Sub
+
+    Private Sub FPBModifier_Click(sender As Object, e As EventArgs) Handles FPBModifier.Click
+        If boutongestion = 0 Then
+            TextBoxDefuntUpd()
+            boutongestion = 1
+            FPBModifier.Text = "Sauvegarder"
+            TabControl1.TabPages(1).Enabled = False
+            TabControl1.TabPages(2).Enabled = False
+        Else
+            Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir effectuer cette modification ?", "Confirmation", MessageBoxButtons.YesNo)
+            If result = DialogResult.No Then
+                boutongestion = 0
+                FPBModifier.Text = "Modifier"
+                TextBoxDefuntRO()
+                TabControl1.TabPages(1).Enabled = True
+                TabControl1.TabPages(2).Enabled = True
+            ElseIf result = DialogResult.Yes Then
+                boutongestion = 0
+                FPBModifier.Text = "Modifier"
+                TextBoxDefuntRO()
+                TabControl1.TabPages(1).Enabled = True
+                TabControl1.TabPages(2).Enabled = True
+            End If
+        End If
+    End Sub
+
+    Private Sub BmodifCons_Click(sender As Object, e As EventArgs) Handles BmodifCons.Click
+        If boutongestion = 0 Then
+            TextBoxConsUpd()
+            boutongestion = 1
+            BmodifCons.Text = "Sauvegarder"
+            TabControl1.TabPages(0).Enabled = False
+            TabControl1.TabPages(2).Enabled = False
+        Else
+            Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir effectuer cette modification ?", "Confirmation", MessageBoxButtons.YesNo)
+            If result = DialogResult.No Then
+                boutongestion = 0
+                BmodifCons.Text = "Modifier"
+                TextBoxConsRO()
+                TabControl1.TabPages(0).Enabled = True
+                TabControl1.TabPages(2).Enabled = True
+            ElseIf result = DialogResult.Yes Then
+                boutongestion = 0
+                BmodifCons.Text = "Modifier"
+                TextBoxConsRO()
+                TabControl1.TabPages(0).Enabled = True
+                TabControl1.TabPages(2).Enabled = True
+            End If
+        End If
+    End Sub
+
+    Private Sub BmodifConsBenef_Click(sender As Object, e As EventArgs) Handles BmodifConsBenef.Click
+        If boutongestion = 0 Then
+            TextBoxConsBenefUpd()
+            boutongestion = 1
+            BmodifConsBenef.Text = "Sauvegarder"
+            TabControl1.TabPages(0).Enabled = False
+            TabControl1.TabPages(2).Enabled = False
+        Else
+            Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir effectuer cette modification ?", "Confirmation", MessageBoxButtons.YesNo)
+            If result = DialogResult.No Then
+                boutongestion = 0
+                BmodifConsBenef.Text = "Modifier"
+                TextBoxConsRO()
+                TabControl1.TabPages(0).Enabled = True
+                TabControl1.TabPages(2).Enabled = True
+            ElseIf result = DialogResult.Yes Then
+                boutongestion = 0
+                BmodifConsBenef.Text = "Modifier"
+                TextBoxConsRO()
+                TabControl1.TabPages(0).Enabled = True
+                TabControl1.TabPages(2).Enabled = True
+            End If
+        End If
+    End Sub
+
+    Private Sub BModifGestionPers_Click(sender As Object, e As EventArgs) Handles BModifGestionPers.Click
+        If boutongestion = 0 Then
+            TextBoxPersUpd()
+            boutongestion = 1
+            BModifGestionPers.Text = "Sauvegarder"
+            TabControl1.TabPages(0).Enabled = False
+            TabControl1.TabPages(1).Enabled = False
+        Else
+            Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir effectuer cette modification ?", "Confirmation", MessageBoxButtons.YesNo)
+            If result = DialogResult.No Then
+                boutongestion = 0
+                BModifGestionPers.Text = "Modifier"
+                TextBoxPersRO()
+                TabControl1.TabPages(0).Enabled = True
+                TabControl1.TabPages(1).Enabled = True
+            ElseIf result = DialogResult.Yes Then
+                boutongestion = 0
+                BModifGestionPers.Text = "Modifier"
+                TextBoxPersRO()
+                TabControl1.TabPages(0).Enabled = True
+                TabControl1.TabPages(1).Enabled = True
+            End If
+        End If
+    End Sub
 End Class

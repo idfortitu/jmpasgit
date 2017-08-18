@@ -163,7 +163,7 @@ Partial Class FormHome
         Me.LabWelkom.AutoSize = True
         Me.LabWelkom.BackColor = System.Drawing.Color.Transparent
         Me.LabWelkom.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabWelkom.Location = New System.Drawing.Point(613, 1)
+        Me.LabWelkom.Location = New System.Drawing.Point(610, 9)
         Me.LabWelkom.Name = "LabWelkom"
         Me.LabWelkom.Size = New System.Drawing.Size(100, 18)
         Me.LabWelkom.TabIndex = 71
