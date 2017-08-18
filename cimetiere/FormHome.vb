@@ -23,18 +23,30 @@ Public Class FormHome
     End Sub
 
     Private Sub BtDéclarationDécès_Click(sender As Object, e As EventArgs) Handles BtDéclarationDécès.Click
-        Dim aer As New FormReservation
-        aer.ShowDialog()
+        If user = "User" Then
+            MessageBox.Show("Erreur d'autorisation", "Erreur")
+        Else
+            Dim aer As New FormReservation
+            aer.ShowDialog()
+        End If
     End Sub
 
     Private Sub BtRéserverCon_Click(sender As Object, e As EventArgs) Handles BtRéserverCon.Click
-        Dim res As New FormReservation
-        res.ShowDialog()
+        If user = "User" Then
+            MessageBox.Show("Erreur d'autorisation", "Erreur")
+        Else
+            Dim res As New FormReservation
+            res.ShowDialog()
+        End If
     End Sub
 
     Private Sub BtProlongation_Click(sender As Object, e As EventArgs) Handles BtProlongation.Click
-        Dim a As New FormProlong
-        a.ShowDialog()
+        If user = "User" Then
+            MessageBox.Show("Erreur d'autorisation", "Erreur")
+        Else
+            Dim a As New FormProlong
+            a.ShowDialog()
+        End If
     End Sub
 
     Private Sub BtConstatAbandon_Click(sender As Object, e As EventArgs) Handles BtConstatAbandon.Click
