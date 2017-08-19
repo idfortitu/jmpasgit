@@ -143,18 +143,13 @@ Public Class debug
         f.ShowDialog()
     End Sub
 
-    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
-        Dim f As New FormEditEmplacement(34)
-        f.ShowDialog()
-
-    End Sub
 
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
         'PlanCimetiere1.Size = New Size(PlanCimetiere1.Width * 0.9, PlanCimetiere1.Height * 0.9)
         PlanCimetiere1.Zoom += 0.1
     End Sub
 
-    Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+    Private Sub Button22_Click(sender As Object, e As EventArgs)
         PlanCimetiere1.MettreALEchelleCoordsEmplacements()
     End Sub
 

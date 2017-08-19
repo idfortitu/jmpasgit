@@ -13,6 +13,7 @@ cimetiere/ConfigLocale.vb
 *.userprefs
 
 [Dd]ebug/*.exe
+
 [Dd]ebug/*.pdb
 [Dd]ebug/*.manifest
 [Dd]ebug/*.xml
@@ -26,6 +27,7 @@ bld/
 #[Bb]in/
 [Oo]bj/
 [Ll]og/
+cimetiere/bin/Debug/cimetiere.exe
 
 
 # Visual Studio 2015 cache/options directory
@@ -203,4 +205,3 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .vs/cimetiere/v14/.suo
-*.exe

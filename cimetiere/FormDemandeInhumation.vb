@@ -403,7 +403,7 @@
         Static CacheEmplsNonLoues As DataTable
 
         If CacheEmplsNonLoues Is Nothing Then
-            CacheEmplsNonLoues = Bdd.Query("SELECT ((emplacements.empl_id,empl_reference,empl_nb_places, empl_monum_classe, COUNT(def_id) AS empl_nb_defunts" &
+            CacheEmplsNonLoues = Bdd.Query("SELECT emplacements.empl_id,empl_reference,empl_nb_places, empl_monum_classe, COUNT(def_id) AS empl_nb_defunts" &
                                            " FROM emplacements" &
                                            " LEFT OUTER JOIN concessions ON concessions.empl_id=emplacements.empl_id" &
                                            " LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id" &

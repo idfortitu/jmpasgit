@@ -25,15 +25,10 @@ Partial Class debug
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(debug))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.nvcon = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
@@ -43,9 +38,7 @@ Partial Class debug
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button19 = New System.Windows.Forms.Button()
-        Me.Button20 = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
-        Me.Button22 = New System.Windows.Forms.Button()
         Me.Button23 = New System.Windows.Forms.Button()
         Me.Button24 = New System.Windows.Forms.Button()
         Me.PanelCustom1 = New cimetiere.PlanCimConteneur()
@@ -70,42 +63,6 @@ Partial Class debug
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "editdef"
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(1118, 324)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 59
-        Me.Button3.Text = "Habiters"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(811, 144)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(129, 23)
-        Me.Button4.TabIndex = 60
-        Me.Button4.Text = "virer bkgrnd"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(814, 64)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 23)
-        Me.Button5.TabIndex = 62
-        Me.Button5.Text = "img1"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(831, 115)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 23)
-        Me.Button6.TabIndex = 63
-        Me.Button6.Text = "img 2"
-        Me.Button6.UseVisualStyleBackColor = True
         '
         'nvcon
         '
@@ -142,15 +99,6 @@ Partial Class debug
         Me.Button9.TabIndex = 67
         Me.Button9.Text = "connstr"
         Me.Button9.UseVisualStyleBackColor = True
-        '
-        'Button10
-        '
-        Me.Button10.Location = New System.Drawing.Point(878, 216)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(75, 23)
-        Me.Button10.TabIndex = 68
-        Me.Button10.Text = "datables"
-        Me.Button10.UseVisualStyleBackColor = True
         '
         'Button11
         '
@@ -233,15 +181,6 @@ Partial Class debug
         Me.Button19.Text = "choixempl"
         Me.Button19.UseVisualStyleBackColor = True
         '
-        'Button20
-        '
-        Me.Button20.Location = New System.Drawing.Point(1191, 523)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(144, 51)
-        Me.Button20.TabIndex = 78
-        Me.Button20.Text = "panel"
-        Me.Button20.UseVisualStyleBackColor = True
-        '
         'Button21
         '
         Me.Button21.Location = New System.Drawing.Point(344, 471)
@@ -250,15 +189,6 @@ Partial Class debug
         Me.Button21.TabIndex = 80
         Me.Button21.Text = "zoom +"
         Me.Button21.UseVisualStyleBackColor = True
-        '
-        'Button22
-        '
-        Me.Button22.Location = New System.Drawing.Point(157, 521)
-        Me.Button22.Name = "Button22"
-        Me.Button22.Size = New System.Drawing.Size(75, 23)
-        Me.Button22.TabIndex = 81
-        Me.Button22.Text = "màéchell"
-        Me.Button22.UseVisualStyleBackColor = True
         '
         'Button23
         '
@@ -311,9 +241,7 @@ Partial Class debug
         Me.Controls.Add(Me.Button24)
         Me.Controls.Add(Me.Button23)
         Me.Controls.Add(Me.PanelCustom1)
-        Me.Controls.Add(Me.Button22)
         Me.Controls.Add(Me.Button21)
-        Me.Controls.Add(Me.Button20)
         Me.Controls.Add(Me.Button19)
         Me.Controls.Add(Me.Button18)
         Me.Controls.Add(Me.Button17)
@@ -323,15 +251,10 @@ Partial Class debug
         Me.Controls.Add(Me.Button13)
         Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Button11)
-        Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.nvcon)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Name = "debug"
@@ -343,16 +266,11 @@ Partial Class debug
 
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button4 As Button
     Friend WithEvents PlanCimetiere1 As PlanCimetiere
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button6 As Button
     Friend WithEvents nvcon As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents Button8 As Button
     Friend WithEvents Button9 As Button
-    Friend WithEvents Button10 As Button
     Friend WithEvents Button11 As Button
     Friend WithEvents Button12 As Button
     Friend WithEvents Button13 As Button
@@ -362,9 +280,7 @@ Partial Class debug
     Friend WithEvents Button17 As Button
     Friend WithEvents Button18 As Button
     Friend WithEvents Button19 As Button
-    Friend WithEvents Button20 As Button
     Friend WithEvents Button21 As Button
-    Friend WithEvents Button22 As Button
     Friend WithEvents PanelCustom1 As PlanCimConteneur
     Friend WithEvents Button23 As Button
     Friend WithEvents Button24 As Button
