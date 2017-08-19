@@ -19,7 +19,7 @@
                     End If
 
                 End If
-                    Case RbNouvelleCon.Checked
+            Case RbNouvelleCon.Checked
                 'ChangerPage(TabP2NvCon)
                 'Dim f As New FormReservation
                 'f.ShowDialog()
@@ -403,7 +403,7 @@
         Static CacheEmplsNonLoues As DataTable
 
         If CacheEmplsNonLoues Is Nothing Then
-            CacheEmplsNonLoues = Bdd.Query("SELECT emplacements.empl_id,empl_reference,empl_nb_places, empl_monum_classe, COUNT(def_id) AS empl_nb_defunts" &
+            CacheEmplsNonLoues = Bdd.Query("SELECT ((emplacements.empl_id,empl_reference,empl_nb_places, empl_monum_classe, COUNT(def_id) AS empl_nb_defunts" &
                                            " FROM emplacements" &
                                            " LEFT OUTER JOIN concessions ON concessions.empl_id=emplacements.empl_id" &
                                            " LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id" &
@@ -478,15 +478,15 @@
                 Dim RowEmpl As DataRow
                 If LbTypeInhOrd.SelectedIndex <> 4 Then     ' si dispersion, on le mettra dans un emplacement spécial ayant la référence AIR
                     RowEmpl = CType(DgvEmplacementsPourInhOrd.SelectedRow.DataBoundItem, DataRowView).Row
-                Else
-                    RowEmpl = Bdd.GetRow("emplacements", "empl_reference", "AIR")
+                    'Else
+                    'RowEmpl = Bdd.GetRow("emplacements", "empl_reference", "AIR")
                 End If
-                Enregistrer(RowDef, RowDmdr, TypeInhOrd, DateSign, RowEmpl("empl_id"))
+                Enregistrer(RowDef, RowDmdr, TypeInhOrd, DateSign, If(RowEmpl IsNot Nothing, RowEmpl("empl_id"), Nothing))
 
                 ' pdf
                 Dim p As New ExporteurPdf
                 p.NomFic = NomficPdf
-                p.CreerPdfInhum(RowDef, RowDmdr, TypeInhOrd, TTypeInhCsnExistante.NonPrecise, DateSign, RowEmpl("empl_reference"))
+                p.CreerPdfInhum(RowDef, RowDmdr, TypeInhOrd, TTypeInhCsnExistante.NonPrecise, DateSign, if(rowempl IsNot nothing,RowEmpl("empl_reference"),""))
 
                 Shell("explorer.exe """ & NomficPdf & """")      ' À faire : ne pas ouvrir si fichier non sauvegardé (car erreur par exemple)
 
@@ -516,7 +516,7 @@
 
     ' code mis à part car appelé depuis plusieurs endroits
     ' les byref sont des sorties, elles permettent à l'appelant de récupérer les rows générée à partir des données du formulaire
-    Sub Enregistrer(ByRef RowDef As DataRow, ByRef RowDmdr As DataRow, ByRef TypeInhOrd As TTypeCsnInh, ByRef DateSign As Date?, IdEmpl As Integer)
+    Sub Enregistrer(ByRef RowDef As DataRow, ByRef RowDmdr As DataRow, ByRef TypeInhOrd As TTypeCsnInh, ByRef DateSign As Date?, IdEmpl As Integer?)
         RowDef = Bdd.GetRowVide("defunts")
         ' numéro LH
         If TbDefNumLh.Value IsNot Nothing Then
@@ -543,7 +543,7 @@
         RowDef("def_etat_civil_de") = CtrlDefEtatCiv.EtatCivilDe
 
         ' emplacement qui vient d'être alloué
-        RowDef("empl_id") = IdEmpl
+        RowDef("empl_id") = If(IdEmpl IsNot Nothing, IdEmpl, DBNull.Value)
 
         Bdd.Insert("defunts", RowDef)
 
@@ -605,7 +605,7 @@
     ' x) personne de contact
 
     Private Function GetTypeInhCsnExis()
-        If LbTypeInhCsnExis.SelectedIndex < -1 Then Return TTypeInhCsnExistante.NonPrecise
+        If LbTypeInhCsnExis.SelectedIndex < 0 Then Return TTypeInhCsnExistante.NonPrecise
         Return {TTypeInhCsnExistante.Urne, TTypeInhCsnExistante.Cercueil, TTypeInhCsnExistante.PleineTerre, TTypeInhCsnExistante.Caveau, TTypeInhCsnExistante.CelluleColombarium, TTypeInhCsnExistante.Cavurne} _
                   (LbTypeInhCsnExis.SelectedIndex)
     End Function

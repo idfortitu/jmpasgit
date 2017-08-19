@@ -144,7 +144,7 @@ Module Uzineagaz
 
     ' pour créer des listes d'un type anonyme
     Public Function ListeDeType(Of T)(ElemTemplate As T) As List(Of T)
-        Return New List(Of T)           ' astuce pour avoir une liste de type anonyme
+        Return New List(Of T)
     End Function
 
 
@@ -153,6 +153,21 @@ Module Uzineagaz
         Public Property Texte As String
         Public Property Valeur As T
     End Class
+
+    Public Function NomEtDatesDefunt(def As DataRow) As String
+        Dim res As String = def("def_prenom") & " " & def("def_nom")
+        If Not IsDBNull(def("def_date_naiss")) OrElse Not IsDBNull(def("def_date_deces")) Then
+            res &= " ("
+            res &= If(Not IsDBNull(def("def_date_naiss")), CType(def("def_date_naiss"), Date).Year, "?")
+            res &= " - "
+            res &= If(Not IsDBNull(def("def_date_deces")), CType(def("def_date_deces"), Date).Year, "?")
+            res &= ")"
+        End If
+        Return res
+    End Function
+
+
+
 
 End Module
 

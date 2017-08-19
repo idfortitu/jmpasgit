@@ -171,6 +171,12 @@
     <Compile Include="Defunt.vb">
       <DependentUpon>dmCimetiere.tt</DependentUpon>
     </Compile>
+    <Compile Include="dev_formplancimedit.Designer.vb">
+      <DependentUpon>dev_formplancimedit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dev_formplancimedit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dmCimetiere.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,6 +202,12 @@
       <DependentUpon>FDetails.vb</DependentUpon>
     </Compile>
     <Compile Include="FDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChoixEmplSurPlan.Designer.vb">
+      <DependentUpon>FormChoixEmplSurPlan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormChoixEmplSurPlan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormDemandeInhumation.Designer.vb">
@@ -283,6 +295,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PlanCimConteneur.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PanelEditBénéficiaire.Designer.vb">
       <DependentUpon>PanelEditBénéficiaire.vb</DependentUpon>
     </Compile>
@@ -326,11 +341,23 @@
     <Compile Include="PersonneContact.vb">
       <DependentUpon>dmCimetiere.tt</DependentUpon>
     </Compile>
+    <Compile Include="PlanCimEdit.designer.vb">
+      <DependentUpon>PlanCimEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PlanCimEdit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PlanCimetiere.Designer.vb">
       <DependentUpon>PlanCimetiere.vb</DependentUpon>
     </Compile>
     <Compile Include="PlanCimetiere.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PopupPlancim.Designer.vb">
+      <DependentUpon>PopupPlancim.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PopupPlancim.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SortableBindingList.vb" />
     <Compile Include="TextBoxDate.vb">
@@ -378,9 +405,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="debug.resx">
       <DependentUpon>debug.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dev_formplancimedit.resx">
+      <DependentUpon>dev_formplancimedit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FDetails.resx">
       <DependentUpon>FDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChoixEmplSurPlan.resx">
+      <DependentUpon>FormChoixEmplSurPlan.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDemandeInhumation.resx">
       <DependentUpon>FormDemandeInhumation.vb</DependentUpon>
@@ -436,8 +471,14 @@
     <EmbeddedResource Include="PanelEditPersonneContact.resx">
       <DependentUpon>PanelEditPersonneContact.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PlanCimEdit.resx">
+      <DependentUpon>PlanCimEdit.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlanCimetiere.resx">
       <DependentUpon>PlanCimetiere.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupPlancim.resx">
+      <DependentUpon>PopupPlancim.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCBenef.resx">
       <DependentUpon>UCBenef.vb</DependentUpon>
@@ -482,6 +523,8 @@
       <DependentUpon>dmCimetiere.edmx</DependentUpon>
       <LastGenOutput>dmCimetiere.vb</LastGenOutput>
     </Content>
+    <None Include="Resources\Note_32x.png" />
+    <None Include="Resources\Note_16x.png" />
     <None Include="Resources\moins.png" />
     <None Include="Resources\home3.jpg" />
     <None Include="Resources\fondformulaire.jpg" />

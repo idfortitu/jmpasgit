@@ -1,4 +1,5 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.ComponentModel
+Imports System.Runtime.InteropServices
 
 
 Public Class PlanCimetiere
@@ -31,6 +32,8 @@ Public Class PlanCimetiere
     Private Class InfosParcelle
         Public NomFicImg As String
         Public IdsEmpls As New List(Of Integer)
+        Public CoordsXOriginales As New List(Of List(Of Integer))
+        Public CoordsYOriginales As New List(Of List(Of Integer))
         Public CoordsX As New List(Of List(Of Integer))
         Public CoordsY As New List(Of List(Of Integer))
         Public RefsEmpls As New List(Of String)
@@ -44,6 +47,7 @@ Public Class PlanCimetiere
                 Return CacheBgImg
             End Get
         End Property
+        Public Enableds As New List(Of Boolean)
 
 
     End Class
@@ -56,7 +60,7 @@ Public Class PlanCimetiere
     ' - fonction publique pour recharger les données (pas les coords qui ne devraient pas changer), à défaut de faire un contrôle databound
 
 
-    Const COORDS_ECHELLE_BASE = 2000       ' les coordonnées des emplacements sont interprétées comme si l'image faisait 2000x2000, puis sont mises à l'échelle de la taille du contrôle
+    Private Const COORDS_ECHELLE_BASE = 2000       ' les coordonnées des emplacements sont interprétées comme si l'image faisait 2000x2000, puis sont mises à l'échelle de la taille du contrôle
 
     Private InfosParcelles As Dictionary(Of String, InfosParcelle) = New Dictionary(Of String, InfosParcelle) From {
         {"A1", New InfosParcelle With {.NomFicImg = "planA1.JPG"}},
@@ -77,11 +81,69 @@ Public Class PlanCimetiere
             Me.ParcelleAffichee = InfosParcelles(value)
             Me.EmplSelect = Nothing
             ChangerImage(ParcelleAffichee.BgImage)
+            Me.Zoom = Me.Zoom
             Me.Invalidate()
         End Set
     End Property
 
     Private ParcelleAffichee As InfosParcelle = InfosParcelles(_nomParcelleAffichee)
+
+    Private _zoom As Single = 1
+    ' change en fait la taille du contrôle, il faut que le plan soit mis dans un panel avec scrolling pour que le truc soit raisonnablement utilisable
+    <Category("Appearance")>
+    Public Property Zoom As Single
+        Get
+            Return _zoom
+        End Get
+        Set(value As Single)
+            If Not TailleAEteDefinie Then Exit Property            ' ne pas mettre ça entraîne un redimensionnement du contrôle à 0x0 ("taille originale" tant que celle-ci n'a pas été mesurée), dimensions qui seront par la suite ensuite officialisées en tant que taille originale, condamnant le contrôle à toujours faire 0x0
+            _zoom = value
+            Dim LargeurImg = ParcelleAffichee.BgImage.Width
+                Dim HauteurImg = ParcelleAffichee.BgImage.Height
+                Dim ratiol = LargeurImg / (LargeurOrig * _zoom)
+                Dim ratioh = HauteurImg / (HauteurOrig * _zoom)
+                'Dim ratiol = LargeurImg / LargeurOrig
+                'Dim ratioh = HauteurImg / HauteurOrig
+                Dim ratio = Math.Max(ratiol, ratioh)
+                LargeurImg /= ratio
+                HauteurImg /= ratio
+                PasToucheDimensionsOriginales = True
+                Me.Width = LargeurImg
+                Me.Height = HauteurImg
+                PasToucheDimensionsOriginales = False
+                Me.Invalidate()        ' nécess ?
+            '''''
+            ''Dim nvl = NouvelleImage.Width
+            ''Dim nvh = NouvelleImage.Height
+            'Dim ratiol = nvl / LargeurOrig
+            'Dim ratioh = nvh / HauteurOrig
+            ''If ratiol > ratioh Then ratioh = ratiol Else ratiol = ratioh
+            ''Dim ratio = If(ratiol > ratioh, ratiol, ratioh)
+            'Dim ratio = Math.Max(ratiol, ratioh)
+            'nvl = nvl / ratio 'l
+            'nvh = nvh / ratio 'h
+            'Me.Height = nvh
+            'Me.Width = nvl
+            ''''''
+        End Set
+    End Property
+
+    <Category("Behavior)")>
+    Public Property ZoomableAvecRoulette As Boolean = True
+
+    Private Sub Me_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
+        If My.Computer.Keyboard.CtrlKeyDown AndAlso Not My.Computer.Keyboard.ShiftKeyDown Then
+            If ZoomableAvecRoulette Then
+                If e.Delta > 0 Then
+                    Zoom += 0.1
+                Else
+                    Zoom -= 0.1
+                End If
+            End If
+            CType(e, HandledMouseEventArgs).Handled = True
+        End If
+    End Sub
+    Public PRATOUKU = False
 
     Private Property _emplSelect As DataRow
     Public Property EmplSelect As DataRow
@@ -123,24 +185,43 @@ Public Class PlanCimetiere
     Public Event EmplClicked(sender As PlanCimetiere, e As PlanCimEventArgs)
 
     Sub Me_Clicked(sender As Object, e As MouseEventArgs) Handles Me.Click
-        Dim EmplClique As DataRow = EmplacementA(e.Location)
-        If EmplClique IsNot Nothing Then RaiseEvent EmplClicked(Me, New PlanCimEventArgs(EmplClique))
-        If EmplClique IsNot EmplSelect Then
-            Me.EmplSelect = EmplClique
-            RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(EmplClique))
+        Dim IndexEmplClique As Integer?
+        Dim EmplClique As DataRow = EmplacementA(e.Location, IndexEmplClique)
+
+        'Dim EmplInactifClique As Boolean = EmplClique IsNot Nothing AndAlso ParcelleAffichee.Enableds(IndexEmplClique) = False
+
+        If Not (EmplClique IsNot Nothing AndAlso ParcelleAffichee.Enableds(IndexEmplClique) = False) Then     ' à moins qu'on ait cliqué sur un empl non activé (auquel cas on ne fait rien)
+            RaiseEvent EmplClicked(Me, New PlanCimEventArgs(EmplClique))
+            If EmplClique IsNot Me.EmplSelect Then
+                Me.EmplSelect = EmplClique
+                RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(EmplClique))
+            End If
         End If
+
+
+
+        'If EmplClique IsNot Nothing AndAlso ParcelleAffichee.Enableds(IndexEmplClique) = True Then
+        '    RaiseEvent EmplClicked(Me, New PlanCimEventArgs(EmplClique))
+        '    If EmplClique IsNot EmplSelect Then
+        '        Me.EmplSelect = EmplClique
+        '        RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(EmplClique))
+        '    End If
+        'End If
     End Sub
 
     Public Event EmplDoubleClicked(sender As PlanCimetiere, e As PlanCimEventArgs)
 
     Private Sub Me_DoubleClicked(sender As PlanCimetiere, e As MouseEventArgs) Handles Me.DoubleClick
-        Dim EmplClique As DataRow = EmplacementA(e.Location)
-        If EmplClique IsNot Nothing Then RaiseEvent EmplDoubleClicked(Me, New PlanCimEventArgs(EmplClique))     ' le SelectionChanged est déjà appelé par l'evt click qui se déclenche aussi
+        Dim IndexEmplClique As Integer?
+        Dim EmplClique As DataRow = EmplacementA(e.Location, IndexEmplClique)
+        If EmplClique IsNot Nothing AndAlso ParcelleAffichee.Enableds(IndexEmplClique) Then
+            RaiseEvent EmplDoubleClicked(Me, New PlanCimEventArgs(EmplClique))     ' le SelectionChanged est déjà appelé par l'evt click qui se déclenche aussi
+        End If
     End Sub
 
     Public Event SelectionChanged(sender As Object, e As PlanCimEventArgs)
 
-    ' mettre la font dans le designer ne marche pas, un code extérieur la remet à 5.8
+    ' mettre la font dans le designer ne marche pas, un code extérieur la remet à 5.8 (peut-être qu'il vise MyBase.Font ; essayer de rendre cet prop visible dans le designer pour voir si ça change quelque chose
     ' on peut la changer après ou pendant le Load
     Public Overrides Property Font As Font
         Get
@@ -159,12 +240,21 @@ Public Class PlanCimetiere
     Public CouleurBordurePasLoué As Color = Color.Transparent
     Public CouleurTexteReference As Color = Color.White
 
+    ' fonction décidant quels emplacements sont actifs ou pas (inactif = grisé &  pas sélectionnable)
+
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>       ' bugs avec le designer, blablabla not serializable
+    <Browsable(False)>
+    <EditorBrowsable(EditorBrowsableState.Never)>
+    <System.ComponentModel.Localizable(False)>
+    Public Property FuncFiltre As Func(Of DataRow, Boolean)
+
     Private LargeurOrig As Integer
     Private HauteurOrig As Integer
 
 
     Private TailleTexteEmplacement As Size    ' utilisé en interne pour centrer le texte sur le polygone de l'emplacement, calculé selon la font
     Private TailleAEteDefinie As Boolean = False     ' interne, indique si la taille originale a déjà été enregistrée, déjà pour ne pas le faire plusieurs fois, ensuite pour ne pas changer le bg si ce n'est pas encore fait
+
 
     ' lit les infos des emplacements, les divise en parcelles, sépare leurs données en listes parallèles pour accélérer les opérations en série
     Public Sub SetEmplacements(empls As DataTable)
@@ -173,17 +263,17 @@ Public Class PlanCimetiere
                 p.IdsEmpls.Clear()
                 p.CoordsX.Clear()
                 p.CoordsY.Clear()
+                p.CoordsXOriginales.Clear()
+                p.CoordsYOriginales.Clear()
                 p.RefsEmpls.Clear()
                 p.Emplacements.Clear()
             Next
 
-            Dim rapport_l As Single = COORDS_ECHELLE_BASE / Me.Size.Width
-            Dim rapport_h As Single = COORDS_ECHELLE_BASE / Me.Size.Height
+            'Dim rapport_l As Single = COORDS_ECHELLE_BASE / Me.Size.Width
+            'Dim rapport_h As Single = COORDS_ECHELLE_BASE / Me.Size.Height
 
             For Each empl As DataRow In empls.Rows
                 Dim RefEmpl As String = empl("empl_reference")
-                'If empl("empl_reference") = "A200" Then
-                'End If
 
                 If RefEmpl.Count < 2 Then Continue For      ' ignorera les emplacements dont la parcelle n'est pas reconnue (d'après les deux premiers caractères de la référence)
                 Dim NomParcelle = RefEmpl.Substring(0, 2)
@@ -206,28 +296,53 @@ Public Class PlanCimetiere
                     i_coords += 1
                     tmpx += CoordsBinaire(i_coords) * &H100              ' cast ? memorystream ?
                     i_coords += 1
-                    tmpx /= rapport_l
 
                     Dim tmpy As Integer = CoordsBinaire(i_coords)
                     i_coords += 1
                     tmpy += CoordsBinaire(i_coords) * &H100
                     i_coords += 1
-                    tmpy /= rapport_h
 
                     CoordsXCePoint.Add(tmpx)
                     CoordsYCePoint.Add(tmpy)
                 End While
 
-                CetteParcelle.CoordsX.Add(CoordsXCePoint)
-                CetteParcelle.CoordsY.Add(CoordsYCePoint)
+                CetteParcelle.CoordsXOriginales.Add(CoordsXCePoint)
+                CetteParcelle.CoordsYOriginales.Add(CoordsYCePoint)
+                CetteParcelle.CoordsX.Add(New List(Of Integer)(CoordsXCePoint.Count))
+                CetteParcelle.CoordsY.Add(New List(Of Integer)(CoordsYCePoint.Count))   ' comme ça, les listes redim existent et on le bon nombre d'items même si il faut encore les mettre à l'échelle
 
                 CetteParcelle.IdsEmpls.Add(empl("empl_id"))
                 CetteParcelle.RefsEmpls.Add(RefEmpl)
+                CetteParcelle.Enableds.Add(FuncFiltre(empl))
                 CetteParcelle.Emplacements.Add(empl)
             Next
+            MettreALEchelleCoordsEmplacements()
         End If
         Me.Invalidate()
     End Sub
+
+
+    Public Sub MettreALEchelleCoordsEmplacements()
+        Dim rapport_l As Single = COORDS_ECHELLE_BASE / Me.Size.Width
+        Dim rapport_h As Single = COORDS_ECHELLE_BASE / Me.Size.Height
+
+        For Each Parcelle In InfosParcelles.Values
+            For NumEmpl = 0 To Parcelle.CoordsXOriginales.Count - 1
+                Dim CoordsXOrigEmpl = Parcelle.CoordsXOriginales(NumEmpl)
+                Dim CoordsYOrigEmpl = Parcelle.CoordsYOriginales(NumEmpl)
+                Dim CoordsXRedim = Parcelle.CoordsX(NumEmpl)
+                Dim CoordsYRedim = Parcelle.CoordsY(NumEmpl)
+                CoordsXRedim.Clear()
+                CoordsYRedim.Clear()
+                For NumCoord = 0 To CoordsXOrigEmpl.Count - 1
+                    CoordsXRedim.Add(CoordsXOrigEmpl(NumCoord) / rapport_l)
+                    CoordsYRedim.Add(CoordsYOrigEmpl(NumCoord) / rapport_h)
+                Next
+            Next
+        Next
+        Me.Invalidate()
+    End Sub
+
 
 
     Private Sub ChangerImage(NouvelleImage As Image)
@@ -243,8 +358,10 @@ Public Class PlanCimetiere
                 Dim ratio = Math.Max(ratiol, ratioh)
                 nvl = nvl / ratio 'l
                 nvh = nvh / ratio 'h
+                PasToucheDimensionsOriginales = True
                 Me.Height = nvh
                 Me.Width = nvl
+                PasToucheDimensionsOriginales = False
             End If
             Me.BackgroundImage = NouvelleImage
         End If
@@ -256,9 +373,17 @@ Public Class PlanCimetiere
 
 
     Sub Me_Load() Handles Me.Load
-        Me.BackgroundImage = ParcelleAffichee.BgImage
+        ''Me.BackgroundImage = ParcelleAffichee.BgImage
+        ChangerImage(ParcelleAffichee.BgImage)
+
         CalculerLargeurTexteEmplacement()
+        If Not DesignMode Then
+            If Me.FuncFiltre Is Nothing Then Me.FuncFiltre = AddressOf FiltreDefaut      ' pour une raison que j'ignore, le designer l'initialise à nothing, donc l'initialiser dans la déclaration de la propriété ou dans le new ne fonctionne pas. De plus, il est possible que mettre une fonction anonyme ici provoque des bugs avec le designer
+        End If
     End Sub
+    Private Function FiltreDefaut(empl As DataRow) As Boolean
+        Return True
+    End Function
 
 
     Private Sub CalculerLargeurTexteEmplacement()
@@ -267,17 +392,24 @@ Public Class PlanCimetiere
 
 
 
-    ' il faut un évènement qui arrive une fois que les dimensions sont définies et qui ne se déclenchera plus après, ce qui n'est pas si évident ;
-    ' ne conviennent pas : Load, New (dimensions zéro), ParentChanged (se fait avant redimensionnement de Windows), Layout, SizeChanged (se redéclenchent quand le plan change sa taille pour garder les proportions de l'image)
-    ' même comme ça, il reste qu'un changement de Location va redéfinir les dimensions "originales" sur celles réduites pour afficher l'image ; tant pis
-    Private Sub NoterDimensionsOriginales() Handles Me.LocationChanged
-        Me.LargeurOrig = Me.Width
-        Me.HauteurOrig = Me.Height
-        TailleAEteDefinie = True
+    Private PasToucheDimensionsOriginales As Boolean = False
+    ' il faudrait un évènement qui arrive une fois que les dimensions sont définies et qui ne se déclenchera plus après, ce qui n'est pas si évident ;
+    ' ne conviennent pas : Load, New (dimensions zéro), ParentChanged (se fait avant redimensionnement par Windows), Layout, SizeChanged (se déclenchent plusieurs fois au chargement et avec des tailles différentes)
+    ' LocationChanged serait correct sauf qu'il ne se déclenche pas quand le contrôle est à la position 0;0 (ce qui pourrait arriver souvent, si il est dans un panel pour le zoom/scroll)
+    ' et qu'accessoirement, un changement de Location va redéfinir les dimensions "originales" d'après celles réduites pour afficher l'image
+    ' au final, on  gèrera resize, en mettant un flag pour empêcher les dimensions originales d'être redéfinie quand on modifie nous-même en fonction du zoom ou du changement d'image
+    Private Sub NoterDimensionsOriginales() Handles Me.Resize
+        'If Not TailleAEteDefinie Then
+        If Not PasToucheDimensionsOriginales Then
+            Me.LargeurOrig = Me.Width
+            Me.HauteurOrig = Me.Height
+            TailleAEteDefinie = True
+        End If
     End Sub
 
 
-    Private Function EmplacementA(p As Point) As DataRow
+    ' IndexEmpl permet de renvoyer l'index de l'empl dans l'InfosParcelle actif
+    Private Function EmplacementA(p As Point, Optional ByRef IndexEmpl As Integer? = Nothing) As DataRow
         Dim lempl As DataRow = Nothing
         With ParcelleAffichee
             For i = 0 To .CoordsX.Count - 1
@@ -290,6 +422,7 @@ Public Class PlanCimetiere
                 path.AddPolygon(poly)
                 If path.IsVisible(p) Then
                     lempl = .Emplacements(i)
+                    IndexEmpl = i
                     Exit For
                 End If
             Next
@@ -298,15 +431,13 @@ Public Class PlanCimetiere
     End Function
 
 
-
-
-
     Protected Overrides Sub OnPaint(pe As PaintEventArgs)
         MyBase.OnPaint(pe)
         Dim InfosParcelle = InfosParcelles(NomParcelleAffichee)
 
         Using brosse As New System.Drawing.SolidBrush(Color.FromArgb(100, Color.Purple)),
               brosseselect As New System.Drawing.SolidBrush(Color.FromArgb(180, Color.Purple)),
+              brossedisabled = New System.Drawing.SolidBrush(Color.FromArgb(120, Color.Gray)),
               Stylo As New SolidBrush(CouleurTexteReference)
 
             Dim graph = pe.Graphics
@@ -318,7 +449,9 @@ Public Class PlanCimetiere
                     For j = 0 To CoordsXCetEmpl.Count - 1
                         poly(j) = New Point(CoordsXCetEmpl(j), CoordsYCetEmpl(j))
                     Next
-                    If .Emplacements(i) Is _emplSelect Then
+                    If Not .Enableds(i) Then
+                        graph.FillPolygon(brossedisabled, poly)
+                    ElseIf .Emplacements(i) Is _emplSelect Then
                         graph.FillPolygon(brosseselect, poly)
                     Else
                         graph.FillPolygon(brosse, poly)
@@ -348,9 +481,6 @@ Public Class PlanCimetiere
     End Function
 
 
-
-    '''''  test
-    ' à faire éventuellement : mettre à jour la position et forme des contrôles emplacements au resize
 
 
     ' Tooltip personnalisé d'une taille de police plus grande
@@ -382,6 +512,8 @@ Public Class PlanCimetiere
 
     End Class
 
-
-
+    Private Sub PlanCimetiere_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        Me.MettreALEchelleCoordsEmplacements()
+        Me.Invalidate()
+    End Sub
 End Class

@@ -40,8 +40,17 @@ Partial Class debug
         Me.Button14 = New System.Windows.Forms.Button()
         Me.Button15 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
-        Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
         Me.Button17 = New System.Windows.Forms.Button()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Button19 = New System.Windows.Forms.Button()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.Button21 = New System.Windows.Forms.Button()
+        Me.Button22 = New System.Windows.Forms.Button()
+        Me.Button23 = New System.Windows.Forms.Button()
+        Me.Button24 = New System.Windows.Forms.Button()
+        Me.PanelCustom1 = New cimetiere.PlanCimConteneur()
+        Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
+        Me.PanelCustom1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
@@ -197,20 +206,6 @@ Partial Class debug
         Me.Button16.Text = "charger"
         Me.Button16.UseVisualStyleBackColor = True
         '
-        'PlanCimetiere1
-        '
-        Me.PlanCimetiere1.BackgroundImage = CType(resources.GetObject("PlanCimetiere1.BackgroundImage"), System.Drawing.Image)
-        Me.PlanCimetiere1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PlanCimetiere1.EmplSelect = Nothing
-        Me.PlanCimetiere1.Font = New System.Drawing.Font("Calibri", 16.0!)
-        Me.PlanCimetiere1.IdEmplSelect = -1
-        Me.PlanCimetiere1.Location = New System.Drawing.Point(24, 23)
-        Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
-        Me.PlanCimetiere1.Name = "PlanCimetiere1"
-        Me.PlanCimetiere1.NomParcelleAffichee = "A1"
-        Me.PlanCimetiere1.Size = New System.Drawing.Size(764, 605)
-        Me.PlanCimetiere1.TabIndex = 61
-        '
         'Button17
         '
         Me.Button17.Location = New System.Drawing.Point(1196, 80)
@@ -220,11 +215,107 @@ Partial Class debug
         Me.Button17.Text = "font"
         Me.Button17.UseVisualStyleBackColor = True
         '
+        'Button18
+        '
+        Me.Button18.Location = New System.Drawing.Point(641, 523)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(75, 23)
+        Me.Button18.TabIndex = 76
+        Me.Button18.Text = "planedit"
+        Me.Button18.UseVisualStyleBackColor = True
+        '
+        'Button19
+        '
+        Me.Button19.Location = New System.Drawing.Point(446, 658)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(135, 23)
+        Me.Button19.TabIndex = 77
+        Me.Button19.Text = "choixempl"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
+        'Button20
+        '
+        Me.Button20.Location = New System.Drawing.Point(1191, 523)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(144, 51)
+        Me.Button20.TabIndex = 78
+        Me.Button20.Text = "panel"
+        Me.Button20.UseVisualStyleBackColor = True
+        '
+        'Button21
+        '
+        Me.Button21.Location = New System.Drawing.Point(344, 471)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(156, 50)
+        Me.Button21.TabIndex = 80
+        Me.Button21.Text = "zoom +"
+        Me.Button21.UseVisualStyleBackColor = True
+        '
+        'Button22
+        '
+        Me.Button22.Location = New System.Drawing.Point(157, 521)
+        Me.Button22.Name = "Button22"
+        Me.Button22.Size = New System.Drawing.Size(75, 23)
+        Me.Button22.TabIndex = 81
+        Me.Button22.Text = "màéchell"
+        Me.Button22.UseVisualStyleBackColor = True
+        '
+        'Button23
+        '
+        Me.Button23.Location = New System.Drawing.Point(390, 582)
+        Me.Button23.Name = "Button23"
+        Me.Button23.Size = New System.Drawing.Size(156, 50)
+        Me.Button23.TabIndex = 83
+        Me.Button23.Text = "zoom -"
+        Me.Button23.UseVisualStyleBackColor = True
+        '
+        'Button24
+        '
+        Me.Button24.Location = New System.Drawing.Point(369, 527)
+        Me.Button24.Name = "Button24"
+        Me.Button24.Size = New System.Drawing.Size(156, 50)
+        Me.Button24.TabIndex = 84
+        Me.Button24.Text = "zoom 1"
+        Me.Button24.UseVisualStyleBackColor = True
+        '
+        'PanelCustom1
+        '
+        Me.PanelCustom1.AutoScroll = True
+        Me.PanelCustom1.Controls.Add(Me.PlanCimetiere1)
+        Me.PanelCustom1.Location = New System.Drawing.Point(12, 12)
+        Me.PanelCustom1.Name = "PanelCustom1"
+        Me.PanelCustom1.Size = New System.Drawing.Size(761, 444)
+        Me.PanelCustom1.TabIndex = 82
+        '
+        'PlanCimetiere1
+        '
+        Me.PlanCimetiere1.BackgroundImage = CType(resources.GetObject("PlanCimetiere1.BackgroundImage"), System.Drawing.Image)
+        Me.PlanCimetiere1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PlanCimetiere1.EmplSelect = Nothing
+        Me.PlanCimetiere1.Font = New System.Drawing.Font("Calibri", 16.0!)
+        Me.PlanCimetiere1.IdEmplSelect = -1
+        Me.PlanCimetiere1.Location = New System.Drawing.Point(66, 11)
+        Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
+        Me.PlanCimetiere1.Name = "PlanCimetiere1"
+        Me.PlanCimetiere1.NomParcelleAffichee = "A1"
+        Me.PlanCimetiere1.Size = New System.Drawing.Size(261, 515)
+        Me.PlanCimetiere1.TabIndex = 61
+        Me.PlanCimetiere1.Zoom = 1.0!
+        Me.PlanCimetiere1.ZoomableAvecRoulette = True
+        '
         'debug
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1698, 878)
+        Me.Controls.Add(Me.Button24)
+        Me.Controls.Add(Me.Button23)
+        Me.Controls.Add(Me.PanelCustom1)
+        Me.Controls.Add(Me.Button22)
+        Me.Controls.Add(Me.Button21)
+        Me.Controls.Add(Me.Button20)
+        Me.Controls.Add(Me.Button19)
+        Me.Controls.Add(Me.Button18)
         Me.Controls.Add(Me.Button17)
         Me.Controls.Add(Me.Button16)
         Me.Controls.Add(Me.Button15)
@@ -239,13 +330,13 @@ Partial Class debug
         Me.Controls.Add(Me.nvcon)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.PlanCimetiere1)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Name = "debug"
         Me.Text = "bu"
+        Me.PanelCustom1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -269,4 +360,12 @@ Partial Class debug
     Friend WithEvents Button15 As Button
     Friend WithEvents Button16 As Button
     Friend WithEvents Button17 As Button
+    Friend WithEvents Button18 As Button
+    Friend WithEvents Button19 As Button
+    Friend WithEvents Button20 As Button
+    Friend WithEvents Button21 As Button
+    Friend WithEvents Button22 As Button
+    Friend WithEvents PanelCustom1 As PlanCimConteneur
+    Friend WithEvents Button23 As Button
+    Friend WithEvents Button24 As Button
 End Class

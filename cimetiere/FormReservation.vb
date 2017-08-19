@@ -8,7 +8,7 @@
     Public NomficPdf As String
     Public Property TypeCsn As TTypeCsnInh
 
-
+    Private LesEmplacements As DataTable
 
     Public Property CbEnregPdfChecked As Boolean
         Get
@@ -27,6 +27,7 @@
 
     Public Sub New(Optional mode As TMode = TMode.Normal)
         InitializeComponent()
+        DgvEmplacements.AutoGenerateColumns = False
         Me.Mode = mode
         If mode = TMode.Dependant Then DtpDateSign.Hide()            'PanCbsPdf.Hide()
     End Sub
@@ -44,14 +45,39 @@
         '    " LEFT OUTER JOIN concessions ON concessions.empl_id= emplacements.empl_id" &
         '    " GROUP BY emplacements.empl_id,concessions.con_id")
 
-        ' empls sans con active
-        DgvEmplacements.DataSource =
-            Bdd.Query("SELECT emplacements.empl_id,empl_reference,empl_type,empl_nb_places,empl_nb_places-COUNT(defunts.def_id) AS places_libres,empl_monum_classe" &
+        'Bdd.Query("SELECT emplacements.*,COUNT(defunts.def_id) AS empl_nb_defunts,empl_nb_places-COUNT(defunts.def_id) AS places_libres,empl_monum_classe,COUNT(concessions.con_id) AS nb_concessions" &
+        '        " FROM emplacements LEFT OUTER JOIN concessions ON emplacements.empl_id = concessions.empl_id" &
+        '        " AND (con_date_fin IS NULL OR con_date_fin > NOW())" &
+        '        " LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id" &
+        '        " GROUP BY emplacements.empl_id" &
+        '        " /*HAVING COUNT(concessions.con_id) = 0*/")
+
+
+
+        ' prend désormais aussi les empls déjà loués, pour les afficher sur le plan
+        Me.LesEmplacements =
+            Bdd.Query("SELECT emplacements.*,COUNT(defunts.def_id) AS empl_nb_defunts,empl_nb_places-COUNT(defunts.def_id) AS places_libres,empl_monum_classe,COUNT(concessions.con_id) AS nb_concessions" &
                 " FROM emplacements LEFT OUTER JOIN concessions ON emplacements.empl_id = concessions.empl_id" &
                 " AND (con_date_fin IS NULL OR con_date_fin > NOW())" &
                 " LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id" &
                 " GROUP BY emplacements.empl_id" &
-                " HAVING COUNT(concessions.con_id) = 0")
+                " /*HAVING COUNT(concessions.con_id) = 0*/")
+
+        ' n'affiche dans la grille que les emplacements non loués et inoccupés
+        Dim DView = New DataView(LesEmplacements)
+        DView.RowFilter = "nb_concessions = 0 And empl_nb_defunts = 0"
+        DgvEmplacements.DataSource = DView
+
+
+
+
+        'DgvEmplacements.DataSource =
+        '    Bdd.Query("SELECT emplacements.empl_id,empl_reference,empl_type,empl_nb_places,empl_nb_places-COUNT(defunts.def_id) AS places_libres,empl_monum_classe,COUNT(concessions.con_id) AS nb_concessions" &
+        '        " FROM emplacements LEFT OUTER JOIN concessions ON emplacements.empl_id = concessions.empl_id" &
+        '        " AND (con_date_fin IS NULL OR con_date_fin > NOW())" &
+        '        " LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id" &
+        '        " GROUP BY emplacements.empl_id" &
+        '        " /*HAVING COUNT(concessions.con_id) = 0*/")
 
 
 
@@ -63,6 +89,10 @@
         '        " GROUP BY emplacements.empl_id")
 
 
+    End Sub
+
+    Sub krapatru(sender As Object, osef As DataGridViewDataErrorEventArgs) Handles DgvEmplacements.DataError
+        Dim kaprute = "a"
     End Sub
 
     Private Sub BtEnregistrer_Click(sender As Object, e As EventArgs) Handles BtEnregistrer.Click
@@ -174,7 +204,7 @@
                 ' pdf
 
                 If Me.Mode = TMode.Normal Then      ' en mode "demande inhumation", on laisse le soin à l'appelant de s'occuper du pdf à l'aide de Me.Nomficpdf et des infos rendues visibles
-                    Dim p = New ExporteurPdf
+                    Dim p = New ExporteurPdf With {.NomFic=Me.NomficPdf}
                     p.CreePdfReservation(RowCsnr, TypeCsnDemande, TblBenefs, RowComCsn("com_commentaire"), DateSign)
 
                     Shell("explorer.exe """ & NomficPdf & """")      ' À faire : ne pas ouvrir si fichier non sauvegardé (car erreur par exemple)
@@ -327,6 +357,42 @@
     End Function
 
 
+    Private PopupPlancim As PopupPlancim
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BtMontrerFormPlancim.Click
+        If PopupPlancim Is Nothing OrElse PopupPlancim.IsDisposed Then
+            PopupPlancim = New PopupPlancim(Me.LesEmplacements, AddressOf FiltrEmplsPlan) With {.Size = New Size(500, 500), .TopMost = True}
+            AddHandler PopupPlancim.SelectionChanged, AddressOf PopupPlancim_SelectionChanged
+            PopupPlancim.EmplSelect = DgvEmplacements.SelectedDataRow
+            PopupPlancim.Show()
+        End If
+    End Sub
+    Private Function FiltrEmplsPlan(Empl As DataRow) As Boolean
+        Return Empl("nb_concessions") = 0 AndAlso Empl("empl_nb_defunts") = 0
+    End Function
+    Private Sub PopupPlancim_SelectionChanged(empl As DataRow)
+        Dim DgvR = (From r As DataGridViewRow In DgvEmplacements.Rows Where CType(r.DataBoundItem, DataRowView).Row Is empl).FirstOrDefault
+        If DgvR Is Nothing Then
+            DgvEmplacements.ClearSelection()
+        Else
+            DgvR.Selected = True
+            DgvEmplacements.ScrollSelectedIntoView()
+        End If
+    End Sub
+
+    Private Sub DgvEmplacements_SelectionChanged(sender As Object, e As EventArgs) Handles DgvEmplacements.SelectionChanged
+        If PopupPlancim IsNot Nothing AndAlso Not PopupPlancim.IsDisposed Then
+            Dim SelRow = DgvEmplacements.SelectedDataRow
+            If SelRow Is Nothing Then
+                PopupPlancim.EmplSelect = Nothing
+            Else
+                PopupPlancim.EmplSelect = SelRow
+            End If
+        End If
+    End Sub
+
+
+
+
 
     ' enregistrement : si empl loué, demander confirm pour remplacer (effacer) location actuelle
 
@@ -361,9 +427,15 @@
         End Select
     End Sub
 
-    Private Sub DgvEmplacements_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvEmplacements.CellFormatting
-
+    Sub Me_Closing() Handles Me.Closing
+        If Me.PopupPlancim IsNot Nothing Then
+            If Not Me.PopupPlancim.IsDisposed Then
+                Me.PopupPlancim.Close()
+                Me.PopupPlancim.Dispose()
+            End If
+        End If
     End Sub
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim f As New FormDemandeInhumation

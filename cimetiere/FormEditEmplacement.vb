@@ -81,7 +81,7 @@ Public Class FormEditEmplacement
     Private Sub AjusterTailleDgv(sender As Object, e As EventArgs) Handles MyBase.Layout
         DgvOccDest.Width = ClientSize.Width - DgvOccDest.Location.X - 5
         DgvOccSrc.Width = ClientSize.Width - DgvOccSrc.Location.X - 5
-        DgvOccSrc.Height = ClientSize.Height - DgvOccSrc.Location.Y - 10
+        DgvOccSrc.Height = ClientSize.Height - DgvOccSrc.Location.Y - 55
 
 
     End Sub
@@ -115,7 +115,7 @@ Public Class FormEditEmplacement
             Bdd.NonQuery("UPDATE emplacements SET hist_id = " & LEmplacement("hist_id") & " WHERE empl_id = " & LEmplacement("empl_id"))
 
             ' défunts ajoutés et retirés
-            Dim IdsDefsDest = (From r In DgvOccDest.DataSource Select r("def_id")).ToList
+            Dim IdsDefsDest = (From r In CType(DgvOccDest.DataSource, DataTable) Select r("def_id")).ToList
             Dim IdsDefsInitiaux = (From r In DefuntsInitiaux Select r("def_id")).ToList
 
             Dim IdsDefsRetirés = (From i In IdsDefsInitiaux Where Not IdsDefsDest.Contains(i)).ToList

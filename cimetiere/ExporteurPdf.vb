@@ -291,7 +291,7 @@ Public Class ExporteurPdf
         pdf.Add(New Paragraph(Champ("Nom et prénom du concessionnaire : ", If(Concessionnaire("csnr_nom") <> "" Or Concessionnaire("csnr_prenom") <> "", Concessionnaire("csnr_nom") & ", " & Concessionnaire("csnr_prenom"), Nothing), ".....................................................")))
         p = New Paragraph
         p.Add(Champ("Date de naissance : ", If(Not IsDBNull(Concessionnaire("csnr_date_naiss")), CType(Concessionnaire("csnr_date_naiss"), Date).ToString("dd/MM/yyyy"), Nothing), "........................................................ "))
-        p.Add(Champ(" – n° de registre national : ", If(Concessionnaire("csnr_no_registre") IsNot Nothing, Concessionnaire("csnr_no_registre").ToString, ""), "........................................................."))
+        p.Add(Champ(" – n° de registre national : ", If(Not IsDBNull(Concessionnaire("csnr_no_registre")), Concessionnaire("csnr_no_registre").ToString, ""), "........................................................."))
         pdf.Add(p)
 
         pdf.Add(New Paragraph(ChampAdresse(Concessionnaire("csnr_adresse"), VilleCsnr("locville_ville"), If(Not IsDBNull(VilleCsnr("locville_cp")), VilleCsnr("locville_cp"), Nothing), PaysCsnr("Pays_nom"))))
@@ -438,13 +438,14 @@ Public Class ExporteurPdf
             If i < nbrben Then ben = Beneficiaires.Rows(i)
             table.AddCell(New Phrase(If(i < nbrben, ben("ben_nom"), vbCrLf & vbCrLf), fNormal))
             table.AddCell(New Phrase(If(i < nbrben, ben("ben_prenom"), vbCrLf & vbCrLf), fNormal))
-            table.AddCell(New Phrase(If(i < nbrben AndAlso ben("ben_date_naiss") IsNot Nothing, CType(ben("ben_date_naiss"), Date).ToString("dd/MM/yyyy"), vbCrLf & vbCrLf), fNormal))
+
+            table.AddCell(New Phrase(If(i < nbrben AndAlso Not IsDBNull(ben("ben_date_naiss")), CType(ben("ben_date_naiss"), Date).ToString("dd/MM/yyyy"), vbCrLf & vbCrLf), fNormal))
             Dim RowBenVille As DataRow
             If i < nbrben Then
-                Dim TbBenVille = Bdd.Query("SELECT t_loc_ville.locville_ville,locville_cp,Pays_nom FROM t_loc_ville LEFT OUTER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id WHERE locville_id = " & ben("locville_id"))
+                Dim TbBenVille = Bdd.Query("SELECT t_loc_ville.locville_ville,locville_cp,Pays_nom FROM t_loc_ville LEFT OUTER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id WHERE locville_id = " & If(Not IsDBNull(ben("locville_id")), ben("locville_id"), -1))
                 RowBenVille = If(TbBenVille.Rows.Count > 0, TbBenVille.Rows(0), TbBenVille.NewRow)
             End If
-            table.AddCell(New Phrase(If(i < nbrben, Uzineagaz.AdresseComplete(ben("ben_adresse"), RowBenVille("locville_cp"), RowBenVille("locville_ville"), RowBenVille("Pays_nom")), vbCrLf & vbCrLf), fNormal))
+            table.AddCell(New Phrase(If(i < nbrben, Uzineagaz.AdresseComplete(if(not IsDBNull(ben("ben_adresse")),ben("ben_adresse"),nothing), If(IsDBNull(RowBenVille("locville_cp")), Nothing, RowBenVille("locville_cp")), if(isdbnull(RowBenVille("locville_ville")),Nothing,RowBenVille("locville_ville")), if(IsDBNull(RowBenVille("Pays_nom")),Nothing,RowBenVille("Pays_nom"))), vbCrLf & vbCrLf), fNormal))
             i += 1
         End While
         pdf.Add(table)

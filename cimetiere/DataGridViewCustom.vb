@@ -8,22 +8,20 @@ Public Class DataGridViewCustom
     End Sub
 
     ' si changement de datasource, remet l'ancienne sélection (en se basant sur la première colonne, qu'on suppose être un id)
-    Public Overloads Property DataSource As DataTable
+    Public Overloads Property DataSource As Object
         Get
             Return MyBase.DataSource
         End Get
-        Set(value As DataTable)
-            Dim Filtre As String
+        Set(value As Object)
+            If Not TypeOf value Is DataTable AndAlso Not TypeOf value Is DataView Then Throw New ArgumentException("Seules les DataTable et les DataView sont acceptées comme source de données")
             Dim ValeurSelect
+            Dim Vue = If(TypeOf value Is DataTable, CType(value, DataTable).DefaultView, CType(value, DataView))
             If DataSource IsNot Nothing Then
                 ValeurSelect = SelectedValue
-                Filtre = DataSource.DefaultView.RowFilter
             Else
                 ValeurSelect = Nothing
-                Filtre = ""
             End If
 
-            value.DefaultView.RowFilter = Filtre
             MyBase.DataSource = value
 
             ' remet l'ancienne sélection
@@ -34,6 +32,8 @@ Public Class DataGridViewCustom
 
         End Set
     End Property
+
+
 
 
     ' la dgv de base ne propose que la collection SelectedRows
@@ -119,7 +119,7 @@ Public Class DataGridViewCustom
              Or GetCellDisplayRectangle(0, ligne.Index, True).Height < GetCellDisplayRectangle(0, ligne.Index, False).Height Then
                 FirstDisplayedScrollingRowIndex = ligne.Index
             End If
-            ' alternative simple à tester :
+            ' alternative simple à tester peut-être - mais CurrenCell n'est peut-être pas modifié par autre chose qu'un clic ou un appel explicite
             ' Me.FirstDisplayedCell = Me.CurrentCell
         End If
     End Sub

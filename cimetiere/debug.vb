@@ -7,7 +7,7 @@ Public Class debug
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim raoijer As New FormEditDefunt(3)
+        Dim raoijer As New FormEditDefunt(9)
         raoijer.ShowDialog()
     End Sub
 
@@ -94,8 +94,22 @@ Public Class debug
     End Sub
 
     Private Sub debug_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        PlanCimetiere1.Font = New Font("Calibri", 6)
+        PlanCimetiere1.FuncFiltre = AddressOf emplactifplan
     End Sub
+    Function emplactifplan(empl As DataRow) As Boolean
+        Return empl("empl_reference") = "A1010" Or empl("empl_reference") = "A1011" Or empl("empl_reference") = "A1012"
+    End Function
+    Sub emplclic(s As PlanCimetiere, osef As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.EmplClicked
+        MessageBox.Show("clic")
+    End Sub
+    Sub empldclic(s As Object, osef As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.EmplDoubleClicked
+        MessageBox.Show("dbl")
+    End Sub
+    Sub emplsc(s As Object, osef As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.SelectionChanged
+        MessageBox.Show("selch")
+    End Sub
+
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
         PlanCimetiere1.NomParcelleAffichee = "A1"
@@ -116,5 +130,46 @@ Public Class debug
     Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
         PlanCimetiere1.Font = New Font("Calibri", 18)
     End Sub
+
+    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
+        Dim f As New dev_formplancimedit
+        f.ShowDialog()
+
+    End Sub
+
+    Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
+        ' choix empl
+        Dim f As New FormChoixEmplSurPlan(Function(empl) empl("empl_reference") <> "A1057")
+        f.ShowDialog()
+    End Sub
+
+    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
+        Dim f As New FormEditEmplacement(34)
+        f.ShowDialog()
+
+    End Sub
+
+    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
+        'PlanCimetiere1.Size = New Size(PlanCimetiere1.Width * 0.9, PlanCimetiere1.Height * 0.9)
+        PlanCimetiere1.Zoom += 0.1
+    End Sub
+
+    Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+        PlanCimetiere1.MettreALEchelleCoordsEmplacements()
+    End Sub
+
+
+    Private Sub Button23_Click(sender As Object, e As EventArgs) Handles Button23.Click
+        PlanCimetiere1.Zoom -= 0.1
+    End Sub
+
+    Private Sub Button24_Click(sender As Object, e As EventArgs) Handles Button24.Click
+        PlanCimetiere1.Zoom = 1
+    End Sub
+
+    Private Sub empldclic(sender As PlanCimetiere, e As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.EmplDoubleClicked
+
+    End Sub
+
 End Class
 

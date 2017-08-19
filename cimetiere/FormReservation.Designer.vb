@@ -26,12 +26,14 @@ Partial Class FormReservation
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormReservation))
         Me.GbCsnr = New System.Windows.Forms.GroupBox()
+        Me.CtrlLocVillePays1 = New cimetiere.CtrlLocVillePays()
         Me.TbCsnrNoRegistre = New System.Windows.Forms.MaskedTextBox()
         Me.TbCsnrTel = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.TbdateCsnrDateNaiss = New cimetiere.TextBoxDate()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TbCsnrAdresse = New System.Windows.Forms.TextBox()
@@ -46,28 +48,11 @@ Partial Class FormReservation
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GBListBenef = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.CtrlListeBenefs1 = New cimetiere.CtrlListeBenefs()
         Me.BtAnnuler = New System.Windows.Forms.Button()
         Me.BtEnregistrer = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.DtpDateDebut = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.CbTarifLh = New System.Windows.Forms.CheckBox()
-        Me.LbTypeConcession = New System.Windows.Forms.ListBox()
-        Me.PanCbsPdf = New System.Windows.Forms.Panel()
-        Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.CbEnregPdf = New System.Windows.Forms.CheckBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.DtpDateSign = New System.Windows.Forms.DateTimePicker()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.TbDateFin = New System.Windows.Forms.TextBox()
-        Me.TbNbPlaces = New cimetiere.TextBoxInt()
-        Me.TbMontant = New cimetiere.TextBoxFloat()
         Me.DgvEmplacements = New cimetiere.DataGridViewCustom()
         Me.ColEmplId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColEmplRef = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,9 +60,25 @@ Partial Class FormReservation
         Me.ColEmplPlLibres = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColEmplPlTotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColEmplClasse = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CtrlListeBenefs1 = New cimetiere.CtrlListeBenefs()
-        Me.CtrlLocVillePays1 = New cimetiere.CtrlLocVillePays()
-        Me.TbdateCsnrDateNaiss = New cimetiere.TextBoxDate()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.BtMontrerFormPlancim = New System.Windows.Forms.Button()
+        Me.TbDateFin = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.DtpDateDebut = New System.Windows.Forms.DateTimePicker()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TbNbPlaces = New cimetiere.TextBoxInt()
+        Me.CbTarifLh = New System.Windows.Forms.CheckBox()
+        Me.LbTypeConcession = New System.Windows.Forms.ListBox()
+        Me.TbMontant = New cimetiere.TextBoxFloat()
+        Me.PanCbsPdf = New System.Windows.Forms.Panel()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.DtpDateSign = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.CbEnregPdf = New System.Windows.Forms.CheckBox()
         Me.GbCsnr.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -87,11 +88,11 @@ Partial Class FormReservation
         Me.GBListBenef.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.DgvEmplacements, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.PanCbsPdf.SuspendLayout()
         Me.Panel9.SuspendLayout()
-        CType(Me.DgvEmplacements, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GbCsnr
@@ -118,6 +119,14 @@ Partial Class FormReservation
         Me.GbCsnr.TabIndex = 10
         Me.GbCsnr.TabStop = False
         Me.GbCsnr.Text = "Concessionnaire"
+        '
+        'CtrlLocVillePays1
+        '
+        Me.CtrlLocVillePays1.Location = New System.Drawing.Point(277, 62)
+        Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
+        Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 26)
+        Me.CtrlLocVillePays1.TabIndex = 65
         '
         'TbCsnrNoRegistre
         '
@@ -173,6 +182,17 @@ Partial Class FormReservation
         Me.Label10.Size = New System.Drawing.Size(57, 17)
         Me.Label10.TabIndex = 22
         Me.Label10.Text = "Prénom"
+        '
+        'TbdateCsnrDateNaiss
+        '
+        Me.TbdateCsnrDateNaiss.DateValue = Nothing
+        Me.TbdateCsnrDateNaiss.Location = New System.Drawing.Point(141, 135)
+        Me.TbdateCsnrDateNaiss.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TbdateCsnrDateNaiss.Mask = "00/00/0000"
+        Me.TbdateCsnrDateNaiss.Name = "TbdateCsnrDateNaiss"
+        Me.TbdateCsnrDateNaiss.Size = New System.Drawing.Size(119, 22)
+        Me.TbdateCsnrDateNaiss.TabIndex = 13
+        Me.TbdateCsnrDateNaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label8
         '
@@ -296,6 +316,14 @@ Partial Class FormReservation
         Me.Button1.Text = "TESTINH"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'CtrlListeBenefs1
+        '
+        Me.CtrlListeBenefs1.AutoScroll = True
+        Me.CtrlListeBenefs1.Location = New System.Drawing.Point(5, 28)
+        Me.CtrlListeBenefs1.Name = "CtrlListeBenefs1"
+        Me.CtrlListeBenefs1.Size = New System.Drawing.Size(689, 440)
+        Me.CtrlListeBenefs1.TabIndex = 0
+        '
         'BtAnnuler
         '
         Me.BtAnnuler.BackColor = System.Drawing.Color.SeaGreen
@@ -341,187 +369,6 @@ Partial Class FormReservation
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Emplacements disponibles"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 26)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(98, 17)
-        Me.Label1.TabIndex = 165
-        Me.Label1.Text = "Date de début"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(458, 128)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(111, 17)
-        Me.Label3.TabIndex = 162
-        Me.Label3.Text = "Montant à payer"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(677, 128)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(16, 17)
-        Me.Label11.TabIndex = 163
-        Me.Label11.Text = "€"
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.SeaGreen
-        Me.Panel4.Controls.Add(Me.GroupBox3)
-        Me.Panel4.Location = New System.Drawing.Point(16, 512)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(715, 170)
-        Me.Panel4.TabIndex = 167
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.BackColor = System.Drawing.SystemColors.Window
-        Me.GroupBox3.Controls.Add(Me.TbDateFin)
-        Me.GroupBox3.Controls.Add(Me.Label12)
-        Me.GroupBox3.Controls.Add(Me.DtpDateDebut)
-        Me.GroupBox3.Controls.Add(Me.Label2)
-        Me.GroupBox3.Controls.Add(Me.TbNbPlaces)
-        Me.GroupBox3.Controls.Add(Me.CbTarifLh)
-        Me.GroupBox3.Controls.Add(Me.LbTypeConcession)
-        Me.GroupBox3.Controls.Add(Me.Label3)
-        Me.GroupBox3.Controls.Add(Me.TbMontant)
-        Me.GroupBox3.Controls.Add(Me.Label1)
-        Me.GroupBox3.Controls.Add(Me.Label11)
-        Me.GroupBox3.Location = New System.Drawing.Point(8, 8)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(699, 154)
-        Me.GroupBox3.TabIndex = 0
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Autres informations"
-        '
-        'DtpDateDebut
-        '
-        Me.DtpDateDebut.Location = New System.Drawing.Point(111, 23)
-        Me.DtpDateDebut.Name = "DtpDateDebut"
-        Me.DtpDateDebut.Size = New System.Drawing.Size(251, 22)
-        Me.DtpDateDebut.TabIndex = 174
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(458, 74)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(223, 17)
-        Me.Label2.TabIndex = 172
-        Me.Label2.Text = "Nombre de places (si applicable) :"
-        '
-        'CbTarifLh
-        '
-        Me.CbTarifLh.AutoSize = True
-        Me.CbTarifLh.Checked = True
-        Me.CbTarifLh.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbTarifLh.Location = New System.Drawing.Point(461, 50)
-        Me.CbTarifLh.Name = "CbTarifLh"
-        Me.CbTarifLh.Size = New System.Drawing.Size(123, 21)
-        Me.CbTarifLh.TabIndex = 170
-        Me.CbTarifLh.Text = "Tarif la hulpois"
-        Me.CbTarifLh.UseVisualStyleBackColor = True
-        '
-        'LbTypeConcession
-        '
-        Me.LbTypeConcession.FormattingEnabled = True
-        Me.LbTypeConcession.ItemHeight = 16
-        Me.LbTypeConcession.Items.AddRange(New Object() {"Inhumation en pleine terre, concession de 15 ans (1 personne)", "Inhumation en pleine terre, concession de 15 ans (2 personnes)", "Caveau, concession de 30 ans (max. 3 places)", "Urne en colombarium, concession de 15 ans", "Urne en colombarium, concession de 30 ans", "Placement d'un cavurne communal, concession de 30 ans (max. 5 urnes)"})
-        Me.LbTypeConcession.Location = New System.Drawing.Point(6, 50)
-        Me.LbTypeConcession.Name = "LbTypeConcession"
-        Me.LbTypeConcession.Size = New System.Drawing.Size(449, 100)
-        Me.LbTypeConcession.TabIndex = 169
-        '
-        'PanCbsPdf
-        '
-        Me.PanCbsPdf.BackColor = System.Drawing.Color.SeaGreen
-        Me.PanCbsPdf.Controls.Add(Me.Panel9)
-        Me.PanCbsPdf.Location = New System.Drawing.Point(16, 691)
-        Me.PanCbsPdf.Name = "PanCbsPdf"
-        Me.PanCbsPdf.Size = New System.Drawing.Size(402, 76)
-        Me.PanCbsPdf.TabIndex = 168
-        '
-        'Panel9
-        '
-        Me.Panel9.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel9.Controls.Add(Me.DtpDateSign)
-        Me.Panel9.Controls.Add(Me.Label4)
-        Me.Panel9.Controls.Add(Me.CbEnregPdf)
-        Me.Panel9.Location = New System.Drawing.Point(8, 7)
-        Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(387, 62)
-        Me.Panel9.TabIndex = 0
-        '
-        'CbEnregPdf
-        '
-        Me.CbEnregPdf.AutoSize = True
-        Me.CbEnregPdf.Checked = True
-        Me.CbEnregPdf.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbEnregPdf.Location = New System.Drawing.Point(9, 37)
-        Me.CbEnregPdf.Margin = New System.Windows.Forms.Padding(4)
-        Me.CbEnregPdf.Name = "CbEnregPdf"
-        Me.CbEnregPdf.Size = New System.Drawing.Size(188, 21)
-        Me.CbEnregPdf.TabIndex = 8
-        Me.CbEnregPdf.Text = "Enregistrer le fichier PDF"
-        Me.CbEnregPdf.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(9, 9)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(46, 17)
-        Me.Label4.TabIndex = 9
-        Me.Label4.Text = "Fait le"
-        '
-        'DtpDateSign
-        '
-        Me.DtpDateSign.Location = New System.Drawing.Point(61, 7)
-        Me.DtpDateSign.Name = "DtpDateSign"
-        Me.DtpDateSign.ShowCheckBox = True
-        Me.DtpDateSign.Size = New System.Drawing.Size(250, 22)
-        Me.DtpDateSign.TabIndex = 10
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(377, 26)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(77, 17)
-        Me.Label12.TabIndex = 175
-        Me.Label12.Text = "Date de fin"
-        '
-        'TbDateFin
-        '
-        Me.TbDateFin.Location = New System.Drawing.Point(461, 23)
-        Me.TbDateFin.Name = "TbDateFin"
-        Me.TbDateFin.ReadOnly = True
-        Me.TbDateFin.Size = New System.Drawing.Size(159, 22)
-        Me.TbDateFin.TabIndex = 176
-        '
-        'TbNbPlaces
-        '
-        Me.TbNbPlaces.Enabled = False
-        Me.TbNbPlaces.Location = New System.Drawing.Point(461, 94)
-        Me.TbNbPlaces.Name = "TbNbPlaces"
-        Me.TbNbPlaces.Size = New System.Drawing.Size(100, 22)
-        Me.TbNbPlaces.TabIndex = 171
-        Me.TbNbPlaces.Value = Nothing
-        '
-        'TbMontant
-        '
-        Me.TbMontant.Location = New System.Drawing.Point(571, 126)
-        Me.TbMontant.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TbMontant.Name = "TbMontant"
-        Me.TbMontant.ReadOnly = True
-        Me.TbMontant.Size = New System.Drawing.Size(100, 22)
-        Me.TbMontant.TabIndex = 161
-        Me.TbMontant.Value = Nothing
-        '
         'DgvEmplacements
         '
         Me.DgvEmplacements.AllowUserToAddRows = False
@@ -551,7 +398,7 @@ Partial Class FormReservation
         Me.DgvEmplacements.SelectedRowIndex = -1
         Me.DgvEmplacements.SelectedValue = -1
         Me.DgvEmplacements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvEmplacements.Size = New System.Drawing.Size(685, 224)
+        Me.DgvEmplacements.Size = New System.Drawing.Size(685, 225)
         Me.DgvEmplacements.TabIndex = 143
         '
         'ColEmplId
@@ -601,32 +448,196 @@ Partial Class FormReservation
         Me.ColEmplClasse.Name = "ColEmplClasse"
         Me.ColEmplClasse.ReadOnly = True
         '
-        'CtrlListeBenefs1
+        'Label1
         '
-        Me.CtrlListeBenefs1.AutoScroll = True
-        Me.CtrlListeBenefs1.Location = New System.Drawing.Point(5, 28)
-        Me.CtrlListeBenefs1.Name = "CtrlListeBenefs1"
-        Me.CtrlListeBenefs1.Size = New System.Drawing.Size(689, 440)
-        Me.CtrlListeBenefs1.TabIndex = 0
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(6, 26)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(98, 17)
+        Me.Label1.TabIndex = 165
+        Me.Label1.Text = "Date de début"
         '
-        'CtrlLocVillePays1
+        'Label3
         '
-        Me.CtrlLocVillePays1.Location = New System.Drawing.Point(277, 62)
-        Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
-        Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 26)
-        Me.CtrlLocVillePays1.TabIndex = 65
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(458, 128)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(111, 17)
+        Me.Label3.TabIndex = 162
+        Me.Label3.Text = "Montant à payer"
         '
-        'TbdateCsnrDateNaiss
+        'Label11
         '
-        Me.TbdateCsnrDateNaiss.DateValue = Nothing
-        Me.TbdateCsnrDateNaiss.Location = New System.Drawing.Point(141, 135)
-        Me.TbdateCsnrDateNaiss.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TbdateCsnrDateNaiss.Mask = "00/00/0000"
-        Me.TbdateCsnrDateNaiss.Name = "TbdateCsnrDateNaiss"
-        Me.TbdateCsnrDateNaiss.Size = New System.Drawing.Size(119, 22)
-        Me.TbdateCsnrDateNaiss.TabIndex = 13
-        Me.TbdateCsnrDateNaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(677, 128)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(16, 17)
+        Me.Label11.TabIndex = 163
+        Me.Label11.Text = "€"
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.SeaGreen
+        Me.Panel4.Controls.Add(Me.GroupBox3)
+        Me.Panel4.Location = New System.Drawing.Point(16, 512)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(715, 170)
+        Me.Panel4.TabIndex = 167
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.BackColor = System.Drawing.SystemColors.Window
+        Me.GroupBox3.Controls.Add(Me.BtMontrerFormPlancim)
+        Me.GroupBox3.Controls.Add(Me.TbDateFin)
+        Me.GroupBox3.Controls.Add(Me.Label12)
+        Me.GroupBox3.Controls.Add(Me.DtpDateDebut)
+        Me.GroupBox3.Controls.Add(Me.Label2)
+        Me.GroupBox3.Controls.Add(Me.TbNbPlaces)
+        Me.GroupBox3.Controls.Add(Me.CbTarifLh)
+        Me.GroupBox3.Controls.Add(Me.LbTypeConcession)
+        Me.GroupBox3.Controls.Add(Me.Label3)
+        Me.GroupBox3.Controls.Add(Me.TbMontant)
+        Me.GroupBox3.Controls.Add(Me.Label1)
+        Me.GroupBox3.Controls.Add(Me.Label11)
+        Me.GroupBox3.Location = New System.Drawing.Point(8, 8)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(699, 154)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Autres informations"
+        '
+        'BtMontrerFormPlancim
+        '
+        Me.BtMontrerFormPlancim.Image = Global.cimetiere.My.Resources.Resources.Note_16x
+        Me.BtMontrerFormPlancim.Location = New System.Drawing.Point(649, 17)
+        Me.BtMontrerFormPlancim.Name = "BtMontrerFormPlancim"
+        Me.BtMontrerFormPlancim.Size = New System.Drawing.Size(30, 31)
+        Me.BtMontrerFormPlancim.TabIndex = 177
+        Me.BtMontrerFormPlancim.UseVisualStyleBackColor = True
+        '
+        'TbDateFin
+        '
+        Me.TbDateFin.Location = New System.Drawing.Point(461, 23)
+        Me.TbDateFin.Name = "TbDateFin"
+        Me.TbDateFin.ReadOnly = True
+        Me.TbDateFin.Size = New System.Drawing.Size(159, 22)
+        Me.TbDateFin.TabIndex = 176
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(377, 26)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(77, 17)
+        Me.Label12.TabIndex = 175
+        Me.Label12.Text = "Date de fin"
+        '
+        'DtpDateDebut
+        '
+        Me.DtpDateDebut.Location = New System.Drawing.Point(111, 23)
+        Me.DtpDateDebut.Name = "DtpDateDebut"
+        Me.DtpDateDebut.Size = New System.Drawing.Size(251, 22)
+        Me.DtpDateDebut.TabIndex = 174
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(458, 74)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(223, 17)
+        Me.Label2.TabIndex = 172
+        Me.Label2.Text = "Nombre de places (si applicable) :"
+        '
+        'TbNbPlaces
+        '
+        Me.TbNbPlaces.Enabled = False
+        Me.TbNbPlaces.Location = New System.Drawing.Point(461, 94)
+        Me.TbNbPlaces.Name = "TbNbPlaces"
+        Me.TbNbPlaces.Size = New System.Drawing.Size(100, 22)
+        Me.TbNbPlaces.TabIndex = 171
+        Me.TbNbPlaces.Value = Nothing
+        '
+        'CbTarifLh
+        '
+        Me.CbTarifLh.AutoSize = True
+        Me.CbTarifLh.Checked = True
+        Me.CbTarifLh.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CbTarifLh.Location = New System.Drawing.Point(461, 50)
+        Me.CbTarifLh.Name = "CbTarifLh"
+        Me.CbTarifLh.Size = New System.Drawing.Size(123, 21)
+        Me.CbTarifLh.TabIndex = 170
+        Me.CbTarifLh.Text = "Tarif la hulpois"
+        Me.CbTarifLh.UseVisualStyleBackColor = True
+        '
+        'LbTypeConcession
+        '
+        Me.LbTypeConcession.FormattingEnabled = True
+        Me.LbTypeConcession.ItemHeight = 16
+        Me.LbTypeConcession.Items.AddRange(New Object() {"Inhumation en pleine terre, concession de 15 ans (1 personne)", "Inhumation en pleine terre, concession de 15 ans (2 personnes)", "Caveau, concession de 30 ans (max. 3 places)", "Urne en colombarium, concession de 15 ans", "Urne en colombarium, concession de 30 ans", "Placement d'un cavurne communal, concession de 30 ans (max. 5 urnes)"})
+        Me.LbTypeConcession.Location = New System.Drawing.Point(6, 50)
+        Me.LbTypeConcession.Name = "LbTypeConcession"
+        Me.LbTypeConcession.Size = New System.Drawing.Size(449, 100)
+        Me.LbTypeConcession.TabIndex = 169
+        '
+        'TbMontant
+        '
+        Me.TbMontant.Location = New System.Drawing.Point(571, 126)
+        Me.TbMontant.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TbMontant.Name = "TbMontant"
+        Me.TbMontant.ReadOnly = True
+        Me.TbMontant.Size = New System.Drawing.Size(100, 22)
+        Me.TbMontant.TabIndex = 161
+        Me.TbMontant.Value = Nothing
+        '
+        'PanCbsPdf
+        '
+        Me.PanCbsPdf.BackColor = System.Drawing.Color.SeaGreen
+        Me.PanCbsPdf.Controls.Add(Me.Panel9)
+        Me.PanCbsPdf.Location = New System.Drawing.Point(16, 691)
+        Me.PanCbsPdf.Name = "PanCbsPdf"
+        Me.PanCbsPdf.Size = New System.Drawing.Size(402, 76)
+        Me.PanCbsPdf.TabIndex = 168
+        '
+        'Panel9
+        '
+        Me.Panel9.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel9.Controls.Add(Me.DtpDateSign)
+        Me.Panel9.Controls.Add(Me.Label4)
+        Me.Panel9.Controls.Add(Me.CbEnregPdf)
+        Me.Panel9.Location = New System.Drawing.Point(8, 7)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(387, 62)
+        Me.Panel9.TabIndex = 0
+        '
+        'DtpDateSign
+        '
+        Me.DtpDateSign.Location = New System.Drawing.Point(61, 7)
+        Me.DtpDateSign.Name = "DtpDateSign"
+        Me.DtpDateSign.ShowCheckBox = True
+        Me.DtpDateSign.Size = New System.Drawing.Size(250, 22)
+        Me.DtpDateSign.TabIndex = 10
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(9, 9)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(46, 17)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Fait le"
+        '
+        'CbEnregPdf
+        '
+        Me.CbEnregPdf.AutoSize = True
+        Me.CbEnregPdf.Checked = True
+        Me.CbEnregPdf.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CbEnregPdf.Location = New System.Drawing.Point(9, 37)
+        Me.CbEnregPdf.Margin = New System.Windows.Forms.Padding(4)
+        Me.CbEnregPdf.Name = "CbEnregPdf"
+        Me.CbEnregPdf.Size = New System.Drawing.Size(188, 21)
+        Me.CbEnregPdf.TabIndex = 8
+        Me.CbEnregPdf.Text = "Enregistrer le fichier PDF"
+        Me.CbEnregPdf.UseVisualStyleBackColor = True
         '
         'FormReservation
         '
@@ -662,13 +673,13 @@ Partial Class FormReservation
         Me.GBListBenef.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
+        CType(Me.DgvEmplacements, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.PanCbsPdf.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
-        CType(Me.DgvEmplacements, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -725,4 +736,5 @@ Partial Class FormReservation
     Friend WithEvents Label4 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents TbDateFin As TextBox
+    Friend WithEvents BtMontrerFormPlancim As Button
 End Class
