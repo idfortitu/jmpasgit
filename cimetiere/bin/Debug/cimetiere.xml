@@ -27,6 +27,11 @@ cimetiere
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:cimetiere.My.Resources.Resources.Cancel_16x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:cimetiere.My.Resources.Resources.fondformulaire">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

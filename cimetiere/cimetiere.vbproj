@@ -523,6 +523,7 @@
       <DependentUpon>dmCimetiere.edmx</DependentUpon>
       <LastGenOutput>dmCimetiere.vb</LastGenOutput>
     </Content>
+    <None Include="Resources\Cancel_16x.png" />
     <None Include="Resources\Note_32x.png" />
     <None Include="Resources\Note_16x.png" />
     <None Include="Resources\moins.png" />

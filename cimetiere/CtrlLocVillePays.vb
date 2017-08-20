@@ -3,10 +3,17 @@
 
     ' <> -1 si la ville est choisie (auquel cas l'enregistrement LocVille existe)
     ' -1 si aucune ville n'est choisie, auquel cas le locville existe peut-être en tant que ville vide + pays sélectionné, ou pas et dans ce cas il faut le créer
-    Public ReadOnly Property LocVilleId As Integer
+    Public Property LocVilleId As Integer
         Get
             Return If(CbLocVille.SelectedValue Is Nothing, -1, CbLocVille.SelectedValue)
         End Get
+        Set(value As Integer)
+            If value = -1 Then
+                CbLocVille.SelectedIndex = -1
+            Else
+                CbLocVille.SelectedValue = value
+            End If
+        End Set
     End Property
 
     Public ReadOnly Property PaysId As Integer

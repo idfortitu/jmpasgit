@@ -90,7 +90,7 @@ Module Uzineagaz
     End Function
 
 
-    ' enlève la ponctuation, les espaces, les accents... les recherches
+    ' enlève la ponctuation, les espaces, les accents... pour les recherches
     Function ReduireString(s As String) As String
         s = RetirerDiacritiques(s).ToUpper
         Dim res As String = ""

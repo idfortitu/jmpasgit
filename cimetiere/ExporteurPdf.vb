@@ -588,7 +588,11 @@ Public Class ExporteurPdf
 
     End Sub
 
-    Sub CreePdfProlongation()
+    ' le demandeur a la structure d'une datarow de la table concessionnaires, bien que, administrativement parlant, il n'est pas certain que ce soit la même personne
+    ' il serait intéressant de savoir si le demandeur d'une prolongation devient de facto le nouveau concessionnaire
+    Sub CreerPdfProlong(Optional RowDmdr As DataRow = Nothing, Optional DefuntsDeja As DataTable = Nothing, Optional RefEmpl As String = Nothing, Optional RemarqueEventuelle As String = "")
+        If RowDmdr Is Nothing Then RowDmdr = Bdd.GetRowVide("concessionnaires")
+        If DefuntsDeja Is Nothing Then DefuntsDeja = Bdd.GetTableVide("defunts")
 
         Dim pdf = Me.pdf
 
@@ -596,9 +600,46 @@ Public Class ExporteurPdf
 
         pdf.Add(New Paragraph(" "))
 
-        pdf.Add(New Paragraph("Je soussignée(e), ............................................., souhaite obtenir la prolongation d'une" &
+        Dim nomdmdr As String = If(IsDBNull(RowDmdr("csnr_nom")), "", RowDmdr("csnr_nom"))
+        Dim prenomdmdr As String = If(IsDBNull(RowDmdr("csnr_prenom")), "", RowDmdr("csnr_prenom"))
+        Dim nomcompletdmdr As String = nomdmdr & " " & prenomdmdr
+        If nomcompletdmdr.Trim = "" Then nomcompletdmdr = Nothing   ' permet au pdf de comprendre qu'il doit mettre les pointillés
+        Dim nomcompletdmdravecmaj As String = nomdmdr.ToUpper & " " & prenomdmdr
+        If nomcompletdmdravecmaj.Trim = "" Then nomcompletdmdravecmaj = Nothing
+
+        pdf.Add(New Paragraph("Je soussignée(e), " & If(nomcompletdmdravecmaj, ".............................................") & ", souhaite obtenir la prolongation d'une" &
                               " concession existante (remplir les indications relatives à la sépulture au verso du présent document", fNormalL))
         pdf.Add(New Paragraph(" ", fNormalS))
+
+        Dim datenaissdmdr As Date? = If(IsDBNull(RowDmdr("csnr_date_naiss")), Nothing, RowDmdr("csnr_date_naiss"))
+        Dim adressedmdr As String = If(IsDBNull(RowDmdr("csnr_adresse")), Nothing, RowDmdr("csnr_adresse"))
+        Dim idlocvilledmdr As Integer? = If(IsDBNull(RowDmdr("locville_id")), Nothing, RowDmdr("locville_id"))
+        Dim nomvilledmdr As String
+        Dim cpdmdr As Integer?
+        Dim locvilledmdr As DataRow
+        If idlocvilledmdr IsNot Nothing Then
+            locvilledmdr = Bdd.GetRow("t_loc_ville", idlocvilledmdr)
+            nomvilledmdr = If(IsDBNull(locvilledmdr("locville_ville")), Nothing, locvilledmdr("locville_ville"))
+            cpdmdr = If(IsDBNull(locvilledmdr("locville_cp")), Nothing, locvilledmdr("locville_cp"))
+        Else
+            locvilledmdr = Nothing
+            nomvilledmdr = ""
+            cpdmdr = Nothing
+        End If
+        ' faire pays
+        Dim paysdmdr As DataRow
+        Dim nompaysdmdr As String
+        If locvilledmdr IsNot Nothing AndAlso Not IsDBNull(locvilledmdr("Pays_id")) Then
+            paysdmdr = Bdd.GetRow("t_pays", locvilledmdr("Pays_id"))
+            nompaysdmdr = If(Not IsDBNull(paysdmdr("Pays_nom")), paysdmdr("Pays_nom"), "")
+        Else
+            paysdmdr = Nothing
+            nompaysdmdr = ""
+        End If
+        Dim domiciledmdr = Uzineagaz.AdresseComplete(adressedmdr, cpdmdr, nomvilledmdr, nompaysdmdr)
+        Dim teldmdr As String = If(Not IsDBNull(RowDmdr("csnr_tel")), RowDmdr("csnr_tel"), "")
+
+        FaireTableauIdentiteDuDemandeur(nomcompletdmdravecmaj, datenaissdmdr, domiciledmdr, teldmdr)
 
         pdf.Add(New Paragraph("Ce formulaire, dûment complété et signé, sera examiné par le Collège communal qui adressera une réponse écrite au demandeur." &
                               " Ce formulaire n'engage ni le demandeur ni la Commune à une modification de la concession existante.", fNormalL))
@@ -635,9 +676,18 @@ Public Class ExporteurPdf
         'Dim L2 As List
         Dim litem As ListItem
 
+
+
         L1 = New List(True, False, 20.0F)
 
         litem = New ListItem(New Phrase("", fNormal))   ' phrase vide pour que le 1. prenne la police normale
+        litem.Add(New Phrase("Référence de l'emplacement :" & vbCrLf, fSouligne))
+        litem.Add(New Paragraph(" "))
+        litem.Add(New Paragraph(If(RefEmpl, "............................."), fNormal))
+        litem.Add(New Paragraph(" "))
+        L1.Add(litem)
+
+        litem = New ListItem(New Phrase("", fNormal))
         litem.Add(New Phrase("Type de sépulture :", fSouligne))
         litem.Add(New Paragraph(" "))
         litem.Add(New Paragraph("      ○ emplacement en pleine terre", fNormal))
@@ -648,6 +698,7 @@ Public Class ExporteurPdf
 
         litem = New ListItem(New Phrase("", fNormal))
         litem.Add(New Phrase("Dans cette sépulture reposent les restes mortels de la (des) personne(s) suivante(s) :", fSouligne))
+
         t = New PdfPTable(5)
         t.WidthPercentage = 100
         t.SetWidths({4, 4, 3, 3, 4})
@@ -656,11 +707,19 @@ Public Class ExporteurPdf
         t.AddCell(New Phrase("Date(s) de naissance", fNormal))
         t.AddCell(New Phrase("Date(s) de décès", fNormal))
         t.AddCell(New Phrase("Lien(s) de parenté", fNormal))
+        Dim i As Integer = 0
+        Dim nbrdefs = DefuntsDeja.Rows.Count
+        While i < nbrdefs Or i < 5
+            Dim def As DataRow
+            If i < nbrdefs Then def = DefuntsDeja.Rows(i)
+            t.AddCell(New Phrase(If(i < nbrdefs, def("def_nom"), ""), fNormal))
+            t.AddCell(New Phrase(If(i < nbrdefs, def("def_prenom"), " "), fNormal))
+            t.AddCell(New Phrase(If(i < nbrdefs AndAlso Not IsDBNull(def("def_date_naiss")), CType(def("def_date_naiss"), Date).ToString("dd/MM/yyyy"), " "), fNormal))
+            t.AddCell(New Phrase(If(i < nbrdefs AndAlso Not IsDBNull(def("def_date_deces")), CType(def("def_date_deces"), Date).ToString("dd/MM/yyyy"), " "), fNormal))
+            t.AddCell(vbCrLf & vbCrLf)      ' le lien de parenté n'est pas disponible en bdd, libre à l'utilisateur de l'écrire à la main
+            i += 1
+        End While
 
-        ' à adapter façon tableau bénefs quand le form prolongation sera fait
-        For i As Integer = 0 To 25
-            t.AddCell(New Paragraph(vbCrLf & vbCrLf, fNormal))
-        Next
         litem.Add(t)
         litem.Add(New Paragraph(" "))
         L1.Add(litem)
@@ -669,16 +728,24 @@ Public Class ExporteurPdf
         ''pdf.Add(New Paragraph("............................................................................................................................................................"))
         ''pdf.Add(New Paragraph("............................................................................................................................................................"))
 
-        litem = New ListItem(New Phrase("Situation approximative de l'endroit où se trouve la sépulture :", fNormal))
+        litem = New ListItem(New Phrase("", fNormal))
+        litem.Add(New Phrase("Situation approximative de l'endroit où se trouve la sépulture :", fSouligne))
+        litem.Add(New Paragraph(" "))
         litem.Add(New Paragraph("..............................................................................................................................................."))
         litem.Add(New Paragraph("..............................................................................................................................................."))
         litem.Add(New Paragraph(" "))
         L1.Add(litem)
 
-        litem = New ListItem(New Phrase("Remarques éventuelles : ", fNormal))
-        litem.Add(New Paragraph("..............................................................................................................................................."))
-        litem.Add(New Paragraph("..............................................................................................................................................."))
-        litem.Add(New Paragraph("..............................................................................................................................................."))
+        litem = New ListItem(New Phrase("", fNormal))
+        litem.Add(New Phrase("Remarques éventuelles : ", fSouligne))
+        litem.Add(New Paragraph(" "))
+        If RemarqueEventuelle <> "" Then
+            litem.Add(New Paragraph(RemarqueEventuelle, fNormal))
+        Else
+            litem.Add(New Paragraph("..............................................................................................................................................."))
+            litem.Add(New Paragraph("..............................................................................................................................................."))
+            litem.Add(New Paragraph("..............................................................................................................................................."))
+        End If
         L1.Add(litem)
 
         pdf.Add(L1)
