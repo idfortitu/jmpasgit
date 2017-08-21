@@ -4,12 +4,14 @@ Public Class FormGestion
     Public dtcons As DataTable
     Public dtbenef As DataTable
     Public dtdefunt As DataTable
+    Public dtdefuntcons As DataTable
     Public dtCsnr As DataTable
     Public dtPersContact As DataTable
     Public dtBeneficiaireForm As DataTable
     Dim screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
     Dim screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
     Dim boutongestion = 0
+    Dim permut As Integer = 0
 
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -69,7 +71,7 @@ Public Class FormGestion
         ProgressBar.Increment(100)
         Threading.Thread.Sleep(500)
         ProgressBar.Hide()
-        Me.Size = New Size(1270, 705)
+        Me.Size = New Size(1252, 705)
         Me.Left = (screenWidth - Me.Width) / 2
         Me.Top = (screenHeight - Me.Height) / 2
         Panel10.Show()
@@ -176,7 +178,7 @@ Public Class FormGestion
             dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") = empl
         End If
 
-        dtdefunt = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") & "")
+        dtdefuntcons = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") & "")
         Dim DTGV_Id_Colonne_def = New DataGridViewTextBoxColumn()
         Dim Colonne = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
@@ -192,7 +194,7 @@ Public Class FormGestion
         colonneid.HeaderText = "id"
         colonneid.Name = "def_id"
         FCDGDefunt.AutoGenerateColumns = False
-        FCDGDefunt.DataSource = dtdefunt
+        FCDGDefunt.DataSource = dtdefuntcons
         FCDGDefunt.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         FCDGDefunt.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
@@ -395,6 +397,8 @@ Public Class FormGestion
         Dim Source As New BindingSource()
         Source.DataSource = Me.DgvListeDefunts.DataSource
         Source.Filter = "def_nom like '%'"
+        permut = 0
+        ' dtdefunt.Rows(DgvListeDefunts.CurrentRow.Index())("def_id") += 1
     End Sub
 
     Private Sub PRBConcessionnaire_CheckedChanged(sender As Object, e As EventArgs) Handles PRBConcessionnaire.CheckedChanged
@@ -476,37 +480,44 @@ Public Class FormGestion
     End Sub
 
     Private Sub FPBLienCons_Click(sender As Object, e As EventArgs) Handles FPBLienCons.Click
-        TabControl1.SelectedIndex = 1
-        'Dim defuntid = dtPersonnes.Rows(DgvListeDefunts.CurrentRow.Index())("def_id").ToString
-        Dim defuntid = Me.DgvListeDefunts(0, 0).Value.ToString
-        MsgBox(defuntid)
-        Dim id = Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "con_id")
-        Dim Source As New BindingSource()
-        Source.DataSource = Me.FCDGConss.DataSource
-        Source.Filter = "convert([con_id],'System.String') LIKE '" & id & "'"
-        Dim NbLigne2 = Me.FCDGConss.CurrentRow.Index
+        If permut = 0 Then
+            TabControl1.SelectedIndex = 1
+            Dim defuntid As String = dtdefunt.Rows(DgvListeDefunts.CurrentRow.Index())("def_id").ToString
+            MsgBox(defuntid)
+            MsgBox(dtdefunt.Rows(DgvListeDefunts.CurrentRow.Index())("def_nom").ToString)
 
-        FCDGDefunt.DataBindings.Clear()
-        FCDGDefunt.Columns.Clear()
-        DataTableDefuntCons(Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "empl_id"))
-
-        Dim Nbcolonne2 = 0
-        Dim Val2 As String = Me.FCDGConss(0, 0).Value
-        MsgBox(Val2)
-
-        FCDGBeneficiaire.DataBindings.Clear()
-        FCDGBeneficiaire.Columns.Clear()
+            Dim id = Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "con_id")
+            Dim Source As New BindingSource()
+            Source.DataSource = Me.FCDGConss.DataSource
+            Source.Filter = "convert([con_id],'System.String') LIKE '" & id & "'"
 
 
-        DataTableConsBeneficiaire(Bdd.GetValeurSql("select * FROM concessions where con_numero = '" & Val2 & "'", "con_id"))
+            Dim NbLigne2 = Me.FCDGConss.CurrentRow.Index
+
+            FCDGDefunt.DataBindings.Clear()
+            FCDGDefunt.Columns.Clear()
+            DataTableDefuntCons(Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "empl_id"))
+
+            Dim Nbcolonne2 = 0
+            Dim Val2 As String = Me.FCDGConss(0, 0).Value
+            MsgBox(Val2)
+
+            FCDGBeneficiaire.DataBindings.Clear()
+            FCDGBeneficiaire.Columns.Clear()
 
 
+            DataTableConsBeneficiaire(Bdd.GetValeurSql("select * FROM concessions where con_numero = '" & Val2 & "'", "con_id"))
+            permut = 1
+
+        Else
+            TabControl1.SelectedIndex = 1
+        End If
 
     End Sub
 
     Private Sub FCBLienDefunt_Click(sender As Object, e As EventArgs) Handles FCBLienDefunt.Click
         TabControl1.SelectedIndex = 0
-        Dim id As String = dtdefunt.Rows(FCDGDefunt.CurrentRow.Index())("def_id").ToString
+        Dim id As String = dtdefuntcons.Rows(FCDGDefunt.CurrentRow.Index())("def_id").ToString
         Dim Source As New BindingSource()
         Source.DataSource = Me.DgvListeDefunts.DataSource
         Source.Filter = "convert([def_id],'System.String') LIKE '" & id & "'"
@@ -831,5 +842,9 @@ Public Class FormGestion
                 TabControl1.TabPages(1).Enabled = True
             End If
         End If
+    End Sub
+
+    Private Sub BSuppCons_Click(sender As Object, e As EventArgs) Handles BSuppCons.Click
+
     End Sub
 End Class

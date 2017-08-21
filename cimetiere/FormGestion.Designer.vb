@@ -73,7 +73,6 @@ Partial Class FormGestion
         Me.FPLDateNaiss = New System.Windows.Forms.Label()
         Me.FPTBNom = New System.Windows.Forms.TextBox()
         Me.FPLNom = New System.Windows.Forms.Label()
-        Me.TbDateDeces = New cimetiere.TextBoxDate()
         Me.FPBSupprimer = New System.Windows.Forms.Button()
         Me.FPBModifier = New System.Windows.Forms.Button()
         Me.FPBDetails = New System.Windows.Forms.Button()
@@ -190,6 +189,7 @@ Partial Class FormGestion
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Lchargementdonnee = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TbDateDeces = New cimetiere.TextBoxDate()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -244,7 +244,7 @@ Partial Class FormGestion
         Me.TabControl1.Location = New System.Drawing.Point(-5, 1)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1270, 705)
+        Me.TabControl1.Size = New System.Drawing.Size(1254, 705)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage1
@@ -264,7 +264,7 @@ Partial Class FormGestion
         Me.TabPage1.Location = New System.Drawing.Point(4, 36)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1262, 665)
+        Me.TabPage1.Size = New System.Drawing.Size(1246, 665)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Défunt"
         '
@@ -272,9 +272,9 @@ Partial Class FormGestion
         '
         Me.Panel3.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel3.Controls.Add(Me.GroupBox3)
-        Me.Panel3.Location = New System.Drawing.Point(274, 6)
+        Me.Panel3.Location = New System.Drawing.Point(271, 6)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(403, 513)
+        Me.Panel3.Size = New System.Drawing.Size(403, 616)
         Me.Panel3.TabIndex = 97
         '
         'GroupBox3
@@ -283,7 +283,7 @@ Partial Class FormGestion
         Me.GroupBox3.Controls.Add(Me.DgvListeDefunts)
         Me.GroupBox3.Location = New System.Drawing.Point(11, 8)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(381, 496)
+        Me.GroupBox3.Size = New System.Drawing.Size(381, 593)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         '
@@ -308,7 +308,7 @@ Partial Class FormGestion
         Me.DgvListeDefunts.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvListeDefunts.RowHeadersVisible = False
         Me.DgvListeDefunts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeDefunts.Size = New System.Drawing.Size(367, 476)
+        Me.DgvListeDefunts.Size = New System.Drawing.Size(367, 577)
         Me.DgvListeDefunts.TabIndex = 48
         '
         'Panel10
@@ -453,7 +453,7 @@ Partial Class FormGestion
         '
         Me.FPBAjouter.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBAjouter.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBAjouter.Location = New System.Drawing.Point(738, 296)
+        Me.FPBAjouter.Location = New System.Drawing.Point(1024, 275)
         Me.FPBAjouter.Name = "FPBAjouter"
         Me.FPBAjouter.Size = New System.Drawing.Size(64, 23)
         Me.FPBAjouter.TabIndex = 88
@@ -464,7 +464,7 @@ Partial Class FormGestion
         '
         Me.Panel1.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(699, 6)
+        Me.Panel1.Location = New System.Drawing.Point(696, 6)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(543, 266)
         Me.Panel1.TabIndex = 92
@@ -510,7 +510,7 @@ Partial Class FormGestion
         '
         'FPTBVille
         '
-        Me.FPTBVille.Location = New System.Drawing.Point(359, 211)
+        Me.FPTBVille.Location = New System.Drawing.Point(372, 211)
         Me.FPTBVille.Name = "FPTBVille"
         Me.FPTBVille.Size = New System.Drawing.Size(126, 21)
         Me.FPTBVille.TabIndex = 141
@@ -518,7 +518,7 @@ Partial Class FormGestion
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(295, 214)
+        Me.Label15.Location = New System.Drawing.Point(323, 214)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(35, 14)
         Me.Label15.TabIndex = 140
@@ -679,7 +679,7 @@ Partial Class FormGestion
         '
         Me.FPTBSepulture.Location = New System.Drawing.Point(119, 211)
         Me.FPTBSepulture.Name = "FPTBSepulture"
-        Me.FPTBSepulture.Size = New System.Drawing.Size(126, 21)
+        Me.FPTBSepulture.Size = New System.Drawing.Size(152, 21)
         Me.FPTBSepulture.TabIndex = 120
         '
         'FPTBDateNaiss
@@ -733,22 +733,11 @@ Partial Class FormGestion
         Me.FPLNom.TabIndex = 114
         Me.FPLNom.Text = "Nom :"
         '
-        'TbDateDeces
-        '
-        Me.TbDateDeces.DateValue = Nothing
-        Me.TbDateDeces.Location = New System.Drawing.Point(851, 405)
-        Me.TbDateDeces.Margin = New System.Windows.Forms.Padding(2)
-        Me.TbDateDeces.Mask = "00/00/0000"
-        Me.TbDateDeces.Name = "TbDateDeces"
-        Me.TbDateDeces.Size = New System.Drawing.Size(76, 21)
-        Me.TbDateDeces.TabIndex = 113
-        Me.TbDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'FPBSupprimer
         '
         Me.FPBSupprimer.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBSupprimer.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBSupprimer.Location = New System.Drawing.Point(906, 296)
+        Me.FPBSupprimer.Location = New System.Drawing.Point(1164, 275)
         Me.FPBSupprimer.Name = "FPBSupprimer"
         Me.FPBSupprimer.Size = New System.Drawing.Size(74, 23)
         Me.FPBSupprimer.TabIndex = 90
@@ -759,7 +748,7 @@ Partial Class FormGestion
         '
         Me.FPBModifier.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBModifier.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBModifier.Location = New System.Drawing.Point(824, 296)
+        Me.FPBModifier.Location = New System.Drawing.Point(1094, 275)
         Me.FPBModifier.Name = "FPBModifier"
         Me.FPBModifier.Size = New System.Drawing.Size(64, 23)
         Me.FPBModifier.TabIndex = 89
@@ -770,7 +759,7 @@ Partial Class FormGestion
         '
         Me.FPBDetails.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBDetails.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBDetails.Location = New System.Drawing.Point(1138, 329)
+        Me.FPBDetails.Location = New System.Drawing.Point(1139, 329)
         Me.FPBDetails.Name = "FPBDetails"
         Me.FPBDetails.Size = New System.Drawing.Size(99, 48)
         Me.FPBDetails.TabIndex = 87
@@ -781,7 +770,7 @@ Partial Class FormGestion
         '
         Me.FPBLienCons.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBLienCons.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBLienCons.Location = New System.Drawing.Point(1088, 279)
+        Me.FPBLienCons.Location = New System.Drawing.Point(901, 329)
         Me.FPBLienCons.Name = "FPBLienCons"
         Me.FPBLienCons.Size = New System.Drawing.Size(152, 48)
         Me.FPBLienCons.TabIndex = 86
@@ -803,9 +792,12 @@ Partial Class FormGestion
         Me.TabPage2.BackColor = System.Drawing.Color.GhostWhite
         Me.TabPage2.BackgroundImage = CType(resources.GetObject("TabPage2.BackgroundImage"), System.Drawing.Image)
         Me.TabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.TabPage2.Controls.Add(Me.BSuppConsBenef)
         Me.TabPage2.Controls.Add(Me.BSuppCons)
+        Me.TabPage2.Controls.Add(Me.BmodifConsBenef)
         Me.TabPage2.Controls.Add(Me.BmodifCons)
         Me.TabPage2.Controls.Add(Me.Panel9)
+        Me.TabPage2.Controls.Add(Me.BAddConsBenef)
         Me.TabPage2.Controls.Add(Me.Panel8)
         Me.TabPage2.Controls.Add(Me.Panel7)
         Me.TabPage2.Controls.Add(Me.Panel5)
@@ -817,7 +809,7 @@ Partial Class FormGestion
         Me.TabPage2.Location = New System.Drawing.Point(4, 36)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1262, 665)
+        Me.TabPage2.Size = New System.Drawing.Size(1246, 665)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Concession"
         '
@@ -825,7 +817,7 @@ Partial Class FormGestion
         '
         Me.BSuppCons.BackColor = System.Drawing.Color.SeaGreen
         Me.BSuppCons.ForeColor = System.Drawing.Color.Transparent
-        Me.BSuppCons.Location = New System.Drawing.Point(1143, 207)
+        Me.BSuppCons.Location = New System.Drawing.Point(1164, 207)
         Me.BSuppCons.Name = "BSuppCons"
         Me.BSuppCons.Size = New System.Drawing.Size(74, 23)
         Me.BSuppCons.TabIndex = 134
@@ -836,7 +828,7 @@ Partial Class FormGestion
         '
         Me.BmodifCons.BackColor = System.Drawing.Color.SeaGreen
         Me.BmodifCons.ForeColor = System.Drawing.Color.Transparent
-        Me.BmodifCons.Location = New System.Drawing.Point(1067, 207)
+        Me.BmodifCons.Location = New System.Drawing.Point(1097, 207)
         Me.BmodifCons.Name = "BmodifCons"
         Me.BmodifCons.Size = New System.Drawing.Size(64, 23)
         Me.BmodifCons.TabIndex = 133
@@ -913,19 +905,16 @@ Partial Class FormGestion
         '
         Me.Panel7.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel7.Controls.Add(Me.GroupBox7)
-        Me.Panel7.Location = New System.Drawing.Point(694, 418)
+        Me.Panel7.Location = New System.Drawing.Point(702, 418)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(536, 200)
+        Me.Panel7.Size = New System.Drawing.Size(536, 180)
         Me.Panel7.TabIndex = 130
         '
         'GroupBox7
         '
         Me.GroupBox7.BackColor = System.Drawing.Color.White
-        Me.GroupBox7.Controls.Add(Me.BSuppConsBenef)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefpays)
-        Me.GroupBox7.Controls.Add(Me.BmodifConsBenef)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefville)
-        Me.GroupBox7.Controls.Add(Me.BAddConsBenef)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefdatenaiss)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefcodepostal)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefadress)
@@ -940,7 +929,7 @@ Partial Class FormGestion
         Me.GroupBox7.Controls.Add(Me.Label22)
         Me.GroupBox7.Location = New System.Drawing.Point(17, 14)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(502, 166)
+        Me.GroupBox7.Size = New System.Drawing.Size(502, 147)
         Me.GroupBox7.TabIndex = 0
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Infos Bénéficiaires"
@@ -949,7 +938,7 @@ Partial Class FormGestion
         '
         Me.BSuppConsBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BSuppConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BSuppConsBenef.Location = New System.Drawing.Point(415, 137)
+        Me.BSuppConsBenef.Location = New System.Drawing.Point(1164, 604)
         Me.BSuppConsBenef.Name = "BSuppConsBenef"
         Me.BSuppConsBenef.Size = New System.Drawing.Size(74, 23)
         Me.BSuppConsBenef.TabIndex = 134
@@ -958,7 +947,7 @@ Partial Class FormGestion
         '
         'TBconsBenefpays
         '
-        Me.TBconsBenefpays.Location = New System.Drawing.Point(319, 103)
+        Me.TBconsBenefpays.Location = New System.Drawing.Point(321, 76)
         Me.TBconsBenefpays.Name = "TBconsBenefpays"
         Me.TBconsBenefpays.Size = New System.Drawing.Size(129, 21)
         Me.TBconsBenefpays.TabIndex = 72
@@ -967,7 +956,7 @@ Partial Class FormGestion
         '
         Me.BmodifConsBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BmodifConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BmodifConsBenef.Location = New System.Drawing.Point(339, 137)
+        Me.BmodifConsBenef.Location = New System.Drawing.Point(1097, 604)
         Me.BmodifConsBenef.Name = "BmodifConsBenef"
         Me.BmodifConsBenef.Size = New System.Drawing.Size(64, 23)
         Me.BmodifConsBenef.TabIndex = 133
@@ -976,7 +965,7 @@ Partial Class FormGestion
         '
         'TBconsBenefville
         '
-        Me.TBconsBenefville.Location = New System.Drawing.Point(321, 75)
+        Me.TBconsBenefville.Location = New System.Drawing.Point(321, 48)
         Me.TBconsBenefville.Name = "TBconsBenefville"
         Me.TBconsBenefville.Size = New System.Drawing.Size(129, 21)
         Me.TBconsBenefville.TabIndex = 71
@@ -985,7 +974,7 @@ Partial Class FormGestion
         '
         Me.BAddConsBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BAddConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BAddConsBenef.Location = New System.Drawing.Point(269, 136)
+        Me.BAddConsBenef.Location = New System.Drawing.Point(1030, 604)
         Me.BAddConsBenef.Name = "BAddConsBenef"
         Me.BAddConsBenef.Size = New System.Drawing.Size(64, 23)
         Me.BAddConsBenef.TabIndex = 132
@@ -1001,7 +990,7 @@ Partial Class FormGestion
         '
         'TBconsBenefcodepostal
         '
-        Me.TBconsBenefcodepostal.Location = New System.Drawing.Point(356, 43)
+        Me.TBconsBenefcodepostal.Location = New System.Drawing.Point(125, 100)
         Me.TBconsBenefcodepostal.Name = "TBconsBenefcodepostal"
         Me.TBconsBenefcodepostal.Size = New System.Drawing.Size(129, 21)
         Me.TBconsBenefcodepostal.TabIndex = 69
@@ -1050,7 +1039,7 @@ Partial Class FormGestion
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(285, 103)
+        Me.Label18.Location = New System.Drawing.Point(285, 76)
         Me.Label18.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(29, 14)
@@ -1060,7 +1049,7 @@ Partial Class FormGestion
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(285, 75)
+        Me.Label19.Location = New System.Drawing.Point(285, 48)
         Me.Label19.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(29, 14)
@@ -1070,7 +1059,7 @@ Partial Class FormGestion
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(282, 46)
+        Me.Label20.Location = New System.Drawing.Point(51, 103)
         Me.Label20.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(69, 14)
@@ -1134,7 +1123,7 @@ Partial Class FormGestion
         '
         Me.Panel6.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel6.Controls.Add(Me.GroupBox6)
-        Me.Panel6.Location = New System.Drawing.Point(694, 6)
+        Me.Panel6.Location = New System.Drawing.Point(702, 6)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(536, 200)
         Me.Panel6.TabIndex = 130
@@ -1413,7 +1402,7 @@ Partial Class FormGestion
         '
         Me.FCBLienDefunt.BackColor = System.Drawing.Color.SeaGreen
         Me.FCBLienDefunt.ForeColor = System.Drawing.Color.Transparent
-        Me.FCBLienDefunt.Location = New System.Drawing.Point(932, 267)
+        Me.FCBLienDefunt.Location = New System.Drawing.Point(940, 267)
         Me.FCBLienDefunt.Name = "FCBLienDefunt"
         Me.FCBLienDefunt.Size = New System.Drawing.Size(154, 57)
         Me.FCBLienDefunt.TabIndex = 91
@@ -1424,7 +1413,7 @@ Partial Class FormGestion
         '
         Me.FCBDetails.BackColor = System.Drawing.Color.SeaGreen
         Me.FCBDetails.ForeColor = System.Drawing.Color.Transparent
-        Me.FCBDetails.Location = New System.Drawing.Point(1144, 269)
+        Me.FCBDetails.Location = New System.Drawing.Point(1152, 269)
         Me.FCBDetails.Name = "FCBDetails"
         Me.FCBDetails.Size = New System.Drawing.Size(86, 53)
         Me.FCBDetails.TabIndex = 90
@@ -1447,17 +1436,21 @@ Partial Class FormGestion
         Me.TabPage3.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.TabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.TabPage3.Controls.Add(Me.Panel13)
+        Me.TabPage3.Controls.Add(Me.BSupGestionPersBenef)
         Me.TabPage3.Controls.Add(Me.Panel2)
+        Me.TabPage3.Controls.Add(Me.BModifGestionPersBenef)
         Me.TabPage3.Controls.Add(Me.Panel15)
         Me.TabPage3.Controls.Add(Me.PRBPersCon)
         Me.TabPage3.Controls.Add(Me.PRBConcessionnaire)
         Me.TabPage3.Controls.Add(Me.PRBBenef)
         Me.TabPage3.Controls.Add(Me.Panel12)
         Me.TabPage3.Controls.Add(Me.PictureBox1)
+        Me.TabPage3.Controls.Add(Me.BModifGestionPers)
+        Me.TabPage3.Controls.Add(Me.BSupGestionPers)
         Me.TabPage3.Location = New System.Drawing.Point(4, 36)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1262, 665)
+        Me.TabPage3.Size = New System.Drawing.Size(1246, 665)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Personnes"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -1466,7 +1459,7 @@ Partial Class FormGestion
         '
         Me.Panel13.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel13.Controls.Add(Me.GroupBox13)
-        Me.Panel13.Location = New System.Drawing.Point(705, 31)
+        Me.Panel13.Location = New System.Drawing.Point(706, 31)
         Me.Panel13.Name = "Panel13"
         Me.Panel13.Size = New System.Drawing.Size(531, 200)
         Me.Panel13.TabIndex = 138
@@ -1483,8 +1476,6 @@ Partial Class FormGestion
         Me.GroupBox13.Controls.Add(Me.TBPersAdress)
         Me.GroupBox13.Controls.Add(Me.TBPersNom)
         Me.GroupBox13.Controls.Add(Me.TBPersPrenom)
-        Me.GroupBox13.Controls.Add(Me.BSupGestionPers)
-        Me.GroupBox13.Controls.Add(Me.BModifGestionPers)
         Me.GroupBox13.Controls.Add(Me.Label4)
         Me.GroupBox13.Controls.Add(Me.Label9)
         Me.GroupBox13.Controls.Add(Me.Label8)
@@ -1568,7 +1559,7 @@ Partial Class FormGestion
         '
         Me.BSupGestionPers.BackColor = System.Drawing.Color.SeaGreen
         Me.BSupGestionPers.ForeColor = System.Drawing.Color.Transparent
-        Me.BSupGestionPers.Location = New System.Drawing.Point(403, 129)
+        Me.BSupGestionPers.Location = New System.Drawing.Point(1163, 234)
         Me.BSupGestionPers.Name = "BSupGestionPers"
         Me.BSupGestionPers.Size = New System.Drawing.Size(74, 23)
         Me.BSupGestionPers.TabIndex = 137
@@ -1579,7 +1570,7 @@ Partial Class FormGestion
         '
         Me.BModifGestionPers.BackColor = System.Drawing.Color.SeaGreen
         Me.BModifGestionPers.ForeColor = System.Drawing.Color.Transparent
-        Me.BModifGestionPers.Location = New System.Drawing.Point(403, 100)
+        Me.BModifGestionPers.Location = New System.Drawing.Point(1094, 234)
         Me.BModifGestionPers.Name = "BModifGestionPers"
         Me.BModifGestionPers.Size = New System.Drawing.Size(64, 23)
         Me.BModifGestionPers.TabIndex = 136
@@ -1749,7 +1740,7 @@ Partial Class FormGestion
         '
         Me.Panel15.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel15.Controls.Add(Me.GroupBox15)
-        Me.Panel15.Location = New System.Drawing.Point(705, 244)
+        Me.Panel15.Location = New System.Drawing.Point(706, 271)
         Me.Panel15.Margin = New System.Windows.Forms.Padding(3, 10, 3, 3)
         Me.Panel15.Name = "Panel15"
         Me.Panel15.Size = New System.Drawing.Size(531, 200)
@@ -1759,8 +1750,6 @@ Partial Class FormGestion
         '
         Me.GroupBox15.BackColor = System.Drawing.Color.White
         Me.GroupBox15.Controls.Add(Me.LinkLabel1)
-        Me.GroupBox15.Controls.Add(Me.BSupGestionPersBenef)
-        Me.GroupBox15.Controls.Add(Me.BModifGestionPersBenef)
         Me.GroupBox15.Location = New System.Drawing.Point(17, 15)
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.Size = New System.Drawing.Size(500, 166)
@@ -1782,7 +1771,7 @@ Partial Class FormGestion
         '
         Me.BSupGestionPersBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BSupGestionPersBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BSupGestionPersBenef.Location = New System.Drawing.Point(393, 76)
+        Me.BSupGestionPersBenef.Location = New System.Drawing.Point(1163, 474)
         Me.BSupGestionPersBenef.Name = "BSupGestionPersBenef"
         Me.BSupGestionPersBenef.Size = New System.Drawing.Size(74, 23)
         Me.BSupGestionPersBenef.TabIndex = 137
@@ -1793,7 +1782,7 @@ Partial Class FormGestion
         '
         Me.BModifGestionPersBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BModifGestionPersBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BModifGestionPersBenef.Location = New System.Drawing.Point(403, 47)
+        Me.BModifGestionPersBenef.Location = New System.Drawing.Point(1094, 474)
         Me.BModifGestionPersBenef.Name = "BModifGestionPersBenef"
         Me.BModifGestionPersBenef.Size = New System.Drawing.Size(64, 23)
         Me.BModifGestionPersBenef.TabIndex = 136
@@ -1839,18 +1828,18 @@ Partial Class FormGestion
         Me.Panel12.Controls.Add(Me.GroupBox12)
         Me.Panel12.Location = New System.Drawing.Point(302, 31)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(349, 527)
+        Me.Panel12.Size = New System.Drawing.Size(349, 591)
         Me.Panel12.TabIndex = 137
         '
         'GroupBox12
         '
         Me.GroupBox12.BackColor = System.Drawing.Color.White
         Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnairePersonneContact)
-        Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnaireConcess)
         Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnaireBenef)
+        Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnaireConcess)
         Me.GroupBox12.Location = New System.Drawing.Point(17, 14)
         Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(312, 483)
+        Me.GroupBox12.Size = New System.Drawing.Size(312, 561)
         Me.GroupBox12.TabIndex = 0
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "Acteurs"
@@ -1866,7 +1855,7 @@ Partial Class FormGestion
         Me.DgvListeConcessionnairePersonneContact.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvListeConcessionnairePersonneContact.RowHeadersVisible = False
         Me.DgvListeConcessionnairePersonneContact.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeConcessionnairePersonneContact.Size = New System.Drawing.Size(312, 470)
+        Me.DgvListeConcessionnairePersonneContact.Size = New System.Drawing.Size(312, 548)
         Me.DgvListeConcessionnairePersonneContact.TabIndex = 148
         '
         'DgvListeConcessionnaireConcess
@@ -1875,12 +1864,12 @@ Partial Class FormGestion
         Me.DgvListeConcessionnaireConcess.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DgvListeConcessionnaireConcess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvListeConcessionnaireConcess.EnableHeadersVisualStyles = False
-        Me.DgvListeConcessionnaireConcess.Location = New System.Drawing.Point(0, 15)
+        Me.DgvListeConcessionnaireConcess.Location = New System.Drawing.Point(0, 17)
         Me.DgvListeConcessionnaireConcess.Name = "DgvListeConcessionnaireConcess"
         Me.DgvListeConcessionnaireConcess.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvListeConcessionnaireConcess.RowHeadersVisible = False
         Me.DgvListeConcessionnaireConcess.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeConcessionnaireConcess.Size = New System.Drawing.Size(312, 470)
+        Me.DgvListeConcessionnaireConcess.Size = New System.Drawing.Size(312, 544)
         Me.DgvListeConcessionnaireConcess.TabIndex = 147
         '
         'DgvListeConcessionnaireBenef
@@ -1889,12 +1878,12 @@ Partial Class FormGestion
         Me.DgvListeConcessionnaireBenef.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DgvListeConcessionnaireBenef.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvListeConcessionnaireBenef.EnableHeadersVisualStyles = False
-        Me.DgvListeConcessionnaireBenef.Location = New System.Drawing.Point(0, 15)
+        Me.DgvListeConcessionnaireBenef.Location = New System.Drawing.Point(0, 13)
         Me.DgvListeConcessionnaireBenef.Name = "DgvListeConcessionnaireBenef"
         Me.DgvListeConcessionnaireBenef.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvListeConcessionnaireBenef.RowHeadersVisible = False
         Me.DgvListeConcessionnaireBenef.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeConcessionnaireBenef.Size = New System.Drawing.Size(312, 470)
+        Me.DgvListeConcessionnaireBenef.Size = New System.Drawing.Size(312, 548)
         Me.DgvListeConcessionnaireBenef.TabIndex = 43
         '
         'PictureBox1
@@ -1937,20 +1926,31 @@ Partial Class FormGestion
         Me.PictureBox2.TabIndex = 51
         Me.PictureBox2.TabStop = False
         '
+        'TbDateDeces
+        '
+        Me.TbDateDeces.DateValue = Nothing
+        Me.TbDateDeces.Location = New System.Drawing.Point(851, 405)
+        Me.TbDateDeces.Margin = New System.Windows.Forms.Padding(2)
+        Me.TbDateDeces.Mask = "00/00/0000"
+        Me.TbDateDeces.Name = "TbDateDeces"
+        Me.TbDateDeces.Size = New System.Drawing.Size(76, 21)
+        Me.TbDateDeces.TabIndex = 113
+        Me.TbDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'FormGestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
-        Me.ClientSize = New System.Drawing.Size(1254, 666)
-        Me.Controls.Add(Me.ProgressBar)
+        Me.ClientSize = New System.Drawing.Size(1236, 671)
         Me.Controls.Add(Me.Lchargementdonnee)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.ProgressBar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.MaximumSize = New System.Drawing.Size(1270, 705)
+        Me.MaximumSize = New System.Drawing.Size(1270, 725)
         Me.MinimumSize = New System.Drawing.Size(400, 100)
         Me.Name = "FormGestion"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
