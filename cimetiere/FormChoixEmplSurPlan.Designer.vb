@@ -110,7 +110,7 @@ Partial Class FormChoixEmplSurPlan
         Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
         Me.PlanCimetiere1.Name = "PlanCimetiere1"
         Me.PlanCimetiere1.NomParcelleAffichee = "A1"
-        Me.PlanCimetiere1.Size = New System.Drawing.Size(1200, 1200)
+        Me.PlanCimetiere1.Size = New System.Drawing.Size(608, 1200)
         Me.PlanCimetiere1.TabIndex = 15
         Me.PlanCimetiere1.Zoom = 1.0!
         Me.PlanCimetiere1.ZoomableAvecRoulette = True

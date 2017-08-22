@@ -74,7 +74,7 @@
                 GbReservation.Hide()
             Else
                 GbReservation.Show()
-                TbCsnr.Text = InfosCsn("csnr_nom")
+                TbCsnr.Text = InfosCsn("csnr_prenom") & " " & InfosCsn("csnr_nom")
                 TbDateDebut.Text = If(IsDBNull(InfosCsn("con_date_debut")), "", InfosCsn("con_date_debut"))
                 TbDateFin.Text = If(IsDBNull(InfosCsn("con_date_fin")), "", InfosCsn("con_date_fin"))
             End If
@@ -136,6 +136,10 @@
         BtFermer.Location = New Point(Me.ClientRectangle.Width - 25 - BtFermer.Width, Me.ClientRectangle.Height - 12 - BtFermer.Height)
 
 
+    End Sub
+
+    Private Sub BtFermer_Click_1(sender As Object, e As EventArgs) Handles BtFermer.Click
+        Me.Close()
     End Sub
 
 
