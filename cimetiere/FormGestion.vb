@@ -11,7 +11,6 @@ Public Class FormGestion
     Dim screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
     Dim screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
     Dim boutongestion = 0
-    Dim permut As Integer = 0
 
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -88,6 +87,7 @@ Public Class FormGestion
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
+        Dim colonnepc = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "def_nom"
         DTGV_Id_Colonne.HeaderText = "nom"
         DTGV_Id_Colonne.Name = "def_nom"
@@ -99,6 +99,13 @@ Public Class FormGestion
         colonneid.DataPropertyName = "def_id"
         colonneid.HeaderText = "id"
         colonneid.Name = "def_id"
+        DgvListeDefunts.Columns.Add(colonneid)
+        DgvListeDefunts.Columns("def_id").Visible = False
+        colonnepc.DataPropertyName = "pc_id"
+        colonnepc.HeaderText = "id"
+        colonnepc.Name = "pc_id"
+        DgvListeDefunts.Columns.Add(colonnepc)
+        DgvListeDefunts.Columns("pc_id").Visible = False
         DgvListeDefunts.AutoGenerateColumns = False
         DgvListeDefunts.DataSource = dtdefunt
         DgvListeDefunts.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -153,6 +160,7 @@ Public Class FormGestion
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
+        Dim colonnecsnr = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "con_numero"
         DTGV_Id_Colonne.HeaderText = "numero"
         DTGV_Id_Colonne.Name = "con_numero"
@@ -164,6 +172,13 @@ Public Class FormGestion
         colonneid.DataPropertyName = "con_id"
         colonneid.HeaderText = "id"
         colonneid.Name = "con_id"
+        FCDGConss.Columns.Add(colonneid)
+        FCDGConss.Columns("con_id").Visible = False
+        colonnecsnr.DataPropertyName = "csnr_id"
+        colonnecsnr.HeaderText = "id"
+        colonnecsnr.Name = "csnr_id"
+        FCDGConss.Columns.Add(colonnecsnr)
+        FCDGConss.Columns("csnr_id").Visible = False
         FCDGConss.AutoGenerateColumns = False
         FCDGConss.DataSource = dtcons
         FCDGConss.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -350,15 +365,12 @@ Public Class FormGestion
         FPTBVille.DataBindings.Clear()
     End Sub
 
-    Private Sub FPBDetails_Click(sender As Object, e As EventArgs) Handles FPBDetails.Click
+    Private Sub FPBDetails_Click(sender As Object, e As EventArgs)
         Dim FDetails As New FDetails
         FDetails.ShowDialog()
     End Sub
 
-    Private Sub FCBDetails_Click(sender As Object, e As EventArgs) Handles FCBDetails.Click
-        Dim FDetails As New FDetails
-        FDetails.ShowDialog()
-    End Sub
+
 
     Private Sub FPBAjouter_Click(sender As Object, e As EventArgs) Handles FPBAjouter.Click
     End Sub
@@ -397,7 +409,6 @@ Public Class FormGestion
         Dim Source As New BindingSource()
         Source.DataSource = Me.DgvListeDefunts.DataSource
         Source.Filter = "def_nom like '%'"
-        permut = 0
         ' dtdefunt.Rows(DgvListeDefunts.CurrentRow.Index())("def_id") += 1
     End Sub
 
@@ -480,39 +491,21 @@ Public Class FormGestion
     End Sub
 
     Private Sub FPBLienCons_Click(sender As Object, e As EventArgs) Handles FPBLienCons.Click
-        If permut = 0 Then
-            TabControl1.SelectedIndex = 1
-            Dim defuntid As String = dtdefunt.Rows(DgvListeDefunts.CurrentRow.Index())("def_id").ToString
-            MsgBox(defuntid)
-            MsgBox(dtdefunt.Rows(DgvListeDefunts.CurrentRow.Index())("def_nom").ToString)
-
-            Dim id = Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "con_id")
-            Dim Source As New BindingSource()
-            Source.DataSource = Me.FCDGConss.DataSource
-            Source.Filter = "convert([con_id],'System.String') LIKE '" & id & "'"
-
-
-            Dim NbLigne2 = Me.FCDGConss.CurrentRow.Index
-
-            FCDGDefunt.DataBindings.Clear()
-            FCDGDefunt.Columns.Clear()
-            DataTableDefuntCons(Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "empl_id"))
-
-            Dim Nbcolonne2 = 0
-            Dim Val2 As String = Me.FCDGConss(0, 0).Value
-            MsgBox(Val2)
-
-            FCDGBeneficiaire.DataBindings.Clear()
-            FCDGBeneficiaire.Columns.Clear()
-
-
-            DataTableConsBeneficiaire(Bdd.GetValeurSql("select * FROM concessions where con_numero = '" & Val2 & "'", "con_id"))
-            permut = 1
-
-        Else
-            TabControl1.SelectedIndex = 1
-        End If
-
+        TabControl1.SelectedIndex = 1
+        Dim defuntid As String = DgvListeDefunts.CurrentRow.Cells("def_id").Value
+        Dim id = Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "con_id")
+        Dim Source As New BindingSource()
+        Source.DataSource = Me.FCDGConss.DataSource
+        Source.Filter = "convert([con_id],'System.String') LIKE '" & id & "'"
+        Dim NbLigne2 = Me.FCDGConss.CurrentRow.Index
+        FCDGDefunt.DataBindings.Clear()
+        FCDGDefunt.Columns.Clear()
+        DataTableDefuntCons(Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "empl_id"))
+        Dim Nbcolonne2 = 0
+        Dim Val2 As String = Me.FCDGConss(0, 0).Value
+        FCDGBeneficiaire.DataBindings.Clear()
+        FCDGBeneficiaire.Columns.Clear()
+        DataTableConsBeneficiaire(Bdd.GetValeurSql("select * FROM concessions where con_numero = '" & Val2 & "'", "con_id"))
     End Sub
 
     Private Sub FCBLienDefunt_Click(sender As Object, e As EventArgs) Handles FCBLienDefunt.Click
@@ -844,7 +837,25 @@ Public Class FormGestion
         End If
     End Sub
 
-    Private Sub BSuppCons_Click(sender As Object, e As EventArgs) Handles BSuppCons.Click
 
+
+    Private Sub FDBLinkToPersCon_Click(sender As Object, e As EventArgs) Handles FDBLinkToPersCon.Click
+        Dim personcontactid As String = DgvListeDefunts.CurrentRow.Cells("pc_id").Value
+        TabControl1.SelectedIndex = 2
+        PRBPersCon.Select()
+        Dim Source As New BindingSource()
+        Source.DataSource = Me.DgvListeConcessionnairePersonneContact.DataSource
+        Source.Filter = "convert([pc_id],'System.String') LIKE '" & personcontactid & "'"
+
+    End Sub
+
+    Private Sub FDBLinkToConcessionnaire_Click(sender As Object, e As EventArgs) Handles FDBLinkToConcessionnaire.Click
+        Dim concessionnaireid As String = FCDGConss.CurrentRow.Cells("csnr_id").Value
+        TabControl1.SelectedIndex = 2
+        PRBPersCon.Select()
+        PRBConcessionnaire.Select()
+        Dim Source As New BindingSource()
+        Source.DataSource = Me.DgvListeConcessionnaireConcess.DataSource
+        Source.Filter = "convert([csnr_id],'System.String') LIKE '" & concessionnaireid & "'"
     End Sub
 End Class
