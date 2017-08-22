@@ -143,7 +143,6 @@ Public Class PlanCimetiere
             CType(e, HandledMouseEventArgs).Handled = True
         End If
     End Sub
-    Public PRATOUKU = False
 
     Private Property _emplSelect As DataRow
     Public Property EmplSelect As DataRow

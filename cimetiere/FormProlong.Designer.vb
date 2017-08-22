@@ -51,6 +51,7 @@ Partial Class FormProlong
         Me.BtViderFiltre = New System.Windows.Forms.Button()
         Me.ErProv = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.BtInfosCsnr = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TbDmdrTel = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -62,7 +63,6 @@ Partial Class FormProlong
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TbRem = New System.Windows.Forms.TextBox()
-        Me.BtInfosCsnr = New System.Windows.Forms.Button()
         Me.TbDmdrDateNaiss = New cimetiere.TextBoxDate()
         Me.CtrlVilleDmdr = New cimetiere.CtrlLocVillePays()
         Me.TbAnneesAjout = New cimetiere.TextBoxInt()
@@ -90,7 +90,7 @@ Partial Class FormProlong
         Me.BtTerminer.BackColor = System.Drawing.Color.SeaGreen
         Me.BtTerminer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtTerminer.ForeColor = System.Drawing.Color.Transparent
-        Me.BtTerminer.Location = New System.Drawing.Point(783, 679)
+        Me.BtTerminer.Location = New System.Drawing.Point(783, 657)
         Me.BtTerminer.Margin = New System.Windows.Forms.Padding(4)
         Me.BtTerminer.Name = "BtTerminer"
         Me.BtTerminer.Size = New System.Drawing.Size(154, 62)
@@ -102,7 +102,7 @@ Partial Class FormProlong
         '
         Me.Panel3.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel3.Controls.Add(Me.Panel7)
-        Me.Panel3.Location = New System.Drawing.Point(500, 672)
+        Me.Panel3.Location = New System.Drawing.Point(500, 650)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(276, 76)
         Me.Panel3.TabIndex = 181
@@ -135,7 +135,7 @@ Partial Class FormProlong
         Me.GbN.Controls.Add(Me.LbOccupants)
         Me.GbN.Location = New System.Drawing.Point(12, 304)
         Me.GbN.Name = "GbN"
-        Me.GbN.Size = New System.Drawing.Size(342, 169)
+        Me.GbN.Size = New System.Drawing.Size(342, 143)
         Me.GbN.TabIndex = 182
         Me.GbN.TabStop = False
         Me.GbN.Text = "Défunts actuels"
@@ -147,7 +147,7 @@ Partial Class FormProlong
         Me.LbOccupants.ItemHeight = 16
         Me.LbOccupants.Location = New System.Drawing.Point(6, 21)
         Me.LbOccupants.Name = "LbOccupants"
-        Me.LbOccupants.Size = New System.Drawing.Size(330, 141)
+        Me.LbOccupants.Size = New System.Drawing.Size(330, 116)
         Me.LbOccupants.TabIndex = 183
         '
         'GroupBox3
@@ -156,7 +156,7 @@ Partial Class FormProlong
         Me.GroupBox3.Controls.Add(Me.LbBenefs)
         Me.GroupBox3.Location = New System.Drawing.Point(360, 306)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(315, 167)
+        Me.GroupBox3.Size = New System.Drawing.Size(315, 141)
         Me.GroupBox3.TabIndex = 180
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Bénéficiaires"
@@ -168,7 +168,7 @@ Partial Class FormProlong
         Me.LbBenefs.ItemHeight = 16
         Me.LbBenefs.Location = New System.Drawing.Point(6, 21)
         Me.LbBenefs.Name = "LbBenefs"
-        Me.LbBenefs.Size = New System.Drawing.Size(299, 139)
+        Me.LbBenefs.Size = New System.Drawing.Size(299, 115)
         Me.LbBenefs.TabIndex = 0
         '
         'TbCom
@@ -177,7 +177,7 @@ Partial Class FormProlong
         Me.TbCom.Multiline = True
         Me.TbCom.Name = "TbCom"
         Me.TbCom.ReadOnly = True
-        Me.TbCom.Size = New System.Drawing.Size(256, 138)
+        Me.TbCom.Size = New System.Drawing.Size(256, 110)
         Me.TbCom.TabIndex = 183
         '
         'GbO
@@ -186,7 +186,7 @@ Partial Class FormProlong
         Me.GbO.Controls.Add(Me.TbCom)
         Me.GbO.Location = New System.Drawing.Point(681, 307)
         Me.GbO.Name = "GbO"
-        Me.GbO.Size = New System.Drawing.Size(269, 166)
+        Me.GbO.Size = New System.Drawing.Size(269, 140)
         Me.GbO.TabIndex = 184
         Me.GbO.TabStop = False
         Me.GbO.Text = "Commentaire"
@@ -212,7 +212,7 @@ Partial Class FormProlong
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox1.Controls.Add(Me.Panel1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 641)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 619)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(464, 139)
         Me.GroupBox1.TabIndex = 187
@@ -347,12 +347,21 @@ Partial Class FormProlong
         Me.GroupBox4.Controls.Add(Me.Label10)
         Me.GroupBox4.Controls.Add(Me.Label9)
         Me.GroupBox4.Controls.Add(Me.Label11)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 483)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 461)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(633, 152)
         Me.GroupBox4.TabIndex = 189
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Personne introduisant la demande"
+        '
+        'BtInfosCsnr
+        '
+        Me.BtInfosCsnr.Location = New System.Drawing.Point(302, -1)
+        Me.BtInfosCsnr.Name = "BtInfosCsnr"
+        Me.BtInfosCsnr.Size = New System.Drawing.Size(214, 51)
+        Me.BtInfosCsnr.TabIndex = 11
+        Me.BtInfosCsnr.Text = "BtInfosCsnr"
+        Me.BtInfosCsnr.UseVisualStyleBackColor = True
         '
         'Label12
         '
@@ -431,29 +440,20 @@ Partial Class FormProlong
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox2.Controls.Add(Me.TbRem)
-        Me.GroupBox2.Location = New System.Drawing.Point(651, 485)
+        Me.GroupBox2.Location = New System.Drawing.Point(651, 461)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(286, 150)
+        Me.GroupBox2.Size = New System.Drawing.Size(286, 152)
         Me.GroupBox2.TabIndex = 190
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Remarque éventuelle"
+        Me.GroupBox2.Text = "Remarque éventuelle sur la prolongation"
         '
         'TbRem
         '
         Me.TbRem.Location = New System.Drawing.Point(6, 21)
         Me.TbRem.Multiline = True
         Me.TbRem.Name = "TbRem"
-        Me.TbRem.Size = New System.Drawing.Size(274, 123)
+        Me.TbRem.Size = New System.Drawing.Size(274, 125)
         Me.TbRem.TabIndex = 0
-        '
-        'BtInfosCsnr
-        '
-        Me.BtInfosCsnr.Location = New System.Drawing.Point(302, -1)
-        Me.BtInfosCsnr.Name = "BtInfosCsnr"
-        Me.BtInfosCsnr.Size = New System.Drawing.Size(214, 51)
-        Me.BtInfosCsnr.TabIndex = 11
-        Me.BtInfosCsnr.Text = "BtInfosCsnr"
-        Me.BtInfosCsnr.UseVisualStyleBackColor = True
         '
         'TbDmdrDateNaiss
         '

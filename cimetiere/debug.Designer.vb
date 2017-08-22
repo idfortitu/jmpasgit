@@ -41,9 +41,10 @@ Partial Class debug
         Me.Button21 = New System.Windows.Forms.Button()
         Me.Button23 = New System.Windows.Forms.Button()
         Me.Button24 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.PanelCustom1 = New cimetiere.PlanCimConteneur()
         Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.PanelCustom1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -209,6 +210,24 @@ Partial Class debug
         Me.Button24.Text = "zoom 1"
         Me.Button24.UseVisualStyleBackColor = True
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(717, 663)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(119, 23)
+        Me.Button3.TabIndex = 85
+        Me.Button3.Text = "notifabandon"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(878, 159)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(96, 29)
+        Me.Button4.TabIndex = 86
+        Me.Button4.Text = "enregnotif"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'PanelCustom1
         '
         Me.PanelCustom1.AutoScroll = True
@@ -234,20 +253,12 @@ Partial Class debug
         Me.PlanCimetiere1.Zoom = 1.0!
         Me.PlanCimetiere1.ZoomableAvecRoulette = True
         '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(717, 663)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(119, 23)
-        Me.Button3.TabIndex = 85
-        Me.Button3.Text = "notifabandon"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'debug
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1698, 878)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button24)
         Me.Controls.Add(Me.Button23)
@@ -296,4 +307,5 @@ Partial Class debug
     Friend WithEvents Button23 As Button
     Friend WithEvents Button24 As Button
     Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
 End Class

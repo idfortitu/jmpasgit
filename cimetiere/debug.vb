@@ -170,5 +170,9 @@ Public Class debug
         Dim f As New FormSignalAbandonCsn
         f.ShowDialog()
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Bdd.InsertSignalCsnAband(33, "rien à ajouter", Image.FromFile("C:\Users\BlastBast\Documents\cimetiere6\jmpasgit\cimetiere\bin\Debug\logo.png"))
+    End Sub
 End Class
 
