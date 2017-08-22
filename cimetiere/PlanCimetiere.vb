@@ -154,6 +154,7 @@ Public Class PlanCimetiere
             If value IsNot _emplSelect Then
                 _emplSelect = value
                 Me.Invalidate()
+                RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(value))
             End If
         End Set
     End Property
@@ -397,7 +398,7 @@ Public Class PlanCimetiere
     ' ne conviennent pas : Load, New (dimensions zéro), ParentChanged (se fait avant redimensionnement par Windows), Layout, SizeChanged (se déclenchent plusieurs fois au chargement et avec des tailles différentes)
     ' LocationChanged serait correct sauf qu'il ne se déclenche pas quand le contrôle est à la position 0;0 (ce qui pourrait arriver souvent, si il est dans un panel pour le zoom/scroll)
     ' et qu'accessoirement, un changement de Location va redéfinir les dimensions "originales" d'après celles réduites pour afficher l'image
-    ' au final, on  gèrera resize, en mettant un flag pour empêcher les dimensions originales d'être redéfinie quand on modifie nous-même en fonction du zoom ou du changement d'image
+    ' au final, on  gèrera resize, en mettant un flag pour empêcher les dimensions originales d'être redéfinies quand on modifie nous-même en fonction du zoom ou du changement d'image
     Private Sub NoterDimensionsOriginales() Handles Me.Resize
         'If Not TailleAEteDefinie Then
         If Not PasToucheDimensionsOriginales Then

@@ -123,6 +123,7 @@ Partial Class FormReservation
         'CtrlLocVillePays1
         '
         Me.CtrlLocVillePays1.Location = New System.Drawing.Point(277, 62)
+        Me.CtrlLocVillePays1.LocVilleId = -1
         Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
         Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 26)
@@ -509,9 +510,9 @@ Partial Class FormReservation
         'BtMontrerFormPlancim
         '
         Me.BtMontrerFormPlancim.Image = Global.cimetiere.My.Resources.Resources.Note_16x
-        Me.BtMontrerFormPlancim.Location = New System.Drawing.Point(649, 17)
+        Me.BtMontrerFormPlancim.Location = New System.Drawing.Point(647, 17)
         Me.BtMontrerFormPlancim.Name = "BtMontrerFormPlancim"
-        Me.BtMontrerFormPlancim.Size = New System.Drawing.Size(30, 31)
+        Me.BtMontrerFormPlancim.Size = New System.Drawing.Size(32, 31)
         Me.BtMontrerFormPlancim.TabIndex = 177
         Me.BtMontrerFormPlancim.UseVisualStyleBackColor = True
         '

@@ -81,6 +81,7 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -265,6 +266,12 @@
     <Compile Include="FormProlong.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSignalAbandonCsn.Designer.vb">
+      <DependentUpon>FormSignalAbandonCsn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSignalAbandonCsn.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Histoire.partial.vb" />
     <Compile Include="Histoire.vb">
       <DependentUpon>dmCimetiere.tt</DependentUpon>
@@ -443,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProlong.resx">
       <DependentUpon>FormProlong.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSignalAbandonCsn.resx">
+      <DependentUpon>FormSignalAbandonCsn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListBenefNewCons.resx">
       <DependentUpon>ListBenefNewCons.vb</DependentUpon>

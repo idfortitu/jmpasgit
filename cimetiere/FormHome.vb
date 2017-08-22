@@ -57,4 +57,8 @@ Public Class FormHome
         Dim f As New FormGestion
         f.ShowDialog()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtSignalAbCsn.Click
+
+    End Sub
 End Class

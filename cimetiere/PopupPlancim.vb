@@ -25,10 +25,4 @@ Public Class PopupPlancim
         RaiseEvent SelectionChanged(e.Emplacement)
     End Sub
 
-
-
-
-
-
-
 End Class

@@ -43,6 +43,7 @@ Partial Class debug
         Me.Button24 = New System.Windows.Forms.Button()
         Me.PanelCustom1 = New cimetiere.PlanCimConteneur()
         Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.PanelCustom1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -233,11 +234,21 @@ Partial Class debug
         Me.PlanCimetiere1.Zoom = 1.0!
         Me.PlanCimetiere1.ZoomableAvecRoulette = True
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(717, 663)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(119, 23)
+        Me.Button3.TabIndex = 85
+        Me.Button3.Text = "notifabandon"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'debug
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1698, 878)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button24)
         Me.Controls.Add(Me.Button23)
         Me.Controls.Add(Me.PanelCustom1)
@@ -284,4 +295,5 @@ Partial Class debug
     Friend WithEvents PanelCustom1 As PlanCimConteneur
     Friend WithEvents Button23 As Button
     Friend WithEvents Button24 As Button
+    Friend WithEvents Button3 As Button
 End Class
