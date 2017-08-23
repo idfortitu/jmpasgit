@@ -432,14 +432,11 @@ Public Class FormGestion
         Dim dateapres As Date = DtpDefRechercherDateDecesApres.Value.Date
         If RbDefChercherNom.Checked = True Then
             If DtpDefRechercherDateDecesAvant.Checked = True And DtpDefRechercherDateDecesApres.Checked = False Then
-                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%'"
-                Source.Filter = "[def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "#"
+                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "#"
             ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = False Then
-                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%'"
-                Source.Filter = "[def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
+                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
             ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = True Then
-                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%'"
-                Source.Filter = "[def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "# AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
+                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "# AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
             Else
                 Source.DataSource = Me.DgvListeDefunts.DataSource
                 Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%'"
@@ -448,16 +445,13 @@ Public Class FormGestion
             If DtpDefRechercherDateDecesAvant.Checked = True And DtpDefRechercherDateDecesApres.Checked = False Then
                 dateavant = DtpDefRechercherDateDecesAvant.Value.Date
                 Source.DataSource = Me.DgvListeDefunts.DataSource
-                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%'"
-                Source.Filter = "[def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "#"
+                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "#"
             ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = False Then
                 dateapres = DtpDefRechercherDateDecesApres.Value.Date
                 Source.DataSource = Me.DgvListeDefunts.DataSource
-                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%'"
-                Source.Filter = "[def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
+                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
             ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = True Then
-                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%'"
-                Source.Filter = "[def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "# AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
+                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "# AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
             Else
                 Source.DataSource = Me.DgvListeDefunts.DataSource
                 Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%'"

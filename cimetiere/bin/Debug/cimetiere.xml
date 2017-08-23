@@ -32,12 +32,22 @@ cimetiere
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:cimetiere.My.Resources.Resources.ColumnDetail_16x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:cimetiere.My.Resources.Resources.fondformulaire">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
 <member name="P:cimetiere.My.Resources.Resources.home3">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.logolh">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
