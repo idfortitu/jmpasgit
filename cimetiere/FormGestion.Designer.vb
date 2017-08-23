@@ -32,6 +32,8 @@ Partial Class FormGestion
         Me.DgvListeDefunts = New System.Windows.Forms.DataGridView()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.RbDefChercherEmplacement = New System.Windows.Forms.RadioButton()
+        Me.RbDefChercherNom = New System.Windows.Forms.RadioButton()
         Me.BtDefAnnulerRecherche = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -39,11 +41,7 @@ Partial Class FormGestion
         Me.DtpDefRechercherDateDecesAvant = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TbDefChampRecherche = New System.Windows.Forms.TextBox()
-        Me.CbDefChercherNom = New System.Windows.Forms.CheckBox()
-        Me.CbDefChercherCode = New System.Windows.Forms.CheckBox()
-        Me.CbDefChercherEmplacement = New System.Windows.Forms.CheckBox()
         Me.BtDefChercher = New System.Windows.Forms.Button()
-        Me.FPBAjouter = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.FPTBVille = New System.Windows.Forms.TextBox()
@@ -74,7 +72,6 @@ Partial Class FormGestion
         Me.FPLDateNaiss = New System.Windows.Forms.Label()
         Me.FPTBNom = New System.Windows.Forms.TextBox()
         Me.FPLNom = New System.Windows.Forms.Label()
-        Me.TbDateDeces = New cimetiere.TextBoxDate()
         Me.FPBSupprimer = New System.Windows.Forms.Button()
         Me.FPBModifier = New System.Windows.Forms.Button()
         Me.FPBLienCons = New System.Windows.Forms.Button()
@@ -134,12 +131,16 @@ Partial Class FormGestion
         Me.FCTBType = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label27 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.DtpConsRechercherDateFinap = New System.Windows.Forms.DateTimePicker()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.DtpConsRechercherDateFin = New System.Windows.Forms.DateTimePicker()
+        Me.RbfconsEmplacement = New System.Windows.Forms.RadioButton()
+        Me.RbfconsNumero = New System.Windows.Forms.RadioButton()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.FCTBRechercher = New System.Windows.Forms.TextBox()
-        Me.FCCBNom = New System.Windows.Forms.CheckBox()
-        Me.FCCBEmplacement = New System.Windows.Forms.CheckBox()
-        Me.FCCBType = New System.Windows.Forms.CheckBox()
         Me.FCBLienDefunt = New System.Windows.Forms.Button()
         Me.FDBLinkToConcessionnaire = New System.Windows.Forms.Button()
         Me.FCPBlahulpe = New System.Windows.Forms.PictureBox()
@@ -169,9 +170,7 @@ Partial Class FormGestion
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.FPersonneTbSearch = New System.Windows.Forms.TextBox()
         Me.BModifGestionPersBenef = New System.Windows.Forms.Button()
         Me.Panel15 = New System.Windows.Forms.Panel()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
@@ -190,6 +189,7 @@ Partial Class FormGestion
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Lchargementdonnee = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TbDateDeces = New cimetiere.TextBoxDate()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -255,7 +255,6 @@ Partial Class FormGestion
         Me.TabPage1.Controls.Add(Me.FDBLinkToPersCon)
         Me.TabPage1.Controls.Add(Me.Panel3)
         Me.TabPage1.Controls.Add(Me.Panel10)
-        Me.TabPage1.Controls.Add(Me.FPBAjouter)
         Me.TabPage1.Controls.Add(Me.Panel1)
         Me.TabPage1.Controls.Add(Me.FPBSupprimer)
         Me.TabPage1.Controls.Add(Me.FPBModifier)
@@ -326,7 +325,7 @@ Partial Class FormGestion
         '
         Me.Panel10.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel10.Controls.Add(Me.GroupBox10)
-        Me.Panel10.Location = New System.Drawing.Point(9, 87)
+        Me.Panel10.Location = New System.Drawing.Point(16, 87)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(242, 222)
         Me.Panel10.TabIndex = 96
@@ -334,6 +333,8 @@ Partial Class FormGestion
         'GroupBox10
         '
         Me.GroupBox10.BackColor = System.Drawing.Color.White
+        Me.GroupBox10.Controls.Add(Me.RbDefChercherEmplacement)
+        Me.GroupBox10.Controls.Add(Me.RbDefChercherNom)
         Me.GroupBox10.Controls.Add(Me.BtDefAnnulerRecherche)
         Me.GroupBox10.Controls.Add(Me.Label3)
         Me.GroupBox10.Controls.Add(Me.Label2)
@@ -341,9 +342,6 @@ Partial Class FormGestion
         Me.GroupBox10.Controls.Add(Me.DtpDefRechercherDateDecesAvant)
         Me.GroupBox10.Controls.Add(Me.Label1)
         Me.GroupBox10.Controls.Add(Me.TbDefChampRecherche)
-        Me.GroupBox10.Controls.Add(Me.CbDefChercherNom)
-        Me.GroupBox10.Controls.Add(Me.CbDefChercherCode)
-        Me.GroupBox10.Controls.Add(Me.CbDefChercherEmplacement)
         Me.GroupBox10.Controls.Add(Me.BtDefChercher)
         Me.GroupBox10.Location = New System.Drawing.Point(14, 8)
         Me.GroupBox10.Name = "GroupBox10"
@@ -351,6 +349,28 @@ Partial Class FormGestion
         Me.GroupBox10.TabIndex = 0
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Rechercher"
+        '
+        'RbDefChercherEmplacement
+        '
+        Me.RbDefChercherEmplacement.AutoSize = True
+        Me.RbDefChercherEmplacement.Location = New System.Drawing.Point(13, 88)
+        Me.RbDefChercherEmplacement.Name = "RbDefChercherEmplacement"
+        Me.RbDefChercherEmplacement.Size = New System.Drawing.Size(93, 18)
+        Me.RbDefChercherEmplacement.TabIndex = 99
+        Me.RbDefChercherEmplacement.TabStop = True
+        Me.RbDefChercherEmplacement.Text = "Emplacement"
+        Me.RbDefChercherEmplacement.UseVisualStyleBackColor = True
+        '
+        'RbDefChercherNom
+        '
+        Me.RbDefChercherNom.AutoSize = True
+        Me.RbDefChercherNom.Location = New System.Drawing.Point(13, 66)
+        Me.RbDefChercherNom.Name = "RbDefChercherNom"
+        Me.RbDefChercherNom.Size = New System.Drawing.Size(49, 18)
+        Me.RbDefChercherNom.TabIndex = 98
+        Me.RbDefChercherNom.TabStop = True
+        Me.RbDefChercherNom.Text = "Nom"
+        Me.RbDefChercherNom.UseVisualStyleBackColor = True
         '
         'BtDefAnnulerRecherche
         '
@@ -415,42 +435,6 @@ Partial Class FormGestion
         Me.TbDefChampRecherche.Size = New System.Drawing.Size(150, 21)
         Me.TbDefChampRecherche.TabIndex = 40
         '
-        'CbDefChercherNom
-        '
-        Me.CbDefChercherNom.AutoSize = True
-        Me.CbDefChercherNom.Checked = True
-        Me.CbDefChercherNom.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbDefChercherNom.Location = New System.Drawing.Point(10, 69)
-        Me.CbDefChercherNom.Name = "CbDefChercherNom"
-        Me.CbDefChercherNom.Size = New System.Drawing.Size(50, 18)
-        Me.CbDefChercherNom.TabIndex = 45
-        Me.CbDefChercherNom.Text = "Nom"
-        Me.CbDefChercherNom.UseVisualStyleBackColor = True
-        '
-        'CbDefChercherCode
-        '
-        Me.CbDefChercherCode.AutoSize = True
-        Me.CbDefChercherCode.Checked = True
-        Me.CbDefChercherCode.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbDefChercherCode.Location = New System.Drawing.Point(97, 88)
-        Me.CbDefChercherCode.Name = "CbDefChercherCode"
-        Me.CbDefChercherCode.Size = New System.Drawing.Size(53, 18)
-        Me.CbDefChercherCode.TabIndex = 46
-        Me.CbDefChercherCode.Text = "Code"
-        Me.CbDefChercherCode.UseVisualStyleBackColor = True
-        '
-        'CbDefChercherEmplacement
-        '
-        Me.CbDefChercherEmplacement.AutoSize = True
-        Me.CbDefChercherEmplacement.Checked = True
-        Me.CbDefChercherEmplacement.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbDefChercherEmplacement.Location = New System.Drawing.Point(10, 88)
-        Me.CbDefChercherEmplacement.Name = "CbDefChercherEmplacement"
-        Me.CbDefChercherEmplacement.Size = New System.Drawing.Size(94, 18)
-        Me.CbDefChercherEmplacement.TabIndex = 47
-        Me.CbDefChercherEmplacement.Text = "Emplacement"
-        Me.CbDefChercherEmplacement.UseVisualStyleBackColor = True
-        '
         'BtDefChercher
         '
         Me.BtDefChercher.Location = New System.Drawing.Point(126, 172)
@@ -459,17 +443,6 @@ Partial Class FormGestion
         Me.BtDefChercher.TabIndex = 49
         Me.BtDefChercher.Text = "Rechercher"
         Me.BtDefChercher.UseVisualStyleBackColor = True
-        '
-        'FPBAjouter
-        '
-        Me.FPBAjouter.BackColor = System.Drawing.Color.SeaGreen
-        Me.FPBAjouter.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBAjouter.Location = New System.Drawing.Point(1024, 275)
-        Me.FPBAjouter.Name = "FPBAjouter"
-        Me.FPBAjouter.Size = New System.Drawing.Size(64, 23)
-        Me.FPBAjouter.TabIndex = 88
-        Me.FPBAjouter.Text = "Ajouter"
-        Me.FPBAjouter.UseVisualStyleBackColor = False
         '
         'Panel1
         '
@@ -743,17 +716,6 @@ Partial Class FormGestion
         Me.FPLNom.Size = New System.Drawing.Size(37, 14)
         Me.FPLNom.TabIndex = 114
         Me.FPLNom.Text = "Nom :"
-        '
-        'TbDateDeces
-        '
-        Me.TbDateDeces.DateValue = Nothing
-        Me.TbDateDeces.Location = New System.Drawing.Point(851, 405)
-        Me.TbDateDeces.Margin = New System.Windows.Forms.Padding(2)
-        Me.TbDateDeces.Mask = "00/00/0000"
-        Me.TbDateDeces.Name = "TbDateDeces"
-        Me.TbDateDeces.Size = New System.Drawing.Size(76, 21)
-        Me.TbDateDeces.TabIndex = 113
-        Me.TbDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'FPBSupprimer
         '
@@ -1333,39 +1295,110 @@ Partial Class FormGestion
         '
         Me.Panel4.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel4.Controls.Add(Me.GroupBox4)
-        Me.Panel4.Location = New System.Drawing.Point(19, 92)
+        Me.Panel4.Location = New System.Drawing.Point(18, 87)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(263, 138)
+        Me.Panel4.Size = New System.Drawing.Size(259, 222)
         Me.Panel4.TabIndex = 129
         '
         'GroupBox4
         '
         Me.GroupBox4.BackColor = System.Drawing.Color.White
+        Me.GroupBox4.Controls.Add(Me.Label27)
         Me.GroupBox4.Controls.Add(Me.Button2)
+        Me.GroupBox4.Controls.Add(Me.DtpConsRechercherDateFinap)
+        Me.GroupBox4.Controls.Add(Me.Label23)
+        Me.GroupBox4.Controls.Add(Me.Label17)
+        Me.GroupBox4.Controls.Add(Me.DtpConsRechercherDateFin)
+        Me.GroupBox4.Controls.Add(Me.RbfconsEmplacement)
+        Me.GroupBox4.Controls.Add(Me.RbfconsNumero)
         Me.GroupBox4.Controls.Add(Me.Button3)
         Me.GroupBox4.Controls.Add(Me.FCTBRechercher)
-        Me.GroupBox4.Controls.Add(Me.FCCBNom)
-        Me.GroupBox4.Controls.Add(Me.FCCBEmplacement)
-        Me.GroupBox4.Controls.Add(Me.FCCBType)
-        Me.GroupBox4.Location = New System.Drawing.Point(11, 10)
+        Me.GroupBox4.Location = New System.Drawing.Point(14, 9)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(234, 113)
+        Me.GroupBox4.Size = New System.Drawing.Size(231, 202)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Rechercher :"
         '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(6, 45)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(39, 14)
+        Me.Label27.TabIndex = 132
+        Me.Label27.Text = "Dans :"
+        '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(5, 65)
+        Me.Button2.Location = New System.Drawing.Point(34, 170)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(127, 23)
+        Me.Button2.Size = New System.Drawing.Size(69, 23)
         Me.Button2.TabIndex = 127
-        Me.Button2.Text = "Annuler la recherche"
+        Me.Button2.Text = "Annuler"
         Me.Button2.UseVisualStyleBackColor = True
+        '
+        'DtpConsRechercherDateFinap
+        '
+        Me.DtpConsRechercherDateFinap.Checked = False
+        Me.DtpConsRechercherDateFinap.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DtpConsRechercherDateFinap.Location = New System.Drawing.Point(111, 141)
+        Me.DtpConsRechercherDateFinap.Name = "DtpConsRechercherDateFinap"
+        Me.DtpConsRechercherDateFinap.ShowCheckBox = True
+        Me.DtpConsRechercherDateFinap.Size = New System.Drawing.Size(113, 21)
+        Me.DtpConsRechercherDateFinap.TabIndex = 131
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(1, 144)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(101, 14)
+        Me.Label23.TabIndex = 130
+        Me.Label23.Text = "Date de fin apres :"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(1, 118)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(104, 14)
+        Me.Label17.TabIndex = 129
+        Me.Label17.Text = "Date de fin avant : "
+        '
+        'DtpConsRechercherDateFin
+        '
+        Me.DtpConsRechercherDateFin.Checked = False
+        Me.DtpConsRechercherDateFin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DtpConsRechercherDateFin.Location = New System.Drawing.Point(111, 114)
+        Me.DtpConsRechercherDateFin.Name = "DtpConsRechercherDateFin"
+        Me.DtpConsRechercherDateFin.ShowCheckBox = True
+        Me.DtpConsRechercherDateFin.Size = New System.Drawing.Size(113, 21)
+        Me.DtpConsRechercherDateFin.TabIndex = 128
+        '
+        'RbfconsEmplacement
+        '
+        Me.RbfconsEmplacement.Location = New System.Drawing.Point(5, 86)
+        Me.RbfconsEmplacement.Name = "RbfconsEmplacement"
+        Me.RbfconsEmplacement.Size = New System.Drawing.Size(97, 18)
+        Me.RbfconsEmplacement.TabIndex = 0
+        Me.RbfconsEmplacement.TabStop = True
+        Me.RbfconsEmplacement.Text = "Emplacement"
+        Me.RbfconsEmplacement.UseVisualStyleBackColor = True
+        '
+        'RbfconsNumero
+        '
+        Me.RbfconsNumero.Location = New System.Drawing.Point(6, 62)
+        Me.RbfconsNumero.Name = "RbfconsNumero"
+        Me.RbfconsNumero.Size = New System.Drawing.Size(97, 18)
+        Me.RbfconsNumero.TabIndex = 0
+        Me.RbfconsNumero.TabStop = True
+        Me.RbfconsNumero.Text = "Numero"
+        Me.RbfconsNumero.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(145, 64)
+        Me.Button3.Location = New System.Drawing.Point(112, 170)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 126
@@ -1374,40 +1407,10 @@ Partial Class FormGestion
         '
         'FCTBRechercher
         '
-        Me.FCTBRechercher.Location = New System.Drawing.Point(6, 14)
+        Me.FCTBRechercher.Location = New System.Drawing.Point(6, 18)
         Me.FCTBRechercher.Name = "FCTBRechercher"
         Me.FCTBRechercher.Size = New System.Drawing.Size(157, 21)
         Me.FCTBRechercher.TabIndex = 35
-        '
-        'FCCBNom
-        '
-        Me.FCCBNom.AutoSize = True
-        Me.FCCBNom.Location = New System.Drawing.Point(8, 41)
-        Me.FCCBNom.Name = "FCCBNom"
-        Me.FCCBNom.Size = New System.Drawing.Size(50, 18)
-        Me.FCCBNom.TabIndex = 40
-        Me.FCCBNom.Text = "Nom"
-        Me.FCCBNom.UseVisualStyleBackColor = True
-        '
-        'FCCBEmplacement
-        '
-        Me.FCCBEmplacement.AutoSize = True
-        Me.FCCBEmplacement.Location = New System.Drawing.Point(62, 41)
-        Me.FCCBEmplacement.Name = "FCCBEmplacement"
-        Me.FCCBEmplacement.Size = New System.Drawing.Size(94, 18)
-        Me.FCCBEmplacement.TabIndex = 42
-        Me.FCCBEmplacement.Text = "Emplacement"
-        Me.FCCBEmplacement.UseVisualStyleBackColor = True
-        '
-        'FCCBType
-        '
-        Me.FCCBType.AutoSize = True
-        Me.FCCBType.Location = New System.Drawing.Point(162, 41)
-        Me.FCCBType.Name = "FCCBType"
-        Me.FCCBType.Size = New System.Drawing.Size(49, 18)
-        Me.FCCBType.TabIndex = 125
-        Me.FCCBType.Text = "Type"
-        Me.FCCBType.UseVisualStyleBackColor = True
         '
         'FCBLienDefunt
         '
@@ -1671,9 +1674,9 @@ Partial Class FormGestion
         '
         Me.Panel2.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Location = New System.Drawing.Point(20, 90)
+        Me.Panel2.Location = New System.Drawing.Point(20, 87)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(263, 138)
+        Me.Panel2.Size = New System.Drawing.Size(259, 103)
         Me.Panel2.TabIndex = 146
         '
         'GroupBox2
@@ -1681,19 +1684,17 @@ Partial Class FormGestion
         Me.GroupBox2.BackColor = System.Drawing.Color.White
         Me.GroupBox2.Controls.Add(Me.Button4)
         Me.GroupBox2.Controls.Add(Me.Button9)
-        Me.GroupBox2.Controls.Add(Me.TextBox1)
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
-        Me.GroupBox2.Controls.Add(Me.CheckBox2)
-        Me.GroupBox2.Location = New System.Drawing.Point(11, 10)
+        Me.GroupBox2.Controls.Add(Me.FPersonneTbSearch)
+        Me.GroupBox2.Location = New System.Drawing.Point(11, 9)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(234, 113)
+        Me.GroupBox2.Size = New System.Drawing.Size(234, 82)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Rechercher :"
+        Me.GroupBox2.Text = "Rechercher un nom :"
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(5, 65)
+        Me.Button4.Location = New System.Drawing.Point(6, 48)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(127, 23)
         Me.Button4.TabIndex = 127
@@ -1702,39 +1703,19 @@ Partial Class FormGestion
         '
         'Button9
         '
-        Me.Button9.Location = New System.Drawing.Point(145, 64)
+        Me.Button9.Location = New System.Drawing.Point(139, 48)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(75, 23)
         Me.Button9.TabIndex = 126
         Me.Button9.Text = "Rechercher"
         Me.Button9.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'FPersonneTbSearch
         '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 14)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(157, 21)
-        Me.TextBox1.TabIndex = 35
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(8, 41)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(50, 18)
-        Me.CheckBox1.TabIndex = 40
-        Me.CheckBox1.Text = "Nom"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(62, 41)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(119, 18)
-        Me.CheckBox2.TabIndex = 42
-        Me.CheckBox2.Text = "Date de naissance"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.FPersonneTbSearch.Location = New System.Drawing.Point(6, 18)
+        Me.FPersonneTbSearch.Name = "FPersonneTbSearch"
+        Me.FPersonneTbSearch.Size = New System.Drawing.Size(157, 21)
+        Me.FPersonneTbSearch.TabIndex = 35
         '
         'BModifGestionPersBenef
         '
@@ -1937,6 +1918,17 @@ Partial Class FormGestion
         Me.PictureBox2.TabIndex = 51
         Me.PictureBox2.TabStop = False
         '
+        'TbDateDeces
+        '
+        Me.TbDateDeces.DateValue = Nothing
+        Me.TbDateDeces.Location = New System.Drawing.Point(851, 405)
+        Me.TbDateDeces.Margin = New System.Windows.Forms.Padding(2)
+        Me.TbDateDeces.Mask = "00/00/0000"
+        Me.TbDateDeces.Name = "TbDateDeces"
+        Me.TbDateDeces.Size = New System.Drawing.Size(76, 21)
+        Me.TbDateDeces.TabIndex = 113
+        Me.TbDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'FormGestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2011,7 +2003,6 @@ Partial Class FormGestion
     End Sub
 
     Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents FPBAjouter As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents FPBSupprimer As Button
@@ -2057,9 +2048,6 @@ Partial Class FormGestion
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents FCTBRechercher As TextBox
-    Friend WithEvents FCCBNom As CheckBox
-    Friend WithEvents FCCBEmplacement As CheckBox
-    Friend WithEvents FCCBType As CheckBox
     Friend WithEvents FCBLienDefunt As Button
     Friend WithEvents FDBLinkToConcessionnaire As Button
     Friend WithEvents FCPBlahulpe As PictureBox
@@ -2068,9 +2056,7 @@ Partial Class FormGestion
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Button4 As Button
     Friend WithEvents Button9 As Button
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents FPersonneTbSearch As TextBox
     Friend WithEvents PRBPersCon As RadioButton
     Friend WithEvents PRBConcessionnaire As RadioButton
     Friend WithEvents PRBBenef As RadioButton
@@ -2105,9 +2091,6 @@ Partial Class FormGestion
     Friend WithEvents DtpDefRechercherDateDecesAvant As DateTimePicker
     Friend WithEvents Label1 As Label
     Friend WithEvents TbDefChampRecherche As TextBox
-    Friend WithEvents CbDefChercherNom As CheckBox
-    Friend WithEvents CbDefChercherCode As CheckBox
-    Friend WithEvents CbDefChercherEmplacement As CheckBox
     Friend WithEvents BtDefChercher As Button
     Friend WithEvents TbDateDeces As TextBoxDate
     Public WithEvents TabPage1 As TabPage
@@ -2176,4 +2159,13 @@ Partial Class FormGestion
     Friend WithEvents BmodifConsBenef As Button
     Friend WithEvents BAddConsBenef As Button
     Friend WithEvents FDBLinkToPersCon As Button
+    Friend WithEvents RbDefChercherEmplacement As RadioButton
+    Friend WithEvents RbDefChercherNom As RadioButton
+    Friend WithEvents RbfconsEmplacement As RadioButton
+    Friend WithEvents RbfconsNumero As RadioButton
+    Friend WithEvents DtpConsRechercherDateFinap As DateTimePicker
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents DtpConsRechercherDateFin As DateTimePicker
+    Friend WithEvents Label27 As Label
 End Class
