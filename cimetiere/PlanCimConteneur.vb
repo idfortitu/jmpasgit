@@ -27,9 +27,9 @@ Public Class PlanCimConteneur
 
         If My.Computer.Keyboard.ShiftKeyDown Then
             If e.Delta < 0 Then
-                Me.HorizontalScroll.Value = Math.Min(Me.HorizontalScroll.Value + 10, Me.HorizontalScroll.Maximum)
+                Me.HorizontalScroll.Value = Math.Min(Me.HorizontalScroll.Value + 20, Me.HorizontalScroll.Maximum)
             Else
-                Me.HorizontalScroll.Value = Math.Max(Me.HorizontalScroll.Value - 10, Me.HorizontalScroll.Minimum)
+                Me.HorizontalScroll.Value = Math.Max(Me.HorizontalScroll.Value - 20, Me.HorizontalScroll.Minimum)
             End If
         Else
             MyBase.OnMouseWheel(e)

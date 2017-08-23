@@ -166,7 +166,6 @@ Public Class debug
 
     End Sub
 
-<<<<<<< HEAD
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim f As New FormSignalAbandonCsn
         f.ShowDialog()
@@ -180,7 +179,5 @@ Public Class debug
         Dim f As New FormVoirDetailsEmpl(34)
         f.ShowDialog()
     End Sub
-=======
->>>>>>> origin/master
 End Class
 

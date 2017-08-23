@@ -129,7 +129,6 @@ Public Class FormHome
         Dim f As New FormGestion
         f.ShowDialog()
     End Sub
-<<<<<<< HEAD
 
     Private Sub BtSgnalAbCsn_Click(sender As Object, e As EventArgs) Handles BtSignalAbCsn.Click
         Using f As New FormSignalAbandonCsn
@@ -298,6 +297,4 @@ Public Class FormHome
 
     End Sub
 
-=======
->>>>>>> origin/master
 End Class

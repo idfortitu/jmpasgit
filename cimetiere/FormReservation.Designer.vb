@@ -47,6 +47,7 @@ Partial Class FormReservation
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GBListBenef = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.CtrlListeBenefs1 = New cimetiere.CtrlListeBenefs()
         Me.BtAnnuler = New System.Windows.Forms.Button()
         Me.BtEnregistrer = New System.Windows.Forms.Button()
@@ -296,6 +297,7 @@ Partial Class FormReservation
         'GBListBenef
         '
         Me.GBListBenef.BackColor = System.Drawing.SystemColors.Window
+        Me.GBListBenef.Controls.Add(Me.Button1)
         Me.GBListBenef.Controls.Add(Me.CtrlListeBenefs1)
         Me.GBListBenef.Location = New System.Drawing.Point(8, 7)
         Me.GBListBenef.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -305,6 +307,15 @@ Partial Class FormReservation
         Me.GBListBenef.TabIndex = 25
         Me.GBListBenef.TabStop = False
         Me.GBListBenef.Text = "Bénéficiaires"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(79, 308)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "TESTINH"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'CtrlListeBenefs1
         '
@@ -499,9 +510,9 @@ Partial Class FormReservation
         'BtMontrerFormPlancim
         '
         Me.BtMontrerFormPlancim.Image = Global.cimetiere.My.Resources.Resources.Note_16x
-        Me.BtMontrerFormPlancim.Location = New System.Drawing.Point(649, 17)
+        Me.BtMontrerFormPlancim.Location = New System.Drawing.Point(647, 17)
         Me.BtMontrerFormPlancim.Name = "BtMontrerFormPlancim"
-        Me.BtMontrerFormPlancim.Size = New System.Drawing.Size(30, 31)
+        Me.BtMontrerFormPlancim.Size = New System.Drawing.Size(32, 31)
         Me.BtMontrerFormPlancim.TabIndex = 177
         Me.BtMontrerFormPlancim.UseVisualStyleBackColor = True
         '
@@ -714,6 +725,7 @@ Partial Class FormReservation
     Friend WithEvents Label2 As Label
     Friend WithEvents TbNbPlaces As TextBoxInt
     Friend WithEvents CbTarifLh As CheckBox
+    Friend WithEvents Button1 As Button
     Friend WithEvents ColEmplId As DataGridViewTextBoxColumn
     Friend WithEvents ColEmplRef As DataGridViewTextBoxColumn
     Friend WithEvents ColEmplType As DataGridViewTextBoxColumn
