@@ -99,32 +99,19 @@ Public Class PlanCimetiere
             If Not TailleAEteDefinie Then Exit Property            ' ne pas mettre ça entraîne un redimensionnement du contrôle à 0x0 ("taille originale" tant que celle-ci n'a pas été mesurée), dimensions qui seront par la suite ensuite officialisées en tant que taille originale, condamnant le contrôle à toujours faire 0x0
             _zoom = value
             Dim LargeurImg = ParcelleAffichee.BgImage.Width
-                Dim HauteurImg = ParcelleAffichee.BgImage.Height
-                Dim ratiol = LargeurImg / (LargeurOrig * _zoom)
-                Dim ratioh = HauteurImg / (HauteurOrig * _zoom)
-                'Dim ratiol = LargeurImg / LargeurOrig
-                'Dim ratioh = HauteurImg / HauteurOrig
-                Dim ratio = Math.Max(ratiol, ratioh)
-                LargeurImg /= ratio
-                HauteurImg /= ratio
-                PasToucheDimensionsOriginales = True
-                Me.Width = LargeurImg
-                Me.Height = HauteurImg
-                PasToucheDimensionsOriginales = False
-                Me.Invalidate()        ' nécess ?
-            '''''
-            ''Dim nvl = NouvelleImage.Width
-            ''Dim nvh = NouvelleImage.Height
-            'Dim ratiol = nvl / LargeurOrig
-            'Dim ratioh = nvh / HauteurOrig
-            ''If ratiol > ratioh Then ratioh = ratiol Else ratiol = ratioh
-            ''Dim ratio = If(ratiol > ratioh, ratiol, ratioh)
-            'Dim ratio = Math.Max(ratiol, ratioh)
-            'nvl = nvl / ratio 'l
-            'nvh = nvh / ratio 'h
-            'Me.Height = nvh
-            'Me.Width = nvl
-            ''''''
+            Dim HauteurImg = ParcelleAffichee.BgImage.Height
+            Dim ratiol = LargeurImg / (LargeurOrig * _zoom)
+            Dim ratioh = HauteurImg / (HauteurOrig * _zoom)
+            'Dim ratiol = LargeurImg / LargeurOrig
+            'Dim ratioh = HauteurImg / HauteurOrig
+            Dim ratio = Math.Max(ratiol, ratioh)
+            LargeurImg /= ratio
+            HauteurImg /= ratio
+            PasToucheDimensionsOriginales = True
+            Me.Width = LargeurImg
+            Me.Height = HauteurImg
+            PasToucheDimensionsOriginales = False
+            Me.Invalidate()        ' nécess ?
         End Set
     End Property
 
@@ -143,7 +130,9 @@ Public Class PlanCimetiere
             CType(e, HandledMouseEventArgs).Handled = True
         End If
     End Sub
-    Public PRATOUKU = False
+
+    <Category("Behavior)")>
+    Public Property SelectionEmplAuClic As Boolean = True
 
     Private Property _emplSelect As DataRow
     Public Property EmplSelect As DataRow
@@ -154,6 +143,7 @@ Public Class PlanCimetiere
             If value IsNot _emplSelect Then
                 _emplSelect = value
                 Me.Invalidate()
+                RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(value))
             End If
         End Set
     End Property
@@ -192,9 +182,11 @@ Public Class PlanCimetiere
 
         If Not (EmplClique IsNot Nothing AndAlso ParcelleAffichee.Enableds(IndexEmplClique) = False) Then     ' à moins qu'on ait cliqué sur un empl non activé (auquel cas on ne fait rien)
             RaiseEvent EmplClicked(Me, New PlanCimEventArgs(EmplClique))
-            If EmplClique IsNot Me.EmplSelect Then
-                Me.EmplSelect = EmplClique
-                RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(EmplClique))
+            If Me.SelectionEmplAuClic Then
+                If EmplClique IsNot Me.EmplSelect Then
+                    Me.EmplSelect = EmplClique
+                    RaiseEvent SelectionChanged(Me, New PlanCimEventArgs(EmplClique))
+                End If
             End If
         End If
 
@@ -233,11 +225,10 @@ Public Class PlanCimetiere
         End Set
     End Property
 
-    Public CouleurVide As Color = Color.FromArgb(60, Color.White)
-    Public CouleurPartiellementPlein As Color = Color.FromArgb(100, Color.MediumPurple)
-    Public CouleurPlein As Color = Color.FromArgb(100, Color.Purple)
-    Public CouleurBordureLoué As Color = Color.FromArgb(255, Color.Yellow)
-    Public CouleurBordurePasLoué As Color = Color.Transparent
+    ' la plupart sont pas utilisées
+    Public CouleurBase As Color = Color.FromArgb(100, Color.Purple)
+    Public CouleurSelect As Color = Color.FromArgb(180, Color.Red)
+    Public CouleurDesact As Color = Color.FromArgb(120, Color.Gray)
     Public CouleurTexteReference As Color = Color.White
 
     ' fonction décidant quels emplacements sont actifs ou pas (inactif = grisé &  pas sélectionnable)
@@ -397,7 +388,7 @@ Public Class PlanCimetiere
     ' ne conviennent pas : Load, New (dimensions zéro), ParentChanged (se fait avant redimensionnement par Windows), Layout, SizeChanged (se déclenchent plusieurs fois au chargement et avec des tailles différentes)
     ' LocationChanged serait correct sauf qu'il ne se déclenche pas quand le contrôle est à la position 0;0 (ce qui pourrait arriver souvent, si il est dans un panel pour le zoom/scroll)
     ' et qu'accessoirement, un changement de Location va redéfinir les dimensions "originales" d'après celles réduites pour afficher l'image
-    ' au final, on  gèrera resize, en mettant un flag pour empêcher les dimensions originales d'être redéfinie quand on modifie nous-même en fonction du zoom ou du changement d'image
+    ' au final, on  gèrera resize, en mettant un flag pour empêcher les dimensions originales d'être redéfinies quand on modifie nous-même en fonction du zoom ou du changement d'image
     Private Sub NoterDimensionsOriginales() Handles Me.Resize
         'If Not TailleAEteDefinie Then
         If Not PasToucheDimensionsOriginales Then
@@ -435,9 +426,9 @@ Public Class PlanCimetiere
         MyBase.OnPaint(pe)
         Dim InfosParcelle = InfosParcelles(NomParcelleAffichee)
 
-        Using brosse As New System.Drawing.SolidBrush(Color.FromArgb(100, Color.Purple)),
-              brosseselect As New System.Drawing.SolidBrush(Color.FromArgb(180, Color.Purple)),
-              brossedisabled = New System.Drawing.SolidBrush(Color.FromArgb(120, Color.Gray)),
+        Using brosse As New System.Drawing.SolidBrush(Me.CouleurBase),
+              brosseselect As New System.Drawing.SolidBrush(Me.CouleurSelect),
+              brossedisabled = New System.Drawing.SolidBrush(Me.CouleurDesact),
               Stylo As New SolidBrush(CouleurTexteReference)
 
             Dim graph = pe.Graphics

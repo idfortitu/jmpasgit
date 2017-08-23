@@ -41,8 +41,11 @@ Partial Class debug
         Me.Button21 = New System.Windows.Forms.Button()
         Me.Button23 = New System.Windows.Forms.Button()
         Me.Button24 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.PanelCustom1 = New cimetiere.PlanCimConteneur()
         Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.PanelCustom1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -111,7 +114,7 @@ Partial Class debug
         '
         'Button12
         '
-        Me.Button12.Location = New System.Drawing.Point(975, 513)
+        Me.Button12.Location = New System.Drawing.Point(1014, 522)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(130, 55)
         Me.Button12.TabIndex = 70
@@ -174,7 +177,7 @@ Partial Class debug
         '
         'Button19
         '
-        Me.Button19.Location = New System.Drawing.Point(446, 658)
+        Me.Button19.Location = New System.Drawing.Point(715, 618)
         Me.Button19.Name = "Button19"
         Me.Button19.Size = New System.Drawing.Size(135, 23)
         Me.Button19.TabIndex = 77
@@ -192,7 +195,7 @@ Partial Class debug
         '
         'Button23
         '
-        Me.Button23.Location = New System.Drawing.Point(390, 582)
+        Me.Button23.Location = New System.Drawing.Point(507, 565)
         Me.Button23.Name = "Button23"
         Me.Button23.Size = New System.Drawing.Size(156, 50)
         Me.Button23.TabIndex = 83
@@ -207,6 +210,24 @@ Partial Class debug
         Me.Button24.TabIndex = 84
         Me.Button24.Text = "zoom 1"
         Me.Button24.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(986, 623)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(119, 23)
+        Me.Button3.TabIndex = 85
+        Me.Button3.Text = "notifabandon"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(878, 159)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(96, 29)
+        Me.Button4.TabIndex = 86
+        Me.Button4.Text = "enregnotif"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'PanelCustom1
         '
@@ -228,16 +249,29 @@ Partial Class debug
         Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
         Me.PlanCimetiere1.Name = "PlanCimetiere1"
         Me.PlanCimetiere1.NomParcelleAffichee = "A1"
+        Me.PlanCimetiere1.SelectionEmplAuClic = True
         Me.PlanCimetiere1.Size = New System.Drawing.Size(261, 515)
         Me.PlanCimetiere1.TabIndex = 61
         Me.PlanCimetiere1.Zoom = 1.0!
         Me.PlanCimetiere1.ZoomableAvecRoulette = True
         '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(1105, 326)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(166, 23)
+        Me.Button5.TabIndex = 87
+        Me.Button5.Text = "montrercsn"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'debug
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1698, 878)
+        Me.ClientSize = New System.Drawing.Size(1698, 706)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button24)
         Me.Controls.Add(Me.Button23)
         Me.Controls.Add(Me.PanelCustom1)
@@ -284,4 +318,7 @@ Partial Class debug
     Friend WithEvents PanelCustom1 As PlanCimConteneur
     Friend WithEvents Button23 As Button
     Friend WithEvents Button24 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
 End Class

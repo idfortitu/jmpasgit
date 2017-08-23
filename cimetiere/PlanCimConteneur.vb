@@ -27,9 +27,9 @@ Public Class PlanCimConteneur
 
         If My.Computer.Keyboard.ShiftKeyDown Then
             If e.Delta < 0 Then
-                Me.HorizontalScroll.Value = Math.Min(Me.HorizontalScroll.Value + 10, Me.HorizontalScroll.Maximum)
+                Me.HorizontalScroll.Value = Math.Min(Me.HorizontalScroll.Value + 20, Me.HorizontalScroll.Maximum)
             Else
-                Me.HorizontalScroll.Value = Math.Max(Me.HorizontalScroll.Value - 10, Me.HorizontalScroll.Minimum)
+                Me.HorizontalScroll.Value = Math.Max(Me.HorizontalScroll.Value - 20, Me.HorizontalScroll.Minimum)
             End If
         Else
             MyBase.OnMouseWheel(e)
@@ -86,7 +86,13 @@ Public Class PlanCimConteneur
     Public Shared Function SendMessage(hwnd As IntPtr, msg As UInt32, wParam As IntPtr, <MarshalAs(UnmanagedType.LPWStr)> ByVal lParam As String) As Integer
     End Function
 
+    Private Sub InitializeComponent()
+        Me.SuspendLayout()
+        '
+        'PlanCimConteneur
+        '
+        Me.BackColor = System.Drawing.SystemColors.Window
+        Me.ResumeLayout(False)
 
-
-
+    End Sub
 End Class

@@ -20,7 +20,8 @@ Module Bdd
         {"t_histoire", "h_id"},
         {"t_loc_ville", "locville_id"},
         {"t_login", "id"},
-        {"t_pays", "Pays_id"}
+        {"t_pays", "Pays_id"},
+        {"notifications", "notif_id"}
     }
 
     Private Const ConnStr As String = "Server=" & ConfigLocale.BddHost & ";User Id=" & ConfigLocale.BddUser & "; Password=" & ConfigLocale.BddPass & "; Database=" & ConfigLocale.BddNom & "; Pooling=false"
@@ -200,17 +201,21 @@ Module Bdd
         End Try
 
     End Function
-
     Private Function Inc(ByRef i As Integer)
         i += 1
         Return i - 1
     End Function
 
+
+    Public Function Supprimer(nomtable As String, id As Integer)
+        Bdd.NonQuery("DELETE FROM " & nomtable & " WHERE " & Pks(nomtable) & " = " & id)
+    End Function
+
     ' récupère une table vide, juste pour avoir la structure
     ' garde une version des tables en cache, pour ne pas refaire la requête
     Function GetTableVide(nomtable As String) As DataTable
-        Static Cache As Dictionary(Of String, DataTable)
-        If Cache Is Nothing Then Cache = New Dictionary(Of String, DataTable)
+        Static Cache As New Dictionary(Of String, DataTable)
+        'If Cache Is Nothing Then Cache = New Dictionary(Of String, DataTable)
         Dim Dt As DataTable
         If Not Cache.ContainsKey(nomtable) Then
             Dt = Query("SELECT * FROM " & nomtable & " WHERE FALSE")
@@ -291,6 +296,65 @@ Module Bdd
             myCommand.Dispose()
             Connexion.Close()
         End Try
+    End Function
+
+    Public Function InsertSignalCsnAband(IdEmpl? As Integer, Com As String, Optional Photo As Image = Nothing) As Integer
+        Connexion.Open()
+        Dim reader As MySqlDataReader = Nothing
+        Dim cmd As MySqlCommand = Nothing
+        Try
+            cmd = New MySqlCommand("INSERT INTO notifications (notif_emplacement,notif_commentaire,notif_photo,notif_masquer_fossoy,notif_masquer_servicepop)" &
+              " VALUES (@empl,@com,@photo,@masqfos,@masqsp)", Connexion)
+
+            Dim p As New MySqlParameter("@photo", Nothing)     ' https://support.microsoft.com/en-us/help/316887/how-to-read-and-write-a-file-to-and-from-a-blob-column-by-using-ado-ne, https://stackoverflow.com/a/3719471, https://www.aspsnippets.com/Articles/Read-and-Write-BLOB-Data-to-SQL-Server-database-using-C-and-VBNet.aspx
+            p.IsNullable = True
+            p.MySqlDbType = MySqlDbType.Blob
+            p.Direction = ParameterDirection.Input
+            If Photo IsNot Nothing Then
+                Dim ImgBin = ImageToJpgToBytes(Photo)
+                p.Value = ImgBin
+                p.Size = ImgBin.Length
+            Else
+                p.Value = DBNull.Value
+            End If
+            cmd.Parameters.Add(p)
+            cmd.Parameters.AddWithValue("@empl", IdEmpl)
+            cmd.Parameters.AddWithValue("@com", Com)
+            cmd.Parameters.AddWithValue("@masqfos", 0)
+            cmd.Parameters.AddWithValue("@masqsp", 0)
+            cmd.ExecuteNonQuery()
+
+            cmd = New MySqlCommand With {.Connection = Connexion, .CommandText = "SELECT LAST_INSERT_ID() FROM notifications"}
+            reader = cmd.ExecuteReader
+            reader.Read()
+            Return reader.GetInt32(0)
+        Finally
+            If reader IsNot Nothing AndAlso Not reader.IsClosed Then reader.Close()
+            If cmd IsNot Nothing Then cmd.Dispose()
+            Connexion.Close()
+        End Try
+
+
+
+
+    End Function
+
+    Private Function ImageToJpgToBytes(img As Image) As Byte()
+        'Dim NomficTmp = IO.Path.GetTempFileName & Guid.NewGuid().ToString() + ".jpg"
+        'img.Save(NomficTmp, Imaging.ImageFormat.Jpeg)       ' y a peut-être un moyen sans passer par un fichier
+        Dim MS As New MemoryStream
+        img.Save(MS, Imaging.ImageFormat.Jpeg)
+        Dim ContenuFic As Byte() = MS.ToArray
+        ' https://stackoverflow.com/a/29440623
+
+        ' (https://www.aspsnippets.com/Articles/Read-and-Write-BLOB-Data-to-SQL-Server-database-using-C-and-VBNet.aspx)
+        'Dim FS = New FileStream(NomficTmp, FileMode.Open, FileAccess.Read)
+        'Dim BR = New BinaryReader(FS)
+        'Dim ContenuFic As Byte() = BR.ReadBytes(Convert.ToInt32(FS.Length))
+        'BR.Close()
+        'FS.Close()
+        Return ContenuFic
+
     End Function
 
 

@@ -1,10 +1,9 @@
 ﻿Public Class FormChoixEmplSurPlan
 
-		' Plus très à jour
+    ' Plus très à jour 
 
     Private Emplacements As DataTable
     Private FuncFiltre As Func(Of DataRow, Boolean)
-
 
     ' à tester
     Private _emplSelect
@@ -13,10 +12,10 @@
             Return _emplSelect
         End Get
         Set(value As DataRow)
-            Dim EmplDejaSelect = If(DgvEmpls.SelectedRows.Count > 0, DgvEmpls.SelectedRows(0), Nothing)
-            If EmplDejaSelect IsNot _emplSelect Then
+            Dim EmplDejaSelect = PlanCimetiere1.EmplSelect
+            If EmplDejaSelect IsNot value Then
                 _emplSelect = value
-                DgvEmpls_SelectionChanged(Nothing, Nothing)
+                PlanCimetiere1.EmplSelect = value
             End If
         End Set
     End Property
@@ -27,26 +26,22 @@
 
     Public Sub New()
         InitializeComponent()        ' This call is required by the designer.
-        DgvEmpls.AutoGenerateColumns = False
     End Sub
 
     ' permet de passer une table d'emplacements personnalisée, par exemple avec des champs supplémentaires pour le filtrage
     Public Sub New(Empls As DataTable, FuncFiltre As Func(Of DataRow, Boolean))
         InitializeComponent()
-        DgvEmpls.AutoGenerateColumns = False
         Me.FuncFiltre = FuncFiltre
         Me.Emplacements = Empls
     End Sub
 
     Public Sub New(FuncFiltre As Func(Of DataRow, Boolean))
         InitializeComponent()
-        DgvEmpls.AutoGenerateColumns = False
         Me.FuncFiltre = FuncFiltre
     End Sub
 
     Public Sub New(Empls As DataTable)
         InitializeComponent()
-        DgvEmpls.AutoGenerateColumns = False
         Me.Emplacements = Empls
     End Sub
 
@@ -62,65 +57,39 @@
                                     " GROUP BY empl_id")
             End If
             PlanCimetiere1.SetEmplacements(Me.Emplacements)
-
-                DgvEmpls.DataSource = (From r In Me.Emplacements.AsEnumerable Where PlanCimetiere1.FuncFiltre(r)).AsDataView
-            End If
-    End Sub
-
-
-    Private Sub DgvEmpls_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvEmpls.CellFormatting
-        Dim LaCol = DgvEmpls.Columns(e.ColumnIndex)
-        If LaCol.Name = "ColOccupants" Then
-            Dim RowEmpl = CType(DgvEmpls.Rows(e.RowIndex).DataBoundItem, DataRowView).Row
-            Dim Aff As String = RowEmpl("empl_nb_defunts")
-            If Not IsDBNull(RowEmpl("empl_nb_places")) Then
-                Aff &= "/" & RowEmpl("empl_nb_places")
-                'If RowEmpl("empl_nb_places") < RowEmpl("empl_nb_defunts") Then e.CellStyle.BackColor = Color.Yellow
-            End If
-            e.Value = Aff
-        ElseIf LaCol.Name = "ColMonumClasse" Then
-            e.Value = If(e.Value = True, "Oui", "")
         End If
-
     End Sub
+
 
     Private Sub PlanCimetiere1_SelectionChanged(sender As Object, e As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.SelectionChanged
-        If e.Emplacement Is Nothing Then
-            DgvEmpls.ClearSelection()
-        Else
-            Dim zerty = (From r As DataGridViewRow In DgvEmpls.Rows Where CType(r.DataBoundItem, DataRowView).row Is e.Emplacement).First
-            zerty.Selected = True
-            DgvEmpls.ScrollSelectedIntoView()
-        End If
-    End Sub
+        Dim EmplSel = e.Emplacement
 
-    Private Sub DgvEmpls_SelectionChanged(sender As Object, e As EventArgs) Handles DgvEmpls.SelectionChanged
-        PlanCimetiere1.EmplSelect = DgvEmpls.SelectedDataRow
         LbOccupants.Items.Clear()
-        Dim RowEmpl = Nothing
 
-        If DgvEmpls.SelectedRows.Count > 0 Then
-            RowEmpl = DgvEmpls.SelectedDataRow
-            Dim InfosCsn = GetInfosCsn(RowEmpl("empl_id"))
-            Dim Occupants = GetOccupants(RowEmpl("empl_id"))
-
-            For Each Occ In Occupants.Rows
-                LbOccupants.Items.Add(Uzineagaz.NomEtDatesDefunt(Occ))
-            Next
-
-            If InfosCsn Is Nothing Then
+        If EmplSel IsNot Nothing Then
+            Dim InfosCsn = GetInfosCsn(EmplSel("empl_id"))
+            Dim Occupants = GetOccupants(EmplSel("empl_id"))
+            LbOccupants.Items.AddRange((From Occ In Occupants.Rows Select Uzineagaz.NomEtDatesDefunt(Occ)).ToArray)
+            If InfosCsn Is Nothing Then  ' si l'empl n'est pas réservé
                 GbReservation.Hide()
             Else
                 GbReservation.Show()
-                TbCsnr.Text = InfosCsn("csnr_nom")
+                TbCsnr.Text = InfosCsn("csnr_prenom") & " " & InfosCsn("csnr_nom")
                 TbDateDebut.Text = If(IsDBNull(InfosCsn("con_date_debut")), "", InfosCsn("con_date_debut"))
                 TbDateFin.Text = If(IsDBNull(InfosCsn("con_date_fin")), "", InfosCsn("con_date_fin"))
             End If
+            CbMonumClasse.Checked = EmplSel("empl_monum_classe")
+            TbReference.Text = EmplSel("empl_reference")
+        Else
+            CbMonumClasse.Checked = False
+            TbReference.Text = ""
         End If
-        Me._emplSelect = RowEmpl
-        RaiseEvent SelectionChanged(RowEmpl)
+
+        Me._emplSelect = EmplSel
+        RaiseEvent SelectionChanged(EmplSel)
 
     End Sub
+
 
 
     ' renvoie nothing si il n'y a pas de concession
@@ -148,9 +117,32 @@
 
     Private CacheOccupants As New Dictionary(Of Integer, DataTable)
 
-    Private Sub GbReservation_Enter(sender As Object, e As EventArgs) Handles GbReservation.Enter
+    Private Sub BtFermer_Click(sender As Object, e As EventArgs)
+        Me.Close()
+    End Sub
+
+    Private Sub FormChoixEmplSurPlan_Layout(sender As Object, e As EventArgs) Handles MyBase.Layout
+        ' plan loc        Loc 939
+        'Form clt  width 1233
+        'écart 294
+        'donc pos cltwidth-294
+        PanInfos.Location = New Point(Me.ClientRectangle.Width - 224, PanInfos.Location.Y)
+
+        ' plan taille x = pos panel - écart plan~panel - marge gauche 
+        PlanCimConteneur1.Width = PanInfos.Location.X - 2 - 12
+
+        PlanCimConteneur1.Height = Me.ClientRectangle.Height - 12 - 12
+
+        BtFermer.Location = New Point(Me.ClientRectangle.Width - 25 - BtFermer.Width, Me.ClientRectangle.Height - 12 - BtFermer.Height)
+
 
     End Sub
+
+    Private Sub BtFermer_Click_1(sender As Object, e As EventArgs) Handles BtFermer.Click
+        Me.Close()
+    End Sub
+
+
 
 
 
