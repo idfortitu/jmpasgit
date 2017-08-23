@@ -14,18 +14,18 @@ Public Class DataGridViewCustom
         End Get
         Set(value As Object)
             If Not TypeOf value Is DataTable AndAlso Not TypeOf value Is DataView Then Throw New ArgumentException("Seules les DataTable et les DataView sont acceptées comme source de données")
-            Dim ValeurSelect
+            'Dim ValeurSelect
             Dim Vue = If(TypeOf value Is DataTable, CType(value, DataTable).DefaultView, CType(value, DataView))
-            If DataSource IsNot Nothing Then
-                ValeurSelect = SelectedValue
-            Else
-                ValeurSelect = Nothing
-            End If
+            'If DataSource IsNot Nothing Then
+            'ValeurSelect = SelectedValue
+            'Else
+            'ValeurSelect = Nothing
+            'End If
 
             MyBase.DataSource = value
 
             ' remet l'ancienne sélection
-            SelectedValue = ValeurSelect
+            'SelectedValue = ValeurSelect
 
             ' et scrolle dessus si nécessaire
             ScrollSelectedIntoView()
@@ -85,7 +85,7 @@ Public Class DataGridViewCustom
             If value = -1 Or Columns.Count <= 0 Then
                 ClearSelection()
             Else
-                Dim Row As DataGridViewRow = (From r In Rows Where r.cells(0).value = value).FirstOrDefault
+                Dim Row As DataGridViewRow = (From r As DataGridViewRow In Rows Where r.Cells(0) IsNot Nothing AndAlso Not IsDBNull(r.Cells(0)) AndAlso r.Cells(0).Value = value).FirstOrDefault
                 If Row Is Nothing Then
                     ClearSelection()
                 Else

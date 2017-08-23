@@ -437,8 +437,4 @@
     End Sub
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim f As New FormDemandeInhumation
-        f.ShowDialog()
-    End Sub
 End Class

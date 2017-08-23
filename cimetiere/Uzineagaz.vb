@@ -8,8 +8,11 @@ Public Enum TTypeEmpl
     Urne = 3
 End Enum
 
-
 Module Uzineagaz
+
+    ' une notification sera affichée si une concession va se finir dans x jours
+    Public Const DUREE_PREVISION_EXPIRATION_CONCESSION = 60
+
 
     ' renvoie une liste à partir d'un type enum, du genre  {  {.Texte="Fosse ordinaire", .Valeur = TTypeEmpl.FosseOrdinaire}, ...  } pour présentation dans une combobox (ou autre contrôle bindable)
     Function BindListEnum(Of T)() As List(Of BindListElement(Of T))
@@ -35,6 +38,11 @@ Module Uzineagaz
 
     Function EtatCivilAttendNom(Etat As TEtatCivil) As Boolean
         Return {TEtatCivil.Epoux, TEtatCivil.Veuf, TEtatCivil.Divorce, TEtatCivil.Enfant}.Contains(Etat)
+    End Function
+
+    ' par ex "Veuf de Machin-Bidule
+    Public Function EtatCivilComplet(def As DataRow) As String
+        Return TEtatCivilToString(def("def_etat_civil")) & If(EtatCivilAttendNom(def("def_etat_civil")) AndAlso (def("def_etat_civil_de").trim <> ""), " de " & def("def_etat_civil_de"), "")
     End Function
 
 
@@ -141,6 +149,7 @@ Module Uzineagaz
             Return If(SignalerAbsence, "(nom absent)", Nothing)
         End If
     End Function
+
 
     ' pour créer des listes d'un type anonyme
     Public Function ListeDeType(Of T)(ElemTemplate As T) As List(Of T)

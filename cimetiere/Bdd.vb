@@ -20,7 +20,8 @@ Module Bdd
         {"t_histoire", "h_id"},
         {"t_loc_ville", "locville_id"},
         {"t_login", "id"},
-        {"t_pays", "Pays_id"}
+        {"t_pays", "Pays_id"},
+        {"notifications", "notif_id"}
     }
 
     Private Const ConnStr As String = "Server=" & ConfigLocale.BddHost & ";User Id=" & ConfigLocale.BddUser & "; Password=" & ConfigLocale.BddPass & "; Database=" & ConfigLocale.BddNom & "; Pooling=false"
@@ -206,11 +207,16 @@ Module Bdd
         Return i - 1
     End Function
 
+
+    Public Function Supprimer(nomtable As String, id As Integer)
+        Bdd.NonQuery("DELETE FROM " & nomtable & " WHERE " & Pks(nomtable) & " = " & id)
+    End Function
+
     ' récupère une table vide, juste pour avoir la structure
     ' garde une version des tables en cache, pour ne pas refaire la requête
     Function GetTableVide(nomtable As String) As DataTable
-        Static Cache As Dictionary(Of String, DataTable)
-        If Cache Is Nothing Then Cache = New Dictionary(Of String, DataTable)
+        Static Cache As New Dictionary(Of String, DataTable)
+        'If Cache Is Nothing Then Cache = New Dictionary(Of String, DataTable)
         Dim Dt As DataTable
         If Not Cache.ContainsKey(nomtable) Then
             Dt = Query("SELECT * FROM " & nomtable & " WHERE FALSE")

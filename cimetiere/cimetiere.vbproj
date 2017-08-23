@@ -23,6 +23,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>cimetiere.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -214,6 +215,18 @@
       <DependentUpon>FormDemandeInhumation.vb</DependentUpon>
     </Compile>
     <Compile Include="FormDemandeInhumation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPopupPrecisionsAbandon.Designer.vb">
+      <DependentUpon>FormPopupPrecisionsAbandon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPopupPrecisionsAbandon.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormVoirDetailsEmpl.Designer.vb">
+      <DependentUpon>FormVoirDetailsEmpl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormVoirDetailsEmpl.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormEditEmplacement.Designer.vb">
@@ -420,6 +433,12 @@
     <EmbeddedResource Include="FormDemandeInhumation.resx">
       <DependentUpon>FormDemandeInhumation.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormPopupPrecisionsAbandon.resx">
+      <DependentUpon>FormPopupPrecisionsAbandon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVoirDetailsEmpl.resx">
+      <DependentUpon>FormVoirDetailsEmpl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEditEmplacement.resx">
       <DependentUpon>FormEditEmplacement.vb</DependentUpon>
     </EmbeddedResource>
@@ -470,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelEditPersonneContact.resx">
       <DependentUpon>PanelEditPersonneContact.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlanCimConteneur.resx">
+      <DependentUpon>PlanCimConteneur.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlanCimEdit.resx">
       <DependentUpon>PlanCimEdit.vb</DependentUpon>
@@ -523,6 +545,8 @@
       <DependentUpon>dmCimetiere.edmx</DependentUpon>
       <LastGenOutput>dmCimetiere.vb</LastGenOutput>
     </Content>
+    <None Include="Resources\logolh.png" />
+    <None Include="Resources\ColumnDetail_16x.png" />
     <None Include="Resources\Cancel_16x.png" />
     <None Include="Resources\Note_32x.png" />
     <None Include="Resources\Note_16x.png" />

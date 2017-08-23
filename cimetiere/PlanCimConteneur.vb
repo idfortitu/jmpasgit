@@ -86,7 +86,13 @@ Public Class PlanCimConteneur
     Public Shared Function SendMessage(hwnd As IntPtr, msg As UInt32, wParam As IntPtr, <MarshalAs(UnmanagedType.LPWStr)> ByVal lParam As String) As Integer
     End Function
 
+    Private Sub InitializeComponent()
+        Me.SuspendLayout()
+        '
+        'PlanCimConteneur
+        '
+        Me.BackColor = System.Drawing.SystemColors.Window
+        Me.ResumeLayout(False)
 
-
-
+    End Sub
 End Class
