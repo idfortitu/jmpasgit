@@ -68,6 +68,7 @@ Partial Class FormProlong
         Me.TbAnneesAjout = New cimetiere.TextBoxInt()
         Me.TbNouvDateFin = New cimetiere.TextBoxDate()
         Me.DgvCsns = New cimetiere.DataGridViewConcessions()
+        Me.ColConId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -256,9 +257,9 @@ Partial Class FormProlong
         '
         'BtAjouterAnnees
         '
-        Me.BtAjouterAnnees.Location = New System.Drawing.Point(181, 77)
+        Me.BtAjouterAnnees.Location = New System.Drawing.Point(181, 76)
         Me.BtAjouterAnnees.Name = "BtAjouterAnnees"
-        Me.BtAjouterAnnees.Size = New System.Drawing.Size(75, 23)
+        Me.BtAjouterAnnees.Size = New System.Drawing.Size(75, 25)
         Me.BtAjouterAnnees.TabIndex = 8
         Me.BtAjouterAnnees.Text = "Ajouter"
         Me.BtAjouterAnnees.UseVisualStyleBackColor = True
@@ -502,7 +503,7 @@ Partial Class FormProlong
         Me.DgvCsns.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvCsns.BackgroundColor = System.Drawing.Color.White
         Me.DgvCsns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCsns.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column4, Me.Column3, Me.DgvCsnsColOccupants})
+        Me.DgvCsns.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColConId, Me.Column1, Me.Column4, Me.Column3, Me.DgvCsnsColOccupants})
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -525,6 +526,14 @@ Partial Class FormProlong
         Me.DgvCsns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvCsns.Size = New System.Drawing.Size(938, 254)
         Me.DgvCsns.TabIndex = 174
+        '
+        'ColConId
+        '
+        Me.ColConId.DataPropertyName = "con_id"
+        Me.ColConId.HeaderText = "id csn"
+        Me.ColConId.Name = "ColConId"
+        Me.ColConId.ReadOnly = True
+        Me.ColConId.Visible = False
         '
         'Column1
         '
@@ -641,11 +650,12 @@ Partial Class FormProlong
     Friend WithEvents Label9 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents TbDmdrDateNaiss As TextBoxDate
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents TbRem As TextBox
+    Friend WithEvents BtInfosCsnr As Button
+    Friend WithEvents ColConId As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents DgvCsnsColOccupants As DataGridViewTextBoxColumn
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents TbRem As TextBox
-    Friend WithEvents BtInfosCsnr As Button
 End Class

@@ -25,7 +25,7 @@ Partial Class FormVoirDetailsEmpl
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormVoirDetailsEmpl))
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LabTitre = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TbDateDebut = New System.Windows.Forms.TextBox()
@@ -41,7 +41,7 @@ Partial Class FormVoirDetailsEmpl
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GbDefunts = New System.Windows.Forms.GroupBox()
         Me.DgvOccupants = New System.Windows.Forms.DataGridView()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,31 +54,35 @@ Partial Class FormVoirDetailsEmpl
         Me.TbEmplHistoire = New System.Windows.Forms.TextBox()
         Me.GbCsnCom = New System.Windows.Forms.GroupBox()
         Me.GbEmplHistoire = New System.Windows.Forms.GroupBox()
+        Me.BtRenouveler = New System.Windows.Forms.Button()
+        Me.PanelInfosConcession = New System.Windows.Forms.Panel()
         Me.PlanCimConteneur1 = New cimetiere.PlanCimConteneur()
         Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GbDefunts.SuspendLayout()
         CType(Me.DgvOccupants, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         CType(Me.DgvBenefs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GbCsnCom.SuspendLayout()
         Me.GbEmplHistoire.SuspendLayout()
+        Me.PanelInfosConcession.SuspendLayout()
         Me.PlanCimConteneur1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'LabTitre
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(48, 11)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(251, 17)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Réservation portant sur l'emplacement"
+        Me.LabTitre.AutoSize = True
+        Me.LabTitre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.8!)
+        Me.LabTitre.Location = New System.Drawing.Point(48, 11)
+        Me.LabTitre.Name = "LabTitre"
+        Me.LabTitre.Size = New System.Drawing.Size(261, 18)
+        Me.LabTitre.TabIndex = 1
+        Me.LabTitre.Text = "Réservation portant sur l'emplacement"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(37, 77)
+        Me.Label2.Location = New System.Drawing.Point(27, 9)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(79, 17)
         Me.Label2.TabIndex = 2
@@ -87,7 +91,7 @@ Partial Class FormVoirDetailsEmpl
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 114)
+        Me.Label3.Location = New System.Drawing.Point(2, 46)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(108, 17)
         Me.Label3.TabIndex = 3
@@ -95,7 +99,7 @@ Partial Class FormVoirDetailsEmpl
         '
         'TbDateDebut
         '
-        Me.TbDateDebut.Location = New System.Drawing.Point(143, 77)
+        Me.TbDateDebut.Location = New System.Drawing.Point(133, 9)
         Me.TbDateDebut.Name = "TbDateDebut"
         Me.TbDateDebut.ReadOnly = True
         Me.TbDateDebut.Size = New System.Drawing.Size(100, 22)
@@ -103,7 +107,7 @@ Partial Class FormVoirDetailsEmpl
         '
         'TbDateFin
         '
-        Me.TbDateFin.Location = New System.Drawing.Point(143, 111)
+        Me.TbDateFin.Location = New System.Drawing.Point(133, 43)
         Me.TbDateFin.Name = "TbDateFin"
         Me.TbDateFin.ReadOnly = True
         Me.TbDateFin.Size = New System.Drawing.Size(100, 22)
@@ -138,7 +142,7 @@ Partial Class FormVoirDetailsEmpl
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Location = New System.Drawing.Point(15, 149)
+        Me.GroupBox1.Location = New System.Drawing.Point(5, 81)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(398, 177)
         Me.GroupBox1.TabIndex = 8
@@ -214,15 +218,15 @@ Partial Class FormVoirDetailsEmpl
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Prénom"
         '
-        'GroupBox2
+        'GbDefunts
         '
-        Me.GroupBox2.Controls.Add(Me.DgvOccupants)
-        Me.GroupBox2.Location = New System.Drawing.Point(430, 412)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(644, 172)
-        Me.GroupBox2.TabIndex = 9
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Défunts"
+        Me.GbDefunts.Controls.Add(Me.DgvOccupants)
+        Me.GbDefunts.Location = New System.Drawing.Point(430, 412)
+        Me.GbDefunts.Name = "GbDefunts"
+        Me.GbDefunts.Size = New System.Drawing.Size(644, 172)
+        Me.GbDefunts.TabIndex = 9
+        Me.GbDefunts.TabStop = False
+        Me.GbDefunts.Text = "Défunts"
         '
         'DgvOccupants
         '
@@ -283,7 +287,7 @@ Partial Class FormVoirDetailsEmpl
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.DgvBenefs)
-        Me.GroupBox3.Location = New System.Drawing.Point(15, 412)
+        Me.GroupBox3.Location = New System.Drawing.Point(5, 344)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(398, 172)
         Me.GroupBox3.TabIndex = 10
@@ -343,7 +347,7 @@ Partial Class FormVoirDetailsEmpl
         'GbCsnCom
         '
         Me.GbCsnCom.Controls.Add(Me.TbCsnCom)
-        Me.GbCsnCom.Location = New System.Drawing.Point(15, 590)
+        Me.GbCsnCom.Location = New System.Drawing.Point(5, 522)
         Me.GbCsnCom.Name = "GbCsnCom"
         Me.GbCsnCom.Size = New System.Drawing.Size(398, 135)
         Me.GbCsnCom.TabIndex = 12
@@ -359,6 +363,30 @@ Partial Class FormVoirDetailsEmpl
         Me.GbEmplHistoire.TabIndex = 1
         Me.GbEmplHistoire.TabStop = False
         Me.GbEmplHistoire.Text = "Informations supplémentaires"
+        '
+        'BtRenouveler
+        '
+        Me.BtRenouveler.Location = New System.Drawing.Point(249, 20)
+        Me.BtRenouveler.Name = "BtRenouveler"
+        Me.BtRenouveler.Size = New System.Drawing.Size(154, 45)
+        Me.BtRenouveler.TabIndex = 13
+        Me.BtRenouveler.Text = "Renouveler maintenant"
+        Me.BtRenouveler.UseVisualStyleBackColor = True
+        '
+        'PanelInfosConcession
+        '
+        Me.PanelInfosConcession.Controls.Add(Me.BtRenouveler)
+        Me.PanelInfosConcession.Controls.Add(Me.Label2)
+        Me.PanelInfosConcession.Controls.Add(Me.Label3)
+        Me.PanelInfosConcession.Controls.Add(Me.GbCsnCom)
+        Me.PanelInfosConcession.Controls.Add(Me.TbDateDebut)
+        Me.PanelInfosConcession.Controls.Add(Me.GroupBox3)
+        Me.PanelInfosConcession.Controls.Add(Me.TbDateFin)
+        Me.PanelInfosConcession.Controls.Add(Me.GroupBox1)
+        Me.PanelInfosConcession.Location = New System.Drawing.Point(10, 68)
+        Me.PanelInfosConcession.Name = "PanelInfosConcession"
+        Me.PanelInfosConcession.Size = New System.Drawing.Size(412, 646)
+        Me.PanelInfosConcession.TabIndex = 14
         '
         'PlanCimConteneur1
         '
@@ -381,6 +409,7 @@ Partial Class FormVoirDetailsEmpl
         Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
         Me.PlanCimetiere1.Name = "PlanCimetiere1"
         Me.PlanCimetiere1.NomParcelleAffichee = "A1"
+        Me.PlanCimetiere1.RefSelect = "-1"
         Me.PlanCimetiere1.SelectionEmplAuClic = False
         Me.PlanCimetiere1.Size = New System.Drawing.Size(290, 573)
         Me.PlanCimetiere1.TabIndex = 0
@@ -393,22 +422,16 @@ Partial Class FormVoirDetailsEmpl
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1081, 735)
         Me.Controls.Add(Me.GbEmplHistoire)
-        Me.Controls.Add(Me.GbCsnCom)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GbDefunts)
         Me.Controls.Add(Me.LabRefEmpl)
-        Me.Controls.Add(Me.TbDateFin)
-        Me.Controls.Add(Me.TbDateDebut)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LabTitre)
         Me.Controls.Add(Me.PlanCimConteneur1)
+        Me.Controls.Add(Me.PanelInfosConcession)
         Me.Name = "FormVoirDetailsEmpl"
         Me.Text = " "
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
+        Me.GbDefunts.ResumeLayout(False)
         CType(Me.DgvOccupants, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         CType(Me.DgvBenefs, System.ComponentModel.ISupportInitialize).EndInit()
@@ -416,6 +439,8 @@ Partial Class FormVoirDetailsEmpl
         Me.GbCsnCom.PerformLayout()
         Me.GbEmplHistoire.ResumeLayout(False)
         Me.GbEmplHistoire.PerformLayout()
+        Me.PanelInfosConcession.ResumeLayout(False)
+        Me.PanelInfosConcession.PerformLayout()
         Me.PlanCimConteneur1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -424,7 +449,7 @@ Partial Class FormVoirDetailsEmpl
 
     Friend WithEvents PlanCimConteneur1 As PlanCimConteneur
     Friend WithEvents PlanCimetiere1 As PlanCimetiere
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LabTitre As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents TbDateDebut As TextBox
@@ -440,7 +465,7 @@ Partial Class FormVoirDetailsEmpl
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GbDefunts As GroupBox
     Friend WithEvents DgvOccupants As DataGridView
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents DgvBenefs As DataGridView
@@ -453,4 +478,6 @@ Partial Class FormVoirDetailsEmpl
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents BtRenouveler As Button
+    Friend WithEvents PanelInfosConcession As Panel
 End Class

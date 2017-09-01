@@ -28,7 +28,6 @@ Partial Class FormChoixEmplSurPlan
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
         Me.BtFermer = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.CbMonumClasse = New System.Windows.Forms.CheckBox()
@@ -45,6 +44,7 @@ Partial Class FormChoixEmplSurPlan
         Me.PanInfos = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PlanCimConteneur1 = New cimetiere.PlanCimConteneur()
+        Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
         Me.GroupBox2.SuspendLayout()
         Me.GbReservation.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -99,24 +99,9 @@ Partial Class FormChoixEmplSurPlan
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Réservation"
         '
-        'PlanCimetiere1
-        '
-        Me.PlanCimetiere1.BackgroundImage = CType(resources.GetObject("PlanCimetiere1.BackgroundImage"), System.Drawing.Image)
-        Me.PlanCimetiere1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PlanCimetiere1.EmplSelect = Nothing
-        Me.PlanCimetiere1.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlanCimetiere1.IdEmplSelect = -1
-        Me.PlanCimetiere1.Location = New System.Drawing.Point(0, 0)
-        Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
-        Me.PlanCimetiere1.Name = "PlanCimetiere1"
-        Me.PlanCimetiere1.NomParcelleAffichee = "A1"
-        Me.PlanCimetiere1.Size = New System.Drawing.Size(608, 1200)
-        Me.PlanCimetiere1.TabIndex = 15
-        Me.PlanCimetiere1.Zoom = 1.0!
-        Me.PlanCimetiere1.ZoomableAvecRoulette = True
-        '
         'BtFermer
         '
+        Me.BtFermer.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.BtFermer.Location = New System.Drawing.Point(1042, 548)
         Me.BtFermer.Name = "BtFermer"
         Me.BtFermer.Size = New System.Drawing.Size(82, 32)
@@ -127,7 +112,7 @@ Partial Class FormChoixEmplSurPlan
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(15, 9)
+        Me.Label7.Location = New System.Drawing.Point(15, 18)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(82, 17)
         Me.Label7.TabIndex = 20
@@ -137,7 +122,7 @@ Partial Class FormChoixEmplSurPlan
         '
         Me.CbMonumClasse.AutoSize = True
         Me.CbMonumClasse.Enabled = False
-        Me.CbMonumClasse.Location = New System.Drawing.Point(18, 36)
+        Me.CbMonumClasse.Location = New System.Drawing.Point(18, 49)
         Me.CbMonumClasse.Name = "CbMonumClasse"
         Me.CbMonumClasse.Size = New System.Drawing.Size(140, 21)
         Me.CbMonumClasse.TabIndex = 16
@@ -146,9 +131,8 @@ Partial Class FormChoixEmplSurPlan
         '
         'TbReference
         '
-        Me.TbReference.Location = New System.Drawing.Point(103, 8)
+        Me.TbReference.Location = New System.Drawing.Point(103, 17)
         Me.TbReference.Name = "TbReference"
-        Me.TbReference.ReadOnly = True
         Me.TbReference.Size = New System.Drawing.Size(103, 22)
         Me.TbReference.TabIndex = 19
         '
@@ -160,7 +144,7 @@ Partial Class FormChoixEmplSurPlan
         Me.GbReservation.Controls.Add(Me.TbDateFin)
         Me.GbReservation.Controls.Add(Me.TbDateDebut)
         Me.GbReservation.Controls.Add(Me.TbCsnr)
-        Me.GbReservation.Location = New System.Drawing.Point(9, 239)
+        Me.GbReservation.Location = New System.Drawing.Point(9, 248)
         Me.GbReservation.Name = "GbReservation"
         Me.GbReservation.Size = New System.Drawing.Size(262, 148)
         Me.GbReservation.TabIndex = 18
@@ -221,7 +205,7 @@ Partial Class FormChoixEmplSurPlan
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.LbOccupants)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 72)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 81)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(268, 157)
         Me.GroupBox1.TabIndex = 17
@@ -247,7 +231,7 @@ Partial Class FormChoixEmplSurPlan
         Me.PanInfos.Controls.Add(Me.CbMonumClasse)
         Me.PanInfos.Location = New System.Drawing.Point(939, 12)
         Me.PanInfos.Name = "PanInfos"
-        Me.PanInfos.Size = New System.Drawing.Size(282, 419)
+        Me.PanInfos.Size = New System.Drawing.Size(282, 507)
         Me.PanInfos.TabIndex = 22
         '
         'Panel1
@@ -266,10 +250,30 @@ Partial Class FormChoixEmplSurPlan
         Me.PlanCimConteneur1.Size = New System.Drawing.Size(921, 581)
         Me.PlanCimConteneur1.TabIndex = 24
         '
+        'PlanCimetiere1
+        '
+        Me.PlanCimetiere1.BackgroundImage = CType(resources.GetObject("PlanCimetiere1.BackgroundImage"), System.Drawing.Image)
+        Me.PlanCimetiere1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PlanCimetiere1.EmplSelect = Nothing
+        Me.PlanCimetiere1.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlanCimetiere1.IdEmplSelect = -1
+        Me.PlanCimetiere1.Location = New System.Drawing.Point(0, 0)
+        Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
+        Me.PlanCimetiere1.Name = "PlanCimetiere1"
+        Me.PlanCimetiere1.NomParcelleAffichee = "A1"
+        Me.PlanCimetiere1.RefSelect = "-1"
+        Me.PlanCimetiere1.SelectionEmplAuClic = True
+        Me.PlanCimetiere1.Size = New System.Drawing.Size(608, 1200)
+        Me.PlanCimetiere1.TabIndex = 15
+        Me.PlanCimetiere1.Zoom = 1.0!
+        Me.PlanCimetiere1.ZoomableAvecRoulette = True
+        '
         'FormChoixEmplSurPlan
         '
+        Me.AcceptButton = Me.BtFermer
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.BtFermer
         Me.ClientSize = New System.Drawing.Size(1233, 605)
         Me.Controls.Add(Me.PlanCimConteneur1)
         Me.Controls.Add(Me.Panel1)

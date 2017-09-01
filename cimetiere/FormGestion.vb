@@ -16,8 +16,8 @@ Public Class FormGestion
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
         If user = "User" Then
-                FPBAjouter.Hide()
-                FPBModifier.Hide()
+
+            FPBModifier.Hide()
                 FPBSupprimer.Hide()
                 BModifGestionPers.Hide()
                 BmodifConsBenef.Hide()
@@ -88,6 +88,8 @@ Public Class FormGestion
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
         Dim colonnepc = New DataGridViewTextBoxColumn()
+        Dim colonneref = New DataGridViewTextBoxColumn()
+        Dim colonnedatedec = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "def_nom"
         DTGV_Id_Colonne.HeaderText = "nom"
         DTGV_Id_Colonne.Name = "def_nom"
@@ -106,6 +108,16 @@ Public Class FormGestion
         colonnepc.Name = "pc_id"
         DgvListeDefunts.Columns.Add(colonnepc)
         DgvListeDefunts.Columns("pc_id").Visible = False
+        colonneref.DataPropertyName = "empl_reference"
+        colonneref.HeaderText = "empl"
+        colonneref.Name = "empl_reference"
+        DgvListeDefunts.Columns.Add(colonneref)
+        DgvListeDefunts.Columns("empl_reference").Visible = False
+        colonnedatedec.DataPropertyName = "def_date_deces"
+        colonnedatedec.HeaderText = "empl"
+        colonnedatedec.Name = "def_date_deces"
+        DgvListeDefunts.Columns.Add(colonnedatedec)
+        DgvListeDefunts.Columns("def_date_deces").Visible = False
         DgvListeDefunts.AutoGenerateColumns = False
         DgvListeDefunts.DataSource = dtdefunt
         DgvListeDefunts.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -161,6 +173,8 @@ Public Class FormGestion
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
         Dim colonnecsnr = New DataGridViewTextBoxColumn()
+        Dim colonnedatefin = New DataGridViewTextBoxColumn()
+        Dim colonneemplid = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "con_numero"
         DTGV_Id_Colonne.HeaderText = "numero"
         DTGV_Id_Colonne.Name = "con_numero"
@@ -179,6 +193,18 @@ Public Class FormGestion
         colonnecsnr.Name = "csnr_id"
         FCDGConss.Columns.Add(colonnecsnr)
         FCDGConss.Columns("csnr_id").Visible = False
+        colonnedatefin.DataPropertyName = "con_date_fin"
+        colonnedatefin.HeaderText = "con_date_fin"
+        colonnedatefin.Name = "con_date_fin"
+        FCDGConss.Columns.Add(colonnedatefin)
+        FCDGConss.Columns("con_date_fin").Visible = False
+
+        colonneemplid.DataPropertyName = "empl_id"
+        colonneemplid.HeaderText = "empl_id"
+        colonneemplid.Name = "empl_id"
+        FCDGConss.Columns.Add(colonneemplid)
+        FCDGConss.Columns("empl_id").Visible = False
+
         FCDGConss.AutoGenerateColumns = False
         FCDGConss.DataSource = dtcons
         FCDGConss.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -190,10 +216,10 @@ Public Class FormGestion
         If empl = 0 Then
 
         Else
-            dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") = empl
+            FCDGConss.CurrentRow.Cells("empl_id").Value = empl
         End If
 
-        dtdefuntcons = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_id") & "")
+        dtdefuntcons = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & FCDGConss.CurrentRow.Cells("empl_id").Value & "")
         Dim DTGV_Id_Colonne_def = New DataGridViewTextBoxColumn()
         Dim Colonne = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
@@ -372,7 +398,7 @@ Public Class FormGestion
 
 
 
-    Private Sub FPBAjouter_Click(sender As Object, e As EventArgs) Handles FPBAjouter.Click
+    Private Sub FPBAjouter_Click(sender As Object, e As EventArgs)
     End Sub
 
 
@@ -402,13 +428,45 @@ Public Class FormGestion
     Private Sub BtDefChercher_Click(sender As Object, e As EventArgs) Handles BtDefChercher.Click
         Dim Source As New BindingSource()
         Source.DataSource = Me.DgvListeDefunts.DataSource
-        Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%'"
+        Dim dateavant As Date = DtpDefRechercherDateDecesAvant.Value.Date
+        Dim dateapres As Date = DtpDefRechercherDateDecesApres.Value.Date
+        If RbDefChercherNom.Checked = True Then
+            If DtpDefRechercherDateDecesAvant.Checked = True And DtpDefRechercherDateDecesApres.Checked = False Then
+                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "#"
+            ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = False Then
+                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
+            ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = True Then
+                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "# AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
+            Else
+                Source.DataSource = Me.DgvListeDefunts.DataSource
+                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%'"
+            End If
+        ElseIf RbDefChercherEmplacement.Checked = True Then
+            If DtpDefRechercherDateDecesAvant.Checked = True And DtpDefRechercherDateDecesApres.Checked = False Then
+                dateavant = DtpDefRechercherDateDecesAvant.Value.Date
+                Source.DataSource = Me.DgvListeDefunts.DataSource
+                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "#"
+            ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = False Then
+                dateapres = DtpDefRechercherDateDecesApres.Value.Date
+                Source.DataSource = Me.DgvListeDefunts.DataSource
+                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
+            ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = True Then
+                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "# AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
+            Else
+                Source.DataSource = Me.DgvListeDefunts.DataSource
+                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%'"
+            End If
+        Else
+            MsgBox("Veuillez effectuer un choix.")
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtDefAnnulerRecherche.Click
         Dim Source As New BindingSource()
         Source.DataSource = Me.DgvListeDefunts.DataSource
         Source.Filter = "def_nom like '%'"
+        DtpDefRechercherDateDecesApres.Checked = False
+        DtpDefRechercherDateDecesAvant.Checked = False
         ' dtdefunt.Rows(DgvListeDefunts.CurrentRow.Index())("def_id") += 1
     End Sub
 
@@ -470,8 +528,32 @@ Public Class FormGestion
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim Source As New BindingSource()
+        Dim dateavant As Date = DtpConsRechercherDateFin.Value.Date
+        Dim dateapres As Date = DtpConsRechercherDateFinap.Value.Date
         Source.DataSource = Me.FCDGConss.DataSource
-        Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%'"
+        If RbfconsNumero.Checked = True Then
+            If DtpConsRechercherDateFin.Checked = True And DtpConsRechercherDateFinap.Checked = False Then
+                Source.Filter = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]<#" & Format(dateavant, "M/d/yyyy") & "#"
+            ElseIf DtpConsRechercherDateFinap.Checked = True And DtpConsRechercherDateFin.Checked = False Then
+                Source.Filter = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]>#" & Format(dateapres, "M/d/yyyy") & "#"
+            ElseIf DtpConsRechercherDateFinap.Checked = True And DtpConsRechercherDateFin.Checked = True Then
+                Source.Filter = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]<#" & Format(dateavant, "M/d/yyyy") & "# AND [con_date_fin]>#" & Format(dateapres, "M/d/yyyy") & "#"
+            Else
+                Source.Filter = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text & "%'"
+            End If
+        ElseIf RbfconsEmplacement.Checked = True Then
+            If DtpConsRechercherDateFin.Checked = True And DtpConsRechercherDateFinap.Checked = False Then
+                Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]<#" & Format(dateavant, "M/d/yyyy") & "#"
+            ElseIf DtpConsRechercherDateFinap.Checked = True And DtpConsRechercherDateFin.Checked = False Then
+                Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]>#" & Format(dateapres, "M/d/yyyy") & "#"
+            ElseIf DtpConsRechercherDateFinap.Checked = True And DtpConsRechercherDateFin.Checked = True Then
+                Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]<#" & Format(dateavant, "M/d/yyyy") & "# AND [con_date_fin]>#" & Format(dateapres, "M/d/yyyy") & "#"
+            Else
+                Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%'"
+            End If
+        Else
+            MsgBox("Veuillez effectuer un choix.")
+        End If
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -753,6 +835,11 @@ Public Class FormGestion
                 TabControl1.TabPages(1).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
             ElseIf result = DialogResult.Yes Then
+                If Bdd.NonQuery("Update defunts set def_nom = '" & FPTBNom.Text & "', def_prenom = '" & FPTBPrenom.Text & "', def_adresse = '" & FPTBAdresse.Text & "' where def_id ='" & DgvListeDefunts.CurrentRow.Cells("def_id").Value & "'") Then
+                    MsgBox("" & DgvListeDefunts.CurrentRow.Cells("def_nom").Value & " " & DgvListeDefunts.CurrentRow.Cells("def_prenom").Value & " " & vbCrLf & "a correctement été modifier")
+                Else
+                    MsgBox("Une erreur est venue dans la modification du défunt.")
+                End If
                 boutongestion = 0
                 FPBModifier.Text = "Modifier"
                 TextBoxDefuntRO()
@@ -857,5 +944,51 @@ Public Class FormGestion
         Dim Source As New BindingSource()
         Source.DataSource = Me.DgvListeConcessionnaireConcess.DataSource
         Source.Filter = "convert([csnr_id],'System.String') LIKE '" & concessionnaireid & "'"
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Dim Source As New BindingSource()
+        If PRBBenef.Checked = True Then
+            Source.DataSource = Me.DgvListeConcessionnaireBenef.DataSource
+            Source.Filter = "ben_nom like '%" & FPersonneTbSearch.Text & "%'"
+        ElseIf PRBConcessionnaire.Checked = True Then
+            Source.DataSource = Me.DgvListeConcessionnaireConcess.DataSource
+            Source.Filter = "csnr_nom like '%" & FPersonneTbSearch.Text & "%'"
+        ElseIf PRBPersCon.Checked = True Then
+            Source.DataSource = Me.DgvListeConcessionnairePersonneContact.DataSource
+            Source.Filter = "pc_nom like '%" & FPersonneTbSearch.Text & "%'"
+        Else
+            MsgBox("Veuillez effectuer un choix.")
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim Source As New BindingSource()
+        If PRBBenef.Checked = True Then
+            Source.DataSource = Me.DgvListeConcessionnaireBenef.DataSource
+            Source.Filter = "ben_nom like '%'"
+        ElseIf PRBConcessionnaire.Checked = True Then
+            Source.DataSource = Me.DgvListeConcessionnaireConcess.DataSource
+            Source.Filter = "csnr_nom like '%'"
+        ElseIf PRBPersCon.Checked = True Then
+            Source.DataSource = Me.DgvListeConcessionnairePersonneContact.DataSource
+            Source.Filter = "pc_nom like '%'"
+        Else
+            MsgBox("Veuillez effectuer un choix.")
+        End If
+    End Sub
+
+    Private Sub FPBSupprimer_Click(sender As Object, e As EventArgs) Handles FPBSupprimer.Click
+        Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir supprimer ce défunt ?", "Confirmation", MessageBoxButtons.YesNo)
+        If result = DialogResult.No Then
+
+        ElseIf result = DialogResult.Yes Then
+            If Bdd.NonQuery("DELETE FROM defunts where def_id =" & DgvListeDefunts.CurrentRow.Cells("def_id").Value) = 1 Then
+                MsgBox("" & DgvListeDefunts.CurrentRow.Cells("def_nom").Value & " " & DgvListeDefunts.CurrentRow.Cells("def_prenom").Value & " " & vbCrLf & "a correctement été supprimer")
+                DgvListeDefunts.Rows.Remove(DgvListeDefunts.CurrentRow)
+            Else
+                MsgBox("Une erreur est venue dans la suppression du défunt.")
+            End If
+        End If
     End Sub
 End Class

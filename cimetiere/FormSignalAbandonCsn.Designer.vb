@@ -58,20 +58,20 @@ Partial Class FormSignalAbandonCsn
         'BtAnnuler
         '
         Me.BtAnnuler.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtAnnuler.Location = New System.Drawing.Point(132, 206)
+        Me.BtAnnuler.Location = New System.Drawing.Point(122, 264)
         Me.BtAnnuler.Name = "BtAnnuler"
-        Me.BtAnnuler.Size = New System.Drawing.Size(75, 23)
+        Me.BtAnnuler.Size = New System.Drawing.Size(85, 30)
         Me.BtAnnuler.TabIndex = 2
         Me.BtAnnuler.Text = "Annuler"
         Me.BtAnnuler.UseVisualStyleBackColor = True
         '
         'BtTerminer
         '
-        Me.BtTerminer.Location = New System.Drawing.Point(299, 206)
+        Me.BtTerminer.Location = New System.Drawing.Point(289, 264)
         Me.BtTerminer.Name = "BtTerminer"
-        Me.BtTerminer.Size = New System.Drawing.Size(75, 23)
+        Me.BtTerminer.Size = New System.Drawing.Size(85, 30)
         Me.BtTerminer.TabIndex = 3
-        Me.BtTerminer.Text = "Signaler"
+        Me.BtTerminer.Text = "Terminer"
         Me.BtTerminer.UseVisualStyleBackColor = True
         '
         'Label2
@@ -102,7 +102,7 @@ Partial Class FormSignalAbandonCsn
         '
         'TbCheminFicImg
         '
-        Me.TbCheminFicImg.Location = New System.Drawing.Point(171, 272)
+        Me.TbCheminFicImg.Location = New System.Drawing.Point(148, 213)
         Me.TbCheminFicImg.Name = "TbCheminFicImg"
         Me.TbCheminFicImg.ReadOnly = True
         Me.TbCheminFicImg.Size = New System.Drawing.Size(277, 22)
@@ -111,17 +111,17 @@ Partial Class FormSignalAbandonCsn
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(28, 272)
+        Me.Label3.Location = New System.Drawing.Point(12, 214)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(137, 17)
+        Me.Label3.Size = New System.Drawing.Size(133, 17)
         Me.Label3.TabIndex = 181
-        Me.Label3.Text = "Joindre une image..."
+        Me.Label3.Text = "Joindre une image :"
         '
         'BtParcourir
         '
-        Me.BtParcourir.Location = New System.Drawing.Point(474, 268)
+        Me.BtParcourir.Location = New System.Drawing.Point(430, 213)
         Me.BtParcourir.Name = "BtParcourir"
-        Me.BtParcourir.Size = New System.Drawing.Size(75, 23)
+        Me.BtParcourir.Size = New System.Drawing.Size(90, 22)
         Me.BtParcourir.TabIndex = 182
         Me.BtParcourir.Text = "Parcourir..."
         Me.BtParcourir.UseVisualStyleBackColor = True

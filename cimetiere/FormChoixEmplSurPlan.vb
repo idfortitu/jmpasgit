@@ -5,7 +5,7 @@
     Private Emplacements As DataTable
     Private FuncFiltre As Func(Of DataRow, Boolean)
 
-    ' à tester
+    ' EmplSelect devrait pouvoir être appelée avant le Load du form, contrairement à RefSelect et IdSelect
     Private _emplSelect
     Public Property EmplSelect As DataRow
         Get
@@ -19,7 +19,25 @@
             End If
         End Set
     End Property
+    ' ne peut être appelé (enfin ça ne sert à rien) avant le load du form
 
+    Public Property RefSelect As String
+        Get
+            Return PlanCimetiere1.RefSelect
+        End Get
+        Set(value As String)
+            PlanCimetiere1.RefSelect = value
+        End Set
+    End Property
+
+    Public Property IdEmplSelect As Integer
+        Get
+            Return PlanCimetiere1.IdEmplSelect
+        End Get
+        Set(value As Integer)
+            PlanCimetiere1.IdEmplSelect = value
+        End Set
+    End Property
 
 
     Public Event SelectionChanged(empl As DataRow)
@@ -57,6 +75,8 @@
                                     " GROUP BY empl_id")
             End If
             PlanCimetiere1.SetEmplacements(Me.Emplacements)
+            PlanCimetiere1.EmplSelect = Me.EmplSelect       ' l'empl select ne peut être mis que quand le plancim a été initialisé ; l'initialisation du plancim ne se fait qu'à son Load parce qu'il a besoin de sa fonction FuncFiltre que le designer met à Nothing avant ça
+            'TbReference.BackColor = If(PlanCimetiere1.EmplSelect IsNot Nothing, Color.White, Color.Khaki)       ' initialise la couleur de la tb, le handler sur SelectionChanged ne le faisant qu'
         End If
     End Sub
 
@@ -80,6 +100,7 @@
             End If
             CbMonumClasse.Checked = EmplSel("empl_monum_classe")
             TbReference.Text = EmplSel("empl_reference")
+            TbReference_TextChanged(Nothing, Nothing)    ' n'est pas appelé automatiquement par une modif de TbReference.Text    ' il peut y avoir un peu de ping-pong entre les deux handlers ; le plan du cimetière y mettra fin en n'appelant pas SelectionChanged si le "nouvel" emplacement est le même qu'avant
         Else
             CbMonumClasse.Checked = False
             TbReference.Text = ""
@@ -140,6 +161,31 @@
 
     Private Sub BtFermer_Click_1(sender As Object, e As EventArgs) Handles BtFermer.Click
         Me.Close()
+    End Sub
+
+    Private Sub TbReference_TextChanged(sender As Object, e As EventArgs) Handles TbReference.TextChanged
+        Dim TxtRef = TbReference.Text.Trim
+        'If TxtRef.Trim.Count >= 2 Then
+        'Dim NomParc = TxtRef.Trim.Substring(0, 2)
+        'If PlanCimetiere1.ParcellesDisponibles.Contains(NomParc) Then       ' mettre dans RefSelect une référence incorrecte ne provoque pas d'erreur, mais pour NomParcelleAffichee si
+        Dim PosCurTxtRef = TbReference.SelectionStart
+        'PlanCimetiere1.NomParcelleAffichee = TxtRef.Substring(0, 2)
+        PlanCimetiere1.RefSelect = TxtRef
+        TbReference.Text = TxtRef               ' le changement de parcelle déclenche la désélection de l'emplacement présent, dont l'evt selectionchanged, donc le vidage de la textbox
+        TbReference.SelectionStart = PosCurTxtRef
+        'If PlanCimetiere1.ParcelleAfficheeContientRef(TxtRef) Then
+        If PlanCimetiere1.EmplSelect IsNot Nothing Then
+            TbReference.BackColor = Color.White
+        Else
+            TbReference.BackColor = Color.Khaki
+        End If
+        'End If
+        'End If
+
+    End Sub
+
+    Private Sub PlanCimetiere1_EmplDoubleClicked(sender As PlanCimetiere, e As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.EmplDoubleClicked
+        BtFermer_Click_1(Nothing, Nothing)
     End Sub
 
 

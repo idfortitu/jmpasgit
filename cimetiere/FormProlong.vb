@@ -1,12 +1,23 @@
 ﻿Public Class FormProlong
 
+    ' n'est valide que si le résultat du form est DialogResult.OK
+    Public NouvelleDate As Date?
+
     Private Concessions As DataTable
+
+    Private Preselection As Integer
+    Private RowForcee As DataGridViewRow
 
     Public Sub New()
         InitializeComponent()
         DgvCsns.AutoGenerateColumns = False
+        Me.Preselection = -1
+    End Sub
 
-
+    Public Sub New(IdSelectionInitiale As Integer)
+        InitializeComponent()
+        DgvCsns.AutoGenerateColumns = False
+        Me.Preselection = IdSelectionInitiale
     End Sub
 
     Private Sub FormProlong_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -18,16 +29,24 @@
                                      ", COUNT(distinct defunts.def_id) AS empl_nb_defunts,GROUP_CONCAT(DISTINCT ben_prenom, ' ', ben_nom SEPARATOR '¤') AS noms_benefs" &
                                      ", GROUP_CONCAT(DISTINCT def_prenom,' ',def_nom ORDER BY def_date_deces ASC SEPARATOR '¤') AS noms_defunts" &
                                      " FROM concessions" &
-                                     " INNER JOIN beneficier ON beneficier.con_id = concessions.con_id" &
-                                     " INNER JOIN beneficiaires ON beneficiaires.ben_id = beneficier.ben_id" &
                                      " INNER JOIN emplacements ON emplacements.empl_id = concessions.empl_id" &
+                                     " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.con_id" &
+                                     " LEFT OUTER JOIN beneficier ON beneficier.con_id = concessions.con_id" &
+                                     " LEFT OUTER JOIN beneficiaires ON beneficiaires.ben_id = beneficier.ben_id" &
                                      " LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id" &
                                      " INNER JOIN t_commentaire ON t_commentaire.com_id = concessions.com_id" &
-                                     " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.con_id" &
                                      " GROUP BY concessions.con_id")
 
         DgvCsns.DataSource = Concessions
 
+        If Me.Preselection <> -1 Then
+            Dim dgvrowcsn As DataGridViewRow = (From r As DataGridViewRow In DgvCsns.Rows Where r.Cells("ColConId").Value = Me.Preselection).FirstOrDefault
+            If dgvrowcsn IsNot Nothing Then
+                dgvrowcsn.Selected = True
+                ChangementSelectionInterdit = True
+                Me.RowForcee = dgvrowcsn
+            End If
+        End If
 
     End Sub
 
@@ -42,7 +61,13 @@
 
 
 
+    Private ChangementSelectionInterdit = False
+
     Private Sub DgvCsns_SelectionChanged(sender As Object, e As EventArgs) Handles DgvCsns.SelectionChanged
+        If ChangementSelectionInterdit Then
+            Me.RowForcee.Selected = True
+            Exit Sub
+        End If
         LbBenefs.Items.Clear()
         LbOccupants.Items.Clear()
         Dim RowCsn = DgvCsns.SelectedDataRow
@@ -106,7 +131,7 @@
         End If
 
 
-        If ErProv.GetError(DgvCsns) = "" AndAlso ErProv.GetError(TbNouvDateFin) = "" Then
+        If Not Erreur Then
 
             Dim AnnulerEnregistrement = False
 
@@ -141,11 +166,11 @@
 
                 Dim RowCsnSelect = DgvCsns.SelectedDataRow
                 Dim NvDateFin As Date? = TbNouvDateFin.DateValue
-                If TbNouvDateFin.DateValue IsNot Nothing Then
-                    Dim RowCsnUpdate = Bdd.GetRow("concessions", RowCsnSelect("con_id"))
-                    RowCsnUpdate("con_date_fin") = NvDateFin
-                    Bdd.Update("concessions", RowCsnUpdate)
-                End If
+                'If TbNouvDateFin.DateValue IsNot Nothing Then
+                Dim RowCsnUpdate = Bdd.GetRow("concessions", RowCsnSelect("con_id"))
+                RowCsnUpdate("con_date_fin") = If(NvDateFin.HasValue, NvDateFin, DBNull.Value)
+                Bdd.Update("concessions", RowCsnUpdate)
+                'End If
 
                 ' enregistrer pdf
 
@@ -165,6 +190,8 @@
 
                 Shell("explorer.exe """ & NomficPdf & """")      ' À faire : ne pas ouvrir si fichier non sauvegardé (car erreur par exemple)
 
+
+                Me.NouvelleDate = TbNouvDateFin.DateValue
                 Me.DialogResult = DialogResult.OK
             End If
 

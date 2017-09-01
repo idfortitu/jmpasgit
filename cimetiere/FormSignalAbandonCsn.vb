@@ -4,7 +4,7 @@ Public Class FormSignalAbandonCsn
 
     Private FormChoix As FormChoixEmplSurPlan
 
-    Private Property _lesEmplacements As DataTable          ' lazy pas vraiment utile vu qu'en principe les formulaire n'est chargé qu'une fois, et affiché/masqué par la suite
+    Private Property _lesEmplacements As DataTable       
     Private ReadOnly Property LesEmplacements As DataTable
         Get
             If _lesEmplacements Is Nothing Then
@@ -22,14 +22,15 @@ Public Class FormSignalAbandonCsn
             FormChoix.Size = New Size(1000, 500)
             AddHandler FormChoix.SelectionChanged, AddressOf FormChoix_SelectionChanged
             'Dim EmplTb = Bdd.GetRow("emplacements", "empl_reference", TbRefEmpl.Text.Trim)
-            If TbRefEmpl.Text.Trim <> "" Then
+        End If
+        If TbRefEmpl.Text.Trim <> "" Then
                 Dim EmplTb = Me.LesEmplacements.Select("empl_reference = '" & TbRefEmpl.Text.Trim & "'")
                 If EmplTb.Count > 0 Then
                     FormChoix.EmplSelect = EmplTb(0)
                 End If
             End If
             FormChoix.Show()
-        End If
+        'End If
     End Sub
 
 

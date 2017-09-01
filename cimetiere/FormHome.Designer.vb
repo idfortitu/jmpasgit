@@ -22,14 +22,14 @@ Partial Class FormHome
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormHome))
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.BtDéclarationDécès = New System.Windows.Forms.Button()
         Me.BtRéserverCon = New System.Windows.Forms.Button()
         Me.BtProlongation = New System.Windows.Forms.Button()
-        Me.BtConstatAbandon = New System.Windows.Forms.Button()
+        Me.BtPlan = New System.Windows.Forms.Button()
         Me.BtConsulterDonnées = New System.Windows.Forms.Button()
         Me.PanNotifs = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -68,7 +68,7 @@ Partial Class FormHome
         Me.FlowLayoutPanel1.Controls.Add(Me.BtDéclarationDécès)
         Me.FlowLayoutPanel1.Controls.Add(Me.BtRéserverCon)
         Me.FlowLayoutPanel1.Controls.Add(Me.BtProlongation)
-        Me.FlowLayoutPanel1.Controls.Add(Me.BtConstatAbandon)
+        Me.FlowLayoutPanel1.Controls.Add(Me.BtPlan)
         Me.FlowLayoutPanel1.Controls.Add(Me.BtConsulterDonnées)
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(75, 144)
         Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
@@ -115,18 +115,18 @@ Partial Class FormHome
         Me.BtProlongation.Text = "Prolongation de concession"
         Me.BtProlongation.UseVisualStyleBackColor = False
         '
-        'BtConstatAbandon
+        'BtPlan
         '
-        Me.BtConstatAbandon.BackColor = System.Drawing.Color.SeaGreen
-        Me.BtConstatAbandon.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
-        Me.BtConstatAbandon.ForeColor = System.Drawing.Color.Transparent
-        Me.BtConstatAbandon.Location = New System.Drawing.Point(120, 140)
-        Me.BtConstatAbandon.Margin = New System.Windows.Forms.Padding(120, 4, 4, 4)
-        Me.BtConstatAbandon.Name = "BtConstatAbandon"
-        Me.BtConstatAbandon.Size = New System.Drawing.Size(279, 128)
-        Me.BtConstatAbandon.TabIndex = 3
-        Me.BtConstatAbandon.Text = "Accéder au Plan"
-        Me.BtConstatAbandon.UseVisualStyleBackColor = False
+        Me.BtPlan.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtPlan.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
+        Me.BtPlan.ForeColor = System.Drawing.Color.Transparent
+        Me.BtPlan.Location = New System.Drawing.Point(120, 140)
+        Me.BtPlan.Margin = New System.Windows.Forms.Padding(120, 4, 4, 4)
+        Me.BtPlan.Name = "BtPlan"
+        Me.BtPlan.Size = New System.Drawing.Size(279, 128)
+        Me.BtPlan.TabIndex = 3
+        Me.BtPlan.Text = "Accéder au Plan"
+        Me.BtPlan.UseVisualStyleBackColor = False
         '
         'BtConsulterDonnées
         '
@@ -186,14 +186,14 @@ Partial Class FormHome
         Me.DgvNotifsCsnsExp.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DgvNotifsCsnsExp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvNotifsCsnsExp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsExpRefEmpl, Me.DgvCsnsExpDateExp, Me.DgvCsnsExpCsnrTel, Me.DgvCsnsExpColInfos, Me.DgvCsnsExpColBtDetails})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvNotifsCsnsExp.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvNotifsCsnsExp.DefaultCellStyle = DataGridViewCellStyle3
         Me.DgvNotifsCsnsExp.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvNotifsCsnsExp.Location = New System.Drawing.Point(4, 38)
         Me.DgvNotifsCsnsExp.MultiSelect = False
@@ -258,14 +258,14 @@ Partial Class FormHome
         Me.DgvNotifsCsnsAb.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DgvNotifsCsnsAb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvNotifsCsnsAb.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsAbColRefEmpl, Me.DgvCsnsAbColNomCsnr, Me.DgvCsnsAbColTelCsnr, Me.DgvCsnsAbColBtDetails})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvNotifsCsnsAb.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvNotifsCsnsAb.DefaultCellStyle = DataGridViewCellStyle4
         Me.DgvNotifsCsnsAb.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvNotifsCsnsAb.Location = New System.Drawing.Point(550, 37)
         Me.DgvNotifsCsnsAb.MultiSelect = False
@@ -312,7 +312,7 @@ Partial Class FormHome
         '
         'BtNotifsMasquer
         '
-        Me.BtNotifsMasquer.Location = New System.Drawing.Point(815, 431)
+        Me.BtNotifsMasquer.Location = New System.Drawing.Point(81, 429)
         Me.BtNotifsMasquer.Margin = New System.Windows.Forms.Padding(4)
         Me.BtNotifsMasquer.Name = "BtNotifsMasquer"
         Me.BtNotifsMasquer.Size = New System.Drawing.Size(119, 28)
@@ -322,10 +322,10 @@ Partial Class FormHome
         '
         'BtNotifsMontrer
         '
-        Me.BtNotifsMontrer.Location = New System.Drawing.Point(815, 433)
+        Me.BtNotifsMontrer.Location = New System.Drawing.Point(81, 430)
         Me.BtNotifsMontrer.Margin = New System.Windows.Forms.Padding(4)
         Me.BtNotifsMontrer.Name = "BtNotifsMontrer"
-        Me.BtNotifsMontrer.Size = New System.Drawing.Size(119, 28)
+        Me.BtNotifsMontrer.Size = New System.Drawing.Size(119, 27)
         Me.BtNotifsMontrer.TabIndex = 6
         Me.BtNotifsMontrer.Text = "Notifications"
         Me.BtNotifsMontrer.UseVisualStyleBackColor = True
@@ -345,7 +345,7 @@ Partial Class FormHome
         '
         'BtSignalAbCsn
         '
-        Me.BtSignalAbCsn.Location = New System.Drawing.Point(16, 432)
+        Me.BtSignalAbCsn.Location = New System.Drawing.Point(655, 430)
         Me.BtSignalAbCsn.Name = "BtSignalAbCsn"
         Me.BtSignalAbCsn.Size = New System.Drawing.Size(279, 27)
         Me.BtSignalAbCsn.TabIndex = 7
@@ -375,6 +375,7 @@ Partial Class FormHome
         '
         'PanelToutSaufNotifs
         '
+        Me.PanelToutSaufNotifs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PanelToutSaufNotifs.Controls.Add(Me.PictureBox2)
         Me.PanelToutSaufNotifs.Controls.Add(Me.PictureBox1)
         Me.PanelToutSaufNotifs.Controls.Add(Me.BtNotifsMontrer)
@@ -421,7 +422,7 @@ Partial Class FormHome
     Friend WithEvents BtDéclarationDécès As Button
     Friend WithEvents BtRéserverCon As Button
     Friend WithEvents BtProlongation As Button
-    Friend WithEvents BtConstatAbandon As Button
+    Friend WithEvents BtPlan As Button
     Friend WithEvents BtConsulterDonnées As Button
     Friend WithEvents PanNotifs As Panel
     Public WithEvents BtNotifsMasquer As Button
