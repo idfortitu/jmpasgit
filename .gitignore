@@ -206,3 +206,7 @@ Temporary Items
 .apdisk
 .vs/cimetiere/v14/.suo
 
+cimetiere/bin/Debug/fr/WebMatrix.WebData.resources.dll
+cimetiere/bin/Debug/fr/WebMatrix.Data.resources.dll
+*.exe
+cimetiere/bin/Debug/cimetiere.exe

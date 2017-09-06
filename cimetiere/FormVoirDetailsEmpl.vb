@@ -9,9 +9,10 @@
     Private LesEmplacements As DataTable
 
 
-    Sub New(IdEmpl As Integer)
+    Sub New(IdEmpl As Integer, Optional ProposerProlong As Boolean = False)
         InitializeComponent()
         Me.IdEmpl = IdEmpl
+        BtRenouveler.Visible = ProposerProlong
     End Sub
 
     Private Sub FormDetailsNotifCsnAbandon_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -28,9 +29,18 @@
             If TblLemplacement.Columns(i).DataType Is GetType(String) AndAlso IsDBNull(Me.LEmplacement.ItemArray(i)) Then
                 Me.LEmplacement(i) = ""
             End If
-
-
         Next
+
+
+        If IsDBNull(LEmplacement("con_id")) Then
+            PanelInfosConcession.Hide()
+            PlanCimConteneur1.Size = New Size(PlanCimConteneur1.Location.X + PlanCimConteneur1.Width - PanelInfosConcession.Location.X, GbDefunts.Location.Y - 2 - PanelInfosConcession.Location.Y + 121)       ' 121 pour agrandir un peu, vu qu'il y a de la place
+            PlanCimConteneur1.Location = New Point(PanelInfosConcession.Location.X, PanelInfosConcession.Location.Y)
+            GbDefunts.Location = New Point(PanelInfosConcession.Location.X, GbDefunts.Location.Y + 121)
+            Me.Text = "Emplacement " & LEmplacement("empl_reference")
+            LabTitre.Text = "Situation de l'emplacement"
+        End If
+
 
         If Not IsDBNull(LEmplacement("con_id")) Then
             Me.LesOccupants = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & Me.LEmplacement("empl_id"))
@@ -56,8 +66,9 @@
         If Not IsDBNull(LEmplacement("con_date_fin")) AndAlso DateAdd(DateInterval.Day, -DUREE_PREVISION_EXPIRATION_CONCESSION, LEmplacement("con_date_fin")) < Today Then
             TbDateFin.BackColor = Color.Khaki
         End If
-        If Not IsDBNull(LEmplacement("com_commentaire")) AndAlso LEmplacement("com_commentaire") <> "" Then
-            TbCsnCom.Text = If(IsDBNull(LEmplacement("com_commentaire")), "", LEmplacement("com_commentaire"))
+
+        If LEmplacement("com_commentaire") <> "" Then
+            TbCsnCom.Text = LEmplacement("com_commentaire")
         Else
             GbCsnCom.Hide()
         End If
@@ -98,4 +109,19 @@
         DgvOccupants.ClearSelection()
     End Sub
 
+
+    Private Sub BtRenouveler_Click(sender As Object, e As EventArgs) Handles BtRenouveler.Click
+        Using f As New FormProlong(Me.LEmplacement("con_id"))
+            f.ShowDialog()
+            If f.DialogResult = DialogResult.OK Then
+                TbDateFin.Text = If(f.NouvelleDate.HasValue, f.NouvelleDate.Value.ToString("dd/MM/yyyy"), "")
+                If f.NouvelleDate.HasValue AndAlso DateAdd(DateInterval.Day, -DUREE_PREVISION_EXPIRATION_CONCESSION, f.NouvelleDate.Value) < Today Then
+                    TbDateFin.BackColor = Color.Khaki
+                Else
+                    TbDateFin.BackColor = SystemColors.Control
+                End If
+                Me.DialogResult = DialogResult.OK         ' ferme le form, suppose que ce qui devait être fait a été fait ; l'appelant (form home) aura dialogresult.ok pour indiquer que la liste des notifs doit être updatée
+            End If
+        End Using
+    End Sub
 End Class

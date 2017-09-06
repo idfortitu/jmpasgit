@@ -49,7 +49,6 @@ Public Class PlanCimetiere
         End Property
         Public Enableds As New List(Of Boolean)
 
-
     End Class
 
     ' - chargement : datatable emplacements
@@ -67,6 +66,14 @@ Public Class PlanCimetiere
         {"A2", New InfosParcelle With {.NomFicImg = "planA2.JPG"}},
         {"A3", New InfosParcelle With {.NomFicImg = "planA3.JPG"}}
      }
+
+    ' par exemple {"A1","A2","A3"}
+    Public ReadOnly Property ParcellesDisponibles As List(Of String)
+    Public ReadOnly Property ParcelleAfficheeContientRef(RefDemandee As String) As Boolean
+        Get
+            Return Me.ParcelleAffichee.RefsEmpls.Contains(RefDemandee)
+        End Get
+    End Property
 
 
     Private _nomParcelleAffichee As String = "A1"
@@ -148,13 +155,45 @@ Public Class PlanCimetiere
         End Set
     End Property
 
+
+    ' à noter que IdEmplSelect et RefSelect ne fonctionnent qu'une fois que les emplacements ont été chargés avec SetEmplacements puisqu'ils se servent des listes parsées pour trouver l'emplacement en question
+    ' et là où RefSelect changera de parcelle au besoin, IdEmplSelect et EmplSelect ne fonctionnent que pour la parcelle actuelle
+    ' pour des raisons "historiques" (= flemme de changer)
+
     Public Property IdEmplSelect As Integer
         Get
             Return If(_emplSelect IsNot Nothing, EmplSelect("empl_id"), -1)
         End Get
         Set(value As Integer)
-            ' trouve l'index du ctrl demandé dans la liste
+            ' trouve l'index du ctrl demandé dans la liste (de ceux de la parcelle courante)
             Dim RowEmplASelect = (From e In ParcelleAffichee.Emplacements Where e("empl_id") = value).FirstOrDefault
+            If RowEmplASelect IsNot Nothing Then
+                EmplSelect = RowEmplASelect
+            Else
+                EmplSelect = Nothing
+            End If
+        End Set
+    End Property
+
+    Public Property RefSelect As String
+        Get
+            Return If(_emplSelect IsNot Nothing, EmplSelect("empl_reference"), -1)
+        End Get
+        Set(TxtRef As String)
+            ' détermine la parcelle sur base de la référence
+            If TxtRef.Count < 2 Then
+                Me.EmplSelect = Nothing
+                Exit Property
+            End If
+            Dim NomParc = TxtRef.Substring(0, 2).ToUpper
+            'If Not Me.ParcellesDisponibles.Contains(NomParc) Then
+            If Me.ParcellesDisponibles.IndexOf(NomParc) = -1 Then       ' version case insensitive
+                Me.EmplSelect = Nothing
+                Exit Property
+            End If
+            Me.NomParcelleAffichee = NomParc
+            ' trouve la ref du ctrl demandé dans la liste (de ceux de la parcelle courante)
+            Dim RowEmplASelect = (From e In ParcelleAffichee.Emplacements Where String.Compare(e("empl_reference"), TxtRef, True) = 0).FirstOrDefault
             If RowEmplASelect IsNot Nothing Then
                 EmplSelect = RowEmplASelect
             Else
@@ -238,6 +277,13 @@ Public Class PlanCimetiere
     <EditorBrowsable(EditorBrowsableState.Never)>
     <System.ComponentModel.Localizable(False)>
     Public Property FuncFiltre As Func(Of DataRow, Boolean)
+
+
+    Public Sub New()
+        InitializeComponent()
+        Me.ParcellesDisponibles = InfosParcelles.Keys.ToList
+    End Sub
+
 
     Private LargeurOrig As Integer
     Private HauteurOrig As Integer

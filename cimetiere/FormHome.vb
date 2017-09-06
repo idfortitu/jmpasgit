@@ -50,7 +50,7 @@ Public Class FormHome
         Dim CsnsExpirant = Bdd.Query("SELECT con_id,empl_reference,emplacements.empl_id,csnr_tel,CONCAT(csnr_prenom,' ',csnr_nom) AS csnr_nomcomplet, con_date_fin FROM concessions " &
                                 " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.csnr_id" &
                                 " INNER JOIN emplacements ON concessions.empl_id = emplacements.empl_id" &
-                                " WHERE con_date_fin < '" & DateAdd(DateInterval.Day, DUREE_PREVISION_EXPIRATION_CONCESSION, Today).ToString("yyyy-MM-dd") & "'" &
+                                " WHERE con_date_fin <= '" & DateAdd(DateInterval.Day, DUREE_PREVISION_EXPIRATION_CONCESSION, Today).ToString("yyyy-MM-dd") & "'" &
                                 " AND con_date_fin >= CURDATE()" &
                                 " ORDER BY con_date_fin ASC")
         DgvNotifsCsnsExp.DataSource = CsnsExpirant
@@ -68,7 +68,8 @@ Public Class FormHome
 
 
     '' les contrôles sont rendus en cache avant d'être affiché, ça peut éviter quelques scintillements mais en contrepartie ça retarde leur affichage
-    ' et comme le fond a tendance à être noir pendant ce temps, c'est naze
+    '' Dans le cas présent, le fond a tendance à être noir pendant l'affichage, du coup c'est naze
+    ' mais ça ça peut mieux fonctionner sur d'autres forms
     'Protected Overrides ReadOnly Property CreateParams() As CreateParams
     '    Get
     '        Dim cp As CreateParams = MyBase.CreateParams
@@ -121,7 +122,7 @@ Public Class FormHome
         End If
     End Sub
 
-    Private Sub BtConstatAbandon_Click(sender As Object, e As EventArgs) Handles BtConstatAbandon.Click
+    Private Sub BtConstatAbandon_Click(sender As Object, e As EventArgs) Handles BtPlan.Click
 
     End Sub
 
@@ -133,6 +134,11 @@ Public Class FormHome
     Private Sub BtSgnalAbCsn_Click(sender As Object, e As EventArgs) Handles BtSignalAbCsn.Click
         Using f As New FormSignalAbandonCsn
             f.ShowDialog()
+            If f.DialogResult = DialogResult.OK Then
+                ChargerNotifsAbandons()
+                Me.NombreNotifs += 1
+                BtNotifsMontrer.Text = "Notifications" & If(Me.NombreNotifs > 0, " (" & Me.NombreNotifs & ")", "")
+            End If
         End Using
     End Sub
 
@@ -210,31 +216,29 @@ Public Class FormHome
             End If
     End Sub
 
-    Private Sub DgvNotifsCsnsExp_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles DgvNotifsCsnsExp.CellPainting, DgvNotifsCsnsAb.CellPainting
 
-    End Sub
-
-    Private Sub FormHome_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
-        'Dim HauteurDebutDegrade As Integer = Me.Height * 0.42
-        'Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, Me.Width, Me.Height - HauteurDebutDegrade)
-        ''Dim rectangledegrade As New Rectangle(0, 0, 0, 0)
-        '' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
-        'Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
-        '            New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 6),
-        '                                            New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y),
-        '                                            Color.FromArgb(11, 160, 92),
-        '                                            Color.White)
+    'Private Sub FormHome_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+    'Dim HauteurDebutDegrade As Integer = Me.Height * 0.42
+    'Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, Me.Width, Me.Height - HauteurDebutDegrade)
+    ''Dim rectangledegrade As New Rectangle(0, 0, 0, 0)
+    '' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+    'Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
+    '            New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 6),
+    '                                            New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y),
+    '                                            Color.FromArgb(11, 160, 92),
+    '                                            Color.White)
 
 
-        'Dim vGraphic As Drawing.Graphics = Me.CreateGraphics
-        '' To tile the image background - Using the same image background of the image
-        ''Dim vTexture As New Drawing.TextureBrush(Me.BackgroundImage)
+    'Dim vGraphic As Drawing.Graphics = Me.CreateGraphics
+    '' To tile the image background - Using the same image background of the image
+    ''Dim vTexture As New Drawing.TextureBrush(Me.BackgroundImage)
 
-        'vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
-        ''vGraphic.FillRectangle(vTexture, Me.DisplayRectangle)
+    'vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
+    ''vGraphic.FillRectangle(vTexture, Me.DisplayRectangle)
 
-        'vGraphic.Dispose() : vGraphic = Nothing ': vTexture.Dispose() : vTexture = Nothing
-    End Sub
+    'vGraphic.Dispose() : vGraphic = Nothing ': vTexture.Dispose() : vTexture = Nothing
+    'End Sub
+
 
     Private Sub Panel1_Paint(sender As Panel, e As PaintEventArgs) Handles PanelToutSaufNotifs.Paint
         Dim HauteurDebutDegrade As Integer = sender.Height * 0.42
@@ -254,15 +258,16 @@ Public Class FormHome
     End Sub
 
     Private Sub DgvNotifsCsnsExp_CellContentClick(sender As DataGridView, e As DataGridViewCellEventArgs) Handles DgvNotifsCsnsExp.CellContentClick, DgvNotifsCsnsAb.CellContentClick
-        If e.RowIndex < 0 Then Exit Sub
+            If e.RowIndex < 0 Then Exit Sub
 
         Dim LaCsn = CType(sender.Rows(e.RowIndex).DataBoundItem, DataRowView).Row
 
         If sender.Columns(e.ColumnIndex).Name = "DgvCsnsExpColBtDetails" OrElse sender.Columns(e.ColumnIndex).Name = "DgvCsnsAbColBtDetails" Then
             If sender Is DgvNotifsCsnsExp Then
                 If Not IsDBNull(LaCsn("empl_id")) Then
-                    Using f As New FormVoirDetailsEmpl(LaCsn("empl_id"))
+                    Using f As New FormVoirDetailsEmpl(LaCsn("empl_id"), True)
                         f.ShowDialog()
+                        If f.DialogResult = DialogResult.OK Then ChargerNotifsExpirations()
                     End Using
                 End If
             ElseIf sender Is DgvNotifsCsnsAb Then
@@ -279,8 +284,9 @@ Public Class FormHome
 
         If sender Is DgvNotifsCsnsExp Then
             If Not IsDBNull(LaCsn("empl_id")) Then
-                Using f As New FormVoirDetailsEmpl(LaCsn("empl_id"))
+                Using f As New FormVoirDetailsEmpl(LaCsn("empl_id"), True)
                     f.ShowDialog()
+                    If f.DialogResult = DialogResult.OK Then ChargerNotifsExpirations()
                 End Using
             End If
         ElseIf sender Is DgvNotifsCsnsAb Then

@@ -23,8 +23,8 @@ Partial Class FormDemandeInhumation
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TbNumAnnee = New cimetiere.TextBoxInt()
@@ -77,6 +77,9 @@ Partial Class FormDemandeInhumation
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabP2ConExis = New System.Windows.Forms.TabPage()
+        Me.BtMontrerFormPlanCimCsnsExist = New System.Windows.Forms.Button()
+        Me.BtViderFiltreCsnsExist = New System.Windows.Forms.Button()
+        Me.TbFiltreCsnsExist = New System.Windows.Forms.TextBox()
         Me.BtPrécédentDeConExis = New System.Windows.Forms.Button()
         Me.LbTypeInhCsnExis = New System.Windows.Forms.ListBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -97,12 +100,10 @@ Partial Class FormDemandeInhumation
         Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtTerminerConExis = New System.Windows.Forms.Button()
         Me.DgvCsnsExist = New cimetiere.DataGridViewConcessions()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DgvCsnsExistColOccupants = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabP2InhOrd = New System.Windows.Forms.TabPage()
+        Me.BtMontrerFormPlancimEmplOrd = New System.Windows.Forms.Button()
+        Me.BtViderFiltreEmpls = New System.Windows.Forms.Button()
+        Me.TbFiltreEmpls = New System.Windows.Forms.TextBox()
         Me.BtPrecedentDeInhOrd = New System.Windows.Forms.Button()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Panel9 = New System.Windows.Forms.Panel()
@@ -115,14 +116,21 @@ Partial Class FormDemandeInhumation
         Me.ColumnHeader12 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader13 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.DgvEmplacementsPourInhOrd = New cimetiere.DataGridViewCustom()
+        Me.DgvEmplsOrdColEmplId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvEmplsInhOrdOccupants = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvEmplsInhOrdClasse = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.CtrlLocVillePays1 = New cimetiere.CtrlLocVillePays()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.BtPrécédentDeConExit = New System.Windows.Forms.Button()
+        Me.CtrlLocVillePays1 = New cimetiere.CtrlLocVillePays()
+        Me.DgvCsnsExistColEmplId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DgvCsnsExistColOccupants = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -277,6 +285,7 @@ Partial Class FormDemandeInhumation
         '
         'CtrlDefEtatCiv
         '
+        Me.CtrlDefEtatCiv.EtatCivil = cimetiere.TEtatCivil.NonPrecise
         Me.CtrlDefEtatCiv.EtatCivilDe = ""
         Me.CtrlDefEtatCiv.Location = New System.Drawing.Point(158, 270)
         Me.CtrlDefEtatCiv.Name = "CtrlDefEtatCiv"
@@ -296,6 +305,7 @@ Partial Class FormDemandeInhumation
         'CtrlDefLocvillepays
         '
         Me.CtrlDefLocvillepays.Location = New System.Drawing.Point(158, 146)
+        Me.CtrlDefLocvillepays.LocVilleId = -1
         Me.CtrlDefLocvillepays.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtrlDefLocvillepays.Name = "CtrlDefLocvillepays"
         Me.CtrlDefLocvillepays.Size = New System.Drawing.Size(316, 25)
@@ -460,6 +470,7 @@ Partial Class FormDemandeInhumation
         '
         'FlowLayoutPanel1
         '
+        Me.FlowLayoutPanel1.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel4)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel1)
         Me.FlowLayoutPanel1.Controls.Add(Me.Panel10)
@@ -526,6 +537,7 @@ Partial Class FormDemandeInhumation
         'CtrlVilleDmdr
         '
         Me.CtrlVilleDmdr.Location = New System.Drawing.Point(307, 60)
+        Me.CtrlVilleDmdr.LocVilleId = -1
         Me.CtrlVilleDmdr.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtrlVilleDmdr.Name = "CtrlVilleDmdr"
         Me.CtrlVilleDmdr.Size = New System.Drawing.Size(316, 25)
@@ -666,6 +678,9 @@ Partial Class FormDemandeInhumation
         '
         'TabP2ConExis
         '
+        Me.TabP2ConExis.Controls.Add(Me.BtMontrerFormPlanCimCsnsExist)
+        Me.TabP2ConExis.Controls.Add(Me.BtViderFiltreCsnsExist)
+        Me.TabP2ConExis.Controls.Add(Me.TbFiltreCsnsExist)
         Me.TabP2ConExis.Controls.Add(Me.BtPrécédentDeConExis)
         Me.TabP2ConExis.Controls.Add(Me.LbTypeInhCsnExis)
         Me.TabP2ConExis.Controls.Add(Me.Panel3)
@@ -680,11 +695,36 @@ Partial Class FormDemandeInhumation
         Me.TabP2ConExis.Text = "fin concexis"
         Me.TabP2ConExis.UseVisualStyleBackColor = True
         '
+        'BtMontrerFormPlanCimCsnsExist
+        '
+        Me.BtMontrerFormPlanCimCsnsExist.Image = Global.cimetiere.My.Resources.Resources.Note_16x
+        Me.BtMontrerFormPlanCimCsnsExist.Location = New System.Drawing.Point(817, 9)
+        Me.BtMontrerFormPlanCimCsnsExist.Name = "BtMontrerFormPlanCimCsnsExist"
+        Me.BtMontrerFormPlanCimCsnsExist.Size = New System.Drawing.Size(34, 31)
+        Me.BtMontrerFormPlanCimCsnsExist.TabIndex = 190
+        Me.BtMontrerFormPlanCimCsnsExist.UseVisualStyleBackColor = True
+        '
+        'BtViderFiltreCsnsExist
+        '
+        Me.BtViderFiltreCsnsExist.Image = Global.cimetiere.My.Resources.Resources.Cancel_16x
+        Me.BtViderFiltreCsnsExist.Location = New System.Drawing.Point(210, 9)
+        Me.BtViderFiltreCsnsExist.Name = "BtViderFiltreCsnsExist"
+        Me.BtViderFiltreCsnsExist.Size = New System.Drawing.Size(32, 29)
+        Me.BtViderFiltreCsnsExist.TabIndex = 189
+        Me.BtViderFiltreCsnsExist.UseVisualStyleBackColor = True
+        '
+        'TbFiltreCsnsExist
+        '
+        Me.TbFiltreCsnsExist.Location = New System.Drawing.Point(14, 12)
+        Me.TbFiltreCsnsExist.Name = "TbFiltreCsnsExist"
+        Me.TbFiltreCsnsExist.Size = New System.Drawing.Size(190, 22)
+        Me.TbFiltreCsnsExist.TabIndex = 183
+        '
         'BtPrécédentDeConExis
         '
         Me.BtPrécédentDeConExis.BackColor = System.Drawing.Color.SeaGreen
         Me.BtPrécédentDeConExis.ForeColor = System.Drawing.Color.Transparent
-        Me.BtPrécédentDeConExis.Location = New System.Drawing.Point(543, 693)
+        Me.BtPrécédentDeConExis.Location = New System.Drawing.Point(543, 723)
         Me.BtPrécédentDeConExis.Margin = New System.Windows.Forms.Padding(4)
         Me.BtPrécédentDeConExis.Name = "BtPrécédentDeConExis"
         Me.BtPrécédentDeConExis.Size = New System.Drawing.Size(132, 59)
@@ -697,7 +737,7 @@ Partial Class FormDemandeInhumation
         Me.LbTypeInhCsnExis.FormattingEnabled = True
         Me.LbTypeInhCsnExis.ItemHeight = 16
         Me.LbTypeInhCsnExis.Items.AddRange(New Object() {"Urne", "Cercueil", "Pleine terre", "Caveau", "Cellule de colombarium", "Cavurne"})
-        Me.LbTypeInhCsnExis.Location = New System.Drawing.Point(857, 19)
+        Me.LbTypeInhCsnExis.Location = New System.Drawing.Point(857, 49)
         Me.LbTypeInhCsnExis.Name = "LbTypeInhCsnExis"
         Me.LbTypeInhCsnExis.Size = New System.Drawing.Size(156, 212)
         Me.LbTypeInhCsnExis.TabIndex = 181
@@ -706,7 +746,7 @@ Partial Class FormDemandeInhumation
         '
         Me.Panel3.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel3.Controls.Add(Me.Panel7)
-        Me.Panel3.Location = New System.Drawing.Point(28, 686)
+        Me.Panel3.Location = New System.Drawing.Point(28, 716)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(402, 76)
         Me.Panel3.TabIndex = 180
@@ -736,7 +776,7 @@ Partial Class FormDemandeInhumation
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.LvCsnExisBenefs)
-        Me.GroupBox3.Location = New System.Drawing.Point(8, 490)
+        Me.GroupBox3.Location = New System.Drawing.Point(8, 520)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(843, 190)
         Me.GroupBox3.TabIndex = 179
@@ -783,7 +823,7 @@ Partial Class FormDemandeInhumation
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.LvCsnExistOccupants)
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 294)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 324)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(843, 190)
         Me.GroupBox1.TabIndex = 178
@@ -825,7 +865,7 @@ Partial Class FormDemandeInhumation
         '
         Me.BtTerminerConExis.BackColor = System.Drawing.Color.SeaGreen
         Me.BtTerminerConExis.ForeColor = System.Drawing.Color.Transparent
-        Me.BtTerminerConExis.Location = New System.Drawing.Point(713, 693)
+        Me.BtTerminerConExis.Location = New System.Drawing.Point(713, 723)
         Me.BtTerminerConExis.Margin = New System.Windows.Forms.Padding(4)
         Me.BtTerminerConExis.Name = "BtTerminerConExis"
         Me.BtTerminerConExis.Size = New System.Drawing.Size(132, 59)
@@ -841,17 +881,17 @@ Partial Class FormDemandeInhumation
         Me.DgvCsnsExist.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvCsnsExist.BackgroundColor = System.Drawing.Color.White
         Me.DgvCsnsExist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvCsnsExist.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column4, Me.Column2, Me.Column3, Me.DgvCsnsExistColOccupants})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvCsnsExist.DefaultCellStyle = DataGridViewCellStyle6
+        Me.DgvCsnsExist.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsExistColEmplId, Me.Column1, Me.Column4, Me.Column2, Me.Column3, Me.DgvCsnsExistColOccupants})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvCsnsExist.DefaultCellStyle = DataGridViewCellStyle1
         Me.DgvCsnsExist.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DgvCsnsExist.Location = New System.Drawing.Point(8, 19)
+        Me.DgvCsnsExist.Location = New System.Drawing.Point(8, 49)
         Me.DgvCsnsExist.MultiSelect = False
         Me.DgvCsnsExist.Name = "DgvCsnsExist"
         Me.DgvCsnsExist.ReadOnly = True
@@ -864,42 +904,11 @@ Partial Class FormDemandeInhumation
         Me.DgvCsnsExist.Size = New System.Drawing.Size(843, 257)
         Me.DgvCsnsExist.TabIndex = 173
         '
-        'Column1
-        '
-        Me.Column1.DataPropertyName = "empl_reference"
-        Me.Column1.HeaderText = "Emplacement"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        '
-        'Column4
-        '
-        Me.Column4.DataPropertyName = "csnr_nom"
-        Me.Column4.HeaderText = "Concessionnaire"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        '
-        'Column2
-        '
-        Me.Column2.DataPropertyName = "con_date_debut"
-        Me.Column2.HeaderText = "Début"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column3
-        '
-        Me.Column3.DataPropertyName = "con_date_fin"
-        Me.Column3.HeaderText = "Fin"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        '
-        'DgvCsnsExistColOccupants
-        '
-        Me.DgvCsnsExistColOccupants.HeaderText = "Occupants"
-        Me.DgvCsnsExistColOccupants.Name = "DgvCsnsExistColOccupants"
-        Me.DgvCsnsExistColOccupants.ReadOnly = True
-        '
         'TabP2InhOrd
         '
+        Me.TabP2InhOrd.Controls.Add(Me.BtMontrerFormPlancimEmplOrd)
+        Me.TabP2InhOrd.Controls.Add(Me.BtViderFiltreEmpls)
+        Me.TabP2InhOrd.Controls.Add(Me.TbFiltreEmpls)
         Me.TabP2InhOrd.Controls.Add(Me.BtPrecedentDeInhOrd)
         Me.TabP2InhOrd.Controls.Add(Me.Panel8)
         Me.TabP2InhOrd.Controls.Add(Me.BtTerminerInhOrd)
@@ -912,11 +921,36 @@ Partial Class FormDemandeInhumation
         Me.TabP2InhOrd.Text = "TabP2InhOrd"
         Me.TabP2InhOrd.UseVisualStyleBackColor = True
         '
+        'BtMontrerFormPlancimEmplOrd
+        '
+        Me.BtMontrerFormPlancimEmplOrd.Image = Global.cimetiere.My.Resources.Resources.Note_16x
+        Me.BtMontrerFormPlancimEmplOrd.Location = New System.Drawing.Point(660, 10)
+        Me.BtMontrerFormPlancimEmplOrd.Name = "BtMontrerFormPlancimEmplOrd"
+        Me.BtMontrerFormPlancimEmplOrd.Size = New System.Drawing.Size(34, 31)
+        Me.BtMontrerFormPlancimEmplOrd.TabIndex = 179
+        Me.BtMontrerFormPlancimEmplOrd.UseVisualStyleBackColor = True
+        '
+        'BtViderFiltreEmpls
+        '
+        Me.BtViderFiltreEmpls.Image = Global.cimetiere.My.Resources.Resources.Cancel_16x
+        Me.BtViderFiltreEmpls.Location = New System.Drawing.Point(210, 10)
+        Me.BtViderFiltreEmpls.Name = "BtViderFiltreEmpls"
+        Me.BtViderFiltreEmpls.Size = New System.Drawing.Size(32, 29)
+        Me.BtViderFiltreEmpls.TabIndex = 191
+        Me.BtViderFiltreEmpls.UseVisualStyleBackColor = True
+        '
+        'TbFiltreEmpls
+        '
+        Me.TbFiltreEmpls.Location = New System.Drawing.Point(14, 13)
+        Me.TbFiltreEmpls.Name = "TbFiltreEmpls"
+        Me.TbFiltreEmpls.Size = New System.Drawing.Size(190, 22)
+        Me.TbFiltreEmpls.TabIndex = 190
+        '
         'BtPrecedentDeInhOrd
         '
         Me.BtPrecedentDeInhOrd.BackColor = System.Drawing.Color.SeaGreen
         Me.BtPrecedentDeInhOrd.ForeColor = System.Drawing.Color.Transparent
-        Me.BtPrecedentDeInhOrd.Location = New System.Drawing.Point(523, 517)
+        Me.BtPrecedentDeInhOrd.Location = New System.Drawing.Point(508, 533)
         Me.BtPrecedentDeInhOrd.Margin = New System.Windows.Forms.Padding(4)
         Me.BtPrecedentDeInhOrd.Name = "BtPrecedentDeInhOrd"
         Me.BtPrecedentDeInhOrd.Size = New System.Drawing.Size(132, 59)
@@ -928,7 +962,7 @@ Partial Class FormDemandeInhumation
         '
         Me.Panel8.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel8.Controls.Add(Me.Panel9)
-        Me.Panel8.Location = New System.Drawing.Point(39, 504)
+        Me.Panel8.Location = New System.Drawing.Point(24, 520)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(402, 76)
         Me.Panel8.TabIndex = 185
@@ -959,7 +993,7 @@ Partial Class FormDemandeInhumation
         '
         Me.BtTerminerInhOrd.BackColor = System.Drawing.Color.SeaGreen
         Me.BtTerminerInhOrd.ForeColor = System.Drawing.Color.Transparent
-        Me.BtTerminerInhOrd.Location = New System.Drawing.Point(721, 516)
+        Me.BtTerminerInhOrd.Location = New System.Drawing.Point(706, 532)
         Me.BtTerminerInhOrd.Margin = New System.Windows.Forms.Padding(4)
         Me.BtTerminerInhOrd.Name = "BtTerminerInhOrd"
         Me.BtTerminerInhOrd.Size = New System.Drawing.Size(132, 59)
@@ -970,7 +1004,7 @@ Partial Class FormDemandeInhumation
         'GroupBox5
         '
         Me.GroupBox5.Controls.Add(Me.LvOccupantsInhOrdEmpl)
-        Me.GroupBox5.Location = New System.Drawing.Point(33, 291)
+        Me.GroupBox5.Location = New System.Drawing.Point(18, 307)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(843, 190)
         Me.GroupBox5.TabIndex = 183
@@ -1016,17 +1050,17 @@ Partial Class FormDemandeInhumation
         Me.DgvEmplacementsPourInhOrd.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvEmplacementsPourInhOrd.BackgroundColor = System.Drawing.Color.White
         Me.DgvEmplacementsPourInhOrd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvEmplacementsPourInhOrd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column5, Me.DgvEmplsInhOrdOccupants, Me.DgvEmplsInhOrdClasse})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvEmplacementsPourInhOrd.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DgvEmplacementsPourInhOrd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvEmplsOrdColEmplId, Me.Column5, Me.DgvEmplsInhOrdOccupants, Me.DgvEmplsInhOrdClasse})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvEmplacementsPourInhOrd.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvEmplacementsPourInhOrd.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DgvEmplacementsPourInhOrd.Location = New System.Drawing.Point(33, 29)
+        Me.DgvEmplacementsPourInhOrd.Location = New System.Drawing.Point(13, 47)
         Me.DgvEmplacementsPourInhOrd.MultiSelect = False
         Me.DgvEmplacementsPourInhOrd.Name = "DgvEmplacementsPourInhOrd"
         Me.DgvEmplacementsPourInhOrd.ReadOnly = True
@@ -1038,6 +1072,14 @@ Partial Class FormDemandeInhumation
         Me.DgvEmplacementsPourInhOrd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvEmplacementsPourInhOrd.Size = New System.Drawing.Size(681, 256)
         Me.DgvEmplacementsPourInhOrd.TabIndex = 0
+        '
+        'DgvEmplsOrdColEmplId
+        '
+        Me.DgvEmplsOrdColEmplId.DataPropertyName = "empl_id"
+        Me.DgvEmplsOrdColEmplId.HeaderText = "empl_id"
+        Me.DgvEmplsOrdColEmplId.Name = "DgvEmplsOrdColEmplId"
+        Me.DgvEmplsOrdColEmplId.ReadOnly = True
+        Me.DgvEmplsOrdColEmplId.Visible = False
         '
         'Column5
         '
@@ -1070,14 +1112,6 @@ Partial Class FormDemandeInhumation
         Me.TextBox1.Size = New System.Drawing.Size(171, 22)
         Me.TextBox1.TabIndex = 6
         '
-        'CtrlLocVillePays1
-        '
-        Me.CtrlLocVillePays1.Location = New System.Drawing.Point(337, 59)
-        Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
-        Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 25)
-        Me.CtrlLocVillePays1.TabIndex = 7
-        '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.SeaGreen
@@ -1102,10 +1136,62 @@ Partial Class FormDemandeInhumation
         Me.BtPrécédentDeConExit.Text = "Précédent"
         Me.BtPrécédentDeConExit.UseVisualStyleBackColor = False
         '
+        'CtrlLocVillePays1
+        '
+        Me.CtrlLocVillePays1.Location = New System.Drawing.Point(337, 59)
+        Me.CtrlLocVillePays1.LocVilleId = -1
+        Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
+        Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 25)
+        Me.CtrlLocVillePays1.TabIndex = 7
+        '
+        'DgvCsnsExistColEmplId
+        '
+        Me.DgvCsnsExistColEmplId.DataPropertyName = "empl_id"
+        Me.DgvCsnsExistColEmplId.HeaderText = "empl_id"
+        Me.DgvCsnsExistColEmplId.Name = "DgvCsnsExistColEmplId"
+        Me.DgvCsnsExistColEmplId.ReadOnly = True
+        Me.DgvCsnsExistColEmplId.Visible = False
+        '
+        'Column1
+        '
+        Me.Column1.DataPropertyName = "empl_reference"
+        Me.Column1.HeaderText = "Emplacement"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column4
+        '
+        Me.Column4.DataPropertyName = "csnr_nom"
+        Me.Column4.HeaderText = "Concessionnaire"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.DataPropertyName = "con_date_debut"
+        Me.Column2.HeaderText = "Début"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column3
+        '
+        Me.Column3.DataPropertyName = "con_date_fin"
+        Me.Column3.HeaderText = "Fin"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        '
+        'DgvCsnsExistColOccupants
+        '
+        Me.DgvCsnsExistColOccupants.HeaderText = "Occupants"
+        Me.DgvCsnsExistColOccupants.Name = "DgvCsnsExistColOccupants"
+        Me.DgvCsnsExistColOccupants.ReadOnly = True
+        '
         'FormDemandeInhumation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1060, 856)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "FormDemandeInhumation"
@@ -1129,6 +1215,7 @@ Partial Class FormDemandeInhumation
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabP2ConExis.ResumeLayout(False)
+        Me.TabP2ConExis.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
@@ -1136,6 +1223,7 @@ Partial Class FormDemandeInhumation
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.DgvCsnsExist, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabP2InhOrd.ResumeLayout(False)
+        Me.TabP2InhOrd.PerformLayout()
         Me.Panel8.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
@@ -1184,11 +1272,6 @@ Partial Class FormDemandeInhumation
     Friend WithEvents TabP2ConExis As TabPage
     Friend WithEvents BtTerminerConExis As Button
     Friend WithEvents DgvCsnsExist As DataGridViewConcessions
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents DgvCsnsExistColOccupants As DataGridViewTextBoxColumn
     Friend WithEvents LvCsnExisBenefs As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents ColumnHeader2 As ColumnHeader
@@ -1226,9 +1309,6 @@ Partial Class FormDemandeInhumation
     Friend WithEvents LbTypeInhCsnExis As ListBox
     Friend WithEvents TabP2InhOrd As TabPage
     Friend WithEvents DgvEmplacementsPourInhOrd As DataGridViewCustom
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents DgvEmplsInhOrdOccupants As DataGridViewTextBoxColumn
-    Friend WithEvents DgvEmplsInhOrdClasse As DataGridViewTextBoxColumn
     Friend WithEvents LvOccupantsInhOrdEmpl As ListView
     Friend WithEvents ColumnHeader10 As ColumnHeader
     Friend WithEvents ColumnHeader11 As ColumnHeader
@@ -1244,4 +1324,20 @@ Partial Class FormDemandeInhumation
     Friend WithEvents BtPrecedentDeInhOrd As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents BtPrécédentDeConExit As Button
+    Friend WithEvents TbFiltreCsnsExist As TextBox
+    Friend WithEvents BtViderFiltreCsnsExist As Button
+    Friend WithEvents BtViderFiltreEmpls As Button
+    Friend WithEvents TbFiltreEmpls As TextBox
+    Friend WithEvents BtMontrerFormPlancimEmplOrd As Button
+    Friend WithEvents BtMontrerFormPlanCimCsnsExist As Button
+    Friend WithEvents DgvEmplsOrdColEmplId As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents DgvEmplsInhOrdOccupants As DataGridViewTextBoxColumn
+    Friend WithEvents DgvEmplsInhOrdClasse As DataGridViewTextBoxColumn
+    Friend WithEvents DgvCsnsExistColEmplId As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents DgvCsnsExistColOccupants As DataGridViewTextBoxColumn
 End Class
