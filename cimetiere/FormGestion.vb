@@ -991,4 +991,8 @@ Public Class FormGestion
             End If
         End If
     End Sub
+
+    Private Sub BSuppCons_Click(sender As Object, e As EventArgs) Handles BSuppCons.Click
+
+    End Sub
 End Class

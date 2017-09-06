@@ -241,10 +241,11 @@ Partial Class FormGestion
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(64, 32)
-        Me.TabControl1.Location = New System.Drawing.Point(-5, 1)
+        Me.TabControl1.Location = New System.Drawing.Point(-8, 2)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1254, 705)
+        Me.TabControl1.Size = New System.Drawing.Size(1881, 1085)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage1
@@ -261,9 +262,10 @@ Partial Class FormGestion
         Me.TabPage1.Controls.Add(Me.FPBLienCons)
         Me.TabPage1.Controls.Add(Me.FPTBLahulpe)
         Me.TabPage1.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1246, 665)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TabPage1.Size = New System.Drawing.Size(1873, 1045)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Défunt"
         '
@@ -271,9 +273,10 @@ Partial Class FormGestion
         '
         Me.FDBLinkToPersCon.BackColor = System.Drawing.Color.SeaGreen
         Me.FDBLinkToPersCon.ForeColor = System.Drawing.Color.Transparent
-        Me.FDBLinkToPersCon.Location = New System.Drawing.Point(1083, 317)
+        Me.FDBLinkToPersCon.Location = New System.Drawing.Point(1624, 488)
+        Me.FDBLinkToPersCon.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FDBLinkToPersCon.Name = "FDBLinkToPersCon"
-        Me.FDBLinkToPersCon.Size = New System.Drawing.Size(154, 48)
+        Me.FDBLinkToPersCon.Size = New System.Drawing.Size(231, 74)
         Me.FDBLinkToPersCon.TabIndex = 98
         Me.FDBLinkToPersCon.Text = "Lien vers Personne de contact"
         Me.FDBLinkToPersCon.UseVisualStyleBackColor = False
@@ -282,18 +285,21 @@ Partial Class FormGestion
         '
         Me.Panel3.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel3.Controls.Add(Me.GroupBox3)
-        Me.Panel3.Location = New System.Drawing.Point(271, 6)
+        Me.Panel3.Location = New System.Drawing.Point(406, 9)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(403, 616)
+        Me.Panel3.Size = New System.Drawing.Size(604, 948)
         Me.Panel3.TabIndex = 97
         '
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.GhostWhite
         Me.GroupBox3.Controls.Add(Me.DgvListeDefunts)
-        Me.GroupBox3.Location = New System.Drawing.Point(11, 8)
+        Me.GroupBox3.Location = New System.Drawing.Point(16, 12)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(381, 593)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox3.Size = New System.Drawing.Size(572, 912)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         '
@@ -311,23 +317,25 @@ Partial Class FormGestion
         Me.DgvListeDefunts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvListeDefunts.EnableHeadersVisualStyles = False
         Me.DgvListeDefunts.GridColor = System.Drawing.Color.DarkGray
-        Me.DgvListeDefunts.Location = New System.Drawing.Point(8, 15)
+        Me.DgvListeDefunts.Location = New System.Drawing.Point(12, 23)
+        Me.DgvListeDefunts.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DgvListeDefunts.MultiSelect = False
         Me.DgvListeDefunts.Name = "DgvListeDefunts"
         Me.DgvListeDefunts.ReadOnly = True
         Me.DgvListeDefunts.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvListeDefunts.RowHeadersVisible = False
         Me.DgvListeDefunts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeDefunts.Size = New System.Drawing.Size(367, 577)
+        Me.DgvListeDefunts.Size = New System.Drawing.Size(550, 888)
         Me.DgvListeDefunts.TabIndex = 48
         '
         'Panel10
         '
         Me.Panel10.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel10.Controls.Add(Me.GroupBox10)
-        Me.Panel10.Location = New System.Drawing.Point(16, 87)
+        Me.Panel10.Location = New System.Drawing.Point(24, 134)
+        Me.Panel10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(242, 222)
+        Me.Panel10.Size = New System.Drawing.Size(363, 342)
         Me.Panel10.TabIndex = 96
         '
         'GroupBox10
@@ -343,9 +351,11 @@ Partial Class FormGestion
         Me.GroupBox10.Controls.Add(Me.Label1)
         Me.GroupBox10.Controls.Add(Me.TbDefChampRecherche)
         Me.GroupBox10.Controls.Add(Me.BtDefChercher)
-        Me.GroupBox10.Location = New System.Drawing.Point(14, 8)
+        Me.GroupBox10.Location = New System.Drawing.Point(21, 12)
+        Me.GroupBox10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(212, 204)
+        Me.GroupBox10.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox10.Size = New System.Drawing.Size(318, 314)
         Me.GroupBox10.TabIndex = 0
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Rechercher"
@@ -353,7 +363,8 @@ Partial Class FormGestion
         'RbDefChercherEmplacement
         '
         Me.RbDefChercherEmplacement.AutoSize = True
-        Me.RbDefChercherEmplacement.Location = New System.Drawing.Point(13, 88)
+        Me.RbDefChercherEmplacement.Location = New System.Drawing.Point(20, 135)
+        Me.RbDefChercherEmplacement.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.RbDefChercherEmplacement.Name = "RbDefChercherEmplacement"
         Me.RbDefChercherEmplacement.Size = New System.Drawing.Size(93, 18)
         Me.RbDefChercherEmplacement.TabIndex = 99
@@ -364,7 +375,8 @@ Partial Class FormGestion
         'RbDefChercherNom
         '
         Me.RbDefChercherNom.AutoSize = True
-        Me.RbDefChercherNom.Location = New System.Drawing.Point(13, 66)
+        Me.RbDefChercherNom.Location = New System.Drawing.Point(20, 102)
+        Me.RbDefChercherNom.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.RbDefChercherNom.Name = "RbDefChercherNom"
         Me.RbDefChercherNom.Size = New System.Drawing.Size(49, 18)
         Me.RbDefChercherNom.TabIndex = 98
@@ -374,9 +386,10 @@ Partial Class FormGestion
         '
         'BtDefAnnulerRecherche
         '
-        Me.BtDefAnnulerRecherche.Location = New System.Drawing.Point(37, 172)
+        Me.BtDefAnnulerRecherche.Location = New System.Drawing.Point(56, 265)
+        Me.BtDefAnnulerRecherche.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BtDefAnnulerRecherche.Name = "BtDefAnnulerRecherche"
-        Me.BtDefAnnulerRecherche.Size = New System.Drawing.Size(68, 23)
+        Me.BtDefAnnulerRecherche.Size = New System.Drawing.Size(102, 35)
         Me.BtDefAnnulerRecherche.TabIndex = 97
         Me.BtDefAnnulerRecherche.Text = "Annuler filtre"
         Me.BtDefAnnulerRecherche.UseVisualStyleBackColor = True
@@ -384,7 +397,8 @@ Partial Class FormGestion
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(8, 115)
+        Me.Label3.Location = New System.Drawing.Point(12, 177)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(82, 14)
         Me.Label3.TabIndex = 96
@@ -393,7 +407,8 @@ Partial Class FormGestion
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 144)
+        Me.Label2.Location = New System.Drawing.Point(12, 222)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(82, 14)
         Me.Label2.TabIndex = 95
@@ -403,26 +418,29 @@ Partial Class FormGestion
         '
         Me.DtpDefRechercherDateDecesApres.Checked = False
         Me.DtpDefRechercherDateDecesApres.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DtpDefRechercherDateDecesApres.Location = New System.Drawing.Point(93, 114)
+        Me.DtpDefRechercherDateDecesApres.Location = New System.Drawing.Point(140, 175)
+        Me.DtpDefRechercherDateDecesApres.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DtpDefRechercherDateDecesApres.Name = "DtpDefRechercherDateDecesApres"
         Me.DtpDefRechercherDateDecesApres.ShowCheckBox = True
-        Me.DtpDefRechercherDateDecesApres.Size = New System.Drawing.Size(113, 21)
+        Me.DtpDefRechercherDateDecesApres.Size = New System.Drawing.Size(168, 21)
         Me.DtpDefRechercherDateDecesApres.TabIndex = 94
         '
         'DtpDefRechercherDateDecesAvant
         '
         Me.DtpDefRechercherDateDecesAvant.Checked = False
         Me.DtpDefRechercherDateDecesAvant.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DtpDefRechercherDateDecesAvant.Location = New System.Drawing.Point(93, 141)
+        Me.DtpDefRechercherDateDecesAvant.Location = New System.Drawing.Point(140, 217)
+        Me.DtpDefRechercherDateDecesAvant.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DtpDefRechercherDateDecesAvant.Name = "DtpDefRechercherDateDecesAvant"
         Me.DtpDefRechercherDateDecesAvant.ShowCheckBox = True
-        Me.DtpDefRechercherDateDecesAvant.Size = New System.Drawing.Size(113, 21)
+        Me.DtpDefRechercherDateDecesAvant.Size = New System.Drawing.Size(168, 21)
         Me.DtpDefRechercherDateDecesAvant.TabIndex = 93
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(10, 47)
+        Me.Label1.Location = New System.Drawing.Point(15, 72)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(39, 14)
         Me.Label1.TabIndex = 92
@@ -430,16 +448,18 @@ Partial Class FormGestion
         '
         'TbDefChampRecherche
         '
-        Me.TbDefChampRecherche.Location = New System.Drawing.Point(10, 20)
+        Me.TbDefChampRecherche.Location = New System.Drawing.Point(15, 31)
+        Me.TbDefChampRecherche.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TbDefChampRecherche.Name = "TbDefChampRecherche"
-        Me.TbDefChampRecherche.Size = New System.Drawing.Size(150, 21)
+        Me.TbDefChampRecherche.Size = New System.Drawing.Size(223, 21)
         Me.TbDefChampRecherche.TabIndex = 40
         '
         'BtDefChercher
         '
-        Me.BtDefChercher.Location = New System.Drawing.Point(126, 172)
+        Me.BtDefChercher.Location = New System.Drawing.Point(189, 265)
+        Me.BtDefChercher.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BtDefChercher.Name = "BtDefChercher"
-        Me.BtDefChercher.Size = New System.Drawing.Size(73, 23)
+        Me.BtDefChercher.Size = New System.Drawing.Size(110, 35)
         Me.BtDefChercher.TabIndex = 49
         Me.BtDefChercher.Text = "Rechercher"
         Me.BtDefChercher.UseVisualStyleBackColor = True
@@ -448,9 +468,10 @@ Partial Class FormGestion
         '
         Me.Panel1.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(696, 6)
+        Me.Panel1.Location = New System.Drawing.Point(1044, 9)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(543, 266)
+        Me.Panel1.Size = New System.Drawing.Size(814, 409)
         Me.Panel1.TabIndex = 92
         '
         'GroupBox1
@@ -485,24 +506,28 @@ Partial Class FormGestion
         Me.GroupBox1.Controls.Add(Me.FPTBNom)
         Me.GroupBox1.Controls.Add(Me.FPLNom)
         Me.GroupBox1.Controls.Add(Me.TbDateDeces)
-        Me.GroupBox1.Location = New System.Drawing.Point(16, 13)
+        Me.GroupBox1.Location = New System.Drawing.Point(24, 20)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(511, 240)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox1.Size = New System.Drawing.Size(766, 369)
         Me.GroupBox1.TabIndex = 93
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Informations du défunt"
         '
         'FPTBVille
         '
-        Me.FPTBVille.Location = New System.Drawing.Point(372, 211)
+        Me.FPTBVille.Location = New System.Drawing.Point(558, 325)
+        Me.FPTBVille.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBVille.Name = "FPTBVille"
-        Me.FPTBVille.Size = New System.Drawing.Size(126, 21)
+        Me.FPTBVille.Size = New System.Drawing.Size(187, 21)
         Me.FPTBVille.TabIndex = 141
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(323, 214)
+        Me.Label15.Location = New System.Drawing.Point(484, 329)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(35, 14)
         Me.Label15.TabIndex = 140
@@ -510,15 +535,17 @@ Partial Class FormGestion
         '
         'FPTBLieuNaiss
         '
-        Me.FPTBLieuNaiss.Location = New System.Drawing.Point(119, 177)
+        Me.FPTBLieuNaiss.Location = New System.Drawing.Point(178, 272)
+        Me.FPTBLieuNaiss.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBLieuNaiss.Name = "FPTBLieuNaiss"
-        Me.FPTBLieuNaiss.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBLieuNaiss.Size = New System.Drawing.Size(226, 21)
         Me.FPTBLieuNaiss.TabIndex = 139
         '
         'FPLLieuNaiss
         '
         Me.FPLLieuNaiss.AutoSize = True
-        Me.FPLLieuNaiss.Location = New System.Drawing.Point(9, 181)
+        Me.FPLLieuNaiss.Location = New System.Drawing.Point(14, 278)
+        Me.FPLLieuNaiss.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLLieuNaiss.Name = "FPLLieuNaiss"
         Me.FPLLieuNaiss.Size = New System.Drawing.Size(104, 14)
         Me.FPLLieuNaiss.TabIndex = 138
@@ -526,15 +553,17 @@ Partial Class FormGestion
         '
         'FPTBEtatCivil
         '
-        Me.FPTBEtatCivil.Location = New System.Drawing.Point(346, 85)
+        Me.FPTBEtatCivil.Location = New System.Drawing.Point(519, 131)
+        Me.FPTBEtatCivil.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBEtatCivil.Name = "FPTBEtatCivil"
-        Me.FPTBEtatCivil.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBEtatCivil.Size = New System.Drawing.Size(226, 21)
         Me.FPTBEtatCivil.TabIndex = 137
         '
         'FPLEtatCivil
         '
         Me.FPLEtatCivil.AutoSize = True
-        Me.FPLEtatCivil.Location = New System.Drawing.Point(291, 88)
+        Me.FPLEtatCivil.Location = New System.Drawing.Point(436, 135)
+        Me.FPLEtatCivil.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLEtatCivil.Name = "FPLEtatCivil"
         Me.FPLEtatCivil.Size = New System.Drawing.Size(57, 14)
         Me.FPLEtatCivil.TabIndex = 136
@@ -542,15 +571,17 @@ Partial Class FormGestion
         '
         'FPTBPays
         '
-        Me.FPTBPays.Location = New System.Drawing.Point(119, 82)
+        Me.FPTBPays.Location = New System.Drawing.Point(178, 126)
+        Me.FPTBPays.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBPays.Name = "FPTBPays"
-        Me.FPTBPays.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBPays.Size = New System.Drawing.Size(226, 21)
         Me.FPTBPays.TabIndex = 135
         '
         'FPLPays
         '
         Me.FPLPays.AutoSize = True
-        Me.FPLPays.Location = New System.Drawing.Point(71, 83)
+        Me.FPLPays.Location = New System.Drawing.Point(106, 128)
+        Me.FPLPays.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLPays.Name = "FPLPays"
         Me.FPLPays.Size = New System.Drawing.Size(35, 14)
         Me.FPLPays.TabIndex = 134
@@ -558,15 +589,17 @@ Partial Class FormGestion
         '
         'FPTBCodePostal
         '
-        Me.FPTBCodePostal.Location = New System.Drawing.Point(346, 50)
+        Me.FPTBCodePostal.Location = New System.Drawing.Point(519, 77)
+        Me.FPTBCodePostal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBCodePostal.Name = "FPTBCodePostal"
-        Me.FPTBCodePostal.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBCodePostal.Size = New System.Drawing.Size(226, 21)
         Me.FPTBCodePostal.TabIndex = 133
         '
         'FPLCodePostal
         '
         Me.FPLCodePostal.AutoSize = True
-        Me.FPLCodePostal.Location = New System.Drawing.Point(277, 50)
+        Me.FPLCodePostal.Location = New System.Drawing.Point(416, 77)
+        Me.FPLCodePostal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLCodePostal.Name = "FPLCodePostal"
         Me.FPLCodePostal.Size = New System.Drawing.Size(69, 14)
         Me.FPLCodePostal.TabIndex = 132
@@ -574,15 +607,17 @@ Partial Class FormGestion
         '
         'FPTBAdresse
         '
-        Me.FPTBAdresse.Location = New System.Drawing.Point(119, 47)
+        Me.FPTBAdresse.Location = New System.Drawing.Point(178, 72)
+        Me.FPTBAdresse.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBAdresse.Name = "FPTBAdresse"
-        Me.FPTBAdresse.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBAdresse.Size = New System.Drawing.Size(226, 21)
         Me.FPTBAdresse.TabIndex = 131
         '
         'FPLAdresse
         '
         Me.FPLAdresse.AutoSize = True
-        Me.FPLAdresse.Location = New System.Drawing.Point(58, 50)
+        Me.FPLAdresse.Location = New System.Drawing.Point(87, 77)
+        Me.FPLAdresse.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLAdresse.Name = "FPLAdresse"
         Me.FPLAdresse.Size = New System.Drawing.Size(53, 14)
         Me.FPLAdresse.TabIndex = 130
@@ -590,36 +625,41 @@ Partial Class FormGestion
         '
         'FPTBCodeLieu
         '
-        Me.FPTBCodeLieu.Location = New System.Drawing.Point(119, 114)
+        Me.FPTBCodeLieu.Location = New System.Drawing.Point(178, 175)
+        Me.FPTBCodeLieu.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBCodeLieu.Name = "FPTBCodeLieu"
-        Me.FPTBCodeLieu.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBCodeLieu.Size = New System.Drawing.Size(226, 21)
         Me.FPTBCodeLieu.TabIndex = 129
         '
         'FPTBEmplacement
         '
-        Me.FPTBEmplacement.Location = New System.Drawing.Point(365, 177)
+        Me.FPTBEmplacement.Location = New System.Drawing.Point(548, 272)
+        Me.FPTBEmplacement.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBEmplacement.Name = "FPTBEmplacement"
-        Me.FPTBEmplacement.Size = New System.Drawing.Size(133, 21)
+        Me.FPTBEmplacement.Size = New System.Drawing.Size(198, 21)
         Me.FPTBEmplacement.TabIndex = 128
         '
         'FPTBDateM
         '
-        Me.FPTBDateM.Location = New System.Drawing.Point(346, 113)
+        Me.FPTBDateM.Location = New System.Drawing.Point(519, 174)
+        Me.FPTBDateM.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBDateM.Name = "FPTBDateM"
-        Me.FPTBDateM.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBDateM.Size = New System.Drawing.Size(226, 21)
         Me.FPTBDateM.TabIndex = 127
         '
         'FPTBPrenom
         '
-        Me.FPTBPrenom.Location = New System.Drawing.Point(346, 20)
+        Me.FPTBPrenom.Location = New System.Drawing.Point(519, 31)
+        Me.FPTBPrenom.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBPrenom.Name = "FPTBPrenom"
-        Me.FPTBPrenom.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBPrenom.Size = New System.Drawing.Size(226, 21)
         Me.FPTBPrenom.TabIndex = 126
         '
         'FPLCodeLieu
         '
         Me.FPLCodeLieu.AutoSize = True
-        Me.FPLCodeLieu.Location = New System.Drawing.Point(74, 117)
+        Me.FPLCodeLieu.Location = New System.Drawing.Point(111, 180)
+        Me.FPLCodeLieu.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLCodeLieu.Name = "FPLCodeLieu"
         Me.FPLCodeLieu.Size = New System.Drawing.Size(27, 14)
         Me.FPLCodeLieu.TabIndex = 125
@@ -628,7 +668,8 @@ Partial Class FormGestion
         'FPLEmplacement
         '
         Me.FPLEmplacement.AutoSize = True
-        Me.FPLEmplacement.Location = New System.Drawing.Point(277, 180)
+        Me.FPLEmplacement.Location = New System.Drawing.Point(416, 277)
+        Me.FPLEmplacement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLEmplacement.Name = "FPLEmplacement"
         Me.FPLEmplacement.Size = New System.Drawing.Size(81, 14)
         Me.FPLEmplacement.TabIndex = 124
@@ -637,7 +678,8 @@ Partial Class FormGestion
         'FPLDateM
         '
         Me.FPLDateM.AutoSize = True
-        Me.FPLDateM.Location = New System.Drawing.Point(310, 118)
+        Me.FPLDateM.Location = New System.Drawing.Point(465, 182)
+        Me.FPLDateM.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLDateM.Name = "FPLDateM"
         Me.FPLDateM.Size = New System.Drawing.Size(31, 14)
         Me.FPLDateM.TabIndex = 123
@@ -646,7 +688,8 @@ Partial Class FormGestion
         'FPLPrenom
         '
         Me.FPLPrenom.AutoSize = True
-        Me.FPLPrenom.Location = New System.Drawing.Point(291, 20)
+        Me.FPLPrenom.Location = New System.Drawing.Point(436, 31)
+        Me.FPLPrenom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLPrenom.Name = "FPLPrenom"
         Me.FPLPrenom.Size = New System.Drawing.Size(52, 14)
         Me.FPLPrenom.TabIndex = 122
@@ -654,29 +697,33 @@ Partial Class FormGestion
         '
         'FPTBDateE
         '
-        Me.FPTBDateE.Location = New System.Drawing.Point(346, 145)
+        Me.FPTBDateE.Location = New System.Drawing.Point(519, 223)
+        Me.FPTBDateE.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBDateE.Name = "FPTBDateE"
-        Me.FPTBDateE.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBDateE.Size = New System.Drawing.Size(226, 21)
         Me.FPTBDateE.TabIndex = 121
         '
         'FPTBSepulture
         '
-        Me.FPTBSepulture.Location = New System.Drawing.Point(119, 211)
+        Me.FPTBSepulture.Location = New System.Drawing.Point(178, 325)
+        Me.FPTBSepulture.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBSepulture.Name = "FPTBSepulture"
-        Me.FPTBSepulture.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBSepulture.Size = New System.Drawing.Size(226, 21)
         Me.FPTBSepulture.TabIndex = 120
         '
         'FPTBDateNaiss
         '
-        Me.FPTBDateNaiss.Location = New System.Drawing.Point(119, 145)
+        Me.FPTBDateNaiss.Location = New System.Drawing.Point(178, 223)
+        Me.FPTBDateNaiss.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBDateNaiss.Name = "FPTBDateNaiss"
-        Me.FPTBDateNaiss.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBDateNaiss.Size = New System.Drawing.Size(226, 21)
         Me.FPTBDateNaiss.TabIndex = 119
         '
         'FPLDateEnt
         '
         Me.FPLDateEnt.AutoSize = True
-        Me.FPLDateEnt.Location = New System.Drawing.Point(310, 148)
+        Me.FPLDateEnt.Location = New System.Drawing.Point(465, 228)
+        Me.FPLDateEnt.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLDateEnt.Name = "FPLDateEnt"
         Me.FPLDateEnt.Size = New System.Drawing.Size(27, 14)
         Me.FPLDateEnt.TabIndex = 118
@@ -685,7 +732,8 @@ Partial Class FormGestion
         'FPLSepulture
         '
         Me.FPLSepulture.AutoSize = True
-        Me.FPLSepulture.Location = New System.Drawing.Point(55, 214)
+        Me.FPLSepulture.Location = New System.Drawing.Point(82, 329)
+        Me.FPLSepulture.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLSepulture.Name = "FPLSepulture"
         Me.FPLSepulture.Size = New System.Drawing.Size(63, 14)
         Me.FPLSepulture.TabIndex = 117
@@ -694,7 +742,8 @@ Partial Class FormGestion
         'FPLDateNaiss
         '
         Me.FPLDateNaiss.AutoSize = True
-        Me.FPLDateNaiss.Location = New System.Drawing.Point(77, 149)
+        Me.FPLDateNaiss.Location = New System.Drawing.Point(116, 229)
+        Me.FPLDateNaiss.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLDateNaiss.Name = "FPLDateNaiss"
         Me.FPLDateNaiss.Size = New System.Drawing.Size(29, 14)
         Me.FPLDateNaiss.TabIndex = 116
@@ -703,15 +752,17 @@ Partial Class FormGestion
         'FPTBNom
         '
         Me.FPTBNom.Cursor = System.Windows.Forms.Cursors.No
-        Me.FPTBNom.Location = New System.Drawing.Point(119, 14)
+        Me.FPTBNom.Location = New System.Drawing.Point(178, 22)
+        Me.FPTBNom.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBNom.Name = "FPTBNom"
-        Me.FPTBNom.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBNom.Size = New System.Drawing.Size(226, 21)
         Me.FPTBNom.TabIndex = 115
         '
         'FPLNom
         '
         Me.FPLNom.AutoSize = True
-        Me.FPLNom.Location = New System.Drawing.Point(65, 17)
+        Me.FPLNom.Location = New System.Drawing.Point(98, 26)
+        Me.FPLNom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLNom.Name = "FPLNom"
         Me.FPLNom.Size = New System.Drawing.Size(37, 14)
         Me.FPLNom.TabIndex = 114
@@ -721,9 +772,10 @@ Partial Class FormGestion
         '
         Me.FPBSupprimer.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBSupprimer.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBSupprimer.Location = New System.Drawing.Point(1164, 275)
+        Me.FPBSupprimer.Location = New System.Drawing.Point(1746, 423)
+        Me.FPBSupprimer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPBSupprimer.Name = "FPBSupprimer"
-        Me.FPBSupprimer.Size = New System.Drawing.Size(74, 23)
+        Me.FPBSupprimer.Size = New System.Drawing.Size(111, 35)
         Me.FPBSupprimer.TabIndex = 90
         Me.FPBSupprimer.Text = "Supprimer"
         Me.FPBSupprimer.UseVisualStyleBackColor = False
@@ -732,9 +784,10 @@ Partial Class FormGestion
         '
         Me.FPBModifier.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBModifier.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBModifier.Location = New System.Drawing.Point(1094, 275)
+        Me.FPBModifier.Location = New System.Drawing.Point(1641, 423)
+        Me.FPBModifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPBModifier.Name = "FPBModifier"
-        Me.FPBModifier.Size = New System.Drawing.Size(64, 23)
+        Me.FPBModifier.Size = New System.Drawing.Size(96, 35)
         Me.FPBModifier.TabIndex = 89
         Me.FPBModifier.Text = "Modifier"
         Me.FPBModifier.UseVisualStyleBackColor = False
@@ -743,9 +796,10 @@ Partial Class FormGestion
         '
         Me.FPBLienCons.BackColor = System.Drawing.Color.SeaGreen
         Me.FPBLienCons.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBLienCons.Location = New System.Drawing.Point(897, 317)
+        Me.FPBLienCons.Location = New System.Drawing.Point(1346, 488)
+        Me.FPBLienCons.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPBLienCons.Name = "FPBLienCons"
-        Me.FPBLienCons.Size = New System.Drawing.Size(152, 48)
+        Me.FPBLienCons.Size = New System.Drawing.Size(228, 74)
         Me.FPBLienCons.TabIndex = 86
         Me.FPBLienCons.Text = "Lien vers concession"
         Me.FPBLienCons.UseVisualStyleBackColor = False
@@ -753,9 +807,10 @@ Partial Class FormGestion
         'FPTBLahulpe
         '
         Me.FPTBLahulpe.Image = CType(resources.GetObject("FPTBLahulpe.Image"), System.Drawing.Image)
-        Me.FPTBLahulpe.Location = New System.Drawing.Point(0, 3)
+        Me.FPTBLahulpe.Location = New System.Drawing.Point(0, 5)
+        Me.FPTBLahulpe.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPTBLahulpe.Name = "FPTBLahulpe"
-        Me.FPTBLahulpe.Size = New System.Drawing.Size(111, 77)
+        Me.FPTBLahulpe.Size = New System.Drawing.Size(166, 118)
         Me.FPTBLahulpe.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.FPTBLahulpe.TabIndex = 50
         Me.FPTBLahulpe.TabStop = False
@@ -780,9 +835,10 @@ Partial Class FormGestion
         Me.TabPage2.Controls.Add(Me.FDBLinkToConcessionnaire)
         Me.TabPage2.Controls.Add(Me.FCPBlahulpe)
         Me.TabPage2.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1246, 665)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TabPage2.Size = New System.Drawing.Size(1873, 1045)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Concession"
         '
@@ -790,9 +846,10 @@ Partial Class FormGestion
         '
         Me.BSuppConsBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BSuppConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BSuppConsBenef.Location = New System.Drawing.Point(1164, 604)
+        Me.BSuppConsBenef.Location = New System.Drawing.Point(1746, 929)
+        Me.BSuppConsBenef.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BSuppConsBenef.Name = "BSuppConsBenef"
-        Me.BSuppConsBenef.Size = New System.Drawing.Size(74, 23)
+        Me.BSuppConsBenef.Size = New System.Drawing.Size(111, 35)
         Me.BSuppConsBenef.TabIndex = 134
         Me.BSuppConsBenef.Text = "Supprimer"
         Me.BSuppConsBenef.UseVisualStyleBackColor = False
@@ -801,9 +858,10 @@ Partial Class FormGestion
         '
         Me.BSuppCons.BackColor = System.Drawing.Color.SeaGreen
         Me.BSuppCons.ForeColor = System.Drawing.Color.Transparent
-        Me.BSuppCons.Location = New System.Drawing.Point(1164, 207)
+        Me.BSuppCons.Location = New System.Drawing.Point(1746, 318)
+        Me.BSuppCons.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BSuppCons.Name = "BSuppCons"
-        Me.BSuppCons.Size = New System.Drawing.Size(74, 23)
+        Me.BSuppCons.Size = New System.Drawing.Size(111, 35)
         Me.BSuppCons.TabIndex = 134
         Me.BSuppCons.Text = "Supprimer"
         Me.BSuppCons.UseVisualStyleBackColor = False
@@ -812,9 +870,10 @@ Partial Class FormGestion
         '
         Me.BmodifConsBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BmodifConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BmodifConsBenef.Location = New System.Drawing.Point(1097, 604)
+        Me.BmodifConsBenef.Location = New System.Drawing.Point(1646, 929)
+        Me.BmodifConsBenef.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BmodifConsBenef.Name = "BmodifConsBenef"
-        Me.BmodifConsBenef.Size = New System.Drawing.Size(64, 23)
+        Me.BmodifConsBenef.Size = New System.Drawing.Size(96, 35)
         Me.BmodifConsBenef.TabIndex = 133
         Me.BmodifConsBenef.Text = "Modifier"
         Me.BmodifConsBenef.UseVisualStyleBackColor = False
@@ -823,9 +882,10 @@ Partial Class FormGestion
         '
         Me.BmodifCons.BackColor = System.Drawing.Color.SeaGreen
         Me.BmodifCons.ForeColor = System.Drawing.Color.Transparent
-        Me.BmodifCons.Location = New System.Drawing.Point(1097, 207)
+        Me.BmodifCons.Location = New System.Drawing.Point(1646, 318)
+        Me.BmodifCons.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BmodifCons.Name = "BmodifCons"
-        Me.BmodifCons.Size = New System.Drawing.Size(64, 23)
+        Me.BmodifCons.Size = New System.Drawing.Size(96, 35)
         Me.BmodifCons.TabIndex = 133
         Me.BmodifCons.Text = "Modifier"
         Me.BmodifCons.UseVisualStyleBackColor = False
@@ -834,18 +894,21 @@ Partial Class FormGestion
         '
         Me.Panel9.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel9.Controls.Add(Me.GroupBox9)
-        Me.Panel9.Location = New System.Drawing.Point(303, 212)
+        Me.Panel9.Location = New System.Drawing.Point(454, 326)
+        Me.Panel9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(349, 200)
+        Me.Panel9.Size = New System.Drawing.Size(524, 308)
         Me.Panel9.TabIndex = 131
         '
         'GroupBox9
         '
         Me.GroupBox9.BackColor = System.Drawing.Color.White
         Me.GroupBox9.Controls.Add(Me.FCDGDefunt)
-        Me.GroupBox9.Location = New System.Drawing.Point(17, 14)
+        Me.GroupBox9.Location = New System.Drawing.Point(26, 22)
+        Me.GroupBox9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(312, 166)
+        Me.GroupBox9.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox9.Size = New System.Drawing.Size(468, 255)
         Me.GroupBox9.TabIndex = 0
         Me.GroupBox9.TabStop = False
         Me.GroupBox9.Text = "Défunt séjournant dans l'emplacement:"
@@ -856,20 +919,22 @@ Partial Class FormGestion
         Me.FCDGDefunt.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.FCDGDefunt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.FCDGDefunt.EnableHeadersVisualStyles = False
-        Me.FCDGDefunt.Location = New System.Drawing.Point(0, 14)
+        Me.FCDGDefunt.Location = New System.Drawing.Point(0, 22)
+        Me.FCDGDefunt.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCDGDefunt.Name = "FCDGDefunt"
         Me.FCDGDefunt.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.FCDGDefunt.RowHeadersVisible = False
-        Me.FCDGDefunt.Size = New System.Drawing.Size(312, 152)
+        Me.FCDGDefunt.Size = New System.Drawing.Size(468, 234)
         Me.FCDGDefunt.TabIndex = 92
         '
         'BAddConsBenef
         '
         Me.BAddConsBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BAddConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BAddConsBenef.Location = New System.Drawing.Point(1030, 604)
+        Me.BAddConsBenef.Location = New System.Drawing.Point(1545, 929)
+        Me.BAddConsBenef.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BAddConsBenef.Name = "BAddConsBenef"
-        Me.BAddConsBenef.Size = New System.Drawing.Size(64, 23)
+        Me.BAddConsBenef.Size = New System.Drawing.Size(96, 35)
         Me.BAddConsBenef.TabIndex = 132
         Me.BAddConsBenef.Text = "Ajouter"
         Me.BAddConsBenef.UseVisualStyleBackColor = False
@@ -878,18 +943,21 @@ Partial Class FormGestion
         '
         Me.Panel8.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel8.Controls.Add(Me.GroupBox8)
-        Me.Panel8.Location = New System.Drawing.Point(303, 418)
+        Me.Panel8.Location = New System.Drawing.Point(454, 643)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(349, 200)
+        Me.Panel8.Size = New System.Drawing.Size(524, 308)
         Me.Panel8.TabIndex = 131
         '
         'GroupBox8
         '
         Me.GroupBox8.BackColor = System.Drawing.Color.White
         Me.GroupBox8.Controls.Add(Me.FCDGBeneficiaire)
-        Me.GroupBox8.Location = New System.Drawing.Point(17, 14)
+        Me.GroupBox8.Location = New System.Drawing.Point(26, 22)
+        Me.GroupBox8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(312, 166)
+        Me.GroupBox8.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox8.Size = New System.Drawing.Size(468, 255)
         Me.GroupBox8.TabIndex = 0
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Bénéficiaire de la concession :"
@@ -900,20 +968,22 @@ Partial Class FormGestion
         Me.FCDGBeneficiaire.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.FCDGBeneficiaire.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.FCDGBeneficiaire.EnableHeadersVisualStyles = False
-        Me.FCDGBeneficiaire.Location = New System.Drawing.Point(0, 17)
+        Me.FCDGBeneficiaire.Location = New System.Drawing.Point(0, 26)
+        Me.FCDGBeneficiaire.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCDGBeneficiaire.Name = "FCDGBeneficiaire"
         Me.FCDGBeneficiaire.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.FCDGBeneficiaire.RowHeadersVisible = False
-        Me.FCDGBeneficiaire.Size = New System.Drawing.Size(312, 149)
+        Me.FCDGBeneficiaire.Size = New System.Drawing.Size(468, 229)
         Me.FCDGBeneficiaire.TabIndex = 93
         '
         'Panel7
         '
         Me.Panel7.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel7.Controls.Add(Me.GroupBox7)
-        Me.Panel7.Location = New System.Drawing.Point(702, 418)
+        Me.Panel7.Location = New System.Drawing.Point(1053, 643)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(536, 180)
+        Me.Panel7.Size = New System.Drawing.Size(804, 277)
         Me.Panel7.TabIndex = 130
         '
         'GroupBox7
@@ -933,67 +1003,75 @@ Partial Class FormGestion
         Me.GroupBox7.Controls.Add(Me.Label20)
         Me.GroupBox7.Controls.Add(Me.Label21)
         Me.GroupBox7.Controls.Add(Me.Label22)
-        Me.GroupBox7.Location = New System.Drawing.Point(17, 14)
+        Me.GroupBox7.Location = New System.Drawing.Point(26, 22)
+        Me.GroupBox7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(502, 147)
+        Me.GroupBox7.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox7.Size = New System.Drawing.Size(753, 226)
         Me.GroupBox7.TabIndex = 0
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Infos Bénéficiaires"
         '
         'TBconsBenefpays
         '
-        Me.TBconsBenefpays.Location = New System.Drawing.Point(321, 76)
+        Me.TBconsBenefpays.Location = New System.Drawing.Point(482, 117)
+        Me.TBconsBenefpays.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBconsBenefpays.Name = "TBconsBenefpays"
-        Me.TBconsBenefpays.Size = New System.Drawing.Size(129, 21)
+        Me.TBconsBenefpays.Size = New System.Drawing.Size(192, 21)
         Me.TBconsBenefpays.TabIndex = 72
         '
         'TBconsBenefville
         '
-        Me.TBconsBenefville.Location = New System.Drawing.Point(321, 48)
+        Me.TBconsBenefville.Location = New System.Drawing.Point(482, 74)
+        Me.TBconsBenefville.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBconsBenefville.Name = "TBconsBenefville"
-        Me.TBconsBenefville.Size = New System.Drawing.Size(129, 21)
+        Me.TBconsBenefville.Size = New System.Drawing.Size(192, 21)
         Me.TBconsBenefville.TabIndex = 71
         '
         'TBconsBenefdatenaiss
         '
-        Me.TBconsBenefdatenaiss.Location = New System.Drawing.Point(125, 72)
+        Me.TBconsBenefdatenaiss.Location = New System.Drawing.Point(188, 111)
+        Me.TBconsBenefdatenaiss.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBconsBenefdatenaiss.Name = "TBconsBenefdatenaiss"
-        Me.TBconsBenefdatenaiss.Size = New System.Drawing.Size(129, 21)
+        Me.TBconsBenefdatenaiss.Size = New System.Drawing.Size(192, 21)
         Me.TBconsBenefdatenaiss.TabIndex = 70
         '
         'TBconsBenefcodepostal
         '
-        Me.TBconsBenefcodepostal.Location = New System.Drawing.Point(125, 100)
+        Me.TBconsBenefcodepostal.Location = New System.Drawing.Point(188, 154)
+        Me.TBconsBenefcodepostal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBconsBenefcodepostal.Name = "TBconsBenefcodepostal"
-        Me.TBconsBenefcodepostal.Size = New System.Drawing.Size(129, 21)
+        Me.TBconsBenefcodepostal.Size = New System.Drawing.Size(192, 21)
         Me.TBconsBenefcodepostal.TabIndex = 69
         '
         'TBconsBenefadress
         '
-        Me.TBconsBenefadress.Location = New System.Drawing.Point(125, 43)
+        Me.TBconsBenefadress.Location = New System.Drawing.Point(188, 66)
+        Me.TBconsBenefadress.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBconsBenefadress.Name = "TBconsBenefadress"
-        Me.TBconsBenefadress.Size = New System.Drawing.Size(129, 21)
+        Me.TBconsBenefadress.Size = New System.Drawing.Size(192, 21)
         Me.TBconsBenefadress.TabIndex = 68
         '
         'TBconsBenefnom
         '
-        Me.TBconsBenefnom.Location = New System.Drawing.Point(321, 17)
+        Me.TBconsBenefnom.Location = New System.Drawing.Point(482, 26)
+        Me.TBconsBenefnom.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBconsBenefnom.Name = "TBconsBenefnom"
-        Me.TBconsBenefnom.Size = New System.Drawing.Size(129, 21)
+        Me.TBconsBenefnom.Size = New System.Drawing.Size(192, 21)
         Me.TBconsBenefnom.TabIndex = 67
         '
         'TBconsBenefprenom
         '
-        Me.TBconsBenefprenom.Location = New System.Drawing.Point(125, 15)
+        Me.TBconsBenefprenom.Location = New System.Drawing.Point(188, 23)
+        Me.TBconsBenefprenom.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBconsBenefprenom.Name = "TBconsBenefprenom"
-        Me.TBconsBenefprenom.Size = New System.Drawing.Size(129, 21)
+        Me.TBconsBenefprenom.Size = New System.Drawing.Size(192, 21)
         Me.TBconsBenefprenom.TabIndex = 66
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(73, 48)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label14.Location = New System.Drawing.Point(110, 74)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(47, 14)
         Me.Label14.TabIndex = 56
@@ -1002,8 +1080,7 @@ Partial Class FormGestion
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(20, 78)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label16.Location = New System.Drawing.Point(30, 120)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(100, 14)
         Me.Label16.TabIndex = 51
@@ -1012,8 +1089,7 @@ Partial Class FormGestion
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(285, 76)
-        Me.Label18.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label18.Location = New System.Drawing.Point(428, 117)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(29, 14)
         Me.Label18.TabIndex = 48
@@ -1022,8 +1098,7 @@ Partial Class FormGestion
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(285, 48)
-        Me.Label19.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label19.Location = New System.Drawing.Point(428, 74)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(29, 14)
         Me.Label19.TabIndex = 46
@@ -1032,8 +1107,7 @@ Partial Class FormGestion
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(51, 103)
-        Me.Label20.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label20.Location = New System.Drawing.Point(76, 158)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(69, 14)
         Me.Label20.TabIndex = 43
@@ -1042,8 +1116,7 @@ Partial Class FormGestion
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(281, 16)
-        Me.Label21.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label21.Location = New System.Drawing.Point(422, 25)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(31, 14)
         Me.Label21.TabIndex = 41
@@ -1052,8 +1125,7 @@ Partial Class FormGestion
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(73, 18)
-        Me.Label22.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label22.Location = New System.Drawing.Point(110, 28)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(46, 14)
         Me.Label22.TabIndex = 39
@@ -1063,18 +1135,21 @@ Partial Class FormGestion
         '
         Me.Panel5.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel5.Controls.Add(Me.GroupBox5)
-        Me.Panel5.Location = New System.Drawing.Point(303, 6)
+        Me.Panel5.Location = New System.Drawing.Point(454, 9)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(349, 200)
+        Me.Panel5.Size = New System.Drawing.Size(524, 308)
         Me.Panel5.TabIndex = 130
         '
         'GroupBox5
         '
         Me.GroupBox5.BackColor = System.Drawing.Color.White
         Me.GroupBox5.Controls.Add(Me.FCDGConss)
-        Me.GroupBox5.Location = New System.Drawing.Point(17, 14)
+        Me.GroupBox5.Location = New System.Drawing.Point(26, 22)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(312, 166)
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox5.Size = New System.Drawing.Size(468, 255)
         Me.GroupBox5.TabIndex = 0
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Concession / Emplacement :"
@@ -1085,20 +1160,22 @@ Partial Class FormGestion
         Me.FCDGConss.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.FCDGConss.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.FCDGConss.EnableHeadersVisualStyles = False
-        Me.FCDGConss.Location = New System.Drawing.Point(0, 15)
+        Me.FCDGConss.Location = New System.Drawing.Point(0, 23)
+        Me.FCDGConss.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCDGConss.Name = "FCDGConss"
         Me.FCDGConss.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.FCDGConss.RowHeadersVisible = False
-        Me.FCDGConss.Size = New System.Drawing.Size(312, 151)
+        Me.FCDGConss.Size = New System.Drawing.Size(468, 232)
         Me.FCDGConss.TabIndex = 43
         '
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel6.Controls.Add(Me.GroupBox6)
-        Me.Panel6.Location = New System.Drawing.Point(702, 6)
+        Me.Panel6.Location = New System.Drawing.Point(1053, 9)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(536, 200)
+        Me.Panel6.Size = New System.Drawing.Size(804, 308)
         Me.Panel6.TabIndex = 130
         '
         'GroupBox6
@@ -1124,9 +1201,11 @@ Partial Class FormGestion
         Me.GroupBox6.Controls.Add(Me.FCTBHistoire)
         Me.GroupBox6.Controls.Add(Me.FCLType)
         Me.GroupBox6.Controls.Add(Me.FCTBType)
-        Me.GroupBox6.Location = New System.Drawing.Point(17, 14)
+        Me.GroupBox6.Location = New System.Drawing.Point(26, 22)
+        Me.GroupBox6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(502, 166)
+        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox6.Size = New System.Drawing.Size(753, 255)
         Me.GroupBox6.TabIndex = 0
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Infos Concessions"
@@ -1134,7 +1213,8 @@ Partial Class FormGestion
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(36, 141)
+        Me.Label12.Location = New System.Drawing.Point(54, 217)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(81, 14)
         Me.Label12.TabIndex = 125
@@ -1142,15 +1222,17 @@ Partial Class FormGestion
         '
         'FCTBDateDeb
         '
-        Me.FCTBDateDeb.Location = New System.Drawing.Point(123, 138)
+        Me.FCTBDateDeb.Location = New System.Drawing.Point(184, 212)
+        Me.FCTBDateDeb.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBDateDeb.Name = "FCTBDateDeb"
-        Me.FCTBDateDeb.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBDateDeb.Size = New System.Drawing.Size(190, 21)
         Me.FCTBDateDeb.TabIndex = 126
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(289, 141)
+        Me.Label13.Location = New System.Drawing.Point(434, 217)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(64, 14)
         Me.Label13.TabIndex = 127
@@ -1158,15 +1240,17 @@ Partial Class FormGestion
         '
         'FCTBDateFin
         '
-        Me.FCTBDateFin.Location = New System.Drawing.Point(359, 136)
+        Me.FCTBDateFin.Location = New System.Drawing.Point(538, 209)
+        Me.FCTBDateFin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBDateFin.Name = "FCTBDateFin"
-        Me.FCTBDateFin.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBDateFin.Size = New System.Drawing.Size(190, 21)
         Me.FCTBDateFin.TabIndex = 128
         '
         'FCLDenomination
         '
         Me.FCLDenomination.AutoSize = True
-        Me.FCLDenomination.Location = New System.Drawing.Point(63, 23)
+        Me.FCLDenomination.Location = New System.Drawing.Point(94, 35)
+        Me.FCLDenomination.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLDenomination.Name = "FCLDenomination"
         Me.FCLDenomination.Size = New System.Drawing.Size(48, 14)
         Me.FCLDenomination.TabIndex = 64
@@ -1174,15 +1258,17 @@ Partial Class FormGestion
         '
         'FCTBnumero
         '
-        Me.FCTBnumero.Location = New System.Drawing.Point(124, 22)
+        Me.FCTBnumero.Location = New System.Drawing.Point(186, 34)
+        Me.FCTBnumero.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBnumero.Name = "FCTBnumero"
-        Me.FCTBnumero.Size = New System.Drawing.Size(129, 21)
+        Me.FCTBnumero.Size = New System.Drawing.Size(192, 21)
         Me.FCTBnumero.TabIndex = 65
         '
         'FCLEmplacement
         '
         Me.FCLEmplacement.AutoSize = True
-        Me.FCLEmplacement.Location = New System.Drawing.Point(277, 20)
+        Me.FCLEmplacement.Location = New System.Drawing.Point(416, 31)
+        Me.FCLEmplacement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLEmplacement.Name = "FCLEmplacement"
         Me.FCLEmplacement.Size = New System.Drawing.Size(81, 14)
         Me.FCLEmplacement.TabIndex = 66
@@ -1190,15 +1276,17 @@ Partial Class FormGestion
         '
         'FCTBEmplacement
         '
-        Me.FCTBEmplacement.Location = New System.Drawing.Point(361, 20)
+        Me.FCTBEmplacement.Location = New System.Drawing.Point(542, 31)
+        Me.FCTBEmplacement.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBEmplacement.Name = "FCTBEmplacement"
-        Me.FCTBEmplacement.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBEmplacement.Size = New System.Drawing.Size(190, 21)
         Me.FCTBEmplacement.TabIndex = 67
         '
         'FCLPlaceLibre
         '
         Me.FCLPlaceLibre.AutoSize = True
-        Me.FCLPlaceLibre.Location = New System.Drawing.Point(53, 53)
+        Me.FCLPlaceLibre.Location = New System.Drawing.Point(80, 82)
+        Me.FCLPlaceLibre.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLPlaceLibre.Name = "FCLPlaceLibre"
         Me.FCLPlaceLibre.Size = New System.Drawing.Size(65, 14)
         Me.FCLPlaceLibre.TabIndex = 68
@@ -1206,15 +1294,17 @@ Partial Class FormGestion
         '
         'FCTBPlaceLibre
         '
-        Me.FCTBPlaceLibre.Location = New System.Drawing.Point(125, 50)
+        Me.FCTBPlaceLibre.Location = New System.Drawing.Point(188, 77)
+        Me.FCTBPlaceLibre.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBPlaceLibre.Name = "FCTBPlaceLibre"
-        Me.FCTBPlaceLibre.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBPlaceLibre.Size = New System.Drawing.Size(190, 21)
         Me.FCTBPlaceLibre.TabIndex = 69
         '
         'FCLPlaceOccupe
         '
         Me.FCLPlaceOccupe.AutoSize = True
-        Me.FCLPlaceOccupe.Location = New System.Drawing.Point(279, 51)
+        Me.FCLPlaceOccupe.Location = New System.Drawing.Point(418, 78)
+        Me.FCLPlaceOccupe.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLPlaceOccupe.Name = "FCLPlaceOccupe"
         Me.FCLPlaceOccupe.Size = New System.Drawing.Size(79, 14)
         Me.FCLPlaceOccupe.TabIndex = 70
@@ -1222,22 +1312,25 @@ Partial Class FormGestion
         '
         'FCTBPlaceOccupe
         '
-        Me.FCTBPlaceOccupe.Location = New System.Drawing.Point(361, 48)
+        Me.FCTBPlaceOccupe.Location = New System.Drawing.Point(542, 74)
+        Me.FCTBPlaceOccupe.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBPlaceOccupe.Name = "FCTBPlaceOccupe"
-        Me.FCTBPlaceOccupe.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBPlaceOccupe.Size = New System.Drawing.Size(190, 21)
         Me.FCTBPlaceOccupe.TabIndex = 71
         '
         'FCTBMonumentClasse
         '
-        Me.FCTBMonumentClasse.Location = New System.Drawing.Point(124, 80)
+        Me.FCTBMonumentClasse.Location = New System.Drawing.Point(186, 123)
+        Me.FCTBMonumentClasse.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBMonumentClasse.Name = "FCTBMonumentClasse"
-        Me.FCTBMonumentClasse.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBMonumentClasse.Size = New System.Drawing.Size(190, 21)
         Me.FCTBMonumentClasse.TabIndex = 95
         '
         'FCLCommentaire
         '
         Me.FCLCommentaire.AutoSize = True
-        Me.FCLCommentaire.Location = New System.Drawing.Point(277, 81)
+        Me.FCLCommentaire.Location = New System.Drawing.Point(416, 125)
+        Me.FCLCommentaire.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLCommentaire.Name = "FCLCommentaire"
         Me.FCLCommentaire.Size = New System.Drawing.Size(81, 14)
         Me.FCLCommentaire.TabIndex = 124
@@ -1245,15 +1338,17 @@ Partial Class FormGestion
         '
         'FCTBCommentaire
         '
-        Me.FCTBCommentaire.Location = New System.Drawing.Point(361, 78)
+        Me.FCTBCommentaire.Location = New System.Drawing.Point(542, 120)
+        Me.FCTBCommentaire.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBCommentaire.Name = "FCTBCommentaire"
-        Me.FCTBCommentaire.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBCommentaire.Size = New System.Drawing.Size(190, 21)
         Me.FCTBCommentaire.TabIndex = 97
         '
         'FCLMonumentC
         '
         Me.FCLMonumentC.AutoSize = True
-        Me.FCLMonumentC.Location = New System.Drawing.Point(14, 83)
+        Me.FCLMonumentC.Location = New System.Drawing.Point(21, 128)
+        Me.FCLMonumentC.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLMonumentC.Name = "FCLMonumentC"
         Me.FCLMonumentC.Size = New System.Drawing.Size(105, 14)
         Me.FCLMonumentC.TabIndex = 123
@@ -1262,7 +1357,8 @@ Partial Class FormGestion
         'FCLHistoire
         '
         Me.FCLHistoire.AutoSize = True
-        Me.FCLHistoire.Location = New System.Drawing.Point(65, 112)
+        Me.FCLHistoire.Location = New System.Drawing.Point(98, 172)
+        Me.FCLHistoire.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLHistoire.Name = "FCLHistoire"
         Me.FCLHistoire.Size = New System.Drawing.Size(53, 14)
         Me.FCLHistoire.TabIndex = 98
@@ -1270,15 +1366,17 @@ Partial Class FormGestion
         '
         'FCTBHistoire
         '
-        Me.FCTBHistoire.Location = New System.Drawing.Point(125, 109)
+        Me.FCTBHistoire.Location = New System.Drawing.Point(188, 168)
+        Me.FCTBHistoire.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBHistoire.Name = "FCTBHistoire"
-        Me.FCTBHistoire.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBHistoire.Size = New System.Drawing.Size(190, 21)
         Me.FCTBHistoire.TabIndex = 99
         '
         'FCLType
         '
         Me.FCLType.AutoSize = True
-        Me.FCLType.Location = New System.Drawing.Point(318, 110)
+        Me.FCLType.Location = New System.Drawing.Point(477, 169)
+        Me.FCLType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLType.Name = "FCLType"
         Me.FCLType.Size = New System.Drawing.Size(36, 14)
         Me.FCLType.TabIndex = 100
@@ -1286,18 +1384,20 @@ Partial Class FormGestion
         '
         'FCTBType
         '
-        Me.FCTBType.Location = New System.Drawing.Point(361, 107)
+        Me.FCTBType.Location = New System.Drawing.Point(542, 165)
+        Me.FCTBType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBType.Name = "FCTBType"
-        Me.FCTBType.Size = New System.Drawing.Size(128, 21)
+        Me.FCTBType.Size = New System.Drawing.Size(190, 21)
         Me.FCTBType.TabIndex = 101
         '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel4.Controls.Add(Me.GroupBox4)
-        Me.Panel4.Location = New System.Drawing.Point(18, 87)
+        Me.Panel4.Location = New System.Drawing.Point(27, 134)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(259, 222)
+        Me.Panel4.Size = New System.Drawing.Size(388, 342)
         Me.Panel4.TabIndex = 129
         '
         'GroupBox4
@@ -1313,9 +1413,11 @@ Partial Class FormGestion
         Me.GroupBox4.Controls.Add(Me.RbfconsNumero)
         Me.GroupBox4.Controls.Add(Me.Button3)
         Me.GroupBox4.Controls.Add(Me.FCTBRechercher)
-        Me.GroupBox4.Location = New System.Drawing.Point(14, 9)
+        Me.GroupBox4.Location = New System.Drawing.Point(21, 14)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(231, 202)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox4.Size = New System.Drawing.Size(346, 311)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Rechercher :"
@@ -1323,7 +1425,8 @@ Partial Class FormGestion
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(6, 45)
+        Me.Label27.Location = New System.Drawing.Point(9, 69)
+        Me.Label27.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(39, 14)
         Me.Label27.TabIndex = 132
@@ -1331,9 +1434,10 @@ Partial Class FormGestion
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(34, 170)
+        Me.Button2.Location = New System.Drawing.Point(51, 262)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(69, 23)
+        Me.Button2.Size = New System.Drawing.Size(104, 35)
         Me.Button2.TabIndex = 127
         Me.Button2.Text = "Annuler"
         Me.Button2.UseVisualStyleBackColor = True
@@ -1342,16 +1446,18 @@ Partial Class FormGestion
         '
         Me.DtpConsRechercherDateFinap.Checked = False
         Me.DtpConsRechercherDateFinap.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DtpConsRechercherDateFinap.Location = New System.Drawing.Point(111, 141)
+        Me.DtpConsRechercherDateFinap.Location = New System.Drawing.Point(166, 217)
+        Me.DtpConsRechercherDateFinap.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DtpConsRechercherDateFinap.Name = "DtpConsRechercherDateFinap"
         Me.DtpConsRechercherDateFinap.ShowCheckBox = True
-        Me.DtpConsRechercherDateFinap.Size = New System.Drawing.Size(113, 21)
+        Me.DtpConsRechercherDateFinap.Size = New System.Drawing.Size(168, 21)
         Me.DtpConsRechercherDateFinap.TabIndex = 131
         '
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(1, 144)
+        Me.Label23.Location = New System.Drawing.Point(2, 222)
+        Me.Label23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(101, 14)
         Me.Label23.TabIndex = 130
@@ -1360,7 +1466,8 @@ Partial Class FormGestion
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(1, 118)
+        Me.Label17.Location = New System.Drawing.Point(2, 182)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(104, 14)
         Me.Label17.TabIndex = 129
@@ -1370,17 +1477,19 @@ Partial Class FormGestion
         '
         Me.DtpConsRechercherDateFin.Checked = False
         Me.DtpConsRechercherDateFin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DtpConsRechercherDateFin.Location = New System.Drawing.Point(111, 114)
+        Me.DtpConsRechercherDateFin.Location = New System.Drawing.Point(166, 175)
+        Me.DtpConsRechercherDateFin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DtpConsRechercherDateFin.Name = "DtpConsRechercherDateFin"
         Me.DtpConsRechercherDateFin.ShowCheckBox = True
-        Me.DtpConsRechercherDateFin.Size = New System.Drawing.Size(113, 21)
+        Me.DtpConsRechercherDateFin.Size = New System.Drawing.Size(168, 21)
         Me.DtpConsRechercherDateFin.TabIndex = 128
         '
         'RbfconsEmplacement
         '
-        Me.RbfconsEmplacement.Location = New System.Drawing.Point(5, 86)
+        Me.RbfconsEmplacement.Location = New System.Drawing.Point(8, 132)
+        Me.RbfconsEmplacement.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.RbfconsEmplacement.Name = "RbfconsEmplacement"
-        Me.RbfconsEmplacement.Size = New System.Drawing.Size(97, 18)
+        Me.RbfconsEmplacement.Size = New System.Drawing.Size(146, 28)
         Me.RbfconsEmplacement.TabIndex = 0
         Me.RbfconsEmplacement.TabStop = True
         Me.RbfconsEmplacement.Text = "Emplacement"
@@ -1388,9 +1497,10 @@ Partial Class FormGestion
         '
         'RbfconsNumero
         '
-        Me.RbfconsNumero.Location = New System.Drawing.Point(6, 62)
+        Me.RbfconsNumero.Location = New System.Drawing.Point(9, 95)
+        Me.RbfconsNumero.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.RbfconsNumero.Name = "RbfconsNumero"
-        Me.RbfconsNumero.Size = New System.Drawing.Size(97, 18)
+        Me.RbfconsNumero.Size = New System.Drawing.Size(146, 28)
         Me.RbfconsNumero.TabIndex = 0
         Me.RbfconsNumero.TabStop = True
         Me.RbfconsNumero.Text = "Numero"
@@ -1398,27 +1508,30 @@ Partial Class FormGestion
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(112, 170)
+        Me.Button3.Location = New System.Drawing.Point(168, 262)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.Size = New System.Drawing.Size(112, 35)
         Me.Button3.TabIndex = 126
         Me.Button3.Text = "Rechercher"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'FCTBRechercher
         '
-        Me.FCTBRechercher.Location = New System.Drawing.Point(6, 18)
+        Me.FCTBRechercher.Location = New System.Drawing.Point(9, 28)
+        Me.FCTBRechercher.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCTBRechercher.Name = "FCTBRechercher"
-        Me.FCTBRechercher.Size = New System.Drawing.Size(157, 21)
+        Me.FCTBRechercher.Size = New System.Drawing.Size(234, 21)
         Me.FCTBRechercher.TabIndex = 35
         '
         'FCBLienDefunt
         '
         Me.FCBLienDefunt.BackColor = System.Drawing.Color.SeaGreen
         Me.FCBLienDefunt.ForeColor = System.Drawing.Color.Transparent
-        Me.FCBLienDefunt.Location = New System.Drawing.Point(906, 267)
+        Me.FCBLienDefunt.Location = New System.Drawing.Point(1359, 411)
+        Me.FCBLienDefunt.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCBLienDefunt.Name = "FCBLienDefunt"
-        Me.FCBLienDefunt.Size = New System.Drawing.Size(154, 57)
+        Me.FCBLienDefunt.Size = New System.Drawing.Size(231, 88)
         Me.FCBLienDefunt.TabIndex = 91
         Me.FCBLienDefunt.Text = "Lien vers Défunt"
         Me.FCBLienDefunt.UseVisualStyleBackColor = False
@@ -1427,9 +1540,10 @@ Partial Class FormGestion
         '
         Me.FDBLinkToConcessionnaire.BackColor = System.Drawing.Color.SeaGreen
         Me.FDBLinkToConcessionnaire.ForeColor = System.Drawing.Color.Transparent
-        Me.FDBLinkToConcessionnaire.Location = New System.Drawing.Point(1082, 269)
+        Me.FDBLinkToConcessionnaire.Location = New System.Drawing.Point(1623, 414)
+        Me.FDBLinkToConcessionnaire.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FDBLinkToConcessionnaire.Name = "FDBLinkToConcessionnaire"
-        Me.FDBLinkToConcessionnaire.Size = New System.Drawing.Size(154, 53)
+        Me.FDBLinkToConcessionnaire.Size = New System.Drawing.Size(231, 82)
         Me.FDBLinkToConcessionnaire.TabIndex = 90
         Me.FDBLinkToConcessionnaire.Text = "Lien vers Concessionnaire"
         Me.FDBLinkToConcessionnaire.UseVisualStyleBackColor = False
@@ -1438,9 +1552,10 @@ Partial Class FormGestion
         '
         Me.FCPBlahulpe.BackColor = System.Drawing.Color.Transparent
         Me.FCPBlahulpe.Image = CType(resources.GetObject("FCPBlahulpe.Image"), System.Drawing.Image)
-        Me.FCPBlahulpe.Location = New System.Drawing.Point(0, 2)
+        Me.FCPBlahulpe.Location = New System.Drawing.Point(0, 3)
+        Me.FCPBlahulpe.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FCPBlahulpe.Name = "FCPBlahulpe"
-        Me.FCPBlahulpe.Size = New System.Drawing.Size(111, 77)
+        Me.FCPBlahulpe.Size = New System.Drawing.Size(166, 118)
         Me.FCPBlahulpe.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.FCPBlahulpe.TabIndex = 45
         Me.FCPBlahulpe.TabStop = False
@@ -1462,9 +1577,10 @@ Partial Class FormGestion
         Me.TabPage3.Controls.Add(Me.BModifGestionPers)
         Me.TabPage3.Controls.Add(Me.BSupGestionPers)
         Me.TabPage3.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1246, 665)
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TabPage3.Size = New System.Drawing.Size(1873, 1045)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Personnes"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -1473,9 +1589,10 @@ Partial Class FormGestion
         '
         Me.Panel13.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel13.Controls.Add(Me.GroupBox13)
-        Me.Panel13.Location = New System.Drawing.Point(706, 31)
+        Me.Panel13.Location = New System.Drawing.Point(1059, 48)
+        Me.Panel13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(531, 200)
+        Me.Panel13.Size = New System.Drawing.Size(796, 308)
         Me.Panel13.TabIndex = 138
         '
         'GroupBox13
@@ -1499,81 +1616,91 @@ Partial Class FormGestion
         Me.GroupBox13.Controls.Add(Me.Label10)
         Me.GroupBox13.Controls.Add(Me.Label11)
         Me.GroupBox13.Controls.Add(Me.Label28)
-        Me.GroupBox13.Location = New System.Drawing.Point(17, 14)
+        Me.GroupBox13.Location = New System.Drawing.Point(26, 22)
+        Me.GroupBox13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(500, 166)
+        Me.GroupBox13.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox13.Size = New System.Drawing.Size(750, 255)
         Me.GroupBox13.TabIndex = 0
         Me.GroupBox13.TabStop = False
         Me.GroupBox13.Text = "Infos Personnes"
         '
         'TBPersNumNational
         '
-        Me.TBPersNumNational.Location = New System.Drawing.Point(87, 129)
+        Me.TBPersNumNational.Location = New System.Drawing.Point(130, 198)
+        Me.TBPersNumNational.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersNumNational.Name = "TBPersNumNational"
-        Me.TBPersNumNational.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersNumNational.Size = New System.Drawing.Size(148, 21)
         Me.TBPersNumNational.TabIndex = 146
         '
         'TBPersPays
         '
-        Me.TBPersPays.Location = New System.Drawing.Point(260, 100)
+        Me.TBPersPays.Location = New System.Drawing.Point(390, 154)
+        Me.TBPersPays.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersPays.Name = "TBPersPays"
-        Me.TBPersPays.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersPays.Size = New System.Drawing.Size(148, 21)
         Me.TBPersPays.TabIndex = 145
         '
         'TBPersDN
         '
-        Me.TBPersDN.Location = New System.Drawing.Point(119, 101)
+        Me.TBPersDN.Location = New System.Drawing.Point(178, 155)
+        Me.TBPersDN.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersDN.Name = "TBPersDN"
-        Me.TBPersDN.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersDN.Size = New System.Drawing.Size(148, 21)
         Me.TBPersDN.TabIndex = 144
         '
         'TBPersVille
         '
-        Me.TBPersVille.Location = New System.Drawing.Point(269, 74)
+        Me.TBPersVille.Location = New System.Drawing.Point(404, 114)
+        Me.TBPersVille.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersVille.Name = "TBPersVille"
-        Me.TBPersVille.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersVille.Size = New System.Drawing.Size(148, 21)
         Me.TBPersVille.TabIndex = 143
         '
         'TBPersTel
         '
-        Me.TBPersTel.Location = New System.Drawing.Point(80, 74)
+        Me.TBPersTel.Location = New System.Drawing.Point(120, 114)
+        Me.TBPersTel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersTel.Name = "TBPersTel"
-        Me.TBPersTel.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersTel.Size = New System.Drawing.Size(148, 21)
         Me.TBPersTel.TabIndex = 142
         '
         'TBPersCodePostal
         '
-        Me.TBPersCodePostal.Location = New System.Drawing.Point(297, 42)
+        Me.TBPersCodePostal.Location = New System.Drawing.Point(446, 65)
+        Me.TBPersCodePostal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersCodePostal.Name = "TBPersCodePostal"
-        Me.TBPersCodePostal.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersCodePostal.Size = New System.Drawing.Size(148, 21)
         Me.TBPersCodePostal.TabIndex = 141
         '
         'TBPersAdress
         '
-        Me.TBPersAdress.Location = New System.Drawing.Point(75, 44)
+        Me.TBPersAdress.Location = New System.Drawing.Point(112, 68)
+        Me.TBPersAdress.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersAdress.Name = "TBPersAdress"
-        Me.TBPersAdress.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersAdress.Size = New System.Drawing.Size(148, 21)
         Me.TBPersAdress.TabIndex = 140
         '
         'TBPersNom
         '
-        Me.TBPersNom.Location = New System.Drawing.Point(269, 13)
+        Me.TBPersNom.Location = New System.Drawing.Point(404, 20)
+        Me.TBPersNom.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersNom.Name = "TBPersNom"
-        Me.TBPersNom.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersNom.Size = New System.Drawing.Size(148, 21)
         Me.TBPersNom.TabIndex = 139
         '
         'TBPersPrenom
         '
-        Me.TBPersPrenom.Location = New System.Drawing.Point(75, 13)
+        Me.TBPersPrenom.Location = New System.Drawing.Point(112, 20)
+        Me.TBPersPrenom.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TBPersPrenom.Name = "TBPersPrenom"
-        Me.TBPersPrenom.Size = New System.Drawing.Size(100, 21)
+        Me.TBPersPrenom.Size = New System.Drawing.Size(148, 21)
         Me.TBPersPrenom.TabIndex = 138
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(14, 47)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Location = New System.Drawing.Point(21, 72)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(47, 14)
         Me.Label4.TabIndex = 38
@@ -1582,8 +1709,7 @@ Partial Class FormGestion
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(17, 131)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label9.Location = New System.Drawing.Point(26, 202)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(65, 14)
         Me.Label9.TabIndex = 36
@@ -1592,8 +1718,7 @@ Partial Class FormGestion
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(14, 104)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label8.Location = New System.Drawing.Point(21, 160)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(100, 14)
         Me.Label8.TabIndex = 33
@@ -1602,8 +1727,7 @@ Partial Class FormGestion
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(14, 76)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label7.Location = New System.Drawing.Point(21, 117)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(61, 14)
         Me.Label7.TabIndex = 32
@@ -1612,8 +1736,7 @@ Partial Class FormGestion
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(226, 102)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Location = New System.Drawing.Point(339, 157)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(29, 14)
         Me.Label6.TabIndex = 30
@@ -1622,8 +1745,7 @@ Partial Class FormGestion
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(226, 74)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label5.Location = New System.Drawing.Point(339, 114)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(29, 14)
         Me.Label5.TabIndex = 28
@@ -1632,8 +1754,7 @@ Partial Class FormGestion
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(223, 45)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label10.Location = New System.Drawing.Point(334, 69)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(69, 14)
         Me.Label10.TabIndex = 25
@@ -1642,8 +1763,7 @@ Partial Class FormGestion
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(222, 15)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Location = New System.Drawing.Point(333, 23)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(31, 14)
         Me.Label11.TabIndex = 23
@@ -1652,8 +1772,7 @@ Partial Class FormGestion
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(14, 17)
-        Me.Label28.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label28.Location = New System.Drawing.Point(21, 26)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(46, 14)
         Me.Label28.TabIndex = 21
@@ -1663,9 +1782,10 @@ Partial Class FormGestion
         '
         Me.BSupGestionPersBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BSupGestionPersBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BSupGestionPersBenef.Location = New System.Drawing.Point(1163, 474)
+        Me.BSupGestionPersBenef.Location = New System.Drawing.Point(1744, 729)
+        Me.BSupGestionPersBenef.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BSupGestionPersBenef.Name = "BSupGestionPersBenef"
-        Me.BSupGestionPersBenef.Size = New System.Drawing.Size(74, 23)
+        Me.BSupGestionPersBenef.Size = New System.Drawing.Size(111, 35)
         Me.BSupGestionPersBenef.TabIndex = 137
         Me.BSupGestionPersBenef.Text = "Supprimer"
         Me.BSupGestionPersBenef.UseVisualStyleBackColor = False
@@ -1674,9 +1794,10 @@ Partial Class FormGestion
         '
         Me.Panel2.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Location = New System.Drawing.Point(20, 87)
+        Me.Panel2.Location = New System.Drawing.Point(30, 134)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(259, 103)
+        Me.Panel2.Size = New System.Drawing.Size(388, 158)
         Me.Panel2.TabIndex = 146
         '
         'GroupBox2
@@ -1685,45 +1806,51 @@ Partial Class FormGestion
         Me.GroupBox2.Controls.Add(Me.Button4)
         Me.GroupBox2.Controls.Add(Me.Button9)
         Me.GroupBox2.Controls.Add(Me.FPersonneTbSearch)
-        Me.GroupBox2.Location = New System.Drawing.Point(11, 9)
+        Me.GroupBox2.Location = New System.Drawing.Point(16, 14)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(234, 82)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox2.Size = New System.Drawing.Size(351, 126)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Rechercher un nom :"
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(6, 48)
+        Me.Button4.Location = New System.Drawing.Point(9, 74)
+        Me.Button4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(127, 23)
+        Me.Button4.Size = New System.Drawing.Size(190, 35)
         Me.Button4.TabIndex = 127
         Me.Button4.Text = "Annuler la recherche"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button9
         '
-        Me.Button9.Location = New System.Drawing.Point(139, 48)
+        Me.Button9.Location = New System.Drawing.Point(208, 74)
+        Me.Button9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(75, 23)
+        Me.Button9.Size = New System.Drawing.Size(112, 35)
         Me.Button9.TabIndex = 126
         Me.Button9.Text = "Rechercher"
         Me.Button9.UseVisualStyleBackColor = True
         '
         'FPersonneTbSearch
         '
-        Me.FPersonneTbSearch.Location = New System.Drawing.Point(6, 18)
+        Me.FPersonneTbSearch.Location = New System.Drawing.Point(9, 28)
+        Me.FPersonneTbSearch.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.FPersonneTbSearch.Name = "FPersonneTbSearch"
-        Me.FPersonneTbSearch.Size = New System.Drawing.Size(157, 21)
+        Me.FPersonneTbSearch.Size = New System.Drawing.Size(234, 21)
         Me.FPersonneTbSearch.TabIndex = 35
         '
         'BModifGestionPersBenef
         '
         Me.BModifGestionPersBenef.BackColor = System.Drawing.Color.SeaGreen
         Me.BModifGestionPersBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BModifGestionPersBenef.Location = New System.Drawing.Point(1094, 474)
+        Me.BModifGestionPersBenef.Location = New System.Drawing.Point(1641, 729)
+        Me.BModifGestionPersBenef.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BModifGestionPersBenef.Name = "BModifGestionPersBenef"
-        Me.BModifGestionPersBenef.Size = New System.Drawing.Size(64, 23)
+        Me.BModifGestionPersBenef.Size = New System.Drawing.Size(96, 35)
         Me.BModifGestionPersBenef.TabIndex = 136
         Me.BModifGestionPersBenef.Text = "Modifier"
         Me.BModifGestionPersBenef.UseVisualStyleBackColor = False
@@ -1732,19 +1859,21 @@ Partial Class FormGestion
         '
         Me.Panel15.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel15.Controls.Add(Me.GroupBox15)
-        Me.Panel15.Location = New System.Drawing.Point(706, 271)
-        Me.Panel15.Margin = New System.Windows.Forms.Padding(3, 10, 3, 3)
+        Me.Panel15.Location = New System.Drawing.Point(1059, 417)
+        Me.Panel15.Margin = New System.Windows.Forms.Padding(4, 15, 4, 5)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(531, 200)
+        Me.Panel15.Size = New System.Drawing.Size(796, 308)
         Me.Panel15.TabIndex = 140
         '
         'GroupBox15
         '
         Me.GroupBox15.BackColor = System.Drawing.Color.White
         Me.GroupBox15.Controls.Add(Me.LinkLabel1)
-        Me.GroupBox15.Location = New System.Drawing.Point(17, 15)
+        Me.GroupBox15.Location = New System.Drawing.Point(26, 23)
+        Me.GroupBox15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox15.Name = "GroupBox15"
-        Me.GroupBox15.Size = New System.Drawing.Size(500, 166)
+        Me.GroupBox15.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox15.Size = New System.Drawing.Size(750, 255)
         Me.GroupBox15.TabIndex = 0
         Me.GroupBox15.TabStop = False
         Me.GroupBox15.Text = "Infos bénéficiaires"
@@ -1752,7 +1881,8 @@ Partial Class FormGestion
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(32, 27)
+        Me.LinkLabel1.Location = New System.Drawing.Point(48, 42)
+        Me.LinkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(109, 14)
         Me.LinkLabel1.TabIndex = 138
@@ -1763,7 +1893,8 @@ Partial Class FormGestion
         '
         Me.PRBPersCon.AutoSize = True
         Me.PRBPersCon.BackColor = System.Drawing.Color.Transparent
-        Me.PRBPersCon.Location = New System.Drawing.Point(511, 8)
+        Me.PRBPersCon.Location = New System.Drawing.Point(766, 12)
+        Me.PRBPersCon.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.PRBPersCon.Name = "PRBPersCon"
         Me.PRBPersCon.Size = New System.Drawing.Size(130, 18)
         Me.PRBPersCon.TabIndex = 142
@@ -1774,7 +1905,8 @@ Partial Class FormGestion
         '
         Me.PRBConcessionnaire.AutoSize = True
         Me.PRBConcessionnaire.BackColor = System.Drawing.Color.Transparent
-        Me.PRBConcessionnaire.Location = New System.Drawing.Point(399, 8)
+        Me.PRBConcessionnaire.Location = New System.Drawing.Point(598, 12)
+        Me.PRBConcessionnaire.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.PRBConcessionnaire.Name = "PRBConcessionnaire"
         Me.PRBConcessionnaire.Size = New System.Drawing.Size(110, 18)
         Me.PRBConcessionnaire.TabIndex = 141
@@ -1785,7 +1917,8 @@ Partial Class FormGestion
         '
         Me.PRBBenef.AutoSize = True
         Me.PRBBenef.BackColor = System.Drawing.Color.Transparent
-        Me.PRBBenef.Location = New System.Drawing.Point(309, 8)
+        Me.PRBBenef.Location = New System.Drawing.Point(464, 12)
+        Me.PRBBenef.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.PRBBenef.Name = "PRBBenef"
         Me.PRBBenef.Size = New System.Drawing.Size(85, 18)
         Me.PRBBenef.TabIndex = 140
@@ -1796,9 +1929,10 @@ Partial Class FormGestion
         '
         Me.Panel12.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel12.Controls.Add(Me.GroupBox12)
-        Me.Panel12.Location = New System.Drawing.Point(302, 31)
+        Me.Panel12.Location = New System.Drawing.Point(453, 48)
+        Me.Panel12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(349, 591)
+        Me.Panel12.Size = New System.Drawing.Size(524, 909)
         Me.Panel12.TabIndex = 137
         '
         'GroupBox12
@@ -1807,9 +1941,11 @@ Partial Class FormGestion
         Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnairePersonneContact)
         Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnaireBenef)
         Me.GroupBox12.Controls.Add(Me.DgvListeConcessionnaireConcess)
-        Me.GroupBox12.Location = New System.Drawing.Point(17, 14)
+        Me.GroupBox12.Location = New System.Drawing.Point(26, 22)
+        Me.GroupBox12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(312, 561)
+        Me.GroupBox12.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox12.Size = New System.Drawing.Size(468, 863)
         Me.GroupBox12.TabIndex = 0
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "Acteurs"
@@ -1820,12 +1956,13 @@ Partial Class FormGestion
         Me.DgvListeConcessionnairePersonneContact.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DgvListeConcessionnairePersonneContact.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvListeConcessionnairePersonneContact.EnableHeadersVisualStyles = False
-        Me.DgvListeConcessionnairePersonneContact.Location = New System.Drawing.Point(0, 13)
+        Me.DgvListeConcessionnairePersonneContact.Location = New System.Drawing.Point(0, 20)
+        Me.DgvListeConcessionnairePersonneContact.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DgvListeConcessionnairePersonneContact.Name = "DgvListeConcessionnairePersonneContact"
         Me.DgvListeConcessionnairePersonneContact.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvListeConcessionnairePersonneContact.RowHeadersVisible = False
         Me.DgvListeConcessionnairePersonneContact.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeConcessionnairePersonneContact.Size = New System.Drawing.Size(312, 548)
+        Me.DgvListeConcessionnairePersonneContact.Size = New System.Drawing.Size(468, 843)
         Me.DgvListeConcessionnairePersonneContact.TabIndex = 148
         '
         'DgvListeConcessionnaireBenef
@@ -1834,12 +1971,13 @@ Partial Class FormGestion
         Me.DgvListeConcessionnaireBenef.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DgvListeConcessionnaireBenef.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvListeConcessionnaireBenef.EnableHeadersVisualStyles = False
-        Me.DgvListeConcessionnaireBenef.Location = New System.Drawing.Point(0, 13)
+        Me.DgvListeConcessionnaireBenef.Location = New System.Drawing.Point(0, 20)
+        Me.DgvListeConcessionnaireBenef.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DgvListeConcessionnaireBenef.Name = "DgvListeConcessionnaireBenef"
         Me.DgvListeConcessionnaireBenef.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvListeConcessionnaireBenef.RowHeadersVisible = False
         Me.DgvListeConcessionnaireBenef.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeConcessionnaireBenef.Size = New System.Drawing.Size(312, 548)
+        Me.DgvListeConcessionnaireBenef.Size = New System.Drawing.Size(468, 843)
         Me.DgvListeConcessionnaireBenef.TabIndex = 43
         '
         'DgvListeConcessionnaireConcess
@@ -1848,12 +1986,13 @@ Partial Class FormGestion
         Me.DgvListeConcessionnaireConcess.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DgvListeConcessionnaireConcess.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvListeConcessionnaireConcess.EnableHeadersVisualStyles = False
-        Me.DgvListeConcessionnaireConcess.Location = New System.Drawing.Point(0, 17)
+        Me.DgvListeConcessionnaireConcess.Location = New System.Drawing.Point(0, 26)
+        Me.DgvListeConcessionnaireConcess.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DgvListeConcessionnaireConcess.Name = "DgvListeConcessionnaireConcess"
         Me.DgvListeConcessionnaireConcess.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvListeConcessionnaireConcess.RowHeadersVisible = False
         Me.DgvListeConcessionnaireConcess.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeConcessionnaireConcess.Size = New System.Drawing.Size(312, 544)
+        Me.DgvListeConcessionnaireConcess.Size = New System.Drawing.Size(468, 837)
         Me.DgvListeConcessionnaireConcess.TabIndex = 147
         '
         'PictureBox1
@@ -1861,8 +2000,9 @@ Partial Class FormGestion
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(111, 77)
+        Me.PictureBox1.Size = New System.Drawing.Size(166, 118)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 132
         Me.PictureBox1.TabStop = False
@@ -1871,9 +2011,10 @@ Partial Class FormGestion
         '
         Me.BModifGestionPers.BackColor = System.Drawing.Color.SeaGreen
         Me.BModifGestionPers.ForeColor = System.Drawing.Color.Transparent
-        Me.BModifGestionPers.Location = New System.Drawing.Point(1094, 234)
+        Me.BModifGestionPers.Location = New System.Drawing.Point(1641, 360)
+        Me.BModifGestionPers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BModifGestionPers.Name = "BModifGestionPers"
-        Me.BModifGestionPers.Size = New System.Drawing.Size(64, 23)
+        Me.BModifGestionPers.Size = New System.Drawing.Size(96, 35)
         Me.BModifGestionPers.TabIndex = 136
         Me.BModifGestionPers.Text = "Modifier"
         Me.BModifGestionPers.UseVisualStyleBackColor = False
@@ -1882,18 +2023,20 @@ Partial Class FormGestion
         '
         Me.BSupGestionPers.BackColor = System.Drawing.Color.SeaGreen
         Me.BSupGestionPers.ForeColor = System.Drawing.Color.Transparent
-        Me.BSupGestionPers.Location = New System.Drawing.Point(1163, 234)
+        Me.BSupGestionPers.Location = New System.Drawing.Point(1744, 360)
+        Me.BSupGestionPers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.BSupGestionPers.Name = "BSupGestionPers"
-        Me.BSupGestionPers.Size = New System.Drawing.Size(74, 23)
+        Me.BSupGestionPers.Size = New System.Drawing.Size(111, 35)
         Me.BSupGestionPers.TabIndex = 137
         Me.BSupGestionPers.Text = "Supprimer"
         Me.BSupGestionPers.UseVisualStyleBackColor = False
         '
         'ProgressBar
         '
-        Me.ProgressBar.Location = New System.Drawing.Point(123, 42)
+        Me.ProgressBar.Location = New System.Drawing.Point(184, 65)
+        Me.ProgressBar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ProgressBar.Name = "ProgressBar"
-        Me.ProgressBar.Size = New System.Drawing.Size(657, 23)
+        Me.ProgressBar.Size = New System.Drawing.Size(986, 35)
         Me.ProgressBar.TabIndex = 98
         '
         'Lchargementdonnee
@@ -1901,7 +2044,8 @@ Partial Class FormGestion
         Me.Lchargementdonnee.AutoSize = True
         Me.Lchargementdonnee.BackColor = System.Drawing.Color.Transparent
         Me.Lchargementdonnee.Font = New System.Drawing.Font("Arial Narrow", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Lchargementdonnee.Location = New System.Drawing.Point(328, 14)
+        Me.Lchargementdonnee.Location = New System.Drawing.Point(492, 22)
+        Me.Lchargementdonnee.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Lchargementdonnee.Name = "Lchargementdonnee"
         Me.Lchargementdonnee.Size = New System.Drawing.Size(247, 25)
         Me.Lchargementdonnee.TabIndex = 99
@@ -1911,9 +2055,10 @@ Partial Class FormGestion
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(1, 1)
+        Me.PictureBox2.Location = New System.Drawing.Point(2, 2)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(111, 77)
+        Me.PictureBox2.Size = New System.Drawing.Size(166, 118)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox2.TabIndex = 51
         Me.PictureBox2.TabStop = False
@@ -1921,29 +2066,27 @@ Partial Class FormGestion
         'TbDateDeces
         '
         Me.TbDateDeces.DateValue = Nothing
-        Me.TbDateDeces.Location = New System.Drawing.Point(851, 405)
-        Me.TbDateDeces.Margin = New System.Windows.Forms.Padding(2)
+        Me.TbDateDeces.Location = New System.Drawing.Point(1276, 623)
         Me.TbDateDeces.Mask = "00/00/0000"
         Me.TbDateDeces.Name = "TbDateDeces"
-        Me.TbDateDeces.Size = New System.Drawing.Size(76, 21)
+        Me.TbDateDeces.Size = New System.Drawing.Size(112, 21)
         Me.TbDateDeces.TabIndex = 113
         Me.TbDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'FormGestion
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
-        Me.ClientSize = New System.Drawing.Size(1236, 671)
+        Me.ClientSize = New System.Drawing.Size(1854, 1032)
         Me.Controls.Add(Me.Lchargementdonnee)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.ProgressBar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.MaximumSize = New System.Drawing.Size(1270, 725)
-        Me.MinimumSize = New System.Drawing.Size(400, 100)
+        Me.MaximumSize = New System.Drawing.Size(1897, 1094)
+        Me.MinimumSize = New System.Drawing.Size(592, 133)
         Me.Name = "FormGestion"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "FormGestion"
