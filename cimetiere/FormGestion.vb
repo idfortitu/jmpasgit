@@ -18,17 +18,17 @@ Public Class FormGestion
         If user = "User" Then
 
             FPBModifier.Hide()
-                FPBSupprimer.Hide()
-                BModifGestionPers.Hide()
-                BmodifConsBenef.Hide()
-                BmodifCons.Hide()
-                BSupGestionPers.Hide()
-                BSupGestionPersBenef.Hide()
-                BSuppConsBenef.Hide()
-                BSuppCons.Hide()
-                BAddConsBenef.Hide()
-                BModifGestionPersBenef.Hide()
-            End If
+            FPBSupprimer.Hide()
+            BModifGestionPers.Hide()
+            BmodifConsBenef.Hide()
+            BmodifCons.Hide()
+            BSupGestionPers.Hide()
+            BSupGestionPersBenef.Hide()
+            BSuppConsBenef.Hide()
+            BSuppCons.Hide()
+            BAddConsBenef.Hide()
+            BModifGestionPersBenef.Hide()
+        End If
 
         TextBoxDefuntRO()
         TextBoxConsRO()
@@ -283,24 +283,24 @@ Public Class FormGestion
         FCTBCommentaire.DataBindings.Add("Text", dtcons, "com_commentaire")
         FCTBHistoire.DataBindings.Add("Text", dtcons, "h_histoire")
         FCTBType.DataBindings.Add("Text", dtcons, "empl_type")
-        FCTBDateDeb.DataBindings.Add("Text", dtcons, "con_date_debut")
-        FCTBDateFin.DataBindings.Add("Text", dtcons, "con_date_fin")
+        FCTBDateDeb.DataBindings.Add("Text", dtcons, "con_date_debut", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+        FCTBDateFin.DataBindings.Add("Text", dtcons, "con_date_fin", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
     End Sub
     Private Sub DataBindConsbenef()
         TBconsBenefnom.DataBindings.Add("Text", dtbenef, "ben_nom")
         TBconsBenefprenom.DataBindings.Add("Text", dtbenef, "ben_prenom")
         TBconsBenefadress.DataBindings.Add("Text", dtbenef, "ben_adresse")
-        TBconsBenefdatenaiss.DataBindings.Add("Text", dtbenef, "ben_date_naiss")
+        TBconsBenefdatenaiss.DataBindings.Add("Text", dtbenef, "ben_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
     End Sub
     Private Sub DataBindDefunt()
         FPTBNom.DataBindings.Add("Text", dtdefunt, "def_nom")
         FPTBPrenom.DataBindings.Add("Text", dtdefunt, "def_prenom")
-        FPTBDateNaiss.DataBindings.Add("Text", dtdefunt, "def_date_naiss")
-        FPTBDateE.DataBindings.Add("Text", dtdefunt, "Date_debut")
-        FPTBSepulture.DataBindings.Add("Text", dtdefunt, "empl_id")
+        FPTBDateNaiss.DataBindings.Add("Text", dtdefunt, "def_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+        FPTBDateE.DataBindings.Add("Text", dtdefunt, "Date_debut", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+
         FPTBEtatCivil.DataBindings.Add("Text", dtdefunt, "def_etat_civil")
         FPTBAdresse.DataBindings.Add("Text", dtdefunt, "def_adresse")
-        FPTBDateM.DataBindings.Add("Text", dtdefunt, "def_date_deces")
+        FPTBDateM.DataBindings.Add("Text", dtdefunt, "def_date_deces", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
         FPTBLieuNaiss.DataBindings.Add("Text", dtdefunt, "def_lieu_naiss")
         FPTBCodeLieu.DataBindings.Add("Text", dtdefunt, "def_etat_civil_de")
         FPTBCodePostal.DataBindings.Add("Text", dtdefunt, "locville_cp")
@@ -315,7 +315,7 @@ Public Class FormGestion
         TBPersNom.DataBindings.Add("Text", dtCsnr, "csnr_nom")
         TBPersPrenom.DataBindings.Add("Text", dtCsnr, "csnr_prenom")
         TBPersTel.DataBindings.Add("Text", dtCsnr, "csnr_tel")
-        TBPersDN.DataBindings.Add("Text", dtCsnr, "csnr_date_naiss")
+        TBPersDN.DataBindings.Add("Text", dtCsnr, "csnr_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
         TBPersAdress.DataBindings.Add("Text", dtCsnr, "csnr_adresse")
         TBPersCodePostal.DataBindings.Add("Text", dtCsnr, "locville_cp")
         TBPersVille.DataBindings.Add("Text", dtCsnr, "locville_ville")
@@ -326,7 +326,7 @@ Public Class FormGestion
     Private Sub DataBindBenef()
         TBPersNom.DataBindings.Add("Text", dtBeneficiaireForm, "ben_nom")
         TBPersPrenom.DataBindings.Add("Text", dtBeneficiaireForm, "ben_prenom")
-        TBPersDN.DataBindings.Add("Text", dtBeneficiaireForm, "ben_date_naiss")
+        TBPersDN.DataBindings.Add("Text", dtBeneficiaireForm, "ben_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
         TBPersAdress.DataBindings.Add("Text", dtBeneficiaireForm, "ben_adresse")
         TBPersNumNational.DataBindings.Add("Text", dtBeneficiaireForm, "ben_lien_parente")
         TBPersCodePostal.DataBindings.Add("Text", dtBeneficiaireForm, "locville_cp")
@@ -380,7 +380,6 @@ Public Class FormGestion
         FPTBDateNaiss.DataBindings.Clear()
         FPTBDateE.DataBindings.Clear()
         FPTBEtatCivil.DataBindings.Clear()
-        FPTBSepulture.DataBindings.Clear()
         FPTBDateM.DataBindings.Clear()
         FPTBEtatCivil.DataBindings.Clear()
         FPTBAdresse.DataBindings.Clear()
@@ -661,9 +660,7 @@ Public Class FormGestion
         FPTBPrenom.ReadOnly = True
         FPTBPrenom.Cursor = Cursors.No
         If FPTBPrenom.BackColor <> SystemColors.Window Then FPTBPrenom.BackColor = SystemColors.Window
-        FPTBSepulture.ReadOnly = True
-        FPTBSepulture.Cursor = Cursors.No
-        If FPTBSepulture.BackColor <> SystemColors.Window Then FPTBSepulture.BackColor = SystemColors.Window
+
         FPTBVille.ReadOnly = True
         FPTBVille.Cursor = Cursors.No
         If FPTBVille.BackColor <> SystemColors.Window Then FPTBVille.BackColor = SystemColors.Window
@@ -755,8 +752,7 @@ Public Class FormGestion
         FPTBPays.Cursor = Cursors.IBeam
         FPTBPrenom.ReadOnly = False
         FPTBPrenom.Cursor = Cursors.IBeam
-        FPTBSepulture.ReadOnly = False
-        FPTBSepulture.Cursor = Cursors.IBeam
+
         FPTBVille.ReadOnly = False
         FPTBVille.Cursor = Cursors.IBeam
         FPTBLieuNaiss.ReadOnly = False
@@ -820,10 +816,28 @@ Public Class FormGestion
     End Sub
 
     Private Sub FPBModifier_Click(sender As Object, e As EventArgs) Handles FPBModifier.Click
+        DgvListeDefunts.Enabled = False
+
+        BtDefChercher.Enabled = False
+        BtDefAnnulerRecherche.Enabled = False
+        FPTBCBEtatCivil.Visible = True
+        Select Case FPTBEtatCivil.Text
+            Case "Non précisé"
+                FPTBCBEtatCivil.SelectedIndex = 4
+            Case "Célibataire"
+                FPTBCBEtatCivil.SelectedIndex = 0
+            Case "Epoux"
+                FPTBCBEtatCivil.SelectedIndex = 1
+            Case "Veuf"
+                FPTBCBEtatCivil.SelectedIndex = 2
+            Case "divorcé"
+                FPTBCBEtatCivil.SelectedIndex = 3
+        End Select
+
         If boutongestion = 0 Then
             TextBoxDefuntUpd()
             boutongestion = 1
-            FPBModifier.Text = "Sauvegarder"
+            FPBModifier.Text = "Sauvegarder ou annuler"
             TabControl1.TabPages(1).Enabled = False
             TabControl1.TabPages(2).Enabled = False
         Else
@@ -834,18 +848,26 @@ Public Class FormGestion
                 TextBoxDefuntRO()
                 TabControl1.TabPages(1).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
+                FPTBCBEtatCivil.Visible = False
             ElseIf result = DialogResult.Yes Then
-                If Bdd.NonQuery("Update defunts set def_nom = '" & FPTBNom.Text & "', def_prenom = '" & FPTBPrenom.Text & "', def_adresse = '" & FPTBAdresse.Text & "' where def_id ='" & DgvListeDefunts.CurrentRow.Cells("def_id").Value & "'") Then
+                If Bdd.NonQuery("Update defunts set def_nom = '" & FPTBNom.Text & "', def_prenom = '" & FPTBPrenom.Text & "', def_adresse " &
+                                " = '" & FPTBAdresse.Text & "', def_etat_civil_de = '" & FPTBCodeLieu.Text & "', def_lieu_de_naiss = '" & FPTBLieuNaiss.Text & "', " &
+                                "  where def_id ='" & DgvListeDefunts.CurrentRow.Cells("def_id").Value & "'") Then
                     MsgBox("" & DgvListeDefunts.CurrentRow.Cells("def_nom").Value & " " & DgvListeDefunts.CurrentRow.Cells("def_prenom").Value & " " & vbCrLf & "a correctement été modifier")
                 Else
                     MsgBox("Une erreur est venue dans la modification du défunt.")
                 End If
+                FPTBCBEtatCivil.Visible = False
                 boutongestion = 0
                 FPBModifier.Text = "Modifier"
                 TextBoxDefuntRO()
                 TabControl1.TabPages(1).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
             End If
+            DgvListeDefunts.Enabled = True
+
+            BtDefChercher.Enabled = True
+            BtDefAnnulerRecherche.Enabled = True
         End If
     End Sub
 
@@ -994,5 +1016,23 @@ Public Class FormGestion
 
     Private Sub BSuppCons_Click(sender As Object, e As EventArgs) Handles BSuppCons.Click
 
+    End Sub
+
+    Private Sub FPTBEtatCivil_TextChanged(sender As Object, e As EventArgs) Handles FPTBEtatCivil.TextChanged
+        Select Case FPTBEtatCivil.Text
+            Case "0"
+                FPTBEtatCivil.Text = "Non précisé"
+                FPTBCodeLieu.Text = "xxxxxxxxxx"
+            Case "1"
+                FPTBEtatCivil.Text = "Célibataire"
+                FPTBCodeLieu.Text = "xxxxxxxxxx"
+            Case "2"
+                FPTBEtatCivil.Text = "Epoux"
+            Case "3"
+                FPTBEtatCivil.Text = "Veuf"
+            Case "4"
+                FPTBEtatCivil.Text = "divorcé"
+                FPTBCodeLieu.Text = "xxxxxxxxxx"
+        End Select
     End Sub
 End Class
