@@ -13,6 +13,16 @@
 
     End Sub
 
+    Public Property EmplId As Object
+        Get
+            Return SelectedValue
+        End Get
+        Set(value As Object)
+            SelectedValue = If(value IsNot Nothing AndAlso Not IsDBNull(value), value, -1)
+        End Set
+    End Property
+
+
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '

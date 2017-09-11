@@ -18,7 +18,7 @@
 
     ' en entrée, attend Me.Text au format j/m/a
     ' si un "champ" est 0 (mois, jour, année), le met à 1
-    Public Property DateValue As Date?
+    Public Property DateValue As Object 'Date?
         Get
             Dim TextSansespaces As String = Replace(Me.Text, " ", "")
             If Replace(TextSansespaces, "/", "").Equals(String.Empty) Then
@@ -34,11 +34,12 @@
                 Return Date.ParseExact(strs(0) & "/" & strs(1) & "/" & strs(2), "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
             End If
         End Get
-        Set(value As Date?)
-            If value Is Nothing Then
+        Set(value As Object) 'Date?)
+            If value Is Nothing OrElse IsDBNull(value) Then
                 Me.Text = "__/__/____"
             Else
-                Me.Text = Format(value.Value.Day, "00") & "/" & Format(value.Value.Month, "00") & "/" & Format(value.Value.Year, "0000")
+                'Me.Text = Format(value.Value.Day, "00") & "/" & Format(value.Value.Month, "00") & "/" & Format(value.Value.Year, "0000")
+                Me.Text = Format(value.Day, "00") & "/" & Format(value.Month, "00") & "/" & Format(value.Year, "0000")
             End If
         End Set
     End Property

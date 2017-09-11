@@ -572,7 +572,7 @@
 
             If Not AnnulerEnregistrement Then
 
-                If FormPlanEmplsOrdinaires IsNot Nothing And Not FormPlanEmplsOrdinaires.IsDisposed Then
+                If FormPlanEmplsOrdinaires IsNot Nothing Andalso Not FormPlanEmplsOrdinaires.IsDisposed Then
                     FormPlanEmplsOrdinaires.Close()
                 End If
 

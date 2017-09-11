@@ -42,7 +42,7 @@
 
     Private Sub BtSupprimer_Click(sender As Object, e As EventArgs) Handles BtSupprimer.Click
         If DialogResult.Yes = MessageBox.Show("Supprimer la notification ?", "Confirmer la suppression", MessageBoxButtons.YesNo) Then
-            Bdd.Supprimer("notifications", LaNotif("notif_id"))
+            Bdd.Delete("notifications", LaNotif("notif_id"))
             Me.Suppression = True
             Me.Close()
         End If

@@ -179,5 +179,18 @@ Public Class debug
         Dim f As New FormVoirDetailsEmpl(34)
         f.ShowDialog()
     End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim t = Bdd.GetTableVide("emplacements")
+        t.Columns.Add("infossuppl", GetType(String))
+        Dim nrow = t.NewRow
+        Dim a = Bdd.GetRow("emplacements", 36)
+        For i = 0 To a.ItemArray.Count - 1
+            nrow(t.Columns(i).Caption) = a(i)
+        Next
+        nrow("infossuppl") = "apapapa"
+        nrow("empl_nb_places")=9
+        Bdd.Update("emplacements", nrow)
+    End Sub
 End Class
 

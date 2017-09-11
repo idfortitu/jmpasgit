@@ -1,13 +1,24 @@
 ﻿Imports System.IO
 Public Class FormGestion
-    Public dtPersonnes As DataTable
-    Public dtcons As DataTable
-    Public dtbenef As DataTable
     Public dtdefunt As DataTable
-    Public dtdefuntcons As DataTable
+    Public dtcons As DataTable
     Public dtCsnr As DataTable
+    Public dtbenef As DataTable
     Public dtPersContact As DataTable
-    Public dtBeneficiaireForm As DataTable
+    Public dtville As DataTable
+    Public dtpays As DataTable
+
+    Public dvlistedefunts As DataView
+    Public dvlisteempl As DataView
+    Public dvCsnrs As DataView
+    Public dvbenefs As DataView
+    Public dvPersContact As DataView
+
+
+    Public dvbenefsdeconcession As DataView
+    Public dvdefuntcons As DataView
+
+
     Dim screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
     Dim screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
     Dim boutongestion = 0
@@ -46,29 +57,30 @@ Public Class FormGestion
     Private Sub Form1_Shown(sender As System.Object, e As System.EventArgs) Handles MyBase.Shown
         ProgressBar.Increment(10)
         DataTableDefunt() '1
-        DataBindDefunt()
         ProgressBar.Increment(25)
         Lchargementdonnee.Text = "Chargement des données ."
-        Threading.Thread.Sleep(500)
+        'Threading.Thread.Sleep(500)
         DataTableConcess() '2
         ProgressBar.Increment(40)
         Lchargementdonnee.Text = "Chargement des données . ."
-        Threading.Thread.Sleep(500)
+        'Threading.Thread.Sleep(500)
         DataTableConcession() '2
         ProgressBar.Increment(55)
         Lchargementdonnee.Text = "Chargement des données . . ."
-        Threading.Thread.Sleep(500)
+        'Threading.Thread.Sleep(500)
         DataTablePersContact()
         ProgressBar.Increment(70)
-        Threading.Thread.Sleep(500)
+        'Threading.Thread.Sleep(500)
         DataTableBeneficiaire()
+        dtville = GetTable("t_loc_ville")
+        dtpays = GetTable("t_pays")
         ProgressBar.Increment(85)
-        Threading.Thread.Sleep(500)
+        'Threading.Thread.Sleep(500)
         DgvListeConcessionnaireBenef.Show()
         DgvListeConcessionnairePersonneContact.Hide()
         DgvListeConcessionnaireConcess.Hide()
         ProgressBar.Increment(100)
-        Threading.Thread.Sleep(500)
+        'Threading.Thread.Sleep(500)
         ProgressBar.Hide()
         Me.Size = New Size(1252, 705)
         Me.Left = (screenWidth - Me.Width) / 2
@@ -83,7 +95,13 @@ Public Class FormGestion
 
 
     Sub DataTableDefunt() '1
-        dtdefunt = Bdd.Query("select * FROM defunts INNER JOIN t_loc_ville ON defunts.locville_id = t_loc_ville.locville_id INNER JOIN t_pays on t_loc_ville.locville_id = t_pays.Pays_id INNER JOIN emplacements on defunts.empl_id = emplacements.empl_id")
+
+        dtdefunt = Bdd.Query("SELECT * FROM defunts LEFT OUTER JOIN t_loc_ville ON defunts.locville_id = t_loc_ville.locville_id LEFT OUTER JOIN t_pays on t_loc_ville.locville_id = t_pays.Pays_id LEFT OUTER JOIN emplacements on defunts.empl_id = emplacements.empl_id")
+
+        ' liste principale des défunts
+
+        dvlistedefunts = New DataView(dtdefunt)
+
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
@@ -119,36 +137,47 @@ Public Class FormGestion
         DgvListeDefunts.Columns.Add(colonnedatedec)
         DgvListeDefunts.Columns("def_date_deces").Visible = False
         DgvListeDefunts.AutoGenerateColumns = False
-        DgvListeDefunts.DataSource = dtdefunt
+        DgvListeDefunts.DataSource = dvlistedefunts   ''''''dtdefunt
         DgvListeDefunts.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DgvListeDefunts.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+        ' liste des défunts de l'emplacement sélectionné
+
+        dvdefuntcons = New DataView(dtdefunt)
+
+        Dim DTGV_Id_Colonne_def = New DataGridViewTextBoxColumn()
+        Dim Colonne = New DataGridViewTextBoxColumn()
+        colonneid = New DataGridViewTextBoxColumn()
+        DTGV_Id_Colonne_def.DataPropertyName = "def_nom"
+        DTGV_Id_Colonne_def.HeaderText = "nom"
+        DTGV_Id_Colonne_def.Name = "def_nom"
+        FCDGDefunt.Columns.Add(DTGV_Id_Colonne_def)
+        Colonne.DataPropertyName = "def_prenom"
+        Colonne.HeaderText = "prenom"
+        Colonne.Name = "def_prenom"
+        FCDGDefunt.Columns.Add(Colonne)
+        colonneid.DataPropertyName = "def_id"
+        colonneid.HeaderText = "id"
+        colonneid.Name = "def_id"
+        FCDGDefunt.Columns.Add(colonneid)
+        FCDGDefunt.AutoGenerateColumns = False
+        FCDGDefunt.DataSource = dvdefuntcons
+        FCDGDefunt.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        FCDGDefunt.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+        ' infos du défunt sélectionné
+        DataBindDefunt()
+
     End Sub
 
-    Sub DataTableConsBeneficiaire(ByRef Optional empl As Integer = 0)
-        If empl = 0 Then
-            dtbenef = Query("SELECT * FROM beneficiaires INNER JOIN beneficier ON beneficiaires.ben_id = beneficier.ben_id where beneficier.con_id = " & dtcons.Rows(FCDGConss.CurrentRow.Index())("con_id") & "")
-        Else
-            dtbenef = Query("SELECT * FROM beneficiaires INNER JOIN beneficier ON beneficiaires.ben_id = beneficier.ben_id where beneficier.con_id = " & empl & "")
-
-        End If
-        Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
-        Dim ColonnePrenom = New DataGridViewTextBoxColumn()
-        DTGV_Id_Colonne.DataPropertyName = "ben_nom"
-        DTGV_Id_Colonne.HeaderText = "nom"
-        DTGV_Id_Colonne.Name = "ben_nom"
-        FCDGBeneficiaire.Columns.Add(DTGV_Id_Colonne)
-        ColonnePrenom.DataPropertyName = "ben_prenom"
-        ColonnePrenom.HeaderText = "prenom"
-        ColonnePrenom.Name = "ben_prenom"
-        FCDGBeneficiaire.Columns.Add(ColonnePrenom)
-        FCDGBeneficiaire.AutoGenerateColumns = False
-        FCDGBeneficiaire.DataSource = dtbenef
-        FCDGBeneficiaire.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        FCDGBeneficiaire.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-    End Sub
 
     Sub DataTableConcess() '2
-        dtCsnr = Bdd.Query("select * FROM concessionnaires INNER JOIN t_loc_ville ON concessionnaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+        dtCsnr = Bdd.Query("select * FROM concessionnaires LEFT OUTER JOIN t_loc_ville ON concessionnaires.locville_id = t_loc_ville.locville_id LEFT OUTER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+
+        ' datagridview des concessionnaires
+
+        dvCsnrs = New DataView(dtCsnr)
+
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "csnr_nom"
@@ -160,15 +189,21 @@ Public Class FormGestion
         ColonnePrenom.Name = "csnr_prenom"
         DgvListeConcessionnaireConcess.Columns.Add(ColonnePrenom)
         DgvListeConcessionnaireConcess.AutoGenerateColumns = False
-        DgvListeConcessionnaireConcess.DataSource = dtCsnr
+        DgvListeConcessionnaireConcess.DataSource = dvCsnrs
         DgvListeConcessionnaireConcess.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DgvListeConcessionnaireConcess.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
     End Sub
 
 
-
     Sub DataTableConcession() '2
-        dtcons = Bdd.Query("SELECT * FROM concessions INNER JOIN emplacements ON concessions.empl_id = emplacements.empl_id INNER JOIN t_histoire ON concessions.h_id = t_histoire.h_id INNER JOIN t_commentaire ON concessions.com_id = t_commentaire.com_id")
+        dtcons = Bdd.Query("SELECT * FROM emplacements LEFT OUTER JOIN concessions ON concessions.empl_id = emplacements.empl_id LEFT OUTER JOIN t_histoire ON concessions.h_id = t_histoire.h_id LEFT OUTER JOIN t_commentaire ON concessions.com_id = t_commentaire.com_id")
+
+        ' datagridview des emplacements
+
+        dvlisteempl = New DataView(dtcons)
+
+
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         Dim colonneid = New DataGridViewTextBoxColumn()
@@ -206,41 +241,36 @@ Public Class FormGestion
         FCDGConss.Columns("empl_id").Visible = False
 
         FCDGConss.AutoGenerateColumns = False
-        FCDGConss.DataSource = dtcons
+        FCDGConss.DataSource = dvlisteempl
         FCDGConss.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         FCDGConss.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+        ' infos de l'emplacement affiché
+        DataBindConsInfos()
     End Sub
 
 
-    Sub DataTableDefuntCons(ByRef Optional empl As Integer = 0)
-        If empl = 0 Then
+    'Sub DataTableDefuntCons(ByRef Optional empl As Integer = 0)
+    '    If empl = 0 Then
 
-        Else
-            FCDGConss.CurrentRow.Cells("empl_id").Value = empl
-        End If
+    '    Else
+    '        FCDGConss.CurrentRow.Cells("empl_id").Value = empl
+    '    End If
 
-        dtdefuntcons = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & FCDGConss.CurrentRow.Cells("empl_id").Value & "")
-        Dim DTGV_Id_Colonne_def = New DataGridViewTextBoxColumn()
-        Dim Colonne = New DataGridViewTextBoxColumn()
-        Dim colonneid = New DataGridViewTextBoxColumn()
-        DTGV_Id_Colonne_def.DataPropertyName = "def_nom"
-        DTGV_Id_Colonne_def.HeaderText = "nom"
-        DTGV_Id_Colonne_def.Name = "def_nom"
-        FCDGDefunt.Columns.Add(DTGV_Id_Colonne_def)
-        Colonne.DataPropertyName = "def_prenom"
-        Colonne.HeaderText = "prenom"
-        Colonne.Name = "def_prenom"
-        FCDGDefunt.Columns.Add(Colonne)
-        colonneid.DataPropertyName = "def_id"
-        colonneid.HeaderText = "id"
-        colonneid.Name = "def_id"
-        FCDGDefunt.AutoGenerateColumns = False
-        FCDGDefunt.DataSource = dtdefuntcons
-        FCDGDefunt.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        FCDGDefunt.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-    End Sub
+    '    'dtdefuntcons = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & FCDGConss.CurrentRow.Cells("empl_id").Value & "")
+
+    '    ' A FAIRE si pas de sélection
+    '    'dvdefuntcons = New
+    '    'dtdefunt.Select("empl_id = " & CType(FCDGConss.SelectedRows(0).DataBoundItem, DataRowView).Row("empl_id"))
+
+    'End Sub
     Sub DataTableBeneficiaire()
-        dtBeneficiaireForm = Bdd.Query("select * FROM beneficiaires INNER JOIN t_loc_ville ON beneficiaires.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+        ' intègre déjà l'id de la concession (ben_con_id) pour usage futur
+        dtbenef = Query("SELECT *, beneficier.con_id AS ben_con_id FROM beneficiaires LEFT OUTER JOIN t_loc_ville ON beneficiaires.locville_id = t_loc_ville.locville_id LEFT OUTER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id INNER JOIN beneficier ON beneficier.ben_id = beneficiaires.ben_id")
+
+        'datagridview tous bénéficiaires
+
+        dvbenefs = New DataView(dtbenef)
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "ben_nom"
@@ -252,13 +282,41 @@ Public Class FormGestion
         ColonnePrenom.Name = "ben_prenom"
         DgvListeConcessionnaireBenef.Columns.Add(ColonnePrenom)
         DgvListeConcessionnaireBenef.AutoGenerateColumns = False
-        DgvListeConcessionnaireBenef.DataSource = dtBeneficiaireForm
+        DgvListeConcessionnaireBenef.DataSource = dvbenefs
         DgvListeConcessionnaireBenef.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DgvListeConcessionnaireBenef.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+        ' datagridview des bénéficiaires de la concession sélectionnée
+
+        dvbenefsdeconcession = New DataView(dtbenef)
+
+        DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
+        ColonnePrenom = New DataGridViewTextBoxColumn()
+        DTGV_Id_Colonne.DataPropertyName = "ben_nom"
+        DTGV_Id_Colonne.HeaderText = "nom"
+        DTGV_Id_Colonne.Name = "ben_nom"
+        FCDGBeneficiaire.Columns.Add(DTGV_Id_Colonne)
+        ColonnePrenom.DataPropertyName = "ben_prenom"
+        ColonnePrenom.HeaderText = "prenom"
+        ColonnePrenom.Name = "ben_prenom"
+        FCDGBeneficiaire.Columns.Add(ColonnePrenom)
+        FCDGBeneficiaire.AutoGenerateColumns = False
+        FCDGBeneficiaire.DataSource = dvbenefsdeconcession
+        FCDGBeneficiaire.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        FCDGBeneficiaire.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+
+        ' infos du bénéficiaire sélectionné (onglet concessions)
+        DataBindConsbenef()
+
+
     End Sub
 
     Sub DataTablePersContact()
-        dtPersContact = Bdd.Query("select * FROM personnes_contact INNER JOIN t_loc_ville ON personnes_contact.locville_id = t_loc_ville.locville_id INNER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+        dtPersContact = Query("SELECT * FROM personnes_contact LEFT OUTER JOIN t_loc_ville ON personnes_contact.locville_id = t_loc_ville.locville_id LEFT OUTER JOIN t_pays ON t_loc_ville.Pays_id = t_pays.Pays_id")
+
+        dvPersContact = New DataView(dtPersContact)
+
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
         Dim ColonnePrenom = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne.DataPropertyName = "pc_nom"
@@ -270,13 +328,13 @@ Public Class FormGestion
         ColonnePrenom.Name = "pc_prenom"
         DgvListeConcessionnairePersonneContact.Columns.Add(ColonnePrenom)
         DgvListeConcessionnairePersonneContact.AutoGenerateColumns = False
-        DgvListeConcessionnairePersonneContact.DataSource = dtPersContact
+        DgvListeConcessionnairePersonneContact.DataSource = dvPersContact
         DgvListeConcessionnairePersonneContact.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DgvListeConcessionnairePersonneContact.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
 
-    Private Sub DataBindConsDefunt()
+    Private Sub DataBindConsInfos()
         FCTBnumero.DataBindings.Add("Text", dtcons, "con_numero")
         FCTBEmplacement.DataBindings.Add("Text", dtcons, "empl_reference")
         FCTBMonumentClasse.DataBindings.Add("Text", dtcons, "empl_monum_classe")
@@ -286,62 +344,80 @@ Public Class FormGestion
         FCTBDateDeb.DataBindings.Add("Text", dtcons, "con_date_debut", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
         FCTBDateFin.DataBindings.Add("Text", dtcons, "con_date_fin", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
     End Sub
-    Private Sub DataBindConsbenef()
-        TBconsBenefnom.DataBindings.Add("Text", dtbenef, "ben_nom")
-        TBconsBenefprenom.DataBindings.Add("Text", dtbenef, "ben_prenom")
-        TBconsBenefadress.DataBindings.Add("Text", dtbenef, "ben_adresse")
-        TBconsBenefdatenaiss.DataBindings.Add("Text", dtbenef, "ben_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
-    End Sub
-    Private Sub DataBindDefunt()
-        FPTBNom.DataBindings.Add("Text", dtdefunt, "def_nom")
-        FPTBPrenom.DataBindings.Add("Text", dtdefunt, "def_prenom")
-        FPTBDateNaiss.DataBindings.Add("Text", dtdefunt, "def_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
-        FPTBDateE.DataBindings.Add("Text", dtdefunt, "Date_debut", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
 
-        FPTBEtatCivil.DataBindings.Add("Text", dtdefunt, "def_etat_civil")
-        FPTBAdresse.DataBindings.Add("Text", dtdefunt, "def_adresse")
-        FPTBDateM.DataBindings.Add("Text", dtdefunt, "def_date_deces", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
-        FPTBLieuNaiss.DataBindings.Add("Text", dtdefunt, "def_lieu_naiss")
-        FPTBCodeLieu.DataBindings.Add("Text", dtdefunt, "def_etat_civil_de")
-        FPTBCodePostal.DataBindings.Add("Text", dtdefunt, "locville_cp")
-        FPTBPays.DataBindings.Add("Text", dtdefunt, "Pays_nom")
-        FPTBVille.DataBindings.Add("Text", dtdefunt, "locville_ville")
-        FPTBEmplacement.DataBindings.Add("Text", dtdefunt, "empl_reference")
+    Private Sub DataBindConsbenef()
+        TBconsBenefnom.DataBindings.Add("Text", dvbenefsdeconcession, "ben_nom")
+        TBconsBenefprenom.DataBindings.Add("Text", dvbenefsdeconcession, "ben_prenom")
+        TBconsBenefadress.DataBindings.Add("Text", dvbenefsdeconcession, "ben_adresse")
+        ''''''TBconsBenefdatenaiss.DataBindings.Add("Text", dvbenefsdeconcession, "ben_date_naiss")
+        'TBconsBenefdatenaiss.DataBindings.Add("DateValue", dvbenefsdeconcession, "ben_date_naiss")
+        CtrlLocBenefDeCons.DataBindings.Add("LocVilleId", dvbenefsdeconcession, "locville_id")
+
+        ' À TESTER À TESTER + utiliser tbdate
+        TBconsBenefdatenaiss.DataBindings.Add("Text", dvbenefsdeconcession, "ben_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+    End Sub
+
+    Private Sub DataBindDefunt()
+        FPTBNom.DataBindings.Add("Text", dvlistedefunts, "def_nom")
+        FPTBPrenom.DataBindings.Add("Text", dvlistedefunts, "def_prenom")
+        'FPTBDateNaiss.DataBindings.Add("Text", dvlistedefunts, "def_date_naiss")
+        'FPTBDateE.DataBindings.Add("Text", dvlistedefunts, "Date_debut")
+        ' à voir...?
+        TbDefDateNaiss.DataBindings.Add("DateValue", dvlistedefunts, "def_date_naiss")
+        'TbDefDateNaiss.DataBindings.Add("Text", dvlistedefunts, "def_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+        FPTBDateE.DataBindings.Add("Text", dvlistedefunts, "Date_debut", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+        FPTBAdresse.DataBindings.Add("Text", dvlistedefunts, "def_adresse")
+        'FPTBDateM.DataBindings.Add("Text", dvlistedefunts, "def_date_deces")
+        ' à voir...?
+        'FPTBDateM.DataBindings.Add("Text", dvlistedefunts, "def_date_deces", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+        TbDefDateDeces.DataBindings.Add("DateValue", dvlistedefunts, "def_date_deces")
+        FPTBLieuNaiss.DataBindings.Add("Text", dvlistedefunts, "def_lieu_naiss")
+        CbDefEmplacement.DataBindings.Add("EmplId", dvlistedefunts, "empl_id")
+        CtrlEtatCivDef.DataBindings.Add("EtatCivil", dvlistedefunts, "def_etat_civil")
+        CtrlEtatCivDef.DataBindings.Add("EtatCivilDe", dvlistedefunts, "def_etat_civil_de")
+        CtrlLocVilleDef.DataBindings.Add("LocVilleId", dvlistedefunts, "locville_id")
+        ''''CtrlLocVilleDef.DataBindings.Add("osef", dvlistedefunts, "def_prenom")
+        ''''CtrlEtatCivDef.DataBindings.Add("osef", dvlistedefunts, "def_prenom")
+
     End Sub
 
 
 
     Private Sub DataBindConss()
-        TBPersNom.DataBindings.Add("Text", dtCsnr, "csnr_nom")
-        TBPersPrenom.DataBindings.Add("Text", dtCsnr, "csnr_prenom")
-        TBPersTel.DataBindings.Add("Text", dtCsnr, "csnr_tel")
-        TBPersDN.DataBindings.Add("Text", dtCsnr, "csnr_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
-        TBPersAdress.DataBindings.Add("Text", dtCsnr, "csnr_adresse")
-        TBPersCodePostal.DataBindings.Add("Text", dtCsnr, "locville_cp")
-        TBPersVille.DataBindings.Add("Text", dtCsnr, "locville_ville")
-        TBPersPays.DataBindings.Add("Text", dtCsnr, "Pays_nom")
-        TBPersNumNational.DataBindings.Add("Text", dtCsnr, "csnr_no_registre")
+        TBPersNom.DataBindings.Add("Text", dvCsnrs, "csnr_nom")
+        TBPersPrenom.DataBindings.Add("Text", dvCsnrs, "csnr_prenom")
+        TBPersTel.DataBindings.Add("Text", dvCsnrs, "csnr_tel")
+        'TBPersDN.DataBindings.Add("Text", dvCsnrs, "csnr_date_naiss")
+        ' À TESTER
+        TBPersDN.DataBindings.Add("Text", dvCsnrs, "csnr_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+        TBPersAdress.DataBindings.Add("Text", dvCsnrs, "csnr_adresse")
+        TBPersCodePostal.DataBindings.Add("Text", dvCsnrs, "locville_cp")
+        TBPersVille.DataBindings.Add("Text", dvCsnrs, "locville_ville")
+        TBPersPays.DataBindings.Add("Text", dvCsnrs, "Pays_nom")
+        TBPersNumNational.DataBindings.Add("Text", dvCsnrs, "csnr_no_registre")
     End Sub
 
     Private Sub DataBindBenef()
-        TBPersNom.DataBindings.Add("Text", dtBeneficiaireForm, "ben_nom")
-        TBPersPrenom.DataBindings.Add("Text", dtBeneficiaireForm, "ben_prenom")
-        TBPersDN.DataBindings.Add("Text", dtBeneficiaireForm, "ben_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
-        TBPersAdress.DataBindings.Add("Text", dtBeneficiaireForm, "ben_adresse")
-        TBPersNumNational.DataBindings.Add("Text", dtBeneficiaireForm, "ben_lien_parente")
-        TBPersCodePostal.DataBindings.Add("Text", dtBeneficiaireForm, "locville_cp")
-        TBPersVille.DataBindings.Add("Text", dtBeneficiaireForm, "locville_ville")
-        TBPersPays.DataBindings.Add("Text", dtBeneficiaireForm, "Pays_nom")
+        TBPersNom.DataBindings.Add("Text", dvbenefs, "ben_nom")
+        TBPersPrenom.DataBindings.Add("Text", dvbenefs, "ben_prenom")
+        'TBPersDN.DataBindings.Add("Text", dvbenefs, "ben_date_naiss")
+        ' À TESTER
+        TBPersDN.DataBindings.Add("Text", dvbenefs, "ben_date_naiss", True, DataSourceUpdateMode.OnValidation, "", "dd/MM/yyyy")
+        TBPersAdress.DataBindings.Add("Text", dvbenefs, "ben_adresse")
+        TBPersNumNational.DataBindings.Add("Text", dvbenefs, "ben_lien_parente")
+        TBPersCodePostal.DataBindings.Add("Text", dvbenefs, "locville_cp")
+        TBPersVille.DataBindings.Add("Text", dvbenefs, "locville_ville")
+        TBPersPays.DataBindings.Add("Text", dvbenefs, "Pays_nom")
     End Sub
 
     Private Sub DataBindPersContact()
-        TBPersNom.DataBindings.Add("Text", dtPersContact, "pc_nom")
-        TBPersPrenom.DataBindings.Add("Text", dtPersContact, "pc_prenom")
-        TBPersTel.DataBindings.Add("Text", dtPersContact, "pc_tel")
-        TBPersAdress.DataBindings.Add("Text", dtPersContact, "pc_adresse")
-        TBPersCodePostal.DataBindings.Add("Text", dtPersContact, "locville_cp")
-        TBPersVille.DataBindings.Add("Text", dtPersContact, "locville_ville")
-        TBPersPays.DataBindings.Add("Text", dtPersContact, "Pays_nom")
+        TBPersNom.DataBindings.Add("Text", dvPersContact, "pc_nom")
+        TBPersPrenom.DataBindings.Add("Text", dvPersContact, "pc_prenom")
+        TBPersTel.DataBindings.Add("Text", dvPersContact, "pc_tel")
+        TBPersAdress.DataBindings.Add("Text", dvPersContact, "pc_adresse")
+        TBPersCodePostal.DataBindings.Add("Text", dvPersContact, "locville_cp")
+        TBPersVille.DataBindings.Add("Text", dvPersContact, "locville_ville")
+        TBPersPays.DataBindings.Add("Text", dvPersContact, "Pays_nom")
     End Sub
 
     Private Sub DataBindClear()
@@ -356,39 +432,42 @@ Public Class FormGestion
         TBPersPays.DataBindings.Clear()
     End Sub
 
-    Private Sub DataBindClearConcessions()
-        FCTBnumero.DataBindings.Clear()
-        FCTBEmplacement.DataBindings.Clear()
-        FCTBMonumentClasse.DataBindings.Clear()
-        FCTBType.DataBindings.Clear()
-        FCTBCommentaire.DataBindings.Clear()
-        FCTBHistoire.DataBindings.Clear()
-        FCTBDateDeb.DataBindings.Clear()
-        FCTBDateFin.DataBindings.Clear()
-    End Sub
 
-    Private Sub DataBindClearConcessionsBeneficiaire()
-        TBconsBenefnom.DataBindings.Clear()
-        TBconsBenefprenom.DataBindings.Clear()
-        TBconsBenefadress.DataBindings.Clear()
-        TBconsBenefdatenaiss.DataBindings.Clear()
-    End Sub
+    'Private Sub DataBindClearConcessions()
+    '    FCTBnumero.DataBindings.Clear()
+    '    FCTBEmplacement.DataBindings.Clear()
+    '    FCTBMonumentClasse.DataBindings.Clear()
+    '    FCTBType.DataBindings.Clear()
+    '    FCTBCommentaire.DataBindings.Clear()
+    '    FCTBHistoire.DataBindings.Clear()
+    '    FCTBDateDeb.DataBindings.Clear()
+    '    FCTBDateFin.DataBindings.Clear()
+    'End Sub
 
-    Private Sub DataBindClearBeneficiaire()
-        FPTBNom.DataBindings.Clear()
-        FPTBPrenom.DataBindings.Clear()
-        FPTBDateNaiss.DataBindings.Clear()
-        FPTBDateE.DataBindings.Clear()
-        FPTBEtatCivil.DataBindings.Clear()
-        FPTBDateM.DataBindings.Clear()
-        FPTBEtatCivil.DataBindings.Clear()
-        FPTBAdresse.DataBindings.Clear()
-        FPTBEmplacement.DataBindings.Clear()
-        FPTBLieuNaiss.DataBindings.Clear()
-        FPTBCodePostal.DataBindings.Clear()
-        FPTBPays.DataBindings.Clear()
-        FPTBVille.DataBindings.Clear()
-    End Sub
+    'Private Sub DataBindClearConcessionsBeneficiaire()
+    '    TBconsBenefnom.DataBindings.Clear()
+    '    TBconsBenefprenom.DataBindings.Clear()
+    '    TBconsBenefadress.DataBindings.Clear()
+    '    TBconsBenefdatenaiss.DataBindings.Clear()
+    'End Sub
+
+    'Private Sub DataBindClearBeneficiaire()
+    '    FPTBNom.DataBindings.Clear()
+    '    FPTBPrenom.DataBindings.Clear()
+    '    FPTBDateNaiss.DataBindings.Clear()
+    '    FPTBDateE.DataBindings.Clear()
+    '    FPTBEtatCivil.DataBindings.Clear()
+    '    FPTBSepulture.DataBindings.Clear()
+    '    FPTBDateM.DataBindings.Clear()
+    '    FPTBEtatCivil.DataBindings.Clear()
+    '    FPTBAdresse.DataBindings.Clear()
+    '    FPTBEmplacement.DataBindings.Clear()
+    '    FPTBLieuNaiss.DataBindings.Clear()
+    '    FPTBCodePostal.DataBindings.Clear()
+    '    FPTBPays.DataBindings.Clear()
+    '    FPTBVille.DataBindings.Clear()
+    'End Sub
+
 
     Private Sub FPBDetails_Click(sender As Object, e As EventArgs)
         Dim FDetails As New FDetails
@@ -398,6 +477,7 @@ Public Class FormGestion
 
 
     Private Sub FPBAjouter_Click(sender As Object, e As EventArgs)
+
     End Sub
 
 
@@ -425,48 +505,33 @@ Public Class FormGestion
 
 
     Private Sub BtDefChercher_Click(sender As Object, e As EventArgs) Handles BtDefChercher.Click
-        Dim Source As New BindingSource()
-        Source.DataSource = Me.DgvListeDefunts.DataSource
+        ''Dim Source As New BindingSource()
+        ''Source.DataSource = Me.DgvListeDefunts.DataSource
+        'Dim source As DataView = DgvListeDefunts.DataSource
         Dim dateavant As Date = DtpDefRechercherDateDecesAvant.Value.Date
         Dim dateapres As Date = DtpDefRechercherDateDecesApres.Value.Date
+        Dim Filtre As String = ""
         If RbDefChercherNom.Checked = True Then
-            If DtpDefRechercherDateDecesAvant.Checked = True And DtpDefRechercherDateDecesApres.Checked = False Then
-                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "#"
-            ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = False Then
-                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
-            ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = True Then
-                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "# AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
-            Else
-                Source.DataSource = Me.DgvListeDefunts.DataSource
-                Source.Filter = "def_nom Like '%" & TbDefChampRecherche.Text & "%'"
-            End If
-        ElseIf RbDefChercherEmplacement.Checked = True Then
-            If DtpDefRechercherDateDecesAvant.Checked = True And DtpDefRechercherDateDecesApres.Checked = False Then
-                dateavant = DtpDefRechercherDateDecesAvant.Value.Date
-                Source.DataSource = Me.DgvListeDefunts.DataSource
-                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "#"
-            ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = False Then
-                dateapres = DtpDefRechercherDateDecesApres.Value.Date
-                Source.DataSource = Me.DgvListeDefunts.DataSource
-                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
-            ElseIf DtpDefRechercherDateDecesApres.Checked = True And DtpDefRechercherDateDecesAvant.Checked = True Then
-                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%' AND [def_date_deces]<#" & Format(dateavant, "M/d/yyyy") & "# AND [def_date_deces]>#" & Format(dateapres, "M/d/yyyy") & "#"
-            Else
-                Source.DataSource = Me.DgvListeDefunts.DataSource
-                Source.Filter = "empl_reference Like '%" & TbDefChampRecherche.Text & "%'"
-            End If
+            Filtre = "def_nom Like '%" & TbDefChampRecherche.Text.Trim & "%'"
         Else
-            MsgBox("Veuillez effectuer un choix.")
+            Filtre = "empl_reference Like '%" & TbDefChampRecherche.Text.Trim & "%'"
         End If
+
+        If DtpDefRechercherDateDecesApres.Checked Then
+            Filtre &= " AND def_date_deces > #" & Format(dateapres, "M/d/yyyy") & "#"
+        End If
+        If DtpDefRechercherDateDecesAvant.Checked Then
+            Filtre &= " AND def_date_deces < #" & Format(dateavant, "M/d/yyyy") & "#"
+        End If
+
+        dvlistedefunts.RowFilter = Filtre
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtDefAnnulerRecherche.Click
-        Dim Source As New BindingSource()
-        Source.DataSource = Me.DgvListeDefunts.DataSource
-        Source.Filter = "def_nom like '%'"
+    Private Sub BtDefAnnulerRecherche_Click(sender As Object, e As EventArgs) Handles BtDefAnnulerRecherche.Click
+        dvlistedefunts.RowFilter = ""
+        TbDefChampRecherche.Text = ""
         DtpDefRechercherDateDecesApres.Checked = False
         DtpDefRechercherDateDecesAvant.Checked = False
-        ' dtdefunt.Rows(DgvListeDefunts.CurrentRow.Index())("def_id") += 1
     End Sub
 
     Private Sub PRBConcessionnaire_CheckedChanged(sender As Object, e As EventArgs) Handles PRBConcessionnaire.CheckedChanged
@@ -496,114 +561,132 @@ Public Class FormGestion
 
 
     Private Sub FCDGConss_SelectionChanged(sender As Object, e As EventArgs) Handles FCDGConss.SelectionChanged
-        DataBindClearConcessions()
-        FCDGBeneficiaire.DataBindings.Clear()
-        FCDGBeneficiaire.Columns.Clear()
-        FCDGDefunt.DataBindings.Clear()
-        FCDGDefunt.Columns.Clear()
-        DataTableDefuntCons()
-        DataTableConsBeneficiaire()
-        DataBindConsDefunt()
-        FCTBPlaceOccupe.Text = FCDGDefunt.RowCount - 1
-        FCTBPlaceLibre.Text = dtcons.Rows(FCDGConss.CurrentRow.Index())("empl_nb_places") - (FCDGDefunt.RowCount - 1)
-        Try
-            TBconsBenefcodepostal.Text = GetValeurSql("SELECT * FROM t_loc_ville where locville_id = " & dtbenef.Rows(FCDGBeneficiaire.CurrentRow.Index())("locville_id") & "", "locville_cp")
-            TBconsBenefville.Text = GetValeurSql("SELECT * FROM t_loc_ville where locville_id = " & dtbenef.Rows(FCDGBeneficiaire.CurrentRow.Index())("locville_id") & "", "locville_ville")
-            TBconsBenefpays.Text = GetValeurSql("Select * From t_loc_ville INNER Join t_pays On t_loc_ville.locville_id = t_pays.Pays_id Where locville_id = " & dtbenef.Rows(FCDGBeneficiaire.CurrentRow.Index())("locville_id") & "", "Pays_nom")
+        ' A FAIRE vérif présence sélection (& aussi pr autres fcts c^ celle-ci)
 
-        Catch ex As Exception
-            TBconsBenefnom.Text = ""
-            TBconsBenefprenom.Text = ""
-            TBconsBenefadress.Text = ""
-            TBconsBenefdatenaiss.Text = ""
-        End Try
 
+
+        '''DataBindClearConcessions()
+        'FCDGBeneficiaire.DataBindings.Clear()
+        '''''''FCDGBeneficiaire.Columns.Clear()
+        'FCDGDefunt.DataBindings.Clear()
+        'FCDGDefunt.Columns.Clear()
+        'DataTableDefuntCons()
+        ''DataTableConsBeneficiaire()
+        'DataBindConsDefunt()
+
+        If FCDGConss.SelectedRows.Count > 0 Then
+            Dim EmplSelect = CType(FCDGConss.SelectedRows(0).DataBoundItem, DataRowView).Row
+
+            dvdefuntcons.RowFilter = "empl_id = " & EmplSelect("empl_id")
+            ' suppose que la table des emplacements contient aussi les données de la location
+            If Not IsDBNull(EmplSelect("con_id")) Then
+                dvbenefsdeconcession.RowFilter = "ben_con_id = " & EmplSelect("con_id")
+            Else
+                dvbenefsdeconcession.RowFilter = "False"
+            End If
+
+            Dim nbplaces = EmplSelect("empl_nb_places")
+            FCTBNbPlaces.Text = If(IsDBNull(nbplaces), "", EmplSelect("empl_nb_places"))         ' - (FCDGDefunt.RowCount - 1))
+
+            FCTBPlaceOccupe.Text = FCDGDefunt.RowCount  '- 1
+
+        Else
+            ' À FAIRE/CONTINUER - si pas de sélection
+            dvbenefsdeconcession.RowFilter = "False"
+            dvdefuntcons.RowFilter = "False"
+
+        End If
+
+    End Sub
+
+    Sub osefa() Handles DgvListeDefunts.SelectionChanged
+        Dim a = "a"
     End Sub
 
     Private Sub FCDGBeneficiaire_SelectionChanged(sender As Object, e As EventArgs) Handles FCDGBeneficiaire.SelectionChanged
-        DataBindClearConcessionsBeneficiaire()
-        DataBindConsbenef()
+        If FCDGBeneficiaire.SelectedRows.Count > 0 Then
+            Dim BenSelect = CType(FCDGBeneficiaire.SelectedRow.DataBoundItem, DataRowView).Row
+
+            CtrlLocBenefDeCons.LocVilleId = If(IsDBNull(BenSelect("locville_id")), -1, BenSelect("locville_id"))
+
+        Else
+            CtrlLocBenefDeCons.LocVilleId = -1
+            ' A FAIRE
+        End If
+
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim Source As New BindingSource()
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles BtRechEmpl.Click
+        'Dim Source As New BindingSource()
         Dim dateavant As Date = DtpConsRechercherDateFin.Value.Date
         Dim dateapres As Date = DtpConsRechercherDateFinap.Value.Date
-        Source.DataSource = Me.FCDGConss.DataSource
+        Dim Filtre As String = ""
+        'Source.DataSource = Me.FCDGConss.DataSource
+
         If RbfconsNumero.Checked = True Then
-            If DtpConsRechercherDateFin.Checked = True And DtpConsRechercherDateFinap.Checked = False Then
-                Source.Filter = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]<#" & Format(dateavant, "M/d/yyyy") & "#"
-            ElseIf DtpConsRechercherDateFinap.Checked = True And DtpConsRechercherDateFin.Checked = False Then
-                Source.Filter = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]>#" & Format(dateapres, "M/d/yyyy") & "#"
-            ElseIf DtpConsRechercherDateFinap.Checked = True And DtpConsRechercherDateFin.Checked = True Then
-                Source.Filter = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]<#" & Format(dateavant, "M/d/yyyy") & "# AND [con_date_fin]>#" & Format(dateapres, "M/d/yyyy") & "#"
-            Else
-                Source.Filter = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text & "%'"
-            End If
-        ElseIf RbfconsEmplacement.Checked = True Then
-            If DtpConsRechercherDateFin.Checked = True And DtpConsRechercherDateFinap.Checked = False Then
-                Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]<#" & Format(dateavant, "M/d/yyyy") & "#"
-            ElseIf DtpConsRechercherDateFinap.Checked = True And DtpConsRechercherDateFin.Checked = False Then
-                Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]>#" & Format(dateapres, "M/d/yyyy") & "#"
-            ElseIf DtpConsRechercherDateFinap.Checked = True And DtpConsRechercherDateFin.Checked = True Then
-                Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%' AND [con_date_fin]<#" & Format(dateavant, "M/d/yyyy") & "# AND [con_date_fin]>#" & Format(dateapres, "M/d/yyyy") & "#"
-            Else
-                Source.Filter = "empl_reference Like '%" & FCTBRechercher.Text & "%'"
-            End If
+            Filtre = "CONVERT(con_numero, 'System.String') Like '%" & FCTBRechercher.Text.Trim & "%'"
         Else
-            MsgBox("Veuillez effectuer un choix.")
+            Filtre = "empl_reference Like '%" & FCTBRechercher.Text.Trim & "%'"
         End If
+
+        If DtpConsRechercherDateFin.Checked Then
+            Filtre &= " AND con_date_fin < #" & Format(dateavant, "M/d/yyyy") & "#"
+        End If
+        If DtpConsRechercherDateFinap.Checked Then
+            Filtre &= " AND con_date_fin > #" & Format(dateapres, "M/d/yyyy") & "#"
+        End If
+
+        dvlisteempl.RowFilter = Filtre
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim Source As New BindingSource()
-        Source.DataSource = Me.FCDGConss.DataSource
-        Source.Filter = "empl_reference like '%'"
-        Dim NbLigne = Me.FCDGConss.CurrentRow.Index
-        Dim Nbcolonne = 0
-        Dim Val As String = Me.FCDGConss(1, 0).Value
-
-        FCDGDefunt.DataBindings.Clear()
-        FCDGDefunt.Columns.Clear()
-        DataTableDefuntCons(Bdd.GetValeurSql("select * FROM emplacements where empl_reference = '" & Val & "'", "empl_id"))
-
-
-
+        dvlisteempl.RowFilter = ""
+        FCTBRechercher.Text = ""
+        DtpConsRechercherDateFin.Checked = False
+        DtpConsRechercherDateFinap.Checked = False
     End Sub
 
     Private Sub FPBLienCons_Click(sender As Object, e As EventArgs) Handles FPBLienCons.Click
+        If Not DgvListeDefunts.SelectedRows.Count > 0 Then Exit Sub
+
+        Dim Def = DgvListeDefunts.SelectedDataRow
+        If IsDBNull(Def("empl_id")) Then Exit Sub
+
         TabControl1.SelectedIndex = 1
-        Dim defuntid As String = DgvListeDefunts.CurrentRow.Cells("def_id").Value
-        Dim id = Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "con_id")
-        Dim Source As New BindingSource()
-        Source.DataSource = Me.FCDGConss.DataSource
-        Source.Filter = "convert([con_id],'System.String') LIKE '" & id & "'"
-        Dim NbLigne2 = Me.FCDGConss.CurrentRow.Index
-        FCDGDefunt.DataBindings.Clear()
-        FCDGDefunt.Columns.Clear()
-        DataTableDefuntCons(Bdd.GetValeurSql("select * FROM concessions INNER JOIN emplacements on concessions.empl_id = emplacements.empl_id INNER JOIN defunts ON defunts.empl_id = emplacements.empl_id where defunts.def_id = '" & defuntid & "'", "empl_id"))
-        Dim Nbcolonne2 = 0
-        Dim Val2 As String = Me.FCDGConss(0, 0).Value
-        FCDGBeneficiaire.DataBindings.Clear()
-        FCDGBeneficiaire.Columns.Clear()
-        DataTableConsBeneficiaire(Bdd.GetValeurSql("select * FROM concessions where con_numero = '" & Val2 & "'", "con_id"))
+        Button2_Click(Nothing, Nothing) ' annule le filtrage dans les concessions, celle qu'on veut doit être visible
+        Dim ligneaselect = (From r As DataGridViewRow In FCDGConss.Rows Where r.Cells("empl_id").Value = Def("empl_id")).First
+        ligneaselect.Selected = True
+        FCDGConss.ScrollSelectedIntoView()
+
+        ' sélectionne aussi le défunt dans la liste des défunts de l'emplacement
+
+        ligneaselect = (From r As DataGridViewRow In FCDGDefunt.Rows Where r.Cells("def_id").Value = Def("def_id")).First
+        ligneaselect.Selected = True
+        FCDGDefunt.ScrollSelectedIntoView()
+
     End Sub
 
     Private Sub FCBLienDefunt_Click(sender As Object, e As EventArgs) Handles FCBLienDefunt.Click
+        If Not FCDGDefunt.SelectedRows.Count > 0 Then Exit Sub
+
+        Dim def = FCDGDefunt.SelectedDataRow
+
         TabControl1.SelectedIndex = 0
-        Dim id As String = dtdefuntcons.Rows(FCDGDefunt.CurrentRow.Index())("def_id").ToString
-        Dim Source As New BindingSource()
-        Source.DataSource = Me.DgvListeDefunts.DataSource
-        Source.Filter = "convert([def_id],'System.String') LIKE '" & id & "'"
+        BtDefAnnulerRecherche_Click(Nothing, Nothing)
+        Dim ligneaselect = (From r As DataGridViewRow In DgvListeDefunts.Rows Where r.Cells("def_id").value = def("def_id")).First
+        ligneaselect.Selected = True
+
+        DgvListeDefunts.ScrollSelectedIntoView()
     End Sub
 
     Private Sub TextBoxConsRO()
         FCTBnumero.ReadOnly = True
         FCTBnumero.Cursor = Cursors.No
         If FCTBnumero.BackColor <> SystemColors.Window Then FCTBnumero.BackColor = SystemColors.Window
-        FCTBPlaceLibre.ReadOnly = True
-        FCTBPlaceLibre.Cursor = Cursors.No
-        If FCTBPlaceLibre.BackColor <> SystemColors.Window Then FCTBPlaceLibre.BackColor = SystemColors.Window
+        FCTBNbPlaces.ReadOnly = True
+        FCTBNbPlaces.Cursor = Cursors.No
+        If FCTBNbPlaces.BackColor <> SystemColors.Window Then FCTBNbPlaces.BackColor = SystemColors.Window
         FCTBPlaceOccupe.ReadOnly = True
         FCTBPlaceOccupe.Cursor = Cursors.No
         If FCTBPlaceOccupe.BackColor <> SystemColors.Window Then FCTBPlaceOccupe.BackColor = SystemColors.Window
@@ -631,14 +714,12 @@ Public Class FormGestion
         TBconsBenefadress.ReadOnly = True
         TBconsBenefadress.Cursor = Cursors.No
         If TBconsBenefadress.BackColor <> SystemColors.Window Then TBconsBenefadress.BackColor = SystemColors.Window
-        TBconsBenefcodepostal.ReadOnly = True
-        TBconsBenefcodepostal.Cursor = Cursors.No
-        If TBconsBenefcodepostal.BackColor <> SystemColors.Window Then TBconsBenefcodepostal.BackColor = SystemColors.Window
         TBconsBenefdatenaiss.ReadOnly = True
         TBconsBenefdatenaiss.Cursor = Cursors.No
         If TBconsBenefdatenaiss.BackColor <> SystemColors.Window Then TBconsBenefdatenaiss.BackColor = SystemColors.Window
         TBconsBenefnom.ReadOnly = True
         TBconsBenefnom.Cursor = Cursors.No
+        CtrlLocBenefDeCons.LectureSeule = True
         If TBconsBenefnom.BackColor <> SystemColors.Window Then TBconsBenefnom.BackColor = SystemColors.Window
         TBconsBenefpays.ReadOnly = True
         TBconsBenefpays.Cursor = Cursors.No
@@ -654,40 +735,24 @@ Public Class FormGestion
         FPTBNom.ReadOnly = True
         FPTBNom.Cursor = Cursors.No
         If FPTBNom.BackColor <> SystemColors.Window Then FPTBNom.BackColor = SystemColors.Window
-        FPTBPays.ReadOnly = True
-        FPTBPays.Cursor = Cursors.No
-        If FPTBPays.BackColor <> SystemColors.Window Then FPTBPays.BackColor = SystemColors.Window
         FPTBPrenom.ReadOnly = True
         FPTBPrenom.Cursor = Cursors.No
         If FPTBPrenom.BackColor <> SystemColors.Window Then FPTBPrenom.BackColor = SystemColors.Window
-
-        FPTBVille.ReadOnly = True
-        FPTBVille.Cursor = Cursors.No
-        If FPTBVille.BackColor <> SystemColors.Window Then FPTBVille.BackColor = SystemColors.Window
         FPTBLieuNaiss.ReadOnly = True
         FPTBLieuNaiss.Cursor = Cursors.No
         If FPTBLieuNaiss.BackColor <> SystemColors.Window Then FPTBLieuNaiss.BackColor = SystemColors.Window
-        FPTBEtatCivil.ReadOnly = True
-        FPTBEtatCivil.Cursor = Cursors.No
-        If FPTBEtatCivil.BackColor <> SystemColors.Window Then FPTBEtatCivil.BackColor = SystemColors.Window
-        FPTBEmplacement.ReadOnly = True
-        FPTBEmplacement.Cursor = Cursors.No
-        If FPTBEmplacement.BackColor <> SystemColors.Window Then FPTBEmplacement.BackColor = SystemColors.Window
-        FPTBDateNaiss.ReadOnly = True
-        FPTBDateNaiss.Cursor = Cursors.No
-        If FPTBDateNaiss.BackColor <> SystemColors.Window Then FPTBDateNaiss.BackColor = SystemColors.Window
-        FPTBDateM.ReadOnly = True
-        FPTBDateM.Cursor = Cursors.No
-        If FPTBDateM.BackColor <> SystemColors.Window Then FPTBDateM.BackColor = SystemColors.Window
+        CbDefEmplacement.Enabled = False
+        CbDefEmplacement.Cursor = Cursors.No
+        If CbDefEmplacement.BackColor <> SystemColors.Window Then CbDefEmplacement.BackColor = SystemColors.Window
+        TbDefDateNaiss.ReadOnly = True
+        TbDefDateNaiss.Cursor = Cursors.No
+        If TbDefDateNaiss.BackColor <> SystemColors.Window Then TbDefDateNaiss.BackColor = SystemColors.Window
+        TbDefDateDeces.ReadOnly = True
+        TbDefDateDeces.Cursor = Cursors.No
+        If TbDefDateDeces.BackColor <> SystemColors.Window Then TbDefDateDeces.BackColor = SystemColors.Window
         FPTBDateE.ReadOnly = True
         FPTBDateE.Cursor = Cursors.No
         If FPTBDateE.BackColor <> SystemColors.Window Then FPTBDateE.BackColor = SystemColors.Window
-        FPTBCodePostal.ReadOnly = True
-        FPTBCodePostal.Cursor = Cursors.No
-        If FPTBCodePostal.BackColor <> SystemColors.Window Then FPTBCodePostal.BackColor = SystemColors.Window
-        FPTBCodeLieu.ReadOnly = True
-        FPTBCodeLieu.Cursor = Cursors.No
-        If FPTBCodeLieu.BackColor <> SystemColors.Window Then FPTBCodeLieu.BackColor = SystemColors.Window
         FPTBAdresse.ReadOnly = True
         FPTBAdresse.Cursor = Cursors.No
         If FPTBAdresse.BackColor <> SystemColors.Window Then FPTBAdresse.BackColor = SystemColors.Window
@@ -748,29 +813,18 @@ Public Class FormGestion
     Private Sub TextBoxDefuntUpd()
         FPTBNom.ReadOnly = False
         FPTBNom.Cursor = Cursors.IBeam
-        FPTBPays.ReadOnly = False
-        FPTBPays.Cursor = Cursors.IBeam
         FPTBPrenom.ReadOnly = False
         FPTBPrenom.Cursor = Cursors.IBeam
-
-        FPTBVille.ReadOnly = False
-        FPTBVille.Cursor = Cursors.IBeam
         FPTBLieuNaiss.ReadOnly = False
         FPTBLieuNaiss.Cursor = Cursors.IBeam
-        FPTBEtatCivil.ReadOnly = False
-        FPTBEtatCivil.Cursor = Cursors.IBeam
-        FPTBEmplacement.ReadOnly = False
-        FPTBEmplacement.Cursor = Cursors.IBeam
-        FPTBDateNaiss.ReadOnly = False
-        FPTBDateNaiss.Cursor = Cursors.IBeam
-        FPTBDateM.ReadOnly = False
-        FPTBDateM.Cursor = Cursors.IBeam
+        CbDefEmplacement.Enabled = True
+        CbDefEmplacement.Cursor = Cursors.IBeam
+        TbDefDateNaiss.ReadOnly = False
+        TbDefDateNaiss.Cursor = Cursors.IBeam
+        TbDefDateDeces.ReadOnly = False
+        TbDefDateDeces.Cursor = Cursors.IBeam
         FPTBDateE.ReadOnly = False
         FPTBDateE.Cursor = Cursors.IBeam
-        FPTBCodePostal.ReadOnly = False
-        FPTBCodePostal.Cursor = Cursors.IBeam
-        FPTBCodeLieu.ReadOnly = False
-        FPTBCodeLieu.Cursor = Cursors.IBeam
         FPTBAdresse.ReadOnly = False
         FPTBAdresse.Cursor = Cursors.IBeam
     End Sub
@@ -778,8 +832,8 @@ Public Class FormGestion
     Private Sub TextBoxConsUpd()
         FCTBnumero.ReadOnly = False
         FCTBnumero.Cursor = Cursors.IBeam
-        FCTBPlaceLibre.ReadOnly = False
-        FCTBPlaceLibre.Cursor = Cursors.IBeam
+        FCTBNbPlaces.ReadOnly = False
+        FCTBNbPlaces.Cursor = Cursors.IBeam
         FCTBPlaceOccupe.ReadOnly = False
         FCTBPlaceOccupe.Cursor = Cursors.IBeam
         FCTBType.ReadOnly = False
@@ -801,12 +855,11 @@ Public Class FormGestion
     Private Sub TextBoxConsBenefUpd()
         TBconsBenefadress.ReadOnly = False
         TBconsBenefadress.Cursor = Cursors.IBeam
-        TBconsBenefcodepostal.ReadOnly = False
-        TBconsBenefcodepostal.Cursor = Cursors.IBeam
         TBconsBenefdatenaiss.ReadOnly = False
         TBconsBenefdatenaiss.Cursor = Cursors.IBeam
         TBconsBenefnom.ReadOnly = False
         TBconsBenefnom.Cursor = Cursors.IBeam
+        CtrlLocBenefDeCons.LectureSeule = False
         TBconsBenefpays.ReadOnly = False
         TBconsBenefpays.Cursor = Cursors.IBeam
         TBconsBenefprenom.ReadOnly = False
@@ -820,19 +873,19 @@ Public Class FormGestion
 
         BtDefChercher.Enabled = False
         BtDefAnnulerRecherche.Enabled = False
-        FPTBCBEtatCivil.Visible = True
-        Select Case FPTBEtatCivil.Text
-            Case "Non précisé"
-                FPTBCBEtatCivil.SelectedIndex = 4
-            Case "Célibataire"
-                FPTBCBEtatCivil.SelectedIndex = 0
-            Case "Epoux"
-                FPTBCBEtatCivil.SelectedIndex = 1
-            Case "Veuf"
-                FPTBCBEtatCivil.SelectedIndex = 2
-            Case "divorcé"
-                FPTBCBEtatCivil.SelectedIndex = 3
-        End Select
+        'FPTBCBEtatCivil.Visible = True
+        'Select Case FPTBEtatCivil.Text
+        '    Case "Non précisé"
+        '        FPTBCBEtatCivil.SelectedIndex = 4
+        '    Case "Célibataire"
+        '        FPTBCBEtatCivil.SelectedIndex = 0
+        '    Case "Epoux"
+        '        FPTBCBEtatCivil.SelectedIndex = 1
+        '    Case "Veuf"
+        '        FPTBCBEtatCivil.SelectedIndex = 2
+        '    Case "divorcé"
+        '        FPTBCBEtatCivil.SelectedIndex = 3
+        'End Select
 
         If boutongestion = 0 Then
             TextBoxDefuntUpd()
@@ -848,27 +901,26 @@ Public Class FormGestion
                 TextBoxDefuntRO()
                 TabControl1.TabPages(1).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
-                FPTBCBEtatCivil.Visible = False
             ElseIf result = DialogResult.Yes Then
-                If Bdd.NonQuery("Update defunts set def_nom = '" & FPTBNom.Text & "', def_prenom = '" & FPTBPrenom.Text & "', def_adresse " &
-                                " = '" & FPTBAdresse.Text & "', def_etat_civil_de = '" & FPTBCodeLieu.Text & "', def_lieu_de_naiss = '" & FPTBLieuNaiss.Text & "', " &
-                                "  where def_id ='" & DgvListeDefunts.CurrentRow.Cells("def_id").Value & "'") Then
-                    MsgBox("" & DgvListeDefunts.CurrentRow.Cells("def_nom").Value & " " & DgvListeDefunts.CurrentRow.Cells("def_prenom").Value & " " & vbCrLf & "a correctement été modifier")
-                Else
-                    MsgBox("Une erreur est venue dans la modification du défunt.")
-                End If
-                FPTBCBEtatCivil.Visible = False
+                ' À FAIRE À FAIRE
+                'If Bdd.NonQuery("Update defunts set def_nom = '" & FPTBNom.Text & "', def_prenom = '" & FPTBPrenom.Text & "', def_adresse " &
+                '                " = '" & FPTBAdresse.Text & "', def_etat_civil_de = '" & FPTBCodeLieu.Text & "', def_lieu_de_naiss = '" & FPTBLieuNaiss.Text & "', " &
+                '                "  where def_id ='" & DgvListeDefunts.CurrentRow.Cells("def_id").Value & "'") Then
+                '    MsgBox("" & DgvListeDefunts.CurrentRow.Cells("def_nom").Value & " " & DgvListeDefunts.CurrentRow.Cells("def_prenom").Value & " " & vbCrLf & "a correctement été modifier")
+                'Else
+                '    MsgBox("Une erreur est venue dans la modification du défunt.")
+                '    End If
                 boutongestion = 0
                 FPBModifier.Text = "Modifier"
-                TextBoxDefuntRO()
-                TabControl1.TabPages(1).Enabled = True
-                TabControl1.TabPages(2).Enabled = True
-            End If
-            DgvListeDefunts.Enabled = True
+                    TextBoxDefuntRO()
+                    TabControl1.TabPages(1).Enabled = True
+                    TabControl1.TabPages(2).Enabled = True
+                End If
+                DgvListeDefunts.Enabled = True
 
-            BtDefChercher.Enabled = True
-            BtDefAnnulerRecherche.Enabled = True
-        End If
+                BtDefChercher.Enabled = True
+                BtDefAnnulerRecherche.Enabled = True
+            End If
     End Sub
 
     Private Sub BmodifCons_Click(sender As Object, e As EventArgs) Handles BmodifCons.Click
@@ -949,7 +1001,8 @@ Public Class FormGestion
 
 
     Private Sub FDBLinkToPersCon_Click(sender As Object, e As EventArgs) Handles FDBLinkToPersCon.Click
-        Dim personcontactid As String = DgvListeDefunts.CurrentRow.Cells("pc_id").Value
+        ' à revoir
+        Dim personcontactid As String = DgvListeDefunts.SelectedRows(0).Cells("pc_id").Value
         TabControl1.SelectedIndex = 2
         PRBPersCon.Select()
         Dim Source As New BindingSource()
@@ -959,7 +1012,8 @@ Public Class FormGestion
     End Sub
 
     Private Sub FDBLinkToConcessionnaire_Click(sender As Object, e As EventArgs) Handles FDBLinkToConcessionnaire.Click
-        Dim concessionnaireid As String = FCDGConss.CurrentRow.Cells("csnr_id").Value
+        ' à revoir
+        Dim concessionnaireid As String = FCDGConss.SelectedRows(0).Cells("csnr_id").Value
         TabControl1.SelectedIndex = 2
         PRBPersCon.Select()
         PRBConcessionnaire.Select()
@@ -1001,13 +1055,14 @@ Public Class FormGestion
     End Sub
 
     Private Sub FPBSupprimer_Click(sender As Object, e As EventArgs) Handles FPBSupprimer.Click
+        ' à revoir
         Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir supprimer ce défunt ?", "Confirmation", MessageBoxButtons.YesNo)
         If result = DialogResult.No Then
 
         ElseIf result = DialogResult.Yes Then
-            If Bdd.NonQuery("DELETE FROM defunts where def_id =" & DgvListeDefunts.CurrentRow.Cells("def_id").Value) = 1 Then
-                MsgBox("" & DgvListeDefunts.CurrentRow.Cells("def_nom").Value & " " & DgvListeDefunts.CurrentRow.Cells("def_prenom").Value & " " & vbCrLf & "a correctement été supprimer")
-                DgvListeDefunts.Rows.Remove(DgvListeDefunts.CurrentRow)
+            If Bdd.NonQuery("DELETE FROM defunts where def_id =" & DgvListeDefunts.SelectedRows(0).Cells("def_id").Value) = 1 Then
+                MsgBox("" & DgvListeDefunts.SelectedRows(0).Cells("def_nom").Value & " " & DgvListeDefunts.SelectedRows(0).Cells("def_prenom").Value & " " & vbCrLf & "a correctement été supprimer")
+                DgvListeDefunts.Rows.Remove(DgvListeDefunts.SelectedRows(0))
             Else
                 MsgBox("Une erreur est venue dans la suppression du défunt.")
             End If
@@ -1018,21 +1073,25 @@ Public Class FormGestion
 
     End Sub
 
-    Private Sub FPTBEtatCivil_TextChanged(sender As Object, e As EventArgs) Handles FPTBEtatCivil.TextChanged
-        Select Case FPTBEtatCivil.Text
-            Case "0"
-                FPTBEtatCivil.Text = "Non précisé"
-                FPTBCodeLieu.Text = "xxxxxxxxxx"
-            Case "1"
-                FPTBEtatCivil.Text = "Célibataire"
-                FPTBCodeLieu.Text = "xxxxxxxxxx"
-            Case "2"
-                FPTBEtatCivil.Text = "Epoux"
-            Case "3"
-                FPTBEtatCivil.Text = "Veuf"
-            Case "4"
-                FPTBEtatCivil.Text = "divorcé"
-                FPTBCodeLieu.Text = "xxxxxxxxxx"
-        End Select
+    Private Sub osefa(sender As Object, e As EventArgs) Handles DgvListeDefunts.SelectionChanged
+
     End Sub
+
+    'Private Sub FPTBEtatCivil_TextChanged(sender As Object, e As EventArgs) Handles FPTBEtatCivil.TextChanged
+    '    Select Case FPTBEtatCivil.Text
+    '        Case "0"
+    '            FPTBEtatCivil.Text = "Non précisé"
+    '            FPTBCodeLieu.Text = "xxxxxxxxxx"
+    '        Case "1"
+    '            FPTBEtatCivil.Text = "Célibataire"
+    '            FPTBCodeLieu.Text = "xxxxxxxxxx"
+    '        Case "2"
+    '            FPTBEtatCivil.Text = "Epoux"
+    '        Case "3"
+    '            FPTBEtatCivil.Text = "Veuf"
+    '        Case "4"
+    '            FPTBEtatCivil.Text = "divorcé"
+    '            FPTBCodeLieu.Text = "xxxxxxxxxx"
+    '    End Select
+    'End Sub
 End Class
