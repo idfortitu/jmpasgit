@@ -33,6 +33,11 @@
     End Sub
 
     Private Sub FormReservation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim TVilles = Bdd.GetTable("t_loc_ville")
+        Dim TPays = Bdd.GetTable("t_Pays")
+        CtrlLocVillePays1.chargercomboboxpays(TPays)
+        CtrlLocVillePays1.chargercomboboxville(TVilles)
+
         InitListeEmplacements()
     End Sub
 

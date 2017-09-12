@@ -1,12 +1,5 @@
 ﻿Imports System.Globalization
 
-' le mettre dans le module uzineagaz provoque des problèmes d'accès
-Public Enum TTypeEmpl
-    NonPrecise = 0
-    Caveau = 1
-    Fosse = 2
-    Urne = 3
-End Enum
 
 Module Uzineagaz
 
@@ -53,6 +46,8 @@ Module Uzineagaz
                 Return ""
             Case TTypeEmpl.Caveau
                 Return "Caveau"
+            Case TTypeEmpl.Concession
+                Return "Concession"
             Case TTypeEmpl.Fosse
                 Return "Fosse"
             Case TTypeEmpl.Urne
@@ -219,4 +214,13 @@ Public Enum TTypeInhCsnExistante
     Caveau
     CelluleColombarium
     Cavurne
+End Enum
+
+' le mettre dans le module uzineagaz provoque des problèmes d'accès
+Public Enum TTypeEmpl
+    NonPrecise = 0
+    Caveau = 1
+    Concession = 2
+    Fosse = 3
+    Urne = 4
 End Enum

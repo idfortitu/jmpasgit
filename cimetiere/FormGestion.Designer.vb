@@ -38,8 +38,6 @@ Partial Class FormGestion
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
-        Me.RbDefChercherEmplacement = New System.Windows.Forms.RadioButton()
-        Me.RbDefChercherNom = New System.Windows.Forms.RadioButton()
         Me.BtDefAnnulerRecherche = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -50,6 +48,7 @@ Partial Class FormGestion
         Me.BtDefChercher = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.FPTBLieuNaiss = New System.Windows.Forms.TextBox()
         Me.FPLLieuNaiss = New System.Windows.Forms.Label()
@@ -80,40 +79,32 @@ Partial Class FormGestion
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.TBconsBenefpays = New System.Windows.Forms.TextBox()
-        Me.TBconsBenefville = New System.Windows.Forms.TextBox()
         Me.TBconsBenefadress = New System.Windows.Forms.TextBox()
         Me.TBconsBenefnom = New System.Windows.Forms.TextBox()
         Me.TBconsBenefprenom = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.CBMonumentClasse = New System.Windows.Forms.CheckBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.FCTBDateDeb = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.FCTBDateFin = New System.Windows.Forms.TextBox()
         Me.FCLDenomination = New System.Windows.Forms.Label()
         Me.FCTBnumero = New System.Windows.Forms.TextBox()
         Me.FCLEmplacement = New System.Windows.Forms.Label()
-        Me.FCTBEmplacement = New System.Windows.Forms.TextBox()
         Me.FCLPlaceLibre = New System.Windows.Forms.Label()
         Me.FCLPlaceOccupe = New System.Windows.Forms.Label()
         Me.FCTBPlaceOccupe = New System.Windows.Forms.TextBox()
-        Me.FCTBMonumentClasse = New System.Windows.Forms.TextBox()
         Me.FCLCommentaire = New System.Windows.Forms.Label()
         Me.FCTBCommentaire = New System.Windows.Forms.TextBox()
         Me.FCLMonumentC = New System.Windows.Forms.Label()
         Me.FCLHistoire = New System.Windows.Forms.Label()
         Me.FCTBHistoire = New System.Windows.Forms.TextBox()
         Me.FCLType = New System.Windows.Forms.Label()
-        Me.FCTBType = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Label27 = New System.Windows.Forms.Label()
@@ -122,8 +113,6 @@ Partial Class FormGestion
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.DtpConsRechercherDateFin = New System.Windows.Forms.DateTimePicker()
-        Me.RbfconsEmplacement = New System.Windows.Forms.RadioButton()
-        Me.RbfconsNumero = New System.Windows.Forms.RadioButton()
         Me.BtRechEmpl = New System.Windows.Forms.Button()
         Me.FCTBRechercher = New System.Windows.Forms.TextBox()
         Me.FCBLienDefunt = New System.Windows.Forms.Button()
@@ -133,11 +122,7 @@ Partial Class FormGestion
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.TBPersNumNational = New System.Windows.Forms.TextBox()
-        Me.TBPersPays = New System.Windows.Forms.TextBox()
-        Me.TBPersDN = New System.Windows.Forms.TextBox()
-        Me.TBPersVille = New System.Windows.Forms.TextBox()
         Me.TBPersTel = New System.Windows.Forms.TextBox()
-        Me.TBPersCodePostal = New System.Windows.Forms.TextBox()
         Me.TBPersAdress = New System.Windows.Forms.TextBox()
         Me.TBPersNom = New System.Windows.Forms.TextBox()
         Me.TBPersPrenom = New System.Windows.Forms.TextBox()
@@ -145,9 +130,6 @@ Partial Class FormGestion
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.BSupGestionPersBenef = New System.Windows.Forms.Button()
@@ -168,23 +150,34 @@ Partial Class FormGestion
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BModifGestionPers = New System.Windows.Forms.Button()
         Me.BSupGestionPers = New System.Windows.Forms.Button()
-        Me.FPTBDateE = New System.Windows.Forms.TextBox()
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Lchargementdonnee = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.Label20 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.CbfConsOccupants = New System.Windows.Forms.CheckBox()
+        Me.CbfconsCsnr = New System.Windows.Forms.CheckBox()
+        Me.CbfconsEmplacement = New System.Windows.Forms.CheckBox()
+        Me.CBDefChercherNom = New System.Windows.Forms.CheckBox()
+        Me.CBDefChercherEmplacement = New System.Windows.Forms.CheckBox()
+        Me.FPTBDateE = New cimetiere.TextBoxDate()
         Me.DgvListeDefunts = New cimetiere.DataGridViewCustom()
         Me.CbDefEmplacement = New cimetiere.ComboBoxEmplacements()
-        Me.TbDefDateDeces = New cimetiere.TextBoxDate()
+        Me.FPTBDateDeces = New cimetiere.TextBoxDate()
         Me.TbDefDateNaiss = New cimetiere.TextBoxDate()
         Me.CtrlLocVilleDef = New cimetiere.CtrlLocVillePays()
         Me.CtrlEtatCivDef = New cimetiere.CtrlEtatCivil()
-        Me.CtrlLocBenefDeCons = New cimetiere.CtrlLocVillePays()
         Me.FCDGDefunt = New cimetiere.DataGridViewCustom()
         Me.FCDGBeneficiaire = New cimetiere.DataGridViewCustom()
+        Me.CtrlLocBenefDeCons = New cimetiere.CtrlLocVillePays()
         Me.TBconsBenefdatenaiss = New cimetiere.TextBoxDate()
         Me.FCDGConss = New cimetiere.DataGridViewCustom()
+        Me.FCTBDateFin = New cimetiere.TextBoxDate()
+        Me.FCTBDateDeb = New cimetiere.TextBoxDate()
+        Me.CBEmplType = New cimetiere.ComboBoxTypeEmpl()
+        Me.CbConsEmplacement = New cimetiere.ComboBoxEmplacements()
         Me.FCTBNbPlaces = New cimetiere.TextBoxInt()
+        Me.TBPersDN = New cimetiere.TextBoxDate()
+        Me.CtrlLocPersonne = New cimetiere.CtrlLocVillePays()
         Me.DgvListeConcessionnairePersonneContact = New cimetiere.DataGridViewCustom()
         Me.DgvListeConcessionnaireBenef = New cimetiere.DataGridViewCustom()
         Me.DgvListeConcessionnaireConcess = New cimetiere.DataGridViewCustom()
@@ -251,6 +244,7 @@ Partial Class FormGestion
         Me.TabPage1.BackColor = System.Drawing.Color.Transparent
         Me.TabPage1.BackgroundImage = CType(resources.GetObject("TabPage1.BackgroundImage"), System.Drawing.Image)
         Me.TabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.TabPage1.Controls.Add(Me.FPTBDateE)
         Me.TabPage1.Controls.Add(Me.FDBLinkToPersCon)
         Me.TabPage1.Controls.Add(Me.Panel3)
         Me.TabPage1.Controls.Add(Me.Panel10)
@@ -259,6 +253,7 @@ Partial Class FormGestion
         Me.TabPage1.Controls.Add(Me.FPBModifier)
         Me.TabPage1.Controls.Add(Me.FPBLienCons)
         Me.TabPage1.Controls.Add(Me.FPTBLahulpe)
+        Me.TabPage1.Controls.Add(Me.FPLDateEnt)
         Me.TabPage1.Location = New System.Drawing.Point(4, 36)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage1.Name = "TabPage1"
@@ -314,8 +309,8 @@ Partial Class FormGestion
         'GroupBox10
         '
         Me.GroupBox10.BackColor = System.Drawing.Color.White
-        Me.GroupBox10.Controls.Add(Me.RbDefChercherEmplacement)
-        Me.GroupBox10.Controls.Add(Me.RbDefChercherNom)
+        Me.GroupBox10.Controls.Add(Me.CBDefChercherEmplacement)
+        Me.GroupBox10.Controls.Add(Me.CBDefChercherNom)
         Me.GroupBox10.Controls.Add(Me.BtDefAnnulerRecherche)
         Me.GroupBox10.Controls.Add(Me.Label3)
         Me.GroupBox10.Controls.Add(Me.Label2)
@@ -332,30 +327,6 @@ Partial Class FormGestion
         Me.GroupBox10.TabIndex = 0
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Rechercher"
-        '
-        'RbDefChercherEmplacement
-        '
-        Me.RbDefChercherEmplacement.AutoSize = True
-        Me.RbDefChercherEmplacement.Location = New System.Drawing.Point(17, 108)
-        Me.RbDefChercherEmplacement.Margin = New System.Windows.Forms.Padding(4)
-        Me.RbDefChercherEmplacement.Name = "RbDefChercherEmplacement"
-        Me.RbDefChercherEmplacement.Size = New System.Drawing.Size(111, 22)
-        Me.RbDefChercherEmplacement.TabIndex = 99
-        Me.RbDefChercherEmplacement.Text = "Emplacement"
-        Me.RbDefChercherEmplacement.UseVisualStyleBackColor = True
-        '
-        'RbDefChercherNom
-        '
-        Me.RbDefChercherNom.AutoSize = True
-        Me.RbDefChercherNom.Checked = True
-        Me.RbDefChercherNom.Location = New System.Drawing.Point(17, 81)
-        Me.RbDefChercherNom.Margin = New System.Windows.Forms.Padding(4)
-        Me.RbDefChercherNom.Name = "RbDefChercherNom"
-        Me.RbDefChercherNom.Size = New System.Drawing.Size(59, 22)
-        Me.RbDefChercherNom.TabIndex = 98
-        Me.RbDefChercherNom.TabStop = True
-        Me.RbDefChercherNom.Text = "Nom"
-        Me.RbDefChercherNom.UseVisualStyleBackColor = True
         '
         'BtDefAnnulerRecherche
         '
@@ -451,7 +422,7 @@ Partial Class FormGestion
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.White
         Me.GroupBox1.Controls.Add(Me.CbDefEmplacement)
-        Me.GroupBox1.Controls.Add(Me.TbDefDateDeces)
+        Me.GroupBox1.Controls.Add(Me.FPTBDateDeces)
         Me.GroupBox1.Controls.Add(Me.Label20)
         Me.GroupBox1.Controls.Add(Me.TbDefDateNaiss)
         Me.GroupBox1.Controls.Add(Me.CtrlLocVilleDef)
@@ -469,7 +440,6 @@ Partial Class FormGestion
         Me.GroupBox1.Controls.Add(Me.FPTBNom)
         Me.GroupBox1.Controls.Add(Me.FPLDateNaiss)
         Me.GroupBox1.Controls.Add(Me.FPLNom)
-        Me.GroupBox1.Controls.Add(Me.FPLDateEnt)
         Me.GroupBox1.Location = New System.Drawing.Point(21, 16)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
@@ -478,6 +448,16 @@ Partial Class FormGestion
         Me.GroupBox1.TabIndex = 93
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Informations du défunt"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(369, 177)
+        Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(74, 18)
+        Me.Label20.TabIndex = 144
+        Me.Label20.Text = "Décédé le :"
         '
         'Label15
         '
@@ -605,7 +585,7 @@ Partial Class FormGestion
         'FPLDateEnt
         '
         Me.FPLDateEnt.AutoSize = True
-        Me.FPLDateEnt.Location = New System.Drawing.Point(278, 196)
+        Me.FPLDateEnt.Location = New System.Drawing.Point(986, 350)
         Me.FPLDateEnt.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FPLDateEnt.Name = "FPLDateEnt"
         Me.FPLDateEnt.Size = New System.Drawing.Size(32, 18)
@@ -664,7 +644,6 @@ Partial Class FormGestion
         Me.TabPage2.BackColor = System.Drawing.Color.GhostWhite
         Me.TabPage2.BackgroundImage = CType(resources.GetObject("TabPage2.BackgroundImage"), System.Drawing.Image)
         Me.TabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.TabPage2.Controls.Add(Me.CtrlLocBenefDeCons)
         Me.TabPage2.Controls.Add(Me.BSuppConsBenef)
         Me.TabPage2.Controls.Add(Me.BSuppCons)
         Me.TabPage2.Controls.Add(Me.BmodifConsBenef)
@@ -806,16 +785,13 @@ Partial Class FormGestion
         'GroupBox7
         '
         Me.GroupBox7.BackColor = System.Drawing.Color.White
+        Me.GroupBox7.Controls.Add(Me.CtrlLocBenefDeCons)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefdatenaiss)
-        Me.GroupBox7.Controls.Add(Me.TBconsBenefpays)
-        Me.GroupBox7.Controls.Add(Me.TBconsBenefville)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefadress)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefnom)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefprenom)
         Me.GroupBox7.Controls.Add(Me.Label14)
         Me.GroupBox7.Controls.Add(Me.Label16)
-        Me.GroupBox7.Controls.Add(Me.Label18)
-        Me.GroupBox7.Controls.Add(Me.Label19)
         Me.GroupBox7.Controls.Add(Me.Label21)
         Me.GroupBox7.Controls.Add(Me.Label22)
         Me.GroupBox7.Location = New System.Drawing.Point(23, 17)
@@ -826,22 +802,6 @@ Partial Class FormGestion
         Me.GroupBox7.TabIndex = 0
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Infos Bénéficiaires"
-        '
-        'TBconsBenefpays
-        '
-        Me.TBconsBenefpays.Location = New System.Drawing.Point(167, 88)
-        Me.TBconsBenefpays.Margin = New System.Windows.Forms.Padding(4)
-        Me.TBconsBenefpays.Name = "TBconsBenefpays"
-        Me.TBconsBenefpays.Size = New System.Drawing.Size(171, 25)
-        Me.TBconsBenefpays.TabIndex = 72
-        '
-        'TBconsBenefville
-        '
-        Me.TBconsBenefville.Location = New System.Drawing.Point(428, 88)
-        Me.TBconsBenefville.Margin = New System.Windows.Forms.Padding(4)
-        Me.TBconsBenefville.Name = "TBconsBenefville"
-        Me.TBconsBenefville.Size = New System.Drawing.Size(171, 25)
-        Me.TBconsBenefville.TabIndex = 71
         '
         'TBconsBenefadress
         '
@@ -884,24 +844,6 @@ Partial Class FormGestion
         Me.Label16.Size = New System.Drawing.Size(118, 18)
         Me.Label16.TabIndex = 51
         Me.Label16.Text = "Date de naissance"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(119, 88)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(36, 18)
-        Me.Label18.TabIndex = 48
-        Me.Label18.Text = "Pays"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(380, 88)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(33, 18)
-        Me.Label19.TabIndex = 46
-        Me.Label19.Text = "Ville"
         '
         'Label21
         '
@@ -957,26 +899,26 @@ Partial Class FormGestion
         'GroupBox6
         '
         Me.GroupBox6.BackColor = System.Drawing.Color.White
+        Me.GroupBox6.Controls.Add(Me.FCTBDateFin)
+        Me.GroupBox6.Controls.Add(Me.FCTBDateDeb)
+        Me.GroupBox6.Controls.Add(Me.CBMonumentClasse)
+        Me.GroupBox6.Controls.Add(Me.CBEmplType)
+        Me.GroupBox6.Controls.Add(Me.CbConsEmplacement)
         Me.GroupBox6.Controls.Add(Me.FCTBNbPlaces)
         Me.GroupBox6.Controls.Add(Me.Label12)
-        Me.GroupBox6.Controls.Add(Me.FCTBDateDeb)
         Me.GroupBox6.Controls.Add(Me.Label13)
-        Me.GroupBox6.Controls.Add(Me.FCTBDateFin)
         Me.GroupBox6.Controls.Add(Me.FCLDenomination)
         Me.GroupBox6.Controls.Add(Me.FCTBnumero)
         Me.GroupBox6.Controls.Add(Me.FCLEmplacement)
-        Me.GroupBox6.Controls.Add(Me.FCTBEmplacement)
         Me.GroupBox6.Controls.Add(Me.FCLPlaceLibre)
         Me.GroupBox6.Controls.Add(Me.FCLPlaceOccupe)
         Me.GroupBox6.Controls.Add(Me.FCTBPlaceOccupe)
-        Me.GroupBox6.Controls.Add(Me.FCTBMonumentClasse)
         Me.GroupBox6.Controls.Add(Me.FCLCommentaire)
         Me.GroupBox6.Controls.Add(Me.FCTBCommentaire)
         Me.GroupBox6.Controls.Add(Me.FCLMonumentC)
         Me.GroupBox6.Controls.Add(Me.FCLHistoire)
         Me.GroupBox6.Controls.Add(Me.FCTBHistoire)
         Me.GroupBox6.Controls.Add(Me.FCLType)
-        Me.GroupBox6.Controls.Add(Me.FCTBType)
         Me.GroupBox6.Location = New System.Drawing.Point(23, 17)
         Me.GroupBox6.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox6.Name = "GroupBox6"
@@ -985,6 +927,15 @@ Partial Class FormGestion
         Me.GroupBox6.TabIndex = 0
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Infos Concessions"
+        '
+        'CBMonumentClasse
+        '
+        Me.CBMonumentClasse.AutoSize = True
+        Me.CBMonumentClasse.Location = New System.Drawing.Point(167, 102)
+        Me.CBMonumentClasse.Name = "CBMonumentClasse"
+        Me.CBMonumentClasse.Size = New System.Drawing.Size(18, 17)
+        Me.CBMonumentClasse.TabIndex = 137
+        Me.CBMonumentClasse.UseVisualStyleBackColor = True
         '
         'Label12
         '
@@ -996,14 +947,6 @@ Partial Class FormGestion
         Me.Label12.TabIndex = 125
         Me.Label12.Text = "Date de debut"
         '
-        'FCTBDateDeb
-        '
-        Me.FCTBDateDeb.Location = New System.Drawing.Point(164, 170)
-        Me.FCTBDateDeb.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCTBDateDeb.Name = "FCTBDateDeb"
-        Me.FCTBDateDeb.Size = New System.Drawing.Size(169, 25)
-        Me.FCTBDateDeb.TabIndex = 126
-        '
         'Label13
         '
         Me.Label13.AutoSize = True
@@ -1013,14 +956,6 @@ Partial Class FormGestion
         Me.Label13.Size = New System.Drawing.Size(75, 18)
         Me.Label13.TabIndex = 127
         Me.Label13.Text = "Date de fin"
-        '
-        'FCTBDateFin
-        '
-        Me.FCTBDateFin.Location = New System.Drawing.Point(479, 167)
-        Me.FCTBDateFin.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCTBDateFin.Name = "FCTBDateFin"
-        Me.FCTBDateFin.Size = New System.Drawing.Size(169, 25)
-        Me.FCTBDateFin.TabIndex = 128
         '
         'FCLDenomination
         '
@@ -1050,49 +985,34 @@ Partial Class FormGestion
         Me.FCLEmplacement.TabIndex = 66
         Me.FCLEmplacement.Text = "Emplacement :"
         '
-        'FCTBEmplacement
-        '
-        Me.FCTBEmplacement.Location = New System.Drawing.Point(481, 25)
-        Me.FCTBEmplacement.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCTBEmplacement.Name = "FCTBEmplacement"
-        Me.FCTBEmplacement.Size = New System.Drawing.Size(169, 25)
-        Me.FCTBEmplacement.TabIndex = 67
-        '
         'FCLPlaceLibre
         '
         Me.FCLPlaceLibre.AutoSize = True
-        Me.FCLPlaceLibre.Location = New System.Drawing.Point(56, 65)
+        Me.FCLPlaceLibre.Location = New System.Drawing.Point(30, 65)
         Me.FCLPlaceLibre.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLPlaceLibre.Name = "FCLPlaceLibre"
-        Me.FCLPlaceLibre.Size = New System.Drawing.Size(97, 18)
+        Me.FCLPlaceLibre.Size = New System.Drawing.Size(125, 18)
         Me.FCLPlaceLibre.TabIndex = 68
-        Me.FCLPlaceLibre.Text = "Places totales :"
+        Me.FCLPlaceLibre.Text = "Nombre de places :"
         '
         'FCLPlaceOccupe
         '
         Me.FCLPlaceOccupe.AutoSize = True
-        Me.FCLPlaceOccupe.Location = New System.Drawing.Point(372, 63)
+        Me.FCLPlaceOccupe.Location = New System.Drawing.Point(385, 63)
         Me.FCLPlaceOccupe.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.FCLPlaceOccupe.Name = "FCLPlaceOccupe"
-        Me.FCLPlaceOccupe.Size = New System.Drawing.Size(93, 18)
+        Me.FCLPlaceOccupe.Size = New System.Drawing.Size(80, 18)
         Me.FCLPlaceOccupe.TabIndex = 70
-        Me.FCLPlaceOccupe.Text = "Place occupé :"
+        Me.FCLPlaceOccupe.Text = "Occupants :"
         '
         'FCTBPlaceOccupe
         '
         Me.FCTBPlaceOccupe.Location = New System.Drawing.Point(481, 59)
         Me.FCTBPlaceOccupe.Margin = New System.Windows.Forms.Padding(4)
         Me.FCTBPlaceOccupe.Name = "FCTBPlaceOccupe"
+        Me.FCTBPlaceOccupe.ReadOnly = True
         Me.FCTBPlaceOccupe.Size = New System.Drawing.Size(169, 25)
         Me.FCTBPlaceOccupe.TabIndex = 71
-        '
-        'FCTBMonumentClasse
-        '
-        Me.FCTBMonumentClasse.Location = New System.Drawing.Point(165, 98)
-        Me.FCTBMonumentClasse.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCTBMonumentClasse.Name = "FCTBMonumentClasse"
-        Me.FCTBMonumentClasse.Size = New System.Drawing.Size(169, 25)
-        Me.FCTBMonumentClasse.TabIndex = 95
         '
         'FCLCommentaire
         '
@@ -1150,14 +1070,6 @@ Partial Class FormGestion
         Me.FCLType.TabIndex = 100
         Me.FCLType.Text = "Type :"
         '
-        'FCTBType
-        '
-        Me.FCTBType.Location = New System.Drawing.Point(481, 132)
-        Me.FCTBType.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCTBType.Name = "FCTBType"
-        Me.FCTBType.Size = New System.Drawing.Size(169, 25)
-        Me.FCTBType.TabIndex = 101
-        '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.SeaGreen
@@ -1165,27 +1077,28 @@ Partial Class FormGestion
         Me.Panel4.Location = New System.Drawing.Point(24, 107)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(345, 273)
+        Me.Panel4.Size = New System.Drawing.Size(345, 375)
         Me.Panel4.TabIndex = 129
         '
         'GroupBox4
         '
         Me.GroupBox4.BackColor = System.Drawing.Color.White
+        Me.GroupBox4.Controls.Add(Me.CbfconsEmplacement)
+        Me.GroupBox4.Controls.Add(Me.CbfconsCsnr)
+        Me.GroupBox4.Controls.Add(Me.CbfConsOccupants)
         Me.GroupBox4.Controls.Add(Me.Label27)
         Me.GroupBox4.Controls.Add(Me.Button2)
         Me.GroupBox4.Controls.Add(Me.DtpConsRechercherDateFinap)
         Me.GroupBox4.Controls.Add(Me.Label23)
         Me.GroupBox4.Controls.Add(Me.Label17)
         Me.GroupBox4.Controls.Add(Me.DtpConsRechercherDateFin)
-        Me.GroupBox4.Controls.Add(Me.RbfconsEmplacement)
-        Me.GroupBox4.Controls.Add(Me.RbfconsNumero)
         Me.GroupBox4.Controls.Add(Me.BtRechEmpl)
         Me.GroupBox4.Controls.Add(Me.FCTBRechercher)
         Me.GroupBox4.Location = New System.Drawing.Point(19, 11)
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox4.Size = New System.Drawing.Size(308, 249)
+        Me.GroupBox4.Size = New System.Drawing.Size(308, 351)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Rechercher :"
@@ -1202,7 +1115,7 @@ Partial Class FormGestion
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(45, 209)
+        Me.Button2.Location = New System.Drawing.Point(49, 290)
         Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(92, 28)
@@ -1214,7 +1127,7 @@ Partial Class FormGestion
         '
         Me.DtpConsRechercherDateFinap.Checked = False
         Me.DtpConsRechercherDateFinap.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DtpConsRechercherDateFinap.Location = New System.Drawing.Point(148, 174)
+        Me.DtpConsRechercherDateFinap.Location = New System.Drawing.Point(152, 255)
         Me.DtpConsRechercherDateFinap.Margin = New System.Windows.Forms.Padding(4)
         Me.DtpConsRechercherDateFinap.Name = "DtpConsRechercherDateFinap"
         Me.DtpConsRechercherDateFinap.ShowCheckBox = True
@@ -1224,7 +1137,7 @@ Partial Class FormGestion
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(1, 177)
+        Me.Label23.Location = New System.Drawing.Point(5, 258)
         Me.Label23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(119, 18)
@@ -1234,7 +1147,7 @@ Partial Class FormGestion
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(1, 145)
+        Me.Label17.Location = New System.Drawing.Point(5, 226)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(124, 18)
@@ -1245,38 +1158,16 @@ Partial Class FormGestion
         '
         Me.DtpConsRechercherDateFin.Checked = False
         Me.DtpConsRechercherDateFin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DtpConsRechercherDateFin.Location = New System.Drawing.Point(148, 140)
+        Me.DtpConsRechercherDateFin.Location = New System.Drawing.Point(152, 221)
         Me.DtpConsRechercherDateFin.Margin = New System.Windows.Forms.Padding(4)
         Me.DtpConsRechercherDateFin.Name = "DtpConsRechercherDateFin"
         Me.DtpConsRechercherDateFin.ShowCheckBox = True
         Me.DtpConsRechercherDateFin.Size = New System.Drawing.Size(149, 25)
         Me.DtpConsRechercherDateFin.TabIndex = 128
         '
-        'RbfconsEmplacement
-        '
-        Me.RbfconsEmplacement.Checked = True
-        Me.RbfconsEmplacement.Location = New System.Drawing.Point(7, 106)
-        Me.RbfconsEmplacement.Margin = New System.Windows.Forms.Padding(4)
-        Me.RbfconsEmplacement.Name = "RbfconsEmplacement"
-        Me.RbfconsEmplacement.Size = New System.Drawing.Size(129, 22)
-        Me.RbfconsEmplacement.TabIndex = 0
-        Me.RbfconsEmplacement.TabStop = True
-        Me.RbfconsEmplacement.Text = "Emplacement"
-        Me.RbfconsEmplacement.UseVisualStyleBackColor = True
-        '
-        'RbfconsNumero
-        '
-        Me.RbfconsNumero.Location = New System.Drawing.Point(8, 76)
-        Me.RbfconsNumero.Margin = New System.Windows.Forms.Padding(4)
-        Me.RbfconsNumero.Name = "RbfconsNumero"
-        Me.RbfconsNumero.Size = New System.Drawing.Size(129, 22)
-        Me.RbfconsNumero.TabIndex = 0
-        Me.RbfconsNumero.Text = "Numero"
-        Me.RbfconsNumero.UseVisualStyleBackColor = True
-        '
         'BtRechEmpl
         '
-        Me.BtRechEmpl.Location = New System.Drawing.Point(149, 209)
+        Me.BtRechEmpl.Location = New System.Drawing.Point(153, 290)
         Me.BtRechEmpl.Margin = New System.Windows.Forms.Padding(4)
         Me.BtRechEmpl.Name = "BtRechEmpl"
         Me.BtRechEmpl.Size = New System.Drawing.Size(100, 28)
@@ -1366,12 +1257,10 @@ Partial Class FormGestion
         'GroupBox13
         '
         Me.GroupBox13.BackColor = System.Drawing.Color.White
-        Me.GroupBox13.Controls.Add(Me.TBPersNumNational)
-        Me.GroupBox13.Controls.Add(Me.TBPersPays)
         Me.GroupBox13.Controls.Add(Me.TBPersDN)
-        Me.GroupBox13.Controls.Add(Me.TBPersVille)
+        Me.GroupBox13.Controls.Add(Me.CtrlLocPersonne)
+        Me.GroupBox13.Controls.Add(Me.TBPersNumNational)
         Me.GroupBox13.Controls.Add(Me.TBPersTel)
-        Me.GroupBox13.Controls.Add(Me.TBPersCodePostal)
         Me.GroupBox13.Controls.Add(Me.TBPersAdress)
         Me.GroupBox13.Controls.Add(Me.TBPersNom)
         Me.GroupBox13.Controls.Add(Me.TBPersPrenom)
@@ -1379,9 +1268,6 @@ Partial Class FormGestion
         Me.GroupBox13.Controls.Add(Me.Label9)
         Me.GroupBox13.Controls.Add(Me.Label8)
         Me.GroupBox13.Controls.Add(Me.Label7)
-        Me.GroupBox13.Controls.Add(Me.Label6)
-        Me.GroupBox13.Controls.Add(Me.Label5)
-        Me.GroupBox13.Controls.Add(Me.Label10)
         Me.GroupBox13.Controls.Add(Me.Label11)
         Me.GroupBox13.Controls.Add(Me.Label28)
         Me.GroupBox13.Location = New System.Drawing.Point(23, 17)
@@ -1401,52 +1287,20 @@ Partial Class FormGestion
         Me.TBPersNumNational.Size = New System.Drawing.Size(132, 25)
         Me.TBPersNumNational.TabIndex = 146
         '
-        'TBPersPays
-        '
-        Me.TBPersPays.Location = New System.Drawing.Point(347, 123)
-        Me.TBPersPays.Margin = New System.Windows.Forms.Padding(4)
-        Me.TBPersPays.Name = "TBPersPays"
-        Me.TBPersPays.Size = New System.Drawing.Size(132, 25)
-        Me.TBPersPays.TabIndex = 145
-        '
-        'TBPersDN
-        '
-        Me.TBPersDN.Location = New System.Drawing.Point(159, 124)
-        Me.TBPersDN.Margin = New System.Windows.Forms.Padding(4)
-        Me.TBPersDN.Name = "TBPersDN"
-        Me.TBPersDN.Size = New System.Drawing.Size(132, 25)
-        Me.TBPersDN.TabIndex = 144
-        '
-        'TBPersVille
-        '
-        Me.TBPersVille.Location = New System.Drawing.Point(359, 91)
-        Me.TBPersVille.Margin = New System.Windows.Forms.Padding(4)
-        Me.TBPersVille.Name = "TBPersVille"
-        Me.TBPersVille.Size = New System.Drawing.Size(132, 25)
-        Me.TBPersVille.TabIndex = 143
-        '
         'TBPersTel
         '
-        Me.TBPersTel.Location = New System.Drawing.Point(107, 91)
+        Me.TBPersTel.Location = New System.Drawing.Point(398, 129)
         Me.TBPersTel.Margin = New System.Windows.Forms.Padding(4)
         Me.TBPersTel.Name = "TBPersTel"
         Me.TBPersTel.Size = New System.Drawing.Size(132, 25)
         Me.TBPersTel.TabIndex = 142
-        '
-        'TBPersCodePostal
-        '
-        Me.TBPersCodePostal.Location = New System.Drawing.Point(396, 52)
-        Me.TBPersCodePostal.Margin = New System.Windows.Forms.Padding(4)
-        Me.TBPersCodePostal.Name = "TBPersCodePostal"
-        Me.TBPersCodePostal.Size = New System.Drawing.Size(132, 25)
-        Me.TBPersCodePostal.TabIndex = 141
         '
         'TBPersAdress
         '
         Me.TBPersAdress.Location = New System.Drawing.Point(100, 54)
         Me.TBPersAdress.Margin = New System.Windows.Forms.Padding(4)
         Me.TBPersAdress.Name = "TBPersAdress"
-        Me.TBPersAdress.Size = New System.Drawing.Size(132, 25)
+        Me.TBPersAdress.Size = New System.Drawing.Size(165, 25)
         Me.TBPersAdress.TabIndex = 140
         '
         'TBPersNom
@@ -1454,15 +1308,15 @@ Partial Class FormGestion
         Me.TBPersNom.Location = New System.Drawing.Point(359, 16)
         Me.TBPersNom.Margin = New System.Windows.Forms.Padding(4)
         Me.TBPersNom.Name = "TBPersNom"
-        Me.TBPersNom.Size = New System.Drawing.Size(132, 25)
+        Me.TBPersNom.Size = New System.Drawing.Size(142, 25)
         Me.TBPersNom.TabIndex = 139
         '
         'TBPersPrenom
         '
-        Me.TBPersPrenom.Location = New System.Drawing.Point(100, 16)
+        Me.TBPersPrenom.Location = New System.Drawing.Point(101, 16)
         Me.TBPersPrenom.Margin = New System.Windows.Forms.Padding(4)
         Me.TBPersPrenom.Name = "TBPersPrenom"
-        Me.TBPersPrenom.Size = New System.Drawing.Size(132, 25)
+        Me.TBPersPrenom.Size = New System.Drawing.Size(164, 25)
         Me.TBPersPrenom.TabIndex = 138
         '
         'Label4
@@ -1495,38 +1349,11 @@ Partial Class FormGestion
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(19, 94)
+        Me.Label7.Location = New System.Drawing.Point(310, 132)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(71, 18)
         Me.Label7.TabIndex = 32
         Me.Label7.Text = "Téléphone"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(301, 126)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(36, 18)
-        Me.Label6.TabIndex = 30
-        Me.Label6.Text = "Pays"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(301, 91)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(33, 18)
-        Me.Label5.TabIndex = 28
-        Me.Label5.Text = "Ville"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(297, 55)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(81, 18)
-        Me.Label10.TabIndex = 25
-        Me.Label10.Text = "Code postal"
         '
         'Label11
         '
@@ -1754,14 +1581,6 @@ Partial Class FormGestion
         Me.BSupGestionPers.Text = "Supprimer"
         Me.BSupGestionPers.UseVisualStyleBackColor = False
         '
-        'FPTBDateE
-        '
-        Me.FPTBDateE.Location = New System.Drawing.Point(461, 178)
-        Me.FPTBDateE.Margin = New System.Windows.Forms.Padding(4)
-        Me.FPTBDateE.Name = "FPTBDateE"
-        Me.FPTBDateE.Size = New System.Drawing.Size(201, 22)
-        Me.FPTBDateE.TabIndex = 121
-        '
         'ProgressBar
         '
         Me.ProgressBar.Location = New System.Drawing.Point(164, 52)
@@ -1794,15 +1613,73 @@ Partial Class FormGestion
         Me.PictureBox2.TabIndex = 51
         Me.PictureBox2.TabStop = False
         '
-        'Label20
+        'TextBox1
         '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(369, 177)
-        Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(74, 18)
-        Me.Label20.TabIndex = 144
-        Me.Label20.Text = "Décédé le :"
+        Me.TextBox1.Location = New System.Drawing.Point(1109, 263)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(169, 22)
+        Me.TextBox1.TabIndex = 139
+        '
+        'CbfConsOccupants
+        '
+        Me.CbfConsOccupants.AutoSize = True
+        Me.CbfConsOccupants.Location = New System.Drawing.Point(11, 137)
+        Me.CbfConsOccupants.Name = "CbfConsOccupants"
+        Me.CbfConsOccupants.Size = New System.Drawing.Size(95, 22)
+        Me.CbfConsOccupants.TabIndex = 136
+        Me.CbfConsOccupants.Text = "Occupants"
+        Me.CbfConsOccupants.UseVisualStyleBackColor = True
+        '
+        'CbfconsCsnr
+        '
+        Me.CbfconsCsnr.AutoSize = True
+        Me.CbfconsCsnr.Location = New System.Drawing.Point(11, 109)
+        Me.CbfconsCsnr.Name = "CbfconsCsnr"
+        Me.CbfconsCsnr.Size = New System.Drawing.Size(129, 22)
+        Me.CbfconsCsnr.TabIndex = 137
+        Me.CbfconsCsnr.Text = "Concessionnaire"
+        Me.CbfconsCsnr.UseVisualStyleBackColor = True
+        '
+        'CbfconsEmplacement
+        '
+        Me.CbfconsEmplacement.AutoSize = True
+        Me.CbfconsEmplacement.Location = New System.Drawing.Point(11, 80)
+        Me.CbfconsEmplacement.Name = "CbfconsEmplacement"
+        Me.CbfconsEmplacement.Size = New System.Drawing.Size(112, 22)
+        Me.CbfconsEmplacement.TabIndex = 138
+        Me.CbfconsEmplacement.Text = "Emplacement"
+        Me.CbfconsEmplacement.UseVisualStyleBackColor = True
+        '
+        'CBDefChercherNom
+        '
+        Me.CBDefChercherNom.AutoSize = True
+        Me.CBDefChercherNom.Location = New System.Drawing.Point(14, 79)
+        Me.CBDefChercherNom.Name = "CBDefChercherNom"
+        Me.CBDefChercherNom.Size = New System.Drawing.Size(60, 22)
+        Me.CBDefChercherNom.TabIndex = 100
+        Me.CBDefChercherNom.Text = "Nom"
+        Me.CBDefChercherNom.UseVisualStyleBackColor = True
+        '
+        'CBDefChercherEmplacement
+        '
+        Me.CBDefChercherEmplacement.AutoSize = True
+        Me.CBDefChercherEmplacement.Location = New System.Drawing.Point(13, 107)
+        Me.CBDefChercherEmplacement.Name = "CBDefChercherEmplacement"
+        Me.CBDefChercherEmplacement.Size = New System.Drawing.Size(112, 22)
+        Me.CBDefChercherEmplacement.TabIndex = 101
+        Me.CBDefChercherEmplacement.Text = "Emplacement"
+        Me.CBDefChercherEmplacement.UseVisualStyleBackColor = True
+        '
+        'FPTBDateE
+        '
+        Me.FPTBDateE.DateValue = Nothing
+        Me.FPTBDateE.Location = New System.Drawing.Point(1060, 353)
+        Me.FPTBDateE.Mask = "00/00/0000"
+        Me.FPTBDateE.Name = "FPTBDateE"
+        Me.FPTBDateE.Size = New System.Drawing.Size(100, 25)
+        Me.FPTBDateE.TabIndex = 119
+        Me.FPTBDateE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'DgvListeDefunts
         '
@@ -1853,15 +1730,15 @@ Partial Class FormGestion
         Me.CbDefEmplacement.TabIndex = 146
         Me.CbDefEmplacement.ValueMember = "empl_id"
         '
-        'TbDefDateDeces
+        'FPTBDateDeces
         '
-        Me.TbDefDateDeces.DateValue = Nothing
-        Me.TbDefDateDeces.Location = New System.Drawing.Point(487, 175)
-        Me.TbDefDateDeces.Mask = "00/00/0000"
-        Me.TbDefDateDeces.Name = "TbDefDateDeces"
-        Me.TbDefDateDeces.Size = New System.Drawing.Size(112, 25)
-        Me.TbDefDateDeces.TabIndex = 145
-        Me.TbDefDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.FPTBDateDeces.DateValue = Nothing
+        Me.FPTBDateDeces.Location = New System.Drawing.Point(487, 175)
+        Me.FPTBDateDeces.Mask = "00/00/0000"
+        Me.FPTBDateDeces.Name = "FPTBDateDeces"
+        Me.FPTBDateDeces.Size = New System.Drawing.Size(112, 25)
+        Me.FPTBDateDeces.TabIndex = 145
+        Me.FPTBDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TbDefDateNaiss
         '
@@ -1893,17 +1770,6 @@ Partial Class FormGestion
         Me.CtrlEtatCivDef.osef = Nothing
         Me.CtrlEtatCivDef.Size = New System.Drawing.Size(369, 24)
         Me.CtrlEtatCivDef.TabIndex = 142
-        '
-        'CtrlLocBenefDeCons
-        '
-        Me.CtrlLocBenefDeCons.LectureSeule = False
-        Me.CtrlLocBenefDeCons.Location = New System.Drawing.Point(936, 477)
-        Me.CtrlLocBenefDeCons.LocVilleId = -1
-        Me.CtrlLocBenefDeCons.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtrlLocBenefDeCons.Name = "CtrlLocBenefDeCons"
-        Me.CtrlLocBenefDeCons.osef = Nothing
-        Me.CtrlLocBenefDeCons.Size = New System.Drawing.Size(329, 30)
-        Me.CtrlLocBenefDeCons.TabIndex = 135
         '
         'FCDGDefunt
         '
@@ -1971,6 +1837,17 @@ Partial Class FormGestion
         Me.FCDGBeneficiaire.Size = New System.Drawing.Size(416, 183)
         Me.FCDGBeneficiaire.TabIndex = 93
         '
+        'CtrlLocBenefDeCons
+        '
+        Me.CtrlLocBenefDeCons.LectureSeule = False
+        Me.CtrlLocBenefDeCons.Location = New System.Drawing.Point(167, 87)
+        Me.CtrlLocBenefDeCons.LocVilleId = -1
+        Me.CtrlLocBenefDeCons.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlLocBenefDeCons.Name = "CtrlLocBenefDeCons"
+        Me.CtrlLocBenefDeCons.osef = Nothing
+        Me.CtrlLocBenefDeCons.Size = New System.Drawing.Size(329, 30)
+        Me.CtrlLocBenefDeCons.TabIndex = 135
+        '
         'TBconsBenefdatenaiss
         '
         Me.TBconsBenefdatenaiss.DateValue = Nothing
@@ -2014,6 +1891,47 @@ Partial Class FormGestion
         Me.FCDGConss.Size = New System.Drawing.Size(416, 186)
         Me.FCDGConss.TabIndex = 43
         '
+        'FCTBDateFin
+        '
+        Me.FCTBDateFin.DateValue = Nothing
+        Me.FCTBDateFin.Location = New System.Drawing.Point(483, 171)
+        Me.FCTBDateFin.Mask = "00/00/0000"
+        Me.FCTBDateFin.Name = "FCTBDateFin"
+        Me.FCTBDateFin.Size = New System.Drawing.Size(167, 25)
+        Me.FCTBDateFin.TabIndex = 138
+        Me.FCTBDateFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'FCTBDateDeb
+        '
+        Me.FCTBDateDeb.DateValue = Nothing
+        Me.FCTBDateDeb.Location = New System.Drawing.Point(167, 172)
+        Me.FCTBDateDeb.Mask = "00/00/0000"
+        Me.FCTBDateDeb.Name = "FCTBDateDeb"
+        Me.FCTBDateDeb.Size = New System.Drawing.Size(167, 25)
+        Me.FCTBDateDeb.TabIndex = 136
+        Me.FCTBDateDeb.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'CBEmplType
+        '
+        Me.CBEmplType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CBEmplType.FormattingEnabled = True
+        Me.CBEmplType.Location = New System.Drawing.Point(484, 134)
+        Me.CBEmplType.Name = "CBEmplType"
+        Me.CBEmplType.SelectedUnderlyingValue = Nothing
+        Me.CBEmplType.Size = New System.Drawing.Size(121, 26)
+        Me.CBEmplType.TabIndex = 1
+        '
+        'CbConsEmplacement
+        '
+        Me.CbConsEmplacement.DisplayMember = "empl_reference"
+        Me.CbConsEmplacement.EmplId = -1
+        Me.CbConsEmplacement.FormattingEnabled = True
+        Me.CbConsEmplacement.Location = New System.Drawing.Point(481, 18)
+        Me.CbConsEmplacement.Name = "CbConsEmplacement"
+        Me.CbConsEmplacement.Size = New System.Drawing.Size(167, 26)
+        Me.CbConsEmplacement.TabIndex = 136
+        Me.CbConsEmplacement.ValueMember = "empl_id"
+        '
         'FCTBNbPlaces
         '
         Me.FCTBNbPlaces.Location = New System.Drawing.Point(165, 62)
@@ -2021,6 +1939,27 @@ Partial Class FormGestion
         Me.FCTBNbPlaces.Size = New System.Drawing.Size(169, 25)
         Me.FCTBNbPlaces.TabIndex = 135
         Me.FCTBNbPlaces.Value = Nothing
+        '
+        'TBPersDN
+        '
+        Me.TBPersDN.DateValue = Nothing
+        Me.TBPersDN.Location = New System.Drawing.Point(143, 124)
+        Me.TBPersDN.Mask = "00/00/0000"
+        Me.TBPersDN.Name = "TBPersDN"
+        Me.TBPersDN.Size = New System.Drawing.Size(105, 25)
+        Me.TBPersDN.TabIndex = 148
+        Me.TBPersDN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'CtrlLocPersonne
+        '
+        Me.CtrlLocPersonne.LectureSeule = False
+        Me.CtrlLocPersonne.Location = New System.Drawing.Point(299, 54)
+        Me.CtrlLocPersonne.LocVilleId = -1
+        Me.CtrlLocPersonne.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlLocPersonne.Name = "CtrlLocPersonne"
+        Me.CtrlLocPersonne.osef = Nothing
+        Me.CtrlLocPersonne.Size = New System.Drawing.Size(316, 25)
+        Me.CtrlLocPersonne.TabIndex = 147
         '
         'DgvListeConcessionnairePersonneContact
         '
@@ -2141,6 +2080,7 @@ Partial Class FormGestion
         Me.Text = "FormGestion"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.Panel10.ResumeLayout(False)
@@ -2216,24 +2156,19 @@ Partial Class FormGestion
     Friend WithEvents Panel6 As Panel
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents Label12 As Label
-    Friend WithEvents FCTBDateDeb As TextBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents FCTBDateFin As TextBox
     Friend WithEvents FCLDenomination As Label
     Friend WithEvents FCTBnumero As TextBox
     Friend WithEvents FCLEmplacement As Label
-    Friend WithEvents FCTBEmplacement As TextBox
     Friend WithEvents FCLPlaceLibre As Label
     Friend WithEvents FCLPlaceOccupe As Label
     Friend WithEvents FCTBPlaceOccupe As TextBox
-    Friend WithEvents FCTBMonumentClasse As TextBox
     Friend WithEvents FCLCommentaire As Label
     Friend WithEvents FCTBCommentaire As TextBox
     Friend WithEvents FCLMonumentC As Label
     Friend WithEvents FCLHistoire As Label
     Friend WithEvents FCTBHistoire As TextBox
     Friend WithEvents FCLType As Label
-    Friend WithEvents FCTBType As TextBox
     Friend WithEvents Panel4 As Panel
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents Button2 As Button
@@ -2259,9 +2194,6 @@ Partial Class FormGestion
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label28 As Label
     Friend WithEvents Panel15 As Panel
@@ -2294,28 +2226,19 @@ Partial Class FormGestion
     Friend WithEvents FPLEmplacement As Label
     Friend WithEvents FPLDateM As Label
     Friend WithEvents FPLPrenom As Label
-    Friend WithEvents FPTBDateE As TextBox
     Friend WithEvents FPLDateEnt As Label
     Friend WithEvents FPLDateNaiss As Label
     Friend WithEvents FPTBNom As TextBox
     Friend WithEvents FPLNom As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents Label16 As Label
-    Friend WithEvents Label18 As Label
-    Friend WithEvents Label19 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents Label22 As Label
-    Friend WithEvents TBconsBenefpays As TextBox
-    Friend WithEvents TBconsBenefville As TextBox
     Friend WithEvents TBconsBenefadress As TextBox
     Friend WithEvents TBconsBenefnom As TextBox
     Friend WithEvents TBconsBenefprenom As TextBox
     Friend WithEvents TBPersNumNational As TextBox
-    Friend WithEvents TBPersPays As TextBox
-    Friend WithEvents TBPersDN As TextBox
-    Friend WithEvents TBPersVille As TextBox
     Friend WithEvents TBPersTel As TextBox
-    Friend WithEvents TBPersCodePostal As TextBox
     Friend WithEvents TBPersAdress As TextBox
     Friend WithEvents TBPersNom As TextBox
     Friend WithEvents TBPersPrenom As TextBox
@@ -2333,10 +2256,6 @@ Partial Class FormGestion
     Friend WithEvents BmodifConsBenef As Button
     Friend WithEvents BAddConsBenef As Button
     Friend WithEvents FDBLinkToPersCon As Button
-    Friend WithEvents RbDefChercherEmplacement As RadioButton
-    Friend WithEvents RbDefChercherNom As RadioButton
-    Friend WithEvents RbfconsEmplacement As RadioButton
-    Friend WithEvents RbfconsNumero As RadioButton
     Friend WithEvents DtpConsRechercherDateFinap As DateTimePicker
     Friend WithEvents Label23 As Label
     Friend WithEvents Label17 As Label
@@ -2348,7 +2267,21 @@ Partial Class FormGestion
     Friend WithEvents CtrlEtatCivDef As CtrlEtatCivil
     Friend WithEvents CtrlLocVilleDef As CtrlLocVillePays
     Friend WithEvents TbDefDateNaiss As TextBoxDate
-    Friend WithEvents TbDefDateDeces As TextBoxDate
+    Friend WithEvents FPTBDateDeces As TextBoxDate
     Friend WithEvents Label20 As Label
     Friend WithEvents CbDefEmplacement As ComboBoxEmplacements
+    Friend WithEvents CbConsEmplacement As ComboBoxEmplacements
+    Friend WithEvents CBEmplType As ComboBoxTypeEmpl
+    Friend WithEvents CBMonumentClasse As CheckBox
+    Friend WithEvents FCTBDateDeb As TextBoxDate
+    Friend WithEvents FCTBDateFin As TextBoxDate
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents CtrlLocPersonne As CtrlLocVillePays
+    Friend WithEvents TBPersDN As TextBoxDate
+    Friend WithEvents FPTBDateE As TextBoxDate
+    Friend WithEvents CbfconsEmplacement As CheckBox
+    Friend WithEvents CbfconsCsnr As CheckBox
+    Friend WithEvents CbfConsOccupants As CheckBox
+    Friend WithEvents CBDefChercherEmplacement As CheckBox
+    Friend WithEvents CBDefChercherNom As CheckBox
 End Class

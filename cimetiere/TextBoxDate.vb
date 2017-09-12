@@ -31,7 +31,13 @@
                 Next
                 If strs(2).Count = 0 Then strs(2) = "1"
                 strs(2) = Format(CType(strs(2), Integer), "0000")
-                Return Date.ParseExact(strs(0) & "/" & strs(1) & "/" & strs(2), "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
+                Dim Res As Object
+                Try
+                    Res = Date.ParseExact(strs(0) & "/" & strs(1) & "/" & strs(2), "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
+                Catch
+                    Res = Nothing
+                End Try
+                Return Res
             End If
         End Get
         Set(value As Object) 'Date?)

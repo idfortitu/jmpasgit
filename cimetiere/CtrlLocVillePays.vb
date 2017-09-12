@@ -71,14 +71,15 @@
     Public Sub New()
         InitializeComponent()       ' This call is required by the designer.
         If Not System.Diagnostics.Process.GetCurrentProcess().ProcessName = "devenv" Then
-            ChargerComboboxLocVille()
-            ChargerComboboxPays()
+            'ChargerComboboxLocVille()
+            'ChargerComboboxPays()
         End If
         Me.Controls.Add(TbV)
         Me.Controls.Add(TbP)
         TbV.BringToFront()
         TbP.BringToFront()
     End Sub
+
 
     Private Sub BtAjouterPays_Click(sender As Object, e As EventArgs) Handles BtAjouterPays.Click
         Dim f As New FormNouveauPays
@@ -135,6 +136,32 @@
         CbPays.DisplayMember = "Pays_nom"
         CbPays.ValueMember = "Pays_id"
         CbPays.DataSource = DtPays
+    End Sub
+
+    Public Sub chargercomboboxpays(tpays As DataTable)
+        If Not (From r As DataRow In tpays.Rows Where r("Pays_id") = -1).Any Then
+            Dim rowvide = tpays.NewRow
+            rowvide("Pays_id") = -1
+            tpays.Rows.InsertAt(rowvide, 0)
+        End If
+
+        CbPays.DisplayMember = "Pays_nom"
+        CbPays.ValueMember = "Pays_id"
+        CbPays.DataSource = tpays
+
+    End Sub
+    Public Sub chargercomboboxville(tville As DataTable)
+        'If tville.Rows.Find(-1) Is Nothing Then
+        If Not (From r As DataRow In tville Where r("locville_id") = -1).Any Then
+            Dim rowvide = tville.NewRow
+            rowvide("locville_id") = -1
+            tville.Rows.InsertAt(rowvide, 0)
+        End If
+
+        CbLocVille.DisplayMember = "locville_ville"
+        CbLocVille.ValueMember = "locville_id"
+        CbLocVille.DataSource = tville
+
     End Sub
 
     Public Sub Rafraichir(Optional ClearSelect As Boolean = False)

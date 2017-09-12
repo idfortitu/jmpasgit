@@ -6,6 +6,18 @@
         DgvEmplacementsPourInhOrd.AutoGenerateColumns = False
     End Sub
 
+    Private Sub FormDemandeInhumation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim TVilles = Bdd.GetTable("t_loc_ville")
+        Dim TPays = Bdd.GetTable("t_Pays")
+        CtrlDefLocvillepays.chargercomboboxpays(TPays)
+        CtrlDefLocvillepays.chargercomboboxville(TVilles)
+        CtrlLocVillePays1.chargercomboboxpays(TPays)    ' sais même pas si il est utilisé
+        CtrlLocVillePays1.chargercomboboxville(TVilles)
+        CtrlVilleDmdr.chargercomboboxpays(TPays)
+        CtrlVilleDmdr.chargercomboboxville(TVilles)
+    End Sub
+
+
     ' bouton "suivant" de la première page
     ' passe à l'onglet ou à l'action appropriée
     Private Sub BtSuivant_Click(sender As Object, e As EventArgs) Handles BtSuivant.Click
@@ -572,7 +584,7 @@
 
             If Not AnnulerEnregistrement Then
 
-                If FormPlanEmplsOrdinaires IsNot Nothing Andalso Not FormPlanEmplsOrdinaires.IsDisposed Then
+                If FormPlanEmplsOrdinaires IsNot Nothing AndAlso Not FormPlanEmplsOrdinaires.IsDisposed Then
                     FormPlanEmplsOrdinaires.Close()
                 End If
 
@@ -782,6 +794,5 @@
             Return cp
         End Get
     End Property
-
 
 End Class
