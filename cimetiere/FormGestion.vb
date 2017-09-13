@@ -43,6 +43,7 @@ Public Class FormGestion
 
         TextBoxDefuntRO()
         TextBoxConsRO()
+        TextBoxBenefDeConsRO()
         TextBoxPersRO()
         Panel10.Hide()
         Panel3.Hide()
@@ -394,8 +395,7 @@ Public Class FormGestion
     Private Sub DataBindDefunt()
         FPTBNom.DataBindings.Add("Text", dvlistedefunts, "def_nom")
         FPTBPrenom.DataBindings.Add("Text", dvlistedefunts, "def_prenom")
-        TbDefDateNaiss.DataBindings.Add("DateValue", dvlistedefunts, "def_date_naiss")
-        FPTBDateE.DataBindings.Add("DateValue", dvlistedefunts, "Date_debut")
+        FPTBDateNaiss.DataBindings.Add("DateValue", dvlistedefunts, "def_date_naiss")
         FPTBAdresse.DataBindings.Add("Text", dvlistedefunts, "def_adresse")
         FPTBDateDeces.DataBindings.Add("DateValue", dvlistedefunts, "def_date_deces")
         FPTBLieuNaiss.DataBindings.Add("Text", dvlistedefunts, "def_lieu_naiss")
@@ -530,7 +530,7 @@ Public Class FormGestion
 
 
     Private Sub BtDefChercher_Click(sender As Object, e As EventArgs) Handles BtDefChercher.Click
-        If Not (CBDefChercherNom.Checked OrElse CBDefChercherEmplacement.Checked OrElse DtpDefRechercherDateDecesApres.Checked OrElse DtpDefRechercherDateDecesAvant.Checked) Then
+        If Not {CBDefChercherNom, CbDefEmplacement, DtpDefRechercherDateDecesApres, DtpDefRechercherDateDecesAvant}.Any(Function(c) c.checked) Then
             dvlistedefunts.RowFilter = ""
             Exit Sub
         End If
@@ -554,6 +554,7 @@ Public Class FormGestion
             End If
         End If
 
+        ' filtrage dates
         If DtpDefRechercherDateDecesApres.Checked Then
             FiltresDates.Add("(def_date_deces > #" & Format(dateapres, "M/d/yyyy") & "#)")
         End If
@@ -568,12 +569,13 @@ Public Class FormGestion
 
     Private Sub BtDefAnnulerRecherche_Click(sender As Object, e As EventArgs) Handles BtDefAnnulerRecherche.Click
         dvlistedefunts.RowFilter = ""
-        TbDefChampRecherche.Text = ""
-        DtpDefRechercherDateDecesApres.Checked = False
-        DtpDefRechercherDateDecesAvant.Checked = False
+        'TbDefChampRecherche.Text = ""
+        'DtpDefRechercherDateDecesApres.Checked = False
+        'DtpDefRechercherDateDecesAvant.Checked = False
     End Sub
 
-    Private Sub PRBConcessionnaire_CheckedChanged(sender As Object, e As EventArgs) Handles PRBConcessionnaire.CheckedChanged
+    Private Sub PRBConcessionnaire_CheckedChanged(sender As RadioButton, e As EventArgs) Handles PRBConcessionnaire.CheckedChanged
+        If Not sender.Checked Then Exit Sub
         DgvListeConcessionnaireBenef.Hide()
         DgvListeConcessionnairePersonneContact.Hide()
         DgvListeConcessionnaireConcess.Show()
@@ -581,15 +583,18 @@ Public Class FormGestion
         DataBindConss()
     End Sub
 
-    Private Sub PRBPersCon_CheckedChanged(sender As Object, e As EventArgs) Handles PRBPersCon.CheckedChanged
+    Private Sub PRBPersCon_CheckedChanged(sender As RadioButton, e As EventArgs) Handles PRBPersCon.CheckedChanged
+        If Not sender.Checked Then Exit Sub
         DgvListeConcessionnaireBenef.Hide()
         DgvListeConcessionnairePersonneContact.Show()
         DgvListeConcessionnaireConcess.Hide()
         DataBindClear()
         DataBindPersContact()
+        'BTAnnulerRechPers_Click(Nothing, Nothing)
     End Sub
 
-    Private Sub PRBBenef_CheckedChanged(sender As Object, e As EventArgs) Handles PRBBenef.CheckedChanged
+    Private Sub PRBBenef_CheckedChanged(sender As RadioButton, e As EventArgs) Handles PRBBenef.CheckedChanged
+        If Not sender.Checked Then Exit Sub
         DgvListeConcessionnaireBenef.Show()
         DgvListeConcessionnairePersonneContact.Hide()
         DgvListeConcessionnaireConcess.Hide()
@@ -598,20 +603,7 @@ Public Class FormGestion
     End Sub
 
 
-
     Private Sub FCDGConss_SelectionChanged(sender As Object, e As EventArgs) Handles FCDGConss.SelectionChanged
-        ' A FAIRE vérif présence sélection (& aussi pr autres fcts c^ celle-ci)
-
-
-
-        '''DataBindClearConcessions()
-        'FCDGBeneficiaire.DataBindings.Clear()
-        '''''''FCDGBeneficiaire.Columns.Clear()
-        'FCDGDefunt.DataBindings.Clear()
-        'FCDGDefunt.Columns.Clear()
-        'DataTableDefuntCons()
-        ''DataTableConsBeneficiaire()
-        'DataBindConsDefunt()
 
         If FCDGConss.SelectedRows.Count > 0 Then
             Dim EmplSelect = CType(FCDGConss.SelectedRows(0).DataBoundItem, DataRowView).Row
@@ -624,40 +616,21 @@ Public Class FormGestion
                 dvbenefsdeconcession.RowFilter = "False"
             End If
 
-            'Dim nbplaces = EmplSelect("empl_nb_places")
-            'FCTBNbPlaces.Text = If(IsDBNull(nbplaces), "", EmplSelect("empl_nb_places"))         ' - (FCDGDefunt.RowCount - 1))
-
             FCTBPlaceOccupe.Text = FCDGDefunt.RowCount  '- 1
 
         Else
-            ' À FAIRE/CONTINUER - si pas de sélection
             dvbenefsdeconcession.RowFilter = "False"
             dvdefuntcons.RowFilter = "False"
-
+            FCTBPlaceOccupe.Text = ""
         End If
 
     End Sub
 
 
-    Private Sub FCDGBeneficiaire_SelectionChanged(sender As Object, e As EventArgs) Handles FCDGBeneficiaire.SelectionChanged
-        If FCDGBeneficiaire.SelectedRows.Count > 0 Then
-            Dim BenSelect = CType(FCDGBeneficiaire.SelectedRow.DataBoundItem, DataRowView).Row
+    Private Sub BtRechEmpl_Click(sender As Object, e As EventArgs) Handles BtRechEmpl.Click
 
-            CtrlLocBenefDeCons.LocVilleId = If(IsDBNull(BenSelect("locville_id")), -1, BenSelect("locville_id"))
-
-        Else
-            CtrlLocBenefDeCons.LocVilleId = -1
-            ' A FAIRE
-        End If
-
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles BtRechEmpl.Click
-
-        'If Not (From c In {CbfconsCsnr, CbfconsEmplacement, CbfConsOccupants, DtpConsRechercherDateFin, DtpConsRechercherDateFinap} Where c.Checked).Any Then
         If Not {CbfconsCsnr, CbfconsEmplacement, CbfConsOccupants, DtpConsRechercherDateFin, DtpConsRechercherDateFinap}.Any(Function(c) c.Checked) Then
             dvlisteempl.RowFilter = ""
-            MessageBox.Show("Fé 1 Choua")
             Exit Sub
         End If
 
@@ -668,8 +641,7 @@ Public Class FormGestion
         Dim FiltresDates As New List(Of String)
         Dim TxtRech = FCTBRechercher.Text.Trim.ToUpper
 
-        ' filtrage champs
-        ' si aucun champ n'est sélectionné, pas de filtrage sur les champs
+        ' filtrage champs (si au moins un champ est choisi)
         If CbfConsOccupants.Checked OrElse CbfconsCsnr.Checked OrElse CbfConsOccupants.Checked Then
             If CbfconsCsnr.Checked Then
                 ' cherche les id des concessionnaires pouvant correspondre
@@ -678,7 +650,7 @@ Public Class FormGestion
             End If
             If CbfConsOccupants.Checked Then
                 ' idem pour les occupants
-                Dim IdsOccs = (From r As DataRow In dtdefunt.Rows Where Not IsDBNull(r("empl_id")) AndAlso (r("def_nom").ToUpper Like "*" & TxtRech & "*" OrElse r("def_prenom").ToUpper Like "*" & TxtRech & "*") Select r("empl_id")) .Distinct
+                Dim IdsOccs = (From r As DataRow In dtdefunt.Rows Where Not IsDBNull(r("empl_id")) AndAlso (r("def_nom").ToUpper Like "*" & TxtRech & "*" OrElse r("def_prenom").ToUpper Like "*" & TxtRech & "*") Select r("empl_id")).Distinct
                 FiltresChamps.Add(If(IdsOccs.Count = 0, "False", "(empl_id In (" & String.Join(",", IdsOccs) & "))"))
             End If
             If CbfconsEmplacement.Checked Then
@@ -702,11 +674,11 @@ Public Class FormGestion
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub BTCsnAnnulerRecherche_Click(sender As Object, e As EventArgs) Handles BTCsnAnnulerRecherche.Click
         dvlisteempl.RowFilter = ""
-        FCTBRechercher.Text = ""
-        DtpConsRechercherDateFin.Checked = False
-        DtpConsRechercherDateFinap.Checked = False
+        'FCTBRechercher.Text = ""
+        'DtpConsRechercherDateFin.Checked = False
+        'DtpConsRechercherDateFinap.Checked = False
     End Sub
 
     Private Sub FPBLienCons_Click(sender As Object, e As EventArgs) Handles FPBLienCons.Click
@@ -716,7 +688,7 @@ Public Class FormGestion
         If IsDBNull(Def("empl_id")) Then Exit Sub
 
         TabControl1.SelectedIndex = 1
-        Button2_Click(Nothing, Nothing) ' annule le filtrage dans les concessions, celle qu'on veut doit être visible
+        BTCsnAnnulerRecherche_Click(Nothing, Nothing) ' annule le filtrage dans les concessions, celle qu'on veut doit être visible
         Dim ligneaselect = (From r As DataGridViewRow In FCDGConss.Rows Where r.Cells("empl_id").Value = Def("empl_id")).First
         ligneaselect.Selected = True
         FCDGConss.ScrollSelectedIntoView()
@@ -738,82 +710,49 @@ Public Class FormGestion
         BtDefAnnulerRecherche_Click(Nothing, Nothing)
         Dim ligneaselect = (From r As DataGridViewRow In DgvListeDefunts.Rows Where r.Cells("def_id").Value = def("def_id")).First
         ligneaselect.Selected = True
-
         DgvListeDefunts.ScrollSelectedIntoView()
     End Sub
 
     Private Sub TextBoxConsRO()
-        FCTBnumero.ReadOnly = True
-        FCTBnumero.Cursor = Cursors.No
-        If FCTBnumero.BackColor <> SystemColors.Window Then FCTBnumero.BackColor = SystemColors.Window
-        FCTBNbPlaces.ReadOnly = True
-        FCTBNbPlaces.Cursor = Cursors.No
-        If FCTBNbPlaces.BackColor <> SystemColors.Window Then FCTBNbPlaces.BackColor = SystemColors.Window
-        'FCTBPlaceOccupe.ReadOnly = True
-        'FCTBPlaceOccupe.Cursor = Cursors.No
-        'If FCTBPlaceOccupe.BackColor <> SystemColors.Window Then FCTBPlaceOccupe.BackColor = SystemColors.Window
-        'CBEmplType.Enabled = False
+        For Each tb As Object In {FCTBnumero, FCTBNbPlaces, FCTBCommentaire, FCTBHistoire, FCTBDateFin, FCTBDateDeb}
+            tb.ReadOnly = True
+            tb.Cursor = Cursors.No
+            If tb.BackColor <> SystemColors.Window Then tb.BackColor = SystemColors.Window
+        Next
+
+        CBEmplType.Enabled = False
         CBEmplType.Cursor = Cursors.No
-        If CBEmplType.BackColor <> SystemColors.Window Then CBEmplType.BackColor = SystemColors.Window
+
         CBMonumentClasse.Enabled = False
         CBMonumentClasse.Cursor = Cursors.No
-        'If CBMonumentClasse.BackColor <> SystemColors.Window Then CBMonumentClasse.BackColor = SystemColors.Window
-        FCTBHistoire.ReadOnly = True
-        FCTBHistoire.Cursor = Cursors.No
-        If FCTBHistoire.BackColor <> SystemColors.Window Then FCTBHistoire.BackColor = SystemColors.Window
+
         '''''CbConsEmplacement.LectureSeule = True
         CbConsEmplacement.Enabled = False
         CbConsEmplacement.Cursor = Cursors.No
-        If CbConsEmplacement.BackColor <> SystemColors.Window Then CbConsEmplacement.BackColor = SystemColors.Window
-        FCTBDateFin.ReadOnly = True
-        FCTBDateFin.Cursor = Cursors.No
-        If FCTBDateFin.BackColor <> SystemColors.Window Then FCTBDateFin.BackColor = SystemColors.Window
-        FCTBDateDeb.ReadOnly = True
-        FCTBDateDeb.Cursor = Cursors.No
-        If FCTBDateDeb.BackColor <> SystemColors.Window Then FCTBDateDeb.BackColor = SystemColors.Window
-        FCTBCommentaire.ReadOnly = True
-        FCTBCommentaire.Cursor = Cursors.No
-        If FCTBCommentaire.BackColor <> SystemColors.Window Then FCTBCommentaire.BackColor = SystemColors.Window
-        TBconsBenefadress.ReadOnly = True
-        TBconsBenefadress.Cursor = Cursors.No
-        If TBconsBenefadress.BackColor <> SystemColors.Window Then TBconsBenefadress.BackColor = SystemColors.Window
-        TBconsBenefdatenaiss.ReadOnly = True
-        TBconsBenefdatenaiss.Cursor = Cursors.No
-        If TBconsBenefdatenaiss.BackColor <> SystemColors.Window Then TBconsBenefdatenaiss.BackColor = SystemColors.Window
-        TBconsBenefnom.ReadOnly = True
-        TBconsBenefnom.Cursor = Cursors.No
-        CtrlLocBenefDeCons.LectureSeule = True
-        If TBconsBenefnom.BackColor <> SystemColors.Window Then TBconsBenefnom.BackColor = SystemColors.Window
-        TBconsBenefprenom.ReadOnly = True
-        TBconsBenefprenom.Cursor = Cursors.No
-        If TBconsBenefprenom.BackColor <> SystemColors.Window Then TBconsBenefprenom.BackColor = SystemColors.Window
     End Sub
+
+    Private Sub TextBoxBenefDeConsRO()
+        For Each tb As Object In {TBconsBenefprenom, TBconsBenefnom, TBconsBenefadress, TBconsBenefdatenaiss}
+            tb.ReadOnly = True
+            tb.Cursor = Cursors.No
+            If tb.BackColor <> SystemColors.Window Then tb.BackColor = SystemColors.Window
+        Next
+        CtrlLocBenefDeCons.LectureSeule = True
+    End Sub
+
+
     Private Sub TextBoxDefuntRO()
-        FPTBNom.ReadOnly = True
-        FPTBNom.Cursor = Cursors.No
-        If FPTBNom.BackColor <> SystemColors.Window Then FPTBNom.BackColor = SystemColors.Window
-        FPTBPrenom.ReadOnly = True
-        FPTBPrenom.Cursor = Cursors.No
-        If FPTBPrenom.BackColor <> SystemColors.Window Then FPTBPrenom.BackColor = SystemColors.Window
-        FPTBLieuNaiss.ReadOnly = True
-        FPTBLieuNaiss.Cursor = Cursors.No
-        If FPTBLieuNaiss.BackColor <> SystemColors.Window Then FPTBLieuNaiss.BackColor = SystemColors.Window
-        CbDefEmplacement.Enabled = False
+
+        For Each tb As Object In {FPTBNom, FPTBPrenom, FPTBAdresse, FPTBDateNaiss, FPTBDateDeces, FPTBLieuNaiss}
+            tb.ReadOnly = True
+            tb.Cursor = Cursors.No
+            If tb.BackColor <> SystemColors.Window Then tb.BackColor = SystemColors.Window
+
+        Next
+
         'CbDefEmplacement.LectureSeule = True
+        CbDefEmplacement.Enabled = False
         CbDefEmplacement.Cursor = Cursors.No
-        If CbDefEmplacement.BackColor <> SystemColors.Window Then CbDefEmplacement.BackColor = SystemColors.Window
-        TbDefDateNaiss.ReadOnly = True
-        TbDefDateNaiss.Cursor = Cursors.No
-        If TbDefDateNaiss.BackColor <> SystemColors.Window Then TbDefDateNaiss.BackColor = SystemColors.Window
-        FPTBDateDeces.ReadOnly = True
-        FPTBDateDeces.Cursor = Cursors.No
-        If FPTBDateDeces.BackColor <> SystemColors.Window Then FPTBDateDeces.BackColor = SystemColors.Window
-        FPTBDateE.ReadOnly = True
-        FPTBDateE.Cursor = Cursors.No
-        If FPTBDateE.BackColor <> SystemColors.Window Then FPTBDateE.BackColor = SystemColors.Window
-        FPTBAdresse.ReadOnly = True
-        FPTBAdresse.Cursor = Cursors.No
-        If FPTBAdresse.BackColor <> SystemColors.Window Then FPTBAdresse.BackColor = SystemColors.Window
     End Sub
 
     Private Sub TextBoxPersRO()
@@ -862,12 +801,10 @@ Public Class FormGestion
         CbDefEmplacement.Enabled = True
         'CbDefEmplacement.LectureSeule = False
         CbDefEmplacement.Cursor = Cursors.IBeam
-        TbDefDateNaiss.ReadOnly = False
-        TbDefDateNaiss.Cursor = Cursors.IBeam
+        FPTBDateNaiss.ReadOnly = False
+        FPTBDateNaiss.Cursor = Cursors.IBeam
         FPTBDateDeces.ReadOnly = False
         FPTBDateDeces.Cursor = Cursors.IBeam
-        FPTBDateE.ReadOnly = False
-        FPTBDateE.Cursor = Cursors.IBeam
         FPTBAdresse.ReadOnly = False
         FPTBAdresse.Cursor = Cursors.IBeam
     End Sub
@@ -1000,13 +937,15 @@ Public Class FormGestion
             If result = DialogResult.No Then
                 boutongestion = 0
                 BmodifConsBenef.Text = "Modifier"
-                TextBoxConsRO()
+                ''TextBoxConsRO()
+                TextBoxBenefDeConsRO()
                 TabControl1.TabPages(0).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
             ElseIf result = DialogResult.Yes Then
                 boutongestion = 0
                 BmodifConsBenef.Text = "Modifier"
-                TextBoxConsRO()
+                ''TextBoxConsRO()
+                TextBoxBenefDeConsRO()
                 TabControl1.TabPages(0).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
             End If
@@ -1062,36 +1001,17 @@ Public Class FormGestion
         Source.Filter = "convert([csnr_id],'System.String') LIKE '" & concessionnaireid & "'"
     End Sub
 
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Dim Source As New BindingSource()
-        If PRBBenef.Checked = True Then
-            Source.DataSource = Me.DgvListeConcessionnaireBenef.DataSource
-            Source.Filter = "ben_nom like '%" & FPersonneTbSearch.Text & "%'"
-        ElseIf PRBConcessionnaire.Checked = True Then
-            Source.DataSource = Me.DgvListeConcessionnaireConcess.DataSource
-            Source.Filter = "csnr_nom like '%" & FPersonneTbSearch.Text & "%'"
-        ElseIf PRBPersCon.Checked = True Then
-            Source.DataSource = Me.DgvListeConcessionnairePersonneContact.DataSource
-            Source.Filter = "pc_nom like '%" & FPersonneTbSearch.Text & "%'"
-        Else
-            MsgBox("Veuillez effectuer un choix.")
-        End If
+    Private Sub BTChercherPersonne_Click(sender As Object, e As EventArgs) Handles BTChercherPersonne.Click
+        Dim TxtRech = FPersonneTbSearch.Text.Trim
+        For Each i In {New With {.dv = dvbenefs, .cn = "ben_nom", .cp = "ben_prenom"}, New With {.dv = dvCsnrs, .cn = "csnr_nom", .cp = "csnr_prenom"}, New With {.dv = dvPersContact, .cn = "pc_nom", .cp = "pc_prenom"}}
+            i.dv.RowFilter = i.cn & " Like '%" & TxtRech & "%' Or " & i.cp & " Like '%" & TxtRech & "%'"
+        Next
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim Source As New BindingSource()
-        If PRBBenef.Checked = True Then
-            Source.DataSource = Me.DgvListeConcessionnaireBenef.DataSource
-            Source.Filter = "ben_nom like '%'"
-        ElseIf PRBConcessionnaire.Checked = True Then
-            Source.DataSource = Me.DgvListeConcessionnaireConcess.DataSource
-            Source.Filter = "csnr_nom like '%'"
-        ElseIf PRBPersCon.Checked = True Then
-            Source.DataSource = Me.DgvListeConcessionnairePersonneContact.DataSource
-            Source.Filter = "pc_nom like '%'"
-        Else
-            MsgBox("Veuillez effectuer un choix.")
-        End If
+    Private Sub BTAnnulerRechPers_Click(sender As Object, e As EventArgs) Handles BTAnnulerRechPers.Click
+        dvbenefs.RowFilter = ""
+        dvCsnrs.RowFilter = ""
+        dvPersContact.RowFilter = ""
     End Sub
 
     Private Sub FPBSupprimer_Click(sender As Object, e As EventArgs) Handles FPBSupprimer.Click
@@ -1110,10 +1030,6 @@ Public Class FormGestion
     End Sub
 
     Private Sub BSuppCons_Click(sender As Object, e As EventArgs) Handles BSuppCons.Click
-
-    End Sub
-
-    Private Sub osefa(sender As Object, e As EventArgs) Handles DgvListeDefunts.SelectionChanged
 
     End Sub
 
