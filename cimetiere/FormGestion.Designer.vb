@@ -136,16 +136,11 @@ Partial Class FormGestion
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
-        Me.BSupGestionPersBenef = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.BTAnnulerRechPers = New System.Windows.Forms.Button()
         Me.BTChercherPersonne = New System.Windows.Forms.Button()
         Me.FPersonneTbSearch = New System.Windows.Forms.TextBox()
-        Me.BModifGestionPersBenef = New System.Windows.Forms.Button()
-        Me.Panel15 = New System.Windows.Forms.Panel()
-        Me.GroupBox15 = New System.Windows.Forms.GroupBox()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.PRBPersCon = New System.Windows.Forms.RadioButton()
         Me.PRBConcessionnaire = New System.Windows.Forms.RadioButton()
         Me.PRBBenef = New System.Windows.Forms.RadioButton()
@@ -158,6 +153,11 @@ Partial Class FormGestion
         Me.Lchargementdonnee = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.FCBLienBenef = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.BTLienCsnrVersConcession = New System.Windows.Forms.Button()
+        Me.BTLienBenefVersConcession = New System.Windows.Forms.Button()
+        Me.BTLienPcontVersDef = New System.Windows.Forms.Button()
         Me.DgvListeDefunts = New cimetiere.DataGridViewCustom()
         Me.CbDefEmplacement = New cimetiere.ComboBoxEmplacements()
         Me.FPTBDateDeces = New cimetiere.TextBoxDate()
@@ -207,8 +207,6 @@ Partial Class FormGestion
         Me.GroupBox13.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.Panel15.SuspendLayout()
-        Me.GroupBox15.SuspendLayout()
         Me.Panel12.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -327,6 +325,8 @@ Partial Class FormGestion
         'CBDefChercherEmplacement
         '
         Me.CBDefChercherEmplacement.AutoSize = True
+        Me.CBDefChercherEmplacement.Checked = True
+        Me.CBDefChercherEmplacement.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CBDefChercherEmplacement.Location = New System.Drawing.Point(13, 107)
         Me.CBDefChercherEmplacement.Name = "CBDefChercherEmplacement"
         Me.CBDefChercherEmplacement.Size = New System.Drawing.Size(112, 22)
@@ -337,6 +337,8 @@ Partial Class FormGestion
         'CBDefChercherNom
         '
         Me.CBDefChercherNom.AutoSize = True
+        Me.CBDefChercherNom.Checked = True
+        Me.CBDefChercherNom.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CBDefChercherNom.Location = New System.Drawing.Point(14, 79)
         Me.CBDefChercherNom.Name = "CBDefChercherNom"
         Me.CBDefChercherNom.Size = New System.Drawing.Size(60, 22)
@@ -631,7 +633,7 @@ Partial Class FormGestion
         Me.FPBLienCons.Name = "FPBLienCons"
         Me.FPBLienCons.Size = New System.Drawing.Size(203, 59)
         Me.FPBLienCons.TabIndex = 86
-        Me.FPBLienCons.Text = "Lien vers concession"
+        Me.FPBLienCons.Text = "Lien vers emplacement"
         Me.FPBLienCons.UseVisualStyleBackColor = False
         '
         'FPTBLahulpe
@@ -650,6 +652,7 @@ Partial Class FormGestion
         Me.TabPage2.BackColor = System.Drawing.Color.GhostWhite
         Me.TabPage2.BackgroundImage = CType(resources.GetObject("TabPage2.BackgroundImage"), System.Drawing.Image)
         Me.TabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.TabPage2.Controls.Add(Me.FCBLienBenef)
         Me.TabPage2.Controls.Add(Me.BSuppConsBenef)
         Me.TabPage2.Controls.Add(Me.BSuppCons)
         Me.TabPage2.Controls.Add(Me.BmodifConsBenef)
@@ -782,7 +785,8 @@ Partial Class FormGestion
         '
         Me.Panel7.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel7.Controls.Add(Me.GroupBox7)
-        Me.Panel7.Location = New System.Drawing.Point(936, 514)
+        Me.Panel7.Enabled = False
+        Me.Panel7.Location = New System.Drawing.Point(992, 457)
         Me.Panel7.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(715, 222)
@@ -791,6 +795,7 @@ Partial Class FormGestion
         'GroupBox7
         '
         Me.GroupBox7.BackColor = System.Drawing.Color.White
+        Me.GroupBox7.Controls.Add(Me.Label5)
         Me.GroupBox7.Controls.Add(Me.CtrlLocBenefDeCons)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefdatenaiss)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefadress)
@@ -1259,11 +1264,11 @@ Partial Class FormGestion
         '
         Me.TabPage3.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.TabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.TabPage3.Controls.Add(Me.BTLienPcontVersDef)
+        Me.TabPage3.Controls.Add(Me.BTLienBenefVersConcession)
+        Me.TabPage3.Controls.Add(Me.BTLienCsnrVersConcession)
         Me.TabPage3.Controls.Add(Me.Panel13)
-        Me.TabPage3.Controls.Add(Me.BSupGestionPersBenef)
         Me.TabPage3.Controls.Add(Me.Panel2)
-        Me.TabPage3.Controls.Add(Me.BModifGestionPersBenef)
-        Me.TabPage3.Controls.Add(Me.Panel15)
         Me.TabPage3.Controls.Add(Me.PRBPersCon)
         Me.TabPage3.Controls.Add(Me.PRBConcessionnaire)
         Me.TabPage3.Controls.Add(Me.PRBBenef)
@@ -1409,18 +1414,6 @@ Partial Class FormGestion
         Me.Label28.TabIndex = 21
         Me.Label28.Text = "Prénom"
         '
-        'BSupGestionPersBenef
-        '
-        Me.BSupGestionPersBenef.BackColor = System.Drawing.Color.SeaGreen
-        Me.BSupGestionPersBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BSupGestionPersBenef.Location = New System.Drawing.Point(1551, 583)
-        Me.BSupGestionPersBenef.Margin = New System.Windows.Forms.Padding(4)
-        Me.BSupGestionPersBenef.Name = "BSupGestionPersBenef"
-        Me.BSupGestionPersBenef.Size = New System.Drawing.Size(99, 28)
-        Me.BSupGestionPersBenef.TabIndex = 137
-        Me.BSupGestionPersBenef.Text = "Supprimer"
-        Me.BSupGestionPersBenef.UseVisualStyleBackColor = False
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.SeaGreen
@@ -1473,52 +1466,6 @@ Partial Class FormGestion
         Me.FPersonneTbSearch.Name = "FPersonneTbSearch"
         Me.FPersonneTbSearch.Size = New System.Drawing.Size(208, 25)
         Me.FPersonneTbSearch.TabIndex = 35
-        '
-        'BModifGestionPersBenef
-        '
-        Me.BModifGestionPersBenef.BackColor = System.Drawing.Color.SeaGreen
-        Me.BModifGestionPersBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BModifGestionPersBenef.Location = New System.Drawing.Point(1459, 583)
-        Me.BModifGestionPersBenef.Margin = New System.Windows.Forms.Padding(4)
-        Me.BModifGestionPersBenef.Name = "BModifGestionPersBenef"
-        Me.BModifGestionPersBenef.Size = New System.Drawing.Size(85, 28)
-        Me.BModifGestionPersBenef.TabIndex = 136
-        Me.BModifGestionPersBenef.Text = "Modifier"
-        Me.BModifGestionPersBenef.UseVisualStyleBackColor = False
-        '
-        'Panel15
-        '
-        Me.Panel15.BackColor = System.Drawing.Color.SeaGreen
-        Me.Panel15.Controls.Add(Me.GroupBox15)
-        Me.Panel15.Location = New System.Drawing.Point(941, 334)
-        Me.Panel15.Margin = New System.Windows.Forms.Padding(4, 12, 4, 4)
-        Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(708, 246)
-        Me.Panel15.TabIndex = 140
-        '
-        'GroupBox15
-        '
-        Me.GroupBox15.BackColor = System.Drawing.Color.White
-        Me.GroupBox15.Controls.Add(Me.LinkLabel1)
-        Me.GroupBox15.Location = New System.Drawing.Point(23, 18)
-        Me.GroupBox15.Margin = New System.Windows.Forms.Padding(4)
-        Me.GroupBox15.Name = "GroupBox15"
-        Me.GroupBox15.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox15.Size = New System.Drawing.Size(667, 204)
-        Me.GroupBox15.TabIndex = 0
-        Me.GroupBox15.TabStop = False
-        Me.GroupBox15.Text = "Infos bénéficiaires"
-        '
-        'LinkLabel1
-        '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(43, 33)
-        Me.LinkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(135, 18)
-        Me.LinkLabel1.TabIndex = 138
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "Emplacement A7262"
         '
         'PRBPersCon
         '
@@ -1656,6 +1603,64 @@ Partial Class FormGestion
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(169, 22)
         Me.TextBox1.TabIndex = 139
+        '
+        'FCBLienBenef
+        '
+        Me.FCBLienBenef.BackColor = System.Drawing.Color.SeaGreen
+        Me.FCBLienBenef.ForeColor = System.Drawing.Color.Transparent
+        Me.FCBLienBenef.Location = New System.Drawing.Point(896, 585)
+        Me.FCBLienBenef.Margin = New System.Windows.Forms.Padding(4)
+        Me.FCBLienBenef.Name = "FCBLienBenef"
+        Me.FCBLienBenef.Size = New System.Drawing.Size(205, 70)
+        Me.FCBLienBenef.TabIndex = 135
+        Me.FCBLienBenef.Text = "Lien vers bénéficiaire"
+        Me.FCBLienBenef.UseVisualStyleBackColor = False
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Tai Le", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(93, 38)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(476, 103)
+        Me.Label5.TabIndex = 137
+        Me.Label5.Text = "On s'en fout"
+        '
+        'BTLienCsnrVersConcession
+        '
+        Me.BTLienCsnrVersConcession.BackColor = System.Drawing.Color.SeaGreen
+        Me.BTLienCsnrVersConcession.ForeColor = System.Drawing.Color.Transparent
+        Me.BTLienCsnrVersConcession.Location = New System.Drawing.Point(1140, 338)
+        Me.BTLienCsnrVersConcession.Margin = New System.Windows.Forms.Padding(4)
+        Me.BTLienCsnrVersConcession.Name = "BTLienCsnrVersConcession"
+        Me.BTLienCsnrVersConcession.Size = New System.Drawing.Size(205, 70)
+        Me.BTLienCsnrVersConcession.TabIndex = 92
+        Me.BTLienCsnrVersConcession.Text = "Lien vers concession"
+        Me.BTLienCsnrVersConcession.UseVisualStyleBackColor = False
+        '
+        'BTLienBenefVersConcession
+        '
+        Me.BTLienBenefVersConcession.BackColor = System.Drawing.Color.SeaGreen
+        Me.BTLienBenefVersConcession.ForeColor = System.Drawing.Color.Transparent
+        Me.BTLienBenefVersConcession.Location = New System.Drawing.Point(1093, 469)
+        Me.BTLienBenefVersConcession.Margin = New System.Windows.Forms.Padding(4)
+        Me.BTLienBenefVersConcession.Name = "BTLienBenefVersConcession"
+        Me.BTLienBenefVersConcession.Size = New System.Drawing.Size(205, 70)
+        Me.BTLienBenefVersConcession.TabIndex = 147
+        Me.BTLienBenefVersConcession.Text = "Lien vers concession"
+        Me.BTLienBenefVersConcession.UseVisualStyleBackColor = False
+        '
+        'BTLienPcontVersDef
+        '
+        Me.BTLienPcontVersDef.BackColor = System.Drawing.Color.SeaGreen
+        Me.BTLienPcontVersDef.ForeColor = System.Drawing.Color.Transparent
+        Me.BTLienPcontVersDef.Location = New System.Drawing.Point(1140, 403)
+        Me.BTLienPcontVersDef.Margin = New System.Windows.Forms.Padding(4)
+        Me.BTLienPcontVersDef.Name = "BTLienPcontVersDef"
+        Me.BTLienPcontVersDef.Size = New System.Drawing.Size(205, 70)
+        Me.BTLienPcontVersDef.TabIndex = 148
+        Me.BTLienPcontVersDef.Text = "Lien vers défunt"
+        Me.BTLienPcontVersDef.UseVisualStyleBackColor = False
         '
         'DgvListeDefunts
         '
@@ -2090,9 +2095,6 @@ Partial Class FormGestion
         Me.Panel2.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.Panel15.ResumeLayout(False)
-        Me.GroupBox15.ResumeLayout(False)
-        Me.GroupBox15.PerformLayout()
         Me.Panel12.ResumeLayout(False)
         Me.GroupBox12.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2171,11 +2173,6 @@ Partial Class FormGestion
     Friend WithEvents Label7 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label28 As Label
-    Friend WithEvents Panel15 As Panel
-    Friend WithEvents GroupBox15 As GroupBox
-    Friend WithEvents LinkLabel1 As LinkLabel
-    Friend WithEvents BSupGestionPersBenef As Button
-    Friend WithEvents BModifGestionPersBenef As Button
     Friend WithEvents Panel12 As Panel
     Friend WithEvents GroupBox12 As GroupBox
     Friend WithEvents DgvListeConcessionnaireBenef As DataGridViewCustom
@@ -2257,4 +2254,9 @@ Partial Class FormGestion
     Friend WithEvents CbfConsOccupants As CheckBox
     Friend WithEvents CBDefChercherEmplacement As CheckBox
     Friend WithEvents CBDefChercherNom As CheckBox
+    Friend WithEvents FCBLienBenef As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents BTLienCsnrVersConcession As Button
+    Friend WithEvents BTLienPcontVersDef As Button
+    Friend WithEvents BTLienBenefVersConcession As Button
 End Class
