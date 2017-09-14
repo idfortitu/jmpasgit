@@ -36,6 +36,7 @@ Partial Class FormGestion
         Me.FDBLinkToPersCon = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.DgvListeDefunts = New cimetiere.DataGridViewCustom()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.CBDefChercherEmplacement = New System.Windows.Forms.CheckBox()
@@ -50,7 +51,12 @@ Partial Class FormGestion
         Me.BtDefChercher = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.CbDefEmplacement = New cimetiere.ComboBoxEmplacements()
+        Me.FPTBDateDeces = New cimetiere.TextBoxDate()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.FPTBDateNaiss = New cimetiere.TextBoxDate()
+        Me.CtrlLocVilleDef = New cimetiere.CtrlLocVillePays()
+        Me.CtrlEtatCivDef = New cimetiere.CtrlEtatCivil()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.FPTBLieuNaiss = New System.Windows.Forms.TextBox()
         Me.FPLLieuNaiss = New System.Windows.Forms.Label()
@@ -69,45 +75,62 @@ Partial Class FormGestion
         Me.FPBLienCons = New System.Windows.Forms.Button()
         Me.FPTBLahulpe = New System.Windows.Forms.PictureBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.BSuppConsBenef = New System.Windows.Forms.Button()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.GBInfosCsn = New System.Windows.Forms.GroupBox()
+        Me.LinkLabCsnrDeCsn = New System.Windows.Forms.LinkLabel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.FCTBDateFin = New cimetiere.TextBoxDate()
+        Me.FCTBnumero = New System.Windows.Forms.TextBox()
+        Me.FCTBDateDeb = New cimetiere.TextBoxDate()
+        Me.FCLDenomination = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.FCLCommentaire = New System.Windows.Forms.Label()
+        Me.FCTBCommentaire = New System.Windows.Forms.TextBox()
+        Me.GBInfosConsRienAMontrer = New System.Windows.Forms.GroupBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.BSuppCons = New System.Windows.Forms.Button()
-        Me.BmodifConsBenef = New System.Windows.Forms.Button()
         Me.BmodifCons = New System.Windows.Forms.Button()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.BAddConsBenef = New System.Windows.Forms.Button()
+        Me.FCDGDefunt = New cimetiere.DataGridViewCustom()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.FCDGBeneficiaire = New cimetiere.DataGridViewCustom()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.BSuppConsBenef = New System.Windows.Forms.Button()
+        Me.CtrlLocBenefDeCons = New cimetiere.CtrlLocVillePays()
+        Me.TBconsBenefdatenaiss = New cimetiere.TextBoxDate()
+        Me.BmodifConsBenef = New System.Windows.Forms.Button()
         Me.TBconsBenefadress = New System.Windows.Forms.TextBox()
         Me.TBconsBenefnom = New System.Windows.Forms.TextBox()
         Me.TBconsBenefprenom = New System.Windows.Forms.TextBox()
+        Me.BAddConsBenef = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.FCDGConss = New cimetiere.DataGridViewCustom()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.CBMonumentClasse = New System.Windows.Forms.CheckBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.FCLDenomination = New System.Windows.Forms.Label()
-        Me.FCTBnumero = New System.Windows.Forms.TextBox()
+        Me.CBEmplType = New cimetiere.ComboBoxTypeEmpl()
+        Me.CbConsEmplacement = New cimetiere.ComboBoxEmplacements()
+        Me.FCTBNbPlaces = New cimetiere.TextBoxInt()
         Me.FCLEmplacement = New System.Windows.Forms.Label()
         Me.FCLPlaceLibre = New System.Windows.Forms.Label()
         Me.FCLPlaceOccupe = New System.Windows.Forms.Label()
         Me.FCTBPlaceOccupe = New System.Windows.Forms.TextBox()
-        Me.FCLCommentaire = New System.Windows.Forms.Label()
-        Me.FCTBCommentaire = New System.Windows.Forms.TextBox()
         Me.FCLMonumentC = New System.Windows.Forms.Label()
         Me.FCLHistoire = New System.Windows.Forms.Label()
         Me.FCTBHistoire = New System.Windows.Forms.TextBox()
         Me.FCLType = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GBRechEmpl = New System.Windows.Forms.GroupBox()
         Me.CbfconsEmplacement = New System.Windows.Forms.CheckBox()
         Me.CbfconsCsnr = New System.Windows.Forms.CheckBox()
         Me.CbfConsOccupants = New System.Windows.Forms.CheckBox()
@@ -119,21 +142,28 @@ Partial Class FormGestion
         Me.DtpConsRechercherDateFin = New System.Windows.Forms.DateTimePicker()
         Me.BtRechEmpl = New System.Windows.Forms.Button()
         Me.FCTBRechercher = New System.Windows.Forms.TextBox()
-        Me.FCBLienDefunt = New System.Windows.Forms.Button()
-        Me.FDBLinkToConcessionnaire = New System.Windows.Forms.Button()
         Me.FCPBlahulpe = New System.Windows.Forms.PictureBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.TBPersNumNational = New System.Windows.Forms.TextBox()
+        Me.LabPcontDefAssoc = New System.Windows.Forms.Label()
+        Me.LinkLabLienBenVersCon = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabLienPcontVersDef = New System.Windows.Forms.LinkLabel()
+        Me.LabConAssoc = New System.Windows.Forms.Label()
+        Me.LinkLabLienCsnrVersCon = New System.Windows.Forms.LinkLabel()
+        Me.TBPersNumNational = New cimetiere.TextBoxInt64()
+        Me.LabPersLienParente = New System.Windows.Forms.Label()
+        Me.TBPersLienParente = New System.Windows.Forms.TextBox()
+        Me.TBPersDN = New cimetiere.TextBoxDate()
+        Me.CtrlLocPersonne = New cimetiere.CtrlLocVillePays()
         Me.TBPersTel = New System.Windows.Forms.TextBox()
         Me.TBPersAdress = New System.Windows.Forms.TextBox()
         Me.TBPersNom = New System.Windows.Forms.TextBox()
         Me.TBPersPrenom = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.LabPersNumNational = New System.Windows.Forms.Label()
+        Me.LabPersDN = New System.Windows.Forms.Label()
+        Me.LabPersTel = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -146,6 +176,9 @@ Partial Class FormGestion
         Me.PRBBenef = New System.Windows.Forms.RadioButton()
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.DgvListeConcessionnairePersonneContact = New cimetiere.DataGridViewCustom()
+        Me.DgvListeConcessionnaireBenef = New cimetiere.DataGridViewCustom()
+        Me.DgvListeConcessionnaireConcess = New cimetiere.DataGridViewCustom()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BModifGestionPers = New System.Windows.Forms.Button()
         Me.BSupGestionPers = New System.Windows.Forms.Button()
@@ -153,54 +186,35 @@ Partial Class FormGestion
         Me.Lchargementdonnee = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.FCBLienBenef = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.BTLienCsnrVersConcession = New System.Windows.Forms.Button()
-        Me.BTLienBenefVersConcession = New System.Windows.Forms.Button()
-        Me.BTLienPcontVersDef = New System.Windows.Forms.Button()
-        Me.DgvListeDefunts = New cimetiere.DataGridViewCustom()
-        Me.CbDefEmplacement = New cimetiere.ComboBoxEmplacements()
-        Me.FPTBDateDeces = New cimetiere.TextBoxDate()
-        Me.FPTBDateNaiss = New cimetiere.TextBoxDate()
-        Me.CtrlLocVilleDef = New cimetiere.CtrlLocVillePays()
-        Me.CtrlEtatCivDef = New cimetiere.CtrlEtatCivil()
-        Me.FCDGDefunt = New cimetiere.DataGridViewCustom()
-        Me.FCDGBeneficiaire = New cimetiere.DataGridViewCustom()
-        Me.CtrlLocBenefDeCons = New cimetiere.CtrlLocVillePays()
-        Me.TBconsBenefdatenaiss = New cimetiere.TextBoxDate()
-        Me.FCDGConss = New cimetiere.DataGridViewCustom()
-        Me.FCTBDateFin = New cimetiere.TextBoxDate()
-        Me.FCTBDateDeb = New cimetiere.TextBoxDate()
-        Me.CBEmplType = New cimetiere.ComboBoxTypeEmpl()
-        Me.CbConsEmplacement = New cimetiere.ComboBoxEmplacements()
-        Me.FCTBNbPlaces = New cimetiere.TextBoxInt()
-        Me.TBPersDN = New cimetiere.TextBoxDate()
-        Me.CtrlLocPersonne = New cimetiere.CtrlLocVillePays()
-        Me.DgvListeConcessionnairePersonneContact = New cimetiere.DataGridViewCustom()
-        Me.DgvListeConcessionnaireBenef = New cimetiere.DataGridViewCustom()
-        Me.DgvListeConcessionnaireConcess = New cimetiere.DataGridViewCustom()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel10.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.FPTBLahulpe, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        Me.GBInfosCsn.SuspendLayout()
+        Me.GBInfosConsRienAMontrer.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
+        CType(Me.FCDGDefunt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel8.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
+        CType(Me.FCDGBeneficiaire, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel7.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        CType(Me.FCDGConss, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
+        Me.GBRechEmpl.SuspendLayout()
         CType(Me.FCPBlahulpe, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
         Me.Panel13.SuspendLayout()
@@ -209,15 +223,11 @@ Partial Class FormGestion
         Me.GroupBox2.SuspendLayout()
         Me.Panel12.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FCDGDefunt, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FCDGBeneficiaire, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FCDGConss, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvListeConcessionnairePersonneContact, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvListeConcessionnaireBenef, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvListeConcessionnaireConcess, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -289,6 +299,43 @@ Partial Class FormGestion
         Me.GroupBox3.Size = New System.Drawing.Size(508, 730)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
+        '
+        'DgvListeDefunts
+        '
+        Me.DgvListeDefunts.AllowUserToAddRows = False
+        Me.DgvListeDefunts.AllowUserToDeleteRows = False
+        Me.DgvListeDefunts.AllowUserToOrderColumns = True
+        Me.DgvListeDefunts.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DgvListeDefunts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DgvListeDefunts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DgvListeDefunts.BackgroundColor = System.Drawing.SystemColors.ButtonFace
+        Me.DgvListeDefunts.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DgvListeDefunts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvListeDefunts.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DgvListeDefunts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.DgvListeDefunts.EnableHeadersVisualStyles = False
+        Me.DgvListeDefunts.GridColor = System.Drawing.Color.DarkGray
+        Me.DgvListeDefunts.Location = New System.Drawing.Point(11, 18)
+        Me.DgvListeDefunts.Margin = New System.Windows.Forms.Padding(4)
+        Me.DgvListeDefunts.MultiSelect = False
+        Me.DgvListeDefunts.Name = "DgvListeDefunts"
+        Me.DgvListeDefunts.ReadOnly = True
+        Me.DgvListeDefunts.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.DgvListeDefunts.RowHeadersVisible = False
+        Me.DgvListeDefunts.SelectedRow = Nothing
+        Me.DgvListeDefunts.SelectedRowIndex = -1
+        Me.DgvListeDefunts.SelectedValue = -1
+        Me.DgvListeDefunts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvListeDefunts.Size = New System.Drawing.Size(489, 710)
+        Me.DgvListeDefunts.TabIndex = 48
         '
         'Panel10
         '
@@ -467,6 +514,28 @@ Partial Class FormGestion
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Informations du défunt"
         '
+        'CbDefEmplacement
+        '
+        Me.CbDefEmplacement.DisplayMember = "empl_reference"
+        Me.CbDefEmplacement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CbDefEmplacement.EmplId = Nothing
+        Me.CbDefEmplacement.FormattingEnabled = True
+        Me.CbDefEmplacement.Location = New System.Drawing.Point(486, 223)
+        Me.CbDefEmplacement.Name = "CbDefEmplacement"
+        Me.CbDefEmplacement.Size = New System.Drawing.Size(176, 26)
+        Me.CbDefEmplacement.TabIndex = 146
+        Me.CbDefEmplacement.ValueMember = "empl_id"
+        '
+        'FPTBDateDeces
+        '
+        Me.FPTBDateDeces.DateValue = Nothing
+        Me.FPTBDateDeces.Location = New System.Drawing.Point(487, 175)
+        Me.FPTBDateDeces.Mask = "00/00/0000"
+        Me.FPTBDateDeces.Name = "FPTBDateDeces"
+        Me.FPTBDateDeces.Size = New System.Drawing.Size(112, 25)
+        Me.FPTBDateDeces.TabIndex = 145
+        Me.FPTBDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'Label20
         '
         Me.Label20.AutoSize = True
@@ -476,6 +545,37 @@ Partial Class FormGestion
         Me.Label20.Size = New System.Drawing.Size(74, 18)
         Me.Label20.TabIndex = 144
         Me.Label20.Text = "Décédé le :"
+        '
+        'FPTBDateNaiss
+        '
+        Me.FPTBDateNaiss.DateValue = Nothing
+        Me.FPTBDateNaiss.Location = New System.Drawing.Point(159, 182)
+        Me.FPTBDateNaiss.Mask = "00/00/0000"
+        Me.FPTBDateNaiss.Name = "FPTBDateNaiss"
+        Me.FPTBDateNaiss.Size = New System.Drawing.Size(112, 25)
+        Me.FPTBDateNaiss.TabIndex = 143
+        Me.FPTBDateNaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'CtrlLocVilleDef
+        '
+        Me.CtrlLocVilleDef.LectureSeule = False
+        Me.CtrlLocVilleDef.Location = New System.Drawing.Point(159, 105)
+        Me.CtrlLocVilleDef.LocVilleId = -1
+        Me.CtrlLocVilleDef.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlLocVilleDef.Name = "CtrlLocVilleDef"
+        Me.CtrlLocVilleDef.osef = Nothing
+        Me.CtrlLocVilleDef.Size = New System.Drawing.Size(316, 25)
+        Me.CtrlLocVilleDef.TabIndex = 99
+        '
+        'CtrlEtatCivDef
+        '
+        Me.CtrlEtatCivDef.EtatCivil = 0
+        Me.CtrlEtatCivDef.EtatCivilDe = ""
+        Me.CtrlEtatCivDef.Location = New System.Drawing.Point(159, 142)
+        Me.CtrlEtatCivDef.Name = "CtrlEtatCivDef"
+        Me.CtrlEtatCivDef.osef = Nothing
+        Me.CtrlEtatCivDef.Size = New System.Drawing.Size(369, 24)
+        Me.CtrlEtatCivDef.TabIndex = 142
         '
         'Label15
         '
@@ -652,20 +752,15 @@ Partial Class FormGestion
         Me.TabPage2.BackColor = System.Drawing.Color.GhostWhite
         Me.TabPage2.BackgroundImage = CType(resources.GetObject("TabPage2.BackgroundImage"), System.Drawing.Image)
         Me.TabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.TabPage2.Controls.Add(Me.FCBLienBenef)
-        Me.TabPage2.Controls.Add(Me.BSuppConsBenef)
+        Me.TabPage2.Controls.Add(Me.Panel11)
         Me.TabPage2.Controls.Add(Me.BSuppCons)
-        Me.TabPage2.Controls.Add(Me.BmodifConsBenef)
         Me.TabPage2.Controls.Add(Me.BmodifCons)
         Me.TabPage2.Controls.Add(Me.Panel9)
-        Me.TabPage2.Controls.Add(Me.BAddConsBenef)
         Me.TabPage2.Controls.Add(Me.Panel8)
         Me.TabPage2.Controls.Add(Me.Panel7)
         Me.TabPage2.Controls.Add(Me.Panel5)
         Me.TabPage2.Controls.Add(Me.Panel6)
         Me.TabPage2.Controls.Add(Me.Panel4)
-        Me.TabPage2.Controls.Add(Me.FCBLienDefunt)
-        Me.TabPage2.Controls.Add(Me.FDBLinkToConcessionnaire)
         Me.TabPage2.Controls.Add(Me.FCPBlahulpe)
         Me.TabPage2.Location = New System.Drawing.Point(4, 36)
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
@@ -675,17 +770,158 @@ Partial Class FormGestion
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Concession"
         '
-        'BSuppConsBenef
+        'Panel11
         '
-        Me.BSuppConsBenef.BackColor = System.Drawing.Color.SeaGreen
-        Me.BSuppConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BSuppConsBenef.Location = New System.Drawing.Point(1552, 743)
-        Me.BSuppConsBenef.Margin = New System.Windows.Forms.Padding(4)
-        Me.BSuppConsBenef.Name = "BSuppConsBenef"
-        Me.BSuppConsBenef.Size = New System.Drawing.Size(99, 28)
-        Me.BSuppConsBenef.TabIndex = 134
-        Me.BSuppConsBenef.Text = "Supprimer"
-        Me.BSuppConsBenef.UseVisualStyleBackColor = False
+        Me.Panel11.BackColor = System.Drawing.Color.SeaGreen
+        Me.Panel11.Controls.Add(Me.GBInfosCsn)
+        Me.Panel11.Controls.Add(Me.GBInfosConsRienAMontrer)
+        Me.Panel11.Location = New System.Drawing.Point(936, 316)
+        Me.Panel11.Margin = New System.Windows.Forms.Padding(4)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(465, 246)
+        Me.Panel11.TabIndex = 132
+        '
+        'GBInfosCsn
+        '
+        Me.GBInfosCsn.BackColor = System.Drawing.Color.White
+        Me.GBInfosCsn.Controls.Add(Me.LinkLabCsnrDeCsn)
+        Me.GBInfosCsn.Controls.Add(Me.Label10)
+        Me.GBInfosCsn.Controls.Add(Me.FCTBDateFin)
+        Me.GBInfosCsn.Controls.Add(Me.FCTBnumero)
+        Me.GBInfosCsn.Controls.Add(Me.FCTBDateDeb)
+        Me.GBInfosCsn.Controls.Add(Me.FCLDenomination)
+        Me.GBInfosCsn.Controls.Add(Me.Label12)
+        Me.GBInfosCsn.Controls.Add(Me.Label13)
+        Me.GBInfosCsn.Controls.Add(Me.FCLCommentaire)
+        Me.GBInfosCsn.Controls.Add(Me.FCTBCommentaire)
+        Me.GBInfosCsn.Location = New System.Drawing.Point(28, 21)
+        Me.GBInfosCsn.Margin = New System.Windows.Forms.Padding(4)
+        Me.GBInfosCsn.Name = "GBInfosCsn"
+        Me.GBInfosCsn.Padding = New System.Windows.Forms.Padding(4)
+        Me.GBInfosCsn.Size = New System.Drawing.Size(416, 204)
+        Me.GBInfosCsn.TabIndex = 0
+        Me.GBInfosCsn.TabStop = False
+        Me.GBInfosCsn.Text = "Informations sur la concession"
+        '
+        'LinkLabCsnrDeCsn
+        '
+        Me.LinkLabCsnrDeCsn.AutoSize = True
+        Me.LinkLabCsnrDeCsn.Location = New System.Drawing.Point(136, 65)
+        Me.LinkLabCsnrDeCsn.Name = "LinkLabCsnrDeCsn"
+        Me.LinkLabCsnrDeCsn.Size = New System.Drawing.Size(14, 18)
+        Me.LinkLabCsnrDeCsn.TabIndex = 140
+        Me.LinkLabCsnrDeCsn.TabStop = True
+        Me.LinkLabCsnrDeCsn.Text = "-"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(10, 65)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(114, 18)
+        Me.Label10.TabIndex = 139
+        Me.Label10.Text = "Concessionnaire :"
+        '
+        'FCTBDateFin
+        '
+        Me.FCTBDateFin.DateValue = Nothing
+        Me.FCTBDateFin.Location = New System.Drawing.Point(116, 139)
+        Me.FCTBDateFin.Mask = "00/00/0000"
+        Me.FCTBDateFin.Name = "FCTBDateFin"
+        Me.FCTBDateFin.Size = New System.Drawing.Size(167, 25)
+        Me.FCTBDateFin.TabIndex = 138
+        Me.FCTBDateFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'FCTBnumero
+        '
+        Me.FCTBnumero.Location = New System.Drawing.Point(89, 28)
+        Me.FCTBnumero.Margin = New System.Windows.Forms.Padding(4)
+        Me.FCTBnumero.Name = "FCTBnumero"
+        Me.FCTBnumero.Size = New System.Drawing.Size(171, 25)
+        Me.FCTBnumero.TabIndex = 65
+        '
+        'FCTBDateDeb
+        '
+        Me.FCTBDateDeb.DateValue = Nothing
+        Me.FCTBDateDeb.Location = New System.Drawing.Point(126, 109)
+        Me.FCTBDateDeb.Mask = "00/00/0000"
+        Me.FCTBDateDeb.Name = "FCTBDateDeb"
+        Me.FCTBDateDeb.Size = New System.Drawing.Size(167, 25)
+        Me.FCTBDateDeb.TabIndex = 136
+        Me.FCTBDateDeb.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'FCLDenomination
+        '
+        Me.FCLDenomination.AutoSize = True
+        Me.FCLDenomination.Location = New System.Drawing.Point(8, 29)
+        Me.FCLDenomination.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.FCLDenomination.Name = "FCLDenomination"
+        Me.FCLDenomination.Size = New System.Drawing.Size(58, 18)
+        Me.FCLDenomination.TabIndex = 64
+        Me.FCLDenomination.Text = "Numero"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(7, 111)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(96, 18)
+        Me.Label12.TabIndex = 125
+        Me.Label12.Text = "Date de debut"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(18, 142)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(75, 18)
+        Me.Label13.TabIndex = 127
+        Me.Label13.Text = "Date de fin"
+        '
+        'FCLCommentaire
+        '
+        Me.FCLCommentaire.AutoSize = True
+        Me.FCLCommentaire.Location = New System.Drawing.Point(8, 176)
+        Me.FCLCommentaire.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.FCLCommentaire.Name = "FCLCommentaire"
+        Me.FCLCommentaire.Size = New System.Drawing.Size(98, 18)
+        Me.FCLCommentaire.TabIndex = 124
+        Me.FCLCommentaire.Text = "Commentaire :"
+        '
+        'FCTBCommentaire
+        '
+        Me.FCTBCommentaire.Location = New System.Drawing.Point(120, 172)
+        Me.FCTBCommentaire.Margin = New System.Windows.Forms.Padding(4)
+        Me.FCTBCommentaire.Multiline = True
+        Me.FCTBCommentaire.Name = "FCTBCommentaire"
+        Me.FCTBCommentaire.Size = New System.Drawing.Size(169, 25)
+        Me.FCTBCommentaire.TabIndex = 97
+        '
+        'GBInfosConsRienAMontrer
+        '
+        Me.GBInfosConsRienAMontrer.BackColor = System.Drawing.Color.White
+        Me.GBInfosConsRienAMontrer.Controls.Add(Me.Label6)
+        Me.GBInfosConsRienAMontrer.Location = New System.Drawing.Point(28, 21)
+        Me.GBInfosConsRienAMontrer.Margin = New System.Windows.Forms.Padding(4)
+        Me.GBInfosConsRienAMontrer.Name = "GBInfosConsRienAMontrer"
+        Me.GBInfosConsRienAMontrer.Padding = New System.Windows.Forms.Padding(4)
+        Me.GBInfosConsRienAMontrer.Size = New System.Drawing.Size(416, 204)
+        Me.GBInfosConsRienAMontrer.TabIndex = 100
+        Me.GBInfosConsRienAMontrer.TabStop = False
+        Me.GBInfosConsRienAMontrer.Text = "Informations sur la concession"
+        Me.GBInfosConsRienAMontrer.Visible = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(30, 91)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(316, 18)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Cet emplacement ne fait pas l'objet d'une location."
         '
         'BSuppCons
         '
@@ -698,18 +934,6 @@ Partial Class FormGestion
         Me.BSuppCons.TabIndex = 134
         Me.BSuppCons.Text = "Supprimer"
         Me.BSuppCons.UseVisualStyleBackColor = False
-        '
-        'BmodifConsBenef
-        '
-        Me.BmodifConsBenef.BackColor = System.Drawing.Color.SeaGreen
-        Me.BmodifConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BmodifConsBenef.Location = New System.Drawing.Point(1463, 743)
-        Me.BmodifConsBenef.Margin = New System.Windows.Forms.Padding(4)
-        Me.BmodifConsBenef.Name = "BmodifConsBenef"
-        Me.BmodifConsBenef.Size = New System.Drawing.Size(85, 28)
-        Me.BmodifConsBenef.TabIndex = 133
-        Me.BmodifConsBenef.Text = "Modifier"
-        Me.BmodifConsBenef.UseVisualStyleBackColor = False
         '
         'BmodifCons
         '
@@ -746,17 +970,38 @@ Partial Class FormGestion
         Me.GroupBox9.TabStop = False
         Me.GroupBox9.Text = "Défunt séjournant dans l'emplacement:"
         '
-        'BAddConsBenef
+        'FCDGDefunt
         '
-        Me.BAddConsBenef.BackColor = System.Drawing.Color.SeaGreen
-        Me.BAddConsBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.BAddConsBenef.Location = New System.Drawing.Point(1373, 743)
-        Me.BAddConsBenef.Margin = New System.Windows.Forms.Padding(4)
-        Me.BAddConsBenef.Name = "BAddConsBenef"
-        Me.BAddConsBenef.Size = New System.Drawing.Size(85, 28)
-        Me.BAddConsBenef.TabIndex = 132
-        Me.BAddConsBenef.Text = "Ajouter"
-        Me.BAddConsBenef.UseVisualStyleBackColor = False
+        Me.FCDGDefunt.AllowUserToAddRows = False
+        Me.FCDGDefunt.AllowUserToDeleteRows = False
+        Me.FCDGDefunt.AllowUserToOrderColumns = True
+        Me.FCDGDefunt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.FCDGDefunt.BackgroundColor = System.Drawing.Color.White
+        Me.FCDGDefunt.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.FCDGDefunt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FCDGDefunt.DefaultCellStyle = DataGridViewCellStyle3
+        Me.FCDGDefunt.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.FCDGDefunt.EnableHeadersVisualStyles = False
+        Me.FCDGDefunt.Location = New System.Drawing.Point(0, 17)
+        Me.FCDGDefunt.Margin = New System.Windows.Forms.Padding(4)
+        Me.FCDGDefunt.MultiSelect = False
+        Me.FCDGDefunt.Name = "FCDGDefunt"
+        Me.FCDGDefunt.ReadOnly = True
+        Me.FCDGDefunt.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.FCDGDefunt.RowHeadersVisible = False
+        Me.FCDGDefunt.SelectedRow = Nothing
+        Me.FCDGDefunt.SelectedRowIndex = -1
+        Me.FCDGDefunt.SelectedValue = -1
+        Me.FCDGDefunt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.FCDGDefunt.Size = New System.Drawing.Size(416, 187)
+        Me.FCDGDefunt.TabIndex = 92
         '
         'Panel8
         '
@@ -781,12 +1026,45 @@ Partial Class FormGestion
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Bénéficiaire de la concession :"
         '
+        'FCDGBeneficiaire
+        '
+        Me.FCDGBeneficiaire.AllowUserToAddRows = False
+        Me.FCDGBeneficiaire.AllowUserToDeleteRows = False
+        Me.FCDGBeneficiaire.AllowUserToOrderColumns = True
+        Me.FCDGBeneficiaire.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.FCDGBeneficiaire.BackgroundColor = System.Drawing.Color.White
+        Me.FCDGBeneficiaire.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.FCDGBeneficiaire.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FCDGBeneficiaire.DefaultCellStyle = DataGridViewCellStyle4
+        Me.FCDGBeneficiaire.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.FCDGBeneficiaire.EnableHeadersVisualStyles = False
+        Me.FCDGBeneficiaire.Location = New System.Drawing.Point(0, 21)
+        Me.FCDGBeneficiaire.Margin = New System.Windows.Forms.Padding(4)
+        Me.FCDGBeneficiaire.MultiSelect = False
+        Me.FCDGBeneficiaire.Name = "FCDGBeneficiaire"
+        Me.FCDGBeneficiaire.ReadOnly = True
+        Me.FCDGBeneficiaire.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.FCDGBeneficiaire.RowHeadersVisible = False
+        Me.FCDGBeneficiaire.SelectedRow = Nothing
+        Me.FCDGBeneficiaire.SelectedRowIndex = -1
+        Me.FCDGBeneficiaire.SelectedValue = -1
+        Me.FCDGBeneficiaire.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.FCDGBeneficiaire.Size = New System.Drawing.Size(416, 183)
+        Me.FCDGBeneficiaire.TabIndex = 93
+        '
         'Panel7
         '
         Me.Panel7.BackColor = System.Drawing.Color.SeaGreen
         Me.Panel7.Controls.Add(Me.GroupBox7)
         Me.Panel7.Enabled = False
-        Me.Panel7.Location = New System.Drawing.Point(992, 457)
+        Me.Panel7.Location = New System.Drawing.Point(1001, 570)
         Me.Panel7.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(715, 222)
@@ -796,11 +1074,14 @@ Partial Class FormGestion
         '
         Me.GroupBox7.BackColor = System.Drawing.Color.White
         Me.GroupBox7.Controls.Add(Me.Label5)
+        Me.GroupBox7.Controls.Add(Me.BSuppConsBenef)
         Me.GroupBox7.Controls.Add(Me.CtrlLocBenefDeCons)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefdatenaiss)
+        Me.GroupBox7.Controls.Add(Me.BmodifConsBenef)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefadress)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefnom)
         Me.GroupBox7.Controls.Add(Me.TBconsBenefprenom)
+        Me.GroupBox7.Controls.Add(Me.BAddConsBenef)
         Me.GroupBox7.Controls.Add(Me.Label14)
         Me.GroupBox7.Controls.Add(Me.Label16)
         Me.GroupBox7.Controls.Add(Me.Label21)
@@ -813,6 +1094,61 @@ Partial Class FormGestion
         Me.GroupBox7.TabIndex = 0
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Infos Bénéficiaires"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Tai Le", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(93, 38)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(476, 103)
+        Me.Label5.TabIndex = 137
+        Me.Label5.Text = "On s'en fout"
+        '
+        'BSuppConsBenef
+        '
+        Me.BSuppConsBenef.BackColor = System.Drawing.Color.SeaGreen
+        Me.BSuppConsBenef.ForeColor = System.Drawing.Color.Transparent
+        Me.BSuppConsBenef.Location = New System.Drawing.Point(511, 153)
+        Me.BSuppConsBenef.Margin = New System.Windows.Forms.Padding(4)
+        Me.BSuppConsBenef.Name = "BSuppConsBenef"
+        Me.BSuppConsBenef.Size = New System.Drawing.Size(99, 28)
+        Me.BSuppConsBenef.TabIndex = 134
+        Me.BSuppConsBenef.Text = "Supprimer"
+        Me.BSuppConsBenef.UseVisualStyleBackColor = False
+        '
+        'CtrlLocBenefDeCons
+        '
+        Me.CtrlLocBenefDeCons.LectureSeule = False
+        Me.CtrlLocBenefDeCons.Location = New System.Drawing.Point(167, 87)
+        Me.CtrlLocBenefDeCons.LocVilleId = -1
+        Me.CtrlLocBenefDeCons.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlLocBenefDeCons.Name = "CtrlLocBenefDeCons"
+        Me.CtrlLocBenefDeCons.osef = Nothing
+        Me.CtrlLocBenefDeCons.Size = New System.Drawing.Size(329, 30)
+        Me.CtrlLocBenefDeCons.TabIndex = 135
+        '
+        'TBconsBenefdatenaiss
+        '
+        Me.TBconsBenefdatenaiss.DateValue = Nothing
+        Me.TBconsBenefdatenaiss.Location = New System.Drawing.Point(167, 124)
+        Me.TBconsBenefdatenaiss.Mask = "00/00/0000"
+        Me.TBconsBenefdatenaiss.Name = "TBconsBenefdatenaiss"
+        Me.TBconsBenefdatenaiss.Size = New System.Drawing.Size(171, 25)
+        Me.TBconsBenefdatenaiss.TabIndex = 136
+        Me.TBconsBenefdatenaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'BmodifConsBenef
+        '
+        Me.BmodifConsBenef.BackColor = System.Drawing.Color.SeaGreen
+        Me.BmodifConsBenef.ForeColor = System.Drawing.Color.Transparent
+        Me.BmodifConsBenef.Location = New System.Drawing.Point(422, 153)
+        Me.BmodifConsBenef.Margin = New System.Windows.Forms.Padding(4)
+        Me.BmodifConsBenef.Name = "BmodifConsBenef"
+        Me.BmodifConsBenef.Size = New System.Drawing.Size(85, 28)
+        Me.BmodifConsBenef.TabIndex = 133
+        Me.BmodifConsBenef.Text = "Modifier"
+        Me.BmodifConsBenef.UseVisualStyleBackColor = False
         '
         'TBconsBenefadress
         '
@@ -837,6 +1173,18 @@ Partial Class FormGestion
         Me.TBconsBenefprenom.Name = "TBconsBenefprenom"
         Me.TBconsBenefprenom.Size = New System.Drawing.Size(171, 25)
         Me.TBconsBenefprenom.TabIndex = 66
+        '
+        'BAddConsBenef
+        '
+        Me.BAddConsBenef.BackColor = System.Drawing.Color.SeaGreen
+        Me.BAddConsBenef.ForeColor = System.Drawing.Color.Transparent
+        Me.BAddConsBenef.Location = New System.Drawing.Point(332, 153)
+        Me.BAddConsBenef.Margin = New System.Windows.Forms.Padding(4)
+        Me.BAddConsBenef.Name = "BAddConsBenef"
+        Me.BAddConsBenef.Size = New System.Drawing.Size(85, 28)
+        Me.BAddConsBenef.TabIndex = 132
+        Me.BAddConsBenef.Text = "Ajouter"
+        Me.BAddConsBenef.UseVisualStyleBackColor = False
         '
         'Label14
         '
@@ -897,6 +1245,39 @@ Partial Class FormGestion
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Concession / Emplacement :"
         '
+        'FCDGConss
+        '
+        Me.FCDGConss.AllowUserToAddRows = False
+        Me.FCDGConss.AllowUserToDeleteRows = False
+        Me.FCDGConss.AllowUserToOrderColumns = True
+        Me.FCDGConss.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.FCDGConss.BackgroundColor = System.Drawing.Color.White
+        Me.FCDGConss.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.FCDGConss.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FCDGConss.DefaultCellStyle = DataGridViewCellStyle5
+        Me.FCDGConss.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.FCDGConss.EnableHeadersVisualStyles = False
+        Me.FCDGConss.Location = New System.Drawing.Point(0, 18)
+        Me.FCDGConss.Margin = New System.Windows.Forms.Padding(4)
+        Me.FCDGConss.MultiSelect = False
+        Me.FCDGConss.Name = "FCDGConss"
+        Me.FCDGConss.ReadOnly = True
+        Me.FCDGConss.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.FCDGConss.RowHeadersVisible = False
+        Me.FCDGConss.SelectedRow = Nothing
+        Me.FCDGConss.SelectedRowIndex = -1
+        Me.FCDGConss.SelectedValue = -1
+        Me.FCDGConss.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.FCDGConss.Size = New System.Drawing.Size(416, 186)
+        Me.FCDGConss.TabIndex = 43
+        '
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.SeaGreen
@@ -910,22 +1291,14 @@ Partial Class FormGestion
         'GroupBox6
         '
         Me.GroupBox6.BackColor = System.Drawing.Color.White
-        Me.GroupBox6.Controls.Add(Me.FCTBDateFin)
-        Me.GroupBox6.Controls.Add(Me.FCTBDateDeb)
         Me.GroupBox6.Controls.Add(Me.CBMonumentClasse)
         Me.GroupBox6.Controls.Add(Me.CBEmplType)
         Me.GroupBox6.Controls.Add(Me.CbConsEmplacement)
         Me.GroupBox6.Controls.Add(Me.FCTBNbPlaces)
-        Me.GroupBox6.Controls.Add(Me.Label12)
-        Me.GroupBox6.Controls.Add(Me.Label13)
-        Me.GroupBox6.Controls.Add(Me.FCLDenomination)
-        Me.GroupBox6.Controls.Add(Me.FCTBnumero)
         Me.GroupBox6.Controls.Add(Me.FCLEmplacement)
         Me.GroupBox6.Controls.Add(Me.FCLPlaceLibre)
         Me.GroupBox6.Controls.Add(Me.FCLPlaceOccupe)
         Me.GroupBox6.Controls.Add(Me.FCTBPlaceOccupe)
-        Me.GroupBox6.Controls.Add(Me.FCLCommentaire)
-        Me.GroupBox6.Controls.Add(Me.FCTBCommentaire)
         Me.GroupBox6.Controls.Add(Me.FCLMonumentC)
         Me.GroupBox6.Controls.Add(Me.FCLHistoire)
         Me.GroupBox6.Controls.Add(Me.FCTBHistoire)
@@ -937,7 +1310,7 @@ Partial Class FormGestion
         Me.GroupBox6.Size = New System.Drawing.Size(669, 204)
         Me.GroupBox6.TabIndex = 0
         Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Infos Concessions"
+        Me.GroupBox6.Text = "Informations sur l'emplacement"
         '
         'CBMonumentClasse
         '
@@ -948,43 +1321,34 @@ Partial Class FormGestion
         Me.CBMonumentClasse.TabIndex = 137
         Me.CBMonumentClasse.UseVisualStyleBackColor = True
         '
-        'Label12
+        'CBEmplType
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(48, 174)
-        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(96, 18)
-        Me.Label12.TabIndex = 125
-        Me.Label12.Text = "Date de debut"
+        Me.CBEmplType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CBEmplType.FormattingEnabled = True
+        Me.CBEmplType.Location = New System.Drawing.Point(484, 134)
+        Me.CBEmplType.Name = "CBEmplType"
+        Me.CBEmplType.SelectedUnderlyingValue = Nothing
+        Me.CBEmplType.Size = New System.Drawing.Size(121, 26)
+        Me.CBEmplType.TabIndex = 1
         '
-        'Label13
+        'CbConsEmplacement
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(385, 174)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(75, 18)
-        Me.Label13.TabIndex = 127
-        Me.Label13.Text = "Date de fin"
+        Me.CbConsEmplacement.DisplayMember = "empl_reference"
+        Me.CbConsEmplacement.EmplId = Nothing
+        Me.CbConsEmplacement.FormattingEnabled = True
+        Me.CbConsEmplacement.Location = New System.Drawing.Point(481, 18)
+        Me.CbConsEmplacement.Name = "CbConsEmplacement"
+        Me.CbConsEmplacement.Size = New System.Drawing.Size(167, 26)
+        Me.CbConsEmplacement.TabIndex = 136
+        Me.CbConsEmplacement.ValueMember = "empl_id"
         '
-        'FCLDenomination
+        'FCTBNbPlaces
         '
-        Me.FCLDenomination.AutoSize = True
-        Me.FCLDenomination.Location = New System.Drawing.Point(84, 28)
-        Me.FCLDenomination.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.FCLDenomination.Name = "FCLDenomination"
-        Me.FCLDenomination.Size = New System.Drawing.Size(58, 18)
-        Me.FCLDenomination.TabIndex = 64
-        Me.FCLDenomination.Text = "Numero"
-        '
-        'FCTBnumero
-        '
-        Me.FCTBnumero.Location = New System.Drawing.Point(165, 27)
-        Me.FCTBnumero.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCTBnumero.Name = "FCTBnumero"
-        Me.FCTBnumero.Size = New System.Drawing.Size(171, 25)
-        Me.FCTBnumero.TabIndex = 65
+        Me.FCTBNbPlaces.Location = New System.Drawing.Point(165, 62)
+        Me.FCTBNbPlaces.Name = "FCTBNbPlaces"
+        Me.FCTBNbPlaces.Size = New System.Drawing.Size(169, 25)
+        Me.FCTBNbPlaces.TabIndex = 135
+        Me.FCTBNbPlaces.Value = Nothing
         '
         'FCLEmplacement
         '
@@ -1024,24 +1388,6 @@ Partial Class FormGestion
         Me.FCTBPlaceOccupe.ReadOnly = True
         Me.FCTBPlaceOccupe.Size = New System.Drawing.Size(169, 25)
         Me.FCTBPlaceOccupe.TabIndex = 71
-        '
-        'FCLCommentaire
-        '
-        Me.FCLCommentaire.AutoSize = True
-        Me.FCLCommentaire.Location = New System.Drawing.Point(369, 100)
-        Me.FCLCommentaire.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.FCLCommentaire.Name = "FCLCommentaire"
-        Me.FCLCommentaire.Size = New System.Drawing.Size(98, 18)
-        Me.FCLCommentaire.TabIndex = 124
-        Me.FCLCommentaire.Text = "Commentaire :"
-        '
-        'FCTBCommentaire
-        '
-        Me.FCTBCommentaire.Location = New System.Drawing.Point(481, 96)
-        Me.FCTBCommentaire.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCTBCommentaire.Name = "FCTBCommentaire"
-        Me.FCTBCommentaire.Size = New System.Drawing.Size(169, 25)
-        Me.FCTBCommentaire.TabIndex = 97
         '
         'FCLMonumentC
         '
@@ -1084,39 +1430,41 @@ Partial Class FormGestion
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.SeaGreen
-        Me.Panel4.Controls.Add(Me.GroupBox4)
+        Me.Panel4.Controls.Add(Me.GBRechEmpl)
         Me.Panel4.Location = New System.Drawing.Point(24, 107)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(345, 375)
         Me.Panel4.TabIndex = 129
         '
-        'GroupBox4
+        'GBRechEmpl
         '
-        Me.GroupBox4.BackColor = System.Drawing.Color.White
-        Me.GroupBox4.Controls.Add(Me.CbfconsEmplacement)
-        Me.GroupBox4.Controls.Add(Me.CbfconsCsnr)
-        Me.GroupBox4.Controls.Add(Me.CbfConsOccupants)
-        Me.GroupBox4.Controls.Add(Me.Label27)
-        Me.GroupBox4.Controls.Add(Me.BTCsnAnnulerRecherche)
-        Me.GroupBox4.Controls.Add(Me.DtpConsRechercherDateFinap)
-        Me.GroupBox4.Controls.Add(Me.Label23)
-        Me.GroupBox4.Controls.Add(Me.Label17)
-        Me.GroupBox4.Controls.Add(Me.DtpConsRechercherDateFin)
-        Me.GroupBox4.Controls.Add(Me.BtRechEmpl)
-        Me.GroupBox4.Controls.Add(Me.FCTBRechercher)
-        Me.GroupBox4.Location = New System.Drawing.Point(19, 11)
-        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox4.Size = New System.Drawing.Size(308, 351)
-        Me.GroupBox4.TabIndex = 0
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Rechercher :"
+        Me.GBRechEmpl.BackColor = System.Drawing.Color.White
+        Me.GBRechEmpl.Controls.Add(Me.CbfconsEmplacement)
+        Me.GBRechEmpl.Controls.Add(Me.CbfconsCsnr)
+        Me.GBRechEmpl.Controls.Add(Me.CbfConsOccupants)
+        Me.GBRechEmpl.Controls.Add(Me.Label27)
+        Me.GBRechEmpl.Controls.Add(Me.BTCsnAnnulerRecherche)
+        Me.GBRechEmpl.Controls.Add(Me.DtpConsRechercherDateFinap)
+        Me.GBRechEmpl.Controls.Add(Me.Label23)
+        Me.GBRechEmpl.Controls.Add(Me.Label17)
+        Me.GBRechEmpl.Controls.Add(Me.DtpConsRechercherDateFin)
+        Me.GBRechEmpl.Controls.Add(Me.BtRechEmpl)
+        Me.GBRechEmpl.Controls.Add(Me.FCTBRechercher)
+        Me.GBRechEmpl.Location = New System.Drawing.Point(19, 11)
+        Me.GBRechEmpl.Margin = New System.Windows.Forms.Padding(4)
+        Me.GBRechEmpl.Name = "GBRechEmpl"
+        Me.GBRechEmpl.Padding = New System.Windows.Forms.Padding(4)
+        Me.GBRechEmpl.Size = New System.Drawing.Size(308, 351)
+        Me.GBRechEmpl.TabIndex = 0
+        Me.GBRechEmpl.TabStop = False
+        Me.GBRechEmpl.Text = "Rechercher :"
         '
         'CbfconsEmplacement
         '
         Me.CbfconsEmplacement.AutoSize = True
+        Me.CbfconsEmplacement.Checked = True
+        Me.CbfconsEmplacement.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CbfconsEmplacement.Location = New System.Drawing.Point(11, 80)
         Me.CbfconsEmplacement.Name = "CbfconsEmplacement"
         Me.CbfconsEmplacement.Size = New System.Drawing.Size(112, 22)
@@ -1127,6 +1475,8 @@ Partial Class FormGestion
         'CbfconsCsnr
         '
         Me.CbfconsCsnr.AutoSize = True
+        Me.CbfconsCsnr.Checked = True
+        Me.CbfconsCsnr.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CbfconsCsnr.Location = New System.Drawing.Point(11, 109)
         Me.CbfconsCsnr.Name = "CbfconsCsnr"
         Me.CbfconsCsnr.Size = New System.Drawing.Size(129, 22)
@@ -1137,6 +1487,8 @@ Partial Class FormGestion
         'CbfConsOccupants
         '
         Me.CbfConsOccupants.AutoSize = True
+        Me.CbfConsOccupants.Checked = True
+        Me.CbfConsOccupants.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CbfConsOccupants.Location = New System.Drawing.Point(11, 137)
         Me.CbfConsOccupants.Name = "CbfConsOccupants"
         Me.CbfConsOccupants.Size = New System.Drawing.Size(95, 22)
@@ -1224,30 +1576,6 @@ Partial Class FormGestion
         Me.FCTBRechercher.Size = New System.Drawing.Size(208, 25)
         Me.FCTBRechercher.TabIndex = 35
         '
-        'FCBLienDefunt
-        '
-        Me.FCBLienDefunt.BackColor = System.Drawing.Color.SeaGreen
-        Me.FCBLienDefunt.ForeColor = System.Drawing.Color.Transparent
-        Me.FCBLienDefunt.Location = New System.Drawing.Point(1208, 329)
-        Me.FCBLienDefunt.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCBLienDefunt.Name = "FCBLienDefunt"
-        Me.FCBLienDefunt.Size = New System.Drawing.Size(205, 70)
-        Me.FCBLienDefunt.TabIndex = 91
-        Me.FCBLienDefunt.Text = "Lien vers Défunt"
-        Me.FCBLienDefunt.UseVisualStyleBackColor = False
-        '
-        'FDBLinkToConcessionnaire
-        '
-        Me.FDBLinkToConcessionnaire.BackColor = System.Drawing.Color.SeaGreen
-        Me.FDBLinkToConcessionnaire.ForeColor = System.Drawing.Color.Transparent
-        Me.FDBLinkToConcessionnaire.Location = New System.Drawing.Point(1443, 331)
-        Me.FDBLinkToConcessionnaire.Margin = New System.Windows.Forms.Padding(4)
-        Me.FDBLinkToConcessionnaire.Name = "FDBLinkToConcessionnaire"
-        Me.FDBLinkToConcessionnaire.Size = New System.Drawing.Size(205, 65)
-        Me.FDBLinkToConcessionnaire.TabIndex = 90
-        Me.FDBLinkToConcessionnaire.Text = "Lien vers Concessionnaire"
-        Me.FDBLinkToConcessionnaire.UseVisualStyleBackColor = False
-        '
         'FCPBlahulpe
         '
         Me.FCPBlahulpe.BackColor = System.Drawing.Color.Transparent
@@ -1264,9 +1592,6 @@ Partial Class FormGestion
         '
         Me.TabPage3.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.TabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.TabPage3.Controls.Add(Me.BTLienPcontVersDef)
-        Me.TabPage3.Controls.Add(Me.BTLienBenefVersConcession)
-        Me.TabPage3.Controls.Add(Me.BTLienCsnrVersConcession)
         Me.TabPage3.Controls.Add(Me.Panel13)
         Me.TabPage3.Controls.Add(Me.Panel2)
         Me.TabPage3.Controls.Add(Me.PRBPersCon)
@@ -1292,48 +1617,140 @@ Partial Class FormGestion
         Me.Panel13.Location = New System.Drawing.Point(941, 38)
         Me.Panel13.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(708, 246)
+        Me.Panel13.Size = New System.Drawing.Size(708, 303)
         Me.Panel13.TabIndex = 138
         '
         'GroupBox13
         '
         Me.GroupBox13.BackColor = System.Drawing.Color.White
+        Me.GroupBox13.Controls.Add(Me.LabPcontDefAssoc)
+        Me.GroupBox13.Controls.Add(Me.LinkLabLienBenVersCon)
+        Me.GroupBox13.Controls.Add(Me.LinkLabLienPcontVersDef)
+        Me.GroupBox13.Controls.Add(Me.LabConAssoc)
+        Me.GroupBox13.Controls.Add(Me.LinkLabLienCsnrVersCon)
+        Me.GroupBox13.Controls.Add(Me.TBPersNumNational)
+        Me.GroupBox13.Controls.Add(Me.LabPersLienParente)
+        Me.GroupBox13.Controls.Add(Me.TBPersLienParente)
         Me.GroupBox13.Controls.Add(Me.TBPersDN)
         Me.GroupBox13.Controls.Add(Me.CtrlLocPersonne)
-        Me.GroupBox13.Controls.Add(Me.TBPersNumNational)
         Me.GroupBox13.Controls.Add(Me.TBPersTel)
         Me.GroupBox13.Controls.Add(Me.TBPersAdress)
         Me.GroupBox13.Controls.Add(Me.TBPersNom)
         Me.GroupBox13.Controls.Add(Me.TBPersPrenom)
         Me.GroupBox13.Controls.Add(Me.Label4)
-        Me.GroupBox13.Controls.Add(Me.Label9)
-        Me.GroupBox13.Controls.Add(Me.Label8)
-        Me.GroupBox13.Controls.Add(Me.Label7)
+        Me.GroupBox13.Controls.Add(Me.LabPersNumNational)
+        Me.GroupBox13.Controls.Add(Me.LabPersDN)
+        Me.GroupBox13.Controls.Add(Me.LabPersTel)
         Me.GroupBox13.Controls.Add(Me.Label11)
         Me.GroupBox13.Controls.Add(Me.Label28)
         Me.GroupBox13.Location = New System.Drawing.Point(23, 17)
         Me.GroupBox13.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox13.Size = New System.Drawing.Size(667, 204)
+        Me.GroupBox13.Size = New System.Drawing.Size(667, 264)
         Me.GroupBox13.TabIndex = 0
         Me.GroupBox13.TabStop = False
         Me.GroupBox13.Text = "Infos Personnes"
         '
+        'LabPcontDefAssoc
+        '
+        Me.LabPcontDefAssoc.AutoSize = True
+        Me.LabPcontDefAssoc.Location = New System.Drawing.Point(19, 198)
+        Me.LabPcontDefAssoc.Name = "LabPcontDefAssoc"
+        Me.LabPcontDefAssoc.Size = New System.Drawing.Size(104, 18)
+        Me.LabPcontDefAssoc.TabIndex = 156
+        Me.LabPcontDefAssoc.Text = "Défunt associé :"
+        '
+        'LinkLabLienBenVersCon
+        '
+        Me.LinkLabLienBenVersCon.AutoSize = True
+        Me.LinkLabLienBenVersCon.Location = New System.Drawing.Point(147, 198)
+        Me.LinkLabLienBenVersCon.Name = "LinkLabLienBenVersCon"
+        Me.LinkLabLienBenVersCon.Size = New System.Drawing.Size(108, 18)
+        Me.LinkLabLienBenVersCon.TabIndex = 155
+        Me.LinkLabLienBenVersCon.TabStop = True
+        Me.LinkLabLienBenVersCon.Text = "LienBenVersCon"
+        '
+        'LinkLabLienPcontVersDef
+        '
+        Me.LinkLabLienPcontVersDef.AutoSize = True
+        Me.LinkLabLienPcontVersDef.Location = New System.Drawing.Point(147, 198)
+        Me.LinkLabLienPcontVersDef.Name = "LinkLabLienPcontVersDef"
+        Me.LinkLabLienPcontVersDef.Size = New System.Drawing.Size(116, 18)
+        Me.LinkLabLienPcontVersDef.TabIndex = 154
+        Me.LinkLabLienPcontVersDef.TabStop = True
+        Me.LinkLabLienPcontVersDef.Text = "LienPcontVersDef"
+        '
+        'LabConAssoc
+        '
+        Me.LabConAssoc.AutoSize = True
+        Me.LabConAssoc.Location = New System.Drawing.Point(19, 198)
+        Me.LabConAssoc.Name = "LabConAssoc"
+        Me.LabConAssoc.Size = New System.Drawing.Size(108, 18)
+        Me.LabConAssoc.TabIndex = 153
+        Me.LabConAssoc.Text = "Concession liée :"
+        '
+        'LinkLabLienCsnrVersCon
+        '
+        Me.LinkLabLienCsnrVersCon.AutoSize = True
+        Me.LinkLabLienCsnrVersCon.Location = New System.Drawing.Point(152, 198)
+        Me.LinkLabLienCsnrVersCon.Name = "LinkLabLienCsnrVersCon"
+        Me.LinkLabLienCsnrVersCon.Size = New System.Drawing.Size(111, 18)
+        Me.LinkLabLienCsnrVersCon.TabIndex = 152
+        Me.LinkLabLienCsnrVersCon.TabStop = True
+        Me.LinkLabLienCsnrVersCon.Text = "LienCsnrVersCsn"
+        '
         'TBPersNumNational
         '
-        Me.TBPersNumNational.Location = New System.Drawing.Point(116, 159)
-        Me.TBPersNumNational.Margin = New System.Windows.Forms.Padding(4)
+        Me.TBPersNumNational.Location = New System.Drawing.Point(380, 138)
         Me.TBPersNumNational.Name = "TBPersNumNational"
-        Me.TBPersNumNational.Size = New System.Drawing.Size(132, 25)
-        Me.TBPersNumNational.TabIndex = 146
+        Me.TBPersNumNational.Size = New System.Drawing.Size(143, 25)
+        Me.TBPersNumNational.TabIndex = 151
+        Me.TBPersNumNational.Value = Nothing
+        '
+        'LabPersLienParente
+        '
+        Me.LabPersLienParente.AutoSize = True
+        Me.LabPersLienParente.Location = New System.Drawing.Point(296, 98)
+        Me.LabPersLienParente.Name = "LabPersLienParente"
+        Me.LabPersLienParente.Size = New System.Drawing.Size(103, 18)
+        Me.LabPersLienParente.TabIndex = 150
+        Me.LabPersLienParente.Text = "Lien de parenté"
+        '
+        'TBPersLienParente
+        '
+        Me.TBPersLienParente.Location = New System.Drawing.Point(405, 98)
+        Me.TBPersLienParente.Name = "TBPersLienParente"
+        Me.TBPersLienParente.Size = New System.Drawing.Size(100, 25)
+        Me.TBPersLienParente.TabIndex = 149
+        '
+        'TBPersDN
+        '
+        Me.TBPersDN.DateValue = Nothing
+        Me.TBPersDN.Location = New System.Drawing.Point(150, 94)
+        Me.TBPersDN.Mask = "00/00/0000"
+        Me.TBPersDN.Name = "TBPersDN"
+        Me.TBPersDN.Size = New System.Drawing.Size(115, 25)
+        Me.TBPersDN.TabIndex = 148
+        Me.TBPersDN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'CtrlLocPersonne
+        '
+        Me.CtrlLocPersonne.LectureSeule = False
+        Me.CtrlLocPersonne.Location = New System.Drawing.Point(299, 54)
+        Me.CtrlLocPersonne.LocVilleId = -1
+        Me.CtrlLocPersonne.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlLocPersonne.Name = "CtrlLocPersonne"
+        Me.CtrlLocPersonne.osef = Nothing
+        Me.CtrlLocPersonne.Size = New System.Drawing.Size(316, 25)
+        Me.CtrlLocPersonne.TabIndex = 147
         '
         'TBPersTel
         '
-        Me.TBPersTel.Location = New System.Drawing.Point(398, 129)
+        Me.TBPersTel.Location = New System.Drawing.Point(101, 133)
         Me.TBPersTel.Margin = New System.Windows.Forms.Padding(4)
         Me.TBPersTel.Name = "TBPersTel"
-        Me.TBPersTel.Size = New System.Drawing.Size(132, 25)
+        Me.TBPersTel.Size = New System.Drawing.Size(164, 25)
         Me.TBPersTel.TabIndex = 142
         '
         'TBPersAdress
@@ -1369,32 +1786,32 @@ Partial Class FormGestion
         Me.Label4.TabIndex = 38
         Me.Label4.Text = "Adresse"
         '
-        'Label9
+        'LabPersNumNational
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(23, 161)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(76, 18)
-        Me.Label9.TabIndex = 36
-        Me.Label9.Text = "N° national"
+        Me.LabPersNumNational.AutoSize = True
+        Me.LabPersNumNational.Location = New System.Drawing.Point(298, 141)
+        Me.LabPersNumNational.Name = "LabPersNumNational"
+        Me.LabPersNumNational.Size = New System.Drawing.Size(76, 18)
+        Me.LabPersNumNational.TabIndex = 36
+        Me.LabPersNumNational.Text = "N° national"
         '
-        'Label8
+        'LabPersDN
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(19, 128)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(118, 18)
-        Me.Label8.TabIndex = 33
-        Me.Label8.Text = "Date de naissance"
+        Me.LabPersDN.AutoSize = True
+        Me.LabPersDN.Location = New System.Drawing.Point(19, 98)
+        Me.LabPersDN.Name = "LabPersDN"
+        Me.LabPersDN.Size = New System.Drawing.Size(118, 18)
+        Me.LabPersDN.TabIndex = 33
+        Me.LabPersDN.Text = "Date de naissance"
         '
-        'Label7
+        'LabPersTel
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(310, 132)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(71, 18)
-        Me.Label7.TabIndex = 32
-        Me.Label7.Text = "Téléphone"
+        Me.LabPersTel.AutoSize = True
+        Me.LabPersTel.Location = New System.Drawing.Point(19, 138)
+        Me.LabPersTel.Name = "LabPersTel"
+        Me.LabPersTel.Size = New System.Drawing.Size(71, 18)
+        Me.LabPersTel.TabIndex = 32
+        Me.LabPersTel.Text = "Téléphone"
         '
         'Label11
         '
@@ -1528,420 +1945,6 @@ Partial Class FormGestion
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "Acteurs"
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(148, 95)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 132
-        Me.PictureBox1.TabStop = False
-        '
-        'BModifGestionPers
-        '
-        Me.BModifGestionPers.BackColor = System.Drawing.Color.SeaGreen
-        Me.BModifGestionPers.ForeColor = System.Drawing.Color.Transparent
-        Me.BModifGestionPers.Location = New System.Drawing.Point(1459, 288)
-        Me.BModifGestionPers.Margin = New System.Windows.Forms.Padding(4)
-        Me.BModifGestionPers.Name = "BModifGestionPers"
-        Me.BModifGestionPers.Size = New System.Drawing.Size(85, 28)
-        Me.BModifGestionPers.TabIndex = 136
-        Me.BModifGestionPers.Text = "Modifier"
-        Me.BModifGestionPers.UseVisualStyleBackColor = False
-        '
-        'BSupGestionPers
-        '
-        Me.BSupGestionPers.BackColor = System.Drawing.Color.SeaGreen
-        Me.BSupGestionPers.ForeColor = System.Drawing.Color.Transparent
-        Me.BSupGestionPers.Location = New System.Drawing.Point(1551, 288)
-        Me.BSupGestionPers.Margin = New System.Windows.Forms.Padding(4)
-        Me.BSupGestionPers.Name = "BSupGestionPers"
-        Me.BSupGestionPers.Size = New System.Drawing.Size(99, 28)
-        Me.BSupGestionPers.TabIndex = 137
-        Me.BSupGestionPers.Text = "Supprimer"
-        Me.BSupGestionPers.UseVisualStyleBackColor = False
-        '
-        'ProgressBar
-        '
-        Me.ProgressBar.Location = New System.Drawing.Point(164, 52)
-        Me.ProgressBar.Margin = New System.Windows.Forms.Padding(4)
-        Me.ProgressBar.Name = "ProgressBar"
-        Me.ProgressBar.Size = New System.Drawing.Size(876, 28)
-        Me.ProgressBar.TabIndex = 98
-        '
-        'Lchargementdonnee
-        '
-        Me.Lchargementdonnee.AutoSize = True
-        Me.Lchargementdonnee.BackColor = System.Drawing.Color.Transparent
-        Me.Lchargementdonnee.Font = New System.Drawing.Font("Arial Narrow", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Lchargementdonnee.Location = New System.Drawing.Point(437, 17)
-        Me.Lchargementdonnee.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Lchargementdonnee.Name = "Lchargementdonnee"
-        Me.Lchargementdonnee.Size = New System.Drawing.Size(299, 31)
-        Me.Lchargementdonnee.TabIndex = 99
-        Me.Lchargementdonnee.Text = "Chargement des données . . ."
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(1, 1)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(148, 95)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 51
-        Me.PictureBox2.TabStop = False
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(1109, 263)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(169, 22)
-        Me.TextBox1.TabIndex = 139
-        '
-        'FCBLienBenef
-        '
-        Me.FCBLienBenef.BackColor = System.Drawing.Color.SeaGreen
-        Me.FCBLienBenef.ForeColor = System.Drawing.Color.Transparent
-        Me.FCBLienBenef.Location = New System.Drawing.Point(896, 585)
-        Me.FCBLienBenef.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCBLienBenef.Name = "FCBLienBenef"
-        Me.FCBLienBenef.Size = New System.Drawing.Size(205, 70)
-        Me.FCBLienBenef.TabIndex = 135
-        Me.FCBLienBenef.Text = "Lien vers bénéficiaire"
-        Me.FCBLienBenef.UseVisualStyleBackColor = False
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Tai Le", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(93, 38)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(476, 103)
-        Me.Label5.TabIndex = 137
-        Me.Label5.Text = "On s'en fout"
-        '
-        'BTLienCsnrVersConcession
-        '
-        Me.BTLienCsnrVersConcession.BackColor = System.Drawing.Color.SeaGreen
-        Me.BTLienCsnrVersConcession.ForeColor = System.Drawing.Color.Transparent
-        Me.BTLienCsnrVersConcession.Location = New System.Drawing.Point(1140, 338)
-        Me.BTLienCsnrVersConcession.Margin = New System.Windows.Forms.Padding(4)
-        Me.BTLienCsnrVersConcession.Name = "BTLienCsnrVersConcession"
-        Me.BTLienCsnrVersConcession.Size = New System.Drawing.Size(205, 70)
-        Me.BTLienCsnrVersConcession.TabIndex = 92
-        Me.BTLienCsnrVersConcession.Text = "Lien vers concession"
-        Me.BTLienCsnrVersConcession.UseVisualStyleBackColor = False
-        '
-        'BTLienBenefVersConcession
-        '
-        Me.BTLienBenefVersConcession.BackColor = System.Drawing.Color.SeaGreen
-        Me.BTLienBenefVersConcession.ForeColor = System.Drawing.Color.Transparent
-        Me.BTLienBenefVersConcession.Location = New System.Drawing.Point(1093, 469)
-        Me.BTLienBenefVersConcession.Margin = New System.Windows.Forms.Padding(4)
-        Me.BTLienBenefVersConcession.Name = "BTLienBenefVersConcession"
-        Me.BTLienBenefVersConcession.Size = New System.Drawing.Size(205, 70)
-        Me.BTLienBenefVersConcession.TabIndex = 147
-        Me.BTLienBenefVersConcession.Text = "Lien vers concession"
-        Me.BTLienBenefVersConcession.UseVisualStyleBackColor = False
-        '
-        'BTLienPcontVersDef
-        '
-        Me.BTLienPcontVersDef.BackColor = System.Drawing.Color.SeaGreen
-        Me.BTLienPcontVersDef.ForeColor = System.Drawing.Color.Transparent
-        Me.BTLienPcontVersDef.Location = New System.Drawing.Point(1140, 403)
-        Me.BTLienPcontVersDef.Margin = New System.Windows.Forms.Padding(4)
-        Me.BTLienPcontVersDef.Name = "BTLienPcontVersDef"
-        Me.BTLienPcontVersDef.Size = New System.Drawing.Size(205, 70)
-        Me.BTLienPcontVersDef.TabIndex = 148
-        Me.BTLienPcontVersDef.Text = "Lien vers défunt"
-        Me.BTLienPcontVersDef.UseVisualStyleBackColor = False
-        '
-        'DgvListeDefunts
-        '
-        Me.DgvListeDefunts.AllowUserToAddRows = False
-        Me.DgvListeDefunts.AllowUserToDeleteRows = False
-        Me.DgvListeDefunts.AllowUserToOrderColumns = True
-        Me.DgvListeDefunts.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvListeDefunts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DgvListeDefunts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DgvListeDefunts.BackgroundColor = System.Drawing.SystemColors.ButtonFace
-        Me.DgvListeDefunts.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DgvListeDefunts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvListeDefunts.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DgvListeDefunts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DgvListeDefunts.EnableHeadersVisualStyles = False
-        Me.DgvListeDefunts.GridColor = System.Drawing.Color.DarkGray
-        Me.DgvListeDefunts.Location = New System.Drawing.Point(11, 18)
-        Me.DgvListeDefunts.Margin = New System.Windows.Forms.Padding(4)
-        Me.DgvListeDefunts.MultiSelect = False
-        Me.DgvListeDefunts.Name = "DgvListeDefunts"
-        Me.DgvListeDefunts.ReadOnly = True
-        Me.DgvListeDefunts.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.DgvListeDefunts.RowHeadersVisible = False
-        Me.DgvListeDefunts.SelectedRow = Nothing
-        Me.DgvListeDefunts.SelectedRowIndex = -1
-        Me.DgvListeDefunts.SelectedValue = -1
-        Me.DgvListeDefunts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeDefunts.Size = New System.Drawing.Size(489, 710)
-        Me.DgvListeDefunts.TabIndex = 48
-        '
-        'CbDefEmplacement
-        '
-        Me.CbDefEmplacement.DisplayMember = "empl_reference"
-        Me.CbDefEmplacement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CbDefEmplacement.EmplId = Nothing
-        Me.CbDefEmplacement.FormattingEnabled = True
-        Me.CbDefEmplacement.Location = New System.Drawing.Point(486, 223)
-        Me.CbDefEmplacement.Name = "CbDefEmplacement"
-        Me.CbDefEmplacement.Size = New System.Drawing.Size(176, 26)
-        Me.CbDefEmplacement.TabIndex = 146
-        Me.CbDefEmplacement.ValueMember = "empl_id"
-        '
-        'FPTBDateDeces
-        '
-        Me.FPTBDateDeces.DateValue = Nothing
-        Me.FPTBDateDeces.Location = New System.Drawing.Point(487, 175)
-        Me.FPTBDateDeces.Mask = "00/00/0000"
-        Me.FPTBDateDeces.Name = "FPTBDateDeces"
-        Me.FPTBDateDeces.Size = New System.Drawing.Size(112, 25)
-        Me.FPTBDateDeces.TabIndex = 145
-        Me.FPTBDateDeces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'FPTBDateNaiss
-        '
-        Me.FPTBDateNaiss.DateValue = Nothing
-        Me.FPTBDateNaiss.Location = New System.Drawing.Point(159, 182)
-        Me.FPTBDateNaiss.Mask = "00/00/0000"
-        Me.FPTBDateNaiss.Name = "FPTBDateNaiss"
-        Me.FPTBDateNaiss.Size = New System.Drawing.Size(112, 25)
-        Me.FPTBDateNaiss.TabIndex = 143
-        Me.FPTBDateNaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'CtrlLocVilleDef
-        '
-        Me.CtrlLocVilleDef.LectureSeule = False
-        Me.CtrlLocVilleDef.Location = New System.Drawing.Point(159, 105)
-        Me.CtrlLocVilleDef.LocVilleId = -1
-        Me.CtrlLocVilleDef.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtrlLocVilleDef.Name = "CtrlLocVilleDef"
-        Me.CtrlLocVilleDef.osef = Nothing
-        Me.CtrlLocVilleDef.Size = New System.Drawing.Size(316, 25)
-        Me.CtrlLocVilleDef.TabIndex = 99
-        '
-        'CtrlEtatCivDef
-        '
-        Me.CtrlEtatCivDef.EtatCivil = 0
-        Me.CtrlEtatCivDef.EtatCivilDe = ""
-        Me.CtrlEtatCivDef.Location = New System.Drawing.Point(159, 142)
-        Me.CtrlEtatCivDef.Name = "CtrlEtatCivDef"
-        Me.CtrlEtatCivDef.osef = Nothing
-        Me.CtrlEtatCivDef.Size = New System.Drawing.Size(369, 24)
-        Me.CtrlEtatCivDef.TabIndex = 142
-        '
-        'FCDGDefunt
-        '
-        Me.FCDGDefunt.AllowUserToAddRows = False
-        Me.FCDGDefunt.AllowUserToDeleteRows = False
-        Me.FCDGDefunt.AllowUserToOrderColumns = True
-        Me.FCDGDefunt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.FCDGDefunt.BackgroundColor = System.Drawing.Color.White
-        Me.FCDGDefunt.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.FCDGDefunt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.FCDGDefunt.DefaultCellStyle = DataGridViewCellStyle3
-        Me.FCDGDefunt.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.FCDGDefunt.EnableHeadersVisualStyles = False
-        Me.FCDGDefunt.Location = New System.Drawing.Point(0, 17)
-        Me.FCDGDefunt.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCDGDefunt.MultiSelect = False
-        Me.FCDGDefunt.Name = "FCDGDefunt"
-        Me.FCDGDefunt.ReadOnly = True
-        Me.FCDGDefunt.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FCDGDefunt.RowHeadersVisible = False
-        Me.FCDGDefunt.SelectedRow = Nothing
-        Me.FCDGDefunt.SelectedRowIndex = -1
-        Me.FCDGDefunt.SelectedValue = -1
-        Me.FCDGDefunt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.FCDGDefunt.Size = New System.Drawing.Size(416, 187)
-        Me.FCDGDefunt.TabIndex = 92
-        '
-        'FCDGBeneficiaire
-        '
-        Me.FCDGBeneficiaire.AllowUserToAddRows = False
-        Me.FCDGBeneficiaire.AllowUserToDeleteRows = False
-        Me.FCDGBeneficiaire.AllowUserToOrderColumns = True
-        Me.FCDGBeneficiaire.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.FCDGBeneficiaire.BackgroundColor = System.Drawing.Color.White
-        Me.FCDGBeneficiaire.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.FCDGBeneficiaire.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.FCDGBeneficiaire.DefaultCellStyle = DataGridViewCellStyle4
-        Me.FCDGBeneficiaire.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.FCDGBeneficiaire.EnableHeadersVisualStyles = False
-        Me.FCDGBeneficiaire.Location = New System.Drawing.Point(0, 21)
-        Me.FCDGBeneficiaire.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCDGBeneficiaire.MultiSelect = False
-        Me.FCDGBeneficiaire.Name = "FCDGBeneficiaire"
-        Me.FCDGBeneficiaire.ReadOnly = True
-        Me.FCDGBeneficiaire.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FCDGBeneficiaire.RowHeadersVisible = False
-        Me.FCDGBeneficiaire.SelectedRow = Nothing
-        Me.FCDGBeneficiaire.SelectedRowIndex = -1
-        Me.FCDGBeneficiaire.SelectedValue = -1
-        Me.FCDGBeneficiaire.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.FCDGBeneficiaire.Size = New System.Drawing.Size(416, 183)
-        Me.FCDGBeneficiaire.TabIndex = 93
-        '
-        'CtrlLocBenefDeCons
-        '
-        Me.CtrlLocBenefDeCons.LectureSeule = False
-        Me.CtrlLocBenefDeCons.Location = New System.Drawing.Point(167, 87)
-        Me.CtrlLocBenefDeCons.LocVilleId = -1
-        Me.CtrlLocBenefDeCons.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtrlLocBenefDeCons.Name = "CtrlLocBenefDeCons"
-        Me.CtrlLocBenefDeCons.osef = Nothing
-        Me.CtrlLocBenefDeCons.Size = New System.Drawing.Size(329, 30)
-        Me.CtrlLocBenefDeCons.TabIndex = 135
-        '
-        'TBconsBenefdatenaiss
-        '
-        Me.TBconsBenefdatenaiss.DateValue = Nothing
-        Me.TBconsBenefdatenaiss.Location = New System.Drawing.Point(167, 124)
-        Me.TBconsBenefdatenaiss.Mask = "00/00/0000"
-        Me.TBconsBenefdatenaiss.Name = "TBconsBenefdatenaiss"
-        Me.TBconsBenefdatenaiss.Size = New System.Drawing.Size(171, 25)
-        Me.TBconsBenefdatenaiss.TabIndex = 136
-        Me.TBconsBenefdatenaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'FCDGConss
-        '
-        Me.FCDGConss.AllowUserToAddRows = False
-        Me.FCDGConss.AllowUserToDeleteRows = False
-        Me.FCDGConss.AllowUserToOrderColumns = True
-        Me.FCDGConss.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.FCDGConss.BackgroundColor = System.Drawing.Color.White
-        Me.FCDGConss.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.FCDGConss.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Tai Le", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.FCDGConss.DefaultCellStyle = DataGridViewCellStyle5
-        Me.FCDGConss.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.FCDGConss.EnableHeadersVisualStyles = False
-        Me.FCDGConss.Location = New System.Drawing.Point(0, 18)
-        Me.FCDGConss.Margin = New System.Windows.Forms.Padding(4)
-        Me.FCDGConss.MultiSelect = False
-        Me.FCDGConss.Name = "FCDGConss"
-        Me.FCDGConss.ReadOnly = True
-        Me.FCDGConss.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FCDGConss.RowHeadersVisible = False
-        Me.FCDGConss.SelectedRow = Nothing
-        Me.FCDGConss.SelectedRowIndex = -1
-        Me.FCDGConss.SelectedValue = -1
-        Me.FCDGConss.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.FCDGConss.Size = New System.Drawing.Size(416, 186)
-        Me.FCDGConss.TabIndex = 43
-        '
-        'FCTBDateFin
-        '
-        Me.FCTBDateFin.DateValue = Nothing
-        Me.FCTBDateFin.Location = New System.Drawing.Point(483, 171)
-        Me.FCTBDateFin.Mask = "00/00/0000"
-        Me.FCTBDateFin.Name = "FCTBDateFin"
-        Me.FCTBDateFin.Size = New System.Drawing.Size(167, 25)
-        Me.FCTBDateFin.TabIndex = 138
-        Me.FCTBDateFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'FCTBDateDeb
-        '
-        Me.FCTBDateDeb.DateValue = Nothing
-        Me.FCTBDateDeb.Location = New System.Drawing.Point(167, 172)
-        Me.FCTBDateDeb.Mask = "00/00/0000"
-        Me.FCTBDateDeb.Name = "FCTBDateDeb"
-        Me.FCTBDateDeb.Size = New System.Drawing.Size(167, 25)
-        Me.FCTBDateDeb.TabIndex = 136
-        Me.FCTBDateDeb.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'CBEmplType
-        '
-        Me.CBEmplType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CBEmplType.FormattingEnabled = True
-        Me.CBEmplType.Location = New System.Drawing.Point(484, 134)
-        Me.CBEmplType.Name = "CBEmplType"
-        Me.CBEmplType.SelectedUnderlyingValue = Nothing
-        Me.CBEmplType.Size = New System.Drawing.Size(121, 26)
-        Me.CBEmplType.TabIndex = 1
-        '
-        'CbConsEmplacement
-        '
-        Me.CbConsEmplacement.DisplayMember = "empl_reference"
-        Me.CbConsEmplacement.EmplId = Nothing
-        Me.CbConsEmplacement.FormattingEnabled = True
-        Me.CbConsEmplacement.Location = New System.Drawing.Point(481, 18)
-        Me.CbConsEmplacement.Name = "CbConsEmplacement"
-        Me.CbConsEmplacement.Size = New System.Drawing.Size(167, 26)
-        Me.CbConsEmplacement.TabIndex = 136
-        Me.CbConsEmplacement.ValueMember = "empl_id"
-        '
-        'FCTBNbPlaces
-        '
-        Me.FCTBNbPlaces.Location = New System.Drawing.Point(165, 62)
-        Me.FCTBNbPlaces.Name = "FCTBNbPlaces"
-        Me.FCTBNbPlaces.Size = New System.Drawing.Size(169, 25)
-        Me.FCTBNbPlaces.TabIndex = 135
-        Me.FCTBNbPlaces.Value = Nothing
-        '
-        'TBPersDN
-        '
-        Me.TBPersDN.DateValue = Nothing
-        Me.TBPersDN.Location = New System.Drawing.Point(143, 124)
-        Me.TBPersDN.Mask = "00/00/0000"
-        Me.TBPersDN.Name = "TBPersDN"
-        Me.TBPersDN.Size = New System.Drawing.Size(105, 25)
-        Me.TBPersDN.TabIndex = 148
-        Me.TBPersDN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'CtrlLocPersonne
-        '
-        Me.CtrlLocPersonne.LectureSeule = False
-        Me.CtrlLocPersonne.Location = New System.Drawing.Point(299, 54)
-        Me.CtrlLocPersonne.LocVilleId = -1
-        Me.CtrlLocPersonne.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtrlLocPersonne.Name = "CtrlLocPersonne"
-        Me.CtrlLocPersonne.osef = Nothing
-        Me.CtrlLocPersonne.Size = New System.Drawing.Size(316, 25)
-        Me.CtrlLocPersonne.TabIndex = 147
-        '
         'DgvListeConcessionnairePersonneContact
         '
         Me.DgvListeConcessionnairePersonneContact.AllowUserToAddRows = False
@@ -2041,6 +2044,82 @@ Partial Class FormGestion
         Me.DgvListeConcessionnaireConcess.Size = New System.Drawing.Size(416, 670)
         Me.DgvListeConcessionnaireConcess.TabIndex = 147
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(148, 95)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 132
+        Me.PictureBox1.TabStop = False
+        '
+        'BModifGestionPers
+        '
+        Me.BModifGestionPers.BackColor = System.Drawing.Color.SeaGreen
+        Me.BModifGestionPers.ForeColor = System.Drawing.Color.Transparent
+        Me.BModifGestionPers.Location = New System.Drawing.Point(1461, 373)
+        Me.BModifGestionPers.Margin = New System.Windows.Forms.Padding(4)
+        Me.BModifGestionPers.Name = "BModifGestionPers"
+        Me.BModifGestionPers.Size = New System.Drawing.Size(85, 28)
+        Me.BModifGestionPers.TabIndex = 136
+        Me.BModifGestionPers.Text = "Modifier"
+        Me.BModifGestionPers.UseVisualStyleBackColor = False
+        '
+        'BSupGestionPers
+        '
+        Me.BSupGestionPers.BackColor = System.Drawing.Color.SeaGreen
+        Me.BSupGestionPers.ForeColor = System.Drawing.Color.Transparent
+        Me.BSupGestionPers.Location = New System.Drawing.Point(1553, 373)
+        Me.BSupGestionPers.Margin = New System.Windows.Forms.Padding(4)
+        Me.BSupGestionPers.Name = "BSupGestionPers"
+        Me.BSupGestionPers.Size = New System.Drawing.Size(99, 28)
+        Me.BSupGestionPers.TabIndex = 137
+        Me.BSupGestionPers.Text = "Supprimer"
+        Me.BSupGestionPers.UseVisualStyleBackColor = False
+        '
+        'ProgressBar
+        '
+        Me.ProgressBar.Location = New System.Drawing.Point(164, 52)
+        Me.ProgressBar.Margin = New System.Windows.Forms.Padding(4)
+        Me.ProgressBar.Name = "ProgressBar"
+        Me.ProgressBar.Size = New System.Drawing.Size(876, 28)
+        Me.ProgressBar.TabIndex = 98
+        '
+        'Lchargementdonnee
+        '
+        Me.Lchargementdonnee.AutoSize = True
+        Me.Lchargementdonnee.BackColor = System.Drawing.Color.Transparent
+        Me.Lchargementdonnee.Font = New System.Drawing.Font("Arial Narrow", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lchargementdonnee.Location = New System.Drawing.Point(437, 17)
+        Me.Lchargementdonnee.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Lchargementdonnee.Name = "Lchargementdonnee"
+        Me.Lchargementdonnee.Size = New System.Drawing.Size(299, 31)
+        Me.Lchargementdonnee.TabIndex = 99
+        Me.Lchargementdonnee.Text = "Chargement des données . . ."
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(1, 1)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(148, 95)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 51
+        Me.PictureBox2.TabStop = False
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(1109, 263)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(169, 22)
+        Me.TextBox1.TabIndex = 139
+        '
         'FormGestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2063,6 +2142,7 @@ Partial Class FormGestion
         Me.TabPage1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
+        CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel10.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
@@ -2071,21 +2151,29 @@ Partial Class FormGestion
         Me.GroupBox1.PerformLayout()
         CType(Me.FPTBLahulpe, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
+        Me.Panel11.ResumeLayout(False)
+        Me.GBInfosCsn.ResumeLayout(False)
+        Me.GBInfosCsn.PerformLayout()
+        Me.GBInfosConsRienAMontrer.ResumeLayout(False)
+        Me.GBInfosConsRienAMontrer.PerformLayout()
         Me.Panel9.ResumeLayout(False)
         Me.GroupBox9.ResumeLayout(False)
+        CType(Me.FCDGDefunt, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
         Me.GroupBox8.ResumeLayout(False)
+        CType(Me.FCDGBeneficiaire, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel7.ResumeLayout(False)
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
+        CType(Me.FCDGConss, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.Panel4.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
+        Me.GBRechEmpl.ResumeLayout(False)
+        Me.GBRechEmpl.PerformLayout()
         CType(Me.FCPBlahulpe, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
@@ -2097,15 +2185,11 @@ Partial Class FormGestion
         Me.GroupBox2.PerformLayout()
         Me.Panel12.ResumeLayout(False)
         Me.GroupBox12.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FCDGDefunt, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FCDGBeneficiaire, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FCDGConss, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvListeConcessionnairePersonneContact, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvListeConcessionnaireBenef, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgvListeConcessionnaireConcess, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2147,12 +2231,10 @@ Partial Class FormGestion
     Friend WithEvents FCTBHistoire As TextBox
     Friend WithEvents FCLType As Label
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents GBRechEmpl As GroupBox
     Friend WithEvents BTCsnAnnulerRecherche As Button
     Friend WithEvents BtRechEmpl As Button
     Friend WithEvents FCTBRechercher As TextBox
-    Friend WithEvents FCBLienDefunt As Button
-    Friend WithEvents FDBLinkToConcessionnaire As Button
     Friend WithEvents FCPBlahulpe As PictureBox
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents Panel2 As Panel
@@ -2168,9 +2250,9 @@ Partial Class FormGestion
     Friend WithEvents BSupGestionPers As Button
     Friend WithEvents BModifGestionPers As Button
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label7 As Label
+    Friend WithEvents LabPersNumNational As Label
+    Friend WithEvents LabPersDN As Label
+    Friend WithEvents LabPersTel As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label28 As Label
     Friend WithEvents Panel12 As Panel
@@ -2208,7 +2290,6 @@ Partial Class FormGestion
     Friend WithEvents TBconsBenefadress As TextBox
     Friend WithEvents TBconsBenefnom As TextBox
     Friend WithEvents TBconsBenefprenom As TextBox
-    Friend WithEvents TBPersNumNational As TextBox
     Friend WithEvents TBPersTel As TextBox
     Friend WithEvents TBPersAdress As TextBox
     Friend WithEvents TBPersNom As TextBox
@@ -2223,9 +2304,6 @@ Partial Class FormGestion
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents BSuppCons As Button
     Friend WithEvents BmodifCons As Button
-    Friend WithEvents BSuppConsBenef As Button
-    Friend WithEvents BmodifConsBenef As Button
-    Friend WithEvents BAddConsBenef As Button
     Friend WithEvents FDBLinkToPersCon As Button
     Friend WithEvents DtpConsRechercherDateFinap As DateTimePicker
     Friend WithEvents Label23 As Label
@@ -2254,9 +2332,22 @@ Partial Class FormGestion
     Friend WithEvents CbfConsOccupants As CheckBox
     Friend WithEvents CBDefChercherEmplacement As CheckBox
     Friend WithEvents CBDefChercherNom As CheckBox
-    Friend WithEvents FCBLienBenef As Button
     Friend WithEvents Label5 As Label
-    Friend WithEvents BTLienCsnrVersConcession As Button
-    Friend WithEvents BTLienPcontVersDef As Button
-    Friend WithEvents BTLienBenefVersConcession As Button
+    Friend WithEvents BSuppConsBenef As Button
+    Friend WithEvents BmodifConsBenef As Button
+    Friend WithEvents BAddConsBenef As Button
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents GBInfosCsn As GroupBox
+    Friend WithEvents GBInfosConsRienAMontrer As GroupBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents LinkLabCsnrDeCsn As LinkLabel
+    Friend WithEvents Label10 As Label
+    Friend WithEvents LabPersLienParente As Label
+    Friend WithEvents TBPersLienParente As TextBox
+    Friend WithEvents TBPersNumNational As TextBoxInt64
+    Friend WithEvents LabConAssoc As Label
+    Friend WithEvents LinkLabLienCsnrVersCon As LinkLabel
+    Friend WithEvents LinkLabLienBenVersCon As LinkLabel
+    Friend WithEvents LinkLabLienPcontVersDef As LinkLabel
+    Friend WithEvents LabPcontDefAssoc As Label
 End Class

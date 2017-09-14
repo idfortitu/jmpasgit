@@ -555,6 +555,7 @@
       <DependentUpon>dmCimetiere.edmx</DependentUpon>
       <LastGenOutput>dmCimetiere.vb</LastGenOutput>
     </Content>
+    <None Include="Resources\Next_16xMD.png" />
     <None Include="Resources\logolh.png" />
     <None Include="Resources\ColumnDetail_16x.png" />
     <None Include="Resources\Cancel_16x.png" />

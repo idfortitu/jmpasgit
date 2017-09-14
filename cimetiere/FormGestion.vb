@@ -144,6 +144,7 @@ Public Class FormGestion
         colonneid.DataPropertyName = "def_id"
         colonneid.HeaderText = "id"
         colonneid.Name = "def_id"
+        colonneid.Visible = False
         DgvListeDefunts.Columns.Add(colonneid)
         DgvListeDefunts.Columns("def_id").Visible = False
         colonnepc.DataPropertyName = "pc_id"
@@ -168,23 +169,36 @@ Public Class FormGestion
 
     Private Sub InitDgvDefuntsDeEmpl()
         Dim DTGV_Id_Colonne_def = New DataGridViewTextBoxColumn()
-        Dim Colonne = New DataGridViewTextBoxColumn()
-        Dim colonneid = New DataGridViewTextBoxColumn()
         DTGV_Id_Colonne_def.DataPropertyName = "def_nom"
         DTGV_Id_Colonne_def.HeaderText = "nom"
         DTGV_Id_Colonne_def.Name = "def_nom"
+        'DTGV_Id_Colonne_def.FillWeight = 100
         FCDGDefunt.Columns.Add(DTGV_Id_Colonne_def)
+
+        Dim Colonne = New DataGridViewTextBoxColumn()
         Colonne.DataPropertyName = "def_prenom"
         Colonne.HeaderText = "prenom"
         Colonne.Name = "def_prenom"
+        'Colonne.FillWeight = 100
         FCDGDefunt.Columns.Add(Colonne)
+
+        Dim colonneid = New DataGridViewTextBoxColumn()
         colonneid.DataPropertyName = "def_id"
         colonneid.HeaderText = "id"
         colonneid.Name = "def_id"
+        colonneid.Visible = False
         FCDGDefunt.Columns.Add(colonneid)
+
+        Dim colonnelien = New DataGridViewButtonColumn
+        colonnelien.Name = "lien"
+        colonnelien.HeaderText = ""
+        colonnelien.FillWeight = 30
+        FCDGDefunt.Columns.Add(colonnelien)
+
         FCDGDefunt.AutoGenerateColumns = False
-        FCDGDefunt.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        FCDGDefunt.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        FCDGDefunt.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        'FCDGDefunt.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        'FCDGDefunt.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
     Sub DataTableConcess() '2
@@ -361,6 +375,13 @@ Public Class FormGestion
         DTGV_Id_Colonne.Name = "ben_id"
         FCDGBeneficiaire.Columns.Add(DTGV_Id_Colonne)
 
+        Dim colonnelien = New DataGridViewButtonColumn
+        colonnelien.Name = "lien"
+        colonnelien.HeaderText = ""
+        colonnelien.FillWeight = 30
+        FCDGBeneficiaire.Columns.Add(colonnelien)
+
+
         FCDGBeneficiaire.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         FCDGBeneficiaire.AutoGenerateColumns = False
         'FCDGBeneficiaire.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -441,47 +462,39 @@ Public Class FormGestion
     Private Sub DataBindConss()
         TBPersNom.DataBindings.Add("Text", dvCsnrs, "csnr_nom")
         TBPersPrenom.DataBindings.Add("Text", dvCsnrs, "csnr_prenom")
-        TBPersTel.Enabled = True
-        TBPersTel.DataBindings.Add("Text", dvCsnrs, "csnr_tel")
-        TBPersDN.Enabled = True
-        TBPersDN.DataBindings.Add("DateValue", dvCsnrs, "csnr_date_naiss")
         TBPersAdress.DataBindings.Add("Text", dvCsnrs, "csnr_adresse")
         CtrlLocPersonne.DataBindings.Add("LocVilleId", dvCsnrs, "locville_id")
-        TBPersNumNational.Enabled = True
+        TBPersDN.DataBindings.Add("DateValue", dvCsnrs, "csnr_date_naiss")
+        TBPersTel.DataBindings.Add("Text", dvCsnrs, "csnr_tel")
         TBPersNumNational.DataBindings.Add("Text", dvCsnrs, "csnr_no_registre")
     End Sub
 
     Private Sub DataBindBenef()
         TBPersNom.DataBindings.Add("Text", dvbenefs, "ben_nom")
         TBPersPrenom.DataBindings.Add("Text", dvbenefs, "ben_prenom")
-        TBPersTel.Enabled = False
-        TBPersDN.Enabled = True
         TBPersDN.DataBindings.Add("DateValue", dvbenefs, "ben_date_naiss")
+        TBPersLienParente.DataBindings.Add("Text", dvbenefs, "ben_lien_parente")
         TBPersAdress.DataBindings.Add("Text", dvbenefs, "ben_adresse")
-        TBPersNumNational.Enabled = True
-        TBPersNumNational.DataBindings.Add("Text", dvbenefs, "ben_lien_parente")
         CtrlLocPersonne.DataBindings.Add("LocVilleId", dvbenefs, "locville_id")
     End Sub
 
     Private Sub DataBindPersContact()
         TBPersNom.DataBindings.Add("Text", dvPersContact, "pc_nom")
         TBPersPrenom.DataBindings.Add("Text", dvPersContact, "pc_prenom")
-        TBPersTel.Enabled = False
         TBPersTel.DataBindings.Add("Text", dvPersContact, "pc_tel")
-        TBPersDN.Enabled = False
         TBPersAdress.DataBindings.Add("Text", dvPersContact, "pc_adresse")
         CtrlLocPersonne.DataBindings.Add("LocVilleId", dvPersContact, "locville_id")
-        TBPersNumNational.Enabled = False
     End Sub
 
     Private Sub DataBindClear()
         TBPersNom.DataBindings.Clear()
         TBPersPrenom.DataBindings.Clear()
-        TBPersTel.DataBindings.Clear()
-        TBPersDN.DataBindings.Clear()
         TBPersAdress.DataBindings.Clear()
         CtrlLocPersonne.DataBindings.Clear()
+        TBPersDN.DataBindings.Clear()
+        TBPersTel.DataBindings.Clear()
         TBPersNumNational.DataBindings.Clear()
+        TBPersLienParente.DataBindings.Clear()
     End Sub
 
 
@@ -609,13 +622,25 @@ Public Class FormGestion
 
     Private Sub PRBConcessionnaire_CheckedChanged(sender As RadioButton, e As EventArgs) Handles PRBConcessionnaire.CheckedChanged
         If Not sender.Checked Then Exit Sub
+
         DgvListeConcessionnaireBenef.Hide()
         DgvListeConcessionnairePersonneContact.Hide()
         DgvListeConcessionnaireConcess.Show()
 
-        BTLienCsnrVersConcession.Show()
-        BTLienPcontVersDef.Hide()
-        BTLienBenefVersConcession.Hide()
+        LabPcontDefAssoc.Hide()
+        LabConAssoc.Show()
+        LinkLabLienCsnrVersCon.Show()
+        LinkLabLienPcontVersDef.Hide()
+        LinkLabLienBenVersCon.Hide()
+
+        LabPersDN.Show()
+        TBPersDN.Show()
+        LabPersTel.Show()
+        TBPersTel.Show()
+        LabPersNumNational.Show()
+        TBPersNumNational.Show()
+        LabPersLienParente.Hide()
+        TBPersLienParente.Hide()
 
         DataBindClear()
         DataBindConss()
@@ -627,13 +652,23 @@ Public Class FormGestion
         DgvListeConcessionnairePersonneContact.Show()
         DgvListeConcessionnaireConcess.Hide()
 
-        BTLienCsnrVersConcession.Hide()
-        BTLienPcontVersDef.Show()
-        BTLienBenefVersConcession.Hide()
+        LabConAssoc.Hide()
+        LabPcontDefAssoc.Show()
+        LinkLabLienCsnrVersCon.Hide()
+        LinkLabLienPcontVersDef.Show()
+        LinkLabLienBenVersCon.Hide()
+
+        LabPersDN.Hide()
+        TBPersDN.Hide()
+        LabPersTel.Show()
+        TBPersTel.Show()
+        LabPersNumNational.Hide()
+        TBPersNumNational.Hide()
+        LabPersLienParente.Hide()
+        TBPersLienParente.Hide()
 
         DataBindClear()
         DataBindPersContact()
-        'BTAnnulerRechPers_Click(Nothing, Nothing)
     End Sub
 
     Private Sub PRBBenef_CheckedChanged(sender As RadioButton, e As EventArgs) Handles PRBBenef.CheckedChanged
@@ -642,9 +677,20 @@ Public Class FormGestion
         DgvListeConcessionnairePersonneContact.Hide()
         DgvListeConcessionnaireConcess.Hide()
 
-        BTLienCsnrVersConcession.Hide()
-        BTLienPcontVersDef.Hide()
-        BTLienBenefVersConcession.Show()
+        LabPcontDefAssoc.Hide()
+        LabConAssoc.Show()
+        LinkLabLienCsnrVersCon.Hide()
+        LinkLabLienPcontVersDef.Hide()
+        LinkLabLienBenVersCon.Show()
+
+        LabPersDN.Show()
+        TBPersDN.Show()
+        LabPersTel.Hide()
+        TBPersTel.Hide()
+        LabPersNumNational.Hide()
+        TBPersNumNational.Hide()
+        LabPersLienParente.Show()
+        TBPersLienParente.Show()
 
         DataBindClear()
         DataBindBenef()
@@ -660,8 +706,17 @@ Public Class FormGestion
             ' présuppose que la table des emplacements contient aussi les données de la location
             If Not IsDBNull(EmplSelect("con_id")) Then
                 dvbenefsdeconcession.RowFilter = "ben_con_id = " & EmplSelect("con_id")
+
+                Dim Csnr = dtCsnr.Select("csnr_id = " & EmplSelect("csnr_id"))(0)
+                LinkLabCsnrDeCsn.Text = Csnr("csnr_prenom") & " " & Csnr("csnr_nom")
+                GBInfosCsn.Show()
+                GBInfosConsRienAMontrer.Hide()
+
+
             Else
                 dvbenefsdeconcession.RowFilter = "False"
+                GBInfosConsRienAMontrer.Show()
+                GBInfosCsn.Hide()
             End If
 
             FCTBPlaceOccupe.Text = FCDGDefunt.RowCount  '- 1
@@ -670,6 +725,9 @@ Public Class FormGestion
             dvbenefsdeconcession.RowFilter = "False"
             dvdefuntcons.RowFilter = "False"
             FCTBPlaceOccupe.Text = ""
+            GBInfosConsRienAMontrer.Show()
+            GBInfosCsn.Hide()
+
         End If
 
     End Sub
@@ -690,7 +748,7 @@ Public Class FormGestion
         Dim TxtRech = FCTBRechercher.Text.Trim.ToUpper
 
         ' filtrage champs (si au moins un champ est choisi)
-        If CbfConsOccupants.Checked OrElse CbfconsCsnr.Checked OrElse CbfConsOccupants.Checked Then
+        If CbfconsEmplacement.Checked OrElse CbfconsCsnr.Checked OrElse CbfConsOccupants.Checked Then
             If CbfconsCsnr.Checked Then
                 ' cherche les id des concessionnaires pouvant correspondre
                 Dim IdsCsnrs = From r As DataRow In dtCsnr.Rows Where r("csnr_nom").ToUpper Like "*" & TxtRech & "*" OrElse r("csnr_prenom").ToUpper Like "*" & TxtRech & "*" Select r("csnr_id")
@@ -749,32 +807,67 @@ Public Class FormGestion
 
     End Sub
 
-    Private Sub FCBLienDefunt_Click(sender As Object, e As EventArgs) Handles FCBLienDefunt.Click
-        If Not FCDGDefunt.SelectedRows.Count > 0 Then Exit Sub
+    'Private Sub FCBLienDefunt_Click(sender As Object, e As EventArgs) Handles FCBLienDefunt.Click
+    '    If Not FCDGDefunt.SelectedRows.Count > 0 Then Exit Sub
 
-        Dim def = FCDGDefunt.SelectedDataRow
+    '    Dim def = FCDGDefunt.SelectedDataRow
 
-        TabControl1.SelectedIndex = 0
-        BtDefAnnulerRecherche_Click(Nothing, Nothing)
-        Dim ligneaselect = (From r As DataGridViewRow In DgvListeDefunts.Rows Where r.Cells("def_id").Value = def("def_id")).First
-        ligneaselect.Selected = True
-        DgvListeDefunts.ScrollSelectedIntoView()
+    '    TabControl1.SelectedIndex = 0
+    '    BtDefAnnulerRecherche_Click(Nothing, Nothing)
+    '    Dim ligneaselect = (From r As DataGridViewRow In DgvListeDefunts.Rows Where r.Cells("def_id").Value = def("def_id")).First
+    '    ligneaselect.Selected = True
+    '    DgvListeDefunts.ScrollSelectedIntoView()
+    'End Sub
+
+
+    ' lien vers défunt depuis l'onglet emplacements
+    Private Sub FCDGDefunt_CellContentClick(sender As DataGridViewCustom, e As DataGridViewCellEventArgs) Handles FCDGDefunt.CellContentClick
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim def = CType(FCDGDefunt.Rows(e.RowIndex).DataBoundItem, DataRowView).Row
+
+        'Dim def = FCDGDefunt.SelectedDataRow
+
+        If sender.Columns(e.ColumnIndex).Name = "lien" Then 'OrElse sender.Columns(e.ColumnIndex).Name = "DgvCsnsAbColBtDetails" Then
+            TabControl1.SelectedIndex = 0
+            BtDefAnnulerRecherche_Click(Nothing, Nothing)
+            Dim ligneaselect = (From r As DataGridViewRow In DgvListeDefunts.Rows Where r.Cells("def_id").Value = def("def_id")).First
+            ligneaselect.Selected = True
+            DgvListeDefunts.ScrollSelectedIntoView()
+        End If
     End Sub
 
-    Private Sub FCBLienBenef_Click(sender As Object, e As EventArgs) Handles FCBLienBenef.Click
-        If Not FCDGBeneficiaire.SelectedRows.Count > 0 Then Exit Sub
 
-        Dim ben = FCDGBeneficiaire.SelectedDataRow
+    Private Sub FCDGBeneficiaire_CellContentClick(sender As DataGridViewCustom, e As DataGridViewCellEventArgs) Handles FCDGBeneficiaire.CellContentClick
+        If e.RowIndex < 0 Then Exit Sub
 
+        Dim ben = CType(FCDGBeneficiaire.Rows(e.RowIndex).DataBoundItem, DataRowView).Row
         BTAnnulerRechPers_Click(Nothing, Nothing)
         TabControl1.SelectedTab = TabPage3
         PRBBenef.Checked = True
         Dim ligneaselect = (From r As DataGridViewRow In DgvListeConcessionnaireBenef.Rows Where r.Cells("ben_id").Value = ben("ben_id")).First
         ligneaselect.Selected = True
         DgvListeConcessionnaireBenef.ScrollSelectedIntoView()
+
+
     End Sub
 
-    Private Sub BTLienCsnrVersConcession_Click(sender As Object, e As EventArgs) Handles BTLienCsnrVersConcession.Click
+
+
+    'Private Sub FCBLienBenef_Click(sender As Object, e As EventArgs) Handles FCBLienBenef.Click
+    '    If Not FCDGBeneficiaire.SelectedRows.Count > 0 Then Exit Sub
+
+    '    Dim ben = FCDGBeneficiaire.SelectedDataRow
+
+    '    BTAnnulerRechPers_Click(Nothing, Nothing)
+    '    TabControl1.SelectedTab = TabPage3
+    '    PRBBenef.Checked = True
+    '    Dim ligneaselect = (From r As DataGridViewRow In DgvListeConcessionnaireBenef.Rows Where r.Cells("ben_id").Value = ben("ben_id")).First
+    '    ligneaselect.Selected = True
+    '    DgvListeConcessionnaireBenef.ScrollSelectedIntoView()
+    'End Sub
+
+    Private Sub BTLienCsnrVersConcession_Click(sender As Object, e As EventArgs) Handles LinkLabLienCsnrVersCon.Click
         If DgvListeConcessionnaireConcess.SelectedRows.Count = 0 Then Exit Sub
 
         Dim Csnr = DgvListeConcessionnaireConcess.SelectedDataRow
@@ -1055,7 +1148,6 @@ Public Class FormGestion
     End Sub
 
 
-
     Private Sub FDBLinkToPersCon_Click(sender As Object, e As EventArgs) Handles FDBLinkToPersCon.Click
         If Not DgvListeDefunts.SelectedRows.Count > 0 Then Exit Sub
 
@@ -1069,11 +1161,9 @@ Public Class FormGestion
         Dim ligneaselect = (From r As DataGridViewRow In DgvListeConcessionnairePersonneContact.Rows Where r.Cells("pc_id").Value = Def("pc_id")).First
         ligneaselect.Selected = True
         DgvListeConcessionnairePersonneContact.ScrollSelectedIntoView()
-
-
     End Sub
 
-    Private Sub FDBLinkToConcessionnaire_Click(sender As Object, e As EventArgs) Handles FDBLinkToConcessionnaire.Click
+    Private Sub FDBLinkToConcessionnaire_Click(sender As Object, e As EventArgs) Handles LinkLabCsnrDeCsn.Click
         If FCDGConss.SelectedRows.Count = 0 Then Exit Sub
 
         Dim Csn = FCDGConss.SelectedDataRow
@@ -1128,7 +1218,7 @@ Public Class FormGestion
         End If
     End Sub
 
-    Private Sub BTLienPcontVersDef_Click(sender As Object, e As EventArgs) Handles BTLienPcontVersDef.Click
+    Private Sub BTLienPcontVersDef_Click(sender As Object, e As EventArgs) Handles LinkLabLienPcontVersDef.Click
         If DgvListeConcessionnairePersonneContact.SelectedRows.Count = 0 Then Exit Sub
 
         Dim Pcont = DgvListeConcessionnairePersonneContact.SelectedDataRow
@@ -1142,7 +1232,7 @@ Public Class FormGestion
         DgvListeDefunts.ScrollSelectedIntoView()
     End Sub
 
-    Private Sub BTLienBenefVersConcession_Click(sender As Object, e As EventArgs) Handles BTLienBenefVersConcession.Click
+    Private Sub BTLienBenefVersConcession_Click(sender As Object, e As EventArgs) Handles LinkLabLienBenVersCon.Click
         If Not DgvListeConcessionnaireBenef.SelectedRows.Count > 0 Then Exit Sub
 
         Dim ben = DgvListeConcessionnaireBenef.SelectedDataRow
@@ -1150,7 +1240,7 @@ Public Class FormGestion
 
         BTCsnAnnulerRecherche_Click(Nothing, Nothing)
         TabControl1.SelectedTab = TabPage2
-        Dim ligneaselect = (From r As DataGridViewRow In FCDGConss.Rows Where not isdbnull(r.cells("con_id").Value) AndAlso r.Cells("con_id").Value = ben("ben_con_id")).First
+        Dim ligneaselect = (From r As DataGridViewRow In FCDGConss.Rows Where Not IsDBNull(r.Cells("con_id").Value) AndAlso r.Cells("con_id").Value = ben("ben_con_id")).First
         ligneaselect.Selected = True
         FCDGConss.ScrollSelectedIntoView()
 
@@ -1160,6 +1250,7 @@ Public Class FormGestion
         FCDGBeneficiaire.ScrollSelectedIntoView()
 
     End Sub
+
 
 
 
@@ -1180,4 +1271,94 @@ Public Class FormGestion
     '            FPTBCodeLieu.Text = "xxxxxxxxxx"
     '    End Select
     'End Sub
+
+
+    Private Sub FCDGDefunt_CellPainting(sender As DataGridView, e As DataGridViewCellPaintingEventArgs) Handles FCDGDefunt.CellPainting, FCDGBeneficiaire.CellPainting
+        ' https://stackoverflow.com/a/36253883
+
+        If e.RowIndex < 0 Then Exit Sub             ' -1 = en-tête de colonne
+
+        Dim Dessiner As Boolean = False
+
+        Dim LaCol As DataGridViewColumn
+        Dim NomCol As String
+        LaCol = sender.Columns(e.ColumnIndex)
+        NomCol = LaCol.Name
+
+        If NomCol = "lien" Then
+            e.Paint(e.CellBounds, DataGridViewPaintParts.All)
+            Dim w = My.Resources.Next_16xMD.Width
+            Dim h = My.Resources.Next_16xMD.Height
+            Dim x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2
+            Dim y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2
+
+            e.Graphics.DrawImage(My.Resources.Next_16xMD, New Rectangle(x, y, w, h))
+            e.Handled = True
+        End If
+
+    End Sub
+
+
+    Private Sub DgvListeConcessionnaireConcess_SelectionChanged(sender As Object, e As EventArgs) Handles DgvListeConcessionnaireConcess.SelectionChanged
+        If Not DgvListeConcessionnaireConcess.Visible Then Exit Sub
+
+        If DgvListeConcessionnaireConcess.SelectedRows.Count = 0 Then
+            LinkLabLienCsnrVersCon.Text = "/"
+        Else
+            Dim Csns = dtcons.Select("csnr_id = " & DgvListeConcessionnaireConcess.SelectedDataRow("csnr_id"))
+
+            If Csns.Count = 0 Then
+                LinkLabLienCsnrVersCon.Text = "/"
+            Else
+                LinkLabLienCsnrVersCon.Text = Csns(0)("empl_reference")
+            End If
+        End If
+    End Sub
+
+    Private Sub DgvListeConcessionnairePersonneContact_SelectionChanged(sender As Object, e As EventArgs) Handles DgvListeConcessionnairePersonneContact.SelectionChanged
+        If Not DgvListeConcessionnairePersonneContact.Visible Then Exit Sub
+        If DgvListeConcessionnairePersonneContact.SelectedRows.Count = 0 Then
+            LinkLabLienPcontVersDef.Text = "/"
+        Else
+            Dim Defs = dtdefunt.Select("pc_id = " & DgvListeConcessionnairePersonneContact.SelectedDataRow("pc_id"))
+            If Defs.Count = 0 Then
+                LinkLabLienPcontVersDef.Text = "/"
+            Else
+                LinkLabLienPcontVersDef.Text = Defs(0)("def_prenom") & " " & Defs(0)("def_nom")
+            End If
+        End If
+    End Sub
+
+    Private Sub DgvListeConcessionnaireBenef_SelectionChanged(sender As Object, e As EventArgs) Handles DgvListeConcessionnaireBenef.SelectionChanged
+        If Not DgvListeConcessionnaireBenef.Visible Then Exit Sub
+        If DgvListeConcessionnaireBenef.SelectedRows.Count = 0 Then
+            LinkLabLienBenVersCon.Text = "/"
+        Else
+            Dim Csns = dtcons.Select("con_id = " & DgvListeConcessionnaireBenef.SelectedDataRow("ben_con_id"))
+            If Csns.Count = 0 Then
+                LinkLabLienBenVersCon.Text = "/"
+            Else
+                LinkLabLienBenVersCon.Text = Csns(0)("empl_reference")
+            End If
+        End If
+    End Sub
+
+
+    Private Sub FPersonneTbSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles FPersonneTbSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BTChercherPersonne_Click(Nothing, Nothing)
+        End If
+    End Sub
+
+    Private Sub FCTBRechercher_KeyDown(sender As Object, e As KeyEventArgs) Handles FCTBRechercher.KeyDown, CbfconsEmplacement.KeyDown, CbfconsCsnr.KeyDown, CbfConsOccupants.KeyDown, DtpConsRechercherDateFin.KeyDown, DtpConsRechercherDateFinap.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtRechEmpl_Click(Nothing, Nothing)
+        End If
+    End Sub
+
+    Private Sub TbDefChampRecherche_KeyDown(sender As Object, e As KeyEventArgs) Handles TbDefChampRecherche.KeyDown, CBDefChercherNom.KeyDown, CBDefChercherEmplacement.KeyDown, DtpDefRechercherDateDecesApres.KeyDown, DtpDefRechercherDateDecesAvant.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtDefChercher_Click(Nothing, Nothing)
+        End If
+    End Sub
 End Class

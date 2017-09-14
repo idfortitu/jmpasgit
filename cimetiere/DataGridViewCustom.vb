@@ -55,7 +55,6 @@ Public Class DataGridViewCustom
     End Property
 
     ' renvoie une DataRow, qui permet un index, par exemple ladgv.SelectedDataRow("empl_id")
-    ' -- Pas encore testé
     Public ReadOnly Property SelectedDataRow As DataRow
         Get
             If Me.SelectedRows.Count > 0 Then
