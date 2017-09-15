@@ -13,9 +13,9 @@ Public Class DataGridViewCustom
             Return MyBase.DataSource
         End Get
         Set(value As Object)
-            If Not TypeOf value Is DataTable AndAlso Not TypeOf value Is DataView Then Throw New ArgumentException("Seules les DataTable et les DataView sont acceptées comme source de données")
+            If Not TypeOf value Is DataTable AndAlso Not TypeOf value Is DataView AndAlso Not TypeOf value Is BindingSource Then Throw New ArgumentException("Seules les DataTable, les DataView et les BindingSource sont acceptées comme source de données")
             'Dim ValeurSelect
-            Dim Vue = If(TypeOf value Is DataTable, CType(value, DataTable).DefaultView, CType(value, DataView))
+            Dim Vue = If(TypeOf value Is DataTable, CType(value, DataTable).DefaultView, If(TypeOf value Is BindingSource, CType(value, BindingSource), CType(value, DataView)))
             'If DataSource IsNot Nothing Then
             'ValeurSelect = SelectedValue
             'Else

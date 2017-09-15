@@ -8,11 +8,13 @@ Public Class FormGestion
     Public dtville As DataTable
     Public dtpays As DataTable
 
-    Public dvlistedefunts As DataView
+    'Public dvlistedefunts As DataView
+    Public bslistedefunts As BindingSource
     Public dvlisteempl As DataView
     Public dvCsnrs As DataView
     Public dvbenefs As DataView
     Public dvPersContact As DataView
+
 
 
     Public dvbenefsdeconcession As DataView
@@ -21,7 +23,8 @@ Public Class FormGestion
 
     Dim screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
     Dim screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
-    Dim boutongestion = 0
+    Dim ModeEdition As Boolean = False
+
 
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -107,14 +110,18 @@ Public Class FormGestion
     Sub DataTableDefunt() '1
 
         'dtdefunt = Bdd.Query("SELECT * FROM defunts LEFT OUTER JOIN t_loc_ville ON defunts.locville_id = t_loc_ville.locville_id LEFT OUTER JOIN t_pays on t_loc_ville.locville_id = t_pays.Pays_id LEFT OUTER JOIN emplacements on defunts.empl_id = emplacements.empl_id")
-        dtdefunt = Bdd.Query("SELECT * FROM defunts")
+        dtdefunt = Bdd.Query("SELECT * FROM defunts LEFT OUTER JOIN emplacements ON defunts.empl_id = emplacements.empl_id")
         'dtdefunt.CaseSensitive = False
         'AjouterColonneMasque(dtdefunt)
 
         ' grille principale des défunts
-        dvlistedefunts = New DataView(dtdefunt)
+        'dvlistedefunts = New DataView(dtdefunt)
+        bslistedefunts = New BindingSource()
+        'bslistedefunts.DataSource = dvlistedefunts
+        bslistedefunts.DataSource = dtdefunt
+
         InitDgvDefunts()
-        DgvListeDefunts.DataSource = dvlistedefunts
+        DgvListeDefunts.DataSource = bslistedefunts
 
         ' infos du défunt sélectionné
         DataBindDefunt()
@@ -125,6 +132,34 @@ Public Class FormGestion
         FCDGDefunt.DataSource = dvdefuntcons
 
     End Sub
+
+    ' met à jour la colonne référence de l'emplacement après une modif
+    ' à tester
+    Sub UpdateInfosRowsDataTableDefunt(RowsAUpd As ICollection(Of DataRow))
+        For Each r As DataRow In RowsAUpd 'dtdefunt.Rows
+            If IsDBNull(r("empl_id")) Then
+                r("empl_reference") = DBNull.Value
+            Else
+                Dim Empls = dtcons.Select("empl_id = " & r("empl_id"))
+                If Empls.Count = 0 Then
+                    r("empl_reference") = DBNull.Value
+                Else
+                    r("empl_reference") = Empls(0)("empl_reference")
+                End If
+            End If
+        Next
+    End Sub
+
+    Sub UpdateInfosDataTableDefunts()
+        UpdateInfosRowsDataTableDefunt(dtdefunt.Rows)
+    End Sub
+    Sub UpdateInfosDataTableDefunts(Def As DataRow)
+        UpdateInfosRowsDataTableDefunt(New List(Of DataRow) From {Def})
+    End Sub
+    Sub UpdateInfosDataTableDefunts(IdDef As Integer)
+        UpdateInfosRowsDataTableDefunt(dtdefunt.Select("def_id = " & IdDef))
+    End Sub
+
 
     Private Sub InitDgvDefunts()
         Dim DTGV_Id_Colonne = New DataGridViewTextBoxColumn()
@@ -137,10 +172,17 @@ Public Class FormGestion
         DTGV_Id_Colonne.HeaderText = "nom"
         DTGV_Id_Colonne.Name = "def_nom"
         DgvListeDefunts.Columns.Add(DTGV_Id_Colonne)
+
         ColonnePrenom.DataPropertyName = "def_prenom"
         ColonnePrenom.HeaderText = "prenom"
         ColonnePrenom.Name = "def_prenom"
         DgvListeDefunts.Columns.Add(ColonnePrenom)
+
+        colonneref.DataPropertyName = "empl_reference"
+        colonneref.HeaderText = "Emplacement"
+        colonneref.Name = "empl_reference"
+        DgvListeDefunts.Columns.Add(colonneref)
+
         colonneid.DataPropertyName = "def_id"
         colonneid.HeaderText = "id"
         colonneid.Name = "def_id"
@@ -152,15 +194,12 @@ Public Class FormGestion
         colonnepc.Name = "pc_id"
         DgvListeDefunts.Columns.Add(colonnepc)
         DgvListeDefunts.Columns("pc_id").Visible = False
-        colonneref.DataPropertyName = "empl_reference"
-        colonneref.HeaderText = "empl"
-        colonneref.Name = "empl_reference"
-        DgvListeDefunts.Columns.Add(colonneref)
-        DgvListeDefunts.Columns("empl_reference").Visible = False
+
         colonnedatedec.DataPropertyName = "def_date_deces"
         colonnedatedec.HeaderText = "empl"
         colonnedatedec.Name = "def_date_deces"
         DgvListeDefunts.Columns.Add(colonnedatedec)
+
         DgvListeDefunts.Columns("def_date_deces").Visible = False
         DgvListeDefunts.AutoGenerateColumns = False
         DgvListeDefunts.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -447,16 +486,17 @@ Public Class FormGestion
     End Sub
 
     Private Sub DataBindDefunt()
-        FPTBNom.DataBindings.Add("Text", dvlistedefunts, "def_nom")
-        FPTBPrenom.DataBindings.Add("Text", dvlistedefunts, "def_prenom")
-        FPTBDateNaiss.DataBindings.Add("DateValue", dvlistedefunts, "def_date_naiss")
-        FPTBAdresse.DataBindings.Add("Text", dvlistedefunts, "def_adresse")
-        FPTBDateDeces.DataBindings.Add("DateValue", dvlistedefunts, "def_date_deces")
-        FPTBLieuNaiss.DataBindings.Add("Text", dvlistedefunts, "def_lieu_naiss")
-        CbDefEmplacement.DataBindings.Add("EmplId", dvlistedefunts, "empl_id")
-        CtrlEtatCivDef.DataBindings.Add("EtatCivil", dvlistedefunts, "def_etat_civil")
-        CtrlEtatCivDef.DataBindings.Add("EtatCivilDe", dvlistedefunts, "def_etat_civil_de")
-        CtrlLocVilleDef.DataBindings.Add("LocVilleId", dvlistedefunts, "locville_id")
+        FPTBNom.DataBindings.Add("Text", bslistedefunts, "def_nom")
+        FPTBPrenom.DataBindings.Add("Text", bslistedefunts, "def_prenom")
+        FPTBAdresse.DataBindings.Add("Text", bslistedefunts, "def_adresse")
+        FPTBCode.DataBindings.Add("Text", bslistedefunts, "def_numero_lh")
+        FPTBDateNaiss.DataBindings.Add("DateValue", bslistedefunts, "def_date_naiss")
+        FPTBDateDeces.DataBindings.Add("DateValue", bslistedefunts, "def_date_deces")
+        FPTBLieuNaiss.DataBindings.Add("Text", bslistedefunts, "def_lieu_naiss")
+        CbDefEmplacement.DataBindings.Add("EmplId", bslistedefunts, "empl_id")
+        CtrlEtatCivDef.DataBindings.Add("EtatCivil", bslistedefunts, "def_etat_civil")
+        CtrlEtatCivDef.DataBindings.Add("EtatCivilDe", bslistedefunts, "def_etat_civil_de")
+        CtrlLocVilleDef.DataBindings.Add("LocVilleId", bslistedefunts, "locville_id")
     End Sub
 
     Private Sub DataBindConss()
@@ -577,7 +617,7 @@ Public Class FormGestion
 
     Private Sub BtDefChercher_Click(sender As Object, e As EventArgs) Handles BtDefChercher.Click
         If Not {CBDefChercherNom, CBDefChercherEmplacement, DtpDefRechercherDateDecesApres, DtpDefRechercherDateDecesAvant}.Any(Function(c) c.checked) Then
-            dvlistedefunts.RowFilter = ""
+            bslistedefunts.Filter = ""
             Exit Sub
         End If
 
@@ -610,11 +650,11 @@ Public Class FormGestion
         Dim FiltresChampsEtDates As New List(Of String)
         If FiltresChamps.Count > 0 Then FiltresChampsEtDates.Add("(" & String.Join(" Or ", FiltresChamps) & ")")
         If FiltresDates.Count > 0 Then FiltresChampsEtDates.Add("(" & String.Join(" And ", FiltresDates) & ")")
-        dvlistedefunts.RowFilter = String.Join(" And ", FiltresChampsEtDates)
+        bslistedefunts.Filter = String.Join(" And ", FiltresChampsEtDates)
     End Sub
 
     Private Sub BtDefAnnulerRecherche_Click(sender As Object, e As EventArgs) Handles BtDefAnnulerRecherche.Click
-        dvlistedefunts.RowFilter = ""
+        bslistedefunts.Filter = ""
         'TbDefChampRecherche.Text = ""
         'DtpDefRechercherDateDecesApres.Checked = False
         'DtpDefRechercherDateDecesAvant.Checked = False
@@ -913,7 +953,7 @@ Public Class FormGestion
 
     Private Sub TextBoxDefuntRO()
 
-        For Each tb As Object In {FPTBNom, FPTBPrenom, FPTBAdresse, FPTBDateNaiss, FPTBDateDeces, FPTBLieuNaiss}
+        For Each tb As Object In {FPTBNom, FPTBPrenom, FPTBAdresse, FPTBDateNaiss, FPTBDateDeces, FPTBLieuNaiss, FPTBCode}
             tb.ReadOnly = True
             tb.Cursor = Cursors.No
             If tb.BackColor <> SystemColors.Window Then tb.BackColor = SystemColors.Window
@@ -922,7 +962,9 @@ Public Class FormGestion
 
         'CbDefEmplacement.LectureSeule = True
         CbDefEmplacement.Enabled = False
-        CbDefEmplacement.Cursor = Cursors.No
+        CtrlEtatCivDef.LectureSeule = True
+        CtrlLocVilleDef.Enabled = False
+        'CbDefEmplacement.Cursor = Cursors.No
     End Sub
 
     Private Sub TextBoxPersRO()
@@ -962,21 +1004,19 @@ Public Class FormGestion
     End Sub
 
     Private Sub TextBoxDefuntUpd()
-        FPTBNom.ReadOnly = False
-        FPTBNom.Cursor = Cursors.IBeam
-        FPTBPrenom.ReadOnly = False
-        FPTBPrenom.Cursor = Cursors.IBeam
-        FPTBLieuNaiss.ReadOnly = False
-        FPTBLieuNaiss.Cursor = Cursors.IBeam
-        CbDefEmplacement.Enabled = True
+        For Each tb As Object In {FPTBNom, FPTBPrenom, FPTBAdresse, FPTBDateNaiss, FPTBDateDeces, FPTBLieuNaiss, FPTBCode}
+            tb.ReadOnly = False
+            tb.Cursor = Cursors.IBeam
+        Next
+
         'CbDefEmplacement.LectureSeule = False
-        CbDefEmplacement.Cursor = Cursors.IBeam
-        FPTBDateNaiss.ReadOnly = False
-        FPTBDateNaiss.Cursor = Cursors.IBeam
-        FPTBDateDeces.ReadOnly = False
-        FPTBDateDeces.Cursor = Cursors.IBeam
-        FPTBAdresse.ReadOnly = False
-        FPTBAdresse.Cursor = Cursors.IBeam
+        CbDefEmplacement.Enabled = True
+        CbDefEmplacement.Cursor = Cursors.Default
+        CtrlLocVilleDef.Enabled = True
+        CtrlLocVilleDef.Cursor = Cursors.Default
+        CtrlEtatCivDef.LectureSeule = False
+        CtrlEtatCivDef.Cursor = Cursors.Default
+
     End Sub
 
     Private Sub TextBoxConsUpd()
@@ -1015,135 +1055,149 @@ Public Class FormGestion
         TBconsBenefprenom.Cursor = Cursors.IBeam
     End Sub
 
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If ModeEdition Then
+            e.Cancel = True
+            ToolTip1.Show("Terminez d'abord l'édition en cours.", Me, Cursor.Position.X - Me.Location.X, Cursor.Position.Y - Me.Location.Y)
+        End If
+    End Sub
+
+
+    Private Sub ClearDefControlsDataBindings()
+        For Each c As Control In {FPTBNom, FPTBPrenom, FPTBAdresse, CtrlLocVilleDef, FPTBCode, CtrlEtatCivDef, FPTBDateNaiss, FPTBDateDeces, FPTBLieuNaiss, CbDefEmplacement}
+            c.DataBindings.Clear()
+        Next
+    End Sub
+
     Private Sub FPBModifier_Click(sender As Object, e As EventArgs) Handles FPBModifier.Click
-        DgvListeDefunts.Enabled = False
+        If DgvListeDefunts.SelectedRows.Count = 0 Then Exit Sub
 
-        BtDefChercher.Enabled = False
-        BtDefAnnulerRecherche.Enabled = False
-        'FPTBCBEtatCivil.Visible = True
-        'Select Case FPTBEtatCivil.Text
-        '    Case "Non précisé"
-        '        FPTBCBEtatCivil.SelectedIndex = 4
-        '    Case "Célibataire"
-        '        FPTBCBEtatCivil.SelectedIndex = 0
-        '    Case "Epoux"
-        '        FPTBCBEtatCivil.SelectedIndex = 1
-        '    Case "Veuf"
-        '        FPTBCBEtatCivil.SelectedIndex = 2
-        '    Case "divorcé"
-        '        FPTBCBEtatCivil.SelectedIndex = 3
-        'End Select
+        If Not ModeEdition Then
 
-        If boutongestion = 0 Then
+            'bslistedefunts.SuspendBinding()    ' marche pas terrible
+            ClearDefControlsDataBindings()
+
+            ModeEdition = True
+
+            DgvListeDefunts.Enabled = False
+            BtDefChercher.Enabled = False
+            BtDefAnnulerRecherche.Enabled = False
+
             TextBoxDefuntUpd()
-            boutongestion = 1
-            FPBModifier.Text = "Sauvegarder ou annuler"
-            TabControl1.TabPages(1).Enabled = False
-            TabControl1.TabPages(2).Enabled = False
-        Else
-            Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir effectuer cette modification ?", "Confirmation", MessageBoxButtons.YesNo)
-            If result = DialogResult.No Then
-                boutongestion = 0
-                FPBModifier.Text = "Modifier"
-                TextBoxDefuntRO()
-                TabControl1.TabPages(1).Enabled = True
-                TabControl1.TabPages(2).Enabled = True
-            ElseIf result = DialogResult.Yes Then
-                ' À FAIRE À FAIRE
-                'If Bdd.NonQuery("Update defunts set def_nom = '" & FPTBNom.Text & "', def_prenom = '" & FPTBPrenom.Text & "', def_adresse " &
-                '                " = '" & FPTBAdresse.Text & "', def_etat_civil_de = '" & FPTBCodeLieu.Text & "', def_lieu_de_naiss = '" & FPTBLieuNaiss.Text & "', " &
-                '                "  where def_id ='" & DgvListeDefunts.CurrentRow.Cells("def_id").Value & "'") Then
-                '    MsgBox("" & DgvListeDefunts.CurrentRow.Cells("def_nom").Value & " " & DgvListeDefunts.CurrentRow.Cells("def_prenom").Value & " " & vbCrLf & "a correctement été modifier")
-                'Else
-                '    MsgBox("Une erreur est venue dans la modification du défunt.")
-                '    End If
-                boutongestion = 0
-                FPBModifier.Text = "Modifier"
-                    TextBoxDefuntRO()
-                    TabControl1.TabPages(1).Enabled = True
-                    TabControl1.TabPages(2).Enabled = True
-                End If
-                DgvListeDefunts.Enabled = True
+            FPBModifier.Text = "Arrêter l'édition"
 
-                BtDefChercher.Enabled = True
-                BtDefAnnulerRecherche.Enabled = True
+        Else
+
+            Dim result = MessageBox.Show("Enregistrer les modifications ?", "Confirmation", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+
+                Dim RowDef = DgvListeDefunts.SelectedDataRow
+                RowDef("def_nom") = FPTBNom.Text.Trim
+                RowDef("def_prenom") = FPTBPrenom.Text.Trim
+                RowDef("def_adresse") = FPTBAdresse.Text.Trim
+                RowDef("locville_id") = If(CtrlLocVilleDef.LocVilleId = -1, DBNull.Value, CtrlLocVilleDef.LocVilleId)
+                RowDef("def_etat_civil") = CtrlEtatCivDef.EtatCivil
+                RowDef("def_etat_civil_de") = CtrlEtatCivDef.EtatCivilDe.Trim
+                RowDef("def_date_naiss") = If(FPTBDateNaiss.DateEstValide And Not FPTBDateNaiss.DateEstVide, FPTBDateNaiss.DateValue, DBNull.Value)
+                RowDef("def_date_deces") = If(FPTBDateDeces.DateEstValide And Not FPTBDateDeces.DateEstVide, FPTBDateDeces.DateValue, DBNull.Value)
+                RowDef("def_numero_lh") = If(FPTBCode.Value.HasValue, FPTBCode.Value, DBNull.Value)
+                RowDef("def_lieu_naiss") = FPTBLieuNaiss.Text.Trim
+                RowDef("empl_id") = If(CbDefEmplacement.SelectedValue = -1, DBNull.Value, CbDefEmplacement.SelectedValue)
+
+                Bdd.Update("defunts", RowDef)
+                UpdateInfosDataTableDefunts(RowDef)
+
+                'bslistedefunts.ResumeBinding()
+
+
+            Else
+                'bslistedefunts.ResetBindings(False)
+                'bslistedefunts.ResumeBinding()
             End If
+
+            TextBoxDefuntRO()
+            DataBindDefunt()
+
+            DgvListeDefunts.Enabled = True
+            BtDefChercher.Enabled = True
+            BtDefAnnulerRecherche.Enabled = True
+            ModeEdition = False
+            FPBModifier.Text = "Modifier"
+
+        End If
     End Sub
 
     Private Sub BmodifCons_Click(sender As Object, e As EventArgs) Handles BmodifCons.Click
-        If boutongestion = 0 Then
+        If Not ModeEdition Then
+            ModeEdition = True
             TextBoxConsUpd()
-            boutongestion = 1
             BmodifCons.Text = "Sauvegarder"
             TabControl1.TabPages(0).Enabled = False
             TabControl1.TabPages(2).Enabled = False
         Else
             Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir effectuer cette modification ?", "Confirmation", MessageBoxButtons.YesNo)
             If result = DialogResult.No Then
-                boutongestion = 0
                 BmodifCons.Text = "Modifier"
                 TextBoxConsRO()
                 TabControl1.TabPages(0).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
             ElseIf result = DialogResult.Yes Then
-                boutongestion = 0
                 BmodifCons.Text = "Modifier"
                 TextBoxConsRO()
                 TabControl1.TabPages(0).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
             End If
+            ModeEdition = False
         End If
     End Sub
 
     Private Sub BmodifConsBenef_Click(sender As Object, e As EventArgs) Handles BmodifConsBenef.Click
-        If boutongestion = 0 Then
+        If Not ModeEdition Then
+            ModeEdition = True
             TextBoxConsBenefUpd()
-            boutongestion = 1
             BmodifConsBenef.Text = "Sauvegarder"
             TabControl1.TabPages(0).Enabled = False
             TabControl1.TabPages(2).Enabled = False
         Else
             Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir effectuer cette modification ?", "Confirmation", MessageBoxButtons.YesNo)
             If result = DialogResult.No Then
-                boutongestion = 0
                 BmodifConsBenef.Text = "Modifier"
                 ''TextBoxConsRO()
                 TextBoxBenefDeConsRO()
                 TabControl1.TabPages(0).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
             ElseIf result = DialogResult.Yes Then
-                boutongestion = 0
                 BmodifConsBenef.Text = "Modifier"
                 ''TextBoxConsRO()
                 TextBoxBenefDeConsRO()
                 TabControl1.TabPages(0).Enabled = True
                 TabControl1.TabPages(2).Enabled = True
             End If
+            ModeEdition = False
         End If
     End Sub
 
     Private Sub BModifGestionPers_Click(sender As Object, e As EventArgs) Handles BModifGestionPers.Click
-        If boutongestion = 0 Then
+        If Not ModeEdition Then
+            ModeEdition = True
             TextBoxPersUpd()
-            boutongestion = 1
             BModifGestionPers.Text = "Sauvegarder"
             TabControl1.TabPages(0).Enabled = False
             TabControl1.TabPages(1).Enabled = False
         Else
             Dim result As Integer = MessageBox.Show("Etes-vous sur de vouloir effectuer cette modification ?", "Confirmation", MessageBoxButtons.YesNo)
             If result = DialogResult.No Then
-                boutongestion = 0
                 BModifGestionPers.Text = "Modifier"
                 TextBoxPersRO()
                 TabControl1.TabPages(0).Enabled = True
                 TabControl1.TabPages(1).Enabled = True
             ElseIf result = DialogResult.Yes Then
-                boutongestion = 0
                 BModifGestionPers.Text = "Modifier"
                 TextBoxPersRO()
                 TabControl1.TabPages(0).Enabled = True
                 TabControl1.TabPages(1).Enabled = True
             End If
+            ModeEdition = False
         End If
     End Sub
 
@@ -1342,6 +1396,9 @@ Public Class FormGestion
             End If
         End If
     End Sub
+
+
+
 
 
     Private Sub FPersonneTbSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles FPersonneTbSearch.KeyDown

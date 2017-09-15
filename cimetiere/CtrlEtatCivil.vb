@@ -30,6 +30,18 @@
         End Set
     End Property
 
+    Private _lectureSeule As Boolean
+    Public Property LectureSeule As Boolean
+        Get
+            Return _lectureSeule
+        End Get
+        Set(value As Boolean)
+            _lectureSeule = value
+            TbEtatCivilDe.ReadOnly = value
+            CbEtatCivil.Enabled = Not value
+        End Set
+    End Property
+
     Public Property EtatCivilDe As String
         Get
             Return VraieValeurEtatCivilDe
