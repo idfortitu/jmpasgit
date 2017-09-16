@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormGestion
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormGestion
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormGestion))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -44,32 +44,33 @@ Partial Class FormGestion
         Me.BtDefChercher = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.FPTBCBEtatCivil = New System.Windows.Forms.ComboBox()
         Me.FPTBVille = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.FPTBLieuNaiss = New System.Windows.Forms.TextBox()
-        Me.FPLLieuNaiss = New System.Windows.Forms.Label()
         Me.FPTBEtatCivil = New System.Windows.Forms.TextBox()
         Me.FPLEtatCivil = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.FPTBPays = New System.Windows.Forms.TextBox()
         Me.FPLPays = New System.Windows.Forms.Label()
+        Me.FPTBLieuNaiss = New System.Windows.Forms.TextBox()
         Me.FPTBCodePostal = New System.Windows.Forms.TextBox()
         Me.FPLCodePostal = New System.Windows.Forms.Label()
+        Me.FPLLieuNaiss = New System.Windows.Forms.Label()
         Me.FPTBAdresse = New System.Windows.Forms.TextBox()
         Me.FPLAdresse = New System.Windows.Forms.Label()
-        Me.FPTBCodeLieu = New System.Windows.Forms.TextBox()
-        Me.FPTBEmplacement = New System.Windows.Forms.TextBox()
-        Me.FPTBDateM = New System.Windows.Forms.TextBox()
         Me.FPTBPrenom = New System.Windows.Forms.TextBox()
-        Me.FPLCodeLieu = New System.Windows.Forms.Label()
-        Me.FPLEmplacement = New System.Windows.Forms.Label()
-        Me.FPLDateM = New System.Windows.Forms.Label()
         Me.FPLPrenom = New System.Windows.Forms.Label()
-        Me.FPTBDateE = New System.Windows.Forms.TextBox()
-        Me.FPTBDateNaiss = New System.Windows.Forms.TextBox()
-        Me.FPLDateEnt = New System.Windows.Forms.Label()
-        Me.FPLDateNaiss = New System.Windows.Forms.Label()
         Me.FPTBNom = New System.Windows.Forms.TextBox()
+        Me.FPTBCodeLieu = New System.Windows.Forms.TextBox()
+        Me.FPLDateNaiss = New System.Windows.Forms.Label()
         Me.FPLNom = New System.Windows.Forms.Label()
+        Me.FPLDateEnt = New System.Windows.Forms.Label()
+        Me.FPTBDateNaiss = New System.Windows.Forms.TextBox()
+        Me.FPLCodeLieu = New System.Windows.Forms.Label()
+        Me.FPTBDateE = New System.Windows.Forms.TextBox()
+        Me.FPTBDateM = New System.Windows.Forms.TextBox()
+        Me.FPLDateM = New System.Windows.Forms.Label()
+        Me.FPLEmplacement = New System.Windows.Forms.Label()
+        Me.FPTBEmplacement = New System.Windows.Forms.TextBox()
         Me.FPBSupprimer = New System.Windows.Forms.Button()
         Me.FPBModifier = New System.Windows.Forms.Button()
         Me.FPBLienCons = New System.Windows.Forms.Button()
@@ -187,7 +188,7 @@ Partial Class FormGestion
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Lchargementdonnee = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.FPTBCBEtatCivil = New System.Windows.Forms.ComboBox()
+        Me.CtrlLocVilleCPPays1 = New cimetiere.CtrlLocVilleCPPays()
         Me.TbDateDeces = New cimetiere.TextBoxDate()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -483,6 +484,7 @@ Partial Class FormGestion
         Me.GroupBox1.Controls.Add(Me.FPLDateM)
         Me.GroupBox1.Controls.Add(Me.FPLEmplacement)
         Me.GroupBox1.Controls.Add(Me.FPTBEmplacement)
+        Me.GroupBox1.Controls.Add(Me.CtrlLocVilleCPPays1)
         Me.GroupBox1.Location = New System.Drawing.Point(16, 13)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(511, 240)
@@ -490,37 +492,22 @@ Partial Class FormGestion
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Informations du défunt"
         '
+        'FPTBCBEtatCivil
+        '
+        Me.FPTBCBEtatCivil.FormattingEnabled = True
+        Me.FPTBCBEtatCivil.Items.AddRange(New Object() {"Célibataire", "Epoux", "Veuf", "Divorcé", "Non précisé"})
+        Me.FPTBCBEtatCivil.Location = New System.Drawing.Point(334, 107)
+        Me.FPTBCBEtatCivil.Name = "FPTBCBEtatCivil"
+        Me.FPTBCBEtatCivil.Size = New System.Drawing.Size(152, 22)
+        Me.FPTBCBEtatCivil.TabIndex = 99
+        Me.FPTBCBEtatCivil.Visible = False
+        '
         'FPTBVille
         '
         Me.FPTBVille.Location = New System.Drawing.Point(349, 80)
         Me.FPTBVille.Name = "FPTBVille"
         Me.FPTBVille.Size = New System.Drawing.Size(126, 21)
         Me.FPTBVille.TabIndex = 141
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(300, 83)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(35, 14)
-        Me.Label15.TabIndex = 140
-        Me.Label15.Text = "Ville :"
-        '
-        'FPTBLieuNaiss
-        '
-        Me.FPTBLieuNaiss.Location = New System.Drawing.Point(117, 116)
-        Me.FPTBLieuNaiss.Name = "FPTBLieuNaiss"
-        Me.FPTBLieuNaiss.Size = New System.Drawing.Size(152, 21)
-        Me.FPTBLieuNaiss.TabIndex = 139
-        '
-        'FPLLieuNaiss
-        '
-        Me.FPLLieuNaiss.AutoSize = True
-        Me.FPLLieuNaiss.Location = New System.Drawing.Point(6, 119)
-        Me.FPLLieuNaiss.Name = "FPLLieuNaiss"
-        Me.FPLLieuNaiss.Size = New System.Drawing.Size(104, 14)
-        Me.FPLLieuNaiss.TabIndex = 138
-        Me.FPLLieuNaiss.Text = "Lieu de Naissance :"
         '
         'FPTBEtatCivil
         '
@@ -538,6 +525,15 @@ Partial Class FormGestion
         Me.FPLEtatCivil.TabIndex = 136
         Me.FPLEtatCivil.Text = "Etat Civil :"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(300, 83)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(35, 14)
+        Me.Label15.TabIndex = 140
+        Me.Label15.Text = "Ville :"
+        '
         'FPTBPays
         '
         Me.FPTBPays.Location = New System.Drawing.Point(119, 82)
@@ -553,6 +549,13 @@ Partial Class FormGestion
         Me.FPLPays.Size = New System.Drawing.Size(35, 14)
         Me.FPLPays.TabIndex = 134
         Me.FPLPays.Text = "Pays :"
+        '
+        'FPTBLieuNaiss
+        '
+        Me.FPTBLieuNaiss.Location = New System.Drawing.Point(117, 116)
+        Me.FPTBLieuNaiss.Name = "FPTBLieuNaiss"
+        Me.FPTBLieuNaiss.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBLieuNaiss.TabIndex = 139
         '
         'FPTBCodePostal
         '
@@ -570,6 +573,15 @@ Partial Class FormGestion
         Me.FPLCodePostal.TabIndex = 132
         Me.FPLCodePostal.Text = "Code postal"
         '
+        'FPLLieuNaiss
+        '
+        Me.FPLLieuNaiss.AutoSize = True
+        Me.FPLLieuNaiss.Location = New System.Drawing.Point(6, 119)
+        Me.FPLLieuNaiss.Name = "FPLLieuNaiss"
+        Me.FPLLieuNaiss.Size = New System.Drawing.Size(104, 14)
+        Me.FPLLieuNaiss.TabIndex = 138
+        Me.FPLLieuNaiss.Text = "Lieu de Naissance :"
+        '
         'FPTBAdresse
         '
         Me.FPTBAdresse.Location = New System.Drawing.Point(119, 46)
@@ -586,60 +598,12 @@ Partial Class FormGestion
         Me.FPLAdresse.TabIndex = 130
         Me.FPLAdresse.Text = "Adresse :"
         '
-        'FPTBCodeLieu
-        '
-        Me.FPTBCodeLieu.Location = New System.Drawing.Point(108, 148)
-        Me.FPTBCodeLieu.Name = "FPTBCodeLieu"
-        Me.FPTBCodeLieu.Size = New System.Drawing.Size(152, 21)
-        Me.FPTBCodeLieu.TabIndex = 129
-        '
-        'FPTBEmplacement
-        '
-        Me.FPTBEmplacement.Location = New System.Drawing.Point(368, 208)
-        Me.FPTBEmplacement.Name = "FPTBEmplacement"
-        Me.FPTBEmplacement.Size = New System.Drawing.Size(133, 21)
-        Me.FPTBEmplacement.TabIndex = 128
-        '
-        'FPTBDateM
-        '
-        Me.FPTBDateM.Location = New System.Drawing.Point(349, 144)
-        Me.FPTBDateM.Name = "FPTBDateM"
-        Me.FPTBDateM.Size = New System.Drawing.Size(152, 21)
-        Me.FPTBDateM.TabIndex = 127
-        '
         'FPTBPrenom
         '
         Me.FPTBPrenom.Location = New System.Drawing.Point(349, 14)
         Me.FPTBPrenom.Name = "FPTBPrenom"
         Me.FPTBPrenom.Size = New System.Drawing.Size(152, 21)
         Me.FPTBPrenom.TabIndex = 126
-        '
-        'FPLCodeLieu
-        '
-        Me.FPLCodeLieu.AutoSize = True
-        Me.FPLCodeLieu.Location = New System.Drawing.Point(63, 151)
-        Me.FPLCodeLieu.Name = "FPLCodeLieu"
-        Me.FPLCodeLieu.Size = New System.Drawing.Size(27, 14)
-        Me.FPLCodeLieu.TabIndex = 125
-        Me.FPLCodeLieu.Text = "De :"
-        '
-        'FPLEmplacement
-        '
-        Me.FPLEmplacement.AutoSize = True
-        Me.FPLEmplacement.Location = New System.Drawing.Point(280, 211)
-        Me.FPLEmplacement.Name = "FPLEmplacement"
-        Me.FPLEmplacement.Size = New System.Drawing.Size(81, 14)
-        Me.FPLEmplacement.TabIndex = 124
-        Me.FPLEmplacement.Text = "Emplacement :"
-        '
-        'FPLDateM
-        '
-        Me.FPLDateM.AutoSize = True
-        Me.FPLDateM.Location = New System.Drawing.Point(313, 149)
-        Me.FPLDateM.Name = "FPLDateM"
-        Me.FPLDateM.Size = New System.Drawing.Size(31, 14)
-        Me.FPLDateM.TabIndex = 123
-        Me.FPLDateM.Text = "DM :"
         '
         'FPLPrenom
         '
@@ -650,28 +614,20 @@ Partial Class FormGestion
         Me.FPLPrenom.TabIndex = 122
         Me.FPLPrenom.Text = "Prenom :"
         '
-        'FPTBDateE
+        'FPTBNom
         '
-        Me.FPTBDateE.Location = New System.Drawing.Point(349, 176)
-        Me.FPTBDateE.Name = "FPTBDateE"
-        Me.FPTBDateE.Size = New System.Drawing.Size(152, 21)
-        Me.FPTBDateE.TabIndex = 121
+        Me.FPTBNom.Cursor = System.Windows.Forms.Cursors.No
+        Me.FPTBNom.Location = New System.Drawing.Point(119, 14)
+        Me.FPTBNom.Name = "FPTBNom"
+        Me.FPTBNom.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBNom.TabIndex = 115
         '
-        'FPTBDateNaiss
+        'FPTBCodeLieu
         '
-        Me.FPTBDateNaiss.Location = New System.Drawing.Point(108, 179)
-        Me.FPTBDateNaiss.Name = "FPTBDateNaiss"
-        Me.FPTBDateNaiss.Size = New System.Drawing.Size(152, 21)
-        Me.FPTBDateNaiss.TabIndex = 119
-        '
-        'FPLDateEnt
-        '
-        Me.FPLDateEnt.AutoSize = True
-        Me.FPLDateEnt.Location = New System.Drawing.Point(313, 179)
-        Me.FPLDateEnt.Name = "FPLDateEnt"
-        Me.FPLDateEnt.Size = New System.Drawing.Size(27, 14)
-        Me.FPLDateEnt.TabIndex = 118
-        Me.FPLDateEnt.Text = "DE :"
+        Me.FPTBCodeLieu.Location = New System.Drawing.Point(108, 148)
+        Me.FPTBCodeLieu.Name = "FPTBCodeLieu"
+        Me.FPTBCodeLieu.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBCodeLieu.TabIndex = 129
         '
         'FPLDateNaiss
         '
@@ -682,14 +638,6 @@ Partial Class FormGestion
         Me.FPLDateNaiss.TabIndex = 116
         Me.FPLDateNaiss.Text = "DN :"
         '
-        'FPTBNom
-        '
-        Me.FPTBNom.Cursor = System.Windows.Forms.Cursors.No
-        Me.FPTBNom.Location = New System.Drawing.Point(119, 14)
-        Me.FPTBNom.Name = "FPTBNom"
-        Me.FPTBNom.Size = New System.Drawing.Size(152, 21)
-        Me.FPTBNom.TabIndex = 115
-        '
         'FPLNom
         '
         Me.FPLNom.AutoSize = True
@@ -698,6 +646,70 @@ Partial Class FormGestion
         Me.FPLNom.Size = New System.Drawing.Size(37, 14)
         Me.FPLNom.TabIndex = 114
         Me.FPLNom.Text = "Nom :"
+        '
+        'FPLDateEnt
+        '
+        Me.FPLDateEnt.AutoSize = True
+        Me.FPLDateEnt.Location = New System.Drawing.Point(313, 179)
+        Me.FPLDateEnt.Name = "FPLDateEnt"
+        Me.FPLDateEnt.Size = New System.Drawing.Size(27, 14)
+        Me.FPLDateEnt.TabIndex = 118
+        Me.FPLDateEnt.Text = "DE :"
+        '
+        'FPTBDateNaiss
+        '
+        Me.FPTBDateNaiss.Location = New System.Drawing.Point(108, 179)
+        Me.FPTBDateNaiss.Name = "FPTBDateNaiss"
+        Me.FPTBDateNaiss.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBDateNaiss.TabIndex = 119
+        '
+        'FPLCodeLieu
+        '
+        Me.FPLCodeLieu.AutoSize = True
+        Me.FPLCodeLieu.Location = New System.Drawing.Point(63, 151)
+        Me.FPLCodeLieu.Name = "FPLCodeLieu"
+        Me.FPLCodeLieu.Size = New System.Drawing.Size(27, 14)
+        Me.FPLCodeLieu.TabIndex = 125
+        Me.FPLCodeLieu.Text = "De :"
+        '
+        'FPTBDateE
+        '
+        Me.FPTBDateE.Location = New System.Drawing.Point(349, 176)
+        Me.FPTBDateE.Name = "FPTBDateE"
+        Me.FPTBDateE.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBDateE.TabIndex = 121
+        '
+        'FPTBDateM
+        '
+        Me.FPTBDateM.Location = New System.Drawing.Point(349, 144)
+        Me.FPTBDateM.Name = "FPTBDateM"
+        Me.FPTBDateM.Size = New System.Drawing.Size(152, 21)
+        Me.FPTBDateM.TabIndex = 127
+        '
+        'FPLDateM
+        '
+        Me.FPLDateM.AutoSize = True
+        Me.FPLDateM.Location = New System.Drawing.Point(313, 149)
+        Me.FPLDateM.Name = "FPLDateM"
+        Me.FPLDateM.Size = New System.Drawing.Size(31, 14)
+        Me.FPLDateM.TabIndex = 123
+        Me.FPLDateM.Text = "DM :"
+        '
+        'FPLEmplacement
+        '
+        Me.FPLEmplacement.AutoSize = True
+        Me.FPLEmplacement.Location = New System.Drawing.Point(280, 211)
+        Me.FPLEmplacement.Name = "FPLEmplacement"
+        Me.FPLEmplacement.Size = New System.Drawing.Size(81, 14)
+        Me.FPLEmplacement.TabIndex = 124
+        Me.FPLEmplacement.Text = "Emplacement :"
+        '
+        'FPTBEmplacement
+        '
+        Me.FPTBEmplacement.Location = New System.Drawing.Point(368, 208)
+        Me.FPTBEmplacement.Name = "FPTBEmplacement"
+        Me.FPTBEmplacement.Size = New System.Drawing.Size(133, 21)
+        Me.FPTBEmplacement.TabIndex = 128
         '
         'FPBSupprimer
         '
@@ -1900,15 +1912,13 @@ Partial Class FormGestion
         Me.PictureBox2.TabIndex = 51
         Me.PictureBox2.TabStop = False
         '
-        'FPTBCBEtatCivil
+        'CtrlLocVilleCPPays1
         '
-        Me.FPTBCBEtatCivil.FormattingEnabled = True
-        Me.FPTBCBEtatCivil.Items.AddRange(New Object() {"Célibataire", "Epoux", "Veuf", "Divorcé", "Non précisé"})
-        Me.FPTBCBEtatCivil.Location = New System.Drawing.Point(334, 107)
-        Me.FPTBCBEtatCivil.Name = "FPTBCBEtatCivil"
-        Me.FPTBCBEtatCivil.Size = New System.Drawing.Size(152, 22)
-        Me.FPTBCBEtatCivil.TabIndex = 99
-        Me.FPTBCBEtatCivil.Visible = False
+        Me.CtrlLocVilleCPPays1.Location = New System.Drawing.Point(117, 50)
+        Me.CtrlLocVilleCPPays1.LocVilleId = -1
+        Me.CtrlLocVilleCPPays1.Name = "CtrlLocVilleCPPays1"
+        Me.CtrlLocVilleCPPays1.Size = New System.Drawing.Size(402, 61)
+        Me.CtrlLocVilleCPPays1.TabIndex = 142
         '
         'TbDateDeces
         '
@@ -1926,7 +1936,7 @@ Partial Class FormGestion
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
-        Me.ClientSize = New System.Drawing.Size(1230, 482)
+        Me.ClientSize = New System.Drawing.Size(1230, 685)
         Me.Controls.Add(Me.Lchargementdonnee)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.PictureBox2)
@@ -2159,4 +2169,5 @@ Partial Class FormGestion
     Friend WithEvents DtpConsRechercherDateFin As DateTimePicker
     Friend WithEvents Label27 As Label
     Friend WithEvents FPTBCBEtatCivil As ComboBox
+    Friend WithEvents CtrlLocVilleCPPays1 As CtrlLocVilleCPPays
 End Class
