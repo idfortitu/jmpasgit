@@ -51,8 +51,9 @@ Module Bdd
         End Using
     End Function
 
-    ' considère que la première colonne est la PK
     ' renvoie le nombre de ligne concernées (1 ou 0 du coup)
+    ' nécessite que la datarow contienne toutes les colonnes de sa table, (ça peut s'arranger facilement)
+    ' mais tolère et ignore des colonnes supplémentaires
     Public Function Update(nomtable As String, row As DataRow)
         Dim sql = "UPDATE " & nomtable & " SET "
         Dim cmd = New MySqlCommand With {.Connection = Connexion, .CommandType = CommandType.Text}
@@ -60,15 +61,17 @@ Module Bdd
         Dim tvide = GetTableVide(nomtable)
 
         Dim pasprem = False
-        For i = 1 To tvide.Columns.Count - 1
+        'For i = 1 To tvide.Columns.Count - 1
+        For Each Col As DataColumn In tvide.Columns
             If pasprem Then sql &= ", " Else pasprem = True
-            Dim nomcol = tvide.Columns(i).Caption
+            Dim nomcol = Col.Caption
             sql &= nomcol & " = @" & nomcol
-            cmd.Parameters.AddWithValue("@" & nomcol, (row(i)))
+            cmd.Parameters.AddWithValue("@" & nomcol, (row(nomcol)))
         Next
 
-        sql &= " WHERE " & tvide.Columns(0).Caption & " = @" & tvide.Columns(0).Caption
-        cmd.Parameters.AddWithValue("@" & tvide.Columns(0).Caption, row(0))
+        Dim NomPk = Pks(nomtable)
+        sql &= " WHERE " & NomPk & " = @" & NomPk
+        'cmd.Parameters.AddWithValue("@" & NomPk, row(NomPk))
         cmd.CommandText = sql
 
         Connexion.Open()
@@ -207,8 +210,8 @@ Module Bdd
     End Function
 
 
-    Public Function Supprimer(nomtable As String, id As Integer)
-        Bdd.NonQuery("DELETE FROM " & nomtable & " WHERE " & Pks(nomtable) & " = " & id)
+    Public Function Delete(nomtable As String, id As Integer)
+        Return Bdd.NonQuery("DELETE FROM " & nomtable & " WHERE " & Pks(nomtable) & " = " & id)
     End Function
 
     ' récupère une table vide, juste pour avoir la structure

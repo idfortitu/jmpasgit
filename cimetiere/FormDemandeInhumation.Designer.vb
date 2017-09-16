@@ -100,6 +100,12 @@ Partial Class FormDemandeInhumation
         Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtTerminerConExis = New System.Windows.Forms.Button()
         Me.DgvCsnsExist = New cimetiere.DataGridViewConcessions()
+        Me.DgvCsnsExistColEmplId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DgvCsnsExistColOccupants = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabP2InhOrd = New System.Windows.Forms.TabPage()
         Me.BtMontrerFormPlancimEmplOrd = New System.Windows.Forms.Button()
         Me.BtViderFiltreEmpls = New System.Windows.Forms.Button()
@@ -125,12 +131,6 @@ Partial Class FormDemandeInhumation
         Me.Button1 = New System.Windows.Forms.Button()
         Me.BtPrécédentDeConExit = New System.Windows.Forms.Button()
         Me.CtrlLocVillePays1 = New cimetiere.CtrlLocVillePays()
-        Me.DgvCsnsExistColEmplId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DgvCsnsExistColOccupants = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -285,10 +285,11 @@ Partial Class FormDemandeInhumation
         '
         'CtrlDefEtatCiv
         '
-        Me.CtrlDefEtatCiv.EtatCivil = cimetiere.TEtatCivil.NonPrecise
+        Me.CtrlDefEtatCiv.EtatCivil = 0
         Me.CtrlDefEtatCiv.EtatCivilDe = ""
         Me.CtrlDefEtatCiv.Location = New System.Drawing.Point(158, 270)
         Me.CtrlDefEtatCiv.Name = "CtrlDefEtatCiv"
+        Me.CtrlDefEtatCiv.osef = Nothing
         Me.CtrlDefEtatCiv.Size = New System.Drawing.Size(369, 24)
         Me.CtrlDefEtatCiv.TabIndex = 142
         '
@@ -304,10 +305,12 @@ Partial Class FormDemandeInhumation
         '
         'CtrlDefLocvillepays
         '
+        Me.CtrlDefLocvillepays.LectureSeule = False
         Me.CtrlDefLocvillepays.Location = New System.Drawing.Point(158, 146)
         Me.CtrlDefLocvillepays.LocVilleId = -1
         Me.CtrlDefLocvillepays.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtrlDefLocvillepays.Name = "CtrlDefLocvillepays"
+        Me.CtrlDefLocvillepays.osef = Nothing
         Me.CtrlDefLocvillepays.Size = New System.Drawing.Size(316, 25)
         Me.CtrlDefLocvillepays.TabIndex = 140
         '
@@ -536,10 +539,12 @@ Partial Class FormDemandeInhumation
         '
         'CtrlVilleDmdr
         '
+        Me.CtrlVilleDmdr.LectureSeule = False
         Me.CtrlVilleDmdr.Location = New System.Drawing.Point(307, 60)
         Me.CtrlVilleDmdr.LocVilleId = -1
         Me.CtrlVilleDmdr.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtrlVilleDmdr.Name = "CtrlVilleDmdr"
+        Me.CtrlVilleDmdr.osef = Nothing
         Me.CtrlVilleDmdr.Size = New System.Drawing.Size(316, 25)
         Me.CtrlVilleDmdr.TabIndex = 7
         '
@@ -904,6 +909,48 @@ Partial Class FormDemandeInhumation
         Me.DgvCsnsExist.Size = New System.Drawing.Size(843, 257)
         Me.DgvCsnsExist.TabIndex = 173
         '
+        'DgvCsnsExistColEmplId
+        '
+        Me.DgvCsnsExistColEmplId.DataPropertyName = "empl_id"
+        Me.DgvCsnsExistColEmplId.HeaderText = "empl_id"
+        Me.DgvCsnsExistColEmplId.Name = "DgvCsnsExistColEmplId"
+        Me.DgvCsnsExistColEmplId.ReadOnly = True
+        Me.DgvCsnsExistColEmplId.Visible = False
+        '
+        'Column1
+        '
+        Me.Column1.DataPropertyName = "empl_reference"
+        Me.Column1.HeaderText = "Emplacement"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column4
+        '
+        Me.Column4.DataPropertyName = "csnr_nom"
+        Me.Column4.HeaderText = "Concessionnaire"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.DataPropertyName = "con_date_debut"
+        Me.Column2.HeaderText = "Début"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column3
+        '
+        Me.Column3.DataPropertyName = "con_date_fin"
+        Me.Column3.HeaderText = "Fin"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        '
+        'DgvCsnsExistColOccupants
+        '
+        Me.DgvCsnsExistColOccupants.HeaderText = "Occupants"
+        Me.DgvCsnsExistColOccupants.Name = "DgvCsnsExistColOccupants"
+        Me.DgvCsnsExistColOccupants.ReadOnly = True
+        '
         'TabP2InhOrd
         '
         Me.TabP2InhOrd.Controls.Add(Me.BtMontrerFormPlancimEmplOrd)
@@ -1138,54 +1185,14 @@ Partial Class FormDemandeInhumation
         '
         'CtrlLocVillePays1
         '
+        Me.CtrlLocVillePays1.LectureSeule = False
         Me.CtrlLocVillePays1.Location = New System.Drawing.Point(337, 59)
         Me.CtrlLocVillePays1.LocVilleId = -1
         Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
+        Me.CtrlLocVillePays1.osef = Nothing
         Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 25)
         Me.CtrlLocVillePays1.TabIndex = 7
-        '
-        'DgvCsnsExistColEmplId
-        '
-        Me.DgvCsnsExistColEmplId.DataPropertyName = "empl_id"
-        Me.DgvCsnsExistColEmplId.HeaderText = "empl_id"
-        Me.DgvCsnsExistColEmplId.Name = "DgvCsnsExistColEmplId"
-        Me.DgvCsnsExistColEmplId.ReadOnly = True
-        Me.DgvCsnsExistColEmplId.Visible = False
-        '
-        'Column1
-        '
-        Me.Column1.DataPropertyName = "empl_reference"
-        Me.Column1.HeaderText = "Emplacement"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        '
-        'Column4
-        '
-        Me.Column4.DataPropertyName = "csnr_nom"
-        Me.Column4.HeaderText = "Concessionnaire"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        '
-        'Column2
-        '
-        Me.Column2.DataPropertyName = "con_date_debut"
-        Me.Column2.HeaderText = "Début"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column3
-        '
-        Me.Column3.DataPropertyName = "con_date_fin"
-        Me.Column3.HeaderText = "Fin"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        '
-        'DgvCsnsExistColOccupants
-        '
-        Me.DgvCsnsExistColOccupants.HeaderText = "Occupants"
-        Me.DgvCsnsExistColOccupants.Name = "DgvCsnsExistColOccupants"
-        Me.DgvCsnsExistColOccupants.ReadOnly = True
         '
         'FormDemandeInhumation
         '

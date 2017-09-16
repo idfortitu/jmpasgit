@@ -13,6 +13,23 @@
         End If
     End Sub
 
+    Public Property SelectedUnderlyingValue As Object
+        Get
+            If System.Diagnostics.Process.GetCurrentProcess().ProcessName = "devenv" Then Return Nothing
+            'Return CType(MyBase.SelectedValue, [Enum].GetUnderlyingType(MyBase.selectedvalue.gettype)
+            'Return Convert.ChangeType(MyBase.SelectedValue, [Enum].GetUnderlyingType(MyBase.SelectedValue.GetType))
+            Return Convert.ChangeType(MyBase.SelectedValue, [Enum].GetUnderlyingType(GetType(T)))
+            'Return CType(MyBase.SelectedValue, Integer)
+        End Get
+        Set(value As Object)
+            If System.Diagnostics.Process.GetCurrentProcess().ProcessName = "devenv" Then Exit Property
+            If value Is Nothing OrElse IsDBNull(value) Then value = 0
+            'MyBase.SelectedValue = CType(value, TTypeEmpl)
+            MyBase.SelectedValue = CType(value, T)
+        End Set
+    End Property
+
+
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '

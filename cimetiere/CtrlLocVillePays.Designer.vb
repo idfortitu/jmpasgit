@@ -31,20 +31,20 @@ Partial Class CtrlLocVillePays
         'BtAjouterPays
         '
         Me.BtAjouterPays.Image = Global.cimetiere.My.Resources.Resources.Add_16x
-        Me.BtAjouterPays.Location = New System.Drawing.Point(218, -1)
-        Me.BtAjouterPays.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BtAjouterPays.Location = New System.Drawing.Point(291, -1)
+        Me.BtAjouterPays.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtAjouterPays.Name = "BtAjouterPays"
-        Me.BtAjouterPays.Size = New System.Drawing.Size(20, 21)
+        Me.BtAjouterPays.Size = New System.Drawing.Size(27, 26)
         Me.BtAjouterPays.TabIndex = 67
         Me.BtAjouterPays.UseVisualStyleBackColor = True
         '
         'BtAjouterVille
         '
         Me.BtAjouterVille.Image = Global.cimetiere.My.Resources.Resources.Add_16x
-        Me.BtAjouterVille.Location = New System.Drawing.Point(96, -1)
-        Me.BtAjouterVille.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BtAjouterVille.Location = New System.Drawing.Point(128, -1)
+        Me.BtAjouterVille.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtAjouterVille.Name = "BtAjouterVille"
-        Me.BtAjouterVille.Size = New System.Drawing.Size(20, 21)
+        Me.BtAjouterVille.Size = New System.Drawing.Size(27, 26)
         Me.BtAjouterVille.TabIndex = 66
         Me.BtAjouterVille.UseVisualStyleBackColor = True
         '
@@ -52,10 +52,10 @@ Partial Class CtrlLocVillePays
         '
         Me.CbPays.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CbPays.FormattingEnabled = True
-        Me.CbPays.Location = New System.Drawing.Point(128, 0)
-        Me.CbPays.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CbPays.Location = New System.Drawing.Point(171, 0)
+        Me.CbPays.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CbPays.Name = "CbPays"
-        Me.CbPays.Size = New System.Drawing.Size(89, 21)
+        Me.CbPays.Size = New System.Drawing.Size(117, 24)
         Me.CbPays.TabIndex = 65
         '
         'CbLocVille
@@ -63,22 +63,22 @@ Partial Class CtrlLocVillePays
         Me.CbLocVille.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CbLocVille.FormattingEnabled = True
         Me.CbLocVille.Location = New System.Drawing.Point(0, 0)
-        Me.CbLocVille.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CbLocVille.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CbLocVille.Name = "CbLocVille"
-        Me.CbLocVille.Size = New System.Drawing.Size(96, 21)
+        Me.CbLocVille.Size = New System.Drawing.Size(127, 24)
         Me.CbLocVille.TabIndex = 64
         '
         'CtrlLocVillePays
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.BtAjouterPays)
         Me.Controls.Add(Me.BtAjouterVille)
         Me.Controls.Add(Me.CbPays)
         Me.Controls.Add(Me.CbLocVille)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "CtrlLocVillePays"
-        Me.Size = New System.Drawing.Size(237, 20)
+        Me.Size = New System.Drawing.Size(316, 25)
         Me.ResumeLayout(False)
 
     End Sub

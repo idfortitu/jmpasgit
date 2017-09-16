@@ -8,12 +8,37 @@
         MajTbEtatCivilDe()
     End Sub
 
-    Public Property EtatCivil As TEtatCivil
+    Private _osef
+    Property osef
         Get
-            Return If(CbEtatCivil.SelectedValue IsNot Nothing AndAlso [Enum].IsDefined(GetType(TEtatCivil), CbEtatCivil.SelectedValue), CbEtatCivil.SelectedValue, TEtatCivil.NonPrecise)
+            Return _osef
         End Get
-        Set(value As TEtatCivil)
-            CbEtatCivil.SelectedValue = value
+        Set(value)
+            _osef = value
+        End Set
+    End Property
+
+    ' devenu integer pour les bindings (car integer en bdd)
+    Public Property EtatCivil As Integer 'TEtatCivil
+        Get
+            'Return If(CbEtatCivil.SelectedValue IsNot Nothing AndAlso [Enum].IsDefined(GetType(TEtatCivil), CbEtatCivil.SelectedValue), CbEtatCivil.SelectedValue, TEtatCivil.NonPrecise)
+            Return If(CbEtatCivil.SelectedValue IsNot Nothing AndAlso [Enum].IsDefined(GetType(TEtatCivil), CbEtatCivil.SelectedValue), CType(CbEtatCivil.SelectedValue, Integer), CType(TEtatCivil.NonPrecise, Integer))
+        End Get
+        Set(value As Integer) 'TEtatCivil)
+            'CbEtatCivil.SelectedValue = value
+            CbEtatCivil.SelectedValue = CType(value, TEtatCivil)
+        End Set
+    End Property
+
+    Private _lectureSeule As Boolean
+    Public Property LectureSeule As Boolean
+        Get
+            Return _lectureSeule
+        End Get
+        Set(value As Boolean)
+            _lectureSeule = value
+            TbEtatCivilDe.ReadOnly = value
+            CbEtatCivil.Enabled = Not value
         End Set
     End Property
 

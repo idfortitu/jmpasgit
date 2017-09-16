@@ -3,16 +3,26 @@
 
     ' <> -1 si la ville est choisie (auquel cas l'enregistrement LocVille existe)
     ' -1 si aucune ville n'est choisie, auquel cas le locville existe peut-être en tant que ville vide + pays sélectionné, ou pas et dans ce cas il faut le créer
-    Public Property LocVilleId As Integer
+    Public Property LocVilleId As Object 'Integer
         Get
             Return If(CbLocVille.SelectedValue Is Nothing, -1, CbLocVille.SelectedValue)
         End Get
-        Set(value As Integer)
-            If value = -1 Then
+        Set(value As Object) 'Integer)
+            If value Is Nothing OrElse isdbnull(value) OrElse value = -1 Then
                 CbLocVille.SelectedIndex = -1
             Else
                 CbLocVille.SelectedValue = value
             End If
+        End Set
+    End Property
+
+    Private _osef
+    Property osef
+        Get
+            Return _osef
+        End Get
+        Set(value)
+            _osef = value
         End Set
     End Property
 
@@ -22,13 +32,54 @@
         End Get
     End Property
 
+    Private TbV As TextBox = New TextBox With {.ReadOnly = True, .Visible = False, .BackColor = SystemColors.Window}
+    Private TbP As TextBox = New TextBox With {.ReadOnly = True, .Visible = False, .BackColor = SystemColors.Window}
+
+    Private _lectureSeule As Boolean = False
+    Public Property LectureSeule As Boolean
+        Get
+            Return _lectureSeule
+        End Get
+        Set(value As Boolean)
+            _lectureSeule = value
+            BtAjouterPays.Enabled = Not value
+            BtAjouterVille.Enabled = Not value
+
+            If value = True Then
+                TbV.Text = CbLocVille.Text
+                TbP.Text = CbPays.Text
+                CbLocVille.Hide()
+                CbPays.Hide()
+                TbV.Show()
+                TbP.Show()
+            Else
+                TbV.Hide()
+                TbP.Hide()
+                CbLocVille.Show()
+                CbPays.Show()
+            End If
+        End Set
+    End Property
+    Private Sub bla() Handles Me.Layout
+        Me.TbV.size = CbLocVille.Size
+        Me.TbV.location = CbLocVille.Location
+        Me.TbP.size = CbPays.Size
+        Me.TbP.Location = CbPays.Location
+    End Sub
+
+
     Public Sub New()
         InitializeComponent()       ' This call is required by the designer.
         If Not System.Diagnostics.Process.GetCurrentProcess().ProcessName = "devenv" Then
-            ChargerComboboxLocVille()
-            ChargerComboboxPays()
+            'ChargerComboboxLocVille()
+            'ChargerComboboxPays()
         End If
+        Me.Controls.Add(TbV)
+        Me.Controls.Add(TbP)
+        TbV.BringToFront()
+        TbP.BringToFront()
     End Sub
+
 
     Private Sub BtAjouterPays_Click(sender As Object, e As EventArgs) Handles BtAjouterPays.Click
         Dim f As New FormNouveauPays
@@ -59,6 +110,10 @@
             CbPays.SelectedIndex = -1
             CbPays.Enabled = True
         End If
+        If Me._lectureSeule Then
+            TbV.Text = CbLocVille.Text
+            TbP.Text = CbPays.Text
+        End If
     End Sub
 
     Private Sub ChargerComboboxLocVille()
@@ -81,6 +136,32 @@
         CbPays.DisplayMember = "Pays_nom"
         CbPays.ValueMember = "Pays_id"
         CbPays.DataSource = DtPays
+    End Sub
+
+    Public Sub chargercomboboxpays(tpays As DataTable)
+        If Not (From r As DataRow In tpays.Rows Where r("Pays_id") = -1).Any Then
+            Dim rowvide = tpays.NewRow
+            rowvide("Pays_id") = -1
+            tpays.Rows.InsertAt(rowvide, 0)
+        End If
+
+        CbPays.DisplayMember = "Pays_nom"
+        CbPays.ValueMember = "Pays_id"
+        CbPays.DataSource = tpays
+
+    End Sub
+    Public Sub chargercomboboxville(tville As DataTable)
+        'If tville.Rows.Find(-1) Is Nothing Then
+        If Not (From r As DataRow In tville Where r("locville_id") = -1).Any Then
+            Dim rowvide = tville.NewRow
+            rowvide("locville_id") = -1
+            tville.Rows.InsertAt(rowvide, 0)
+        End If
+
+        CbLocVille.DisplayMember = "locville_ville"
+        CbLocVille.ValueMember = "locville_id"
+        CbLocVille.DataSource = tville
+
     End Sub
 
     Public Sub Rafraichir(Optional ClearSelect As Boolean = False)

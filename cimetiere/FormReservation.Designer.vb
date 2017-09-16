@@ -47,7 +47,6 @@ Partial Class FormReservation
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GBListBenef = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.CtrlListeBenefs1 = New cimetiere.CtrlListeBenefs()
         Me.BtAnnuler = New System.Windows.Forms.Button()
         Me.BtEnregistrer = New System.Windows.Forms.Button()
@@ -122,10 +121,12 @@ Partial Class FormReservation
         '
         'CtrlLocVillePays1
         '
+        Me.CtrlLocVillePays1.LectureSeule = False
         Me.CtrlLocVillePays1.Location = New System.Drawing.Point(277, 62)
         Me.CtrlLocVillePays1.LocVilleId = -1
         Me.CtrlLocVillePays1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtrlLocVillePays1.Name = "CtrlLocVillePays1"
+        Me.CtrlLocVillePays1.osef = Nothing
         Me.CtrlLocVillePays1.Size = New System.Drawing.Size(316, 26)
         Me.CtrlLocVillePays1.TabIndex = 65
         '
@@ -297,7 +298,6 @@ Partial Class FormReservation
         'GBListBenef
         '
         Me.GBListBenef.BackColor = System.Drawing.SystemColors.Window
-        Me.GBListBenef.Controls.Add(Me.Button1)
         Me.GBListBenef.Controls.Add(Me.CtrlListeBenefs1)
         Me.GBListBenef.Location = New System.Drawing.Point(8, 7)
         Me.GBListBenef.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -307,15 +307,6 @@ Partial Class FormReservation
         Me.GBListBenef.TabIndex = 25
         Me.GBListBenef.TabStop = False
         Me.GBListBenef.Text = "Bénéficiaires"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(79, 308)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "TESTINH"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'CtrlListeBenefs1
         '
@@ -725,7 +716,6 @@ Partial Class FormReservation
     Friend WithEvents Label2 As Label
     Friend WithEvents TbNbPlaces As TextBoxInt
     Friend WithEvents CbTarifLh As CheckBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents ColEmplId As DataGridViewTextBoxColumn
     Friend WithEvents ColEmplRef As DataGridViewTextBoxColumn
     Friend WithEvents ColEmplType As DataGridViewTextBoxColumn

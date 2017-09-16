@@ -21,6 +21,11 @@
     End Sub
 
     Private Sub FormProlong_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim TVilles = Bdd.GetTable("t_loc_ville")
+        Dim TPays = Bdd.GetTable("t_Pays")
+        CtrlVilleDmdr.chargercomboboxpays(TPays)
+        CtrlVilleDmdr.chargercomboboxville(TVilles)
+
         BtInfosCsnr.Text = "Utiliser les informations" & vbCrLf & "du concessionnaire"
         ' on présente aussi les concessions non expirées ou qui ont expiré il y a moins de 2 mois - valeur un peu arbitraire
 

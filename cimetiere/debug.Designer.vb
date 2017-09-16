@@ -46,6 +46,7 @@ Partial Class debug
         Me.PanelCustom1 = New cimetiere.PlanCimConteneur()
         Me.PlanCimetiere1 = New cimetiere.PlanCimetiere()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.PanelCustom1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -249,6 +250,7 @@ Partial Class debug
         Me.PlanCimetiere1.Margin = New System.Windows.Forms.Padding(2)
         Me.PlanCimetiere1.Name = "PlanCimetiere1"
         Me.PlanCimetiere1.NomParcelleAffichee = "A1"
+        Me.PlanCimetiere1.RefSelect = "-1"
         Me.PlanCimetiere1.SelectionEmplAuClic = True
         Me.PlanCimetiere1.Size = New System.Drawing.Size(261, 515)
         Me.PlanCimetiere1.TabIndex = 61
@@ -264,11 +266,21 @@ Partial Class debug
         Me.Button5.Text = "montrercsn"
         Me.Button5.UseVisualStyleBackColor = True
         '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(837, 247)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(97, 23)
+        Me.Button6.TabIndex = 88
+        Me.Button6.Text = "update"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'debug
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1698, 706)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
@@ -321,4 +333,5 @@ Partial Class debug
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents Button6 As Button
 End Class
