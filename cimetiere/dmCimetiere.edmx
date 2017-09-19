@@ -1,0 +1,858 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bddcimeModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="beneficiaires">
+          <Key>
+            <PropertyRef Name="ben_id" />
+          </Key>
+          <Property Name="ben_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ben_nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ben_prenom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ben_date_naiss" Type="date" />
+          <Property Name="ben_lien_parente" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ben_adresse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="locville_id" Type="int" />
+        </EntityType>
+        <EntityType Name="beneficier">
+          <Key>
+            <PropertyRef Name="con_id" />
+            <PropertyRef Name="ben_id" />
+          </Key>
+          <Property Name="con_id" Type="int" Nullable="false" />
+          <Property Name="ben_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="concessionnaires">
+          <Key>
+            <PropertyRef Name="csnr_id" />
+          </Key>
+          <Property Name="csnr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="csnr_nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="csnr_prenom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="csnr_date_naiss" Type="date" />
+          <Property Name="csnr_adresse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="csnr_no_registre" Type="bigint" />
+          <Property Name="csnr_tel" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="locville_id" Type="int" />
+        </EntityType>
+        <EntityType Name="concessions">
+          <Key>
+            <PropertyRef Name="con_id" />
+          </Key>
+          <Property Name="con_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="con_numero" Type="int" />
+          <Property Name="con_date_debut" Type="date" />
+          <Property Name="con_date_fin" Type="date" />
+          <Property Name="con_nbre_renovations" Type="int" />
+          <Property Name="con_montant_paye" Type="decimal" Precision="7" Scale="0" />
+          <Property Name="empl_id" Type="int" Nullable="false" />
+          <Property Name="csnr_id" Type="int" Nullable="false" />
+          <Property Name="com_id" Type="int" />
+        </EntityType>
+        <EntityType Name="defunts">
+          <Key>
+            <PropertyRef Name="def_id" />
+          </Key>
+          <Property Name="def_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="def_numero_lh" Type="int" />
+          <Property Name="def_numero_annee" Type="int" />
+          <Property Name="def_prenom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="def_nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="def_adresse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="def_etat_civil" Type="int" Nullable="false" />
+          <Property Name="def_etat_civil_de" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="def_date_naiss" Type="date" />
+          <Property Name="def_lieu_naiss" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="def_date_deces" Type="date" />
+          <Property Name="def_lieu_deces" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="pc_id" Type="int" />
+          <Property Name="Date_debut" Type="date" />
+          <Property Name="Date_fin" Type="date" />
+          <Property Name="empl_id" Type="int" />
+          <Property Name="locville_id" Type="int" />
+        </EntityType>
+        <EntityType Name="emplacements">
+          <Key>
+            <PropertyRef Name="empl_id" />
+          </Key>
+          <Property Name="empl_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empl_reference" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="empl_type" Type="int" Nullable="false" />
+          <Property Name="empl_nb_places" Type="int" />
+          <Property Name="empl_monum_classe" Type="bool" Nullable="false" />
+          <Property Name="hist_id" Type="int" />
+          <Property Name="empl_coords" Type="varbinary" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="personnes_contact">
+          <Key>
+            <PropertyRef Name="pc_id" />
+          </Key>
+          <Property Name="pc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pc_nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="pc_prenom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="pc_tel" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="pc_adresse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="locville_id" Type="int" />
+        </EntityType>
+        <EntityType Name="t_commentaire">
+          <Key>
+            <PropertyRef Name="com_id" />
+          </Key>
+          <Property Name="com_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="com_commentaire" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_histoire">
+          <Key>
+            <PropertyRef Name="h_id" />
+          </Key>
+          <Property Name="h_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="h_histoire" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_loc_ville">
+          <Key>
+            <PropertyRef Name="locville_id" />
+          </Key>
+          <Property Name="locville_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="locville_cp" Type="int" />
+          <Property Name="locville_ville" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Pays_id" Type="int" />
+        </EntityType>
+        <EntityType Name="t_pays">
+          <Key>
+            <PropertyRef Name="Pays_id" />
+          </Key>
+          <Property Name="Pays_id" Type="int" Nullable="false" />
+          <Property Name="Pays_nom" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_beneficiaires_locville_id">
+          <End Role="t_loc_ville" Type="Self.t_loc_ville" Multiplicity="0..1" />
+          <End Role="beneficiaires" Type="Self.beneficiaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_loc_ville">
+              <PropertyRef Name="locville_id" />
+            </Principal>
+            <Dependent Role="beneficiaires">
+              <PropertyRef Name="locville_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficier_ben_id">
+          <End Role="beneficiaires" Type="Self.beneficiaires" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="beneficier" Type="Self.beneficier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="beneficiaires">
+              <PropertyRef Name="ben_id" />
+            </Principal>
+            <Dependent Role="beneficier">
+              <PropertyRef Name="ben_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficier_con_id">
+          <End Role="concessions" Type="Self.concessions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="beneficier" Type="Self.beneficier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="concessions">
+              <PropertyRef Name="con_id" />
+            </Principal>
+            <Dependent Role="beneficier">
+              <PropertyRef Name="con_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_concessionaires_locville_id">
+          <End Role="t_loc_ville" Type="Self.t_loc_ville" Multiplicity="0..1" />
+          <End Role="concessionnaires" Type="Self.concessionnaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_loc_ville">
+              <PropertyRef Name="locville_id" />
+            </Principal>
+            <Dependent Role="concessionnaires">
+              <PropertyRef Name="locville_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_concessions_com_id">
+          <End Role="t_commentaire" Type="Self.t_commentaire" Multiplicity="0..1" />
+          <End Role="concessions" Type="Self.concessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_commentaire">
+              <PropertyRef Name="com_id" />
+            </Principal>
+            <Dependent Role="concessions">
+              <PropertyRef Name="com_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_concessions_csnr_id">
+          <End Role="concessionnaires" Type="Self.concessionnaires" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="concessions" Type="Self.concessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="concessionnaires">
+              <PropertyRef Name="csnr_id" />
+            </Principal>
+            <Dependent Role="concessions">
+              <PropertyRef Name="csnr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_concessions_empl_id">
+          <End Role="emplacements" Type="Self.emplacements" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="concessions" Type="Self.concessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emplacements">
+              <PropertyRef Name="empl_id" />
+            </Principal>
+            <Dependent Role="concessions">
+              <PropertyRef Name="empl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_defunts_empl_id">
+          <End Role="emplacements" Type="Self.emplacements" Multiplicity="0..1" />
+          <End Role="defunts" Type="Self.defunts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emplacements">
+              <PropertyRef Name="empl_id" />
+            </Principal>
+            <Dependent Role="defunts">
+              <PropertyRef Name="empl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_defunts_locville_id">
+          <End Role="t_loc_ville" Type="Self.t_loc_ville" Multiplicity="0..1" />
+          <End Role="defunts" Type="Self.defunts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_loc_ville">
+              <PropertyRef Name="locville_id" />
+            </Principal>
+            <Dependent Role="defunts">
+              <PropertyRef Name="locville_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_defunts_pc_id">
+          <End Role="personnes_contact" Type="Self.personnes_contact" Multiplicity="0..1" />
+          <End Role="defunts" Type="Self.defunts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personnes_contact">
+              <PropertyRef Name="pc_id" />
+            </Principal>
+            <Dependent Role="defunts">
+              <PropertyRef Name="pc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_emplacements_hist_id">
+          <End Role="t_histoire" Type="Self.t_histoire" Multiplicity="0..1" />
+          <End Role="emplacements" Type="Self.emplacements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_histoire">
+              <PropertyRef Name="h_id" />
+            </Principal>
+            <Dependent Role="emplacements">
+              <PropertyRef Name="hist_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pcontact_locville_id">
+          <End Role="t_loc_ville" Type="Self.t_loc_ville" Multiplicity="0..1" />
+          <End Role="personnes_contact" Type="Self.personnes_contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_loc_ville">
+              <PropertyRef Name="locville_id" />
+            </Principal>
+            <Dependent Role="personnes_contact">
+              <PropertyRef Name="locville_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Loc_ville_Pays_id">
+          <End Role="t_pays" Type="Self.t_pays" Multiplicity="0..1" />
+          <End Role="t_loc_ville" Type="Self.t_loc_ville" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_pays">
+              <PropertyRef Name="Pays_id" />
+            </Principal>
+            <Dependent Role="t_loc_ville">
+              <PropertyRef Name="Pays_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bddcimeModelStoreContainer">
+          <EntitySet Name="beneficiaires" EntityType="Self.beneficiaires" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="beneficier" EntityType="Self.beneficier" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="concessionnaires" EntityType="Self.concessionnaires" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="concessions" EntityType="Self.concessions" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="defunts" EntityType="Self.defunts" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="emplacements" EntityType="Self.emplacements" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="personnes_contact" EntityType="Self.personnes_contact" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="t_commentaire" EntityType="Self.t_commentaire" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="t_histoire" EntityType="Self.t_histoire" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="t_loc_ville" EntityType="Self.t_loc_ville" Schema="bddcime" store:Type="Tables" />
+          <EntitySet Name="t_pays" EntityType="Self.t_pays" Schema="bddcime" store:Type="Tables" />
+          <AssociationSet Name="FK_beneficiaires_locville_id" Association="Self.FK_beneficiaires_locville_id">
+            <End Role="t_loc_ville" EntitySet="t_loc_ville" />
+            <End Role="beneficiaires" EntitySet="beneficiaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficier_ben_id" Association="Self.FK_Beneficier_ben_id">
+            <End Role="beneficiaires" EntitySet="beneficiaires" />
+            <End Role="beneficier" EntitySet="beneficier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficier_con_id" Association="Self.FK_Beneficier_con_id">
+            <End Role="concessions" EntitySet="concessions" />
+            <End Role="beneficier" EntitySet="beneficier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_concessionaires_locville_id" Association="Self.FK_concessionaires_locville_id">
+            <End Role="t_loc_ville" EntitySet="t_loc_ville" />
+            <End Role="concessionnaires" EntitySet="concessionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_concessions_com_id" Association="Self.FK_concessions_com_id">
+            <End Role="t_commentaire" EntitySet="t_commentaire" />
+            <End Role="concessions" EntitySet="concessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_concessions_csnr_id" Association="Self.FK_concessions_csnr_id">
+            <End Role="concessionnaires" EntitySet="concessionnaires" />
+            <End Role="concessions" EntitySet="concessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_concessions_empl_id" Association="Self.FK_concessions_empl_id">
+            <End Role="emplacements" EntitySet="emplacements" />
+            <End Role="concessions" EntitySet="concessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_defunts_empl_id" Association="Self.FK_defunts_empl_id">
+            <End Role="emplacements" EntitySet="emplacements" />
+            <End Role="defunts" EntitySet="defunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_defunts_locville_id" Association="Self.FK_defunts_locville_id">
+            <End Role="t_loc_ville" EntitySet="t_loc_ville" />
+            <End Role="defunts" EntitySet="defunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_defunts_pc_id" Association="Self.FK_defunts_pc_id">
+            <End Role="personnes_contact" EntitySet="personnes_contact" />
+            <End Role="defunts" EntitySet="defunts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_emplacements_hist_id" Association="Self.fk_emplacements_hist_id">
+            <End Role="t_histoire" EntitySet="t_histoire" />
+            <End Role="emplacements" EntitySet="emplacements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pcontact_locville_id" Association="Self.FK_pcontact_locville_id">
+            <End Role="t_loc_ville" EntitySet="t_loc_ville" />
+            <End Role="personnes_contact" EntitySet="personnes_contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Loc_ville_Pays_id" Association="Self.FK_T_Loc_ville_Pays_id">
+            <End Role="t_pays" EntitySet="t_pays" />
+            <End Role="t_loc_ville" EntitySet="t_loc_ville" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bddcimeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Beneficiaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Nullable="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateNaiss" Type="DateTime" Nullable="true" />
+          <Property Name="LienParente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocVilleId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="LocVille" Relationship="Self.FK_beneficiaires_locville_id" FromRole="beneficiaires" ToRole="t_loc_ville" />
+          <NavigationProperty Name="Concessions" Relationship="Self.beneficier" FromRole="beneficiaires" ToRole="concessions" />
+        </EntityType>
+        <EntityType Name="Concessionnaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateNaiss" Type="DateTime" Nullable="true" />
+          <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NoRegistre" Type="Int64" Nullable="true" />
+          <Property Name="Tel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocVilleId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="LocVille" Relationship="Self.FK_concessionnaires_locville_id" FromRole="concessionnaires" ToRole="t_loc_ville" />
+          <NavigationProperty Name="Concessions" Relationship="Self.FK_concessions_csnr_id" FromRole="concessionnaires" ToRole="concessions" />
+        </EntityType>
+        <EntityType Name="Concession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Numero" Type="Int32" Nullable="true" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="true" />
+          <Property Name="DateFin" Type="DateTime" Nullable="true" />
+          <Property Name="NbreRenovations" Type="Int32" Nullable="true" />
+          <Property Name="MontantPaye" Type="Decimal" Nullable="true" />
+          <Property Name="EmplId" Type="Int32" Nullable="false" />
+          <Property Name="CsnrId" Type="Int32" Nullable="false" />
+          <Property Name="ComId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Concessionnaire" Relationship="Self.FK_concessions_csnr_id" FromRole="concessions" ToRole="concessionnaires" />
+          <NavigationProperty Name="Commentaire" Relationship="Self.FK_concessions_com_id" FromRole="concessions" ToRole="t_commentaire" />
+          <NavigationProperty Name="Emplacement" Relationship="Self.FK_concessions_empl_id" FromRole="concessions" ToRole="emplacements" />
+          <NavigationProperty Name="Beneficiaires" Relationship="Self.beneficier" FromRole="concessions" ToRole="beneficiaires" />
+        </EntityType>
+        <EntityType Name="Defunt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NumeroLh" Type="Int32" Nullable="true" />
+          <Property Name="NumeroAnnee" Type="Int32" Nullable="true" />
+          <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EtatCivil" Type="Int32" Nullable="false" />
+          <Property Name="EtatCivilDe" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateNaiss" Type="DateTime" Nullable="true" />
+          <Property Name="LieuNaiss" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateDeces" Type="DateTime" Nullable="true" />
+          <Property Name="LieuDeces" Type="String" Nullable="false" />
+          <Property Name="PcId" Type="Int32" Nullable="true" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" />
+          <Property Name="DateFin" Type="DateTime" Nullable="true" />
+          <Property Name="EmplId" Type="Int32" Nullable="true" />
+          <Property Name="LocVilleId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Emplacement" Relationship="bddcimeModel.FK_defunts_empl_id" FromRole="defunts" ToRole="emplacements" />
+          <NavigationProperty Name="LocVille" Relationship="Self.FK_defunts_locville_id" FromRole="defunts" ToRole="t_loc_ville" />
+          <NavigationProperty Name="PersonneContact" Relationship="bddcimeModel.FK_defunts_pc_id" FromRole="defunts" ToRole="personnes_contact" />
+        </EntityType>
+        <EntityType Name="Emplacement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Reference" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="NbPlaces" Type="Int32" Nullable="true" />
+          <Property Name="MonumClasse" Type="Boolean" Nullable="false" />
+          <Property Name="Coordonnees" Type="Binary" />
+          <NavigationProperty Name="Concessions" Relationship="Self.FK_concessions_empl_id" FromRole="emplacements" ToRole="concessions" />
+          <NavigationProperty Name="Defunts" Relationship="Self.FK_defunts_empl_id" FromRole="emplacements" ToRole="defunts" />
+          <Property Name="HistId" Type="Int32" />
+          <NavigationProperty Name="Histoire" Relationship="bddcimeModel.emplacements_ibfk_11" FromRole="Emplacement" ToRole="Histoire" />
+        </EntityType>
+        <EntityType Name="PersonneContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocVilleId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Defunts" Relationship="Self.FK_defunts_pc_id" FromRole="personnes_contact" ToRole="defunts" />
+          <NavigationProperty Name="LocVille" Relationship="Self.FK_personnes_contact_locville_id" FromRole="personnes_contact" ToRole="t_loc_ville" />
+        </EntityType>
+        <EntityType Name="Commentaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Texte" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Concessions" Relationship="Self.FK_concessions_com_id" FromRole="t_commentaire" ToRole="concessions" />
+        </EntityType>
+        <EntityType Name="Histoire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Texte" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Emplacements" Relationship="bddcimeModel.emplacements_ibfk_11" FromRole="Histoire" ToRole="Emplacement" />
+        </EntityType>
+        <EntityType Name="LocVille">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Cp" Type="Int32" Nullable="true" />
+          <Property Name="Ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PaysId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Beneficiaires" Relationship="Self.FK_beneficiaires_locville_id" FromRole="t_loc_ville" ToRole="beneficiaires" />
+          <NavigationProperty Name="Concessionnaires" Relationship="Self.FK_concessionnaires_locville_id" FromRole="t_loc_ville" ToRole="concessionnaires" />
+          <NavigationProperty Name="Defunts" Relationship="Self.FK_defunts_locville_id" FromRole="t_loc_ville" ToRole="defunts" />
+          <NavigationProperty Name="PersonnesContact" Relationship="Self.FK_personnes_contact_locville_id" FromRole="t_loc_ville" ToRole="personnes_contact" />
+          <NavigationProperty Name="Pays" Relationship="Self.FK_T_Loc_ville_Pays_id" FromRole="t_loc_ville" ToRole="t_pays" />
+        </EntityType>
+        <EntityType Name="Pays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LocVilles" Relationship="Self.FK_T_Loc_ville_Pays_id" FromRole="t_pays" ToRole="t_loc_ville" />
+        </EntityType>
+        <Association Name="FK_beneficiaires_locville_id">
+          <End Role="t_loc_ville" Type="bddcimeModel.LocVille" Multiplicity="0..1" />
+          <End Role="beneficiaires" Type="bddcimeModel.Beneficiaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_loc_ville">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="beneficiaires">
+              <PropertyRef Name="LocVilleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_concessionnaires_locville_id">
+          <End Role="t_loc_ville" Type="bddcimeModel.LocVille" Multiplicity="0..1" />
+          <End Role="concessionnaires" Type="bddcimeModel.Concessionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_loc_ville">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="concessionnaires">
+              <PropertyRef Name="LocVilleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_concessions_csnr_id">
+          <End Role="concessionnaires" Type="bddcimeModel.Concessionnaire" Multiplicity="1" />
+          <End Role="concessions" Type="bddcimeModel.Concession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="concessionnaires">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="concessions">
+              <PropertyRef Name="CsnrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_concessions_com_id">
+          <End Role="t_commentaire" Type="bddcimeModel.Commentaire" Multiplicity="0..1" />
+          <End Role="concessions" Type="bddcimeModel.Concession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_commentaire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="concessions">
+              <PropertyRef Name="ComId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_concessions_empl_id">
+          <End Role="emplacements" Type="bddcimeModel.Emplacement" Multiplicity="1" />
+          <End Role="concessions" Type="bddcimeModel.Concession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emplacements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="concessions">
+              <PropertyRef Name="EmplId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_defunts_empl_id">
+          <End Role="emplacements" Type="bddcimeModel.Emplacement" Multiplicity="0..1" />
+          <End Role="defunts" Type="bddcimeModel.Defunt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emplacements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="defunts">
+              <PropertyRef Name="EmplId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_defunts_locville_id">
+          <End Role="t_loc_ville" Type="bddcimeModel.LocVille" Multiplicity="0..1" />
+          <End Role="defunts" Type="bddcimeModel.Defunt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_loc_ville">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="defunts">
+              <PropertyRef Name="LocVilleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_defunts_pc_id">
+          <End Role="personnes_contact" Type="bddcimeModel.PersonneContact" Multiplicity="0..1" />
+          <End Role="defunts" Type="bddcimeModel.Defunt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personnes_contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="defunts">
+              <PropertyRef Name="PcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personnes_contact_locville_id">
+          <End Role="t_loc_ville" Type="bddcimeModel.LocVille" Multiplicity="0..1" />
+          <End Role="personnes_contact" Type="bddcimeModel.PersonneContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_loc_ville">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="personnes_contact">
+              <PropertyRef Name="LocVilleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Loc_ville_Pays_id">
+          <End Role="t_pays" Type="bddcimeModel.Pays" Multiplicity="0..1" />
+          <End Role="t_loc_ville" Type="bddcimeModel.LocVille" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_pays">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_loc_ville">
+              <PropertyRef Name="PaysId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="beneficier">
+          <End Role="beneficiaires" Type="bddcimeModel.Beneficiaire" Multiplicity="*" />
+          <End Role="concessions" Type="bddcimeModel.Concession" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CimEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Beneficiaires" EntityType="bddcimeModel.Beneficiaire" />
+          <EntitySet Name="Concessionnaires" EntityType="bddcimeModel.Concessionnaire" />
+          <EntitySet Name="Concessions" EntityType="bddcimeModel.Concession" />
+          <EntitySet Name="Defunts" EntityType="bddcimeModel.Defunt" />
+          <EntitySet Name="Emplacements" EntityType="bddcimeModel.Emplacement" />
+          <EntitySet Name="PersonnesContact" EntityType="bddcimeModel.PersonneContact" />
+          <EntitySet Name="Commentaires" EntityType="bddcimeModel.Commentaire" />
+          <EntitySet Name="Histoires" EntityType="bddcimeModel.Histoire" />
+          <EntitySet Name="LocVilles" EntityType="bddcimeModel.LocVille" />
+          <EntitySet Name="Pays" EntityType="bddcimeModel.Pays" />
+          <AssociationSet Name="FK_beneficiaires_locville_id" Association="Self.FK_beneficiaires_locville_id">
+            <End Role="t_loc_ville" EntitySet="LocVilles" />
+            <End Role="beneficiaires" EntitySet="Beneficiaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_concessionnaires_locville_id" Association="Self.FK_concessionnaires_locville_id">
+            <End Role="t_loc_ville" EntitySet="LocVilles" />
+            <End Role="concessionnaires" EntitySet="Concessionnaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_concessions_csnr_id" Association="Self.FK_concessions_csnr_id">
+            <End Role="concessionnaires" EntitySet="Concessionnaires" />
+            <End Role="concessions" EntitySet="Concessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_concessions_com_id" Association="Self.FK_concessions_com_id">
+            <End Role="t_commentaire" EntitySet="Commentaires" />
+            <End Role="concessions" EntitySet="Concessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_concessions_empl_id" Association="Self.FK_concessions_empl_id">
+            <End Role="emplacements" EntitySet="Emplacements" />
+            <End Role="concessions" EntitySet="Concessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_defunts_empl_id" Association="Self.FK_defunts_empl_id">
+            <End Role="emplacements" EntitySet="Emplacements" />
+            <End Role="defunts" EntitySet="Defunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_defunts_locville_id" Association="Self.FK_defunts_locville_id">
+            <End Role="t_loc_ville" EntitySet="LocVilles" />
+            <End Role="defunts" EntitySet="Defunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_defunts_pc_id" Association="Self.FK_defunts_pc_id">
+            <End Role="personnes_contact" EntitySet="PersonnesContact" />
+            <End Role="defunts" EntitySet="Defunts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personnes_contact_locville_id" Association="Self.FK_personnes_contact_locville_id">
+            <End Role="t_loc_ville" EntitySet="LocVilles" />
+            <End Role="personnes_contact" EntitySet="PersonnesContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Loc_ville_Pays_id" Association="Self.FK_T_Loc_ville_Pays_id">
+            <End Role="t_pays" EntitySet="Pays" />
+            <End Role="t_loc_ville" EntitySet="LocVilles" />
+          </AssociationSet>
+          <AssociationSet Name="beneficier" Association="Self.beneficier">
+            <End Role="beneficiaires" EntitySet="Beneficiaires" />
+            <End Role="concessions" EntitySet="Concessions" />
+          </AssociationSet>
+          <AssociationSet Name="emplacements_ibfk_11" Association="bddcimeModel.emplacements_ibfk_11">
+            <End Role="Histoire" EntitySet="Histoires" />
+            <End Role="Emplacement" EntitySet="Emplacements" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="emplacements_ibfk_11">
+          <End Type="bddcimeModel.Histoire" Role="Histoire" Multiplicity="0..1" />
+          <End Type="bddcimeModel.Emplacement" Role="Emplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Histoire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emplacement">
+              <PropertyRef Name="HistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bddcimeModelStoreContainer" CdmEntityContainer="CimEntities">
+          <EntitySetMapping Name="Beneficiaires">
+            <EntityTypeMapping TypeName="bddcimeModel.Beneficiaire">
+              <MappingFragment StoreEntitySet="beneficiaires">
+                <ScalarProperty Name="Id" ColumnName="ben_id" />
+                <ScalarProperty Name="Nom" ColumnName="ben_nom" />
+                <ScalarProperty Name="Prenom" ColumnName="ben_prenom" />
+                <ScalarProperty Name="DateNaiss" ColumnName="ben_date_naiss" />
+                <ScalarProperty Name="LienParente" ColumnName="ben_lien_parente" />
+                <ScalarProperty Name="Adresse" ColumnName="ben_adresse" />
+                <ScalarProperty Name="LocVilleId" ColumnName="locville_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Concessionnaires">
+            <EntityTypeMapping TypeName="bddcimeModel.Concessionnaire">
+              <MappingFragment StoreEntitySet="concessionnaires">
+                <ScalarProperty Name="Id" ColumnName="csnr_id" />
+                <ScalarProperty Name="Nom" ColumnName="csnr_nom" />
+                <ScalarProperty Name="Prenom" ColumnName="csnr_prenom" />
+                <ScalarProperty Name="DateNaiss" ColumnName="csnr_date_naiss" />
+                <ScalarProperty Name="Adresse" ColumnName="csnr_adresse" />
+                <ScalarProperty Name="NoRegistre" ColumnName="csnr_no_registre" />
+                <ScalarProperty Name="Tel" ColumnName="csnr_tel" />
+                <ScalarProperty Name="LocVilleId" ColumnName="locville_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Concessions">
+            <EntityTypeMapping TypeName="bddcimeModel.Concession">
+              <MappingFragment StoreEntitySet="concessions">
+                <ScalarProperty Name="Id" ColumnName="con_id" />
+                <ScalarProperty Name="Numero" ColumnName="con_numero" />
+                <ScalarProperty Name="DateDebut" ColumnName="con_date_debut" />
+                <ScalarProperty Name="DateFin" ColumnName="con_date_fin" />
+                <ScalarProperty Name="NbreRenovations" ColumnName="con_nbre_renovations" />
+                <ScalarProperty Name="MontantPaye" ColumnName="con_montant_paye" />
+                <ScalarProperty Name="EmplId" ColumnName="empl_id" />
+                <ScalarProperty Name="CsnrId" ColumnName="csnr_id" />
+                <ScalarProperty Name="ComId" ColumnName="com_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Defunts">
+            <EntityTypeMapping TypeName="bddcimeModel.Defunt">
+              <MappingFragment StoreEntitySet="defunts">
+                <ScalarProperty Name="Id" ColumnName="def_id" />
+                <ScalarProperty Name="NumeroLh" ColumnName="def_numero_lh" />
+                <ScalarProperty Name="NumeroAnnee" ColumnName="def_numero_annee" />
+                <ScalarProperty Name="Prenom" ColumnName="def_prenom" />
+                <ScalarProperty Name="Nom" ColumnName="def_nom" />
+                <ScalarProperty Name="Adresse" ColumnName="def_adresse" />
+                <ScalarProperty Name="EtatCivil" ColumnName="def_etat_civil" />
+                <ScalarProperty Name="EtatCivilDe" ColumnName="def_etat_civil_de" />
+                <ScalarProperty Name="DateNaiss" ColumnName="def_date_naiss" />
+                <ScalarProperty Name="LieuNaiss" ColumnName="def_lieu_naiss" />
+                <ScalarProperty Name="DateDeces" ColumnName="def_date_deces" />
+                <ScalarProperty Name="LieuDeces" ColumnName="def_lieu_deces" />
+                <ScalarProperty Name="PcId" ColumnName="pc_id" />
+                <ScalarProperty Name="DateDebut" ColumnName="Date_debut" />
+                <ScalarProperty Name="DateFin" ColumnName="Date_fin" />
+                <ScalarProperty Name="EmplId" ColumnName="empl_id" />
+                <ScalarProperty Name="LocVilleId" ColumnName="locville_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emplacements">
+            <EntityTypeMapping TypeName="bddcimeModel.Emplacement">
+              <MappingFragment StoreEntitySet="emplacements">
+                <ScalarProperty Name="HistId" ColumnName="hist_id" />
+                <ScalarProperty Name="Id" ColumnName="empl_id" />
+                <ScalarProperty Name="Reference" ColumnName="empl_reference" />
+                <ScalarProperty Name="Type" ColumnName="empl_type" />
+                <ScalarProperty Name="NbPlaces" ColumnName="empl_nb_places" />
+                <ScalarProperty Name="MonumClasse" ColumnName="empl_monum_classe" />
+                <ScalarProperty Name="Coordonnees" ColumnName="empl_coords" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonnesContact">
+            <EntityTypeMapping TypeName="bddcimeModel.PersonneContact">
+              <MappingFragment StoreEntitySet="personnes_contact">
+                <ScalarProperty Name="Id" ColumnName="pc_id" />
+                <ScalarProperty Name="Nom" ColumnName="pc_nom" />
+                <ScalarProperty Name="Prenom" ColumnName="pc_prenom" />
+                <ScalarProperty Name="Tel" ColumnName="pc_tel" />
+                <ScalarProperty Name="Adresse" ColumnName="pc_adresse" />
+                <ScalarProperty Name="LocVilleId" ColumnName="locville_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commentaires">
+            <EntityTypeMapping TypeName="bddcimeModel.Commentaire">
+              <MappingFragment StoreEntitySet="t_commentaire">
+                <ScalarProperty Name="Id" ColumnName="com_id" />
+                <ScalarProperty Name="Texte" ColumnName="com_commentaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Histoires">
+            <EntityTypeMapping TypeName="bddcimeModel.Histoire">
+              <MappingFragment StoreEntitySet="t_histoire">
+                <ScalarProperty Name="Id" ColumnName="h_id" />
+                <ScalarProperty Name="Texte" ColumnName="h_histoire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocVilles">
+            <EntityTypeMapping TypeName="bddcimeModel.LocVille">
+              <MappingFragment StoreEntitySet="t_loc_ville">
+                <ScalarProperty Name="Id" ColumnName="locville_id" />
+                <ScalarProperty Name="Cp" ColumnName="locville_cp" />
+                <ScalarProperty Name="Ville" ColumnName="locville_ville" />
+                <ScalarProperty Name="PaysId" ColumnName="Pays_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pays">
+            <EntityTypeMapping TypeName="bddcimeModel.Pays">
+              <MappingFragment StoreEntitySet="t_pays">
+                <ScalarProperty Name="Id" ColumnName="Pays_id" />
+                <ScalarProperty Name="Nom" ColumnName="Pays_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="beneficier" TypeName="bddcimeModel.beneficier" StoreEntitySet="beneficier">
+            <EndProperty Name="beneficiaires">
+              <ScalarProperty Name="Id" ColumnName="ben_id" />
+            </EndProperty>
+            <EndProperty Name="concessions">
+              <ScalarProperty Name="Id" ColumnName="con_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

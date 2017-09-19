@@ -1,0 +1,176 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+cimetiere
+</name>
+</assembly>
+<members>
+<member name="T:cimetiere.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.Add_16x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.Cancel_16x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.ColumnDetail_16x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.fondformulaire">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.home3">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.logolh">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.moins">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.Next_16xMD">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.Note_16x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.Note_24x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.Note_32x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.StackDown_16x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:cimetiere.My.Resources.Resources.StackUp_16x">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:cimetiere.Bdd.Insert(System.String,System.Data.DataRow,System.Boolean)">
+ <summary>
+ Renvoie l'id de la ligne insérée. Ignore valeur de la colonne PK, sauf si AutoId est false
+ Requiert que toutes les colonnes de la bdd soient présentes, mais tolère des colonnes supplémentaires qui seront ignorées
+ </summary>
+ <param name="nomtable"></param>
+ <param name="row"></param>
+ <param name="AutoId"></param>
+ <returns></returns>
+</member>
+<member name="M:cimetiere.Bdd.Delete(System.String,System.Int32)">
+ <summary>
+ Renvoie le nombre de lignes affectées, donc en principe 1 ou 0
+ </summary>
+ <param name="nomtable"></param>
+ <param name="id"></param>
+ <returns></returns>
+</member>
+<member name="M:cimetiere.FormGestion.CopierColonnesCorrespondantes(System.Data.DataRow,System.Data.DataRow)">
+ <summary>
+ copie les colonnes d'une datarow à une autre, ignore celles qui sont de trop
+ </summary>
+</member>
+<member name="T:cimetiere.SortableBindingList`1">
+ <summary>
+ SortableBindingList is a list that supports sorting its items and filtering them.
+ When binding a <see cref="T:System.Collections.Generic.List`1"/> to a <see cref="T:System.Windows.Forms.DataGridView"/>, you can not sort by clicking on the columns
+ or filter the list. With this list, you can.
+ 
+ Dependencies:
+  - .NET 3.5 or higher
+  - System.Linq.Dynamic (DynamicQuery NuGet package: http://www.nuget.org/packages/DynamicQuery/)
+ </summary>
+ <typeparam name="T">The data type represented by this SortableBindingList</typeparam>
+ <remarks></remarks>
+ 
+</member>
+<member name="M:cimetiere.SortableBindingList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+ <summary>
+ Creates a new instance of SortableBindingList and populates it with the contents of the given list.
+ </summary>
+ <param name="list"></param>
+ <remarks></remarks>
+</member>
+<member name="P:cimetiere.SortableBindingList`1.Filter">
+ <summary>
+ You can filter this list by adding a LINQ Where-clause.
+ </summary>
+ <value>A string representing a LINQ Where-clause</value>
+ <returns>The filter value</returns>
+ <example>
+ You can filter on any property of <typeparamref name="T"/> like you would do when writing a LINQ Where-clause:
+ <code lang="VB">
+ Public Class Customer
+     Public Property Name As String 
+     Public Property FirstName As String
+     Public Property CountryIsoCode As String
+ End Class
+
+ '...  
+ 
+ Dim list As New SortableBindingList(Of Customer)()
+ 
+ '... 
+ 
+ list.Filter = "CountryIsoCode.ToUpper() = ""BE""" 'Only show Belgian customers
+ </code>
+ <code lang="C#">
+ public class Customer
+ {
+     public string Name { get; set; }
+     public string FirstName { get; set; }
+     public string CountryIsoCode { get; set; }
+ }
+ 
+ //...
+ 
+ SortableBindingList&gt;Customer&lt; list = new SortableBindingList&gt;Customer&lt;();
+ 
+ //...
+ 
+ list.Filter = "CountryIsoCode.ToUpper() = \"BE\"" //Only show Belgian customers
+ </code>
+ </example>
+</member>
+</members>
+</doc>
