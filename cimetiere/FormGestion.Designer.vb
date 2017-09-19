@@ -87,10 +87,11 @@ Partial Class FormGestion
         Me.FCTBRechercher = New System.Windows.Forms.TextBox()
         Me.FCPBlahulpe = New System.Windows.Forms.PictureBox()
         Me.TabPageDefunts = New System.Windows.Forms.TabPage()
-        Me.PanBordure1 = New cimetiere.PanBordure()
-        Me.DgvListeDefunts = New cimetiere.DataGridViewCustom()
         Me.BtMontrerFormPlanCim2 = New System.Windows.Forms.Button()
         Me.FPBAjouter = New System.Windows.Forms.Button()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.DgvListeDefunts = New cimetiere.DataGridViewCustom()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.CBDefChercherEmplacement = New System.Windows.Forms.CheckBox()
@@ -240,7 +241,8 @@ Partial Class FormGestion
         Me.GBRechEmpl.SuspendLayout()
         CType(Me.FCPBlahulpe, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageDefunts.SuspendLayout()
-        Me.PanBordure1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel10.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -909,9 +911,9 @@ Partial Class FormGestion
         Me.TabPageDefunts.BackColor = System.Drawing.Color.Transparent
         Me.TabPageDefunts.BackgroundImage = CType(resources.GetObject("TabPageDefunts.BackgroundImage"), System.Drawing.Image)
         Me.TabPageDefunts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.TabPageDefunts.Controls.Add(Me.PanBordure1)
         Me.TabPageDefunts.Controls.Add(Me.BtMontrerFormPlanCim2)
         Me.TabPageDefunts.Controls.Add(Me.FPBAjouter)
+        Me.TabPageDefunts.Controls.Add(Me.Panel3)
         Me.TabPageDefunts.Controls.Add(Me.Panel10)
         Me.TabPageDefunts.Controls.Add(Me.Panel1)
         Me.TabPageDefunts.Controls.Add(Me.FPBSupprimer)
@@ -925,17 +927,49 @@ Partial Class FormGestion
         Me.TabPageDefunts.TabIndex = 0
         Me.TabPageDefunts.Text = "Défunts"
         '
-        'PanBordure1
+        'BtMontrerFormPlanCim2
         '
-        Me.PanBordure1.BackColor = System.Drawing.Color.White
-        Me.PanBordure1.Controls.Add(Me.DgvListeDefunts)
-        Me.PanBordure1.CouleurBordure = System.Drawing.Color.SeaGreen
-        Me.PanBordure1.EpaisseurBordure = 7
-        Me.PanBordure1.Location = New System.Drawing.Point(361, 7)
-        Me.PanBordure1.Name = "PanBordure1"
-        Me.PanBordure1.Size = New System.Drawing.Size(537, 743)
-        Me.PanBordure1.TabIndex = 180
-        Me.PanBordure1.Texte = "batain"
+        Me.BtMontrerFormPlanCim2.BackColor = System.Drawing.Color.MediumSeaGreen
+        Me.BtMontrerFormPlanCim2.Image = Global.cimetiere.My.Resources.Resources.Note_24x
+        Me.BtMontrerFormPlanCim2.Location = New System.Drawing.Point(275, 34)
+        Me.BtMontrerFormPlanCim2.Name = "BtMontrerFormPlanCim2"
+        Me.BtMontrerFormPlanCim2.Size = New System.Drawing.Size(60, 53)
+        Me.BtMontrerFormPlanCim2.TabIndex = 179
+        Me.BtMontrerFormPlanCim2.UseVisualStyleBackColor = False
+        '
+        'FPBAjouter
+        '
+        Me.FPBAjouter.BackColor = System.Drawing.Color.SeaGreen
+        Me.FPBAjouter.ForeColor = System.Drawing.Color.Transparent
+        Me.FPBAjouter.Location = New System.Drawing.Point(935, 338)
+        Me.FPBAjouter.Margin = New System.Windows.Forms.Padding(4)
+        Me.FPBAjouter.Name = "FPBAjouter"
+        Me.FPBAjouter.Size = New System.Drawing.Size(85, 28)
+        Me.FPBAjouter.TabIndex = 98
+        Me.FPBAjouter.Text = "Ajouter"
+        Me.FPBAjouter.UseVisualStyleBackColor = False
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.SeaGreen
+        Me.Panel3.Controls.Add(Me.GroupBox3)
+        Me.Panel3.Location = New System.Drawing.Point(361, 7)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(537, 743)
+        Me.Panel3.TabIndex = 97
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.BackColor = System.Drawing.Color.GhostWhite
+        Me.GroupBox3.Controls.Add(Me.DgvListeDefunts)
+        Me.GroupBox3.Location = New System.Drawing.Point(7, 7)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox3.Size = New System.Drawing.Size(523, 728)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
         '
         'DgvListeDefunts
         '
@@ -960,7 +994,7 @@ Partial Class FormGestion
         Me.DgvListeDefunts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvListeDefunts.EnableHeadersVisualStyles = False
         Me.DgvListeDefunts.GridColor = System.Drawing.Color.DarkGray
-        Me.DgvListeDefunts.Location = New System.Drawing.Point(19, 27)
+        Me.DgvListeDefunts.Location = New System.Drawing.Point(11, 18)
         Me.DgvListeDefunts.Margin = New System.Windows.Forms.Padding(4)
         Me.DgvListeDefunts.MultiSelect = False
         Me.DgvListeDefunts.Name = "DgvListeDefunts"
@@ -971,30 +1005,8 @@ Partial Class FormGestion
         Me.DgvListeDefunts.SelectedRowIndex = -1
         Me.DgvListeDefunts.SelectedValue = -1
         Me.DgvListeDefunts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvListeDefunts.Size = New System.Drawing.Size(503, 703)
+        Me.DgvListeDefunts.Size = New System.Drawing.Size(504, 703)
         Me.DgvListeDefunts.TabIndex = 48
-        '
-        'BtMontrerFormPlanCim2
-        '
-        Me.BtMontrerFormPlanCim2.BackColor = System.Drawing.Color.MediumSeaGreen
-        Me.BtMontrerFormPlanCim2.Image = Global.cimetiere.My.Resources.Resources.Note_24x
-        Me.BtMontrerFormPlanCim2.Location = New System.Drawing.Point(275, 34)
-        Me.BtMontrerFormPlanCim2.Name = "BtMontrerFormPlanCim2"
-        Me.BtMontrerFormPlanCim2.Size = New System.Drawing.Size(60, 53)
-        Me.BtMontrerFormPlanCim2.TabIndex = 179
-        Me.BtMontrerFormPlanCim2.UseVisualStyleBackColor = False
-        '
-        'FPBAjouter
-        '
-        Me.FPBAjouter.BackColor = System.Drawing.Color.SeaGreen
-        Me.FPBAjouter.ForeColor = System.Drawing.Color.Transparent
-        Me.FPBAjouter.Location = New System.Drawing.Point(935, 338)
-        Me.FPBAjouter.Margin = New System.Windows.Forms.Padding(4)
-        Me.FPBAjouter.Name = "FPBAjouter"
-        Me.FPBAjouter.Size = New System.Drawing.Size(85, 28)
-        Me.FPBAjouter.TabIndex = 98
-        Me.FPBAjouter.Text = "Ajouter"
-        Me.FPBAjouter.UseVisualStyleBackColor = False
         '
         'Panel10
         '
@@ -2614,8 +2626,8 @@ Partial Class FormGestion
         Me.GBRechEmpl.PerformLayout()
         CType(Me.FCPBlahulpe, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPageDefunts.ResumeLayout(False)
-        Me.PanBordure1.ResumeLayout(False)
-        Me.PanBordure1.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
         CType(Me.DgvListeDefunts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel10.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
@@ -2748,6 +2760,8 @@ Partial Class FormGestion
     Friend WithEvents TBPersAdress As TextBox
     Friend WithEvents TBPersNom As TextBox
     Friend WithEvents TBPersPrenom As TextBox
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents DgvListeDefunts As DataGridViewCustom
     Friend WithEvents DgvListeConcessionnairePersonneContact As DataGridViewCustom
     Friend WithEvents DgvListeConcessionnaireConcess As DataGridViewCustom
@@ -2844,5 +2858,4 @@ Partial Class FormGestion
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents BtMontrerFormPlanCim4 As Button
     Friend WithEvents Panel16 As Panel
-    Friend WithEvents PanBordure1 As PanBordure
 End Class

@@ -3,6 +3,7 @@
     Public dvlistelocville As DataView
     Private Sub GestionLocVille_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'DataTableVillePayss
+
     End Sub
 
     Private Sub DataBindPaysVilleInfos()

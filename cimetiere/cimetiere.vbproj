@@ -152,6 +152,12 @@
     <Compile Include="CtrlListeBenefs.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="CtrlLocVilleCPPays.Designer.vb">
+      <DependentUpon>CtrlLocVilleCPPays.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CtrlLocVilleCPPays.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CtrlLocVillePays.Designer.vb">
       <DependentUpon>CtrlLocVillePays.vb</DependentUpon>
     </Compile>
@@ -425,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CtrlListeBenefs.resx">
       <DependentUpon>CtrlListeBenefs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtrlLocVilleCPPays.resx">
+      <DependentUpon>CtrlLocVilleCPPays.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CtrlLocVillePays.resx">
       <DependentUpon>CtrlLocVillePays.vb</DependentUpon>
