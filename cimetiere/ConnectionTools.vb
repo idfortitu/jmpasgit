@@ -1,3 +1,0 @@
-﻿Module ConnectionTools
-
-End Module
