@@ -18,7 +18,7 @@ Public Class FormSignalAbandonCsn
 
     Private Sub BtMontrerFormPlancim_Click(sender As Object, e As EventArgs) Handles BtMontrerFormPlancim.Click
         If FormChoix Is Nothing OrElse FormChoix.IsDisposed Then
-            FormChoix = New FormChoixEmplSurPlan(Me.LesEmplacements) With {.TopMost = True}         '', .Size = New Size(500, 1000)} ' n'a pas l'air de marcher
+            FormChoix = New FormChoixEmplSurPlan(Me.LesEmplacements) With {.Owner = Me}         '', .Size = New Size(500, 1000)} ' n'a pas l'air de marcher
             FormChoix.Size = New Size(1000, 500)
             AddHandler FormChoix.SelectionChanged, AddressOf FormChoix_SelectionChanged
             'Dim EmplTb = Bdd.GetRow("emplacements", "empl_reference", TbRefEmpl.Text.Trim)

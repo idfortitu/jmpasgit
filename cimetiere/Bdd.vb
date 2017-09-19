@@ -105,13 +105,14 @@ Module Bdd
 
 
     ''' <summary>
-    ''' Renvoie l'id de la ligne insérée. Ignore la première colonne (qui est supposée être la PK), sauf si PasAutoId est true
+    ''' Renvoie l'id de la ligne insérée. Ignore valeur de la colonne PK, sauf si AutoId est false
+    ''' Requiert que toutes les colonnes de la bdd soient présentes, mais tolère des colonnes supplémentaires qui seront ignorées
     ''' </summary>
     ''' <param name="nomtable"></param>
     ''' <param name="row"></param>
-    ''' <param name="PasAutoId"></param>
+    ''' <param name="AutoId"></param>
     ''' <returns></returns>
-    Public Function Insert(nomtable As String, row As DataRow, Optional PasAutoId As Boolean = False) As Integer
+    Public Function Insert(nomtable As String, row As DataRow, Optional AutoId As Boolean = True) As Integer
 
         Dim sqlchamps = "("
         Dim sqlvalues = "("
@@ -120,7 +121,9 @@ Module Bdd
         Dim tvide = GetTableVide(nomtable)
 
         Dim pasprem = False
-        For i = If(PasAutoId, 0, 1) To tvide.Columns.Count - 1
+        'For i = If(Not AutoId, 0, 1) To tvide.Columns.Count - 1
+        For i = 0 To tvide.Columns.Count - 1
+            If AutoId = True AndAlso Bdd.Pks.ContainsKey(nomtable) AndAlso tvide.Columns(i).Caption = Bdd.Pks(nomtable) Then Continue For      ''
             If pasprem Then
                 sqlchamps &= ", "
                 sqlvalues &= ", "
@@ -209,8 +212,13 @@ Module Bdd
         Return i - 1
     End Function
 
-
-    Public Function Delete(nomtable As String, id As Integer)
+    ''' <summary>
+    ''' Renvoie le nombre de lignes affectées, donc en principe 1 ou 0
+    ''' </summary>
+    ''' <param name="nomtable"></param>
+    ''' <param name="id"></param>
+    ''' <returns></returns>
+    Public Function Delete(nomtable As String, id As Integer) As Integer
         Return Bdd.NonQuery("DELETE FROM " & nomtable & " WHERE " & Pks(nomtable) & " = " & id)
     End Function
 

@@ -1,5 +1,18 @@
 ﻿Public Class CtrlListeBenefs
 
+    Private LesVilles
+    Private LesPays
+    Public Sub ChargerVillesEtPays(v As DataTable, p As DataTable)
+        Me.LesVilles = v
+        Me.LesPays = p
+        For N = 0 To PanelInterieur.Controls.Count - 2
+            Dim c = CType(PanelInterieur.Controls.Item(N), CtrlBenefPourListe)
+            c.CtrlVille.chargercomboboxville(LesVilles)
+            c.CtrlVille.chargercomboboxpays(LesPays)
+        Next
+    End Sub
+
+
     ' suppose que toutes les données entrées sont correctes (l'appelant est censé vérifier avec ToutEstOk d'abord)
     Public Function GetBenefs() As DataTable
         Dim LaTable = Bdd.GetTableVide("beneficiaires")
@@ -24,6 +37,8 @@
     Private Sub BtAjoutBenef_Click(sender As Object, e As EventArgs) Handles BtAjoutBenef.Click
         Dim NvBen = New CtrlBenefPourListe
         AddHandler NvBen.BtRetirerClick, AddressOf RetirerBenef
+        If LesVilles IsNot Nothing Then NvBen.CtrlVille.chargercomboboxville(LesVilles)
+        If LesPays IsNot Nothing Then NvBen.CtrlVille.chargercomboboxpays(LesPays)
         PanelInterieur.Controls.Add(NvBen)
         PanelInterieur.Controls.SetChildIndex(BtAjoutBenef, PanelInterieur.Controls.Count - 1)
     End Sub

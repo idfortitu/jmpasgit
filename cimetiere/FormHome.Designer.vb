@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormHome
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,11 @@ Partial Class FormHome
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormHome))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.BtDéclarationDécès = New System.Windows.Forms.Button()
         Me.BtRéserverCon = New System.Windows.Forms.Button()
@@ -34,6 +34,13 @@ Partial Class FormHome
         Me.PanNotifs = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtNotifsMasquer = New System.Windows.Forms.Button()
+        Me.BtNotifsMontrer = New System.Windows.Forms.Button()
+        Me.LabWelkom = New System.Windows.Forms.Label()
+        Me.BtSignalAbCsn = New System.Windows.Forms.Button()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PanelToutSaufNotifs = New System.Windows.Forms.Panel()
         Me.DgvNotifsCsnsExp = New cimetiere.DataGridViewCustom()
         Me.DgvCsnsExpRefEmpl = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCsnsExpDateExp = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,20 +52,13 @@ Partial Class FormHome
         Me.DgvCsnsAbColNomCsnr = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCsnsAbColTelCsnr = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCsnsAbColBtDetails = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.BtNotifsMasquer = New System.Windows.Forms.Button()
-        Me.BtNotifsMontrer = New System.Windows.Forms.Button()
-        Me.LabWelkom = New System.Windows.Forms.Label()
-        Me.BtSignalAbCsn = New System.Windows.Forms.Button()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.PanelToutSaufNotifs = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.PanNotifs.SuspendLayout()
-        CType(Me.DgvNotifsCsnsExp, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DgvNotifsCsnsAb, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelToutSaufNotifs.SuspendLayout()
+        CType(Me.DgvNotifsCsnsExp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvNotifsCsnsAb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FlowLayoutPanel1
@@ -176,140 +176,6 @@ Partial Class FormHome
         Me.Label1.TabIndex = 74
         Me.Label1.Text = "Concessions expirant bientôt"
         '
-        'DgvNotifsCsnsExp
-        '
-        Me.DgvNotifsCsnsExp.AllowUserToAddRows = False
-        Me.DgvNotifsCsnsExp.AllowUserToDeleteRows = False
-        Me.DgvNotifsCsnsExp.AllowUserToOrderColumns = True
-        Me.DgvNotifsCsnsExp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DgvNotifsCsnsExp.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DgvNotifsCsnsExp.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.DgvNotifsCsnsExp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvNotifsCsnsExp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsExpRefEmpl, Me.DgvCsnsExpDateExp, Me.DgvCsnsExpCsnrTel, Me.DgvCsnsExpColInfos, Me.DgvCsnsExpColBtDetails})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvNotifsCsnsExp.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DgvNotifsCsnsExp.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DgvNotifsCsnsExp.Location = New System.Drawing.Point(4, 38)
-        Me.DgvNotifsCsnsExp.MultiSelect = False
-        Me.DgvNotifsCsnsExp.Name = "DgvNotifsCsnsExp"
-        Me.DgvNotifsCsnsExp.ReadOnly = True
-        Me.DgvNotifsCsnsExp.RowHeadersVisible = False
-        Me.DgvNotifsCsnsExp.RowTemplate.Height = 24
-        Me.DgvNotifsCsnsExp.SelectedRow = Nothing
-        Me.DgvNotifsCsnsExp.SelectedRowIndex = -1
-        Me.DgvNotifsCsnsExp.SelectedValue = -1
-        Me.DgvNotifsCsnsExp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvNotifsCsnsExp.Size = New System.Drawing.Size(543, 170)
-        Me.DgvNotifsCsnsExp.TabIndex = 72
-        '
-        'DgvCsnsExpRefEmpl
-        '
-        Me.DgvCsnsExpRefEmpl.DataPropertyName = "empl_reference"
-        Me.DgvCsnsExpRefEmpl.HeaderText = "Empl."
-        Me.DgvCsnsExpRefEmpl.Name = "DgvCsnsExpRefEmpl"
-        Me.DgvCsnsExpRefEmpl.ReadOnly = True
-        '
-        'DgvCsnsExpDateExp
-        '
-        Me.DgvCsnsExpDateExp.DataPropertyName = "con_date_fin"
-        Me.DgvCsnsExpDateExp.FillWeight = 120.0!
-        Me.DgvCsnsExpDateExp.HeaderText = "Fin"
-        Me.DgvCsnsExpDateExp.Name = "DgvCsnsExpDateExp"
-        Me.DgvCsnsExpDateExp.ReadOnly = True
-        '
-        'DgvCsnsExpCsnrTel
-        '
-        Me.DgvCsnsExpCsnrTel.DataPropertyName = "csnr_tel"
-        Me.DgvCsnsExpCsnrTel.FillWeight = 90.0!
-        Me.DgvCsnsExpCsnrTel.HeaderText = "Téléphone"
-        Me.DgvCsnsExpCsnrTel.Name = "DgvCsnsExpCsnrTel"
-        Me.DgvCsnsExpCsnrTel.ReadOnly = True
-        '
-        'DgvCsnsExpColInfos
-        '
-        Me.DgvCsnsExpColInfos.DataPropertyName = "csnr_nomcomplet"
-        Me.DgvCsnsExpColInfos.FillWeight = 120.0!
-        Me.DgvCsnsExpColInfos.HeaderText = "Concessionnaire"
-        Me.DgvCsnsExpColInfos.Name = "DgvCsnsExpColInfos"
-        Me.DgvCsnsExpColInfos.ReadOnly = True
-        '
-        'DgvCsnsExpColBtDetails
-        '
-        Me.DgvCsnsExpColBtDetails.FillWeight = 30.0!
-        Me.DgvCsnsExpColBtDetails.HeaderText = "Plus"
-        Me.DgvCsnsExpColBtDetails.Name = "DgvCsnsExpColBtDetails"
-        Me.DgvCsnsExpColBtDetails.ReadOnly = True
-        Me.DgvCsnsExpColBtDetails.Text = ""
-        Me.DgvCsnsExpColBtDetails.UseColumnTextForButtonValue = True
-        '
-        'DgvNotifsCsnsAb
-        '
-        Me.DgvNotifsCsnsAb.AllowUserToAddRows = False
-        Me.DgvNotifsCsnsAb.AllowUserToDeleteRows = False
-        Me.DgvNotifsCsnsAb.AllowUserToOrderColumns = True
-        Me.DgvNotifsCsnsAb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DgvNotifsCsnsAb.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DgvNotifsCsnsAb.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.DgvNotifsCsnsAb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgvNotifsCsnsAb.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsAbColRefEmpl, Me.DgvCsnsAbColNomCsnr, Me.DgvCsnsAbColTelCsnr, Me.DgvCsnsAbColBtDetails})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvNotifsCsnsAb.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DgvNotifsCsnsAb.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DgvNotifsCsnsAb.Location = New System.Drawing.Point(550, 37)
-        Me.DgvNotifsCsnsAb.MultiSelect = False
-        Me.DgvNotifsCsnsAb.Name = "DgvNotifsCsnsAb"
-        Me.DgvNotifsCsnsAb.ReadOnly = True
-        Me.DgvNotifsCsnsAb.RowHeadersVisible = False
-        Me.DgvNotifsCsnsAb.RowTemplate.Height = 24
-        Me.DgvNotifsCsnsAb.SelectedRow = Nothing
-        Me.DgvNotifsCsnsAb.SelectedRowIndex = -1
-        Me.DgvNotifsCsnsAb.SelectedValue = -1
-        Me.DgvNotifsCsnsAb.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvNotifsCsnsAb.Size = New System.Drawing.Size(471, 171)
-        Me.DgvNotifsCsnsAb.TabIndex = 73
-        '
-        'DgvCsnsAbColRefEmpl
-        '
-        Me.DgvCsnsAbColRefEmpl.DataPropertyName = "empl_reference"
-        Me.DgvCsnsAbColRefEmpl.FillWeight = 50.0!
-        Me.DgvCsnsAbColRefEmpl.HeaderText = "Empl."
-        Me.DgvCsnsAbColRefEmpl.Name = "DgvCsnsAbColRefEmpl"
-        Me.DgvCsnsAbColRefEmpl.ReadOnly = True
-        '
-        'DgvCsnsAbColNomCsnr
-        '
-        Me.DgvCsnsAbColNomCsnr.DataPropertyName = "csnr_nomcomplet"
-        Me.DgvCsnsAbColNomCsnr.FillWeight = 120.0!
-        Me.DgvCsnsAbColNomCsnr.HeaderText = "Concessionnaire"
-        Me.DgvCsnsAbColNomCsnr.Name = "DgvCsnsAbColNomCsnr"
-        Me.DgvCsnsAbColNomCsnr.ReadOnly = True
-        '
-        'DgvCsnsAbColTelCsnr
-        '
-        Me.DgvCsnsAbColTelCsnr.DataPropertyName = "csnr_tel"
-        Me.DgvCsnsAbColTelCsnr.HeaderText = "Téléphone"
-        Me.DgvCsnsAbColTelCsnr.Name = "DgvCsnsAbColTelCsnr"
-        Me.DgvCsnsAbColTelCsnr.ReadOnly = True
-        '
-        'DgvCsnsAbColBtDetails
-        '
-        Me.DgvCsnsAbColBtDetails.FillWeight = 30.0!
-        Me.DgvCsnsAbColBtDetails.HeaderText = "Plus"
-        Me.DgvCsnsAbColBtDetails.Name = "DgvCsnsAbColBtDetails"
-        Me.DgvCsnsAbColBtDetails.ReadOnly = True
-        '
         'BtNotifsMasquer
         '
         Me.BtNotifsMasquer.Location = New System.Drawing.Point(81, 429)
@@ -389,6 +255,140 @@ Partial Class FormHome
         Me.PanelToutSaufNotifs.Size = New System.Drawing.Size(1025, 470)
         Me.PanelToutSaufNotifs.TabIndex = 73
         '
+        'DgvNotifsCsnsExp
+        '
+        Me.DgvNotifsCsnsExp.AllowUserToAddRows = False
+        Me.DgvNotifsCsnsExp.AllowUserToDeleteRows = False
+        Me.DgvNotifsCsnsExp.AllowUserToOrderColumns = True
+        Me.DgvNotifsCsnsExp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DgvNotifsCsnsExp.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DgvNotifsCsnsExp.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DgvNotifsCsnsExp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvNotifsCsnsExp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsExpRefEmpl, Me.DgvCsnsExpDateExp, Me.DgvCsnsExpCsnrTel, Me.DgvCsnsExpColInfos, Me.DgvCsnsExpColBtDetails})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvNotifsCsnsExp.DefaultCellStyle = DataGridViewCellStyle1
+        Me.DgvNotifsCsnsExp.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.DgvNotifsCsnsExp.Location = New System.Drawing.Point(4, 38)
+        Me.DgvNotifsCsnsExp.MultiSelect = False
+        Me.DgvNotifsCsnsExp.Name = "DgvNotifsCsnsExp"
+        Me.DgvNotifsCsnsExp.ReadOnly = True
+        Me.DgvNotifsCsnsExp.RowHeadersVisible = False
+        Me.DgvNotifsCsnsExp.RowTemplate.Height = 24
+        Me.DgvNotifsCsnsExp.SelectedRow = Nothing
+        Me.DgvNotifsCsnsExp.SelectedRowIndex = -1
+        Me.DgvNotifsCsnsExp.SelectedValue = -1
+        Me.DgvNotifsCsnsExp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvNotifsCsnsExp.Size = New System.Drawing.Size(543, 170)
+        Me.DgvNotifsCsnsExp.TabIndex = 72
+        '
+        'DgvCsnsExpRefEmpl
+        '
+        Me.DgvCsnsExpRefEmpl.DataPropertyName = "empl_reference"
+        Me.DgvCsnsExpRefEmpl.HeaderText = "Empl."
+        Me.DgvCsnsExpRefEmpl.Name = "DgvCsnsExpRefEmpl"
+        Me.DgvCsnsExpRefEmpl.ReadOnly = True
+        '
+        'DgvCsnsExpDateExp
+        '
+        Me.DgvCsnsExpDateExp.DataPropertyName = "con_date_fin"
+        Me.DgvCsnsExpDateExp.FillWeight = 120.0!
+        Me.DgvCsnsExpDateExp.HeaderText = "Fin"
+        Me.DgvCsnsExpDateExp.Name = "DgvCsnsExpDateExp"
+        Me.DgvCsnsExpDateExp.ReadOnly = True
+        '
+        'DgvCsnsExpCsnrTel
+        '
+        Me.DgvCsnsExpCsnrTel.DataPropertyName = "csnr_tel"
+        Me.DgvCsnsExpCsnrTel.FillWeight = 90.0!
+        Me.DgvCsnsExpCsnrTel.HeaderText = "Téléphone"
+        Me.DgvCsnsExpCsnrTel.Name = "DgvCsnsExpCsnrTel"
+        Me.DgvCsnsExpCsnrTel.ReadOnly = True
+        '
+        'DgvCsnsExpColInfos
+        '
+        Me.DgvCsnsExpColInfos.DataPropertyName = "csnr_nomcomplet"
+        Me.DgvCsnsExpColInfos.FillWeight = 120.0!
+        Me.DgvCsnsExpColInfos.HeaderText = "Concessionnaire"
+        Me.DgvCsnsExpColInfos.Name = "DgvCsnsExpColInfos"
+        Me.DgvCsnsExpColInfos.ReadOnly = True
+        '
+        'DgvCsnsExpColBtDetails
+        '
+        Me.DgvCsnsExpColBtDetails.FillWeight = 30.0!
+        Me.DgvCsnsExpColBtDetails.HeaderText = "Plus"
+        Me.DgvCsnsExpColBtDetails.Name = "DgvCsnsExpColBtDetails"
+        Me.DgvCsnsExpColBtDetails.ReadOnly = True
+        Me.DgvCsnsExpColBtDetails.Text = ""
+        Me.DgvCsnsExpColBtDetails.UseColumnTextForButtonValue = True
+        '
+        'DgvNotifsCsnsAb
+        '
+        Me.DgvNotifsCsnsAb.AllowUserToAddRows = False
+        Me.DgvNotifsCsnsAb.AllowUserToDeleteRows = False
+        Me.DgvNotifsCsnsAb.AllowUserToOrderColumns = True
+        Me.DgvNotifsCsnsAb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DgvNotifsCsnsAb.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DgvNotifsCsnsAb.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DgvNotifsCsnsAb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvNotifsCsnsAb.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsAbColRefEmpl, Me.DgvCsnsAbColNomCsnr, Me.DgvCsnsAbColTelCsnr, Me.DgvCsnsAbColBtDetails})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvNotifsCsnsAb.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DgvNotifsCsnsAb.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.DgvNotifsCsnsAb.Location = New System.Drawing.Point(550, 37)
+        Me.DgvNotifsCsnsAb.MultiSelect = False
+        Me.DgvNotifsCsnsAb.Name = "DgvNotifsCsnsAb"
+        Me.DgvNotifsCsnsAb.ReadOnly = True
+        Me.DgvNotifsCsnsAb.RowHeadersVisible = False
+        Me.DgvNotifsCsnsAb.RowTemplate.Height = 24
+        Me.DgvNotifsCsnsAb.SelectedRow = Nothing
+        Me.DgvNotifsCsnsAb.SelectedRowIndex = -1
+        Me.DgvNotifsCsnsAb.SelectedValue = -1
+        Me.DgvNotifsCsnsAb.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvNotifsCsnsAb.Size = New System.Drawing.Size(471, 171)
+        Me.DgvNotifsCsnsAb.TabIndex = 73
+        '
+        'DgvCsnsAbColRefEmpl
+        '
+        Me.DgvCsnsAbColRefEmpl.DataPropertyName = "empl_reference"
+        Me.DgvCsnsAbColRefEmpl.FillWeight = 50.0!
+        Me.DgvCsnsAbColRefEmpl.HeaderText = "Empl."
+        Me.DgvCsnsAbColRefEmpl.Name = "DgvCsnsAbColRefEmpl"
+        Me.DgvCsnsAbColRefEmpl.ReadOnly = True
+        '
+        'DgvCsnsAbColNomCsnr
+        '
+        Me.DgvCsnsAbColNomCsnr.DataPropertyName = "csnr_nomcomplet"
+        Me.DgvCsnsAbColNomCsnr.FillWeight = 120.0!
+        Me.DgvCsnsAbColNomCsnr.HeaderText = "Concessionnaire"
+        Me.DgvCsnsAbColNomCsnr.Name = "DgvCsnsAbColNomCsnr"
+        Me.DgvCsnsAbColNomCsnr.ReadOnly = True
+        '
+        'DgvCsnsAbColTelCsnr
+        '
+        Me.DgvCsnsAbColTelCsnr.DataPropertyName = "csnr_tel"
+        Me.DgvCsnsAbColTelCsnr.HeaderText = "Téléphone"
+        Me.DgvCsnsAbColTelCsnr.Name = "DgvCsnsAbColTelCsnr"
+        Me.DgvCsnsAbColTelCsnr.ReadOnly = True
+        '
+        'DgvCsnsAbColBtDetails
+        '
+        Me.DgvCsnsAbColBtDetails.FillWeight = 30.0!
+        Me.DgvCsnsAbColBtDetails.HeaderText = "Plus"
+        Me.DgvCsnsAbColBtDetails.Name = "DgvCsnsAbColBtDetails"
+        Me.DgvCsnsAbColBtDetails.ReadOnly = True
+        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -408,12 +408,12 @@ Partial Class FormHome
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.PanNotifs.ResumeLayout(False)
         Me.PanNotifs.PerformLayout()
-        CType(Me.DgvNotifsCsnsExp, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DgvNotifsCsnsAb, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelToutSaufNotifs.ResumeLayout(False)
         Me.PanelToutSaufNotifs.PerformLayout()
+        CType(Me.DgvNotifsCsnsExp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvNotifsCsnsAb, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

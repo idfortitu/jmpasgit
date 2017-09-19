@@ -2,13 +2,16 @@
 
     ' "publie" certaines données pour l'appelant
     ' la valeur de ces props n'est pas garantie tant que l'enregistrement n'a pas été fait
-    ' + note : à part pour RowCsn, il n'est pas garanti que l'Id soit initialisé, à faire au besoin
+    ' + note : pour les bénéficiaires, l'id n'est pas initialisé, se baser sur PremIdBen et compter sur le fait que l'autoincrement rendra les suivants prévisible
     Public RowCsnr, RowComCsn, RowHist, RowCsn As DataRow
     Public TblBenefs As DataTable
     Public NomficPdf As String
+    Public PremIdBen
     Public Property TypeCsn As TTypeCsnInh
 
     Private LesEmplacements As DataTable
+    Private LesLocVille As DataTable
+    Private LesPays As DataTable
 
     Public Property CbEnregPdfChecked As Boolean
         Get
@@ -33,10 +36,11 @@
     End Sub
 
     Private Sub FormReservation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim TVilles = Bdd.GetTable("t_loc_ville")
-        Dim TPays = Bdd.GetTable("t_Pays")
-        CtrlLocVillePays1.chargercomboboxpays(TPays)
-        CtrlLocVillePays1.chargercomboboxville(TVilles)
+        LesLocVille = Bdd.GetTable("t_loc_ville")
+        LesPays = Bdd.GetTable("t_Pays")
+        CtrlLocVillePays1.chargercomboboxpays(LesPays)
+        CtrlLocVillePays1.chargercomboboxville(LesLocVille)
+        CtrlListeBenefs1.ChargerVillesEtPays(LesLocVille, LesPays)
 
         InitListeEmplacements()
     End Sub
@@ -59,7 +63,7 @@
 
 
 
-        ' prend désormais aussi les empls déjà loués, pour les afficher sur le plan
+        ' prend aussi les empls déjà loués, pour les afficher sur le plan
         Me.LesEmplacements =
             Bdd.Query("SELECT emplacements.*,COUNT(defunts.def_id) AS empl_nb_defunts,empl_nb_places-COUNT(defunts.def_id) AS places_libres,empl_monum_classe,COUNT(concessions.con_id) AS nb_concessions" &
                 " FROM emplacements LEFT OUTER JOIN concessions ON emplacements.empl_id = concessions.empl_id" &
@@ -68,7 +72,7 @@
                 " GROUP BY emplacements.empl_id" &
                 " /*HAVING COUNT(concessions.con_id) = 0*/")
 
-        ' n'affiche dans la grille que les emplacements non loués et inoccupés
+        ' mais n'affiche dans la grille que les emplacements non loués et inoccupés
         Dim DView = New DataView(LesEmplacements)
         DView.RowFilter = "nb_concessions = 0 And empl_nb_defunts = 0"
         DgvEmplacements.DataSource = DView
@@ -94,10 +98,6 @@
         '        " GROUP BY emplacements.empl_id")
 
 
-    End Sub
-
-    Sub krapatru(sender As Object, osef As DataGridViewDataErrorEventArgs) Handles DgvEmplacements.DataError
-        Dim kaprute = "a"
     End Sub
 
     Private Sub BtEnregistrer_Click(sender As Object, e As EventArgs) Handles BtEnregistrer.Click
@@ -162,18 +162,22 @@
                 RowCsnr("csnr_no_registre") = If(TbCsnrNoRegistre.Text.Trim = "", DBNull.Value, TbCsnrNoRegistre.Text)
                 RowCsnr("csnr_tel") = TbCsnrTel.Text.Trim
                 RowCsnr("locville_id") = If(CtrlLocVillePays1.LocVilleId > 0, CtrlLocVillePays1.LocVilleId, DBNull.Value)
-                ' ICI ajouter csnr
+
                 Dim IdCsnr = Bdd.Insert("concessionnaires", RowCsnr)
+                RowCsnr("csnr_id") = IdCsnr
 
                 ' commentaire
                 Me.RowComCsn = Bdd.GetRowVide("t_commentaire")
                 RowComCsn("com_commentaire") = TbCommentaire.Text.Trim
                 Dim IdCom = Bdd.Insert("t_commentaire", RowComCsn)
+                RowComCsn("com_id") = IdCom
+
 
                 ' histoire, même si en fait on s'en fout
                 Me.RowHist = Bdd.GetRowVide("t_histoire")
                 RowHist("h_histoire") = ""
                 Dim IdHist = Bdd.Insert("t_histoire", RowHist)
+                RowHist("h_id") = IdHist
 
 
                 ' concession
@@ -195,7 +199,7 @@
 
                 If TblBenefs.Rows.Count > 0 Then
 
-                    Dim PremIdBen = Bdd.Insert("beneficiaires", TblBenefs)
+                    PremIdBen = Bdd.Insert("beneficiaires", TblBenefs)
 
                     Dim LiensBensCsn = Bdd.GetTableVide("beneficier")
                     For idben = PremIdBen To PremIdBen + TblBenefs.Rows.Count - 1
@@ -365,7 +369,7 @@
     Private PopupPlancim As PopupPlancim
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BtMontrerFormPlancim.Click
         If PopupPlancim Is Nothing OrElse PopupPlancim.IsDisposed Then
-            PopupPlancim = New PopupPlancim(Me.LesEmplacements, AddressOf FiltrEmplsPlan) With {.Size = New Size(500, 500), .TopMost = True}
+            PopupPlancim = New PopupPlancim(Me.LesEmplacements, AddressOf FiltrEmplsPlan) With {.Size = New Size(500, 500), .Owner = Me}
             AddHandler PopupPlancim.SelectionChanged, AddressOf PopupPlancim_SelectionChanged
             PopupPlancim.EmplSelect = DgvEmplacements.SelectedDataRow
             PopupPlancim.Show()

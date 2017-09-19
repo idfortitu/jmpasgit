@@ -165,23 +165,15 @@
 
     Private Sub TbReference_TextChanged(sender As Object, e As EventArgs) Handles TbReference.TextChanged
         Dim TxtRef = TbReference.Text.Trim
-        'If TxtRef.Trim.Count >= 2 Then
-        'Dim NomParc = TxtRef.Trim.Substring(0, 2)
-        'If PlanCimetiere1.ParcellesDisponibles.Contains(NomParc) Then       ' mettre dans RefSelect une référence incorrecte ne provoque pas d'erreur, mais pour NomParcelleAffichee si
         Dim PosCurTxtRef = TbReference.SelectionStart
-        'PlanCimetiere1.NomParcelleAffichee = TxtRef.Substring(0, 2)
         PlanCimetiere1.RefSelect = TxtRef
         TbReference.Text = TxtRef               ' le changement de parcelle déclenche la désélection de l'emplacement présent, dont l'evt selectionchanged, donc le vidage de la textbox
         TbReference.SelectionStart = PosCurTxtRef
-        'If PlanCimetiere1.ParcelleAfficheeContientRef(TxtRef) Then
         If PlanCimetiere1.EmplSelect IsNot Nothing Then
             TbReference.BackColor = Color.White
         Else
             TbReference.BackColor = Color.Khaki
         End If
-        'End If
-        'End If
-
     End Sub
 
     Private Sub PlanCimetiere1_EmplDoubleClicked(sender As PlanCimetiere, e As PlanCimetiere.PlanCimEventArgs) Handles PlanCimetiere1.EmplDoubleClicked

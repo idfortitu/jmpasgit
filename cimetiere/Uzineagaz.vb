@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Runtime.CompilerServices
 
 
 Module Uzineagaz
@@ -53,7 +54,8 @@ Module Uzineagaz
             Case TTypeEmpl.Urne
                 Return "Urne en colombarium"
             Case Else
-                Throw New ArgumentException("Valeur inconnue.")
+                'Throw New ArgumentException("Valeur inconnue.")
+                Return ""
         End Select
     End Function
 
@@ -170,6 +172,12 @@ Module Uzineagaz
         Return res
     End Function
 
+    <Extension()>
+    Public Sub RemoveRange(rc As DataRowCollection, rows As DataRow())
+        For Each r In rows
+            rc.Remove(r)
+        Next
+    End Sub
 
 End Module
 

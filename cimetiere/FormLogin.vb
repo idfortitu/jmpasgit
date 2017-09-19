@@ -1,6 +1,13 @@
 ﻿Imports System.Security.Cryptography
 
 Public Class FormLogin
+
+    Public Sub OSEF() Handles Me.Load
+        TbNomUtilisateur.Text = "admin"
+        TbMdp.Text = "commune"
+        OK_Click(Nothing, Nothing)
+    End Sub
+
     Private Sub OK_Click(sender As Object, e As EventArgs) Handles BtOk.Click
         Dim mMD5 As New MD5CryptoServiceProvider
         Dim UniEnc As New System.Text.UnicodeEncoding
