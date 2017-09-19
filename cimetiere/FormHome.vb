@@ -1,7 +1,16 @@
 ﻿
 Public Class FormHome
 
-    Private NombreNotifs As Integer
+    Private _nombrenotifs
+    Private Property NombreNotifs As Integer
+        Get
+            Return _nombrenotifs
+        End Get
+        Set(value As Integer)
+            _nombrenotifs = value
+            BtNotifsMontrer.Text = "Notifications" & If(Me.NombreNotifs > 0, " (" & Me.NombreNotifs & ")", "")
+        End Set
+    End Property
 
     Public Sub New()
         InitializeComponent()
@@ -19,34 +28,14 @@ Public Class FormHome
         End Using
         LabWelkom.Text = "Bonjour " & user
 
-        'Dim CsnsExpirant = Bdd.Query("SELECT con_id,empl_reference,emplacements.empl_id,csnr_tel,CONCAT(csnr_prenom,' ',csnr_nom) AS csnr_nomcomplet, con_date_fin FROM concessions " &
-        '                        " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.csnr_id" &
-        '                        " INNER JOIN emplacements ON concessions.empl_id = emplacements.empl_id" &
-        '                        " WHERE con_date_fin < '" & DateAdd(DateInterval.Day, DUREE_PREVISION_EXPIRATION_CONCESSION, Today).ToString("yyyy-MM-dd") & "'" &
-        '                        " AND con_date_fin >= CURDATE()" &
-        '                        " ORDER BY con_date_fin ASC")
-        'DgvNotifsCsnsExp.DataSource = CsnsExpirant
-
-        Dim NbNotifsExp = ChargerNotifsExpirations()
-
-        'Dim NotifsAbandons = Bdd.Query("SELECT notif_id,emplacements.empl_id,empl_reference,CONCAT(csnr_prenom,' ',csnr_nom) AS csnr_nomcomplet,csnr_tel FROM notifications" &
-        '                           " LEFT OUTER JOIN emplacements ON notifications.notif_emplacement = emplacements.empl_id" &
-        '                           " LEFT OUTER JOIN concessions ON concessions.empl_id = emplacements.empl_id" &
-        '                           " LEFT OUTER JOIN concessionnaires ON concessions.csnr_id = concessionnaires.csnr_id")
-        'DgvNotifsCsnsAb.DataSource = NotifsAbandons
-
-        Dim NbNotifsAbandons = ChargerNotifsAbandons()
-
-        Me.NombreNotifs = NbNotifsExp + NbNotifsAbandons
-        If Me.NombreNotifs > 0 Then BtNotifsMontrer.Text = "Notifications (" & Me.NombreNotifs & ")"
+        ChargerNotifs()
 
 
         ' possibilité pr servicepop ajouter info empl/éditer notif ??
 
     End Sub
 
-    ' renvoie le nombre de notifs
-    Private Function ChargerNotifsExpirations() As Integer
+    Private Sub ChargerNotifs()
         Dim CsnsExpirant = Bdd.Query("SELECT con_id,empl_reference,emplacements.empl_id,csnr_tel,CONCAT(csnr_prenom,' ',csnr_nom) AS csnr_nomcomplet, con_date_fin FROM concessions " &
                                 " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.csnr_id" &
                                 " INNER JOIN emplacements ON concessions.empl_id = emplacements.empl_id" &
@@ -54,17 +43,14 @@ Public Class FormHome
                                 " AND con_date_fin >= CURDATE()" &
                                 " ORDER BY con_date_fin ASC")
         DgvNotifsCsnsExp.DataSource = CsnsExpirant
-        Return CsnsExpirant.Rows.Count
-    End Function
-
-    Private Function ChargerNotifsAbandons() As Integer
         Dim NotifsAbandons = Bdd.Query("SELECT notif_id,emplacements.empl_id,empl_reference,CONCAT(csnr_prenom,' ',csnr_nom) AS csnr_nomcomplet,csnr_tel FROM notifications" &
                                    " LEFT OUTER JOIN emplacements ON notifications.notif_emplacement = emplacements.empl_id" &
                                    " LEFT OUTER JOIN concessions ON concessions.empl_id = emplacements.empl_id" &
                                    " LEFT OUTER JOIN concessionnaires ON concessions.csnr_id = concessionnaires.csnr_id")
         DgvNotifsCsnsAb.DataSource = NotifsAbandons
-        Return NotifsAbandons.Rows.Count
-    End Function
+        Me.NombreNotifs = CsnsExpirant.Rows.Count + NotifsAbandons.Rows.Count
+    End Sub
+
 
 
     '' les contrôles sont rendus en cache avant d'être affiché, ça peut éviter quelques scintillements mais en contrepartie ça retarde leur affichage
@@ -122,9 +108,6 @@ Public Class FormHome
         End If
     End Sub
 
-    Private Sub BtConstatAbandon_Click(sender As Object, e As EventArgs) Handles BtPlan.Click
-
-    End Sub
 
     Private Sub BtConsulterDonnées_Click(sender As Object, e As EventArgs) Handles BtConsulterDonnées.Click
         Dim f As New FormGestion
@@ -135,9 +118,7 @@ Public Class FormHome
         Using f As New FormSignalAbandonCsn
             f.ShowDialog()
             If f.DialogResult = DialogResult.OK Then
-                ChargerNotifsAbandons()
-                Me.NombreNotifs += 1
-                BtNotifsMontrer.Text = "Notifications" & If(Me.NombreNotifs > 0, " (" & Me.NombreNotifs & ")", "")
+                ChargerNotifs()
             End If
         End Using
     End Sub
@@ -262,45 +243,48 @@ Public Class FormHome
 
         Dim LaCsn = CType(sender.Rows(e.RowIndex).DataBoundItem, DataRowView).Row
 
-        If sender.Columns(e.ColumnIndex).Name = "DgvCsnsExpColBtDetails" OrElse sender.Columns(e.ColumnIndex).Name = "DgvCsnsAbColBtDetails" Then
-            If sender Is DgvNotifsCsnsExp Then
-                If Not IsDBNull(LaCsn("empl_id")) Then
-                    Using f As New FormVoirDetailsEmpl(LaCsn("empl_id"), True)
-                        f.ShowDialog()
-                        If f.DialogResult = DialogResult.OK Then ChargerNotifsExpirations()
-                    End Using
-                End If
-            ElseIf sender Is DgvNotifsCsnsAb Then
-                Using f As New FormPopupPrecisionsAbandon(LaCsn("notif_id"))
-                    f.ShowDialog()
-                End Using
-            End If
+        Dim NomCol = sender.Columns(e.ColumnIndex).Name
+        If NomCol = "DgvCsnsExpColBtDetails" OrElse NomCol = "DgvCsnsAbColBtDetails" Then
+            ActivItemDgvSub(sender, LaCsn)
         End If
     End Sub
 
     Private Sub DgvNotifsCsnsExp_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvNotifsCsnsExp.CellDoubleClick, DgvNotifsCsnsAb.CellDoubleClick
         If e.RowIndex < 0 Then Exit Sub
         Dim LaCsn = CType(sender.Rows(e.RowIndex).DataBoundItem, DataRowView).Row
+        ActivItemDgvSub(sender, LaCsn)
+    End Sub
 
+
+    Private Sub ActivItemDgvSub(sender As DataGridView, LaCsn As DataRow)
         If sender Is DgvNotifsCsnsExp Then
             If Not IsDBNull(LaCsn("empl_id")) Then
                 Using f As New FormVoirDetailsEmpl(LaCsn("empl_id"), True)
                     f.ShowDialog()
-                    If f.DialogResult = DialogResult.OK Then ChargerNotifsExpirations()
+                    If f.DialogResult = DialogResult.OK Then ChargerNotifs()
                 End Using
             End If
         ElseIf sender Is DgvNotifsCsnsAb Then
             Using f As New FormPopupPrecisionsAbandon(LaCsn("notif_id"))
                 f.ShowDialog()
-                If f.Suppression Then
-                    ChargerNotifsAbandons()
-                    Me.NombreNotifs -= 1
-                    BtNotifsMontrer.Text = "Notifications" & If(Me.NombreNotifs > 0, " (" & Me.NombreNotifs & ")", "")
-                End If
-
+                If f.Suppression Then ChargerNotifs()
             End Using
         End If
+    End Sub
+
+    Private Sub AGAGA(sender As Object, e As PaintEventArgs) Handles BtConsulterDonnées.Paint
+        Dim borderRectangle As Rectangle = sender.ClientRectangle
+        borderRectangle.Inflate(-10, -10)
+        ControlPaint.DrawBorder3D(e.Graphics, borderRectangle,
+            Border3DStyle.Raised)
+        ControlPaint.DrawBorder(e.Graphics, borderRectangle, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid)
+    End Sub
+
+    Private Sub DgvNotifsCsnsExp_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvNotifsCsnsExp.CellContentClick, DgvNotifsCsnsAb.CellContentClick
 
     End Sub
 
+    Private Sub DgvNotifsCsnsExp_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles DgvNotifsCsnsExp.CellPainting, DgvNotifsCsnsAb.CellPainting
+
+    End Sub
 End Class

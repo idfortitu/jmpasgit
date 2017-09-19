@@ -15,6 +15,8 @@
         CtrlLocVillePays1.chargercomboboxville(TVilles)
         CtrlVilleDmdr.chargercomboboxpays(TPays)
         CtrlVilleDmdr.chargercomboboxville(TVilles)
+        CtrlLocPcont.chargercomboboxville(TVilles)
+        CtrlLocPcont.chargercomboboxpays(TPays)
     End Sub
 
 
@@ -56,6 +58,8 @@
         ValiderLbTypeInh()
         ValiderNomDmdr()
         ValiderPrenomDmdr()
+        ValiderNomPcont()
+        ValiderPrenomPcont()
 
         Return ErrorProvider1.GetError(RbNouvelleCon) = "" _
             AndAlso ErrorProvider1.GetError(TbDefNumLh) = "" _
@@ -65,7 +69,9 @@
             AndAlso ErrorProvider1.GetError(TbDefDateDeces) = "" _
             AndAlso ErrorProvider1.GetError(LbTypeInhOrd) = "" _
             AndAlso ErrorProvider1.GetError(TbDmdrNom) = "" _
-            AndAlso ErrorProvider1.GetError(TbDmdrPrenom) = ""
+            AndAlso ErrorProvider1.GetError(TbDmdrPrenom) = "" _
+            AndAlso ErrorProvider1.GetError(TbPcontNom) = "" _
+            AndAlso ErrorProvider1.GetError(TbPcontPrenom) = ""
     End Function
 
     Private Function ValidePrFinCsnExis() As Boolean
@@ -149,6 +155,22 @@
             ErrorProvider1.SetError(DgvCsnsExist, "")
         End If
     End Sub
+
+    Private Sub ValiderNomPcont()
+        If CbPCont.Checked AndAlso TbPcontNom.Text.Trim = "" Then
+            ErrorProvider1.SetError(TbPcontNom, "Veuillez indiquer le nom de la personne de contact")
+        Else
+            ErrorProvider1.SetError(TbPcontNom, "")
+        End If
+    End Sub
+    Private Sub ValiderPrenomPcont()
+        If CbPCont.Checked AndAlso TbPcontPrenom.Text.Trim = "" Then
+            ErrorProvider1.SetError(TbPcontPrenom, "Veuillez indiquer le prénom de la personne de contact")
+        Else
+            ErrorProvider1.SetError(TbPcontPrenom, "")
+        End If
+    End Sub
+
 
 #End Region
 
@@ -246,7 +268,7 @@
     Private FormPlanCsnsExist As FormChoixEmplSurPlan
     Private Sub BtMontrerFormPlanCimCsnsExist_Click(sender As Object, e As EventArgs) Handles BtMontrerFormPlanCimCsnsExist.Click
         If Me.FormPlanCsnsExist Is Nothing OrElse Me.FormPlanCsnsExist.IsDisposed Then
-            FormPlanCsnsExist = New FormChoixEmplSurPlan(Me.GetEmplacementsPourPlan(DgvCsnsExist.DataSource), AddressOf FiltrerPlanCsnsExist) With {.TopMost = True}
+            FormPlanCsnsExist = New FormChoixEmplSurPlan(Me.GetEmplacementsPourPlan(DgvCsnsExist.DataSource), AddressOf FiltrerPlanCsnsExist) With {.Owner = Me}
             FormPlanCsnsExist.Size = New Size(1000, 500)
             AddHandler FormPlanCsnsExist.SelectionChanged, AddressOf FormPlanCsnsExist_SelectionChanged
         Else
@@ -341,11 +363,11 @@
                 Dim Empl = Bdd.GetRow("emplacements", IdEmpl)
                 Dim RefEmpl = Empl("empl_reference")
 
-                Dim RowDef, RowDmdr As DataRow
+                Dim RowDef, RowDmdr, RowPcont As DataRow
                 Dim osef As TTypeCsnInh
                 Dim DateSign As Date?
 
-                Enregistrer(RowDef, RowDmdr, osef, DateSign, IdEmpl)
+                Enregistrer(RowDef, RowDmdr, RowPcont, osef, DateSign, IdEmpl)
 
                 Dim DefuntsDeja = Bdd.Query("SELECT * FROM defunts WHERE empl_id = " & IdEmpl)
 
@@ -403,13 +425,12 @@
             If f.DialogResult = DialogResult.OK Then
                 ' à ce stade la concession a été enregistrée
                 ' -> enregistrer et mettre le défunt dans l'emplacement
-                Dim RowDef As DataRow
-                Dim RowDmdr As DataRow
+                Dim RowDef, RowDmdr, RowPcont As DataRow
                 Dim TypeInh As TTypeCsnInh
                 Dim DateSign As Date?
                 Dim osef As TTypeCsnInh
                 ' récupère les données des contrôles du tabpage 1 pour l'inhumation
-                Enregistrer(RowDef, RowDmdr, osef, DateSign, f.RowCsn("empl_id")) ' virer typeinh
+                Enregistrer(RowDef, RowDmdr, RowPcont, osef, DateSign, f.RowCsn("empl_id")) ' virer typeinh
                 TypeInh = f.TypeCsn
 
                 ' pdf
@@ -518,7 +539,7 @@
     Private FormPlanEmplsOrdinaires As FormChoixEmplSurPlan
     Private Sub BtMontrerFormPlancimEmplOrd_Click(sender As Object, e As EventArgs) Handles BtMontrerFormPlancimEmplOrd.Click
         If Me.FormPlanEmplsOrdinaires Is Nothing OrElse Me.FormPlanEmplsOrdinaires.IsDisposed Then
-            FormPlanEmplsOrdinaires = New FormChoixEmplSurPlan(Me.GetEmplacementsPourPlan(DgvEmplacementsPourInhOrd.DataSource), AddressOf FiltrerPlanEmplsOrdinaires) With {.TopMost = True}
+            FormPlanEmplsOrdinaires = New FormChoixEmplSurPlan(Me.GetEmplacementsPourPlan(DgvEmplacementsPourInhOrd.DataSource), AddressOf FiltrerPlanEmplsOrdinaires) With {.Owner = Me}
             FormPlanEmplsOrdinaires.Size = New Size(1000, 500)
             AddHandler FormPlanEmplsOrdinaires.SelectionChanged, AddressOf FormPlanEmplsOrdinaires_SelectionChanged
         Else
@@ -588,7 +609,7 @@
                     FormPlanEmplsOrdinaires.Close()
                 End If
 
-                Dim RowDef, RowDmdr As DataRow
+                Dim RowDef, RowDmdr, RowPcont As DataRow
                 Dim TypeInhOrd As TTypeCsnInh
                 Dim DateSign As Date?
                 Dim RowEmpl As DataRow
@@ -597,7 +618,7 @@
                     'Else
                     'RowEmpl = Bdd.GetRow("emplacements", "empl_reference", "AIR")
                 End If
-                Enregistrer(RowDef, RowDmdr, TypeInhOrd, DateSign, If(RowEmpl IsNot Nothing, RowEmpl("empl_id"), Nothing))
+                Enregistrer(RowDef, RowDmdr, RowPcont, TypeInhOrd, DateSign, If(RowEmpl IsNot Nothing, RowEmpl("empl_id"), Nothing))
 
                 ' pdf
                 Dim p As New ExporteurPdf
@@ -647,8 +668,22 @@
 
 
     ' code mis à part car appelé depuis plusieurs endroits
-    ' les byref sont des sorties, elles permettent à l'appelant de récupérer les rows générée à partir des données du formulaire
-    Sub Enregistrer(ByRef RowDef As DataRow, ByRef RowDmdr As DataRow, ByRef TypeInhOrd As TTypeCsnInh, ByRef DateSign As Date?, IdEmpl As Integer?)
+    ' les byref sont des sorties, elles permettent à l'appelant de récupérer les rows générée à partir des données du formulaire pour le pdf etc
+    Sub Enregistrer(ByRef RowDef As DataRow, ByRef RowDmdr As DataRow, ByRef RowPcont As DataRow, ByRef TypeInhOrd As TTypeCsnInh, ByRef DateSign As Date?, IdEmpl As Integer?)
+        ' personne de contact
+
+        RowPcont = Bdd.GetRowVide("personnes_contact")
+        RowPcont("pc_nom") = TbPcontNom.Text.Trim
+        RowPcont("pc_prenom") = TbPcontPrenom.Text.Trim
+        RowPcont("pc_adresse") = TbPcontAdresse.Text.Trim
+        RowPcont("locville_id") = If(CtrlLocPcont.LocVilleId = -1, DBNull.Value, CtrlLocPcont.LocVilleId)
+        RowPcont("pc_tel") = TbPcontTel.Text.Trim
+        If CbPCont.Checked Then
+            RowPcont("pc_id") = Bdd.Insert("personnes_contact", RowPcont)
+        End If
+
+        ' défunt
+
         RowDef = Bdd.GetRowVide("defunts")
         ' numéro LH
         If TbDefNumLh.Value IsNot Nothing Then
@@ -676,6 +711,10 @@
 
         ' emplacement qui vient d'être alloué
         RowDef("empl_id") = If(IdEmpl IsNot Nothing, IdEmpl, DBNull.Value)
+
+        If CbPCont.Checked Then
+            RowDef("pc_id") = RowPcont("pc_id")
+        End If
 
         Bdd.Insert("defunts", RowDef)
 
@@ -794,5 +833,11 @@
             Return cp
         End Get
     End Property
+
+    Private Sub CbPCont_CheckedChanged(sender As Object, e As EventArgs) Handles CbPCont.CheckedChanged
+        For Each c As Control In {TbPcontAdresse, TbPcontNom, TbPcontPrenom, TbPcontTel, CtrlLocPcont}
+            c.Enabled = CbPCont.Checked
+        Next
+    End Sub
 
 End Class

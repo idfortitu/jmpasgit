@@ -8,7 +8,13 @@
             If Text.Trim = "" Then
                 Return Nothing
             Else
-                Return Int32.Parse(Text)
+                Dim Res As Int64?
+                Try
+                    Res = Int64.Parse(Text)
+                Catch
+                    Return Nothing
+                End Try
+                Return Res
             End If
         End Get
         Set(value As Int64?)

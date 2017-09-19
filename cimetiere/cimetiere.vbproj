@@ -285,6 +285,12 @@
     <Compile Include="FormSignalAbandonCsn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GestionLocVille.designer.vb">
+      <DependentUpon>GestionLocVille.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GestionLocVille.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Histoire.partial.vb" />
     <Compile Include="Histoire.vb">
       <DependentUpon>dmCimetiere.tt</DependentUpon>
@@ -314,6 +320,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PanBordure.vb">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="PlanCimConteneur.vb">
       <SubType>Component</SubType>
@@ -473,6 +482,9 @@
     <EmbeddedResource Include="FormSignalAbandonCsn.resx">
       <DependentUpon>FormSignalAbandonCsn.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GestionLocVille.resx">
+      <DependentUpon>GestionLocVille.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListBenefNewCons.resx">
       <DependentUpon>ListBenefNewCons.vb</DependentUpon>
     </EmbeddedResource>
@@ -555,6 +567,7 @@
       <DependentUpon>dmCimetiere.edmx</DependentUpon>
       <LastGenOutput>dmCimetiere.vb</LastGenOutput>
     </Content>
+    <None Include="Resources\Note_24x.png" />
     <None Include="Resources\Next_16xMD.png" />
     <None Include="Resources\logolh.png" />
     <None Include="Resources\ColumnDetail_16x.png" />
