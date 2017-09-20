@@ -40,12 +40,11 @@ Public Class FormGestion
             FPBModifier.Hide()
             FPBSupprimer.Hide()
             BModifGestionPers.Hide()
-            BmodifConsBenef.Hide()
+
             BTModifEmpl.Hide()
             BSupGestionPers.Hide()
-            BSuppConsBenef.Hide()
+
             BTSupprEmpl.Hide()
-            BAddConsBenef.Hide()
         End If
 
         TextBoxDefuntRO()
@@ -66,8 +65,7 @@ Public Class FormGestion
         dtpays = Bdd.GetTable("t_Pays")
         CtrlLocVilleDef.chargercomboboxpays(dtpays)
         CtrlLocVilleDef.chargercomboboxville(dtville)
-        CtrlLocBenefDeCons.chargercomboboxville(dtville)
-        CtrlLocBenefDeCons.chargercomboboxpays(dtpays)
+
         CtrlLocPersonne.chargercomboboxville(dtville)
         CtrlLocPersonne.chargercomboboxpays(dtpays)
 
@@ -448,7 +446,7 @@ Public Class FormGestion
         FCDGBeneficiaire.DataSource = dvbenefsdeconcession
 
         ' infos du bénéficiaire sélectionné (onglet concessions)
-        DataBindConsbenef()
+
     End Sub
 
     Private Sub InitDgvBeneficiaires()
@@ -686,13 +684,7 @@ Public Class FormGestion
         LinkLabCsnVersCsnr.DataBindings.Add("Text", dvcons, "csnr_nomcomplet")
     End Sub
 
-    Private Sub DataBindConsbenef()
-        TBconsBenefnom.DataBindings.Add("Text", dvbenefsdeconcession, "ben_nom")
-        TBconsBenefprenom.DataBindings.Add("Text", dvbenefsdeconcession, "ben_prenom")
-        TBconsBenefadress.DataBindings.Add("Text", dvbenefsdeconcession, "ben_adresse")
-        TBconsBenefdatenaiss.DataBindings.Add("DateValue", dvbenefsdeconcession, "ben_date_naiss")
-        CtrlLocBenefDeCons.DataBindings.Add("LocVilleId", dvbenefsdeconcession, "locville_id")
-    End Sub
+
 
     Private Sub DataBindDefunt()
         FPTBNom.DataBindings.Add("Text", bslistedefunts, "def_nom")
@@ -1316,17 +1308,7 @@ Public Class FormGestion
         Next
     End Sub
 
-    Private Sub TextBoxConsBenefUpd()
-        TBconsBenefadress.ReadOnly = False
-        TBconsBenefadress.Cursor = Cursors.IBeam
-        TBconsBenefdatenaiss.ReadOnly = False
-        TBconsBenefdatenaiss.Cursor = Cursors.IBeam
-        TBconsBenefnom.ReadOnly = False
-        TBconsBenefnom.Cursor = Cursors.IBeam
-        CtrlLocBenefDeCons.LectureSeule = False
-        TBconsBenefprenom.ReadOnly = False
-        TBconsBenefprenom.Cursor = Cursors.IBeam
-    End Sub
+
 
     Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
         If ModeEdition Then
@@ -2160,6 +2142,10 @@ Public Class FormGestion
         ControlPaint.DrawBorder3D(e.Graphics, borderRectangle,
             Border3DStyle.Raised)
         ControlPaint.DrawBorder(e.Graphics, borderRectangle, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid)
+
+    End Sub
+
+    Private Sub TabPageEmplacements_Click(sender As Object, e As EventArgs) Handles TabPageEmplacements.Click
 
     End Sub
 End Class

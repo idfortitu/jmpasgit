@@ -285,7 +285,7 @@
     <Compile Include="FormSignalAbandonCsn.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GestionLocVille.designer.vb">
+    <Compile Include="GestionLocVille.Designer.vb">
       <DependentUpon>GestionLocVille.vb</DependentUpon>
     </Compile>
     <Compile Include="GestionLocVille.vb">

@@ -272,13 +272,7 @@ Public Class FormHome
         End If
     End Sub
 
-    Private Sub AGAGA(sender As Object, e As PaintEventArgs) Handles BtConsulterDonnées.Paint
-        Dim borderRectangle As Rectangle = sender.ClientRectangle
-        borderRectangle.Inflate(-10, -10)
-        ControlPaint.DrawBorder3D(e.Graphics, borderRectangle,
-            Border3DStyle.Raised)
-        ControlPaint.DrawBorder(e.Graphics, borderRectangle, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid)
-    End Sub
+
 
     Private Sub DgvNotifsCsnsExp_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvNotifsCsnsExp.CellContentClick, DgvNotifsCsnsAb.CellContentClick
 
