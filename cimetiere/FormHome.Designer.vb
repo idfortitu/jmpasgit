@@ -22,9 +22,9 @@ Partial Class FormHome
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormHome))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormHome))
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.BtDéclarationDécès = New System.Windows.Forms.Button()
         Me.BtRéserverCon = New System.Windows.Forms.Button()
@@ -34,13 +34,6 @@ Partial Class FormHome
         Me.PanNotifs = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.BtNotifsMasquer = New System.Windows.Forms.Button()
-        Me.BtNotifsMontrer = New System.Windows.Forms.Button()
-        Me.LabWelkom = New System.Windows.Forms.Label()
-        Me.BtSignalAbCsn = New System.Windows.Forms.Button()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.PanelToutSaufNotifs = New System.Windows.Forms.Panel()
         Me.DgvNotifsCsnsExp = New cimetiere.DataGridViewCustom()
         Me.DgvCsnsExpRefEmpl = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCsnsExpDateExp = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -52,13 +45,20 @@ Partial Class FormHome
         Me.DgvCsnsAbColNomCsnr = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCsnsAbColTelCsnr = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DgvCsnsAbColBtDetails = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.BtNotifsMasquer = New System.Windows.Forms.Button()
+        Me.BtNotifsMontrer = New System.Windows.Forms.Button()
+        Me.LabWelkom = New System.Windows.Forms.Label()
+        Me.BtSignalAbCsn = New System.Windows.Forms.Button()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PanelToutSaufNotifs = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.PanNotifs.SuspendLayout()
+        CType(Me.DgvNotifsCsnsExp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DgvNotifsCsnsAb, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelToutSaufNotifs.SuspendLayout()
-        CType(Me.DgvNotifsCsnsExp, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DgvNotifsCsnsAb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'FlowLayoutPanel1
@@ -175,85 +175,6 @@ Partial Class FormHome
         Me.Label1.Size = New System.Drawing.Size(225, 20)
         Me.Label1.TabIndex = 74
         Me.Label1.Text = "Concessions expirant bientôt"
-        '
-        'BtNotifsMasquer
-        '
-        Me.BtNotifsMasquer.Location = New System.Drawing.Point(81, 429)
-        Me.BtNotifsMasquer.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtNotifsMasquer.Name = "BtNotifsMasquer"
-        Me.BtNotifsMasquer.Size = New System.Drawing.Size(119, 28)
-        Me.BtNotifsMasquer.TabIndex = 5
-        Me.BtNotifsMasquer.Text = "Masquer"
-        Me.BtNotifsMasquer.UseVisualStyleBackColor = True
-        '
-        'BtNotifsMontrer
-        '
-        Me.BtNotifsMontrer.Location = New System.Drawing.Point(81, 430)
-        Me.BtNotifsMontrer.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtNotifsMontrer.Name = "BtNotifsMontrer"
-        Me.BtNotifsMontrer.Size = New System.Drawing.Size(119, 27)
-        Me.BtNotifsMontrer.TabIndex = 6
-        Me.BtNotifsMontrer.Text = "Notifications"
-        Me.BtNotifsMontrer.UseVisualStyleBackColor = True
-        Me.BtNotifsMontrer.Visible = False
-        '
-        'LabWelkom
-        '
-        Me.LabWelkom.AutoSize = True
-        Me.LabWelkom.BackColor = System.Drawing.Color.Transparent
-        Me.LabWelkom.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabWelkom.Location = New System.Drawing.Point(813, 13)
-        Me.LabWelkom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LabWelkom.Name = "LabWelkom"
-        Me.LabWelkom.Size = New System.Drawing.Size(123, 24)
-        Me.LabWelkom.TabIndex = 71
-        Me.LabWelkom.Text = "Welkom User"
-        '
-        'BtSignalAbCsn
-        '
-        Me.BtSignalAbCsn.Location = New System.Drawing.Point(655, 430)
-        Me.BtSignalAbCsn.Name = "BtSignalAbCsn"
-        Me.BtSignalAbCsn.Size = New System.Drawing.Size(279, 27)
-        Me.BtSignalAbCsn.TabIndex = 7
-        Me.BtSignalAbCsn.Text = "Signaler une concession à l'abandon"
-        Me.BtSignalAbCsn.UseVisualStyleBackColor = True
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.cimetiere.My.Resources.Resources.logolh
-        Me.PictureBox2.Location = New System.Drawing.Point(3, 3)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(180, 113)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 72
-        Me.PictureBox2.TabStop = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(955, 3)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(69, 62)
-        Me.PictureBox1.TabIndex = 70
-        Me.PictureBox1.TabStop = False
-        '
-        'PanelToutSaufNotifs
-        '
-        Me.PanelToutSaufNotifs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PanelToutSaufNotifs.Controls.Add(Me.PictureBox2)
-        Me.PanelToutSaufNotifs.Controls.Add(Me.PictureBox1)
-        Me.PanelToutSaufNotifs.Controls.Add(Me.BtNotifsMontrer)
-        Me.PanelToutSaufNotifs.Controls.Add(Me.LabWelkom)
-        Me.PanelToutSaufNotifs.Controls.Add(Me.FlowLayoutPanel1)
-        Me.PanelToutSaufNotifs.Controls.Add(Me.BtNotifsMasquer)
-        Me.PanelToutSaufNotifs.Controls.Add(Me.BtSignalAbCsn)
-        Me.PanelToutSaufNotifs.Location = New System.Drawing.Point(0, 0)
-        Me.PanelToutSaufNotifs.Margin = New System.Windows.Forms.Padding(0)
-        Me.PanelToutSaufNotifs.Name = "PanelToutSaufNotifs"
-        Me.PanelToutSaufNotifs.Size = New System.Drawing.Size(1025, 470)
-        Me.PanelToutSaufNotifs.TabIndex = 73
         '
         'DgvNotifsCsnsExp
         '
@@ -389,6 +310,85 @@ Partial Class FormHome
         Me.DgvCsnsAbColBtDetails.Name = "DgvCsnsAbColBtDetails"
         Me.DgvCsnsAbColBtDetails.ReadOnly = True
         '
+        'BtNotifsMasquer
+        '
+        Me.BtNotifsMasquer.Location = New System.Drawing.Point(81, 429)
+        Me.BtNotifsMasquer.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtNotifsMasquer.Name = "BtNotifsMasquer"
+        Me.BtNotifsMasquer.Size = New System.Drawing.Size(119, 28)
+        Me.BtNotifsMasquer.TabIndex = 5
+        Me.BtNotifsMasquer.Text = "Masquer"
+        Me.BtNotifsMasquer.UseVisualStyleBackColor = True
+        '
+        'BtNotifsMontrer
+        '
+        Me.BtNotifsMontrer.Location = New System.Drawing.Point(81, 430)
+        Me.BtNotifsMontrer.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtNotifsMontrer.Name = "BtNotifsMontrer"
+        Me.BtNotifsMontrer.Size = New System.Drawing.Size(119, 27)
+        Me.BtNotifsMontrer.TabIndex = 6
+        Me.BtNotifsMontrer.Text = "Notifications"
+        Me.BtNotifsMontrer.UseVisualStyleBackColor = True
+        Me.BtNotifsMontrer.Visible = False
+        '
+        'LabWelkom
+        '
+        Me.LabWelkom.AutoSize = True
+        Me.LabWelkom.BackColor = System.Drawing.Color.Transparent
+        Me.LabWelkom.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabWelkom.Location = New System.Drawing.Point(813, 13)
+        Me.LabWelkom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LabWelkom.Name = "LabWelkom"
+        Me.LabWelkom.Size = New System.Drawing.Size(123, 24)
+        Me.LabWelkom.TabIndex = 71
+        Me.LabWelkom.Text = "Welkom User"
+        '
+        'BtSignalAbCsn
+        '
+        Me.BtSignalAbCsn.Location = New System.Drawing.Point(655, 430)
+        Me.BtSignalAbCsn.Name = "BtSignalAbCsn"
+        Me.BtSignalAbCsn.Size = New System.Drawing.Size(279, 27)
+        Me.BtSignalAbCsn.TabIndex = 7
+        Me.BtSignalAbCsn.Text = "Signaler une concession à l'abandon"
+        Me.BtSignalAbCsn.UseVisualStyleBackColor = True
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.cimetiere.My.Resources.Resources.logolh
+        Me.PictureBox2.Location = New System.Drawing.Point(3, 3)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(180, 113)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 72
+        Me.PictureBox2.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(955, 3)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(69, 62)
+        Me.PictureBox1.TabIndex = 70
+        Me.PictureBox1.TabStop = False
+        '
+        'PanelToutSaufNotifs
+        '
+        Me.PanelToutSaufNotifs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PanelToutSaufNotifs.Controls.Add(Me.PictureBox2)
+        Me.PanelToutSaufNotifs.Controls.Add(Me.PictureBox1)
+        Me.PanelToutSaufNotifs.Controls.Add(Me.BtNotifsMontrer)
+        Me.PanelToutSaufNotifs.Controls.Add(Me.LabWelkom)
+        Me.PanelToutSaufNotifs.Controls.Add(Me.FlowLayoutPanel1)
+        Me.PanelToutSaufNotifs.Controls.Add(Me.BtNotifsMasquer)
+        Me.PanelToutSaufNotifs.Controls.Add(Me.BtSignalAbCsn)
+        Me.PanelToutSaufNotifs.Location = New System.Drawing.Point(0, 0)
+        Me.PanelToutSaufNotifs.Margin = New System.Windows.Forms.Padding(0)
+        Me.PanelToutSaufNotifs.Name = "PanelToutSaufNotifs"
+        Me.PanelToutSaufNotifs.Size = New System.Drawing.Size(1025, 470)
+        Me.PanelToutSaufNotifs.TabIndex = 73
+        '
         'FormHome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -404,16 +404,16 @@ Partial Class FormHome
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FormHome"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "pict"
+        Me.Text = "Cimetière"
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.PanNotifs.ResumeLayout(False)
         Me.PanNotifs.PerformLayout()
+        CType(Me.DgvNotifsCsnsExp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DgvNotifsCsnsAb, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelToutSaufNotifs.ResumeLayout(False)
         Me.PanelToutSaufNotifs.PerformLayout()
-        CType(Me.DgvNotifsCsnsExp, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DgvNotifsCsnsAb, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

@@ -2,6 +2,8 @@
 Public Class PopupPlancim
     Private Emplacements As DataTable
 
+
+    ' ne gère pas le changement de parcelle
     Private _emplSelect As DataRow
     Public Property EmplSelect As DataRow
         Get

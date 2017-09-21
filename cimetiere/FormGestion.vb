@@ -40,12 +40,9 @@ Public Class FormGestion
             FPBModifier.Hide()
             FPBSupprimer.Hide()
             BModifGestionPers.Hide()
-            BmodifConsBenef.Hide()
             BTModifEmpl.Hide()
             BSupGestionPers.Hide()
-            BSuppConsBenef.Hide()
             BTSupprEmpl.Hide()
-            BAddConsBenef.Hide()
         End If
 
         TextBoxDefuntRO()
@@ -66,8 +63,6 @@ Public Class FormGestion
         dtpays = Bdd.GetTable("t_Pays")
         CtrlLocVilleDef.chargercomboboxpays(dtpays)
         CtrlLocVilleDef.chargercomboboxville(dtville)
-        CtrlLocBenefDeCons.chargercomboboxville(dtville)
-        CtrlLocBenefDeCons.chargercomboboxpays(dtpays)
         CtrlLocPersonne.chargercomboboxville(dtville)
         CtrlLocPersonne.chargercomboboxpays(dtpays)
 
@@ -415,13 +410,6 @@ Public Class FormGestion
         DgvEmplacements.Columns.Add(col)
 
 
-        'Dim colonnedatefin = New DataGridViewTextBoxColumn()
-        'colonnedatefin.DataPropertyName = "con_date_fin"
-        'colonnedatefin.HeaderText = "con_date_fin"
-        'colonnedatefin.Name = "con_date_fin"
-        'DgvEmplacements.Columns.Add(colonnedatefin)
-        'DgvEmplacements.Columns("con_date_fin").Visible = False
-
         DgvEmplacements.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
         DgvEmplacements.AutoGenerateColumns = False
@@ -447,8 +435,6 @@ Public Class FormGestion
         InitDgvBeneficiairesDeConcession()
         FCDGBeneficiaire.DataSource = dvbenefsdeconcession
 
-        ' infos du bénéficiaire sélectionné (onglet concessions)
-        DataBindConsbenef()
     End Sub
 
     Private Sub InitDgvBeneficiaires()
@@ -684,14 +670,6 @@ Public Class FormGestion
         FCTBMontantPaye.DataBindings.Add("Text", dvcons, "con_montant_paye")
         CBConEmpl.DataBindings.Add("EmplId", dvcons, "empl_id")
         LinkLabCsnVersCsnr.DataBindings.Add("Text", dvcons, "csnr_nomcomplet")
-    End Sub
-
-    Private Sub DataBindConsbenef()
-        TBconsBenefnom.DataBindings.Add("Text", dvbenefsdeconcession, "ben_nom")
-        TBconsBenefprenom.DataBindings.Add("Text", dvbenefsdeconcession, "ben_prenom")
-        TBconsBenefadress.DataBindings.Add("Text", dvbenefsdeconcession, "ben_adresse")
-        TBconsBenefdatenaiss.DataBindings.Add("DateValue", dvbenefsdeconcession, "ben_date_naiss")
-        CtrlLocBenefDeCons.DataBindings.Add("LocVilleId", dvbenefsdeconcession, "locville_id")
     End Sub
 
     Private Sub DataBindDefunt()
@@ -1047,7 +1025,7 @@ Public Class FormGestion
             FiltresDates.Add("(con_date_fin < #" & Format(DtpRechCsnFinAvant.Value.Date, "M/d/yyyy") & " 11:59:59 PM#)")
         End If
         If DtpRechCsnFinApres.Checked Then
-            FiltresDates.Add("(con_date_fin > #" & Format(DtpRechCsnFinApres.Value.Date, "M/d/yyyy") & " 00:00:00 AM#)")
+            FiltresDates.Add("(con_date_fin => #" & Format(DtpRechCsnFinApres.Value.Date, "M/d/yyyy") & " 00:00:00 AM#)")
         End If
 
         Dim FiltresChampsEtDates As New List(Of String)
@@ -1316,17 +1294,6 @@ Public Class FormGestion
         Next
     End Sub
 
-    Private Sub TextBoxConsBenefUpd()
-        TBconsBenefadress.ReadOnly = False
-        TBconsBenefadress.Cursor = Cursors.IBeam
-        TBconsBenefdatenaiss.ReadOnly = False
-        TBconsBenefdatenaiss.Cursor = Cursors.IBeam
-        TBconsBenefnom.ReadOnly = False
-        TBconsBenefnom.Cursor = Cursors.IBeam
-        CtrlLocBenefDeCons.LectureSeule = False
-        TBconsBenefprenom.ReadOnly = False
-        TBconsBenefprenom.Cursor = Cursors.IBeam
-    End Sub
 
     Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
         If ModeEdition Then
@@ -2095,9 +2062,13 @@ Public Class FormGestion
         End If
     End Sub
 
-    Private Sub FCDGDefunt_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles FCDGDefunt.CellPainting, FCDGBeneficiaire.CellPainting, DgvCsnsDeEmpl.CellPainting, DgvConcessions.CellPainting
+    Private Sub TbRechCsn_KeyDown(sender As Object, e As KeyEventArgs) Handles TBRechCsn.KeyDown, CbRechCsnEmpl.KeyDown, CbRechCsnCsnr.KeyDown, DtpRechCsnFinApres.KeyDown, DtpRechCsnFinAvant.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtCsnRechercher_Click()
+        End If
 
     End Sub
+
 
     Private Sub DgvEmplacements_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvEmplacements.CellFormatting
         If DgvEmplacements.Columns(e.ColumnIndex).Name = "con_actuelle_id" Then
@@ -2145,7 +2116,53 @@ Public Class FormGestion
 
     End Sub
 
-    Private Sub FCDGBeneficiaire_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles FCDGBeneficiaire.CellContentClick
+
+    'Private Sub FormHome_paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+    '    Dim hauteurdebutdegrade As Integer = Me.Height * 0.42
+    '    Dim rectangledegrade = New Rectangle(0, hauteurdebutdegrade, Me.Width, Me.Height - hauteurdebutdegrade)
+    '    'dim rectangledegrade as new rectangle(0, 0, 0, 0)
+    '    ' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+    '    Dim vlineargradient As Drawing.Drawing2D.LinearGradientBrush =
+    '                New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(rectangledegrade.X, rectangledegrade.Y + rectangledegrade.Height - 6),
+    '                                                New Drawing.Point(rectangledegrade.X, rectangledegrade.Y),
+    '                                                Color.FromArgb(11, 160, 92),
+    '                                                Color.White)
+
+
+    '    Dim vgraphic As Drawing.Graphics = Me.CreateGraphics
+    '    ' to tile the image background - using the same image background of the image
+    '    'dim vtexture as new drawing.texturebrush(me.backgroundimage)
+
+    '    vgraphic.FillRectangle(vlineargradient, rectangledegrade)
+    '    'vgraphic.fillrectangle(vtexture, me.displayrectangle)
+
+    '    vgraphic.Dispose() : vgraphic = Nothing ': vtexture.dispose() : vtexture = nothing
+    'End Sub
+
+
+
+    Private Sub Tabs_Paint(sender As Panel, e As PaintEventArgs) Handles TabPageCsns.Paint, TabPageDefunts.Paint, TabPageEmplacements.Paint, TabPagePersonnes.Paint
+        Dim HauteurDebutDegrade As Integer = sender.Height * 0.42
+        Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, sender.Width, sender.Height - HauteurDebutDegrade)
+        ' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+        Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
+                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 6),
+                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height),
+                                                    Color.White,
+                                                    Color.FromArgb(11, 160, 92))
+
+        Dim vGraphic = e.Graphics
+
+        vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
+
+        vGraphic.Dispose() : vGraphic = Nothing
+    End Sub
+
+    Private Sub FCDGDefunt_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles FCDGDefunt.CellPainting, FCDGBeneficiaire.CellPainting, DgvCsnsDeEmpl.CellPainting, DgvConcessions.CellPainting
+
+    End Sub
+
+    Private Sub FDBLinkToPersCon_Click(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabDeDefVersPcont.LinkClicked
 
     End Sub
 
@@ -2153,13 +2170,15 @@ Public Class FormGestion
 
     End Sub
 
-    Private Sub GroupBox5_Paint(sender As Object, e As PaintEventArgs) Handles GroupBox5.Paint
+    Private Sub FCDGBeneficiaire_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles FCDGBeneficiaire.CellContentClick
 
-        Dim borderRectangle As Rectangle = sender.ClientRectangle
-        borderRectangle.Inflate(10, 10)
-        ControlPaint.DrawBorder3D(e.Graphics, borderRectangle,
-            Border3DStyle.Raised)
-        ControlPaint.DrawBorder(e.Graphics, borderRectangle, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid)
+    End Sub
+
+    Private Sub BtCsnRechercher_Click(sender As Object, e As EventArgs) Handles BtCsnRechercher.Click
+
+    End Sub
+
+    Private Sub BTLienCsnrVersConcession_Click(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabLienCsnrVersCon.LinkClicked
 
     End Sub
 End Class

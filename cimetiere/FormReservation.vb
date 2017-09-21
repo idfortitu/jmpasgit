@@ -366,13 +366,14 @@
     End Function
 
 
-    Private PopupPlancim As PopupPlancim
+    Private FormPlanCim As FormChoixEmplSurPlan
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BtMontrerFormPlancim.Click
-        If PopupPlancim Is Nothing OrElse PopupPlancim.IsDisposed Then
-            PopupPlancim = New PopupPlancim(Me.LesEmplacements, AddressOf FiltrEmplsPlan) With {.Size = New Size(500, 500), .Owner = Me}
-            AddHandler PopupPlancim.SelectionChanged, AddressOf PopupPlancim_SelectionChanged
-            PopupPlancim.EmplSelect = DgvEmplacements.SelectedDataRow
-            PopupPlancim.Show()
+        If FormPlanCim Is Nothing OrElse FormPlanCim.IsDisposed Then
+            FormPlanCim = New FormChoixEmplSurPlan(Me.LesEmplacements, AddressOf FiltrEmplsPlan) With {.Size = New Size(500, 500), .Owner = Me}
+            AddHandler FormPlanCim.SelectionChanged, AddressOf PopupPlancim_SelectionChanged
+            FormPlanCim.Show()
+
+            FormPlanCim.EmplSelect = DgvEmplacements.SelectedDataRow
         End If
     End Sub
     Private Function FiltrEmplsPlan(Empl As DataRow) As Boolean
@@ -388,17 +389,21 @@
         End If
     End Sub
 
+
     Private Sub DgvEmplacements_SelectionChanged(sender As Object, e As EventArgs) Handles DgvEmplacements.SelectionChanged
-        If PopupPlancim IsNot Nothing AndAlso Not PopupPlancim.IsDisposed Then
+        If FormPlanCim IsNot Nothing AndAlso Not FormPlanCim.IsDisposed Then
             Dim SelRow = DgvEmplacements.SelectedDataRow
             If SelRow Is Nothing Then
-                PopupPlancim.EmplSelect = Nothing
+                FormPlanCim.EmplSelect = Nothing
             Else
-                PopupPlancim.EmplSelect = SelRow
+                FormPlanCim.EmplSelect = SelRow
             End If
         End If
     End Sub
 
+    Private Sub DgvEmplacements_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvEmplacements.CellFormatting
+
+    End Sub
 
 
 
@@ -436,14 +441,47 @@
         End Select
     End Sub
 
+
+
+
+    Private Sub Me_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+        Dim HauteurDebutDegrade As Integer = Me.Height * 0.42
+        Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, Me.Width, Me.Height - HauteurDebutDegrade)
+        'Dim rectangledegrade As New Rectangle(0, 0, 0, 0)
+        ' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+        Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
+                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 0),
+                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y),
+                                                    Color.FromArgb(11, 160, 92),
+                                                    Color.White)
+
+
+        Dim vGraphic As Drawing.Graphics = Me.CreateGraphics
+        ' To tile the image background - Using the same image background of the image
+        'Dim vTexture As New Drawing.TextureBrush(Me.BackgroundImage)
+
+        vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
+        'vGraphic.FillRectangle(vTexture, Me.DisplayRectangle)
+
+        vGraphic.Dispose() : vGraphic = Nothing ': vTexture.Dispose() : vTexture = Nothing
+    End Sub
+
+
+
+
     Sub Me_Closing() Handles Me.Closing
-        If Me.PopupPlancim IsNot Nothing Then
-            If Not Me.PopupPlancim.IsDisposed Then
-                Me.PopupPlancim.Close()
-                Me.PopupPlancim.Dispose()
+        If Me.FormPlanCim IsNot Nothing Then
+            If Not Me.FormPlanCim.IsDisposed Then
+                Me.FormPlanCim.Close()
+                Me.FormPlanCim.Dispose()
             End If
         End If
     End Sub
+
+
+
+
+
 
 
 End Class

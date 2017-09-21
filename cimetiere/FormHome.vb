@@ -87,6 +87,7 @@ Public Class FormHome
         Else
             Dim aer As New FormDemandeInhumation
             aer.ShowDialog()
+            ChargerNotifs()
         End If
     End Sub
 
@@ -96,6 +97,7 @@ Public Class FormHome
         Else
             Dim res As New FormReservation
             res.ShowDialog()
+            ChargerNotifs()
         End If
     End Sub
 
@@ -105,6 +107,7 @@ Public Class FormHome
         Else
             Dim a As New FormProlong
             a.ShowDialog()
+            ChargerNotifs()
         End If
     End Sub
 
@@ -112,6 +115,7 @@ Public Class FormHome
     Private Sub BtConsulterDonnées_Click(sender As Object, e As EventArgs) Handles BtConsulterDonnées.Click
         Dim f As New FormGestion
         f.ShowDialog()
+        ChargerNotifs()
     End Sub
 
     Private Sub BtSgnalAbCsn_Click(sender As Object, e As EventArgs) Handles BtSignalAbCsn.Click
@@ -225,6 +229,7 @@ Public Class FormHome
         Dim HauteurDebutDegrade As Integer = sender.Height * 0.42
         Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, sender.Width, sender.Height - HauteurDebutDegrade)
         ' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+        ' -- ça peut être différent sur d'autres forms, tester au cas par cas
         Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
                     New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 6),
                                                     New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height),
@@ -272,19 +277,5 @@ Public Class FormHome
         End If
     End Sub
 
-    Private Sub AGAGA(sender As Object, e As PaintEventArgs) Handles BtConsulterDonnées.Paint
-        Dim borderRectangle As Rectangle = sender.ClientRectangle
-        borderRectangle.Inflate(-10, -10)
-        ControlPaint.DrawBorder3D(e.Graphics, borderRectangle,
-            Border3DStyle.Raised)
-        ControlPaint.DrawBorder(e.Graphics, borderRectangle, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid, Color.Red, 10, ButtonBorderStyle.Solid)
-    End Sub
 
-    Private Sub DgvNotifsCsnsExp_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvNotifsCsnsExp.CellContentClick, DgvNotifsCsnsAb.CellContentClick
-
-    End Sub
-
-    Private Sub DgvNotifsCsnsExp_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles DgvNotifsCsnsExp.CellPainting, DgvNotifsCsnsAb.CellPainting
-
-    End Sub
 End Class

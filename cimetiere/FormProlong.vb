@@ -35,11 +35,11 @@
                                      ", GROUP_CONCAT(DISTINCT def_prenom,' ',def_nom ORDER BY def_date_deces ASC SEPARATOR '¤') AS noms_defunts" &
                                      " FROM concessions" &
                                      " INNER JOIN emplacements ON emplacements.empl_id = concessions.empl_id" &
-                                     " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.con_id" &
+                                     " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.csnr_id" &
                                      " LEFT OUTER JOIN beneficier ON beneficier.con_id = concessions.con_id" &
                                      " LEFT OUTER JOIN beneficiaires ON beneficiaires.ben_id = beneficier.ben_id" &
                                      " LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id" &
-                                     " INNER JOIN t_commentaire ON t_commentaire.com_id = concessions.com_id" &
+                                     " LEFT OUTER JOIN t_commentaire ON t_commentaire.com_id = concessions.com_id" &
                                      " GROUP BY concessions.con_id")
 
         DgvCsns.DataSource = Concessions
@@ -234,10 +234,8 @@
     End Sub
 
     Private Sub BtInfosCsnr_Click(sender As Object, e As EventArgs) Handles BtInfosCsnr.Click
-        Static InfosCsnr As DataRow
-        If InfosCsnr Is Nothing Then
-            InfosCsnr = Bdd.Query("SELECT * FROM concessionnaires LEFT OUTER JOIN t_loc_ville ON concessionnaires.locville_id = t_loc_ville.locville_id WHERE csnr_id = " & DgvCsns.SelectedDataRow("csnr_id")).Rows(0)
-        End If
+        If DgvCsns.SelectedRows.Count = 0 Then Exit Sub
+        Dim InfosCsnr = Bdd.Query("SELECT * FROM concessionnaires LEFT OUTER JOIN t_loc_ville ON concessionnaires.locville_id = t_loc_ville.locville_id WHERE csnr_id = " & DgvCsns.SelectedDataRow("csnr_id")).Rows(0)
         TbDmdrNom.Text = InfosCsnr("csnr_nom")
         TbDmdrPrenom.Text = InfosCsnr("csnr_prenom")
         TbDmdrAdresse.Text = InfosCsnr("csnr_adresse")

@@ -3,6 +3,8 @@
 Public Class PanBordure
     Inherits Panel
 
+    ' devrait utiliser le padding pour marquer la zone intérieure, mais trop tard maintenant qu'il y en a dans tous les forms
+
     Private _texte As String
     <Category("Appearance")>
     Public Property Texte As String
@@ -62,7 +64,7 @@ Public Class PanBordure
 
         Dim XGaucheBordure = theRec.X + EpaisseurBordure + EcartBordureCadre
         'Dim YHautBordure = theRec.Y + EpaisseurBordure + EcartBordureCadre + (LeLabel.Height \ 2)
-        Dim YHautBordure = LeLabel.Location.Y + LeLabel.Height \ 2 + 1
+        Dim YHautBordure = LeLabel.Location.Y + If(LeLabel.Text <> "", LeLabel.Height \ 2 + 1, 0)
         Dim XDroiteBordure = theRec.Right - EpaisseurBordure - EcartBordureCadre
         Dim YBasBordure = theRec.Bottom - EpaisseurBordure - EcartBordureCadre
         Dim HauteurBordure = theRec.Height - YHautBordure - EpaisseurBordure - EcartBordureCadre
@@ -70,29 +72,29 @@ Public Class PanBordure
         Dim LargeurBordure = theRec.Width - XGaucheBordure - EpaisseurBordure - EcartBordureCadre
 
 
-        Dim theEndPosition As Integer = LeLabel.Location.X + TextSize + 1
+        'Dim theEndPosition As Integer = LeLabel.Location.X + TextSize + 1
 
 
         g.DrawRectangle(thePen, XGaucheBordure, YHautBordure, LargeurBordure, HauteurBordure)
 
-        ' haut
-        'g.DrawLine(thePen, XGaucheBordure, YHautBordure, LeLabel.Location.X + 100, YHautBordure)
-        ' suite de la ligne à droite
+        '' haut
+        ''g.DrawLine(thePen, XGaucheBordure, YHautBordure, LeLabel.Location.X + 100, YHautBordure)
+        '' suite de la ligne à droite
 
 
-        g.DrawLine(thePen, theRec.X, theRec.Y + 5, theRec.X, theRec.Bottom - 2)
-        g.DrawLine(thePen, theRec.X, theRec.Bottom - 2, theRec.Right - 1, theRec.Bottom - 2)
-        g.DrawLine(thePen, theRec.Right - 2, theRec.Bottom - 2, theRec.Right - 2, theRec.Y + 5)
+        'g.DrawLine(thePen, theRec.X, theRec.Y + 5, theRec.X, theRec.Bottom - 2)
+        'g.DrawLine(thePen, theRec.X, theRec.Bottom - 2, theRec.Right - 1, theRec.Bottom - 2)
+        'g.DrawLine(thePen, theRec.Right - 2, theRec.Bottom - 2, theRec.Right - 2, theRec.Y + 5)
 
-        g.DrawLine(thePen, theRec.Right - 2, theRec.Y + 5, theRec.X + theEndPosition, theRec.Y + 5)
-        'g.DrawLine(thePen, theRec.Right - 2, theRec.Y + 5, theRec.X, theRec.Y + 5)
+        'g.DrawLine(thePen, theRec.Right - 2, theRec.Y + 5, theRec.X + theEndPosition, theRec.Y + 5)
+        ''g.DrawLine(thePen, theRec.Right - 2, theRec.Y + 5, theRec.X, theRec.Y + 5)
 
 
-        g.DrawLine(Pens.White, theRec.X + 8, theRec.Y + 6, theRec.X + 1, theRec.Y + 6)
-        g.DrawLine(Pens.White, theRec.X + 1, theRec.Y + 6, theRec.X + 1, theRec.Bottom - 3)
-        g.DrawLine(Pens.White, theRec.X, theRec.Bottom - 1, theRec.Right, theRec.Bottom - 1)
-        g.DrawLine(Pens.White, theRec.Right - 1, theRec.Bottom - 1, theRec.Right - 1, theRec.Y + 5)
-        g.DrawLine(Pens.White, theRec.Right - 3, theRec.Y + 6, theRec.X + theEndPosition, theRec.Y + 6)
+        'g.DrawLine(Pens.White, theRec.X + 8, theRec.Y + 6, theRec.X + 1, theRec.Y + 6)
+        'g.DrawLine(Pens.White, theRec.X + 1, theRec.Y + 6, theRec.X + 1, theRec.Bottom - 3)
+        'g.DrawLine(Pens.White, theRec.X, theRec.Bottom - 1, theRec.Right, theRec.Bottom - 1)
+        'g.DrawLine(Pens.White, theRec.Right - 1, theRec.Bottom - 1, theRec.Right - 1, theRec.Y + 5)
+        'g.DrawLine(Pens.White, theRec.Right - 3, theRec.Y + 6, theRec.X + theEndPosition, theRec.Y + 6)
 
         'Dim sf As StringFormat = New StringFormat()
         'Dim drawBrush As SolidBrush = New SolidBrush(Color.Black)
@@ -118,7 +120,7 @@ Public Class PanBordure
         Me.LeLabel.Name = "LeLabel"
         'Me.LeLabel.Size = New System.Drawing.Size(51, 17)
         Me.LeLabel.TabIndex = 0
-        Me.LeLabel.Text = "Label1"
+        Me.LeLabel.Text = ""
         '
         'PanelCollapse
         '
@@ -127,6 +129,7 @@ Public Class PanBordure
         'Me.Size = New System.Drawing.Size(504, 334)
         Me.ResumeLayout(False)
         Me.PerformLayout()
+        'Me.
 
     End Sub
 

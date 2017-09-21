@@ -5,13 +5,13 @@
     Private Emplacements As DataTable
     Private FuncFiltre As Func(Of DataRow, Boolean)
 
-    ' EmplSelect devrait pouvoir être appelée avant le Load du form, contrairement à RefSelect et IdSelect
     Private _emplSelect
     Public Property EmplSelect As DataRow
         Get
             Return _emplSelect
         End Get
         Set(value As DataRow)
+            If Not Loaded Then Throw New Exception("Le form doit avoir été chargé")     ' changer l'empl avant l'event Load (chargement des emplacements dans le contrôle PlanCimetière) entraîne un jeu de ping-pong infini entre les différents gestionnaires de changement de sélection d'emplacement/de référence d'emplacement, pour des raisons qui restent à examiner
             Dim EmplDejaSelect = PlanCimetiere1.EmplSelect
             If EmplDejaSelect IsNot value Then
                 _emplSelect = value
@@ -64,7 +64,7 @@
     End Sub
 
 
-
+    Private Loaded As Boolean = False
     Private Sub FormChoixEmplSurPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not DesignMode Then
             If Me.FuncFiltre IsNot Nothing Then PlanCimetiere1.FuncFiltre = Me.FuncFiltre
@@ -78,6 +78,7 @@
             PlanCimetiere1.EmplSelect = Me.EmplSelect       ' l'empl select ne peut être mis que quand le plancim a été initialisé ; l'initialisation du plancim ne se fait qu'à son Load parce qu'il a besoin de sa fonction FuncFiltre que le designer met à Nothing avant ça
             'TbReference.BackColor = If(PlanCimetiere1.EmplSelect IsNot Nothing, Color.White, Color.Khaki)       ' initialise la couleur de la tb, le handler sur SelectionChanged ne le faisant qu'
         End If
+        Loaded = True
     End Sub
 
 

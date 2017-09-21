@@ -4,7 +4,6 @@ Public Class DataGridViewConcessions
     Private Sub ColorLignes(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles Me.CellFormatting
         Dim larow As DataGridViewRow = Me.Rows(e.RowIndex)
         Dim LaDataRow As DataRow = CType(larow.DataBoundItem, DataRowView).Row
-        ''Dim datefin As Date? = CType(larow.DataBoundItem, Concession).DateFin
         Dim datefin As Date? = If(Not IsDBNull(LaDataRow("con_date_fin")), LaDataRow("con_date_fin"), Nothing)
         Dim expire As Boolean = datefin.HasValue AndAlso datefin < Today
         Dim expirebientot As Boolean = Not expire AndAlso datefin.HasValue AndAlso Today > DateAdd(DateInterval.Month, -1, datefin.Value)
@@ -21,11 +20,9 @@ Public Class DataGridViewConcessions
 
         If expirebientot Then
             If impair Then
-                e.CellStyle.BackColor = Color.FromArgb(232, 222, 222)
-                'larow.DefaultCellStyle.ForeColor = SystemColors.GrayText
+                e.CellStyle.BackColor = Color.FromArgb(255, 255, 200)
             Else
-                e.CellStyle.BackColor = Color.FromArgb(242, 232, 232)
-                'larow.DefaultCellStyle.ForeColor = SystemColors.GrayText
+                e.CellStyle.BackColor = Color.FromArgb(255, 255, 200)
             End If
 
         End If

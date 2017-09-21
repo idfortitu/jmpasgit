@@ -4,6 +4,12 @@
         InitializeComponent()
         DgvCsnsExist.AutoGenerateColumns = False
         DgvEmplacementsPourInhOrd.AutoGenerateColumns = False
+
+        TabControl1.Appearance = TabAppearance.FlatButtons
+        TabControl1.ItemSize = New Size(0, 1)
+        TabControl1.SizeMode = TabSizeMode.Fixed
+        TabControl1.TabStop = False
+
     End Sub
 
     Private Sub FormDemandeInhumation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -223,7 +229,7 @@
                                                    ", GROUP_CONCAT(DISTINCT def_prenom,' ',def_nom ORDER BY def_date_deces ASC SEPARATOR '¤') AS noms_defunts" &
                                                    " FROM concessions" &
                                                    " INNER JOIN emplacements ON emplacements.empl_id = concessions.empl_id" &
-                                                   " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.con_id" &
+                                                   " INNER JOIN concessionnaires ON concessionnaires.csnr_id = concessions.csnr_id" &
                                                    " LEFT OUTER JOIN beneficier ON beneficier.con_id = concessions.con_id" &
                                                    " LEFT OUTER JOIN beneficiaires ON beneficiaires.ben_id = beneficier.ben_id" &
                                                    " LEFT OUTER JOIN defunts ON defunts.empl_id = emplacements.empl_id" &
@@ -840,4 +846,25 @@
         Next
     End Sub
 
+
+    Private Sub Tabs_Paint(sender As Panel, e As PaintEventArgs) Handles TabP2ConExis.Paint, TabP2InhOrd.Paint, FlowLayoutPanel1.Paint 'TabPage1.Paint
+        Dim HauteurDebutDegrade As Integer = sender.Height * 0.42
+        Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, sender.Width, sender.Height - HauteurDebutDegrade)
+        ' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+        Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
+                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 6),
+                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height),
+                                                    Color.White,
+                                                    Color.FromArgb(11, 160, 92))
+
+        Dim vGraphic = e.Graphics
+
+        vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
+
+        vGraphic.Dispose() : vGraphic = Nothing
+    End Sub
+
+    Private Sub RbInhOrd_CheckedChanged(sender As Object, e As EventArgs) Handles RbInhOrd.CheckedChanged
+
+    End Sub
 End Class

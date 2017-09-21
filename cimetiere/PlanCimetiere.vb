@@ -141,6 +141,7 @@ Public Class PlanCimetiere
     <Category("Behavior)")>
     Public Property SelectionEmplAuClic As Boolean = True
 
+    ' pourrait être amélioré pour changer de parcelle si besoin
     Private Property _emplSelect As DataRow
     Public Property EmplSelect As DataRow
         Get
