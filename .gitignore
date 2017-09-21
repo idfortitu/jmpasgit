@@ -210,3 +210,4 @@ cimetiere/bin/Debug/fr/WebMatrix.WebData.resources.dll
 cimetiere/bin/Debug/fr/WebMatrix.Data.resources.dll
 *.exe
 cimetiere/bin/Debug/cimetiere.exe
+cimetiere/bin/Debug/Microsoft.Web.Infrastructure.dll

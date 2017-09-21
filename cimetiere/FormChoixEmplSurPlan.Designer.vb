@@ -65,7 +65,7 @@ Partial Class FormChoixEmplSurPlan
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(6, 22)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(170, 17)
+        Me.Label1.Size = New System.Drawing.Size(127, 13)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Emplacement réservé par"
         '
@@ -74,7 +74,7 @@ Partial Class FormChoixEmplSurPlan
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(9, 88)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(24, 17)
+        Me.Label2.Size = New System.Drawing.Size(19, 13)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "du"
         '
@@ -83,7 +83,7 @@ Partial Class FormChoixEmplSurPlan
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(152, 88)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(24, 17)
+        Me.Label3.Size = New System.Drawing.Size(19, 13)
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "au"
         '
@@ -102,9 +102,10 @@ Partial Class FormChoixEmplSurPlan
         'BtFermer
         '
         Me.BtFermer.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtFermer.Location = New System.Drawing.Point(1042, 548)
+        Me.BtFermer.Location = New System.Drawing.Point(782, 445)
+        Me.BtFermer.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BtFermer.Name = "BtFermer"
-        Me.BtFermer.Size = New System.Drawing.Size(82, 32)
+        Me.BtFermer.Size = New System.Drawing.Size(62, 26)
         Me.BtFermer.TabIndex = 21
         Me.BtFermer.Text = "Fermer"
         Me.BtFermer.UseVisualStyleBackColor = True
@@ -112,9 +113,10 @@ Partial Class FormChoixEmplSurPlan
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(15, 18)
+        Me.Label7.Location = New System.Drawing.Point(11, 15)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(82, 17)
+        Me.Label7.Size = New System.Drawing.Size(63, 13)
         Me.Label7.TabIndex = 20
         Me.Label7.Text = "Référence :"
         '
@@ -122,18 +124,20 @@ Partial Class FormChoixEmplSurPlan
         '
         Me.CbMonumClasse.AutoSize = True
         Me.CbMonumClasse.Enabled = False
-        Me.CbMonumClasse.Location = New System.Drawing.Point(18, 49)
+        Me.CbMonumClasse.Location = New System.Drawing.Point(14, 40)
+        Me.CbMonumClasse.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CbMonumClasse.Name = "CbMonumClasse"
-        Me.CbMonumClasse.Size = New System.Drawing.Size(140, 21)
+        Me.CbMonumClasse.Size = New System.Drawing.Size(109, 17)
         Me.CbMonumClasse.TabIndex = 16
         Me.CbMonumClasse.Text = "Monument classé"
         Me.CbMonumClasse.UseVisualStyleBackColor = True
         '
         'TbReference
         '
-        Me.TbReference.Location = New System.Drawing.Point(103, 17)
+        Me.TbReference.Location = New System.Drawing.Point(77, 14)
+        Me.TbReference.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbReference.Name = "TbReference"
-        Me.TbReference.Size = New System.Drawing.Size(103, 22)
+        Me.TbReference.Size = New System.Drawing.Size(78, 20)
         Me.TbReference.TabIndex = 19
         '
         'GbReservation
@@ -144,9 +148,11 @@ Partial Class FormChoixEmplSurPlan
         Me.GbReservation.Controls.Add(Me.TbDateFin)
         Me.GbReservation.Controls.Add(Me.TbDateDebut)
         Me.GbReservation.Controls.Add(Me.TbCsnr)
-        Me.GbReservation.Location = New System.Drawing.Point(9, 248)
+        Me.GbReservation.Location = New System.Drawing.Point(7, 202)
+        Me.GbReservation.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GbReservation.Name = "GbReservation"
-        Me.GbReservation.Size = New System.Drawing.Size(262, 148)
+        Me.GbReservation.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GbReservation.Size = New System.Drawing.Size(196, 120)
         Me.GbReservation.TabIndex = 18
         Me.GbReservation.TabStop = False
         Me.GbReservation.Text = "Réservation :"
@@ -154,60 +160,68 @@ Partial Class FormChoixEmplSurPlan
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(15, 23)
+        Me.Label6.Location = New System.Drawing.Point(11, 19)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(86, 17)
+        Me.Label6.Size = New System.Drawing.Size(65, 13)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "Réservé par"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 106)
+        Me.Label5.Location = New System.Drawing.Point(9, 86)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(24, 17)
+        Me.Label5.Size = New System.Drawing.Size(19, 13)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "au"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 79)
+        Me.Label4.Location = New System.Drawing.Point(9, 64)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(24, 17)
+        Me.Label4.Size = New System.Drawing.Size(19, 13)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "du"
         '
         'TbDateFin
         '
-        Me.TbDateFin.Location = New System.Drawing.Point(42, 106)
+        Me.TbDateFin.Location = New System.Drawing.Point(32, 86)
+        Me.TbDateFin.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDateFin.Name = "TbDateFin"
         Me.TbDateFin.ReadOnly = True
-        Me.TbDateFin.Size = New System.Drawing.Size(110, 22)
+        Me.TbDateFin.Size = New System.Drawing.Size(84, 20)
         Me.TbDateFin.TabIndex = 2
         '
         'TbDateDebut
         '
-        Me.TbDateDebut.Location = New System.Drawing.Point(44, 79)
+        Me.TbDateDebut.Location = New System.Drawing.Point(33, 64)
+        Me.TbDateDebut.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDateDebut.Name = "TbDateDebut"
         Me.TbDateDebut.ReadOnly = True
-        Me.TbDateDebut.Size = New System.Drawing.Size(108, 22)
+        Me.TbDateDebut.Size = New System.Drawing.Size(82, 20)
         Me.TbDateDebut.TabIndex = 1
         '
         'TbCsnr
         '
-        Me.TbCsnr.Location = New System.Drawing.Point(15, 46)
+        Me.TbCsnr.Location = New System.Drawing.Point(11, 37)
+        Me.TbCsnr.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbCsnr.Name = "TbCsnr"
         Me.TbCsnr.ReadOnly = True
-        Me.TbCsnr.Size = New System.Drawing.Size(203, 22)
+        Me.TbCsnr.Size = New System.Drawing.Size(153, 20)
         Me.TbCsnr.TabIndex = 0
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.LbOccupants)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 81)
+        Me.GroupBox1.Location = New System.Drawing.Point(2, 66)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(268, 157)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Size = New System.Drawing.Size(201, 128)
         Me.GroupBox1.TabIndex = 17
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Occupants :"
@@ -216,10 +230,10 @@ Partial Class FormChoixEmplSurPlan
         '
         Me.LbOccupants.FormattingEnabled = True
         Me.LbOccupants.IntegralHeight = False
-        Me.LbOccupants.ItemHeight = 16
-        Me.LbOccupants.Location = New System.Drawing.Point(6, 20)
+        Me.LbOccupants.Location = New System.Drawing.Point(4, 16)
+        Me.LbOccupants.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.LbOccupants.Name = "LbOccupants"
-        Me.LbOccupants.Size = New System.Drawing.Size(258, 130)
+        Me.LbOccupants.Size = New System.Drawing.Size(194, 106)
         Me.LbOccupants.TabIndex = 3
         '
         'PanInfos
@@ -229,25 +243,28 @@ Partial Class FormChoixEmplSurPlan
         Me.PanInfos.Controls.Add(Me.GbReservation)
         Me.PanInfos.Controls.Add(Me.TbReference)
         Me.PanInfos.Controls.Add(Me.CbMonumClasse)
-        Me.PanInfos.Location = New System.Drawing.Point(939, 12)
+        Me.PanInfos.Location = New System.Drawing.Point(704, 10)
+        Me.PanInfos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanInfos.Name = "PanInfos"
-        Me.PanInfos.Size = New System.Drawing.Size(282, 507)
+        Me.PanInfos.Size = New System.Drawing.Size(212, 412)
         Me.PanInfos.TabIndex = 22
         '
         'Panel1
         '
-        Me.Panel1.Location = New System.Drawing.Point(441, 544)
+        Me.Panel1.Location = New System.Drawing.Point(331, 442)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(8, 8)
+        Me.Panel1.Size = New System.Drawing.Size(6, 6)
         Me.Panel1.TabIndex = 23
         '
         'PlanCimConteneur1
         '
         Me.PlanCimConteneur1.AutoScroll = True
         Me.PlanCimConteneur1.Controls.Add(Me.PlanCimetiere1)
-        Me.PlanCimConteneur1.Location = New System.Drawing.Point(12, 12)
+        Me.PlanCimConteneur1.Location = New System.Drawing.Point(9, 10)
+        Me.PlanCimConteneur1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PlanCimConteneur1.Name = "PlanCimConteneur1"
-        Me.PlanCimConteneur1.Size = New System.Drawing.Size(921, 581)
+        Me.PlanCimConteneur1.Size = New System.Drawing.Size(691, 472)
         Me.PlanCimConteneur1.TabIndex = 24
         '
         'PlanCimetiere1
@@ -263,7 +280,7 @@ Partial Class FormChoixEmplSurPlan
         Me.PlanCimetiere1.NomParcelleAffichee = "A1"
         Me.PlanCimetiere1.RefSelect = "-1"
         Me.PlanCimetiere1.SelectionEmplAuClic = True
-        Me.PlanCimetiere1.Size = New System.Drawing.Size(608, 1200)
+        Me.PlanCimetiere1.Size = New System.Drawing.Size(456, 975)
         Me.PlanCimetiere1.TabIndex = 15
         Me.PlanCimetiere1.Zoom = 1.0!
         Me.PlanCimetiere1.ZoomableAvecRoulette = True
@@ -271,14 +288,15 @@ Partial Class FormChoixEmplSurPlan
         'FormChoixEmplSurPlan
         '
         Me.AcceptButton = Me.BtFermer
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtFermer
-        Me.ClientSize = New System.Drawing.Size(1233, 605)
+        Me.ClientSize = New System.Drawing.Size(925, 492)
         Me.Controls.Add(Me.PlanCimConteneur1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PanInfos)
         Me.Controls.Add(Me.BtFermer)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "FormChoixEmplSurPlan"
         Me.Text = "FormChoixEmplSurPlan"
         Me.GroupBox2.ResumeLayout(False)
