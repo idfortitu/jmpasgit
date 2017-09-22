@@ -73,8 +73,6 @@ Partial Class FormProlong
         Me.TbCom = New System.Windows.Forms.TextBox()
         Me.CbEnregPdfCsn = New System.Windows.Forms.CheckBox()
         Me.Panel3 = New cimetiere.PanBordure()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.Label16 = New System.Windows.Forms.Label()
         CType(Me.ErProv, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgvCsns, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanBordure4.SuspendLayout()
@@ -85,7 +83,6 @@ Partial Class FormProlong
         Me.GroupBox3.SuspendLayout()
         Me.GbO.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtTerminer
@@ -93,10 +90,9 @@ Partial Class FormProlong
         Me.BtTerminer.BackColor = System.Drawing.Color.SeaGreen
         Me.BtTerminer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtTerminer.ForeColor = System.Drawing.Color.Transparent
-        Me.BtTerminer.Location = New System.Drawing.Point(783, 790)
-        Me.BtTerminer.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtTerminer.Location = New System.Drawing.Point(604, 582)
         Me.BtTerminer.Name = "BtTerminer"
-        Me.BtTerminer.Size = New System.Drawing.Size(154, 62)
+        Me.BtTerminer.Size = New System.Drawing.Size(116, 50)
         Me.BtTerminer.TabIndex = 135
         Me.BtTerminer.Text = "Prolonger"
         Me.BtTerminer.UseVisualStyleBackColor = False
@@ -128,7 +124,8 @@ Partial Class FormProlong
         Me.DgvCsns.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvCsns.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.ErProv.SetIconPadding(Me.DgvCsns, -30)
-        Me.DgvCsns.Location = New System.Drawing.Point(16, 71)
+        Me.DgvCsns.Location = New System.Drawing.Point(12, 58)
+        Me.DgvCsns.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DgvCsns.MultiSelect = False
         Me.DgvCsns.Name = "DgvCsns"
         Me.DgvCsns.ReadOnly = True
@@ -138,7 +135,7 @@ Partial Class FormProlong
         Me.DgvCsns.SelectedRowIndex = -1
         Me.DgvCsns.SelectedValue = -1
         Me.DgvCsns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgvCsns.Size = New System.Drawing.Size(912, 239)
+        Me.DgvCsns.Size = New System.Drawing.Size(684, 194)
         Me.DgvCsns.TabIndex = 174
         '
         'ColConId
@@ -186,18 +183,20 @@ Partial Class FormProlong
         Me.PanBordure4.Controls.Add(Me.TbRem)
         Me.PanBordure4.CouleurBordure = System.Drawing.Color.SeaGreen
         Me.PanBordure4.EpaisseurBordure = 7
-        Me.PanBordure4.Location = New System.Drawing.Point(655, 582)
+        Me.PanBordure4.Location = New System.Drawing.Point(498, 391)
+        Me.PanBordure4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanBordure4.Name = "PanBordure4"
-        Me.PanBordure4.Size = New System.Drawing.Size(295, 195)
+        Me.PanBordure4.Size = New System.Drawing.Size(221, 158)
         Me.PanBordure4.TabIndex = 193
         Me.PanBordure4.Texte = "Remarque sur la prolongation"
         '
         'TbRem
         '
-        Me.TbRem.Location = New System.Drawing.Point(19, 34)
+        Me.TbRem.Location = New System.Drawing.Point(14, 28)
+        Me.TbRem.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbRem.Multiline = True
         Me.TbRem.Name = "TbRem"
-        Me.TbRem.Size = New System.Drawing.Size(257, 145)
+        Me.TbRem.Size = New System.Drawing.Size(194, 119)
         Me.TbRem.TabIndex = 0
         '
         'PanBordure3
@@ -216,42 +215,47 @@ Partial Class FormProlong
         Me.PanBordure3.Controls.Add(Me.Label4)
         Me.PanBordure3.CouleurBordure = System.Drawing.Color.SeaGreen
         Me.PanBordure3.EpaisseurBordure = 7
-        Me.PanBordure3.Location = New System.Drawing.Point(5, 783)
+        Me.PanBordure3.Location = New System.Drawing.Point(11, 554)
+        Me.PanBordure3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanBordure3.Name = "PanBordure3"
-        Me.PanBordure3.Size = New System.Drawing.Size(495, 142)
+        Me.PanBordure3.Size = New System.Drawing.Size(371, 115)
         Me.PanBordure3.TabIndex = 193
         Me.PanBordure3.Texte = "Durée"
         '
         'TbDateFinAct
         '
-        Me.TbDateFinAct.Location = New System.Drawing.Point(163, 54)
+        Me.TbDateFinAct.Location = New System.Drawing.Point(122, 44)
+        Me.TbDateFinAct.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDateFinAct.Name = "TbDateFinAct"
         Me.TbDateFinAct.ReadOnly = True
-        Me.TbDateFinAct.Size = New System.Drawing.Size(103, 22)
+        Me.TbDateFinAct.Size = New System.Drawing.Size(78, 20)
         Me.TbDateFinAct.TabIndex = 12
         '
         'TbDateDebut
         '
-        Me.TbDateDebut.Location = New System.Drawing.Point(41, 54)
+        Me.TbDateDebut.Location = New System.Drawing.Point(31, 44)
+        Me.TbDateDebut.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDateDebut.Name = "TbDateDebut"
         Me.TbDateDebut.ReadOnly = True
-        Me.TbDateDebut.Size = New System.Drawing.Size(95, 22)
+        Me.TbDateDebut.Size = New System.Drawing.Size(72, 20)
         Me.TbDateDebut.TabIndex = 11
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(38, 29)
+        Me.Label2.Location = New System.Drawing.Point(28, 24)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(98, 17)
+        Me.Label2.Size = New System.Drawing.Size(75, 13)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Date de début"
         '
         'BtAjouterAnnees
         '
-        Me.BtAjouterAnnees.Location = New System.Drawing.Point(203, 98)
+        Me.BtAjouterAnnees.Location = New System.Drawing.Point(152, 80)
+        Me.BtAjouterAnnees.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BtAjouterAnnees.Name = "BtAjouterAnnees"
-        Me.BtAjouterAnnees.Size = New System.Drawing.Size(75, 25)
+        Me.BtAjouterAnnees.Size = New System.Drawing.Size(56, 20)
         Me.BtAjouterAnnees.TabIndex = 8
         Me.BtAjouterAnnees.Text = "Ajouter"
         Me.BtAjouterAnnees.UseVisualStyleBackColor = True
@@ -259,9 +263,10 @@ Partial Class FormProlong
         'Label7
         '
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!)
-        Me.Label7.Location = New System.Drawing.Point(358, 82)
+        Me.Label7.Location = New System.Drawing.Point(268, 67)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(30, 27)
+        Me.Label7.Size = New System.Drawing.Size(22, 22)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "↗"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -269,9 +274,10 @@ Partial Class FormProlong
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(330, 102)
+        Me.Label5.Location = New System.Drawing.Point(248, 83)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(31, 17)
+        Me.Label5.Size = New System.Drawing.Size(24, 13)
         Me.Label5.TabIndex = 7
         Me.Label5.Text = "ans"
         '
@@ -279,17 +285,19 @@ Partial Class FormProlong
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!)
-        Me.Label6.Location = New System.Drawing.Point(179, 71)
+        Me.Label6.Location = New System.Drawing.Point(134, 58)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(30, 31)
+        Me.Label6.Size = New System.Drawing.Size(25, 26)
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "↘"
         '
         'TbAnneesAjout
         '
-        Me.TbAnneesAjout.Location = New System.Drawing.Point(284, 100)
+        Me.TbAnneesAjout.Location = New System.Drawing.Point(213, 81)
+        Me.TbAnneesAjout.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbAnneesAjout.Name = "TbAnneesAjout"
-        Me.TbAnneesAjout.Size = New System.Drawing.Size(43, 22)
+        Me.TbAnneesAjout.Size = New System.Drawing.Size(33, 20)
         Me.TbAnneesAjout.TabIndex = 6
         Me.TbAnneesAjout.Text = "5"
         Me.TbAnneesAjout.Value = 5
@@ -297,28 +305,31 @@ Partial Class FormProlong
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(159, 29)
+        Me.Label3.Location = New System.Drawing.Point(119, 24)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(130, 17)
+        Me.Label3.Size = New System.Drawing.Size(99, 13)
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "Date de fin actuelle"
         '
         'TbNouvDateFin
         '
         Me.TbNouvDateFin.DateValue = Nothing
-        Me.TbNouvDateFin.Location = New System.Drawing.Point(322, 54)
+        Me.TbNouvDateFin.Location = New System.Drawing.Point(242, 44)
+        Me.TbNouvDateFin.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbNouvDateFin.Mask = "00/00/0000"
         Me.TbNouvDateFin.Name = "TbNouvDateFin"
-        Me.TbNouvDateFin.Size = New System.Drawing.Size(95, 22)
+        Me.TbNouvDateFin.Size = New System.Drawing.Size(72, 20)
         Me.TbNouvDateFin.TabIndex = 5
         Me.TbNouvDateFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(316, 29)
+        Me.Label4.Location = New System.Drawing.Point(237, 24)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(134, 17)
+        Me.Label4.Size = New System.Drawing.Size(102, 13)
         Me.Label4.TabIndex = 2
         Me.Label4.Text = "Nouvelle date de fin"
         '
@@ -339,17 +350,19 @@ Partial Class FormProlong
         Me.PanBordure2.Controls.Add(Me.TbDmdrAdresse)
         Me.PanBordure2.CouleurBordure = System.Drawing.Color.SeaGreen
         Me.PanBordure2.EpaisseurBordure = 7
-        Me.PanBordure2.Location = New System.Drawing.Point(5, 582)
+        Me.PanBordure2.Location = New System.Drawing.Point(11, 391)
+        Me.PanBordure2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanBordure2.Name = "PanBordure2"
-        Me.PanBordure2.Size = New System.Drawing.Size(644, 195)
+        Me.PanBordure2.Size = New System.Drawing.Size(483, 158)
         Me.PanBordure2.TabIndex = 192
         Me.PanBordure2.Texte = "Personne introduisant la demande"
         '
         'BtInfosCsnr
         '
-        Me.BtInfosCsnr.Location = New System.Drawing.Point(307, 29)
+        Me.BtInfosCsnr.Location = New System.Drawing.Point(230, 24)
+        Me.BtInfosCsnr.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BtInfosCsnr.Name = "BtInfosCsnr"
-        Me.BtInfosCsnr.Size = New System.Drawing.Size(214, 51)
+        Me.BtInfosCsnr.Size = New System.Drawing.Size(160, 41)
         Me.BtInfosCsnr.TabIndex = 11
         Me.BtInfosCsnr.Text = "BtInfosCsnr"
         Me.BtInfosCsnr.UseVisualStyleBackColor = True
@@ -357,95 +370,105 @@ Partial Class FormProlong
         'TbDmdrDateNaiss
         '
         Me.TbDmdrDateNaiss.DateValue = Nothing
-        Me.TbDmdrDateNaiss.Location = New System.Drawing.Point(450, 154)
+        Me.TbDmdrDateNaiss.Location = New System.Drawing.Point(338, 125)
+        Me.TbDmdrDateNaiss.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDmdrDateNaiss.Mask = "00/00/0000"
         Me.TbDmdrDateNaiss.Name = "TbDmdrDateNaiss"
-        Me.TbDmdrDateNaiss.Size = New System.Drawing.Size(100, 22)
+        Me.TbDmdrDateNaiss.Size = New System.Drawing.Size(76, 20)
         Me.TbDmdrDateNaiss.TabIndex = 10
         Me.TbDmdrDateNaiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(304, 154)
+        Me.Label12.Location = New System.Drawing.Point(228, 125)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(126, 17)
+        Me.Label12.Size = New System.Drawing.Size(96, 13)
         Me.Label12.TabIndex = 9
         Me.Label12.Text = "Date de naissance"
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(13, 151)
+        Me.Label11.Location = New System.Drawing.Point(10, 123)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(76, 17)
+        Me.Label11.Size = New System.Drawing.Size(58, 13)
         Me.Label11.TabIndex = 4
         Me.Label11.Text = "Téléphone"
         '
         'TbDmdrTel
         '
-        Me.TbDmdrTel.Location = New System.Drawing.Point(98, 151)
+        Me.TbDmdrTel.Location = New System.Drawing.Point(74, 123)
+        Me.TbDmdrTel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDmdrTel.Name = "TbDmdrTel"
-        Me.TbDmdrTel.Size = New System.Drawing.Size(142, 22)
+        Me.TbDmdrTel.Size = New System.Drawing.Size(108, 20)
         Me.TbDmdrTel.TabIndex = 8
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(304, 86)
+        Me.Label9.Location = New System.Drawing.Point(228, 70)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(57, 17)
+        Me.Label9.Size = New System.Drawing.Size(43, 13)
         Me.Label9.TabIndex = 3
         Me.Label9.Text = "Prénom"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(28, 86)
+        Me.Label8.Location = New System.Drawing.Point(21, 70)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(37, 17)
+        Me.Label8.Size = New System.Drawing.Size(29, 13)
         Me.Label8.TabIndex = 1
         Me.Label8.Text = "Nom"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(26, 118)
+        Me.Label10.Location = New System.Drawing.Point(20, 96)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(60, 17)
+        Me.Label10.Size = New System.Drawing.Size(45, 13)
         Me.Label10.TabIndex = 5
         Me.Label10.Text = "Adresse"
         '
         'CtrlVilleDmdr
         '
         Me.CtrlVilleDmdr.LectureSeule = False
-        Me.CtrlVilleDmdr.Location = New System.Drawing.Point(312, 117)
+        Me.CtrlVilleDmdr.Location = New System.Drawing.Point(234, 95)
         Me.CtrlVilleDmdr.LocVilleId = -1
-        Me.CtrlVilleDmdr.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtrlVilleDmdr.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CtrlVilleDmdr.Name = "CtrlVilleDmdr"
         Me.CtrlVilleDmdr.osef = Nothing
-        Me.CtrlVilleDmdr.Size = New System.Drawing.Size(316, 25)
+        Me.CtrlVilleDmdr.Size = New System.Drawing.Size(237, 20)
         Me.CtrlVilleDmdr.TabIndex = 7
         '
         'TbDmdrPrenom
         '
-        Me.TbDmdrPrenom.Location = New System.Drawing.Point(371, 86)
+        Me.TbDmdrPrenom.Location = New System.Drawing.Point(278, 70)
+        Me.TbDmdrPrenom.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDmdrPrenom.Name = "TbDmdrPrenom"
-        Me.TbDmdrPrenom.Size = New System.Drawing.Size(142, 22)
+        Me.TbDmdrPrenom.Size = New System.Drawing.Size(108, 20)
         Me.TbDmdrPrenom.TabIndex = 2
         '
         'TbDmdrNom
         '
-        Me.TbDmdrNom.Location = New System.Drawing.Point(98, 86)
+        Me.TbDmdrNom.Location = New System.Drawing.Point(74, 70)
+        Me.TbDmdrNom.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDmdrNom.Name = "TbDmdrNom"
-        Me.TbDmdrNom.Size = New System.Drawing.Size(142, 22)
+        Me.TbDmdrNom.Size = New System.Drawing.Size(108, 20)
         Me.TbDmdrNom.TabIndex = 0
         '
         'TbDmdrAdresse
         '
-        Me.TbDmdrAdresse.Location = New System.Drawing.Point(98, 118)
+        Me.TbDmdrAdresse.Location = New System.Drawing.Point(74, 96)
+        Me.TbDmdrAdresse.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbDmdrAdresse.Name = "TbDmdrAdresse"
-        Me.TbDmdrAdresse.Size = New System.Drawing.Size(171, 22)
+        Me.TbDmdrAdresse.Size = New System.Drawing.Size(129, 20)
         Me.TbDmdrAdresse.TabIndex = 6
         '
         'PanBordure1
@@ -460,9 +483,10 @@ Partial Class FormProlong
         Me.PanBordure1.Controls.Add(Me.GbO)
         Me.PanBordure1.CouleurBordure = System.Drawing.Color.SeaGreen
         Me.PanBordure1.EpaisseurBordure = 7
-        Me.PanBordure1.Location = New System.Drawing.Point(5, 115)
+        Me.PanBordure1.Location = New System.Drawing.Point(11, 11)
+        Me.PanBordure1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanBordure1.Name = "PanBordure1"
-        Me.PanBordure1.Size = New System.Drawing.Size(945, 464)
+        Me.PanBordure1.Size = New System.Drawing.Size(709, 377)
         Me.PanBordure1.TabIndex = 191
         Me.PanBordure1.Texte = "Choisir la concession"
         '
@@ -470,18 +494,20 @@ Partial Class FormProlong
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Location = New System.Drawing.Point(21, 40)
+        Me.Label1.Location = New System.Drawing.Point(16, 32)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 17)
+        Me.Label1.Size = New System.Drawing.Size(29, 13)
         Me.Label1.TabIndex = 185
         Me.Label1.Text = "Filtre"
         '
         'BtViderFiltre
         '
         Me.BtViderFiltre.Image = Global.cimetiere.My.Resources.Resources.Cancel_16x
-        Me.BtViderFiltre.Location = New System.Drawing.Point(227, 36)
+        Me.BtViderFiltre.Location = New System.Drawing.Point(170, 29)
+        Me.BtViderFiltre.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BtViderFiltre.Name = "BtViderFiltre"
-        Me.BtViderFiltre.Size = New System.Drawing.Size(32, 29)
+        Me.BtViderFiltre.Size = New System.Drawing.Size(24, 24)
         Me.BtViderFiltre.TabIndex = 188
         Me.BtViderFiltre.UseVisualStyleBackColor = True
         '
@@ -489,9 +515,11 @@ Partial Class FormProlong
         '
         Me.GbN.BackColor = System.Drawing.Color.Transparent
         Me.GbN.Controls.Add(Me.LbOccupants)
-        Me.GbN.Location = New System.Drawing.Point(18, 313)
+        Me.GbN.Location = New System.Drawing.Point(14, 254)
+        Me.GbN.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GbN.Name = "GbN"
-        Me.GbN.Size = New System.Drawing.Size(342, 134)
+        Me.GbN.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GbN.Size = New System.Drawing.Size(256, 109)
         Me.GbN.TabIndex = 182
         Me.GbN.TabStop = False
         Me.GbN.Text = "Défunts actuels"
@@ -500,19 +528,21 @@ Partial Class FormProlong
         '
         Me.LbOccupants.FormattingEnabled = True
         Me.LbOccupants.IntegralHeight = False
-        Me.LbOccupants.ItemHeight = 16
-        Me.LbOccupants.Location = New System.Drawing.Point(6, 21)
+        Me.LbOccupants.Location = New System.Drawing.Point(4, 17)
+        Me.LbOccupants.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.LbOccupants.Name = "LbOccupants"
-        Me.LbOccupants.Size = New System.Drawing.Size(330, 106)
+        Me.LbOccupants.Size = New System.Drawing.Size(248, 87)
         Me.LbOccupants.TabIndex = 183
         '
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox3.Controls.Add(Me.LbBenefs)
-        Me.GroupBox3.Location = New System.Drawing.Point(366, 313)
+        Me.GroupBox3.Location = New System.Drawing.Point(274, 254)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(315, 134)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox3.Size = New System.Drawing.Size(236, 109)
         Me.GroupBox3.TabIndex = 180
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Bénéficiaires"
@@ -521,37 +551,41 @@ Partial Class FormProlong
         '
         Me.LbBenefs.FormattingEnabled = True
         Me.LbBenefs.IntegralHeight = False
-        Me.LbBenefs.ItemHeight = 16
-        Me.LbBenefs.Location = New System.Drawing.Point(6, 21)
+        Me.LbBenefs.Location = New System.Drawing.Point(4, 17)
+        Me.LbBenefs.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.LbBenefs.Name = "LbBenefs"
-        Me.LbBenefs.Size = New System.Drawing.Size(299, 107)
+        Me.LbBenefs.Size = New System.Drawing.Size(225, 88)
         Me.LbBenefs.TabIndex = 0
         '
         'TbRecherche
         '
-        Me.TbRecherche.Location = New System.Drawing.Point(74, 39)
+        Me.TbRecherche.Location = New System.Drawing.Point(56, 32)
+        Me.TbRecherche.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbRecherche.Name = "TbRecherche"
-        Me.TbRecherche.Size = New System.Drawing.Size(147, 22)
+        Me.TbRecherche.Size = New System.Drawing.Size(111, 20)
         Me.TbRecherche.TabIndex = 186
         '
         'GbO
         '
         Me.GbO.BackColor = System.Drawing.Color.Transparent
         Me.GbO.Controls.Add(Me.TbCom)
-        Me.GbO.Location = New System.Drawing.Point(687, 314)
+        Me.GbO.Location = New System.Drawing.Point(515, 255)
+        Me.GbO.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GbO.Name = "GbO"
-        Me.GbO.Size = New System.Drawing.Size(241, 133)
+        Me.GbO.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GbO.Size = New System.Drawing.Size(181, 108)
         Me.GbO.TabIndex = 184
         Me.GbO.TabStop = False
         Me.GbO.Text = "Commentaire"
         '
         'TbCom
         '
-        Me.TbCom.Location = New System.Drawing.Point(6, 21)
+        Me.TbCom.Location = New System.Drawing.Point(4, 17)
+        Me.TbCom.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbCom.Multiline = True
         Me.TbCom.Name = "TbCom"
         Me.TbCom.ReadOnly = True
-        Me.TbCom.Size = New System.Drawing.Size(232, 105)
+        Me.TbCom.Size = New System.Drawing.Size(175, 86)
         Me.TbCom.TabIndex = 183
         '
         'CbEnregPdfCsn
@@ -559,10 +593,9 @@ Partial Class FormProlong
         Me.CbEnregPdfCsn.AutoSize = True
         Me.CbEnregPdfCsn.Checked = True
         Me.CbEnregPdfCsn.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CbEnregPdfCsn.Location = New System.Drawing.Point(20, 23)
-        Me.CbEnregPdfCsn.Margin = New System.Windows.Forms.Padding(4)
+        Me.CbEnregPdfCsn.Location = New System.Drawing.Point(15, 19)
         Me.CbEnregPdfCsn.Name = "CbEnregPdfCsn"
-        Me.CbEnregPdfCsn.Size = New System.Drawing.Size(188, 21)
+        Me.CbEnregPdfCsn.Size = New System.Drawing.Size(142, 17)
         Me.CbEnregPdfCsn.TabIndex = 8
         Me.CbEnregPdfCsn.Text = "Enregistrer le fichier PDF"
         Me.CbEnregPdfCsn.UseVisualStyleBackColor = True
@@ -573,54 +606,33 @@ Partial Class FormProlong
         Me.Panel3.Controls.Add(Me.CbEnregPdfCsn)
         Me.Panel3.CouleurBordure = System.Drawing.Color.SeaGreen
         Me.Panel3.EpaisseurBordure = 7
-        Me.Panel3.Location = New System.Drawing.Point(503, 790)
+        Me.Panel3.Location = New System.Drawing.Point(393, 578)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(276, 76)
+        Me.Panel3.Size = New System.Drawing.Size(207, 62)
         Me.Panel3.TabIndex = 181
         Me.Panel3.Texte = Nothing
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(5, 13)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(148, 95)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 194
-        Me.PictureBox2.TabStop = False
-        '
-        'Label16
-        '
-        Me.Label16.BackColor = System.Drawing.Color.Transparent
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(157, 9)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(539, 99)
-        Me.Label16.TabIndex = 195
-        Me.Label16.Text = "Prolonger une concession"
-        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'FormProlong
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
+        Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(962, 853)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.Label16)
+        Me.ClientSize = New System.Drawing.Size(733, 674)
         Me.Controls.Add(Me.PanBordure4)
         Me.Controls.Add(Me.PanBordure3)
         Me.Controls.Add(Me.PanBordure2)
         Me.Controls.Add(Me.PanBordure1)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.BtTerminer)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.MaximumSize = New System.Drawing.Size(749, 713)
+        Me.MinimumSize = New System.Drawing.Size(749, 713)
         Me.Name = "FormProlong"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Prolonger une concession"
@@ -640,7 +652,6 @@ Partial Class FormProlong
         Me.GbO.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -691,6 +702,4 @@ Partial Class FormProlong
     Friend WithEvents PanBordure2 As PanBordure
     Friend WithEvents Panel3 As PanBordure
     Friend WithEvents CbEnregPdfCsn As CheckBox
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents Label16 As Label
 End Class

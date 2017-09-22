@@ -44,11 +44,11 @@ Partial Class FormSignalAbandonCsn
         '
         'TbCommentaire
         '
-        Me.TbCommentaire.Location = New System.Drawing.Point(18, 37)
-        Me.TbCommentaire.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TbCommentaire.Location = New System.Drawing.Point(14, 30)
+        Me.TbCommentaire.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbCommentaire.Multiline = True
         Me.TbCommentaire.Name = "TbCommentaire"
-        Me.TbCommentaire.Size = New System.Drawing.Size(500, 86)
+        Me.TbCommentaire.Size = New System.Drawing.Size(376, 71)
         Me.TbCommentaire.TabIndex = 0
         '
         'BtAnnuler
@@ -56,10 +56,10 @@ Partial Class FormSignalAbandonCsn
         Me.BtAnnuler.BackColor = System.Drawing.Color.SeaGreen
         Me.BtAnnuler.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.BtAnnuler.ForeColor = System.Drawing.Color.White
-        Me.BtAnnuler.Location = New System.Drawing.Point(255, 287)
-        Me.BtAnnuler.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BtAnnuler.Location = New System.Drawing.Point(191, 233)
+        Me.BtAnnuler.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BtAnnuler.Name = "BtAnnuler"
-        Me.BtAnnuler.Size = New System.Drawing.Size(109, 43)
+        Me.BtAnnuler.Size = New System.Drawing.Size(82, 35)
         Me.BtAnnuler.TabIndex = 2
         Me.BtAnnuler.Text = "Annuler"
         Me.BtAnnuler.UseVisualStyleBackColor = False
@@ -68,10 +68,10 @@ Partial Class FormSignalAbandonCsn
         '
         Me.BtTerminer.BackColor = System.Drawing.Color.SeaGreen
         Me.BtTerminer.ForeColor = System.Drawing.Color.White
-        Me.BtTerminer.Location = New System.Drawing.Point(396, 287)
-        Me.BtTerminer.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BtTerminer.Location = New System.Drawing.Point(297, 233)
+        Me.BtTerminer.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BtTerminer.Name = "BtTerminer"
-        Me.BtTerminer.Size = New System.Drawing.Size(116, 43)
+        Me.BtTerminer.Size = New System.Drawing.Size(87, 35)
         Me.BtTerminer.TabIndex = 3
         Me.BtTerminer.Text = "Terminer"
         Me.BtTerminer.UseVisualStyleBackColor = False
@@ -80,55 +80,57 @@ Partial Class FormSignalAbandonCsn
         '
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Location = New System.Drawing.Point(210, 63)
+        Me.Label2.Location = New System.Drawing.Point(158, 51)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(170, 17)
+        Me.Label2.Size = New System.Drawing.Size(129, 13)
         Me.Label2.TabIndex = 4
         Me.Label2.Text = "Référence emplacement :"
         '
         'BtMontrerFormPlancim
         '
         Me.BtMontrerFormPlancim.Image = Global.cimetiere.My.Resources.Resources.Note_16x
-        Me.BtMontrerFormPlancim.Location = New System.Drawing.Point(494, 55)
-        Me.BtMontrerFormPlancim.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BtMontrerFormPlancim.Location = New System.Drawing.Point(370, 45)
+        Me.BtMontrerFormPlancim.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BtMontrerFormPlancim.Name = "BtMontrerFormPlancim"
-        Me.BtMontrerFormPlancim.Size = New System.Drawing.Size(35, 31)
+        Me.BtMontrerFormPlancim.Size = New System.Drawing.Size(26, 25)
         Me.BtMontrerFormPlancim.TabIndex = 178
         Me.ToolTip1.SetToolTip(Me.BtMontrerFormPlancim, "Voir le plan")
         Me.BtMontrerFormPlancim.UseVisualStyleBackColor = True
         '
         'TbRefEmpl
         '
-        Me.TbRefEmpl.Location = New System.Drawing.Point(387, 59)
-        Me.TbRefEmpl.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TbRefEmpl.Location = New System.Drawing.Point(290, 48)
+        Me.TbRefEmpl.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbRefEmpl.Name = "TbRefEmpl"
-        Me.TbRefEmpl.Size = New System.Drawing.Size(100, 22)
+        Me.TbRefEmpl.Size = New System.Drawing.Size(76, 20)
         Me.TbRefEmpl.TabIndex = 179
         '
         'TbCheminFicImg
         '
-        Me.TbCheminFicImg.Location = New System.Drawing.Point(152, 135)
-        Me.TbCheminFicImg.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TbCheminFicImg.Location = New System.Drawing.Point(114, 110)
+        Me.TbCheminFicImg.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TbCheminFicImg.Name = "TbCheminFicImg"
         Me.TbCheminFicImg.ReadOnly = True
-        Me.TbCheminFicImg.Size = New System.Drawing.Size(270, 22)
+        Me.TbCheminFicImg.Size = New System.Drawing.Size(204, 20)
         Me.TbCheminFicImg.TabIndex = 180
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(18, 137)
+        Me.Label3.Location = New System.Drawing.Point(14, 111)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(133, 17)
+        Me.Label3.Size = New System.Drawing.Size(99, 13)
         Me.Label3.TabIndex = 181
         Me.Label3.Text = "Joindre une image :"
         '
         'BtParcourir
         '
-        Me.BtParcourir.Location = New System.Drawing.Point(426, 135)
-        Me.BtParcourir.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BtParcourir.Location = New System.Drawing.Point(320, 110)
+        Me.BtParcourir.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BtParcourir.Name = "BtParcourir"
-        Me.BtParcourir.Size = New System.Drawing.Size(91, 25)
+        Me.BtParcourir.Size = New System.Drawing.Size(68, 20)
         Me.BtParcourir.TabIndex = 182
         Me.BtParcourir.Text = "Parcourir..."
         Me.BtParcourir.UseVisualStyleBackColor = True
@@ -141,10 +143,9 @@ Partial Class FormSignalAbandonCsn
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(-4, 1)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox1.Location = New System.Drawing.Point(-3, 1)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(148, 95)
+        Me.PictureBox1.Size = New System.Drawing.Size(111, 77)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 193
         Me.PictureBox1.TabStop = False
@@ -158,21 +159,23 @@ Partial Class FormSignalAbandonCsn
         Me.PanBordure1.Controls.Add(Me.Label3)
         Me.PanBordure1.CouleurBordure = System.Drawing.Color.SeaGreen
         Me.PanBordure1.EpaisseurBordure = 7
-        Me.PanBordure1.Location = New System.Drawing.Point(3, 103)
+        Me.PanBordure1.Location = New System.Drawing.Point(2, 84)
+        Me.PanBordure1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanBordure1.Name = "PanBordure1"
-        Me.PanBordure1.Size = New System.Drawing.Size(537, 176)
+        Me.PanBordure1.Size = New System.Drawing.Size(403, 143)
         Me.PanBordure1.TabIndex = 195
         Me.PanBordure1.Texte = "Description/commentaire"
         '
         'FormSignalAbandonCsn
         '
         Me.AcceptButton = Me.BtTerminer
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.CancelButton = Me.BtAnnuler
-        Me.ClientSize = New System.Drawing.Size(543, 338)
+        Me.ClientSize = New System.Drawing.Size(407, 275)
         Me.Controls.Add(Me.PanBordure1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.TbRefEmpl)
@@ -180,7 +183,10 @@ Partial Class FormSignalAbandonCsn
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.BtTerminer)
         Me.Controls.Add(Me.BtAnnuler)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.MaximumSize = New System.Drawing.Size(423, 314)
+        Me.MinimumSize = New System.Drawing.Size(423, 314)
         Me.Name = "FormSignalAbandonCsn"
         Me.Text = "Signaler une concession à l'abandon"
         CType(Me.ErProv, System.ComponentModel.ISupportInitialize).EndInit()

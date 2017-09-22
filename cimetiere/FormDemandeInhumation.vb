@@ -13,17 +13,18 @@
     End Sub
 
     Private Sub FormDemandeInhumation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Size = New Size(582, 715)
         TbDefNumLh.Value = GenererNumeroLh()
         Dim TVilles = Bdd.GetTable("t_loc_ville")
         Dim TPays = Bdd.GetTable("t_Pays")
-        CtrlDefLocvillepays.chargercomboboxpays(TPays)
+        CtrlDefLocvillepays.ChargerComboboxPays(TPays)
         CtrlDefLocvillepays.chargercomboboxville(TVilles)
-        CtrlLocVillePays1.chargercomboboxpays(TPays)    ' sais même pas si il est utilisé
+        CtrlLocVillePays1.ChargerComboboxPays(TPays)    ' sais même pas si il est utilisé
         CtrlLocVillePays1.chargercomboboxville(TVilles)
-        CtrlVilleDmdr.chargercomboboxpays(TPays)
+        CtrlVilleDmdr.ChargerComboboxPays(TPays)
         CtrlVilleDmdr.chargercomboboxville(TVilles)
         CtrlLocPcont.chargercomboboxville(TVilles)
-        CtrlLocPcont.chargercomboboxpays(TPays)
+        CtrlLocPcont.ChargerComboboxPays(TPays)
     End Sub
 
 
@@ -35,6 +36,7 @@
                 If ValidePourBtSuivant() Then
                     If LbTypeInhOrd.SelectedIndex <> 4 Then     ' saute le choix d'emplacement si c'est une dispersion
                         ChangerPage(TabP2InhOrd)
+                        Me.Size = New Size(703, 568)
                         OngletInhSimpleSelectionne()
                     Else
                         CbEnregPdfInhOrd.Checked = CbEnregPdfP1.Checked
@@ -47,6 +49,7 @@
             Case RbConcExis.Checked
                 If ValidePourBtSuivant() Then
                     ChangerPage(TabP2ConExis)
+                    Me.Size = New Size(789, 700)
                     OngletCsnsExistantesSelectionne()
                 End If
         End Select
@@ -228,6 +231,7 @@
         End If
         CbEnregPdfP1.Checked = CbEnregPdfCsnExis.Checked
         ChangerPage(TabPage1)
+        Me.Size = New Size(582, 715)
     End Sub
 
 
@@ -502,6 +506,7 @@
         End If
         CbEnregPdfP1.Checked = CbEnregPdfInhOrd.Checked
         ChangerPage(TabPage1)
+        Me.Size = New Size(582, 715)
     End Sub
 
 
@@ -877,4 +882,8 @@
         Dim NumMaxBdd = Bdd.Query("SELECT MAX(def_numero_lh) from defunts").Rows(0)(0)
         Return If(Not IsDBNull(NumMaxBdd), NumMaxBdd + 1, 1)
     End Function
+
+    Private Sub RbInhOrd_CheckedChanged(sender As Object, e As EventArgs) Handles RbInhOrd.CheckedChanged
+
+    End Sub
 End Class

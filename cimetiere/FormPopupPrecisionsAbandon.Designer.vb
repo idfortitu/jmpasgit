@@ -44,56 +44,59 @@ Partial Class FormPopupPrecisionsAbandon
         '
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.PictureBox1.Location = New System.Drawing.Point(15, 14)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.PictureBox1.Location = New System.Drawing.Point(11, 11)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(419, 395)
+        Me.PictureBox1.Size = New System.Drawing.Size(314, 321)
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
         'TbCom
         '
-        Me.TbCom.Location = New System.Drawing.Point(23, 75)
-        Me.TbCom.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TbCom.Location = New System.Drawing.Point(17, 61)
+        Me.TbCom.Margin = New System.Windows.Forms.Padding(2)
         Me.TbCom.Multiline = True
         Me.TbCom.Name = "TbCom"
         Me.TbCom.ReadOnly = True
-        Me.TbCom.Size = New System.Drawing.Size(335, 153)
+        Me.TbCom.Size = New System.Drawing.Size(252, 125)
         Me.TbCom.TabIndex = 1
         '
         'TbRefEmpl
         '
-        Me.TbRefEmpl.Location = New System.Drawing.Point(222, 22)
-        Me.TbRefEmpl.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TbRefEmpl.Location = New System.Drawing.Point(166, 18)
+        Me.TbRefEmpl.Margin = New System.Windows.Forms.Padding(2)
         Me.TbRefEmpl.Name = "TbRefEmpl"
         Me.TbRefEmpl.ReadOnly = True
-        Me.TbRefEmpl.Size = New System.Drawing.Size(136, 22)
+        Me.TbRefEmpl.Size = New System.Drawing.Size(103, 20)
         Me.TbRefEmpl.TabIndex = 2
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(18, 22)
+        Me.Label1.Location = New System.Drawing.Point(14, 18)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(196, 17)
+        Me.Label1.Size = New System.Drawing.Size(148, 13)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Référence de l'emplacement :"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(18, 53)
+        Me.Label2.Location = New System.Drawing.Point(14, 43)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(157, 17)
+        Me.Label2.Size = New System.Drawing.Size(118, 13)
         Me.Label2.TabIndex = 4
         Me.Label2.Text = "Commentaire éventuel :"
         '
         'LabPasDimage
         '
         Me.LabPasDimage.AutoSize = True
-        Me.LabPasDimage.Location = New System.Drawing.Point(167, 201)
+        Me.LabPasDimage.Location = New System.Drawing.Point(125, 163)
+        Me.LabPasDimage.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LabPasDimage.Name = "LabPasDimage"
-        Me.LabPasDimage.Size = New System.Drawing.Size(96, 17)
+        Me.LabPasDimage.Size = New System.Drawing.Size(73, 13)
         Me.LabPasDimage.TabIndex = 5
         Me.LabPasDimage.Text = "Pas de photo."
         '
@@ -102,10 +105,10 @@ Partial Class FormPopupPrecisionsAbandon
         Me.BtDetails.BackColor = System.Drawing.Color.SeaGreen
         Me.BtDetails.Enabled = False
         Me.BtDetails.ForeColor = System.Drawing.Color.White
-        Me.BtDetails.Location = New System.Drawing.Point(112, 353)
-        Me.BtDetails.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BtDetails.Location = New System.Drawing.Point(84, 287)
+        Me.BtDetails.Margin = New System.Windows.Forms.Padding(2)
         Me.BtDetails.Name = "BtDetails"
-        Me.BtDetails.Size = New System.Drawing.Size(257, 39)
+        Me.BtDetails.Size = New System.Drawing.Size(193, 32)
         Me.BtDetails.TabIndex = 6
         Me.BtDetails.Text = "Voir les détails de l'emplacement"
         Me.BtDetails.UseVisualStyleBackColor = False
@@ -116,11 +119,11 @@ Partial Class FormPopupPrecisionsAbandon
         Me.BtSupprimer.ForeColor = System.Drawing.Color.White
         Me.BtSupprimer.Image = Global.cimetiere.My.Resources.Resources.Cancel_16x
         Me.BtSupprimer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BtSupprimer.Location = New System.Drawing.Point(112, 399)
-        Me.BtSupprimer.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BtSupprimer.Location = New System.Drawing.Point(84, 324)
+        Me.BtSupprimer.Margin = New System.Windows.Forms.Padding(2)
         Me.BtSupprimer.Name = "BtSupprimer"
-        Me.BtSupprimer.Padding = New System.Windows.Forms.Padding(7, 0, 0, 0)
-        Me.BtSupprimer.Size = New System.Drawing.Size(259, 35)
+        Me.BtSupprimer.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.BtSupprimer.Size = New System.Drawing.Size(194, 28)
         Me.BtSupprimer.TabIndex = 7
         Me.BtSupprimer.Text = "   Supprimer cette notification "
         Me.BtSupprimer.UseVisualStyleBackColor = False
@@ -130,9 +133,8 @@ Partial Class FormPopupPrecisionsAbandon
         Me.FCPBlahulpe.BackColor = System.Drawing.Color.Transparent
         Me.FCPBlahulpe.Image = CType(resources.GetObject("FCPBlahulpe.Image"), System.Drawing.Image)
         Me.FCPBlahulpe.Location = New System.Drawing.Point(-1, -1)
-        Me.FCPBlahulpe.Margin = New System.Windows.Forms.Padding(4)
         Me.FCPBlahulpe.Name = "FCPBlahulpe"
-        Me.FCPBlahulpe.Size = New System.Drawing.Size(148, 95)
+        Me.FCPBlahulpe.Size = New System.Drawing.Size(111, 77)
         Me.FCPBlahulpe.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.FCPBlahulpe.TabIndex = 46
         Me.FCPBlahulpe.TabStop = False
@@ -146,9 +148,10 @@ Partial Class FormPopupPrecisionsAbandon
         Me.PanBordure1.Controls.Add(Me.Label2)
         Me.PanBordure1.CouleurBordure = System.Drawing.Color.SeaGreen
         Me.PanBordure1.EpaisseurBordure = 7
-        Me.PanBordure1.Location = New System.Drawing.Point(-1, 98)
+        Me.PanBordure1.Location = New System.Drawing.Point(-1, 80)
+        Me.PanBordure1.Margin = New System.Windows.Forms.Padding(2)
         Me.PanBordure1.Name = "PanBordure1"
-        Me.PanBordure1.Size = New System.Drawing.Size(383, 248)
+        Me.PanBordure1.Size = New System.Drawing.Size(287, 202)
         Me.PanBordure1.TabIndex = 132
         Me.PanBordure1.Texte = Nothing
         '
@@ -158,25 +161,31 @@ Partial Class FormPopupPrecisionsAbandon
         Me.PanBordure2.Controls.Add(Me.PictureBox1)
         Me.PanBordure2.CouleurBordure = System.Drawing.Color.SeaGreen
         Me.PanBordure2.EpaisseurBordure = 7
-        Me.PanBordure2.Location = New System.Drawing.Point(388, 12)
+        Me.PanBordure2.Location = New System.Drawing.Point(291, 10)
+        Me.PanBordure2.Margin = New System.Windows.Forms.Padding(2)
         Me.PanBordure2.Name = "PanBordure2"
-        Me.PanBordure2.Size = New System.Drawing.Size(448, 422)
+        Me.PanBordure2.Size = New System.Drawing.Size(336, 343)
         Me.PanBordure2.TabIndex = 133
         Me.PanBordure2.Texte = Nothing
         '
         'FormPopupPrecisionsAbandon
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(844, 447)
+        Me.ClientSize = New System.Drawing.Size(633, 363)
         Me.Controls.Add(Me.PanBordure2)
         Me.Controls.Add(Me.PanBordure1)
         Me.Controls.Add(Me.FCPBlahulpe)
         Me.Controls.Add(Me.BtSupprimer)
         Me.Controls.Add(Me.BtDetails)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.MaximumSize = New System.Drawing.Size(649, 402)
+        Me.MinimumSize = New System.Drawing.Size(649, 402)
         Me.Name = "FormPopupPrecisionsAbandon"
         Me.Text = "Concession à l'abandon"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
