@@ -17,8 +17,17 @@ Public Class PanBordure
         End Set
     End Property
 
+    Private _couleurBordure As Color = Color.SeaGreen
     <Category("Appearance")>
-    Public Property CouleurBordure As Color = Color.SeaGreen
+    Public Property CouleurBordure As Color
+        Get
+            Return _couleurBordure
+        End Get
+        Set(value As Color)
+            _couleurBordure = value
+            Me.Invalidate()
+        End Set
+    End Property
 
     <Category("Appearance")>
     Public Property EpaisseurBordure As Integer = 7
@@ -39,7 +48,7 @@ Public Class PanBordure
         Dim theRec = ClientRectangle
 
         ' dessine la bordure
-        Dim BrushBordure As New SolidBrush(Me.CouleurBordure)
+        Dim BrushBordure As New SolidBrush(Me._couleurBordure)
 
         ' droite, haut, bas, gauche
         Dim RectsBordure As Rectangle() = {

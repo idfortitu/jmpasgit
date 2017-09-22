@@ -385,7 +385,7 @@ Partial Class FormVoirDetailsEmpl
         Me.PanelInfosConcession.Controls.Add(Me.GroupBox1)
         Me.PanelInfosConcession.Location = New System.Drawing.Point(10, 68)
         Me.PanelInfosConcession.Name = "PanelInfosConcession"
-        Me.PanelInfosConcession.Size = New System.Drawing.Size(412, 646)
+        Me.PanelInfosConcession.Size = New System.Drawing.Size(412, 653)
         Me.PanelInfosConcession.TabIndex = 14
         '
         'PlanCimConteneur1
@@ -420,7 +420,7 @@ Partial Class FormVoirDetailsEmpl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1081, 735)
+        Me.ClientSize = New System.Drawing.Size(1104, 764)
         Me.Controls.Add(Me.GbEmplHistoire)
         Me.Controls.Add(Me.GbDefunts)
         Me.Controls.Add(Me.LabRefEmpl)
