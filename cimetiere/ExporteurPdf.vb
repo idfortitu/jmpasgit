@@ -151,8 +151,12 @@ Public Class ExporteurPdf
         pdf.Add(Logo)
 
         Colonne(If(Not IsDBNull(Defunt("def_numero_lh")), Defunt("def_numero_lh"), ".............."), 512, 150, 700, 790, fGrasS)           ' si dbnull, est nothing ?
-        Colonne(If(Not IsDBNull(Defunt("def_numero_annee")), Defunt("def_numero_annee"), "........"), 507, 150, 700, 770, fGrasS)     ' idem
-        Colonne(Today.Year, 535, 150, 700, 770)
+        ' num année ignoré pour l'instant
+        'Colonne(If(Not IsDBNull(Defunt("def_numero_annee")), Defunt("def_numero_annee"), "........"), 507, 150, 700, 770, fGrasS)     ' idem
+
+        'Colonne(Today.Year, 535, 150, 700, 770)
+        ' décale l'année du coup
+        Colonne(Today.Year, 512, 150, 700, 770)
 
         p = New Paragraph("À compléter en MAJUSCULES", fGras)
         p.Alignment = Element.ALIGN_CENTER

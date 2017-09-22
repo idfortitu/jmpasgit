@@ -13,6 +13,7 @@
     End Sub
 
     Private Sub FormDemandeInhumation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TbDefNumLh.Value = GenererNumeroLh()
         Dim TVilles = Bdd.GetTable("t_loc_ville")
         Dim TPays = Bdd.GetTable("t_Pays")
         CtrlDefLocvillepays.chargercomboboxpays(TPays)
@@ -78,6 +79,9 @@
             AndAlso ErrorProvider1.GetError(TbDmdrPrenom) = "" _
             AndAlso ErrorProvider1.GetError(TbPcontNom) = "" _
             AndAlso ErrorProvider1.GetError(TbPcontPrenom) = ""
+
+        'AndAlso ErrorProvider1.GetError(TbNumAnnee) = "" _
+
     End Function
 
     Private Function ValidePrFinCsnExis() As Boolean
@@ -94,7 +98,7 @@
         End If
     End Sub
 
-    ' valid code défunt : ne doit pas déjà exister ; si non précisé, on le génèrera automatiquement
+    ' valid code défunt : ne doit pas déjà exister (si non précisé, on le génèrera automatiquement)
     Private Sub ValiderNumLhDefunt()
         If TbDefNumLh.Value IsNot Nothing AndAlso
         Bdd.Query("SELECT def_id FROM defunts WHERE def_numero_lh = " & TbDefNumLh.Value).Rows.Count > 0 Then
@@ -103,6 +107,12 @@
             ErrorProvider1.SetError(TbDefNumLh, "")
         End If
     End Sub
+    '' même principe pour le code année
+    'Private Sub ValiderNumLhDefunt()
+    '    If TbNumAnnee.Value IsNot Nothing AndAlso
+    '            Bdd.Query("SELECT def_id FROM defunts WHERE def_numero_annee)
+    'End Sub
+
     Private Sub ValiderNomDef()
         If TbDefNom.Text.Trim = "" Then
             ErrorProvider1.SetError(TbDefNom, "Veuillez indiquer le nom du défunt")
@@ -619,10 +629,10 @@
                 Dim TypeInhOrd As TTypeCsnInh
                 Dim DateSign As Date?
                 Dim RowEmpl As DataRow
-                If LbTypeInhOrd.SelectedIndex <> 4 Then     ' si dispersion, on le mettra dans un emplacement spécial ayant la référence AIR
+                If LbTypeInhOrd.SelectedIndex <> 4 Then
                     RowEmpl = CType(DgvEmplacementsPourInhOrd.SelectedRow.DataBoundItem, DataRowView).Row
                     'Else
-                    'RowEmpl = Bdd.GetRow("emplacements", "empl_reference", "AIR")
+                    'RowEmpl = Bdd.GetRow("emplacements", "empl_reference", "AIR")      ' mettait les défs dispersé dans un emplacement spécial, abandonné
                 End If
                 Enregistrer(RowDef, RowDmdr, RowPcont, TypeInhOrd, DateSign, If(RowEmpl IsNot Nothing, RowEmpl("empl_id"), Nothing))
 
@@ -695,9 +705,7 @@
         If TbDefNumLh.Value IsNot Nothing Then
             RowDef("def_numero_lh") = TbDefNumLh.Value
         Else
-            ' génère un numéro - celui suivant le plus élevé trouvé en bdd
-            Dim NumMaxBdd = Bdd.Query("SELECT MAX(def_numero_lh) from defunts").Rows(0)(0)
-            RowDef("def_numero_lh") = If(Not IsDBNull(NumMaxBdd), NumMaxBdd + 1, 1)
+            RowDef("def_numero_lh") = GenererNumeroLh()
         End If
         ' numéro année ----- à faire
         RowDef("def_nom") = TbDefNom.Text.Trim
@@ -864,7 +872,9 @@
         vGraphic.Dispose() : vGraphic = Nothing
     End Sub
 
-    Private Sub RbInhOrd_CheckedChanged(sender As Object, e As EventArgs) Handles RbInhOrd.CheckedChanged
-
-    End Sub
+    ' génère un numéro - celui suivant le plus élevé trouvé en bdd
+    Private Function GenererNumeroLh() As Integer
+        Dim NumMaxBdd = Bdd.Query("SELECT MAX(def_numero_lh) from defunts").Rows(0)(0)
+        Return If(Not IsDBNull(NumMaxBdd), NumMaxBdd + 1, 1)
+    End Function
 End Class
