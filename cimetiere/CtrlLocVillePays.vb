@@ -116,6 +116,8 @@
         End If
     End Sub
 
+
+
     Private Sub ChargerComboboxLocVille()
         Dim DtLocVilles = Bdd.Query("SELECT * from t_loc_ville WHERE locville_ville <> """"")
         Dim rowvide = DtLocVilles.NewRow
@@ -138,29 +140,36 @@
         CbPays.DataSource = DtPays
     End Sub
 
-    Public Sub chargercomboboxpays(tpays As DataTable)
-        If Not (From r As DataRow In tpays.Rows Where r("Pays_id") = -1).Any Then
-            Dim rowvide = tpays.NewRow
+    ''' <summary>
+    ''' attention : crée une copie de la liste fournie (et de ses éléments), n'utilise pas les datarows originales
+    ''' </summary>
+    ''' <param name="tpays"></param>
+    Public Sub ChargerComboboxPays(tpays As DataTable)
+        Dim nvtpays = tpays.Copy
+        If Not (From r As DataRow In nvtpays.Rows Where r("Pays_id") = -1).Any Then
+            Dim rowvide = nvtpays.NewRow
             rowvide("Pays_id") = -1
-            tpays.Rows.InsertAt(rowvide, 0)
+            nvtpays.Rows.InsertAt(rowvide, 0)
         End If
 
         CbPays.DisplayMember = "Pays_nom"
         CbPays.ValueMember = "Pays_id"
-        CbPays.DataSource = tpays
+        CbPays.DataSource = nvtpays
 
     End Sub
     Public Sub chargercomboboxville(tville As DataTable)
+        Dim nvtville = tville.Copy
+        'RowCsn.ItemArray = f.RowCsn.ItemArray.Clone
         'If tville.Rows.Find(-1) Is Nothing Then
-        If Not (From r As DataRow In tville Where r("locville_id") = -1).Any Then
-            Dim rowvide = tville.NewRow
+        If Not (From r As DataRow In nvtville Where r("locville_id") = -1).Any Then
+            Dim rowvide = nvtville.NewRow
             rowvide("locville_id") = -1
-            tville.Rows.InsertAt(rowvide, 0)
+            nvtville.Rows.InsertAt(rowvide, 0)
         End If
 
         CbLocVille.DisplayMember = "locville_ville"
         CbLocVille.ValueMember = "locville_id"
-        CbLocVille.DataSource = tville
+        CbLocVille.DataSource = nvtville
 
     End Sub
 

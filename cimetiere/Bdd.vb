@@ -83,8 +83,8 @@ Module Bdd
         End Try
     End Function
 
-    Public Function GetTable(nomtable As String) As DataTable
-        Return Query("SELECT * FROM " & nomtable)
+    Public Function GetTable(nomtable As String, Optional ChampOrder As String = Nothing) As DataTable
+        Return Query("SELECT * FROM " & nomtable & If(ChampOrder IsNot Nothing, " ORDER BY " & ChampOrder, ""))
     End Function
 
     Public Function GetRow(nomtable As String, colcritere As String, valeurcherchee As Object) As DataRow

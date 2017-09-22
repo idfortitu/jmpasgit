@@ -49,19 +49,22 @@
 
     End Sub
 
-    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs)
+    Private Sub Me_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+        Dim HauteurDebutDegrade As Integer = Me.Height * 0.42
+        Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, Me.Width, Me.Height - HauteurDebutDegrade)
+        Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
+                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 0),
+                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 1),
+                                                    Color.FromArgb(11, 160, 92),
+                                                    Color.White)
 
+
+        Dim vGraphic As Drawing.Graphics = Me.CreateGraphics
+
+        vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
+
+        vGraphic.Dispose()
+        vGraphic = Nothing
     End Sub
 
-    Private Sub Me_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
 End Class

@@ -196,6 +196,7 @@ Partial Class FormGestion
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BtGererVilles = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPageEmplacements.SuspendLayout()
         Me.Panel11.SuspendLayout()
@@ -1660,6 +1661,7 @@ Partial Class FormGestion
         '
         Me.TabPagePersonnes.BackColor = System.Drawing.Color.White
         Me.TabPagePersonnes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.TabPagePersonnes.Controls.Add(Me.BtGererVilles)
         Me.TabPagePersonnes.Controls.Add(Me.BtMontrerFormPlanCim4)
         Me.TabPagePersonnes.Controls.Add(Me.PRBPersCon)
         Me.TabPagePersonnes.Controls.Add(Me.PRBConcessionnaire)
@@ -2174,6 +2176,17 @@ Partial Class FormGestion
         Me.TextBox1.Size = New System.Drawing.Size(169, 22)
         Me.TextBox1.TabIndex = 139
         '
+        'BtGererVilles
+        '
+        Me.BtGererVilles.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtGererVilles.ForeColor = System.Drawing.Color.White
+        Me.BtGererVilles.Location = New System.Drawing.Point(848, 363)
+        Me.BtGererVilles.Name = "BtGererVilles"
+        Me.BtGererVilles.Size = New System.Drawing.Size(287, 39)
+        Me.BtGererVilles.TabIndex = 180
+        Me.BtGererVilles.Text = "Gérer les villes et pays enregistrés..."
+        Me.BtGererVilles.UseVisualStyleBackColor = False
+        '
         'FormGestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2191,7 +2204,7 @@ Partial Class FormGestion
         Me.MinimumSize = New System.Drawing.Size(527, 112)
         Me.Name = "FormGestion"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FormGestion"
+        Me.Text = "Gestion des données - cimetière"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPageEmplacements.ResumeLayout(False)
         Me.Panel11.ResumeLayout(False)
@@ -2401,4 +2414,5 @@ Partial Class FormGestion
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents BtMontrerFormPlanCim4 As Button
     Friend WithEvents Panel16 As PanBordure
+    Friend WithEvents BtGererVilles As Button
 End Class

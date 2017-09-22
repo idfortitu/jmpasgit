@@ -30,7 +30,6 @@ Partial Class FormLogin
         Me.LabMdp = New System.Windows.Forms.Label()
         Me.LabNomUtilisateur = New System.Windows.Forms.Label()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -108,15 +107,6 @@ Partial Class FormLogin
         Me.LogoPictureBox.TabIndex = 16
         Me.LogoPictureBox.TabStop = False
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(535, 187)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 22
-        Me.Button1.Text = "debug"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'FormLogin
         '
         Me.AcceptButton = Me.BtOk
@@ -125,7 +115,6 @@ Partial Class FormLogin
         Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(676, 213)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.BtQuitter)
         Me.Controls.Add(Me.BtOk)
         Me.Controls.Add(Me.TbMdp)
@@ -151,5 +140,4 @@ Partial Class FormLogin
     Friend WithEvents LabMdp As Label
     Friend WithEvents LabNomUtilisateur As Label
     Friend WithEvents LogoPictureBox As PictureBox
-    Friend WithEvents Button1 As Button
 End Class

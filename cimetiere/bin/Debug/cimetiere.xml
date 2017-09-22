@@ -105,6 +105,12 @@ cimetiere
  <param name="id"></param>
  <returns></returns>
 </member>
+<member name="M:cimetiere.CtrlLocVillePays.ChargerComboboxPays(System.Data.DataTable)">
+ <summary>
+ attention : crée une copie de la liste fournie (et de ses éléments), n'utilise pas les datarows originales
+ </summary>
+ <param name="tpays"></param>
+</member>
 <member name="M:cimetiere.FormGestion.CopierColonnesCorrespondantes(System.Data.DataRow,System.Data.DataRow)">
  <summary>
  copie les colonnes d'une datarow à une autre, ignore celles qui sont de trop

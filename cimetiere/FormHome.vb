@@ -206,10 +206,10 @@ Public Class FormHome
     'Dim HauteurDebutDegrade As Integer = Me.Height * 0.42
     'Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, Me.Width, Me.Height - HauteurDebutDegrade)
     ''Dim rectangledegrade As New Rectangle(0, 0, 0, 0)
-    '' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+    '' - 1 à un des params parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
     'Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
-    '            New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 6),
-    '                                            New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y),
+    '            New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height),
+    '                                            New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 1),
     '                                            Color.FromArgb(11, 160, 92),
     '                                            Color.White)
 
@@ -228,11 +228,11 @@ Public Class FormHome
     Private Sub Panel1_Paint(sender As Panel, e As PaintEventArgs) Handles PanelToutSaufNotifs.Paint
         Dim HauteurDebutDegrade As Integer = sender.Height * 0.42
         Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, sender.Width, sender.Height - HauteurDebutDegrade)
-        ' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+        ' - 1 à un des params parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
         ' -- ça peut être différent sur d'autres forms, tester au cas par cas
         Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
-                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 6),
-                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height),
+                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y),
+                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 1),
                                                     Color.White,
                                                     Color.FromArgb(11, 160, 92))
 

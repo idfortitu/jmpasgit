@@ -36,13 +36,20 @@ Public Class FormGestion
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
         If user = "User" Then
-
             FPBModifier.Hide()
             FPBSupprimer.Hide()
             BModifGestionPers.Hide()
             BTModifEmpl.Hide()
             BSupGestionPers.Hide()
             BTSupprEmpl.Hide()
+            FPBAjouter.Hide()
+            BTSupprCons.Hide()
+            BTModifCons.Hide()
+            BTConsAjout.Hide()
+            BModifGestionPers.Hide()
+            BSupGestionPers.Hide()
+            BtGererVilles.Hide()
+            BTConAjoutBen.Hide()
         End If
 
         TextBoxDefuntRO()
@@ -59,13 +66,16 @@ Public Class FormGestion
         Me.Top = (screenHeight - Me.Height) / 2
         Lchargementdonnee.Text = "Chargement des données"
 
-        dtville = Bdd.GetTable("t_loc_ville")
-        dtpays = Bdd.GetTable("t_Pays")
+
+    End Sub
+
+    Private Sub ChargerVillesPays()
+        dtville = Bdd.GetTable("t_loc_ville", "locville_ville")
+        dtpays = Bdd.GetTable("t_Pays", "Pays_nom")
         CtrlLocVilleDef.chargercomboboxpays(dtpays)
         CtrlLocVilleDef.chargercomboboxville(dtville)
         CtrlLocPersonne.chargercomboboxville(dtville)
         CtrlLocPersonne.chargercomboboxpays(dtpays)
-
 
     End Sub
 
@@ -504,6 +514,9 @@ Public Class FormGestion
         dtpays = GetTable("t_pays")
         dtcommentaires = GetTable("t_commentaire")
         dthistoires = GetTable("t_histoire")
+        ChargerVillesPays()
+
+
     End Sub
 
     Sub DataTablePersContact()
@@ -882,7 +895,7 @@ Public Class FormGestion
         LinkLabLienCsnrVersCon.Hide()
         LinkLabLienPcontVersDef.Show()
         LinkLabLienBenVersCon.Hide()
-        BSupGestionPers.Show()
+        If user <> "User" Then BSupGestionPers.Show()
 
         LabPersDN.Hide()
         TBPersDN.Hide()
@@ -908,7 +921,7 @@ Public Class FormGestion
         LinkLabLienCsnrVersCon.Hide()
         LinkLabLienPcontVersDef.Hide()
         LinkLabLienBenVersCon.Show()
-        BSupGestionPers.Show()
+        If user <> "User" Then BSupGestionPers.Show()
 
         LabPersDN.Show()
         TBPersDN.Show()
@@ -2170,15 +2183,28 @@ Public Class FormGestion
 
     End Sub
 
-    Private Sub FCDGBeneficiaire_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles FCDGBeneficiaire.CellContentClick
+    Private Sub BtGererVilles_Click(sender As Object, e As EventArgs) Handles BtGererVilles.Click
+        Using f As New GestionLocVille(dtville, dtpays)
+            f.ShowDialog()
+            ' retire les FKs chez les personnes dont les villes n'existent plus
+            If f.IdsVillesSuppr.Count > 0 Then
+                Dim Ids As String = "(" & String.Join(",", f.IdsVillesSuppr) & ")"
+                For Each t As DataTable In {dtdefunt, dtCsnr, dtbenef, dtPersContact}           ' profite du fait que la prop s'appelle locville_id dans toutes les tables
+                    Dim Rows = t.Select("locville_id In " & Ids)
+                    For Each Row In Rows
+                        Row("locville_id") = DBNull.Value
+                    Next
+                Next
+            End If
+            ' met à jour les listes combobox
+            ChargerVillesPays()
+            ' ce qui oblige à refaire les bindings
+            CtrlLocVilleDef.DataBindings.Clear()
+            CtrlLocPersonne.DataBindings.Clear()
 
-    End Sub
+            CtrlLocVilleDef.DataBindings.Add("LocVilleId", bslistedefunts, "locville_id")
+            CtrlLocPersonne.DataBindings.Add("LocVilleId", dvCsnrs, "locville_id")
 
-    Private Sub BtCsnRechercher_Click(sender As Object, e As EventArgs) Handles BtCsnRechercher.Click
-
-    End Sub
-
-    Private Sub BTLienCsnrVersConcession_Click(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabLienCsnrVersCon.LinkClicked
-
+        End Using
     End Sub
 End Class

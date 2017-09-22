@@ -44,10 +44,10 @@ Partial Class FormPopupPrecisionsAbandon
         '
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.PictureBox1.Location = New System.Drawing.Point(15, 17)
+        Me.PictureBox1.Location = New System.Drawing.Point(15, 14)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(419, 391)
+        Me.PictureBox1.Size = New System.Drawing.Size(419, 395)
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
@@ -130,7 +130,7 @@ Partial Class FormPopupPrecisionsAbandon
         Me.FCPBlahulpe.BackColor = System.Drawing.Color.Transparent
         Me.FCPBlahulpe.Image = CType(resources.GetObject("FCPBlahulpe.Image"), System.Drawing.Image)
         Me.FCPBlahulpe.Location = New System.Drawing.Point(-1, -1)
-        Me.FCPBlahulpe.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.FCPBlahulpe.Margin = New System.Windows.Forms.Padding(4)
         Me.FCPBlahulpe.Name = "FCPBlahulpe"
         Me.FCPBlahulpe.Size = New System.Drawing.Size(148, 95)
         Me.FCPBlahulpe.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -168,7 +168,7 @@ Partial Class FormPopupPrecisionsAbandon
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
+        Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(844, 447)
         Me.Controls.Add(Me.PanBordure2)
@@ -178,7 +178,7 @@ Partial Class FormPopupPrecisionsAbandon
         Me.Controls.Add(Me.BtDetails)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FormPopupPrecisionsAbandon"
-        Me.Text = "FormPopupPrecisionsAbandon"
+        Me.Text = "Concession à l'abandon"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FCPBlahulpe, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanBordure1.ResumeLayout(False)

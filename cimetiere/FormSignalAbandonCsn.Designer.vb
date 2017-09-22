@@ -48,7 +48,7 @@ Partial Class FormSignalAbandonCsn
         Me.TbCommentaire.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TbCommentaire.Multiline = True
         Me.TbCommentaire.Name = "TbCommentaire"
-        Me.TbCommentaire.Size = New System.Drawing.Size(503, 86)
+        Me.TbCommentaire.Size = New System.Drawing.Size(500, 86)
         Me.TbCommentaire.TabIndex = 0
         '
         'BtAnnuler
@@ -107,17 +107,17 @@ Partial Class FormSignalAbandonCsn
         '
         'TbCheminFicImg
         '
-        Me.TbCheminFicImg.Location = New System.Drawing.Point(150, 135)
+        Me.TbCheminFicImg.Location = New System.Drawing.Point(152, 135)
         Me.TbCheminFicImg.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TbCheminFicImg.Name = "TbCheminFicImg"
         Me.TbCheminFicImg.ReadOnly = True
-        Me.TbCheminFicImg.Size = New System.Drawing.Size(277, 22)
+        Me.TbCheminFicImg.Size = New System.Drawing.Size(270, 22)
         Me.TbCheminFicImg.TabIndex = 180
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(14, 136)
+        Me.Label3.Location = New System.Drawing.Point(18, 137)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(133, 17)
         Me.Label3.TabIndex = 181
@@ -125,7 +125,7 @@ Partial Class FormSignalAbandonCsn
         '
         'BtParcourir
         '
-        Me.BtParcourir.Location = New System.Drawing.Point(431, 135)
+        Me.BtParcourir.Location = New System.Drawing.Point(426, 135)
         Me.BtParcourir.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtParcourir.Name = "BtParcourir"
         Me.BtParcourir.Size = New System.Drawing.Size(91, 25)
@@ -142,7 +142,7 @@ Partial Class FormSignalAbandonCsn
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(-4, 1)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(148, 95)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -169,7 +169,7 @@ Partial Class FormSignalAbandonCsn
         Me.AcceptButton = Me.BtTerminer
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
+        Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.CancelButton = Me.BtAnnuler
         Me.ClientSize = New System.Drawing.Size(543, 338)

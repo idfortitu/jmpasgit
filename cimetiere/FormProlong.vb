@@ -79,7 +79,7 @@
         If RowCsn IsNot Nothing Then
             If Not IsDBNull(RowCsn("noms_benefs")) Then LbBenefs.Items.AddRange(CType(RowCsn("noms_benefs"), String).Split("¤").ToArray)
             If Not IsDBNull(RowCsn("noms_defunts")) Then LbOccupants.Items.AddRange(CType(RowCsn("noms_defunts"), String).Split("¤").ToArray)
-            TbCom.Text = RowCsn("com_commentaire")
+            TbCom.Text = if(isdbnull(RowCsn("com_commentaire")), "",RowCsn("com_commentaire"))
             TbDateDebut.Text = If(IsDBNull(RowCsn("con_date_debut")), Nothing, CType(RowCsn("con_date_debut"), Date).ToString("dd/MM/yyyy"))
             TbDateFinAct.Text = If(IsDBNull(RowCsn("con_date_fin")), Nothing, CType(RowCsn("con_date_fin"), Date).ToString("dd/MM/yyyy"))
             TbNouvDateFin.Text = ""
@@ -245,22 +245,22 @@
     End Sub
 
 
+    Private Sub Me_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+        Dim HauteurDebutDegrade As Integer = Me.Height * 0.42
+        Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, Me.Width, Me.Height - HauteurDebutDegrade)
+        Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
+                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 0),
+                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 1),
+                                                    Color.FromArgb(11, 160, 92),
+                                                    Color.White)
 
 
+        Dim vGraphic As Drawing.Graphics = Me.CreateGraphics
 
+        vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
 
-
-    ' choix concession (aff liste)
-    ' choix durée avec auto +30 et +15
-    ' montant payé
-
-    ' infos suppl :
-    ' bénefs
-    ' commentaire
-    ' infos csnr
-    ' infos défunt(s)
-
-
-
+        vGraphic.Dispose()
+        vGraphic = Nothing
+    End Sub
 
 End Class

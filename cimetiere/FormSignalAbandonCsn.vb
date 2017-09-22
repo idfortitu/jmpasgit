@@ -93,8 +93,6 @@ Public Class FormSignalAbandonCsn
         Dim ContenuOk As Boolean = TbCommentaire.Text.Trim <> "" OrElse TbRefEmpl.Text.Trim <> "" OrElse TbCheminFicImg.Text <> ""
         ErProv.SetError(TbCommentaire, If(ContenuOk, "", "Veuillez indiquer au moins un renseignement !"))
 
-
-
         If RefOk AndAlso ContenuOk Then
             Bdd.InsertSignalCsnAband(IdEmpl, TbCommentaire.Text.Trim, If(TbCheminFicImg.Text = "", Nothing, Image.FromFile(TbCheminFicImg.Text)))
             Me.DialogResult = DialogResult.OK
@@ -102,7 +100,6 @@ Public Class FormSignalAbandonCsn
 
 
     End Sub
-
 
     Sub Me_Closing() Handles Me.Closing
         If Me.FormChoix IsNot Nothing Then
@@ -113,11 +110,23 @@ Public Class FormSignalAbandonCsn
         End If
     End Sub
 
-    Private Sub FormSignalAbandonCsn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    Private Sub Me_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+        Dim HauteurDebutDegrade As Integer = Me.Height * 0.42
+        Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, Me.Width, Me.Height - HauteurDebutDegrade)
+        Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
+                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 0),
+                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 1),
+                                                    Color.FromArgb(11, 160, 92),
+                                                    Color.White)
+
+
+        Dim vGraphic As Drawing.Graphics = Me.CreateGraphics
+
+        vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
+
+        vGraphic.Dispose()
+        vGraphic = Nothing
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-
-    End Sub
 End Class

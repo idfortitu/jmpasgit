@@ -23,7 +23,7 @@ Public Class FormLogin
         Me.Close()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) 
         Dim form As New debug
         debug.ShowDialog()
     End Sub

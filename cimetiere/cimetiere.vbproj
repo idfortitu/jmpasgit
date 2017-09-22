@@ -104,28 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bdd.vb" />
-    <Compile Include="Beneficiaire.partial.vb" />
-    <Compile Include="Beneficiaire.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CimEntities.partial.vb" />
     <Compile Include="ComboBoxEmplacements.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ComboBoxEnum.vb">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Commentaire.partial.vb" />
-    <Compile Include="Commentaire.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Concession.partial.vb" />
-    <Compile Include="Concession.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Concessionnaire.partial.vb" />
-    <Compile Include="Concessionnaire.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
     </Compile>
     <Compile Include="ConfigLocale.vb" />
     <Compile Include="corbeille.Designer.vb">
@@ -170,34 +153,11 @@
     <Compile Include="debug.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Defunt.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
     <Compile Include="dev_formplancimedit.Designer.vb">
       <DependentUpon>dev_formplancimedit.vb</DependentUpon>
     </Compile>
     <Compile Include="dev_formplancimedit.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dmCimetiere.Context.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dmCimetiere.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dmCimetiere.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dmCimetiere.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="dmCimetiere.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Defunt.partial.vb" />
-    <Compile Include="Emplacement.partial.vb" />
-    <Compile Include="Emplacement.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
     </Compile>
     <Compile Include="ExporteurPdf.vb" />
     <Compile Include="FDetails.Designer.vb">
@@ -228,12 +188,6 @@
       <DependentUpon>FormVoirDetailsEmpl.vb</DependentUpon>
     </Compile>
     <Compile Include="FormVoirDetailsEmpl.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEditEmplacement.Designer.vb">
-      <DependentUpon>FormEditEmplacement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormEditEmplacement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormGestion.Designer.vb">
@@ -291,20 +245,11 @@
     <Compile Include="GestionLocVille.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Histoire.partial.vb" />
-    <Compile Include="Histoire.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IEntity.vb" />
-    <Compile Include="IPersonne.vb" />
     <Compile Include="ListBenefNewCons.Designer.vb">
       <DependentUpon>ListBenefNewCons.vb</DependentUpon>
     </Compile>
     <Compile Include="ListBenefNewCons.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LocVille.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -326,12 +271,6 @@
     </Compile>
     <Compile Include="PlanCimConteneur.vb">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PanelEditBénéficiaire.Designer.vb">
-      <DependentUpon>PanelEditBénéficiaire.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PanelEditBénéficiaire.vb">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PanelEditConcessionnaire.Designer.vb">
       <DependentUpon>PanelEditConcessionnaire.vb</DependentUpon>
@@ -362,13 +301,6 @@
     </Compile>
     <Compile Include="PanelEditPersonneContact.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pays.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PersonneContact.partial.vb" />
-    <Compile Include="PersonneContact.vb">
-      <DependentUpon>dmCimetiere.tt</DependentUpon>
     </Compile>
     <Compile Include="PlanCimEdit.designer.vb">
       <DependentUpon>PlanCimEdit.vb</DependentUpon>
@@ -408,7 +340,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Uzineagaz.vb" />
-    <Compile Include="LocVille.partial.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ComboBoxEnum.resx">
@@ -455,9 +386,6 @@
     <EmbeddedResource Include="FormVoirDetailsEmpl.resx">
       <DependentUpon>FormVoirDetailsEmpl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormEditEmplacement.resx">
-      <DependentUpon>FormEditEmplacement.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormGestion.resx">
       <DependentUpon>FormGestion.vb</DependentUpon>
     </EmbeddedResource>
@@ -494,9 +422,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PanelEditBénéficiaire.resx">
-      <DependentUpon>PanelEditBénéficiaire.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PanelEditConcessionnaire.resx">
       <DependentUpon>PanelEditConcessionnaire.vb</DependentUpon>
     </EmbeddedResource>
@@ -529,13 +454,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="dmCimetiere.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dmCimetiere.Designer.vb</LastGenOutput>
-    </EntityDeploy>
-    <None Include="dmCimetiere.edmx.diagram">
-      <DependentUpon>dmCimetiere.edmx</DependentUpon>
-    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -557,16 +475,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dmCimetiere.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dmCimetiere.edmx</DependentUpon>
-      <LastGenOutput>dmCimetiere.Context.vb</LastGenOutput>
-    </Content>
-    <Content Include="dmCimetiere.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dmCimetiere.edmx</DependentUpon>
-      <LastGenOutput>dmCimetiere.vb</LastGenOutput>
-    </Content>
     <None Include="Resources\Note_24x.png" />
     <None Include="Resources\Next_16xMD.png" />
     <None Include="Resources\logolh.png" />

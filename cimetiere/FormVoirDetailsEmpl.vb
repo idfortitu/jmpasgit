@@ -12,7 +12,7 @@
     Sub New(IdEmpl As Integer, Optional ProposerProlong As Boolean = False)
         InitializeComponent()
         Me.IdEmpl = IdEmpl
-        BtRenouveler.Visible = ProposerProlong
+        BtRenouveler.Visible = ProposerProlong AndAlso user <> "User"
     End Sub
 
     Private Sub FormDetailsNotifCsnAbandon_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -34,12 +34,13 @@
 
         If IsDBNull(LEmplacement("con_id")) Then
             PanelInfosConcession.Hide()
-            PlanCimConteneur1.Size = New Size(PlanCimConteneur1.Location.X + PlanCimConteneur1.Width - PanelInfosConcession.Location.X, GbDefunts.Location.Y - 2 - PanelInfosConcession.Location.Y + 121)       ' 121 pour agrandir un peu, vu qu'il y a de la place
+            PlanCimConteneur1.Size = New Size(PlanCimConteneur1.Location.X + PlanCimConteneur1.Width - PanelInfosConcession.Location.X, PanDefunts.Location.Y - 2 - PanelInfosConcession.Location.Y + 121)       ' 121 pour agrandir un peu, vu qu'il y a de la place
             PlanCimConteneur1.Location = New Point(PanelInfosConcession.Location.X, PanelInfosConcession.Location.Y)
-            GbDefunts.Location = New Point(PanelInfosConcession.Location.X, GbDefunts.Location.Y + 121)
-            Me.Text = "Emplacement " & LEmplacement("empl_reference")
+            PanDefunts.Location = New Point(PanelInfosConcession.Location.X, PanDefunts.Location.Y + 121)
             LabTitre.Text = "Situation de l'emplacement"
         End If
+
+        Me.Text = "Emplacement " & LEmplacement("empl_reference")
 
 
         If Not IsDBNull(LEmplacement("con_id")) Then
@@ -79,7 +80,7 @@
         TbCsnrTel.Text = LEmplacement("csnr_tel")
 
         TbCsnrAdresse.Text = Uzineagaz.AdresseComplete(LEmplacement("csnr_adresse"),
-                                                  If(IsDBNull(LEmplacement("locville_id")), Nothing, LEmplacement("locville_cp")),
+                                                  If(IsDBNull(LEmplacement("locville_cp")), Nothing, LEmplacement("locville_cp")),
                                                   If(IsDBNull(LEmplacement("locville_ville")), Nothing, LEmplacement("locville_ville")),
                                                   If(IsDBNull(LEmplacement("Pays_nom")), Nothing, LEmplacement("Pays_nom"))
                                                   )
@@ -93,7 +94,7 @@
         If Not IsDBNull(LEmplacement("h_histoire")) AndAlso LEmplacement("h_histoire") <> "" Then
             TbEmplHistoire.Text = LEmplacement("h_histoire")
         Else
-            GbEmplHistoire.Hide()
+            PanEmplHistoire.Hide()
         End If
 
         ' infos bénefs
@@ -124,4 +125,24 @@
             End If
         End Using
     End Sub
+
+    Private Sub Me_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+        Dim HauteurDebutDegrade As Integer = Me.Height * 0.42
+        Dim RectangleDegrade = New Rectangle(0, HauteurDebutDegrade, Me.Width, Me.Height - HauteurDebutDegrade)
+        ' - 6 au premier param parce que sinon il peut y avoir une ligne verte en haut du rectangle du dégradé, comme si le dégradé (re)commençait quelques pixels trop bas
+        Dim vLinearGradient As Drawing.Drawing2D.LinearGradientBrush =
+                    New Drawing.Drawing2D.LinearGradientBrush(New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y + RectangleDegrade.Height - 0),
+                                                    New Drawing.Point(RectangleDegrade.X, RectangleDegrade.Y - 1),
+                                                    Color.FromArgb(11, 160, 92),
+                                                    Color.White)
+
+        Dim vGraphic As Drawing.Graphics = Me.CreateGraphics
+        vGraphic.FillRectangle(vLinearGradient, RectangleDegrade)
+        vGraphic.Dispose()
+        vGraphic = Nothing
+    End Sub
+
+
+
+
 End Class

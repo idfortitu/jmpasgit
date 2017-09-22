@@ -22,8 +22,10 @@ Partial Class FormHome
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormHome))
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.BtDéclarationDécès = New System.Windows.Forms.Button()
@@ -181,19 +183,21 @@ Partial Class FormHome
         Me.DgvNotifsCsnsExp.AllowUserToAddRows = False
         Me.DgvNotifsCsnsExp.AllowUserToDeleteRows = False
         Me.DgvNotifsCsnsExp.AllowUserToOrderColumns = True
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(249, Byte), Integer), CType(CType(249, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DgvNotifsCsnsExp.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.DgvNotifsCsnsExp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DgvNotifsCsnsExp.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvNotifsCsnsExp.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DgvNotifsCsnsExp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvNotifsCsnsExp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsExpRefEmpl, Me.DgvCsnsExpDateExp, Me.DgvCsnsExpCsnrTel, Me.DgvCsnsExpColInfos, Me.DgvCsnsExpColBtDetails})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvNotifsCsnsExp.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvNotifsCsnsExp.DefaultCellStyle = DataGridViewCellStyle6
         Me.DgvNotifsCsnsExp.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvNotifsCsnsExp.Location = New System.Drawing.Point(4, 38)
         Me.DgvNotifsCsnsExp.MultiSelect = False
@@ -253,19 +257,21 @@ Partial Class FormHome
         Me.DgvNotifsCsnsAb.AllowUserToAddRows = False
         Me.DgvNotifsCsnsAb.AllowUserToDeleteRows = False
         Me.DgvNotifsCsnsAb.AllowUserToOrderColumns = True
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(249, Byte), Integer), CType(CType(249, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DgvNotifsCsnsAb.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.DgvNotifsCsnsAb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DgvNotifsCsnsAb.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvNotifsCsnsAb.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DgvNotifsCsnsAb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvNotifsCsnsAb.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvCsnsAbColRefEmpl, Me.DgvCsnsAbColNomCsnr, Me.DgvCsnsAbColTelCsnr, Me.DgvCsnsAbColBtDetails})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvNotifsCsnsAb.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvNotifsCsnsAb.DefaultCellStyle = DataGridViewCellStyle8
         Me.DgvNotifsCsnsAb.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DgvNotifsCsnsAb.Location = New System.Drawing.Point(550, 37)
         Me.DgvNotifsCsnsAb.MultiSelect = False
@@ -322,13 +328,15 @@ Partial Class FormHome
         '
         'BtNotifsMontrer
         '
-        Me.BtNotifsMontrer.Location = New System.Drawing.Point(81, 430)
+        Me.BtNotifsMontrer.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtNotifsMontrer.ForeColor = System.Drawing.Color.White
+        Me.BtNotifsMontrer.Location = New System.Drawing.Point(81, 428)
         Me.BtNotifsMontrer.Margin = New System.Windows.Forms.Padding(4)
         Me.BtNotifsMontrer.Name = "BtNotifsMontrer"
-        Me.BtNotifsMontrer.Size = New System.Drawing.Size(119, 27)
+        Me.BtNotifsMontrer.Size = New System.Drawing.Size(119, 29)
         Me.BtNotifsMontrer.TabIndex = 6
         Me.BtNotifsMontrer.Text = "Notifications"
-        Me.BtNotifsMontrer.UseVisualStyleBackColor = True
+        Me.BtNotifsMontrer.UseVisualStyleBackColor = False
         Me.BtNotifsMontrer.Visible = False
         '
         'LabWelkom
@@ -345,12 +353,14 @@ Partial Class FormHome
         '
         'BtSignalAbCsn
         '
-        Me.BtSignalAbCsn.Location = New System.Drawing.Point(655, 430)
+        Me.BtSignalAbCsn.BackColor = System.Drawing.Color.SeaGreen
+        Me.BtSignalAbCsn.ForeColor = System.Drawing.Color.White
+        Me.BtSignalAbCsn.Location = New System.Drawing.Point(655, 426)
         Me.BtSignalAbCsn.Name = "BtSignalAbCsn"
-        Me.BtSignalAbCsn.Size = New System.Drawing.Size(279, 27)
+        Me.BtSignalAbCsn.Size = New System.Drawing.Size(279, 31)
         Me.BtSignalAbCsn.TabIndex = 7
-        Me.BtSignalAbCsn.Text = "Signaler une concession à l'abandon"
-        Me.BtSignalAbCsn.UseVisualStyleBackColor = True
+        Me.BtSignalAbCsn.Text = "Signaler un abandon de concession"
+        Me.BtSignalAbCsn.UseVisualStyleBackColor = False
         '
         'PictureBox2
         '

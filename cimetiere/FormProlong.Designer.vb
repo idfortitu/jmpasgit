@@ -258,13 +258,13 @@ Partial Class FormProlong
         '
         'Label7
         '
-        Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!)
-        Me.Label7.Location = New System.Drawing.Point(354, 78)
+        Me.Label7.Location = New System.Drawing.Point(358, 82)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(30, 31)
+        Me.Label7.Size = New System.Drawing.Size(30, 27)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "↗"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label5
         '
@@ -608,7 +608,7 @@ Partial Class FormProlong
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.BackgroundImage = Global.cimetiere.My.Resources.Resources.fondformulaire
+        Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(962, 853)
         Me.Controls.Add(Me.PictureBox2)
