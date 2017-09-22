@@ -113,13 +113,10 @@ Module Bdd
     ''' <param name="AutoId"></param>
     ''' <returns></returns>
     Public Function Insert(nomtable As String, row As DataRow, Optional AutoId As Boolean = True) As Integer
-
         Dim sqlchamps = "("
         Dim sqlvalues = "("
         Dim cmd = New MySqlCommand With {.Connection = Connexion, .CommandType = CommandType.Text}
-
         Dim tvide = GetTableVide(nomtable)
-
         Dim pasprem = False
         'For i = If(Not AutoId, 0, 1) To tvide.Columns.Count - 1
         For i = 0 To tvide.Columns.Count - 1

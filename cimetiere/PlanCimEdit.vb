@@ -20,13 +20,21 @@
         Dim coords((coords_empl_actuel.Count * 4) - 1) As Byte
         Dim i As Integer = 0
         For Each pt As Point In coords_empl_actuel
-            coords(i) = pt.X And &HFF
+
+            '330
+            '00 00 01 4A
+            '270 ; 500
+            '15 1
+            '1 * 255 + 15 = 270
+            '270 = 01 0F
+
+            coords(i) = pt.X And &HFF           ' 4A 
             i += 1
-            coords(i) = pt.X >> 8
+            coords(i) = pt.X >> 8 ' 01
             i += 1
             coords(i) = pt.Y And &HFF
             i += 1
-            coords(i) = pt.Y >> 8
+            coords(i) = pt.Y >> 8  ' beaucoup
             i += 1
         Next
         empl("empl_coords") = coords

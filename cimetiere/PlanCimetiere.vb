@@ -323,7 +323,6 @@ Public Class PlanCimetiere
 
                 Dim CetteParcelle = InfosParcelles(NomParcelle)
 
-
                 ' traduit les coordonnées binaires en deux listes d'entiers (coords x et y)
                 Dim NbrPtsCetEmpl As Integer = CoordsBinaire.Count \ 4
                 Dim i_coords As Integer = 0

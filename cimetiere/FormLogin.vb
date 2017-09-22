@@ -27,4 +27,9 @@ Public Class FormLogin
         Dim form As New debug
         debug.ShowDialog()
     End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim f As New debug
+        debug.ShowDialog()
+    End Sub
 End Class
